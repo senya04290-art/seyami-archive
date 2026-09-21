@@ -6,11 +6,24 @@
 
 <title>塞垭弥大陆档案馆｜SEYAMI ARCHIVE</title>
 
+<!--
+    西幻高对比字体
+    Cormorant Garamond：
+    细、长、高对比、优雅，非常适合大陆档案馆 / 奇幻世界观标题
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&display=swap"
+    rel="stylesheet"
+>
+
 <style>
 
-/* =========================
+/* =========================================================
    基础
-========================= */
+========================================================= */
 
 * {
     box-sizing: border-box;
@@ -20,26 +33,37 @@ html,
 body {
     margin: 0;
     padding: 0;
+
     width: 100%;
     min-height: 100%;
 }
 
 body {
+
     background:
+
         radial-gradient(
-            circle at 50% 45%,
-            rgba(35, 105, 160, 0.16),
-            transparent 38%
+            circle at 50% 42%,
+            rgba(42, 125, 185, 0.17),
+            transparent 37%
         ),
+
         radial-gradient(
-            circle at 15% 20%,
-            rgba(30, 90, 145, 0.10),
+            circle at 18% 22%,
+            rgba(40, 105, 160, 0.11),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 82% 68%,
+            rgba(35, 105, 170, 0.08),
             transparent 28%
         ),
+
         linear-gradient(
             180deg,
             #020a16 0%,
-            #041426 45%,
+            #041426 46%,
             #020914 100%
         );
 
@@ -55,11 +79,12 @@ body {
 }
 
 
-/* =========================
-   页面整体
-========================= */
+/* =========================================================
+   页面
+========================================================= */
 
 .page {
+
     position: relative;
 
     width: 100%;
@@ -72,213 +97,347 @@ body {
 }
 
 
-/* =========================
-   星空基础
-========================= */
+/* =========================================================
+   远处星尘
+========================================================= */
 
-.stars,
-.stars::before,
-.stars::after {
+.stars {
+
     position: absolute;
 
-    width: 2px;
-    height: 2px;
+    inset: 0;
 
-    background: rgba(210, 240, 255, 0.72);
-
-    border-radius: 50%;
-
-    content: "";
+    z-index: 1;
 
     pointer-events: none;
 
-    z-index: 1;
-}
+    opacity: 0.9;
 
-.stars {
-    top: 10%;
-    left: 8%;
+    background-image:
+
+        radial-gradient(
+            circle,
+            rgba(205, 235, 255, 0.72) 0 1px,
+            transparent 1.5px
+        ),
+
+        radial-gradient(
+            circle,
+            rgba(170, 220, 255, 0.50) 0 1px,
+            transparent 1.6px
+        ),
+
+        radial-gradient(
+            circle,
+            rgba(220, 245, 255, 0.38) 0 0.8px,
+            transparent 1.5px
+        );
+
+    background-size:
+        145px 130px,
+        210px 180px,
+        280px 230px;
+
+    background-position:
+        10px 30px,
+        80px 100px,
+        150px 60px;
 
     animation:
-        starDrift 18s ease-in-out infinite alternate;
+        starFieldMove 30s linear infinite;
+}
 
-    box-shadow:
-        90px 40px rgba(180,220,255,.45),
-        180px 120px rgba(210,240,255,.65),
-        290px 50px rgba(160,210,255,.38),
-        390px 180px rgba(210,240,255,.55),
-        520px 70px rgba(170,220,255,.45),
-        650px 150px rgba(210,240,255,.55),
-        780px 35px rgba(170,215,255,.45),
-        900px 120px rgba(210,240,255,.65),
-        1040px 65px rgba(180,225,255,.42),
-        1150px 170px rgba(200,235,255,.55),
-        1250px 80px rgba(170,215,255,.40),
+@keyframes starFieldMove {
 
-        120px 420px rgba(190,230,255,.38),
-        270px 510px rgba(210,240,255,.52),
-        430px 390px rgba(170,220,255,.45),
-        580px 470px rgba(210,240,255,.55),
-        760px 400px rgba(190,230,255,.40),
-        920px 520px rgba(210,240,255,.52),
-        1090px 430px rgba(180,220,255,.45),
-        1220px 540px rgba(210,240,255,.55),
+    0% {
+        transform:
+            translate3d(0, 0, 0);
+    }
 
-        60px 280px rgba(220,245,255,.32),
-        340px 300px rgba(180,225,255,.40),
-        470px 110px rgba(220,245,255,.42),
-        720px 280px rgba(170,215,255,.35),
-        850px 180px rgba(220,245,255,.42),
-        980px 340px rgba(180,225,255,.34),
-        1180px 300px rgba(220,245,255,.38);
+    50% {
+        transform:
+            translate3d(-8px, 10px, 0);
+    }
+
+    100% {
+        transform:
+            translate3d(0, 0, 0);
+    }
 }
 
 
-/* =========================
-   浮动星星
-========================= */
+/* =========================================================
+   浮动星星容器
+========================================================= */
 
-.floating-star {
+.floating-stars {
+
     position: absolute;
 
-    color: rgba(205, 239, 255, 0.72);
+    inset: 0;
+
+    z-index: 3;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   浮动星星
+========================================================= */
+
+.floating-star {
+
+    position: absolute;
+
+    display: block;
+
+    color:
+        rgba(210, 240, 255, 0.78);
 
     font-family:
         "Times New Roman",
         serif;
 
-    pointer-events: none;
-
-    z-index: 2;
+    line-height: 1;
 
     text-shadow:
-        0 0 8px rgba(120, 210, 255, 0.55),
-        0 0 18px rgba(90, 180, 235, 0.28);
+        0 0 5px rgba(160, 225, 255, 0.9),
+        0 0 15px rgba(85, 190, 245, 0.65),
+        0 0 30px rgba(70, 165, 230, 0.30);
 
     animation:
-        floatStar 6s ease-in-out infinite,
-        twinkleStar 3.5s ease-in-out infinite alternate;
+        starFloat var(--float-time) ease-in-out infinite,
+        starTwinkle var(--twinkle-time) ease-in-out infinite alternate;
+
+    animation-delay:
+        var(--delay);
+
+    opacity:
+        var(--opacity);
 }
 
-.star-1 {
-    top: 21%;
-    left: 19%;
-    font-size: 12px;
-    animation-delay: -1s;
+
+/* 大星星 */
+
+.star-a {
+    top: 20%;
+    left: 18%;
+
+    font-size: 16px;
+
+    --float-time: 7s;
+    --twinkle-time: 3.5s;
+    --delay: -2s;
+    --opacity: 0.75;
 }
 
-.star-2 {
-    top: 27%;
-    right: 20%;
-    font-size: 9px;
-    animation-delay: -3s;
+.star-b {
+    top: 29%;
+    right: 18%;
+
+    font-size: 11px;
+
+    --float-time: 8s;
+    --twinkle-time: 4s;
+    --delay: -5s;
+    --opacity: 0.62;
 }
 
-.star-3 {
-    top: 42%;
-    left: 13%;
-    font-size: 7px;
-    animation-delay: -2s;
-}
+.star-c {
+    top: 43%;
+    left: 11%;
 
-.star-4 {
-    top: 48%;
-    right: 14%;
-    font-size: 13px;
-    animation-delay: -4s;
-}
-
-.star-5 {
-    top: 66%;
-    left: 23%;
     font-size: 8px;
-    animation-delay: -1.5s;
+
+    --float-time: 6s;
+    --twinkle-time: 3s;
+    --delay: -1s;
+    --opacity: 0.58;
 }
 
-.star-6 {
+.star-d {
+    top: 49%;
+    right: 12%;
+
+    font-size: 15px;
+
+    --float-time: 9s;
+    --twinkle-time: 4.5s;
+    --delay: -6s;
+    --opacity: 0.72;
+}
+
+.star-e {
+    top: 67%;
+    left: 22%;
+
+    font-size: 9px;
+
+    --float-time: 7.5s;
+    --twinkle-time: 3.7s;
+    --delay: -4s;
+    --opacity: 0.58;
+}
+
+.star-f {
     top: 70%;
-    right: 24%;
-    font-size: 10px;
-    animation-delay: -3.5s;
+    right: 23%;
+
+    font-size: 12px;
+
+    --float-time: 8.5s;
+    --twinkle-time: 4s;
+    --delay: -3s;
+    --opacity: 0.65;
 }
 
-.star-7 {
-    top: 34%;
+.star-g {
+    top: 35%;
     left: 29%;
+
     font-size: 5px;
-    animation-delay: -2.5s;
+
+    --float-time: 5s;
+    --twinkle-time: 2.8s;
+    --delay: -2.5s;
+    --opacity: 0.50;
 }
 
-.star-8 {
+.star-h {
     top: 58%;
-    right: 31%;
+    right: 30%;
+
     font-size: 6px;
-    animation-delay: -4.5s;
+
+    --float-time: 6.5s;
+    --twinkle-time: 3.2s;
+    --delay: -5s;
+    --opacity: 0.55;
 }
 
 
-/* =========================
-   星星动画
-========================= */
+/* 更远的星星 */
 
-@keyframes floatStar {
+.star-i {
+    top: 15%;
+    left: 38%;
+
+    font-size: 4px;
+
+    --float-time: 10s;
+    --twinkle-time: 5s;
+    --delay: -4s;
+    --opacity: 0.45;
+}
+
+.star-j {
+    top: 24%;
+    right: 32%;
+
+    font-size: 5px;
+
+    --float-time: 9s;
+    --twinkle-time: 4s;
+    --delay: -1s;
+    --opacity: 0.40;
+}
+
+.star-k {
+    top: 74%;
+    left: 38%;
+
+    font-size: 5px;
+
+    --float-time: 8s;
+    --twinkle-time: 4.5s;
+    --delay: -6s;
+    --opacity: 0.45;
+}
+
+.star-l {
+    top: 62%;
+    right: 40%;
+
+    font-size: 4px;
+
+    --float-time: 7s;
+    --twinkle-time: 3s;
+    --delay: -3s;
+    --opacity: 0.42;
+}
+
+
+/* =========================================================
+   星星动画
+========================================================= */
+
+@keyframes starFloat {
 
     0% {
         transform:
-            translate(0, 0)
+            translate3d(0, 0, 0)
             rotate(0deg);
     }
 
-    50% {
+    25% {
         transform:
-            translate(4px, -8px)
-            rotate(10deg);
-    }
-
-    100% {
-        transform:
-            translate(-3px, 4px)
-            rotate(-8deg);
-    }
-
-}
-
-@keyframes twinkleStar {
-
-    0% {
-        opacity: 0.25;
+            translate3d(5px, -7px, 0)
+            rotate(7deg);
     }
 
     50% {
-        opacity: 0.85;
+        transform:
+            translate3d(-2px, -13px, 0)
+            rotate(-4deg);
+    }
+
+    75% {
+        transform:
+            translate3d(-6px, -5px, 0)
+            rotate(5deg);
     }
 
     100% {
-        opacity: 0.38;
+        transform:
+            translate3d(0, 0, 0)
+            rotate(0deg);
     }
-
 }
 
-@keyframes starDrift {
+
+@keyframes starTwinkle {
 
     0% {
-        transform:
-            translate(0, 0);
+        opacity: 0.18;
+
+        filter:
+            blur(0.2px);
+    }
+
+    45% {
+        opacity: 0.55;
+    }
+
+    70% {
+        opacity: 0.95;
+
+        filter:
+            blur(0);
     }
 
     100% {
-        transform:
-            translate(10px, -7px);
+        opacity: 0.30;
     }
-
 }
 
 
-/* =========================
+/* =========================================================
    装饰边框
-========================= */
+========================================================= */
 
 .frame {
+
     position: absolute;
 
     top: 24px;
@@ -286,15 +445,18 @@ body {
     right: 24px;
     bottom: 24px;
 
-    border: 1px solid rgba(110, 190, 235, 0.18);
+    border:
+        1px solid rgba(110, 190, 235, 0.18);
 
     pointer-events: none;
 
-    z-index: 8;
+    z-index: 10;
 }
+
 
 .frame::before,
 .frame::after {
+
     content: "";
 
     position: absolute;
@@ -302,32 +464,42 @@ body {
     width: 70px;
     height: 70px;
 
-    border-color: rgba(130, 210, 255, 0.45);
+    border-color:
+        rgba(130, 210, 255, 0.45);
+
     border-style: solid;
 }
 
+
 .frame::before {
+
     top: -1px;
     left: -1px;
 
-    border-width: 1px 0 0 1px;
+    border-width:
+        1px 0 0 1px;
 }
 
+
 .frame::after {
+
     right: -1px;
     bottom: -1px;
 
-    border-width: 0 1px 1px 0;
+    border-width:
+        0 1px 1px 0;
 }
 
 
-/* =========================
+/* =========================================================
    顶部导航
-========================= */
+========================================================= */
 
 .nav {
+
     position: relative;
-    z-index: 10;
+
+    z-index: 20;
 
     width: 100%;
 
@@ -336,16 +508,23 @@ body {
         clamp(30px, 6vw, 90px);
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 }
 
+
 .logo {
+
     display: flex;
+
     align-items: center;
+
     gap: 13px;
 
-    color: rgba(220, 244, 255, 0.92);
+    color:
+        rgba(220, 244, 255, 0.92);
 
     font-size: 13px;
 
@@ -354,7 +533,9 @@ body {
     white-space: nowrap;
 }
 
+
 .logo-symbol {
+
     color: #9fdcff;
 
     font-size: 17px;
@@ -363,27 +544,36 @@ body {
         0 0 10px rgba(110, 210, 255, 0.7);
 }
 
+
 .logo-en {
+
     opacity: 0.65;
 
     font-family:
+        "Cormorant Garamond",
         "Times New Roman",
         serif;
 
     letter-spacing: 3px;
 
-    font-size: 11px;
+    font-size: 13px;
 }
 
+
 .nav-links {
+
     display: flex;
+
     gap: 34px;
 }
 
+
 .nav-links a {
+
     position: relative;
 
-    color: rgba(210, 235, 250, 0.62);
+    color:
+        rgba(210, 235, 250, 0.62);
 
     text-decoration: none;
 
@@ -395,7 +585,9 @@ body {
         color .3s ease;
 }
 
+
 .nav-links a::after {
+
     content: "";
 
     position: absolute;
@@ -408,36 +600,48 @@ body {
 
     background: #9edcff;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
-    transition: width .3s ease;
+    transition:
+        width .3s ease;
 }
+
 
 .nav-links a:hover {
-    color: #edfaff;
+
+    color:
+        #edfaff;
 }
 
+
 .nav-links a:hover::after {
+
     width: 100%;
 }
 
 
-/* =========================
+/* =========================================================
    主区域
-========================= */
+========================================================= */
 
 .hero {
+
     position: relative;
-    z-index: 4;
+
+    z-index: 12;
 
     flex: 1;
 
-    min-height: calc(100vh - 100px);
+    min-height:
+        calc(100vh - 100px);
 
     display: flex;
+
     flex-direction: column;
 
     align-items: center;
+
     justify-content: center;
 
     text-align: center;
@@ -447,14 +651,16 @@ body {
 }
 
 
-/* =========================
-   小装饰
-========================= */
+/* =========================================================
+   顶部小符号
+========================================================= */
 
 .symbol {
-    margin-bottom: 31px;
 
-    color: rgba(155, 218, 250, 0.7);
+    margin-bottom: 34px;
+
+    color:
+        rgba(155, 218, 250, 0.70);
 
     font-size: 15px;
 
@@ -462,107 +668,187 @@ body {
 
     text-shadow:
         0 0 15px rgba(90, 190, 255, 0.45);
+
+    animation:
+        symbolGlow 4s ease-in-out infinite alternate;
 }
 
 
-/* =========================
-   英文主标题
-   SEYAMI
-   ARCHIVE
-========================= */
+@keyframes symbolGlow {
+
+    from {
+        opacity: 0.45;
+    }
+
+    to {
+        opacity: 0.90;
+    }
+}
+
+
+/* =========================================================
+   SEYAMI ARCHIVE
+   真正的西幻标题
+========================================================= */
 
 .title-en {
+
     margin: 0;
 
     display: flex;
+
     flex-direction: column;
 
     align-items: center;
 
+    justify-content: center;
+
     font-family:
+        "Cormorant Garamond",
         "Bodoni 72",
         "Didot",
         "Baskerville",
         "Times New Roman",
         serif;
 
-    font-size:
-        clamp(70px, 10vw, 128px);
-
     font-weight: 300;
+
+    color:
+        rgba(244, 250, 255, 0.96);
+
+    text-shadow:
+
+        0 0 5px rgba(225, 247, 255, 0.52),
+
+        0 0 18px rgba(90, 190, 245, 0.24),
+
+        0 0 45px rgba(55, 150, 215, 0.12);
+
+    transform:
+        scaleX(0.92);
+
+    letter-spacing: 0;
 
     line-height: 0.82;
 
-    letter-spacing:
-        clamp(8px, 1.8vw, 20px);
-
-    color: #edf9ff;
-
-    text-shadow:
-        0 0 6px rgba(220, 245, 255, 0.55),
-        0 0 24px rgba(70, 175, 240, 0.30);
-
-    transform: scaleX(0.91);
-
-    font-variant: small-caps;
-}
-
-
-/* =========================
-   两行标题
-========================= */
-
-.title-word {
-    display: block;
-
     white-space: nowrap;
+
+    /* 让字体保持极细 */
+
+    -webkit-font-smoothing: antialiased;
+
+    text-rendering:
+        geometricPrecision;
 }
+
+
+/* =========================================================
+   第一行 SEYAMI
+========================================================= */
 
 .title-word:first-child {
-    font-size: 1em;
+
+    display: block;
+
+    font-size:
+        clamp(76px, 10.5vw, 136px);
+
+    font-weight: 300;
 
     letter-spacing:
-        clamp(10px, 2vw, 23px);
+        clamp(11px, 1.8vw, 24px);
+
+    padding-left:
+        clamp(11px, 1.8vw, 24px);
 }
+
+
+/* =========================================================
+   第二行 ARCHIVE
+========================================================= */
 
 .title-word:last-child {
-    margin-top: 13px;
 
-    font-size: 0.78em;
+    display: block;
+
+    margin-top: 16px;
+
+    font-size:
+        clamp(61px, 8.6vw, 111px);
+
+    font-weight: 300;
 
     letter-spacing:
-        clamp(12px, 2.4vw, 28px);
+        clamp(14px, 2.2vw, 29px);
 
-    opacity: 0.96;
+    padding-left:
+        clamp(14px, 2.2vw, 29px);
+
+    opacity: 0.94;
 }
 
 
-/* =========================
-   标题下方细线
-========================= */
+/* =========================================================
+   标题附近微光
+========================================================= */
+
+.title-en::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 520px;
+    height: 220px;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(75, 175, 230, 0.08),
+            transparent 68%
+        );
+
+    filter:
+        blur(25px);
+
+    pointer-events: none;
+
+    z-index: -1;
+}
+
+
+/* =========================================================
+   标题线
+========================================================= */
 
 .title-line {
+
     position: relative;
 
-    width: min(650px, 80vw);
+    width:
+        min(650px, 78vw);
 
     height: 1px;
 
     margin:
-        31px auto
+        34px auto
         17px;
 
     background:
         linear-gradient(
             90deg,
-            transparent,
-            rgba(105, 200, 255, 0.45),
-            transparent
+            transparent 0%,
+            rgba(105, 200, 255, 0.10) 12%,
+            rgba(105, 200, 255, 0.48) 50%,
+            rgba(105, 200, 255, 0.10) 88%,
+            transparent 100%
         );
 }
 
+
 .title-line::before,
 .title-line::after {
+
     content: "✦";
 
     position: absolute;
@@ -570,31 +856,38 @@ body {
     top: 50%;
 
     color:
-        rgba(135, 215, 250, 0.42);
+        rgba(145, 220, 255, 0.55);
 
     font-size: 8px;
 
     transform:
         translateY(-50%);
+
+    text-shadow:
+        0 0 10px rgba(110, 210, 255, 0.7);
 }
+
 
 .title-line::before {
-    left: 19%;
+    left: 18%;
 }
+
 
 .title-line::after {
-    right: 19%;
+    right: 18%;
 }
 
 
-/* =========================
+/* =========================================================
    中文标题
-========================= */
+========================================================= */
 
 .title-cn {
+
     margin: 0;
 
-    color: rgba(221, 241, 251, 0.82);
+    color:
+        rgba(221, 241, 251, 0.82);
 
     font-size:
         clamp(16px, 2vw, 23px);
@@ -609,14 +902,16 @@ body {
 }
 
 
-/* =========================
+/* =========================================================
    简介
-========================= */
+========================================================= */
 
 .description {
+
     margin-top: 27px;
 
-    color: rgba(180, 213, 232, 0.57);
+    color:
+        rgba(180, 213, 232, 0.57);
 
     font-size: 13px;
 
@@ -628,16 +923,18 @@ body {
 }
 
 
-/* =========================
+/* =========================================================
    进入按钮
-========================= */
+========================================================= */
 
 .enter-button {
+
     position: relative;
 
     display: inline-flex;
 
     align-items: center;
+
     justify-content: center;
 
     margin-top: 45px;
@@ -650,7 +947,8 @@ body {
     border:
         1px solid rgba(130, 205, 240, 0.45);
 
-    color: rgba(225, 246, 255, 0.9);
+    color:
+        rgba(225, 246, 255, 0.9);
 
     background:
         rgba(8, 31, 52, 0.38);
@@ -664,11 +962,14 @@ body {
     transition:
         all .35s ease;
 
-    backdrop-filter: blur(5px);
+    backdrop-filter:
+        blur(5px);
 }
+
 
 .enter-button::before,
 .enter-button::after {
+
     content: "";
 
     position: absolute;
@@ -676,27 +977,37 @@ body {
     width: 7px;
     height: 7px;
 
-    border-color: #a8e1ff;
+    border-color:
+        #a8e1ff;
 
     border-style: solid;
 }
 
+
 .enter-button::before {
+
     top: -1px;
     left: -1px;
 
-    border-width: 1px 0 0 1px;
+    border-width:
+        1px 0 0 1px;
 }
 
+
 .enter-button::after {
+
     right: -1px;
     bottom: -1px;
 
-    border-width: 0 1px 1px 0;
+    border-width:
+        0 1px 1px 0;
 }
 
+
 .enter-button:hover {
-    color: #ffffff;
+
+    color:
+        #ffffff;
 
     border-color:
         rgba(165, 225, 255, 0.8);
@@ -712,48 +1023,55 @@ body {
 }
 
 
-/* =========================
+/* =========================================================
    底部文字
-========================= */
+========================================================= */
 
 .footer-mark {
+
     position: absolute;
 
     bottom: 30px;
 
     left: 50%;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
     color:
         rgba(150, 200, 225, 0.32);
 
     font-family:
+        "Cormorant Garamond",
         "Times New Roman",
         serif;
 
-    font-size: 10px;
+    font-size: 12px;
 
     letter-spacing: 6px;
 
     white-space: nowrap;
 
-    z-index: 6;
+    z-index: 15;
 }
 
 
-/* =========================
+/* =========================================================
    魔法圆环
-========================= */
+========================================================= */
 
 .magic-circle {
+
     position: absolute;
 
     left: 50%;
     top: 50%;
 
-    width: min(650px, 90vw);
-    height: min(650px, 90vw);
+    width:
+        min(650px, 90vw);
+
+    height:
+        min(650px, 90vw);
 
     border:
         1px solid rgba(90, 175, 220, 0.07);
@@ -766,9 +1084,14 @@ body {
     pointer-events: none;
 
     z-index: 1;
+
+    animation:
+        circleBreath 12s ease-in-out infinite alternate;
 }
 
+
 .magic-circle::before {
+
     content: "";
 
     position: absolute;
@@ -785,7 +1108,9 @@ body {
     border-radius: 50%;
 }
 
+
 .magic-circle::after {
+
     content: "✦";
 
     position: absolute;
@@ -803,18 +1128,39 @@ body {
 }
 
 
-/* =========================
+@keyframes circleBreath {
+
+    from {
+        opacity: 0.55;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.99);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(1.015);
+    }
+}
+
+
+/* =========================================================
    中央微光
-========================= */
+========================================================= */
 
 .glow {
+
     position: absolute;
 
     left: 50%;
     top: 50%;
 
-    width: 420px;
-    height: 420px;
+    width: 470px;
+    height: 470px;
 
     transform:
         translate(-50%, -50%);
@@ -822,106 +1168,167 @@ body {
     background:
         radial-gradient(
             circle,
-            rgba(50, 145, 210, 0.09),
+            rgba(50, 145, 210, 0.10),
             transparent 68%
         );
 
-    filter: blur(10px);
+    filter:
+        blur(12px);
 
     pointer-events: none;
 
     z-index: 1;
+
+    animation:
+        glowPulse 7s ease-in-out infinite alternate;
 }
 
 
-/* =========================
-   手机适配
-========================= */
+@keyframes glowPulse {
+
+    from {
+        opacity: 0.65;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.94);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(1.08);
+    }
+}
+
+
+/* =========================================================
+   手机
+========================================================= */
 
 @media (max-width: 700px) {
 
     .frame {
+
         top: 14px;
         left: 14px;
         right: 14px;
         bottom: 14px;
     }
 
+
     .nav {
+
         padding:
             24px 30px;
 
-        align-items: flex-start;
+        align-items:
+            flex-start;
     }
 
+
     .logo {
+
         font-size: 11px;
 
         letter-spacing: 2px;
     }
 
+
     .logo-en {
         display: none;
     }
 
+
     .nav-links {
+
         gap: 14px;
     }
 
+
     .nav-links a {
+
         font-size: 10px;
 
         letter-spacing: 1px;
     }
 
+
     .hero {
+
         padding:
             40px 20px 90px;
     }
 
+
     .symbol {
-        margin-bottom: 24px;
+
+        margin-bottom: 27px;
 
         font-size: 13px;
     }
 
-    .title-en {
-        font-size:
-            clamp(60px, 17vw, 88px);
 
-        line-height: 0.83;
+    .title-en {
+
+        transform:
+            scaleX(0.88);
+
+        line-height:
+            0.84;
+    }
+
+
+    .title-word:first-child {
+
+        font-size:
+            clamp(58px, 16vw, 88px);
 
         letter-spacing:
             7px;
 
-        transform: scaleX(0.88);
+        padding-left:
+            7px;
     }
 
-    .title-word:first-child {
-        letter-spacing: 8px;
-    }
 
     .title-word:last-child {
-        margin-top: 10px;
 
-        letter-spacing: 10px;
+        margin-top: 11px;
+
+        font-size:
+            clamp(47px, 13vw, 72px);
+
+        letter-spacing:
+            9px;
+
+        padding-left:
+            9px;
     }
 
+
     .title-line {
-        width: 75vw;
+
+        width: 76vw;
 
         margin:
-            23px auto
+            28px auto
             15px;
     }
 
+
     .title-cn {
+
         font-size: 15px;
 
         letter-spacing: 5px;
     }
 
+
     .description {
+
         font-size: 11px;
 
         line-height: 2;
@@ -929,36 +1336,61 @@ body {
         letter-spacing: 1px;
     }
 
+
     .enter-button {
+
         margin-top: 34px;
 
         min-width: 175px;
 
-        padding: 13px 20px;
+        padding:
+            13px 20px;
 
         font-size: 11px;
 
         letter-spacing: 3px;
     }
 
+
     .footer-mark {
+
         bottom: 20px;
 
-        font-size: 8px;
+        font-size: 9px;
 
         letter-spacing: 4px;
     }
 
-    .floating-star {
-        transform: scale(0.8);
+
+    .magic-circle {
+
+        width: 480px;
+        height: 480px;
+    }
+
+
+    .star-a {
+        left: 12%;
+    }
+
+    .star-b {
+        right: 11%;
+    }
+
+    .star-d {
+        right: 8%;
+    }
+
+    .star-f {
+        right: 14%;
     }
 
 }
 
 
-/* =========================
+/* =========================================================
    超小屏幕
-========================= */
+========================================================= */
 
 @media (max-width: 430px) {
 
@@ -966,38 +1398,53 @@ body {
         display: none;
     }
 
+
     .logo {
+
         font-size: 10px;
     }
 
-    .title-en {
-        font-size: 55px;
-
-        letter-spacing: 5px;
-    }
 
     .title-word:first-child {
-        letter-spacing: 6px;
+
+        font-size: 53px;
+
+        letter-spacing: 5px;
+
+        padding-left: 5px;
     }
+
 
     .title-word:last-child {
-        margin-top: 8px;
 
-        letter-spacing: 7px;
+        font-size: 43px;
+
+        letter-spacing: 6px;
+
+        padding-left: 6px;
+
+        margin-top: 9px;
     }
 
+
     .title-cn {
+
         font-size: 14px;
 
         letter-spacing: 4px;
     }
 
+
     .description {
+
         max-width: 280px;
     }
 
+
     .floating-star {
-        display: none;
+
+        transform:
+            scale(0.75);
     }
 
 }
@@ -1010,38 +1457,79 @@ body {
 
 <div class="page">
 
-    <!-- 星空 -->
+
+    <!-- =====================================================
+         远处星尘
+    ====================================================== -->
+
     <div class="stars"></div>
 
-    <!-- 浮动星星 -->
-    <div class="floating-star star-1">✦</div>
-    <div class="floating-star star-2">✧</div>
-    <div class="floating-star star-3">·</div>
-    <div class="floating-star star-4">✦</div>
-    <div class="floating-star star-5">✧</div>
-    <div class="floating-star star-6">✦</div>
-    <div class="floating-star star-7">·</div>
-    <div class="floating-star star-8">✧</div>
 
-    <!-- 中央微光 -->
+    <!-- =====================================================
+         浮动星星
+    ====================================================== -->
+
+    <div class="floating-stars">
+
+        <span class="floating-star star-a">✦</span>
+
+        <span class="floating-star star-b">✧</span>
+
+        <span class="floating-star star-c">✦</span>
+
+        <span class="floating-star star-d">✦</span>
+
+        <span class="floating-star star-e">✧</span>
+
+        <span class="floating-star star-f">✦</span>
+
+        <span class="floating-star star-g">·</span>
+
+        <span class="floating-star star-h">✧</span>
+
+        <span class="floating-star star-i">·</span>
+
+        <span class="floating-star star-j">✦</span>
+
+        <span class="floating-star star-k">·</span>
+
+        <span class="floating-star star-l">✧</span>
+
+    </div>
+
+
+    <!-- =====================================================
+         中央微光
+    ====================================================== -->
+
     <div class="glow"></div>
 
-    <!-- 魔法圆环 -->
+
+    <!-- =====================================================
+         魔法圆环
+    ====================================================== -->
+
     <div class="magic-circle"></div>
 
-    <!-- 装饰边框 -->
+
+    <!-- =====================================================
+         装饰边框
+    ====================================================== -->
+
     <div class="frame"></div>
 
 
-    <!-- =====================
+    <!-- =====================================================
          顶部导航
-    ====================== -->
+    ====================================================== -->
 
     <header class="nav">
 
         <div class="logo">
 
-            <span class="logo-symbol">✦</span>
+            <span class="logo-symbol">
+                ✦
+            </span>
 
             <span>
                 塞垭弥大陆档案馆
@@ -1073,18 +1561,23 @@ body {
     </header>
 
 
-    <!-- =====================
+    <!-- =====================================================
          首页主体
-    ====================== -->
+    ====================================================== -->
 
     <main class="hero">
+
+
+        <!-- 小星徽 -->
 
         <div class="symbol">
             ✧　✦　✧
         </div>
 
 
-        <!-- 两行西幻标题 -->
+        <!-- =================================================
+             西幻主标题
+        ================================================== -->
 
         <h1 class="title-en">
 
@@ -1099,25 +1592,38 @@ body {
         </h1>
 
 
+        <!-- 标题装饰线 -->
+
         <div class="title-line"></div>
 
+
+        <!-- 中文名称 -->
 
         <h2 class="title-cn">
             塞垭弥大陆档案馆
         </h2>
 
 
+        <!-- 简介 -->
+
         <p class="description">
+
             记录关于这片大陆的一切。<br>
+
             角色、种族、地域、历史，<br>
+
             以及那些尚未被发现的故事。
+
         </p>
 
+
+        <!-- 进入按钮 -->
 
         <a
             class="enter-button"
             href="archive.html"
         >
+
             进入档案馆
 
             <span style="margin-left: 14px;">
@@ -1126,16 +1632,20 @@ body {
 
         </a>
 
+
     </main>
 
 
-    <!-- =====================
+    <!-- =====================================================
          底部
-    ====================== -->
+    ====================================================== -->
 
     <div class="footer-mark">
+
         ✦　THE ARCHIVES OF SEYAMI　✦
+
     </div>
+
 
 </div>
 
