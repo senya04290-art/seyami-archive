@@ -9,10 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link
-href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&display=swap"
-rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 
@@ -33,7 +30,6 @@ body {
 }
 
 body {
-
     overflow: hidden;
 
     background: #06111d;
@@ -66,12 +62,13 @@ body {
     background:
 
         radial-gradient(
-            circle at 50% 43%,
-            rgba(38, 111, 153, .20) 0%,
-            rgba(13, 48, 72, .14) 25%,
-            rgba(5, 18, 31, .70) 58%,
+            circle at 50% 45%,
+            rgba(38, 111, 153, .24) 0%,
+            rgba(13, 48, 72, .18) 23%,
+            rgba(5, 18, 31, .72) 55%,
             #030a12 100%
         );
+
 }
 
 
@@ -85,25 +82,27 @@ body {
 
     inset: 0;
 
-    opacity: .72;
+    opacity: .82;
+
+    pointer-events: none;
 
     background-image:
 
         radial-gradient(
             circle,
-            rgba(255,255,255,.72) 0 1px,
+            rgba(255,255,255,.78) 0 1px,
             transparent 1.5px
         ),
 
         radial-gradient(
             circle,
-            rgba(170,225,255,.48) 0 1px,
+            rgba(170,225,255,.58) 0 1px,
             transparent 1.5px
         ),
 
         radial-gradient(
             circle,
-            rgba(255,255,255,.35) 0 1px,
+            rgba(255,255,255,.42) 0 1px,
             transparent 1.5px
         );
 
@@ -118,30 +117,199 @@ body {
         40px 80px;
 
     animation:
-        starFieldMove 32s linear infinite;
+        starFieldMove 30s linear infinite;
 
-    pointer-events: none;
-
-    z-index: 1;
 }
 
 
 @keyframes starFieldMove {
 
     0% {
-        transform:
-            translate3d(0,0,0);
+        transform: translate3d(0,0,0);
     }
 
     50% {
-        transform:
-            translate3d(-18px,12px,0);
+        transform: translate3d(-18px,12px,0);
     }
 
     100% {
-        transform:
-            translate3d(0,0,0);
+        transform: translate3d(0,0,0);
     }
+
+}
+
+
+/* =========================================================
+   外层边框
+========================================================= */
+
+.frame {
+
+    position: absolute;
+
+    inset: 18px;
+
+    border:
+        1px solid
+        rgba(92,170,224,.48);
+
+    pointer-events: none;
+
+    z-index: 20;
+
+}
+
+
+/* =========================================================
+   顶部横线
+========================================================= */
+
+.frame::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    top: 68px;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            to right,
+            transparent 0%,
+            rgba(75,160,220,.75) 8%,
+            rgba(75,160,220,.75) 92%,
+            transparent 100%
+        );
+
+}
+
+
+/* =========================================================
+   四角六芒星
+========================================================= */
+
+.corner {
+
+    position: absolute;
+
+    width: 62px;
+    height: 62px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #79caff;
+
+    opacity: .88;
+
+}
+
+
+/* SVG 本身 */
+
+.corner svg {
+
+    width: 100%;
+    height: 100%;
+
+    overflow: visible;
+
+}
+
+
+/* 六芒星线 */
+
+.corner polygon {
+
+    fill: none;
+
+    stroke:
+        rgba(105,195,245,.82);
+
+    stroke-width: 1;
+
+}
+
+
+/* 外围圆 */
+
+.corner circle {
+
+    fill: none;
+
+    stroke:
+        rgba(77,170,225,.45);
+
+    stroke-width: 1;
+
+}
+
+
+/* 装饰线 */
+
+.corner line {
+
+    stroke:
+        rgba(93,185,235,.68);
+
+    stroke-width: 1;
+
+}
+
+
+/* 左上 */
+
+.corner-tl {
+
+    left: -20px;
+    top: -20px;
+
+}
+
+
+/* 右上 */
+
+.corner-tr {
+
+    right: -20px;
+    top: -20px;
+
+    transform:
+        rotate(90deg);
+
+}
+
+
+/* 左下 */
+
+.corner-bl {
+
+    left: -20px;
+    bottom: -20px;
+
+    transform:
+        rotate(-90deg);
+
+}
+
+
+/* 右下 */
+
+.corner-br {
+
+    right: -20px;
+    bottom: -20px;
+
+    transform:
+        rotate(180deg);
+
 }
 
 
@@ -157,7 +325,8 @@ body {
 
     pointer-events: none;
 
-    z-index: 3;
+    z-index: 4;
+
 }
 
 
@@ -166,7 +335,7 @@ body {
     position: absolute;
 
     color:
-        rgba(190,235,255,.72);
+        rgba(190,235,255,.84);
 
     font-family:
         "Times New Roman",
@@ -175,12 +344,11 @@ body {
     opacity: .42;
 
     animation:
-        starFloat 9s ease-in-out infinite,
-        starTwinkle 5s ease-in-out infinite;
+        starFloat 8s ease-in-out infinite,
+        starTwinkle 4s ease-in-out infinite;
+
 }
 
-
-/* 普通星星 */
 
 .star-a {
     left: 12%;
@@ -267,13 +435,15 @@ body {
 }
 
 
-/* 星象符号 */
+/* =========================================================
+   ✡ ✶
+========================================================= */
 
 .star-m {
     left: 18%;
     top: 35%;
     font-size: 15px;
-    opacity: .38;
+    opacity: .42;
     animation-delay: 1.2s,2.4s;
 }
 
@@ -281,7 +451,7 @@ body {
     left: 43%;
     top: 25%;
     font-size: 13px;
-    opacity: .44;
+    opacity: .50;
     animation-delay: 3.4s,1.3s;
 }
 
@@ -289,7 +459,7 @@ body {
     left: 68%;
     top: 62%;
     font-size: 18px;
-    opacity: .36;
+    opacity: .38;
     animation-delay: 2.6s,.7s;
 }
 
@@ -297,7 +467,7 @@ body {
     left: 88%;
     top: 18%;
     font-size: 12px;
-    opacity: .42;
+    opacity: .48;
     animation-delay: 4.2s,2.1s;
 }
 
@@ -313,9 +483,10 @@ body {
 
     50% {
         transform:
-            translate3d(0,-15px,0)
-            rotate(8deg);
+            translate3d(0,-18px,0)
+            rotate(10deg);
     }
+
 }
 
 
@@ -323,17 +494,18 @@ body {
 
     0%,
     100% {
-        opacity: .22;
+        opacity: .25;
     }
 
     50% {
-        opacity: .9;
+        opacity: .95;
     }
+
 }
 
 
 /* =========================================================
-   中央光晕
+   中央柔和光晕
 ========================================================= */
 
 .glow {
@@ -341,7 +513,7 @@ body {
     position: absolute;
 
     left: 50%;
-    top: 43%;
+    top: 46%;
 
     width: 650px;
     height: 650px;
@@ -352,24 +524,22 @@ body {
     border-radius: 50%;
 
     background:
-
         radial-gradient(
             circle,
-            rgba(67,163,210,.09) 0%,
-            rgba(55,135,180,.045) 30%,
-            transparent 70%
+            rgba(67,163,210,.12) 0%,
+            rgba(55,135,180,.06) 28%,
+            transparent 68%
         );
 
-    filter: blur(7px);
+    filter: blur(5px);
 
     pointer-events: none;
 
-    z-index: 2;
 }
 
 
 /* =========================================================
-   中央魔法阵
+   魔法阵主体
 ========================================================= */
 
 .magic-circle {
@@ -377,10 +547,10 @@ body {
     position: absolute;
 
     left: 50%;
-    top: 52%;
+    top: 53%;
 
-    width: 540px;
-    height: 540px;
+    width: 570px;
+    height: 570px;
 
     transform:
         translate(-50%,-50%);
@@ -389,23 +559,20 @@ body {
 
     border:
         1px solid
-        rgba(110,196,235,.10);
+        rgba(72,167,224,.22);
 
     box-shadow:
+        0 0 45px rgba(55,145,205,.06),
+        inset 0 0 45px rgba(55,145,205,.05);
 
-        0 0 40px
-        rgba(76,170,220,.04),
-
-        inset 0 0 40px
-        rgba(76,170,220,.035);
-
-    opacity: .68;
+    opacity: .88;
 
     pointer-events: none;
 
-    z-index: 2;
 }
 
+
+/* 第一层 */
 
 .magic-circle::before {
 
@@ -413,15 +580,18 @@ body {
 
     position: absolute;
 
-    inset: 42px;
+    inset: 40px;
 
     border-radius: 50%;
 
     border:
         1px solid
-        rgba(120,205,240,.075);
+        rgba(80,180,235,.18);
+
 }
 
+
+/* 第二层 */
 
 .magic-circle::after {
 
@@ -435,144 +605,243 @@ body {
 
     border:
         1px dashed
-        rgba(135,215,245,.07);
+        rgba(93,190,240,.20);
 
     animation:
         circleRotate 45s linear infinite;
-}
 
-
-@keyframes circleRotate {
-
-    from {
-        transform:
-            rotate(0deg);
-    }
-
-    to {
-        transform:
-            rotate(360deg);
-    }
 }
 
 
 /* =========================================================
-   外框
+   多层星轨
 ========================================================= */
 
-.frame {
+.orbit {
 
     position: absolute;
 
-    inset: 22px;
+    left: 50%;
+    top: 50%;
+
+    border-radius: 50%;
 
     border:
         1px solid
-        rgba(155,218,245,.24);
+        rgba(74,171,229,.20);
 
     pointer-events: none;
 
-    z-index: 20;
 }
 
 
-/* 上下横线 */
+/* 最大横向椭圆 */
 
-.frame::before {
+.orbit-1 {
+
+    width: 650px;
+    height: 250px;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(0deg);
+
+}
+
+
+/* 第二层 */
+
+.orbit-2 {
+
+    width: 610px;
+    height: 300px;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(28deg);
+
+}
+
+
+/* 第三层 */
+
+.orbit-3 {
+
+    width: 600px;
+    height: 270px;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(-28deg);
+
+}
+
+
+/* 第四层 */
+
+.orbit-4 {
+
+    width: 520px;
+    height: 210px;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(58deg);
+
+}
+
+
+/* 第五层 */
+
+.orbit-5 {
+
+    width: 500px;
+    height: 190px;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(-58deg);
+
+}
+
+
+/* 第六层 */
+
+.orbit-6 {
+
+    width: 440px;
+    height: 150px;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(90deg);
+
+}
+
+
+/* =========================================================
+   魔法阵中心十字
+========================================================= */
+
+.magic-cross {
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 1px;
+    height: 500px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent,
+            rgba(84,176,230,.18),
+            transparent
+        );
+
+    transform:
+        translate(-50%,-50%);
+
+    pointer-events: none;
+
+}
+
+
+.magic-cross::after {
 
     content: "";
 
     position: absolute;
 
-    left: 0;
-    right: 0;
-
+    left: 50%;
     top: 50%;
 
+    width: 500px;
     height: 1px;
+
+    transform:
+        translate(-50%,-50%);
 
     background:
         linear-gradient(
             to right,
-            transparent 0%,
-            rgba(70,157,218,.18) 12%,
-            rgba(100,190,235,.32) 50%,
-            rgba(70,157,218,.18) 88%,
-            transparent 100%
+            transparent,
+            rgba(84,176,230,.18),
+            transparent
         );
-
-    opacity: 0;
 
 }
 
 
 /* =========================================================
-   四角雪花 SVG
+   魔法阵旋转细线
 ========================================================= */
 
-.corner {
+.arc {
 
     position: absolute;
 
-    width: 74px;
-    height: 74px;
+    left: 50%;
+    top: 50%;
 
-    color:
-        rgba(105,190,240,.70);
-
-    opacity: .85;
-
-    filter:
-        drop-shadow(
-            0 0 4px
-            rgba(70,170,230,.18)
-        );
-
-}
-
-
-/* 左上 */
-
-.corner-tl {
-
-    left: -8px;
-    top: -8px;
-}
-
-
-/* 右上 */
-
-.corner-tr {
-
-    right: -8px;
-    top: -8px;
+    width: 470px;
+    height: 470px;
 
     transform:
-        rotate(90deg);
+        translate(-50%,-50%)
+        rotate(20deg);
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(88,181,235,.12);
+
+    border-left-color:
+        rgba(88,181,235,.35);
+
+    border-right-color:
+        rgba(88,181,235,.35);
+
+    animation:
+        circleRotateReverse 55s linear infinite;
+
 }
 
 
-/* 左下 */
+/* =========================================================
+   旋转
+========================================================= */
 
-.corner-bl {
+@keyframes circleRotate {
 
-    left: -8px;
-    bottom: -8px;
+    from {
+        transform: rotate(0deg);
+    }
 
-    transform:
-        rotate(-90deg);
+    to {
+        transform: rotate(360deg);
+    }
+
 }
 
 
-/* 右下 */
+@keyframes circleRotateReverse {
 
-.corner-br {
+    from {
+        transform:
+            translate(-50%,-50%)
+            rotate(20deg);
+    }
 
-    right: -8px;
-    bottom: -8px;
+    to {
+        transform:
+            translate(-50%,-50%)
+            rotate(-340deg);
+    }
 
-    transform:
-        rotate(180deg);
 }
 
 
@@ -586,8 +855,7 @@ body {
 
     left: 58px;
     right: 58px;
-
-    top: 43px;
+    top: 35px;
 
     display: flex;
 
@@ -596,12 +864,12 @@ body {
     justify-content: space-between;
 
     z-index: 30;
+
 }
 
 
 /* =========================================================
-   左上角 Logo
-   使用你原本代码里的样式
+   左上 Logo —— 恢复你原来的
 ========================================================= */
 
 .logo {
@@ -616,6 +884,7 @@ body {
         rgba(220,244,255,.92);
 
     white-space: nowrap;
+
 }
 
 
@@ -629,6 +898,7 @@ body {
     line-height: 1;
 
     margin-top: 3px;
+
 }
 
 
@@ -641,6 +911,7 @@ body {
     align-items: flex-start;
 
     gap: 2px;
+
 }
 
 
@@ -660,12 +931,11 @@ body {
 
     color:
         rgba(220,244,255,.90);
+
 }
 
 
 .logo-en {
-
-    display: block;
 
     font-family:
         "Cormorant Garamond",
@@ -681,7 +951,8 @@ body {
     color:
         rgba(190,225,245,.72);
 
-    opacity: .65;
+    opacity: .72;
+
 }
 
 
@@ -694,6 +965,7 @@ body {
     display: flex;
 
     gap: 34px;
+
 }
 
 
@@ -702,7 +974,7 @@ body {
     position: relative;
 
     color:
-        rgba(208,232,244,.65);
+        rgba(208,232,244,.72);
 
     text-decoration: none;
 
@@ -714,6 +986,7 @@ body {
 
     transition:
         color .35s ease;
+
 }
 
 
@@ -724,11 +997,9 @@ body {
     position: absolute;
 
     left: 50%;
-
     bottom: -8px;
 
     width: 0;
-
     height: 1px;
 
     background:
@@ -739,6 +1010,7 @@ body {
 
     transition:
         width .35s ease;
+
 }
 
 
@@ -746,12 +1018,14 @@ body {
 
     color:
         rgba(235,250,255,.98);
+
 }
 
 
 .nav-links a:hover::after {
 
     width: 100%;
+
 }
 
 
@@ -767,7 +1041,7 @@ body {
     top: 50%;
 
     width:
-        min(1050px,92vw);
+        min(1000px,90vw);
 
     transform:
         translate(-50%,-46%);
@@ -775,11 +1049,12 @@ body {
     text-align: center;
 
     z-index: 10;
+
 }
 
 
 /* =========================================================
-   主标题
+   英文标题
 ========================================================= */
 
 .title-en {
@@ -791,7 +1066,6 @@ body {
     align-items: center;
 
     font-family:
-
         "Cormorant Garamond",
         "Bodoni 72",
         "Didot",
@@ -804,21 +1078,21 @@ body {
     color:
         rgba(244,250,255,.96);
 
-    /* 已经去除文字发光 */
+    /* 已经去掉字体发光 */
 
-    text-shadow:
-        none;
+    text-shadow: none;
 
     transform:
         scaleX(.92);
 
-    line-height: .80;
+    line-height: .82;
 
     -webkit-font-smoothing:
         antialiased;
 
     text-rendering:
         geometricPrecision;
+
 }
 
 
@@ -827,6 +1101,7 @@ body {
     display: block;
 
     white-space: nowrap;
+
 }
 
 
@@ -835,15 +1110,16 @@ body {
 .title-word:first-child {
 
     font-size:
-        clamp(78px,10.8vw,142px);
+        clamp(76px,10.5vw,136px);
 
     font-weight: 300;
 
     letter-spacing:
-        clamp(10px,1.7vw,24px);
+        clamp(11px,1.8vw,24px);
 
     padding-left:
-        clamp(10px,1.7vw,24px);
+        clamp(11px,1.8vw,24px);
+
 }
 
 
@@ -851,46 +1127,45 @@ body {
 
 .title-word:last-child {
 
-    margin-top: 13px;
+    margin-top: 14px;
 
     font-size:
-        clamp(72px,10vw,132px);
+        clamp(68px,9.6vw,124px);
 
     font-weight: 300;
 
     letter-spacing:
-        clamp(13px,2vw,28px);
+        clamp(14px,2.2vw,29px);
 
     padding-left:
-        clamp(13px,2vw,28px);
+        clamp(14px,2.2vw,29px);
 
     opacity: .96;
+
 }
 
 
 /* =========================================================
-   标题下方细线
+   标题下方装饰线
 ========================================================= */
 
 .title-line {
 
-    position: relative;
-
-    width: 300px;
+    width: 250px;
 
     height: 1px;
 
     margin:
-        31px auto 23px;
+        34px auto 24px;
 
     background:
-
         linear-gradient(
             to right,
             transparent,
-            rgba(155,215,242,.52),
+            rgba(105,190,235,.65),
             transparent
         );
+
 }
 
 
@@ -901,7 +1176,6 @@ body {
 .title-cn {
 
     font-family:
-
         "Noto Sans SC",
         "Microsoft YaHei",
         "PingFang SC",
@@ -916,10 +1190,10 @@ body {
     padding-left: 8px;
 
     color:
-        rgba(224,244,252,.88);
+        rgba(224,244,252,.90);
 
-    text-shadow:
-        none;
+    text-shadow: none;
+
 }
 
 
@@ -932,7 +1206,7 @@ body {
     margin-top: 22px;
 
     color:
-        rgba(190,219,234,.58);
+        rgba(190,219,234,.64);
 
     font-size: 12px;
 
@@ -943,12 +1217,12 @@ body {
     letter-spacing: 4px;
 
     padding-left: 4px;
+
 }
 
 
 /* =========================================================
    进入档案馆按钮
-   全新西幻双层边框
 ========================================================= */
 
 .enter-button {
@@ -963,19 +1237,16 @@ body {
 
     margin-top: 34px;
 
-    width: 230px;
+    width: 225px;
 
-    height: 54px;
-
-    padding: 0 25px;
+    height: 52px;
 
     color:
-        rgba(220,245,255,.90);
+        rgba(224,246,255,.92);
 
     text-decoration: none;
 
     font-family:
-
         "Noto Sans SC",
         "Microsoft YaHei",
         sans-serif;
@@ -984,23 +1255,24 @@ body {
 
     font-weight: 300;
 
-    letter-spacing: 4px;
+    letter-spacing: 5px;
 
     background:
-        rgba(20,65,95,.10);
+        rgba(8,31,53,.34);
 
     border:
         1px solid
-        rgba(135,205,240,.55);
+        rgba(82,171,228,.58);
 
     transition:
-        background .4s ease,
-        border-color .4s ease,
-        transform .4s ease;
+        background .35s ease,
+        border-color .35s ease,
+        transform .35s ease;
+
 }
 
 
-/* 内层边框 */
+/* 内框 */
 
 .enter-button::before {
 
@@ -1012,88 +1284,88 @@ body {
 
     border:
         1px solid
-        rgba(105,190,235,.32);
+        rgba(84,176,231,.30);
 
     pointer-events: none;
+
 }
 
 
-/* 四角切角 */
+/* 左右六边装饰 */
 
 .enter-button::after {
 
-    content: "";
+    content: "◇";
 
     position: absolute;
 
-    inset: -1px;
+    left: -11px;
 
-    pointer-events: none;
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    width: 20px;
+    height: 20px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color:
+        rgba(104,196,243,.90);
+
+    font-size: 16px;
 
     background:
+        #06111d;
 
-        linear-gradient(
-            45deg,
-            transparent 0 12px,
-            rgba(145,215,245,.55) 12px 13px,
-            transparent 13px
-        )
-        left top / 20px 20px no-repeat,
-
-        linear-gradient(
-            -45deg,
-            transparent 0 12px,
-            rgba(145,215,245,.55) 12px 13px,
-            transparent 13px
-        )
-        right top / 20px 20px no-repeat,
-
-        linear-gradient(
-            -45deg,
-            transparent 0 12px,
-            rgba(145,215,245,.55) 12px 13px,
-            transparent 13px
-        )
-        left bottom / 20px 20px no-repeat,
-
-        linear-gradient(
-            45deg,
-            transparent 0 12px,
-            rgba(145,215,245,.55) 12px 13px,
-            transparent 13px
-        )
-        right bottom / 20px 20px no-repeat;
 }
 
 
-/* 按钮中央小菱形 */
+/* 右侧菱形 */
 
 .enter-button span {
 
-    position: relative;
+    margin-left: 15px;
 
-    z-index: 2;
+}
+
+
+/* 左右延伸线 */
+
+.enter-button {
+
+    box-shadow:
+
+        -18px 0 0 -17px rgba(92,185,235,.65),
+
+        18px 0 0 -17px rgba(92,185,235,.65);
+
 }
 
 
 .enter-button:hover {
 
     color:
-        #f2fbff;
+        #f4fbff;
 
     border-color:
-        rgba(175,225,250,.78);
+        rgba(116,204,248,.82);
 
     background:
-        rgba(45,105,145,.13);
+        rgba(36,102,145,.12);
 
     transform:
         translateY(-2px);
+
 }
 
 
 /* =========================================================
-   底部文字
+   底部
 ========================================================= */
 
 .footer-mark {
@@ -1101,7 +1373,6 @@ body {
     position: absolute;
 
     left: 50%;
-
     bottom: 38px;
 
     transform:
@@ -1111,7 +1382,6 @@ body {
         rgba(160,205,225,.28);
 
     font-family:
-
         "Cormorant Garamond",
         "Times New Roman",
         serif;
@@ -1125,6 +1395,7 @@ body {
     white-space: nowrap;
 
     z-index: 10;
+
 }
 
 
@@ -1137,64 +1408,84 @@ body {
     .page {
 
         min-height: 580px;
+
     }
 
 
     .frame {
 
-        inset: 12px;
+        inset: 11px;
+
     }
 
 
-    /* 雪花角变小 */
+    .frame::before {
+
+        top: 53px;
+
+    }
+
 
     .corner {
 
-        width: 57px;
-        height: 57px;
+        width: 48px;
+        height: 48px;
+
     }
 
 
     .corner-tl {
-        left: -6px;
-        top: -6px;
+
+        left: -15px;
+        top: -15px;
+
     }
+
 
     .corner-tr {
-        right: -6px;
-        top: -6px;
+
+        right: -15px;
+        top: -15px;
+
     }
+
 
     .corner-bl {
-        left: -6px;
-        bottom: -6px;
+
+        left: -15px;
+        bottom: -15px;
+
     }
 
+
     .corner-br {
-        right: -6px;
-        bottom: -6px;
+
+        right: -15px;
+        bottom: -15px;
+
     }
 
 
     .nav {
 
         left: 30px;
-
         right: 30px;
+        top: 28px;
 
-        top: 30px;
     }
 
 
     .logo {
 
         gap: 9px;
+
     }
 
 
     .logo-symbol {
 
         font-size: 13px;
+
     }
 
 
@@ -1203,6 +1494,7 @@ body {
         font-size: 10px;
 
         letter-spacing: 2px;
+
     }
 
 
@@ -1211,12 +1503,14 @@ body {
         font-size: 9px;
 
         letter-spacing: 2.5px;
+
     }
 
 
     .nav-links {
 
         gap: 14px;
+
     }
 
 
@@ -1225,14 +1519,114 @@ body {
         font-size: 10px;
 
         letter-spacing: 1px;
+
     }
 
 
     .nav-links a:nth-child(3) {
 
         display: none;
+
     }
 
+
+    /* 手机魔法阵 */
+
+    .magic-circle {
+
+        width: 430px;
+        height: 430px;
+
+        top: 51%;
+
+    }
+
+
+    .magic-circle::before {
+
+        inset: 32px;
+
+    }
+
+
+    .magic-circle::after {
+
+        inset: 65px;
+
+    }
+
+
+    .orbit-1 {
+
+        width: 500px;
+        height: 190px;
+
+    }
+
+
+    .orbit-2 {
+
+        width: 470px;
+        height: 220px;
+
+    }
+
+
+    .orbit-3 {
+
+        width: 460px;
+        height: 200px;
+
+    }
+
+
+    .orbit-4 {
+
+        width: 400px;
+        height: 165px;
+
+    }
+
+
+    .orbit-5 {
+
+        width: 390px;
+        height: 145px;
+
+    }
+
+
+    .orbit-6 {
+
+        width: 350px;
+        height: 125px;
+
+    }
+
+
+    .magic-cross {
+
+        height: 390px;
+
+    }
+
+
+    .magic-cross::after {
+
+        width: 390px;
+
+    }
+
+
+    .arc {
+
+        width: 360px;
+        height: 360px;
+
+    }
+
+
+    /* Hero */
 
     .hero {
 
@@ -1240,17 +1634,19 @@ body {
 
         transform:
             translate(-50%,-45%);
+
     }
 
 
     .title-word:first-child {
 
         font-size:
-            clamp(57px,16vw,88px);
+            clamp(55px,15.5vw,88px);
 
-        letter-spacing: 7px;
+        letter-spacing: 6px;
 
-        padding-left: 7px;
+        padding-left: 6px;
+
     }
 
 
@@ -1259,11 +1655,12 @@ body {
         margin-top: 10px;
 
         font-size:
-            clamp(51px,14.5vw,80px);
+            clamp(50px,14vw,80px);
 
         letter-spacing: 8px;
 
         padding-left: 8px;
+
     }
 
 
@@ -1272,7 +1669,8 @@ body {
         width: 150px;
 
         margin:
-            25px auto 19px;
+            27px auto 19px;
+
     }
 
 
@@ -1283,6 +1681,7 @@ body {
         letter-spacing: 5px;
 
         padding-left: 5px;
+
     }
 
 
@@ -1295,28 +1694,22 @@ body {
         letter-spacing: 2px;
 
         line-height: 2;
+
     }
 
 
     .enter-button {
 
-        width: 200px;
-
-        height: 49px;
-
         margin-top: 27px;
+
+        width: 195px;
+
+        height: 45px;
 
         font-size: 10px;
 
         letter-spacing: 3px;
-    }
 
-
-    .magic-circle {
-
-        width: 390px;
-
-        height: 390px;
     }
 
 
@@ -1327,7 +1720,9 @@ body {
         font-size: 8px;
 
         letter-spacing: 2px;
+
     }
+
 }
 
 
@@ -1340,61 +1735,109 @@ body {
     .nav-links {
 
         display: none;
+
     }
 
 
     .nav {
 
-        justify-content: flex-start;
+        justify-content:
+            flex-start;
+
     }
 
 
     .title-word:first-child {
 
-        font-size: 57px;
+        font-size: 55px;
 
         letter-spacing: 5px;
 
         padding-left: 5px;
+
     }
 
 
     .title-word:last-child {
 
-        font-size: 50px;
+        font-size: 49px;
 
         letter-spacing: 6px;
 
         padding-left: 6px;
+
     }
 
 
     .title-cn {
 
         font-size: 13px;
+
     }
 
 
     .description {
 
         font-size: 9px;
+
     }
 
 
-    .corner {
+    .magic-circle {
 
-        width: 51px;
+        width: 390px;
+        height: 390px;
 
-        height: 51px;
     }
 
 
-    .enter-button {
+    .orbit-1 {
 
-        width: 190px;
+        width: 450px;
+        height: 170px;
 
-        height: 47px;
     }
+
+
+    .orbit-2 {
+
+        width: 420px;
+        height: 200px;
+
+    }
+
+
+    .orbit-3 {
+
+        width: 410px;
+        height: 180px;
+
+    }
+
+
+    .orbit-4 {
+
+        width: 350px;
+        height: 145px;
+
+    }
+
+
+    .orbit-5 {
+
+        width: 340px;
+        height: 130px;
+
+    }
+
+
+    .orbit-6 {
+
+        width: 310px;
+        height: 110px;
+
+    }
+
 }
 
 </style>
@@ -1453,6 +1896,17 @@ body {
 
     <div class="magic-circle"></div>
 
+    <div class="orbit orbit-1"></div>
+    <div class="orbit orbit-2"></div>
+    <div class="orbit orbit-3"></div>
+    <div class="orbit orbit-4"></div>
+    <div class="orbit orbit-5"></div>
+    <div class="orbit orbit-6"></div>
+
+    <div class="magic-cross"></div>
+
+    <div class="arc"></div>
+
 
     <!-- =====================================================
          外框
@@ -1461,163 +1915,209 @@ body {
     <div class="frame">
 
 
-        <!-- 左上雪花 -->
+        <!-- 左上六芒星 -->
 
-        <svg
-            class="corner corner-tl"
-            viewBox="0 0 100 100"
-            xmlns="http://www.w3.org/2000/svg"
-        >
+        <div class="corner corner-tl">
 
-            <g
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1"
-                stroke-linecap="round"
-            >
+            <svg viewBox="0 0 100 100">
 
-                <path d="M5 5 L72 5 L95 28"/>
-                <path d="M5 5 L5 72 L28 95"/>
+                <circle
+                    cx="50"
+                    cy="50"
+                    r="31"
+                />
 
-                <path d="M25 5 L25 25 L5 25"/>
-                <path d="M45 5 L45 18"/>
-                <path d="M5 45 L18 45"/>
+                <circle
+                    cx="50"
+                    cy="50"
+                    r="22"
+                    opacity=".45"
+                />
 
-                <path d="M72 5 L65 18 L72 25 L85 18"/>
-                <path d="M5 72 L18 65 L25 72 L18 85"/>
+                <polygon
+                    points="
+                    50,16
+                    79,67
+                    21,67
+                    "
+                />
 
-                <path d="M48 48 L48 76"/>
-                <path d="M34 62 L48 48 L62 62"/>
+                <polygon
+                    points="
+                    50,84
+                    21,33
+                    79,33
+                    "
+                />
 
-                <path d="M48 48 L76 48"/>
-                <path d="M62 34 L48 48 L62 62"/>
+                <line
+                    x1="8"
+                    y1="50"
+                    x2="27"
+                    y2="50"
+                />
 
-                <path d="M48 48 L48 34"/>
-                <path d="M34 48 L48 48"/>
+                <line
+                    x1="73"
+                    y1="50"
+                    x2="92"
+                    y2="50"
+                />
 
-                <path d="M90 28 L78 40"/>
-                <path d="M28 90 L40 78"/>
+            </svg>
 
-            </g>
-
-        </svg>
+        </div>
 
 
         <!-- 右上 -->
 
-        <svg
-            class="corner corner-tr"
-            viewBox="0 0 100 100"
-            xmlns="http://www.w3.org/2000/svg"
-        >
+        <div class="corner corner-tr">
 
-            <g
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1"
-                stroke-linecap="round"
-            >
+            <svg viewBox="0 0 100 100">
 
-                <path d="M5 5 L72 5 L95 28"/>
-                <path d="M5 5 L5 72 L28 95"/>
+                <circle cx="50" cy="50" r="31"/>
 
-                <path d="M25 5 L25 25 L5 25"/>
-                <path d="M45 5 L45 18"/>
-                <path d="M5 45 L18 45"/>
+                <circle
+                    cx="50"
+                    cy="50"
+                    r="22"
+                    opacity=".45"
+                />
 
-                <path d="M72 5 L65 18 L72 25 L85 18"/>
-                <path d="M5 72 L18 65 L25 72 L18 85"/>
+                <polygon
+                    points="
+                    50,16
+                    79,67
+                    21,67
+                    "
+                />
 
-                <path d="M48 48 L48 76"/>
-                <path d="M34 62 L48 48 L62 62"/>
+                <polygon
+                    points="
+                    50,84
+                    21,33
+                    79,33
+                    "
+                />
 
-                <path d="M48 48 L76 48"/>
-                <path d="M62 34 L48 48 L62 62"/>
+                <line
+                    x1="8"
+                    y1="50"
+                    x2="27"
+                    y2="50"
+                />
 
-                <path d="M48 48 L48 34"/>
-                <path d="M34 48 L48 48"/>
+                <line
+                    x1="73"
+                    y1="50"
+                    x2="92"
+                    y2="50"
+                />
 
-            </g>
+            </svg>
 
-        </svg>
+        </div>
 
 
         <!-- 左下 -->
 
-        <svg
-            class="corner corner-bl"
-            viewBox="0 0 100 100"
-            xmlns="http://www.w3.org/2000/svg"
-        >
+        <div class="corner corner-bl">
 
-            <g
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1"
-                stroke-linecap="round"
-            >
+            <svg viewBox="0 0 100 100">
 
-                <path d="M5 5 L72 5 L95 28"/>
-                <path d="M5 5 L5 72 L28 95"/>
+                <circle cx="50" cy="50" r="31"/>
 
-                <path d="M25 5 L25 25 L5 25"/>
-                <path d="M45 5 L45 18"/>
-                <path d="M5 45 L18 45"/>
+                <circle
+                    cx="50"
+                    cy="50"
+                    r="22"
+                    opacity=".45"
+                />
 
-                <path d="M72 5 L65 18 L72 25 L85 18"/>
-                <path d="M5 72 L18 65 L25 72 L18 85"/>
+                <polygon
+                    points="
+                    50,16
+                    79,67
+                    21,67
+                    "
+                />
 
-                <path d="M48 48 L48 76"/>
-                <path d="M34 62 L48 48 L62 62"/>
+                <polygon
+                    points="
+                    50,84
+                    21,33
+                    79,33
+                    "
+                />
 
-                <path d="M48 48 L76 48"/>
-                <path d="M62 34 L48 48 L62 62"/>
+                <line
+                    x1="8"
+                    y1="50"
+                    x2="27"
+                    y2="50"
+                />
 
-                <path d="M48 48 L48 34"/>
-                <path d="M34 48 L48 48"/>
+                <line
+                    x1="73"
+                    y1="50"
+                    x2="92"
+                    y2="50"
+                />
 
-            </g>
+            </svg>
 
-        </svg>
+        </div>
 
 
         <!-- 右下 -->
 
-        <svg
-            class="corner corner-br"
-            viewBox="0 0 100 100"
-            xmlns="http://www.w3.org/2000/svg"
-        >
+        <div class="corner corner-br">
 
-            <g
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1"
-                stroke-linecap="round"
-            >
+            <svg viewBox="0 0 100 100">
 
-                <path d="M5 5 L72 5 L95 28"/>
-                <path d="M5 5 L5 72 L28 95"/>
+                <circle cx="50" cy="50" r="31"/>
 
-                <path d="M25 5 L25 25 L5 25"/>
-                <path d="M45 5 L45 18"/>
-                <path d="M5 45 L18 45"/>
+                <circle
+                    cx="50"
+                    cy="50"
+                    r="22"
+                    opacity=".45"
+                />
 
-                <path d="M72 5 L65 18 L72 25 L85 18"/>
-                <path d="M5 72 L18 65 L25 72 L18 85"/>
+                <polygon
+                    points="
+                    50,16
+                    79,67
+                    21,67
+                    "
+                />
 
-                <path d="M48 48 L48 76"/>
-                <path d="M34 62 L48 48 L62 62"/>
+                <polygon
+                    points="
+                    50,84
+                    21,33
+                    79,33
+                    "
+                />
 
-                <path d="M48 48 L76 48"/>
-                <path d="M62 34 L48 48 L62 62"/>
+                <line
+                    x1="8"
+                    y1="50"
+                    x2="27"
+                    y2="50"
+                />
 
-                <path d="M48 48 L48 34"/>
-                <path d="M34 48 L48 48"/>
+                <line
+                    x1="73"
+                    y1="50"
+                    x2="92"
+                    y2="50"
+                />
 
-            </g>
+            </svg>
 
-        </svg>
+        </div>
+
 
     </div>
 
@@ -1629,7 +2129,7 @@ body {
     <header class="nav">
 
 
-        <!-- 左上 Logo -->
+        <!-- 左上角 Logo -->
 
         <div class="logo">
 
@@ -1674,13 +2174,10 @@ body {
 
 
     <!-- =====================================================
-         中央内容
+         Hero
     ====================================================== -->
 
     <main class="hero">
-
-
-        <!-- 已删除标题上下 ✧✦✧ -->
 
 
         <!-- 英文标题 -->
@@ -1698,7 +2195,7 @@ body {
         </h1>
 
 
-        <!-- 标题下方装饰线 -->
+        <!-- 标题下方横线 -->
 
         <div class="title-line"></div>
 
@@ -1723,17 +2220,17 @@ body {
         </p>
 
 
-        <!-- =================================================
-             进入档案馆
-        ================================================== -->
+        <!-- 进入档案馆 -->
 
         <a
             class="enter-button"
             href="archive.html"
         >
 
+            进入档案馆
+
             <span>
-                进入档案馆　→
+                →
             </span>
 
         </a>
@@ -1743,7 +2240,7 @@ body {
 
 
     <!-- =====================================================
-         底部
+         Footer
     ====================================================== -->
 
     <div class="footer-mark">
