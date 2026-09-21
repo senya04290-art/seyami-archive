@@ -8,124 +8,114 @@
 
 <style>
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+html, body {
+    width: 100%;
+    min-height: 100%;
 }
 
 body {
-    min-height: 100vh;
     font-family:
-        "Noto Serif SC",
-        "Source Han Serif SC",
+        "Noto Sans SC",
         "Microsoft YaHei",
-        serif;
+        sans-serif;
 
-    color: #eee8ff;
+    color: #e9f6ff;
 
     background:
-        radial-gradient(circle at 50% 0%, #29204a 0%, transparent 38%),
-        radial-gradient(circle at 10% 80%, #241a42 0%, transparent 30%),
-        linear-gradient(180deg, #0d0a19 0%, #100c20 55%, #080710 100%);
+        radial-gradient(circle at 50% 25%, rgba(52, 145, 220, 0.22), transparent 32%),
+        radial-gradient(circle at 20% 80%, rgba(34, 93, 180, 0.18), transparent 30%),
+        linear-gradient(
+            180deg,
+            #06152c 0%,
+            #081d3b 45%,
+            #041126 100%
+        );
 
     overflow-x: hidden;
 }
 
-/* ===== 星空 ===== */
+/* 星空 */
 
-.stars,
-.stars::before,
-.stars::after {
+.stars {
     position: fixed;
     inset: 0;
     pointer-events: none;
-}
-
-.stars {
     z-index: 0;
+
     background-image:
-        radial-gradient(circle, rgba(255,255,255,.8) 1px, transparent 1px),
-        radial-gradient(circle, rgba(198,176,255,.5) 1px, transparent 1px);
-    background-size: 130px 130px, 190px 190px;
-    background-position: 20px 40px, 80px 120px;
-    opacity: .45;
+        radial-gradient(circle, rgba(255,255,255,.9) 1px, transparent 1px),
+        radial-gradient(circle, rgba(137,210,255,.7) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255,255,255,.5) 1px, transparent 1px);
+
+    background-size:
+        110px 110px,
+        170px 170px,
+        240px 240px;
+
+    background-position:
+        10px 20px,
+        70px 90px,
+        130px 40px;
+
+    opacity: .65;
 }
 
-.stars::before {
-    content: "";
-    background-image:
-        radial-gradient(circle, white 1px, transparent 1px);
-    background-size: 240px 240px;
-    opacity: .35;
-}
-
-/* ===== 导航 ===== */
+/* 顶部导航 */
 
 nav {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+
     height: 72px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    padding: 0 6vw;
+    padding: 0 6%;
 
-    background: rgba(9, 7, 18, .72);
+    background: rgba(4, 17, 38, .72);
     backdrop-filter: blur(14px);
 
-    border-bottom: 1px solid rgba(210,190,255,.12);
+    border-bottom: 1px solid rgba(116, 203, 255, .18);
 
     z-index: 20;
 }
 
 .logo {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.1;
-}
+    color: #dff6ff;
+    text-decoration: none;
 
-.logo-cn {
     font-size: 18px;
     letter-spacing: 3px;
+
+    text-shadow:
+        0 0 10px rgba(105, 207, 255, .7);
 }
 
-.logo-en {
-    margin-top: 4px;
-    font-size: 9px;
+.logo span {
+    display: block;
+
+    font-size: 10px;
     letter-spacing: 4px;
-    color: #a99acb;
+
+    color: #78cfff;
+
+    margin-top: 3px;
 }
 
-.nav-links {
-    display: flex;
-    gap: 28px;
-}
-
-.nav-links a {
-    color: #c9c0dc;
-    text-decoration: none;
-    font-size: 13px;
-    transition: .3s;
-}
-
-.nav-links a:hover {
-    color: #fff;
-    text-shadow: 0 0 12px rgba(205,180,255,.8);
-}
-
-/* ===== 首页 ===== */
+/* 首页 */
 
 .hero {
     position: relative;
-    z-index: 1;
+    z-index: 2;
 
     min-height: 100vh;
 
@@ -135,76 +125,117 @@ nav {
 
     text-align: center;
 
-    padding: 120px 25px 80px;
+    padding: 100px 20px 60px;
 }
 
 .hero-content {
     max-width: 850px;
 }
 
-.symbol {
-    font-size: 48px;
-    color: #cbb8ff;
+/* 月亮 */
 
-    margin-bottom: 25px;
+.moon {
+    width: 150px;
+    height: 150px;
 
-    text-shadow:
-        0 0 12px rgba(194,165,255,.7),
-        0 0 35px rgba(134,98,220,.45);
+    margin: 0 auto 35px;
 
-    animation: float 5s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%,100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-8px);
-    }
-}
-
-.hero h1 {
-    font-size: clamp(38px, 7vw, 78px);
-    font-weight: 400;
-    letter-spacing: 12px;
-
-    margin-bottom: 15px;
-
-    text-shadow:
-        0 0 20px rgba(200,175,255,.35);
-}
-
-.hero .english {
-    font-size: clamp(12px, 2vw, 16px);
-    letter-spacing: 9px;
-    color: #9e91bd;
-    margin-bottom: 35px;
-}
-
-.hero p {
-    color: #bdb4ca;
-    line-height: 2;
-    font-size: 14px;
-}
-
-/* ===== 魔法圆环 ===== */
-
-.magic-ring {
-    width: 230px;
-    height: 230px;
-
-    border: 1px solid rgba(190,165,255,.25);
     border-radius: 50%;
 
-    margin: 35px auto;
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #ffffff 0%,
+            #dff7ff 45%,
+            #8fd9ff 100%
+        );
+
+    box-shadow:
+        0 0 30px rgba(130, 220, 255, .55),
+        0 0 80px rgba(65, 165, 255, .28);
 
     position: relative;
+}
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.moon::before,
+.moon::after {
+    content: "";
+    position: absolute;
+
+    border-radius: 50%;
+
+    background: rgba(89, 166, 211, .18);
+}
+
+.moon::before {
+    width: 28px;
+    height: 28px;
+
+    top: 35px;
+    left: 30px;
+}
+
+.moon::after {
+    width: 18px;
+    height: 18px;
+
+    bottom: 35px;
+    right: 35px;
+}
+
+/* 标题 */
+
+.title-cn {
+    font-size: clamp(34px, 7vw, 68px);
+
+    font-weight: 500;
+
+    letter-spacing: 9px;
+
+    color: #effbff;
+
+    text-shadow:
+        0 0 12px rgba(122, 214, 255, .9),
+        0 0 35px rgba(55, 151, 255, .55);
+
+    margin-bottom: 15px;
+}
+
+.title-en {
+    font-size: clamp(13px, 2vw, 18px);
+
+    letter-spacing: 8px;
+
+    color: #79d4ff;
+
+    margin-bottom: 28px;
+}
+
+.description {
+    color: #a9cde3;
+
+    font-size: 14px;
+
+    line-height: 2;
+
+    max-width: 620px;
+
+    margin: 0 auto 42px;
+}
+
+/* 魔法圆环 */
+
+.magic-ring {
+    position: absolute;
+
+    width: min(600px, 85vw);
+    height: min(600px, 85vw);
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(95, 205, 255, .16);
+
+    z-index: -1;
 
     animation: rotate 35s linear infinite;
 }
@@ -212,249 +243,205 @@ nav {
 .magic-ring::before,
 .magic-ring::after {
     content: "";
-    position: absolute;
-    inset: 18px;
 
-    border: 1px dashed rgba(200,180,255,.28);
+    position: absolute;
+
+    inset: 25px;
+
     border-radius: 50%;
+
+    border: 1px dashed rgba(103, 207, 255, .16);
 }
 
 .magic-ring::after {
-    inset: 45px;
-    border-style: solid;
-    opacity: .6;
-}
+    inset: 65px;
 
-.magic-core {
-    width: 72px;
-    height: 72px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(circle,
-            #eee4ff 0%,
-            #bda5ff 25%,
-            #62478e 55%,
-            transparent 72%
-        );
-
-    box-shadow:
-        0 0 25px rgba(184,151,255,.8),
-        0 0 70px rgba(111,76,180,.45);
+    border: 1px solid rgba(110, 220, 255, .1);
 }
 
 @keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
     to {
         transform: rotate(360deg);
     }
 }
 
-/* ===== 按钮 ===== */
+/* 进入按钮 */
 
 .enter-btn {
-    display: inline-block;
+    display: inline-flex;
 
-    padding: 14px 35px;
+    align-items: center;
+    justify-content: center;
 
-    border: 1px solid rgba(205,185,255,.5);
-    border-radius: 40px;
+    min-width: 220px;
 
-    color: #eee7ff;
+    padding: 15px 32px;
+
+    border-radius: 50px;
+
+    border: 1px solid rgba(132, 222, 255, .65);
+
+    color: #e8f9ff;
+
     text-decoration: none;
-
-    background: rgba(130,100,190,.12);
-
-    transition: .35s;
-
-    letter-spacing: 3px;
-    font-size: 13px;
-}
-
-.enter-btn:hover {
-    background: rgba(165,135,235,.25);
-
-    box-shadow:
-        0 0 20px rgba(180,150,255,.3);
-
-    transform: translateY(-2px);
-}
-
-/* ===== 档案区域 ===== */
-
-.section {
-    position: relative;
-    z-index: 1;
-
-    max-width: 1100px;
-
-    margin: auto;
-
-    padding: 100px 25px;
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.section-title h2 {
-    font-size: 27px;
-    font-weight: 400;
-    letter-spacing: 6px;
-}
-
-.section-title span {
-    display: block;
-
-    margin-top: 10px;
-
-    font-size: 10px;
-    letter-spacing: 5px;
-
-    color: #887ba5;
-}
-
-/* ===== 卡片 ===== */
-
-.archive-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 20px;
-}
-
-.archive-card {
-    min-height: 190px;
-
-    padding: 35px 25px;
 
     background:
         linear-gradient(
-            145deg,
-            rgba(92,70,130,.16),
-            rgba(20,16,35,.55)
+            135deg,
+            rgba(51, 143, 220, .25),
+            rgba(29, 82, 155, .18)
         );
 
-    border: 1px solid rgba(191,169,235,.13);
+    box-shadow:
+        0 0 18px rgba(73, 184, 255, .18),
+        inset 0 0 20px rgba(103, 205, 255, .05);
 
-    border-radius: 14px;
+    transition:
+        .3s ease;
 
-    transition: .35s;
+    letter-spacing: 3px;
 
-    position: relative;
-    overflow: hidden;
+    font-size: 15px;
 }
 
-.archive-card::after {
-    content: "";
+.enter-btn:hover {
+    transform: translateY(-3px);
 
-    position: absolute;
-
-    width: 120px;
-    height: 120px;
-
-    right: -50px;
-    bottom: -50px;
-
-    border-radius: 50%;
-
-    background: rgba(157,122,220,.08);
-
-    filter: blur(10px);
-}
-
-.archive-card:hover {
-    transform: translateY(-5px);
-
-    border-color:
-        rgba(202,181,255,.35);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(65, 168, 240, .4),
+            rgba(35, 100, 190, .28)
+        );
 
     box-shadow:
-        0 15px 40px rgba(0,0,0,.25);
+        0 0 30px rgba(74, 192, 255, .4);
+
+    border-color: #9ee7ff;
 }
 
-.card-icon {
-    font-size: 27px;
-    margin-bottom: 18px;
+/* 小装饰 */
+
+.decor {
+    position: absolute;
+
+    color: rgba(124, 211, 255, .6);
+
+    font-size: 14px;
+
+    pointer-events: none;
+
+    animation: float 5s ease-in-out infinite;
 }
 
-.archive-card h3 {
-    font-size: 17px;
-    font-weight: 400;
-
-    margin-bottom: 10px;
-
-    letter-spacing: 2px;
+.decor.one {
+    top: 25%;
+    left: 10%;
 }
 
-.archive-card p {
-    color: #958ca7;
+.decor.two {
+    top: 35%;
+    right: 12%;
 
-    font-size: 12px;
-
-    line-height: 1.8;
+    animation-delay: 1.5s;
 }
 
-/* ===== Footer ===== */
+.decor.three {
+    bottom: 18%;
+    left: 18%;
 
-footer {
-    position: relative;
-    z-index: 1;
+    animation-delay: 2.5s;
+}
 
-    padding: 70px 20px 40px;
+.decor.four {
+    bottom: 25%;
+    right: 20%;
+
+    animation-delay: 1s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+        opacity: .45;
+    }
+
+    50% {
+        transform: translateY(-12px);
+        opacity: 1;
+    }
+}
+
+/* 底部 */
+
+.footer {
+    position: absolute;
+
+    bottom: 25px;
+
+    width: 100%;
 
     text-align: center;
 
-    color: #625a70;
+    color: rgba(157, 201, 225, .5);
 
     font-size: 11px;
 
-    letter-spacing: 2px;
+    letter-spacing: 3px;
 }
 
-footer .footer-name {
-    color: #9a8caf;
+/* 手机 */
 
-    margin-bottom: 10px;
-
-    font-size: 14px;
-}
-
-/* ===== 手机 ===== */
-
-@media (max-width: 700px) {
+@media (max-width: 600px) {
 
     nav {
         height: 62px;
         padding: 0 20px;
     }
 
-    .nav-links {
-        display: none;
+    .logo {
+        font-size: 15px;
+    }
+
+    .logo span {
+        font-size: 8px;
     }
 
     .hero {
-        padding-top: 100px;
+        padding-top: 80px;
     }
 
-    .hero h1 {
+    .moon {
+        width: 110px;
+        height: 110px;
+
+        margin-bottom: 28px;
+    }
+
+    .title-cn {
         letter-spacing: 5px;
     }
 
-    .hero .english {
+    .title-en {
         letter-spacing: 5px;
+    }
+
+    .description {
+        font-size: 13px;
+        padding: 0 15px;
     }
 
     .magic-ring {
-        width: 190px;
-        height: 190px;
+        width: 450px;
+        height: 450px;
     }
 
-    .archive-grid {
-        grid-template-columns: 1fr;
+    .decor {
+        font-size: 11px;
     }
 }
 </style>
@@ -464,151 +451,53 @@ footer .footer-name {
 
 <div class="stars"></div>
 
-<!-- 导航 -->
 <nav>
-
-    <div class="logo">
-        <div class="logo-cn">
-            赛垭弥大陆档案馆
-        </div>
-
-        <div class="logo-en">
-            SEYAMI ARCHIVE
-        </div>
-    </div>
-
-    <div class="nav-links">
-        <a href="#home">首页</a>
-        <a href="#characters">角色档案</a>
-        <a href="#world">世界</a>
-        <a href="#gallery">画廊</a>
-    </div>
-
+    <a href="index.html" class="logo">
+        赛垭弥大陆档案馆
+        <span>SEYAMI ARCHIVE</span>
+    </a>
 </nav>
 
+<main class="hero">
 
-<!-- 首页 -->
-<section class="hero" id="home">
+    <div class="magic-ring"></div>
+
+    <div class="decor one">✦</div>
+    <div class="decor two">✧</div>
+    <div class="decor three">⋆</div>
+    <div class="decor four">✦</div>
 
     <div class="hero-content">
 
-        <div class="symbol">
-            ✦
-        </div>
+        <div class="moon"></div>
 
-        <h1>
+        <h1 class="title-cn">
             赛垭弥大陆档案馆
         </h1>
 
-        <div class="english">
+        <div class="title-en">
             SEYAMI ARCHIVE
         </div>
 
-        <p>
-            记录大陆上的生命、传说与未曾被遗忘的故事。
+        <p class="description">
+            记录关于这片大陆的一切。
             <br>
-            在星辰与魔法之间，寻找属于他们的名字。
+            角色、种族、地域、历史，以及那些尚未被发现的故事。
         </p>
 
-        <div class="magic-ring">
-            <div class="magic-core"></div>
-        </div>
-
-        <a class="enter-btn" href="#characters">
-            进入档案馆　✦
+        <!-- 点击后进入独立档案目录页面 -->
+        <a href="archive.html" class="enter-btn">
+            进入档案馆
+            <span style="margin-left:10px;">→</span>
         </a>
 
     </div>
 
-</section>
+</main>
 
-
-<!-- 档案 -->
-<section class="section" id="characters">
-
-    <div class="section-title">
-
-        <h2>
-            档案目录
-        </h2>
-
-        <span>
-            ARCHIVE INDEX
-        </span>
-
-    </div>
-
-
-    <div class="archive-grid">
-
-        <div class="archive-card">
-
-            <div class="card-icon">
-                ✦
-            </div>
-
-            <h3>
-                角色档案
-            </h3>
-
-            <p>
-                记录生活于赛垭弥大陆的角色、
-                种族、身份与他们各自的故事。
-            </p>
-
-        </div>
-
-
-        <div class="archive-card" id="world">
-
-            <div class="card-icon">
-                ◇
-            </div>
-
-            <h3>
-                世界设定
-            </h3>
-
-            <p>
-                大陆、国家、森林、雪山、
-                王庭与隐藏于历史中的秘密。
-            </p>
-
-        </div>
-
-
-        <div class="archive-card" id="gallery">
-
-            <div class="card-icon">
-                ♢
-            </div>
-
-            <h3>
-                档案画廊
-            </h3>
-
-            <p>
-                收藏角色插画、场景、
-                概念设计与属于这个世界的视觉记录。
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<footer>
-
-    <div class="footer-name">
-        ✦ SEYAMI ARCHIVE ✦
-    </div>
-
-    赛垭弥大陆档案馆
-
-</footer>
-
+<div class="footer">
+    ✦ THE ARCHIVES OF SEYAMI ✦
+</div>
 
 </body>
 </html>
