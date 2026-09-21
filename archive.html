@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>档案目录｜赛垭弥大陆档案馆</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+
+    font-family:
+        "Noto Sans SC",
+        "Microsoft YaHei",
+        sans-serif;
+
+    color: #e9f7ff;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(49, 145, 220, .25),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 10% 80%,
+            rgba(32, 100, 190, .15),
+            transparent 30%
+        ),
+        linear-gradient(
+            180deg,
+            #06152d 0%,
+            #071d3b 45%,
+            #030e21 100%
+        );
+
+    overflow-x: hidden;
+}
+
+/* =========================
+   星空
+========================= */
+
+.stars {
+    position: fixed;
+    inset: 0;
+
+    pointer-events: none;
+
+    background-image:
+        radial-gradient(circle, rgba(255,255,255,.8) 1px, transparent 1px),
+        radial-gradient(circle, rgba(105,205,255,.65) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255,255,255,.4) 1px, transparent 1px);
+
+    background-size:
+        120px 120px,
+        190px 190px,
+        260px 260px;
+
+    background-position:
+        20px 30px,
+        80px 100px,
+        150px 60px;
+
+    opacity: .5;
+
+    z-index: 0;
+}
+
+/* =========================
+   顶部导航
+========================= */
+
+nav {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 6%;
+
+    background: rgba(3, 15, 34, .78);
+
+    backdrop-filter: blur(15px);
+
+    border-bottom:
+        1px solid rgba(112, 207, 255, .18);
+
+    z-index: 20;
+}
+
+.logo {
+    color: #e8f8ff;
+
+    text-decoration: none;
+
+    font-size: 17px;
+
+    letter-spacing: 3px;
+
+    text-shadow:
+        0 0 12px rgba(92, 201, 255, .65);
+}
+
+.logo span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #70ccff;
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+}
+
+.back {
+    color: #91cde8;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    letter-spacing: 2px;
+
+    transition: .3s;
+}
+
+.back:hover {
+    color: #e8f9ff;
+
+    text-shadow:
+        0 0 12px rgba(92, 202, 255, .8);
+}
+
+/* =========================
+   页面主体
+========================= */
+
+.container {
+    position: relative;
+
+    z-index: 2;
+
+    width: min(1100px, 90%);
+
+    margin: 0 auto;
+
+    padding:
+        145px 0 80px;
+}
+
+/* =========================
+   标题
+========================= */
+
+.page-title {
+    text-align: center;
+
+    margin-bottom: 65px;
+}
+
+.page-title .small {
+    color: #69caff;
+
+    font-size: 11px;
+
+    letter-spacing: 6px;
+
+    margin-bottom: 15px;
+}
+
+.page-title h1 {
+    font-size: clamp(32px, 6vw, 52px);
+
+    font-weight: 400;
+
+    letter-spacing: 8px;
+
+    color: #effbff;
+
+    text-shadow:
+        0 0 15px rgba(100, 212, 255, .65),
+        0 0 40px rgba(39, 137, 230, .3);
+}
+
+.page-title p {
+    margin-top: 20px;
+
+    color: #8eb7d0;
+
+    font-size: 13px;
+
+    letter-spacing: 2px;
+
+    line-height: 2;
+}
+
+/* =========================
+   档案卡片区域
+========================= */
+
+.archive-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 24px;
+}
+
+/* =========================
+   单个档案卡
+========================= */
+
+.archive-card {
+    position: relative;
+
+    min-height: 220px;
+
+    padding: 34px 28px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    text-decoration: none;
+
+    color: #eaf8ff;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(28, 92, 148, .25),
+            rgba(5, 29, 63, .55)
+        );
+
+    border:
+        1px solid rgba(100, 201, 255, .2);
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow:
+        inset 0 0 35px rgba(58, 165, 230, .04),
+        0 10px 35px rgba(0, 0, 0, .15);
+
+    transition:
+        transform .35s ease,
+        border-color .35s ease,
+        box-shadow .35s ease;
+}
+
+.archive-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 140px;
+    height: 140px;
+
+    right: -45px;
+    top: -45px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid rgba(117, 214, 255, .12);
+
+    box-shadow:
+        0 0 30px rgba(77, 185, 255, .08);
+}
+
+.archive-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 70px;
+    height: 70px;
+
+    right: -20px;
+    top: -20px;
+
+    border-radius: 50%;
+
+    border:
+        1px dashed rgba(117, 214, 255, .15);
+}
+
+.archive-card:hover {
+    transform:
+        translateY(-8px);
+
+    border-color:
+        rgba(116, 216, 255, .55);
+
+    box-shadow:
+        0 15px 45px rgba(20, 111, 180, .2),
+        0 0 30px rgba(71, 185, 255, .1);
+}
+
+/* =========================
+   图标
+========================= */
+
+.icon {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background:
+        rgba(70, 169, 224, .1);
+
+    border:
+        1px solid rgba(105, 208, 255, .25);
+
+    color: #8bdcff;
+
+    font-size: 27px;
+
+    box-shadow:
+        inset 0 0 20px rgba(73, 181, 242, .05);
+}
+
+/* =========================
+   卡片文字
+========================= */
+
+.card-info {
+    margin-top: 25px;
+}
+
+.card-info h2 {
+    font-size: 20px;
+
+    font-weight: 400;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 10px;
+}
+
+.card-info .en {
+    color: #5ebce9;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 12px;
+}
+
+.card-info p {
+    color: #87abc2;
+
+    font-size: 12px;
+
+    line-height: 1.8;
+}
+
+/* =========================
+   右下角编号
+========================= */
+
+.number {
+    position: absolute;
+
+    right: 24px;
+    bottom: 20px;
+
+    color: rgba(116, 204, 255, .28);
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+}
+
+/* =========================
+   档案馆底部
+========================= */
+
+.archive-footer {
+    margin-top: 75px;
+
+    padding-top: 25px;
+
+    border-top:
+        1px solid rgba(111, 200, 255, .12);
+
+    text-align: center;
+
+    color: rgba(142, 187, 211, .45);
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+}
+
+/* =========================
+   魔法圆环装饰
+========================= */
+
+.magic-circle {
+    position: fixed;
+
+    width: 480px;
+    height: 480px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid rgba(73, 181, 244, .055);
+
+    top: 50%;
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+.magic-circle::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 45px;
+
+    border-radius: 50%;
+
+    border:
+        1px dashed rgba(92, 201, 255, .06);
+}
+
+.magic-circle::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 100px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid rgba(92, 201, 255, .05);
+}
+
+/* =========================
+   手机
+========================= */
+
+@media (max-width: 800px) {
+
+    .archive-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 560px) {
+
+    nav {
+        height: 62px;
+
+        padding:
+            0 20px;
+    }
+
+    .logo {
+        font-size: 14px;
+    }
+
+    .logo span {
+        font-size: 8px;
+    }
+
+    .back {
+        font-size: 11px;
+    }
+
+    .container {
+        width: 88%;
+
+        padding-top: 115px;
+    }
+
+    .page-title {
+        margin-bottom: 45px;
+    }
+
+    .page-title h1 {
+        letter-spacing: 5px;
+    }
+
+    .page-title p {
+        font-size: 12px;
+    }
+
+    .archive-grid {
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+    }
+
+    .archive-card {
+        min-height: 190px;
+    }
+
+    .magic-circle {
+        width: 350px;
+        height: 350px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<div class="magic-circle"></div>
+
+<!-- 顶部导航 -->
+
+<nav>
+
+    <a href="index.html" class="logo">
+        赛垭弥大陆档案馆
+        <span>SEYAMI ARCHIVE</span>
+    </a>
+
+    <a href="index.html" class="back">
+        ← 返回首页
+    </a>
+
+</nav>
+
+
+<!-- 页面主体 -->
+
+<main class="container">
+
+    <!-- 标题 -->
+
+    <header class="page-title">
+
+        <div class="small">
+            ARCHIVE DIRECTORY
+        </div>
+
+        <h1>
+            档案目录
+        </h1>
+
+        <p>
+            欢迎进入赛垭弥大陆档案馆。<br>
+            请选择你想查阅的档案。
+        </p>
+
+    </header>
+
+
+    <!-- 档案分类 -->
+
+    <section class="archive-grid">
+
+
+        <!-- 角色 -->
+
+        <a href="#" class="archive-card">
+
+            <div class="icon">
+                ♡
+            </div>
+
+            <div class="card-info">
+
+                <h2>
+                    角色档案
+                </h2>
+
+                <div class="en">
+                    CHARACTER ARCHIVES
+                </div>
+
+                <p>
+                    记录大陆上存在的角色、
+                    身份、能力与他们各自的故事。
+                </p>
+
+            </div>
+
+            <div class="number">
+                01
+            </div>
+
+        </a>
+
+
+        <!-- 世界 -->
+
+        <a href="#" class="archive-card">
+
+            <div class="icon">
+                ✦
+            </div>
+
+            <div class="card-info">
+
+                <h2>
+                    世界设定
+                </h2>
+
+                <div class="en">
+                    WORLD LORE
+                </div>
+
+                <p>
+                    关于赛垭弥大陆的世界规则、
+                    神秘力量与未知传说。
+                </p>
+
+            </div>
+
+            <div class="number">
+                02
+            </div>
+
+        </a>
+
+
+        <!-- 地区 -->
+
+        <a href="#" class="archive-card">
+
+            <div class="icon">
+                ◇
+            </div>
+
+            <div class="card-info">
+
+                <h2>
+                    地区档案
+                </h2>
+
+                <div class="en">
+                    REGIONS
+                </div>
+
+                <p>
+                    城市、森林、雪山、
+                    王国以及大陆上的神秘地点。
+                </p>
+
+            </div>
+
+            <div class="number">
+                03
+            </div>
+
+        </a>
+
+
+        <!-- 种族 -->
+
+        <a href="#" class="archive-card">
+
+            <div class="icon">
+                ♢
+            </div>
+
+            <div class="card-info">
+
+                <h2>
+                    种族档案
+                </h2>
+
+                <div class="en">
+                    RACES
+                </div>
+
+                <p>
+                    记录生活于这片大陆上的
+                    各种族群与他们的文化。
+                </p>
+
+            </div>
+
+            <div class="number">
+                04
+            </div>
+
+        </a>
+
+
+        <!-- 历史 -->
+
+        <a href="#" class="archive-card">
+
+            <div class="icon">
+                ⌛
+            </div>
+
+            <div class="card-info">
+
+                <h2>
+                    历史记录
+                </h2>
+
+                <div class="en">
+                    HISTORY
+                </div>
+
+                <p>
+                    从远古时代至今发生过的
+                    重大事件与历史痕迹。
+                </p>
+
+            </div>
+
+            <div class="number">
+                05
+            </div>
+
+        </a>
+
+
+        <!-- 画廊 -->
+
+        <a href="#" class="archive-card">
+
+            <div class="icon">
+                ✧
+            </div>
+
+            <div class="card-info">
+
+                <h2>
+                    档案画廊
+                </h2>
+
+                <div class="en">
+                    ARCHIVE GALLERY
+                </div>
+
+                <p>
+                    收藏来自赛垭弥大陆的
+                    插画、场景与珍贵影像。
+                </p>
+
+            </div>
+
+            <div class="number">
+                06
+            </div>
+
+        </a>
+
+    </section>
+
+
+    <footer class="archive-footer">
+
+        ✦ THE ARCHIVES OF SEYAMI ✦
+
+    </footer>
+
+</main>
+
+</body>
+</html>
