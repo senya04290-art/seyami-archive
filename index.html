@@ -8,7 +8,6 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
@@ -42,7 +41,7 @@ body {
 
 
 /* =========================
-   页面主体
+   页面
 ========================= */
 
 .page {
@@ -64,7 +63,7 @@ body {
 
 
 /* =========================
-   外框
+   边框
 ========================= */
 
 .frame {
@@ -80,6 +79,7 @@ body {
 .frame::before,
 .frame::after {
     content: "";
+
     position: absolute;
 
     width: 38px;
@@ -115,9 +115,21 @@ body {
     opacity: .8;
 
     background-image:
-        radial-gradient(circle, rgba(255,255,255,.75) 0 1px, transparent 1.5px),
-        radial-gradient(circle, rgba(170,225,255,.55) 0 1px, transparent 1.5px),
-        radial-gradient(circle, rgba(255,255,255,.4) 0 1px, transparent 1.5px);
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.75) 0 1px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(170,225,255,.55) 0 1px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.4) 0 1px,
+            transparent 1.5px
+        );
 
     background-size:
         190px 190px,
@@ -152,7 +164,7 @@ body {
 
 
 /* =========================
-   浮动星星
+   漂浮星星
 ========================= */
 
 .floating-stars {
@@ -185,7 +197,9 @@ body {
 }
 
 
-/* 每颗星星的位置 */
+/* =========================
+   原本的星星
+========================= */
 
 .star-a {
     left: 12%;
@@ -272,33 +286,107 @@ body {
 }
 
 
+/* =========================
+   新增 ✡ ✶ 星象符号
+========================= */
+
+.star-m {
+    left: 18%;
+    top: 35%;
+
+    font-size: 15px;
+
+    opacity: .42;
+
+    animation-delay:
+        1.2s,
+        2.4s;
+}
+
+.star-n {
+    left: 43%;
+    top: 25%;
+
+    font-size: 13px;
+
+    opacity: .50;
+
+    animation-delay:
+        3.4s,
+        1.3s;
+}
+
+.star-o {
+    left: 68%;
+    top: 62%;
+
+    font-size: 18px;
+
+    opacity: .38;
+
+    animation-delay:
+        2.6s,
+        .7s;
+}
+
+.star-p {
+    left: 88%;
+    top: 18%;
+
+    font-size: 12px;
+
+    opacity: .48;
+
+    animation-delay:
+        4.2s,
+        2.1s;
+}
+
+
+/* =========================
+   漂浮动画
+========================= */
+
 @keyframes starFloat {
 
     0%,
     100% {
-        transform: translate3d(0,0,0) rotate(0deg);
+        transform:
+            translate3d(0,0,0)
+            rotate(0deg);
     }
 
     50% {
-        transform: translate3d(0,-18px,0) rotate(10deg);
+        transform:
+            translate3d(0,-18px,0)
+            rotate(10deg);
     }
 
 }
 
+
+/* =========================
+   闪烁动画
+========================= */
 
 @keyframes starTwinkle {
 
     0%,
     100% {
         opacity: .25;
+
         filter: blur(.2px);
     }
 
     50% {
         opacity: 1;
+
         filter:
             blur(0)
-            drop-shadow(0 0 7px rgba(160,225,255,.8));
+            drop-shadow(
+                0 0 7px
+                rgba(160,225,255,.8)
+            );
     }
 
 }
@@ -317,7 +405,8 @@ body {
     width: 600px;
     height: 600px;
 
-    transform: translate(-50%, -50%);
+    transform:
+        translate(-50%, -50%);
 
     border-radius: 50%;
 
@@ -348,7 +437,8 @@ body {
     width: 520px;
     height: 520px;
 
-    transform: translate(-50%, -50%);
+    transform:
+        translate(-50%, -50%);
 
     border-radius: 50%;
 
@@ -384,7 +474,8 @@ body {
     border:
         1px dashed rgba(135, 215, 245, .08);
 
-    animation: circleRotate 40s linear infinite;
+    animation:
+        circleRotate 40s linear infinite;
 }
 
 @keyframes circleRotate {
@@ -412,7 +503,9 @@ body {
     top: 46px;
 
     display: flex;
+
     align-items: flex-start;
+
     justify-content: space-between;
 
     z-index: 30;
@@ -425,11 +518,13 @@ body {
 
 .logo {
     display: flex;
+
     align-items: flex-start;
 
     gap: 13px;
 
-    color: rgba(220, 244, 255, .92);
+    color:
+        rgba(220,244,255,.92);
 
     white-space: nowrap;
 }
@@ -442,7 +537,8 @@ body {
     line-height: 1;
 
     text-shadow:
-        0 0 10px rgba(110, 210, 255, .7);
+        0 0 10px
+        rgba(110,210,255,.7);
 
     margin-top: 3px;
 }
@@ -451,6 +547,7 @@ body {
     display: flex;
 
     flex-direction: column;
+
     align-items: flex-start;
 
     gap: 2px;
@@ -464,11 +561,13 @@ body {
         sans-serif;
 
     font-size: 12px;
+
     font-weight: 300;
 
     letter-spacing: 3px;
 
-    color: rgba(220, 244, 255, .90);
+    color:
+        rgba(220,244,255,.90);
 }
 
 .logo-en {
@@ -480,18 +579,20 @@ body {
         serif;
 
     font-size: 10px;
+
     font-weight: 300;
 
     letter-spacing: 3px;
 
-    color: rgba(190, 225, 245, .72);
+    color:
+        rgba(190,225,245,.72);
 
     opacity: .65;
 }
 
 
 /* =========================
-   导航按钮
+   导航
 ========================= */
 
 .nav-links {
@@ -503,11 +604,13 @@ body {
 .nav-links a {
     position: relative;
 
-    color: rgba(208, 232, 244, .65);
+    color:
+        rgba(208,232,244,.65);
 
     text-decoration: none;
 
     font-size: 12px;
+
     font-weight: 300;
 
     letter-spacing: 3px;
@@ -528,18 +631,23 @@ body {
     width: 0;
     height: 1px;
 
-    background: rgba(170, 225, 250, .8);
+    background:
+        rgba(170,225,250,.8);
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
-    transition: width .35s ease;
+    transition:
+        width .35s ease;
 }
 
 .nav-links a:hover {
-    color: rgba(235, 250, 255, .98);
+    color:
+        rgba(235,250,255,.98);
 
     text-shadow:
-        0 0 12px rgba(120, 210, 245, .55);
+        0 0 12px
+        rgba(120,210,245,.55);
 }
 
 .nav-links a:hover::after {
@@ -548,7 +656,7 @@ body {
 
 
 /* =========================
-   中央 Hero
+   Hero
 ========================= */
 
 .hero {
@@ -557,9 +665,11 @@ body {
     left: 50%;
     top: 50%;
 
-    width: min(1000px, 90vw);
+    width:
+        min(1000px, 90vw);
 
-    transform: translate(-50%, -47%);
+    transform:
+        translate(-50%, -47%);
 
     text-align: center;
 
@@ -568,13 +678,14 @@ body {
 
 
 /* =========================
-   顶部符号
+   顶部装饰
 ========================= */
 
 .symbol {
     margin-bottom: 28px;
 
-    color: rgba(165, 221, 246, .7);
+    color:
+        rgba(165,221,246,.7);
 
     font-family:
         "Cormorant Garamond",
@@ -585,9 +696,11 @@ body {
     letter-spacing: 8px;
 
     text-shadow:
-        0 0 12px rgba(105, 202, 245, .4);
+        0 0 12px
+        rgba(105,202,245,.4);
 
-    animation: symbolBreath 4s ease-in-out infinite;
+    animation:
+        symbolBreath 4s ease-in-out infinite;
 }
 
 @keyframes symbolBreath {
@@ -605,13 +718,14 @@ body {
 
 
 /* =========================
-   主标题
+   SEYAMI ARCHIVE
 ========================= */
 
 .title-en {
     display: flex;
 
     flex-direction: column;
+
     align-items: center;
 
     font-family:
@@ -624,20 +738,29 @@ body {
 
     font-weight: 300;
 
-    color: rgba(244, 250, 255, .96);
+    color:
+        rgba(244,250,255,.96);
 
     text-shadow:
-        0 0 5px rgba(225, 247, 255, .52),
-        0 0 18px rgba(90, 190, 245, .24),
-        0 0 45px rgba(55, 150, 215, .12);
+        0 0 5px
+        rgba(225,247,255,.52),
 
-    transform: scaleX(.92);
+        0 0 18px
+        rgba(90,190,245,.24),
+
+        0 0 45px
+        rgba(55,150,215,.12);
+
+    transform:
+        scaleX(.92);
 
     line-height: .82;
 
-    -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing:
+        antialiased;
 
-    text-rendering: geometricPrecision;
+    text-rendering:
+        geometricPrecision;
 }
 
 .title-word {
@@ -686,25 +809,28 @@ body {
 
 
 /* =========================
-   标题下方细线
+   标题装饰线
 ========================= */
 
 .title-line {
     width: 180px;
+
     height: 1px;
 
-    margin: 31px auto 23px;
+    margin:
+        31px auto 23px;
 
     background:
         linear-gradient(
             to right,
             transparent,
-            rgba(175, 225, 247, .58),
+            rgba(175,225,247,.58),
             transparent
         );
 
     box-shadow:
-        0 0 10px rgba(110, 205, 245, .18);
+        0 0 10px
+        rgba(110,205,245,.18);
 }
 
 
@@ -727,21 +853,24 @@ body {
 
     padding-left: 8px;
 
-    color: rgba(224, 244, 252, .88);
+    color:
+        rgba(224,244,252,.88);
 
     text-shadow:
-        0 0 15px rgba(80, 180, 230, .18);
+        0 0 15px
+        rgba(80,180,230,.18);
 }
 
 
 /* =========================
-   描述
+   简介
 ========================= */
 
 .description {
     margin-top: 22px;
 
-    color: rgba(190, 219, 234, .58);
+    color:
+        rgba(190,219,234,.58);
 
     font-size: 12px;
 
@@ -763,19 +892,23 @@ body {
     display: inline-flex;
 
     align-items: center;
+
     justify-content: center;
 
     margin-top: 32px;
 
     min-width: 190px;
+
     height: 45px;
 
     padding: 0 25px;
 
     border:
-        1px solid rgba(150, 215, 240, .35);
+        1px solid
+        rgba(150,215,240,.35);
 
-    color: rgba(220, 245, 255, .85);
+    color:
+        rgba(220,245,255,.85);
 
     text-decoration: none;
 
@@ -791,11 +924,14 @@ body {
     letter-spacing: 4px;
 
     background:
-        rgba(100, 175, 210, .035);
+        rgba(100,175,210,.035);
 
     box-shadow:
-        inset 0 0 20px rgba(80, 170, 215, .025),
-        0 0 20px rgba(70, 165, 215, .03);
+        inset 0 0 20px
+        rgba(80,170,215,.025),
+
+        0 0 20px
+        rgba(70,165,215,.03);
 
     transition:
         background .4s ease,
@@ -809,21 +945,25 @@ body {
     color: #f2fbff;
 
     border-color:
-        rgba(170, 230, 250, .7);
+        rgba(170,230,250,.7);
 
     background:
-        rgba(100, 185, 225, .08);
+        rgba(100,185,225,.08);
 
     box-shadow:
-        0 0 25px rgba(80, 190, 240, .12),
-        inset 0 0 25px rgba(80, 190, 240, .06);
+        0 0 25px
+        rgba(80,190,240,.12),
 
-    transform: translateY(-2px);
+        inset 0 0 25px
+        rgba(80,190,240,.06);
+
+    transform:
+        translateY(-2px);
 }
 
 
 /* =========================
-   底部文字
+   底部
 ========================= */
 
 .footer-mark {
@@ -832,9 +972,11 @@ body {
     left: 50%;
     bottom: 38px;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
-    color: rgba(160, 205, 225, .28);
+    color:
+        rgba(160,205,225,.28);
 
     font-family:
         "Cormorant Garamond",
@@ -906,12 +1048,16 @@ body {
 
     .hero {
         width: 94vw;
-        transform: translate(-50%, -46%);
+
+        transform:
+            translate(-50%, -46%);
     }
 
     .symbol {
         margin-bottom: 23px;
+
         font-size: 13px;
+
         letter-spacing: 5px;
     }
 
@@ -964,6 +1110,7 @@ body {
         margin-top: 26px;
 
         min-width: 170px;
+
         height: 42px;
 
         font-size: 10px;
@@ -1003,13 +1150,17 @@ body {
 
     .title-word:first-child {
         font-size: 59px;
+
         letter-spacing: 6px;
+
         padding-left: 6px;
     }
 
     .title-word:last-child {
         font-size: 52px;
+
         letter-spacing: 7px;
+
         padding-left: 7px;
     }
 
@@ -1031,48 +1182,87 @@ body {
 
 <div class="page">
 
-    <!-- 背景星空 -->
+
+    <!-- =========================
+         背景
+    ========================== -->
+
     <div class="stars"></div>
 
 
-    <!-- 漂浮星星 -->
+    <!-- =========================
+         漂浮星星
+    ========================== -->
+
     <div class="floating-stars">
 
         <span class="floating-star star-a">✦</span>
+
         <span class="floating-star star-b">✧</span>
+
         <span class="floating-star star-c">✦</span>
+
         <span class="floating-star star-d">✦</span>
+
         <span class="floating-star star-e">✧</span>
+
         <span class="floating-star star-f">✦</span>
+
         <span class="floating-star star-g">·</span>
+
         <span class="floating-star star-h">✧</span>
+
         <span class="floating-star star-i">·</span>
+
         <span class="floating-star star-j">✦</span>
+
         <span class="floating-star star-k">·</span>
+
         <span class="floating-star star-l">✧</span>
+
+
+        <!-- 新增星象符号 -->
+
+        <span class="floating-star star-m">✡</span>
+
+        <span class="floating-star star-n">✶</span>
+
+        <span class="floating-star star-o">✡</span>
+
+        <span class="floating-star star-p">✶</span>
 
     </div>
 
 
-    <!-- 中央光晕 -->
+    <!-- 光晕 -->
+
     <div class="glow"></div>
 
 
     <!-- 魔法阵 -->
+
     <div class="magic-circle"></div>
 
 
-    <!-- 装饰边框 -->
+    <!-- 边框 -->
+
     <div class="frame"></div>
 
 
-    <!-- 顶部导航 -->
+    <!-- =========================
+         顶部导航
+    ========================== -->
+
     <header class="nav">
 
-        <!-- 左上角 Logo -->
+
+        <!-- Logo -->
+
         <div class="logo">
 
-            <span class="logo-symbol">✦</span>
+            <span class="logo-symbol">
+                ✦
+            </span>
 
             <div class="logo-text">
 
@@ -1090,6 +1280,7 @@ body {
 
 
         <!-- 导航 -->
+
         <nav class="nav-links">
 
             <a href="index.html">
@@ -1110,15 +1301,20 @@ body {
 
 
     <!-- =========================
-         首页中央内容
+         中央内容
     ========================== -->
 
     <main class="hero">
+
+
+        <!-- 顶部符号 -->
 
         <div class="symbol">
             ✧　✦　✧
         </div>
 
+
+        <!-- 英文标题 -->
 
         <h1 class="title-en">
 
@@ -1133,13 +1329,19 @@ body {
         </h1>
 
 
+        <!-- 分隔线 -->
+
         <div class="title-line"></div>
 
+
+        <!-- 中文标题 -->
 
         <h2 class="title-cn">
             塞垭弥大陆档案馆
         </h2>
 
+
+        <!-- 描述 -->
 
         <p class="description">
 
@@ -1152,10 +1354,13 @@ body {
         </p>
 
 
+        <!-- 进入按钮 -->
+
         <a
             class="enter-button"
             href="archive.html"
         >
+
             进入档案馆
 
             <span style="margin-left:14px;">
@@ -1164,13 +1369,20 @@ body {
 
         </a>
 
+
     </main>
 
 
-    <!-- 底部 -->
+    <!-- =========================
+         底部文字
+    ========================== -->
+
     <div class="footer-mark">
+
         ✦　THE ARCHIVES OF SEYAMI　✦
+
     </div>
+
 
 </div>
 
