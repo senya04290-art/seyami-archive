@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>赛垭弥大陆档案馆｜SEYAMI ARCHIVE</title>
+<title>塞垭弥大陆档案馆｜SEYAMI ARCHIVE</title>
 
 <style>
 
@@ -73,7 +73,7 @@ body {
 
 
 /* =========================
-   星空
+   星空基础
 ========================= */
 
 .stars,
@@ -84,18 +84,23 @@ body {
     width: 2px;
     height: 2px;
 
-    background: rgba(190, 230, 255, 0.65);
+    background: rgba(210, 240, 255, 0.72);
 
     border-radius: 50%;
 
     content: "";
 
     pointer-events: none;
+
+    z-index: 1;
 }
 
 .stars {
-    top: 14%;
-    left: 12%;
+    top: 10%;
+    left: 8%;
+
+    animation:
+        starDrift 18s ease-in-out infinite alternate;
 
     box-shadow:
         90px 40px rgba(180,220,255,.45),
@@ -117,7 +122,155 @@ body {
         760px 400px rgba(190,230,255,.40),
         920px 520px rgba(210,240,255,.52),
         1090px 430px rgba(180,220,255,.45),
-        1220px 540px rgba(210,240,255,.55);
+        1220px 540px rgba(210,240,255,.55),
+
+        60px 280px rgba(220,245,255,.32),
+        340px 300px rgba(180,225,255,.40),
+        470px 110px rgba(220,245,255,.42),
+        720px 280px rgba(170,215,255,.35),
+        850px 180px rgba(220,245,255,.42),
+        980px 340px rgba(180,225,255,.34),
+        1180px 300px rgba(220,245,255,.38);
+}
+
+
+/* =========================
+   浮动星星
+========================= */
+
+.floating-star {
+    position: absolute;
+
+    color: rgba(205, 239, 255, 0.72);
+
+    font-family:
+        "Times New Roman",
+        serif;
+
+    pointer-events: none;
+
+    z-index: 2;
+
+    text-shadow:
+        0 0 8px rgba(120, 210, 255, 0.55),
+        0 0 18px rgba(90, 180, 235, 0.28);
+
+    animation:
+        floatStar 6s ease-in-out infinite,
+        twinkleStar 3.5s ease-in-out infinite alternate;
+}
+
+.star-1 {
+    top: 21%;
+    left: 19%;
+    font-size: 12px;
+    animation-delay: -1s;
+}
+
+.star-2 {
+    top: 27%;
+    right: 20%;
+    font-size: 9px;
+    animation-delay: -3s;
+}
+
+.star-3 {
+    top: 42%;
+    left: 13%;
+    font-size: 7px;
+    animation-delay: -2s;
+}
+
+.star-4 {
+    top: 48%;
+    right: 14%;
+    font-size: 13px;
+    animation-delay: -4s;
+}
+
+.star-5 {
+    top: 66%;
+    left: 23%;
+    font-size: 8px;
+    animation-delay: -1.5s;
+}
+
+.star-6 {
+    top: 70%;
+    right: 24%;
+    font-size: 10px;
+    animation-delay: -3.5s;
+}
+
+.star-7 {
+    top: 34%;
+    left: 29%;
+    font-size: 5px;
+    animation-delay: -2.5s;
+}
+
+.star-8 {
+    top: 58%;
+    right: 31%;
+    font-size: 6px;
+    animation-delay: -4.5s;
+}
+
+
+/* =========================
+   星星动画
+========================= */
+
+@keyframes floatStar {
+
+    0% {
+        transform:
+            translate(0, 0)
+            rotate(0deg);
+    }
+
+    50% {
+        transform:
+            translate(4px, -8px)
+            rotate(10deg);
+    }
+
+    100% {
+        transform:
+            translate(-3px, 4px)
+            rotate(-8deg);
+    }
+
+}
+
+@keyframes twinkleStar {
+
+    0% {
+        opacity: 0.25;
+    }
+
+    50% {
+        opacity: 0.85;
+    }
+
+    100% {
+        opacity: 0.38;
+    }
+
+}
+
+@keyframes starDrift {
+
+    0% {
+        transform:
+            translate(0, 0);
+    }
+
+    100% {
+        transform:
+            translate(10px, -7px);
+    }
+
 }
 
 
@@ -136,6 +289,8 @@ body {
     border: 1px solid rgba(110, 190, 235, 0.18);
 
     pointer-events: none;
+
+    z-index: 8;
 }
 
 .frame::before,
@@ -273,7 +428,7 @@ body {
 
 .hero {
     position: relative;
-    z-index: 2;
+    z-index: 4;
 
     flex: 1;
 
@@ -297,7 +452,7 @@ body {
 ========================= */
 
 .symbol {
-    margin-bottom: 30px;
+    margin-bottom: 31px;
 
     color: rgba(155, 218, 250, 0.7);
 
@@ -312,10 +467,17 @@ body {
 
 /* =========================
    英文主标题
+   SEYAMI
+   ARCHIVE
 ========================= */
 
 .title-en {
     margin: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
 
     font-family:
         "Bodoni 72",
@@ -325,24 +487,53 @@ body {
         serif;
 
     font-size:
-        clamp(54px, 8vw, 104px);
+        clamp(70px, 10vw, 128px);
 
     font-weight: 300;
 
-    line-height: 0.95;
+    line-height: 0.82;
 
     letter-spacing:
-        clamp(7px, 1.4vw, 17px);
-
-    white-space: nowrap;
+        clamp(8px, 1.8vw, 20px);
 
     color: #edf9ff;
 
     text-shadow:
         0 0 6px rgba(220, 245, 255, 0.55),
-        0 0 22px rgba(70, 175, 240, 0.32);
+        0 0 24px rgba(70, 175, 240, 0.30);
 
-    transform: scaleX(0.96);
+    transform: scaleX(0.91);
+
+    font-variant: small-caps;
+}
+
+
+/* =========================
+   两行标题
+========================= */
+
+.title-word {
+    display: block;
+
+    white-space: nowrap;
+}
+
+.title-word:first-child {
+    font-size: 1em;
+
+    letter-spacing:
+        clamp(10px, 2vw, 23px);
+}
+
+.title-word:last-child {
+    margin-top: 13px;
+
+    font-size: 0.78em;
+
+    letter-spacing:
+        clamp(12px, 2.4vw, 28px);
+
+    opacity: 0.96;
 }
 
 
@@ -358,7 +549,7 @@ body {
     height: 1px;
 
     margin:
-        23px auto
+        31px auto
         17px;
 
     background:
@@ -368,6 +559,31 @@ body {
             rgba(105, 200, 255, 0.45),
             transparent
         );
+}
+
+.title-line::before,
+.title-line::after {
+    content: "✦";
+
+    position: absolute;
+
+    top: 50%;
+
+    color:
+        rgba(135, 215, 250, 0.42);
+
+    font-size: 8px;
+
+    transform:
+        translateY(-50%);
+}
+
+.title-line::before {
+    left: 19%;
+}
+
+.title-line::after {
+    right: 19%;
 }
 
 
@@ -521,6 +737,8 @@ body {
     letter-spacing: 6px;
 
     white-space: nowrap;
+
+    z-index: 6;
 }
 
 
@@ -546,6 +764,8 @@ body {
         translate(-50%, -50%);
 
     pointer-events: none;
+
+    z-index: 1;
 }
 
 .magic-circle::before {
@@ -584,7 +804,7 @@ body {
 
 
 /* =========================
-   浮动光点
+   中央微光
 ========================= */
 
 .glow {
@@ -609,6 +829,8 @@ body {
     filter: blur(10px);
 
     pointer-events: none;
+
+    z-index: 1;
 }
 
 
@@ -665,17 +887,31 @@ body {
 
     .title-en {
         font-size:
-            clamp(39px, 12vw, 70px);
+            clamp(60px, 17vw, 88px);
+
+        line-height: 0.83;
 
         letter-spacing:
-            clamp(4px, 1.6vw, 9px);
+            7px;
+
+        transform: scaleX(0.88);
+    }
+
+    .title-word:first-child {
+        letter-spacing: 8px;
+    }
+
+    .title-word:last-child {
+        margin-top: 10px;
+
+        letter-spacing: 10px;
     }
 
     .title-line {
         width: 75vw;
 
         margin:
-            18px auto
+            23px auto
             15px;
     }
 
@@ -713,6 +949,10 @@ body {
         letter-spacing: 4px;
     }
 
+    .floating-star {
+        transform: scale(0.8);
+    }
+
 }
 
 
@@ -731,9 +971,19 @@ body {
     }
 
     .title-en {
-        font-size: 37px;
+        font-size: 55px;
 
-        letter-spacing: 3px;
+        letter-spacing: 5px;
+    }
+
+    .title-word:first-child {
+        letter-spacing: 6px;
+    }
+
+    .title-word:last-child {
+        margin-top: 8px;
+
+        letter-spacing: 7px;
     }
 
     .title-cn {
@@ -744,6 +994,10 @@ body {
 
     .description {
         max-width: 280px;
+    }
+
+    .floating-star {
+        display: none;
     }
 
 }
@@ -758,6 +1012,16 @@ body {
 
     <!-- 星空 -->
     <div class="stars"></div>
+
+    <!-- 浮动星星 -->
+    <div class="floating-star star-1">✦</div>
+    <div class="floating-star star-2">✧</div>
+    <div class="floating-star star-3">·</div>
+    <div class="floating-star star-4">✦</div>
+    <div class="floating-star star-5">✧</div>
+    <div class="floating-star star-6">✦</div>
+    <div class="floating-star star-7">·</div>
+    <div class="floating-star star-8">✧</div>
 
     <!-- 中央微光 -->
     <div class="glow"></div>
@@ -780,7 +1044,7 @@ body {
             <span class="logo-symbol">✦</span>
 
             <span>
-                赛垭弥大陆档案馆
+                塞垭弥大陆档案馆
             </span>
 
             <span class="logo-en">
@@ -820,8 +1084,18 @@ body {
         </div>
 
 
+        <!-- 两行西幻标题 -->
+
         <h1 class="title-en">
-            SEYAMI ARCHIVE
+
+            <span class="title-word">
+                SEYAMI
+            </span>
+
+            <span class="title-word">
+                ARCHIVE
+            </span>
+
         </h1>
 
 
@@ -829,7 +1103,7 @@ body {
 
 
         <h2 class="title-cn">
-            赛垭弥大陆档案馆
+            塞垭弥大陆档案馆
         </h2>
 
 
@@ -845,9 +1119,11 @@ body {
             href="archive.html"
         >
             进入档案馆
+
             <span style="margin-left: 14px;">
                 →
             </span>
+
         </a>
 
     </main>
