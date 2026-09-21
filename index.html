@@ -467,8 +467,6 @@ body{
 }
 
 
-/* 多层圆环 */
-
 .magic-circle::before{
 
     content:"";
@@ -510,8 +508,6 @@ body{
         infinite;
 }
 
-
-/* 内部额外圆 */
 
 .magic-inner{
 
@@ -805,8 +801,6 @@ body{
 }
 
 
-/* 上下线 */
-
 .frame::before,
 .frame::after{
 
@@ -842,7 +836,7 @@ body{
 
 
 /* =========================================================
-   四角装饰
+   四角六芒星
 ========================================================= */
 
 .corner{
@@ -853,202 +847,146 @@ body{
     height:68px;
 
     z-index:21;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    pointer-events:none;
+}
+
+
+/* 六芒星 */
+
+.corner::before{
+
+    content:"✡";
+
+    position:absolute;
+
+    color:
+        #77caff;
+
+    font-family:
+        "Times New Roman",
+        "Noto Serif SC",
+        serif;
+
+    font-size:31px;
+
+    font-weight:400;
+
+    line-height:1;
+
+    text-shadow:
+
+        0 0 6px
+        rgba(75,180,245,.95),
+
+        0 0 15px
+        rgba(75,180,245,.65),
+
+        0 0 28px
+        rgba(55,160,220,.35);
+
+    opacity:.88;
+
+    animation:
+        cornerStarBreath
+        4s
+        ease-in-out
+        infinite;
+}
+
+
+/* 六芒星外围细线感 */
+
+.corner::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:48px;
+    height:48px;
+
+    border:
+        1px solid
+        rgba(88,181,240,.28);
+
+    transform:
+        rotate(30deg);
+
+    clip-path:
+        polygon(
+            50% 0%,
+            93% 25%,
+            93% 75%,
+            50% 100%,
+            7% 75%,
+            7% 25%
+        );
+
+    opacity:.35;
+}
+
+
+@keyframes cornerStarBreath{
+
+    0%,
+    100%{
+
+        opacity:.68;
+
+        transform:
+            scale(.96);
+    }
+
+    50%{
+
+        opacity:1;
+
+        transform:
+            scale(1.05);
+    }
 }
 
 
 /* 左上 */
 
 .corner.tl{
+
     left:-1px;
     top:-1px;
-}
-
-.corner.tl::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:48px;
-    height:48px;
-
-    left:0;
-    top:0;
-
-    border:
-        1px solid
-        rgba(88,181,240,.72);
-
-    border-right:0;
-    border-bottom:0;
-
-    border-radius:
-        28px 0 0 0;
-}
-
-.corner.tl::after{
-
-    content:"✦";
-
-    position:absolute;
-
-    left:10px;
-    top:20px;
-
-    color:#77caff;
-
-    font-size:19px;
-
-    text-shadow:
-        0 0 9px
-        rgba(75,180,245,.9);
 }
 
 
 /* 右上 */
 
 .corner.tr{
+
     right:-1px;
     top:-1px;
-}
-
-.corner.tr::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:48px;
-    height:48px;
-
-    right:0;
-    top:0;
-
-    border:
-        1px solid
-        rgba(88,181,240,.72);
-
-    border-left:0;
-    border-bottom:0;
-
-    border-radius:
-        0 28px 0 0;
-}
-
-.corner.tr::after{
-
-    content:"✦";
-
-    position:absolute;
-
-    right:10px;
-    top:20px;
-
-    color:#77caff;
-
-    font-size:19px;
-
-    text-shadow:
-        0 0 9px
-        rgba(75,180,245,.9);
 }
 
 
 /* 左下 */
 
 .corner.bl{
+
     left:-1px;
     bottom:-1px;
-}
-
-.corner.bl::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:48px;
-    height:48px;
-
-    left:0;
-    bottom:0;
-
-    border:
-        1px solid
-        rgba(88,181,240,.72);
-
-    border-right:0;
-    border-top:0;
-
-    border-radius:
-        0 0 0 28px;
-}
-
-.corner.bl::after{
-
-    content:"✦";
-
-    position:absolute;
-
-    left:10px;
-    bottom:20px;
-
-    color:#77caff;
-
-    font-size:19px;
-
-    text-shadow:
-        0 0 9px
-        rgba(75,180,245,.9);
 }
 
 
 /* 右下 */
 
 .corner.br{
+
     right:-1px;
     bottom:-1px;
-}
-
-.corner.br::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:48px;
-    height:48px;
-
-    right:0;
-    bottom:0;
-
-    border:
-        1px solid
-        rgba(88,181,240,.72);
-
-    border-left:0;
-    border-top:0;
-
-    border-radius:
-        0 0 28px 0;
-}
-
-.corner.br::after{
-
-    content:"✦";
-
-    position:absolute;
-
-    right:10px;
-    bottom:20px;
-
-    color:#77caff;
-
-    font-size:19px;
-
-    text-shadow:
-        0 0 9px
-        rgba(75,180,245,.9);
 }
 
 
@@ -1484,44 +1422,7 @@ body{
    顶部装饰
 ========================================================= */
 
-.symbol{
-
-    margin-bottom:25px;
-
-    color:
-        rgba(170,224,248,.72);
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:17px;
-
-    letter-spacing:8px;
-
-    text-shadow:
-        0 0 12px
-        rgba(105,202,245,.45);
-
-    animation:
-        symbolBreath
-        4s
-        ease-in-out
-        infinite;
-}
-
-
-@keyframes symbolBreath{
-
-    0%,
-    100%{
-        opacity:.5;
-    }
-
-    50%{
-        opacity:1;
-    }
-}
+/* 已按照要求移除标题上方的 ✧ ✦ ✧ */
 
 
 /* =========================================================
@@ -1834,7 +1735,7 @@ body{
 
 
 /* =========================================================
-   进入档案馆按钮
+   开启塞垭弥档案
 ========================================================= */
 
 .enter-wrap{
@@ -1876,13 +1777,14 @@ body{
         rgba(226,245,255,.92);
 
     font-family:
+        "Cinzel",
         "Noto Serif SC",
-        "Microsoft YaHei",
+        "Cormorant Garamond",
         serif;
 
-    font-size:16px;
+    font-size:14px;
 
-    font-weight:300;
+    font-weight:400;
 
     letter-spacing:5px;
 
@@ -2459,8 +2361,6 @@ body{
         <span class="floating-star star-l">✧</span>
 
 
-        <!-- 你之前特别喜欢的两个 -->
-
         <span class="floating-star star-m">✡</span>
 
         <span class="floating-star star-n">✶</span>
@@ -2482,6 +2382,7 @@ body{
 
     <!-- =====================================================
          魔法阵
+         ★ 完全保持原样
     ====================================================== -->
 
     <div class="magic-circle">
@@ -2609,15 +2510,6 @@ body{
     <main class="hero">
 
 
-        <!-- 顶部装饰 -->
-
-        <div class="symbol">
-
-            ✧　✦　✧
-
-        </div>
-
-
         <!-- 英文标题 -->
 
         <h1 class="title-en">
@@ -2687,7 +2579,7 @@ body{
 
 
         <!-- =================================================
-             进入档案馆
+             开启塞垭弥档案
         ================================================== -->
 
         <div class="enter-wrap">
@@ -2719,7 +2611,7 @@ body{
                 ></span>
 
 
-                进入档案馆
+                开启塞垭弥档案
 
                 <span style="margin-left:14px;">
                     →
