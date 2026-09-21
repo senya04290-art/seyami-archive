@@ -1,36 +1,20 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
+<!DOCTYPE html><html lang="zh-CN">
+<head><meta charset="UTF-8"><meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
 
-<meta charset="UTF-8">
+«»
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
-<title>塞垭弥大陆档案馆 · Seyami Archive</title>
-
-
-<!-- =========================
+<title>塞垭弥大陆档案馆 · Seyami Archive</title><!-- =========================
      字体
-========================= -->
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link
+========================= --><link rel="preconnect" href="https://fonts.googleapis.com"><link
     rel="preconnect"
     href="https://fonts.gstatic.com"
     crossorigin
->
-
-<link
+><link
     href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500&display=swap"
     rel="stylesheet"
->
-
-
-<style>
+><style>
 
 /* =========================================================
    基础
@@ -44,17 +28,13 @@
 
 html,
 body{
-
     width:100%;
     height:100%;
 }
 
 body{
-
     overflow:hidden;
-
     background:#020b18;
-
     color:#eaf7ff;
 
     font-family:
@@ -70,7 +50,6 @@ body{
 ========================================================= */
 
 .page{
-
     position:relative;
 
     width:100%;
@@ -81,7 +60,6 @@ body{
     overflow:hidden;
 
     background:
-
         radial-gradient(
             circle at 50% 43%,
             rgba(31,91,145,.28) 0%,
@@ -97,7 +75,6 @@ body{
 ========================================================= */
 
 .glow{
-
     position:absolute;
 
     left:50%;
@@ -112,7 +89,6 @@ body{
     border-radius:50%;
 
     background:
-
         radial-gradient(
             circle,
             rgba(62,151,218,.16) 0%,
@@ -123,7 +99,6 @@ body{
     filter:blur(8px);
 
     pointer-events:none;
-
     z-index:1;
 }
 
@@ -133,9 +108,7 @@ body{
 ========================================================= */
 
 .stars{
-
     position:absolute;
-
     inset:0;
 
     opacity:.85;
@@ -161,13 +134,11 @@ body{
         );
 
     background-size:
-
         190px 190px,
         270px 270px,
         340px 340px;
 
     background-position:
-
         20px 30px,
         100px 120px,
         40px 80px;
@@ -179,7 +150,6 @@ body{
         infinite;
 
     pointer-events:none;
-
     z-index:1;
 }
 
@@ -205,16 +175,14 @@ body{
 
 /* =========================================================
    漂浮星星
+   ★ 保留背景中的微小星空装饰
 ========================================================= */
 
 .floating-stars{
-
     position:absolute;
-
     inset:0;
 
     pointer-events:none;
-
     z-index:5;
 }
 
@@ -243,7 +211,6 @@ body{
     opacity:.38;
 
     animation:
-
         starFloat
         8s
         ease-in-out
@@ -255,10 +222,6 @@ body{
         infinite;
 }
 
-
-/* -------------------------
-   星星位置
-------------------------- */
 
 .star-a{
     left:12%;
@@ -345,7 +308,9 @@ body{
 }
 
 
-/* 新增 ✡ ✶ */
+/* =========================================================
+   背景六芒星 / 星芒
+========================================================= */
 
 .star-m{
     left:18%;
@@ -380,22 +345,16 @@ body{
 }
 
 
-/* =========================================================
-   星星动画
-========================================================= */
-
 @keyframes starFloat{
 
     0%,
     100%{
-
         transform:
             translate3d(0,0,0)
             rotate(0deg);
     }
 
     50%{
-
         transform:
             translate3d(0,-18px,0)
             rotate(10deg);
@@ -407,7 +366,6 @@ body{
 
     0%,
     100%{
-
         opacity:.25;
 
         filter:
@@ -415,7 +373,6 @@ body{
     }
 
     50%{
-
         opacity:1;
 
         filter:
@@ -430,6 +387,7 @@ body{
 
 /* =========================================================
    魔法阵
+   ★ 保持原样
 ========================================================= */
 
 .magic-circle{
@@ -588,7 +546,6 @@ body{
 }
 
 .orbit.one{
-
     width:500px;
     height:190px;
 }
@@ -632,14 +589,12 @@ body{
 @keyframes orbitRotate{
 
     from{
-
         transform:
             translate(-50%,-50%)
             rotate(0deg);
     }
 
     to{
-
         transform:
             translate(-50%,-50%)
             rotate(360deg);
@@ -678,102 +633,6 @@ body{
     transform:
         translate(-50%,-50%)
         rotate(90deg);
-}
-
-
-/* =========================================================
-   中央大型星芒
-========================================================= */
-
-.center-star{
-
-    position:absolute;
-
-    left:50%;
-    top:29%;
-
-    width:48px;
-    height:48px;
-
-    transform:
-        translate(-50%,-50%);
-
-    z-index:8;
-
-    pointer-events:none;
-
-    filter:
-        drop-shadow(
-            0 0 10px
-            rgba(70,185,255,.85)
-        );
-}
-
-
-.center-star::before,
-.center-star::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    transform:
-        translate(-50%,-50%);
-
-    background:
-        linear-gradient(
-            transparent,
-            #e8f8ff,
-            transparent
-        );
-}
-
-
-.center-star::before{
-
-    width:2px;
-    height:75px;
-}
-
-
-.center-star::after{
-
-    width:75px;
-    height:2px;
-}
-
-
-.center-star span{
-
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    width:31px;
-    height:31px;
-
-    transform:
-        translate(-50%,-50%)
-        rotate(45deg);
-
-    background:
-        #eaf8ff;
-
-    clip-path:
-        polygon(
-            50% 0,
-            64% 36%,
-            100% 50%,
-            64% 64%,
-            50% 100%,
-            36% 64%,
-            0 50%,
-            36% 36%
-        );
 }
 
 
@@ -836,7 +695,8 @@ body{
 
 
 /* =========================================================
-   四角六芒星
+   四角
+   ★ 全部改成纯六芒星 ✡
 ========================================================= */
 
 .corner{
@@ -851,14 +711,11 @@ body{
     display:flex;
 
     align-items:center;
-
     justify-content:center;
 
     pointer-events:none;
 }
 
-
-/* 六芒星 */
 
 .corner::before{
 
@@ -866,15 +723,14 @@ body{
 
     position:absolute;
 
-    color:
-        #77caff;
+    color:#77caff;
 
     font-family:
         "Times New Roman",
         "Noto Serif SC",
         serif;
 
-    font-size:31px;
+    font-size:34px;
 
     font-weight:400;
 
@@ -891,7 +747,7 @@ body{
         0 0 28px
         rgba(55,160,220,.35);
 
-    opacity:.88;
+    opacity:.9;
 
     animation:
         cornerStarBreath
@@ -901,35 +757,10 @@ body{
 }
 
 
-/* 六芒星外围细线感 */
+/* 不再添加六边形外围框 */
 
 .corner::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:48px;
-    height:48px;
-
-    border:
-        1px solid
-        rgba(88,181,240,.28);
-
-    transform:
-        rotate(30deg);
-
-    clip-path:
-        polygon(
-            50% 0%,
-            93% 25%,
-            93% 75%,
-            50% 100%,
-            7% 75%,
-            7% 25%
-        );
-
-    opacity:.35;
+    display:none;
 }
 
 
@@ -937,7 +768,6 @@ body{
 
     0%,
     100%{
-
         opacity:.68;
 
         transform:
@@ -945,46 +775,30 @@ body{
     }
 
     50%{
-
         opacity:1;
 
         transform:
-            scale(1.05);
+            scale(1.06);
     }
 }
 
 
-/* 左上 */
-
 .corner.tl{
-
     left:-1px;
     top:-1px;
 }
 
-
-/* 右上 */
-
 .corner.tr{
-
     right:-1px;
     top:-1px;
 }
 
-
-/* 左下 */
-
 .corner.bl{
-
     left:-1px;
     bottom:-1px;
 }
 
-
-/* 右下 */
-
 .corner.br{
-
     right:-1px;
     bottom:-1px;
 }
@@ -1014,6 +828,7 @@ body{
 
 /* =========================================================
    Logo
+   ★ 塞垭弥大陆档案馆 + SEYAMI ARCHIVE
 ========================================================= */
 
 .logo{
@@ -1093,8 +908,6 @@ body{
 }
 
 
-/* 罗盘横线 */
-
 .compass-horizontal{
 
     position:absolute;
@@ -1118,8 +931,6 @@ body{
         );
 }
 
-
-/* 罗盘星 */
 
 .compass-star{
 
@@ -1312,39 +1123,35 @@ body{
 
 
 .nav-links a:hover::after{
-
     width:100%;
 }
 
 
-/* 当前页面 */
-
 .nav-links a.active{
-
     color:
         rgba(232,248,255,.96);
 }
 
 
 .nav-links a.active::after{
-
     width:100%;
 }
 
 
 /* =========================================================
-   顶部中央星芒
+   顶部中央装饰
+   ★ 保留顶部导航区域的小星芒
 ========================================================= */
 
-.header-star{
+.header-line-star{
 
     position:absolute;
 
     left:50%;
-    top:83px;
+    top:84px;
 
-    width:30px;
-    height:30px;
+    width:28px;
+    height:28px;
 
     transform:
         translateX(-50%);
@@ -1354,13 +1161,13 @@ body{
     filter:
         drop-shadow(
             0 0 8px
-            #4eaeff
+            #52b4ff
         );
 }
 
 
-.header-star::before,
-.header-star::after{
+.header-line-star::before,
+.header-line-star::after{
 
     content:"";
 
@@ -1375,22 +1182,22 @@ body{
     background:
         linear-gradient(
             transparent,
-            #e9f8ff,
+            #eaf8ff,
             transparent
         );
 }
 
 
-.header-star::before{
+.header-line-star::before{
 
     width:2px;
-    height:37px;
+    height:35px;
 }
 
 
-.header-star::after{
+.header-line-star::after{
 
-    width:37px;
+    width:35px;
     height:2px;
 }
 
@@ -1416,13 +1223,6 @@ body{
 
     z-index:10;
 }
-
-
-/* =========================================================
-   顶部装饰
-========================================================= */
-
-/* 已按照要求移除标题上方的 ✧ ✦ ✧ */
 
 
 /* =========================================================
@@ -1509,7 +1309,7 @@ body{
 
 
 /* =========================================================
-   标题上下装饰线
+   标题装饰线
 ========================================================= */
 
 .title-decoration{
@@ -1612,102 +1412,6 @@ body{
 
 
 /* =========================================================
-   中央小星芒
-========================================================= */
-
-.content-star{
-
-    position:absolute;
-
-    left:50%;
-    top:47%;
-
-    width:34px;
-    height:34px;
-
-    transform:
-        translate(-50%,-50%);
-
-    pointer-events:none;
-
-    z-index:8;
-
-    filter:
-        drop-shadow(
-            0 0 8px
-            #55b5ff
-        );
-}
-
-
-.content-star::before,
-.content-star::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    transform:
-        translate(-50%,-50%);
-
-    background:
-        linear-gradient(
-            transparent,
-            #e9f8ff,
-            transparent
-        );
-}
-
-
-.content-star::before{
-
-    width:2px;
-    height:52px;
-}
-
-
-.content-star::after{
-
-    width:52px;
-    height:2px;
-}
-
-
-.content-star span{
-
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    width:21px;
-    height:21px;
-
-    transform:
-        translate(-50%,-50%)
-        rotate(45deg);
-
-    background:
-        #eaf8ff;
-
-    clip-path:
-        polygon(
-            50% 0,
-            64% 36%,
-            100% 50%,
-            64% 64%,
-            50% 100%,
-            36% 64%,
-            0 50%,
-            36% 36%
-        );
-}
-
-
-/* =========================================================
    简介
 ========================================================= */
 
@@ -1735,18 +1439,19 @@ body{
 
 
 /* =========================================================
-   开启塞垭弥档案
+   进入档案馆
+   ★ 全新西幻入口
 ========================================================= */
 
 .enter-wrap{
 
     position:relative;
 
-    width:330px;
-    height:68px;
+    width:370px;
+    height:82px;
 
     margin:
-        32px auto 0;
+        30px auto 0;
 
     display:flex;
 
@@ -1756,14 +1461,76 @@ body{
 }
 
 
+/* 外层魔法印记 */
+
+.enter-wrap::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:355px;
+    height:63px;
+
+    border:
+        1px solid
+        rgba(91,178,231,.30);
+
+    clip-path:
+        polygon(
+            8% 0,
+            92% 0,
+            100% 50%,
+            92% 100%,
+            8% 100%,
+            0 50%
+        );
+
+    box-shadow:
+        0 0 18px
+        rgba(50,150,225,.10);
+
+    pointer-events:none;
+}
+
+
+/* 外层第二道细线 */
+
+.enter-wrap::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:337px;
+    height:50px;
+
+    border:
+        1px solid
+        rgba(107,194,241,.17);
+
+    clip-path:
+        polygon(
+            6% 0,
+            94% 0,
+            100% 50%,
+            94% 100%,
+            6% 100%,
+            0 50%
+        );
+
+    pointer-events:none;
+}
+
+
 /* 主按钮 */
 
 .enter-button{
 
     position:relative;
 
-    width:285px;
-    height:53px;
+    width:300px;
+    height:50px;
 
     display:flex;
 
@@ -1774,7 +1541,7 @@ body{
     text-decoration:none;
 
     color:
-        rgba(226,245,255,.92);
+        rgba(231,247,255,.94);
 
     font-family:
         "Cinzel",
@@ -1782,33 +1549,32 @@ body{
         "Cormorant Garamond",
         serif;
 
-    font-size:14px;
+    font-size:13px;
 
     font-weight:400;
 
-    letter-spacing:5px;
+    letter-spacing:6px;
 
-    border:
-        1px solid
-        rgba(105,191,239,.72);
+    padding-left:6px;
+
+    border:none;
 
     background:
-        rgba(5,24,49,.42);
-
-    box-shadow:
-
-        inset 0 0 22px
-        rgba(65,160,220,.08),
-
-        0 0 15px
-        rgba(38,125,230,.08);
+        linear-gradient(
+            90deg,
+            rgba(4,21,43,.18),
+            rgba(16,54,87,.38),
+            rgba(4,21,43,.18)
+        );
 
     transition:
-        .35s ease;
+        .4s ease;
+
+    z-index:2;
 }
 
 
-/* 内框 */
+/* 中央横向魔法线 */
 
 .enter-button::before{
 
@@ -1816,140 +1582,153 @@ body{
 
     position:absolute;
 
-    inset:5px;
+    left:18px;
+    right:18px;
 
-    border:
-        1px solid
-        rgba(90,175,230,.42);
+    top:50%;
+
+    height:1px;
+
+    transform:
+        translateY(-50%);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(117,205,247,.45),
+            transparent
+        );
+
+    opacity:.55;
 
     pointer-events:none;
 }
 
 
-/* 两侧尖角 */
+/* 四角装饰 */
 
 .enter-button::after{
 
-    content:"";
-
-    position:absolute;
-
-    left:-12px;
-    right:-12px;
-
-    top:11px;
-    bottom:11px;
-
-    border-left:
-        1px solid
-        rgba(88,180,238,.78);
-
-    border-right:
-        1px solid
-        rgba(88,180,238,.78);
-
-    transform:
-        skewX(-18deg);
-
-    pointer-events:none;
-}
-
-
-/* 按钮左右菱形 */
-
-.button-diamond{
-
-    position:absolute;
-
-    width:9px;
-    height:9px;
-
-    transform:
-        rotate(45deg);
-
-    border:
-        1px solid
-        #81caff;
-
-    background:
-        #05182f;
-
-    box-shadow:
-        0 0 8px
-        rgba(72,172,255,.8);
-
-    z-index:3;
-}
-
-
-.button-diamond.left{
-    left:-8px;
-}
-
-
-.button-diamond.right{
-    right:-8px;
-}
-
-
-/* 按钮上下星芒 */
-
-.button-star{
-
-    position:absolute;
-
-    left:50%;
-
-    width:24px;
-    height:24px;
-
-    transform:
-        translateX(-50%);
-}
-
-
-.button-star.top{
-    top:-14px;
-}
-
-
-.button-star.bottom{
-    bottom:-14px;
-}
-
-
-.button-star::before,
-.button-star::after{
-
-    content:"";
+    content:"✡";
 
     position:absolute;
 
     left:50%;
     top:50%;
 
+    width:100%;
+    height:100%;
+
     transform:
         translate(-50%,-50%);
 
-    background:#e3f6ff;
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 5px;
+
+    color:
+        rgba(107,198,245,.72);
+
+    font-family:
+        "Times New Roman",
+        serif;
+
+    font-size:11px;
+
+    pointer-events:none;
+}
+
+
+/* 按钮文字 */
+
+.enter-button span.enter-text{
+    position:relative;
+    z-index:5;
+}
+
+
+/* 两侧六芒星 */
+
+.button-star-side{
+
+    position:absolute;
+
+    top:50%;
+
+    transform:
+        translateY(-50%);
+
+    color:#82d0ff;
+
+    font-family:
+        "Times New Roman",
+        serif;
+
+    font-size:17px;
+
+    line-height:1;
+
+    text-shadow:
+        0 0 8px
+        rgba(77,185,255,.85);
+
+    z-index:4;
+
+    transition:
+        .4s ease;
+}
+
+
+.button-star-side.left{
+    left:-22px;
+}
+
+
+.button-star-side.right{
+    right:-22px;
+}
+
+
+/* 上下小菱形 */
+
+.enter-diamond{
+
+    position:absolute;
+
+    left:50%;
+
+    width:7px;
+    height:7px;
+
+    transform:
+        translateX(-50%)
+        rotate(45deg);
+
+    border:
+        1px solid
+        rgba(125,208,249,.82);
+
+    background:
+        #061b34;
 
     box-shadow:
-        0 0 9px
-        #55b5ff;
+        0 0 8px
+        rgba(72,172,255,.7);
+
+    z-index:5;
 }
 
 
-.button-star::before{
-
-    width:2px;
-    height:27px;
+.enter-diamond.top{
+    top:-5px;
 }
 
-
-.button-star::after{
-
-    width:27px;
-    height:2px;
+.enter-diamond.bottom{
+    bottom:-5px;
 }
 
 
@@ -1959,22 +1738,36 @@ body{
 
     color:#ffffff;
 
-    border-color:
-        #b5e1ff;
+    letter-spacing:7px;
 
     background:
-        rgba(27,68,118,.46);
+        linear-gradient(
+            90deg,
+            rgba(10,38,67,.22),
+            rgba(29,79,119,.48),
+            rgba(10,38,67,.22)
+        );
 
-    box-shadow:
-
-        inset 0 0 28px
-        rgba(66,154,244,.16),
-
-        0 0 25px
-        rgba(58,153,255,.25);
+    text-shadow:
+        0 0 9px
+        rgba(183,231,255,.85);
 
     transform:
         translateY(-2px);
+}
+
+
+.enter-button:hover
+.button-star-side{
+
+    color:#d9f5ff;
+
+    text-shadow:
+        0 0 10px
+        rgba(89,198,255,1),
+        0 0 20px
+        rgba(89,198,255,.55);
+
 }
 
 
@@ -2012,69 +1805,6 @@ body{
 
 
 /* =========================================================
-   顶部中央星芒
-========================================================= */
-
-.header-line-star{
-
-    position:absolute;
-
-    left:50%;
-    top:84px;
-
-    width:28px;
-    height:28px;
-
-    transform:
-        translateX(-50%);
-
-    z-index:31;
-
-    filter:
-        drop-shadow(
-            0 0 8px
-            #52b4ff
-        );
-}
-
-
-.header-line-star::before,
-.header-line-star::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    transform:
-        translate(-50%,-50%);
-
-    background:
-        linear-gradient(
-            transparent,
-            #eaf8ff,
-            transparent
-        );
-}
-
-
-.header-line-star::before{
-
-    width:2px;
-    height:35px;
-}
-
-
-.header-line-star::after{
-
-    width:35px;
-    height:2px;
-}
-
-
-/* =========================================================
    手机端
 ========================================================= */
 
@@ -2096,63 +1826,51 @@ body{
 
 
     .logo-compass::after{
-
         height:56px;
     }
 
 
     .compass-horizontal{
-
         width:56px;
     }
 
 
     .compass-star{
-
         width:27px;
         height:27px;
     }
 
 
     .logo-cn{
-
         font-size:11px;
-
         letter-spacing:2px;
     }
 
 
     .logo-en{
-
         font-size:9px;
-
         letter-spacing:3px;
     }
 
 
     .nav-links{
-
         gap:18px;
     }
 
 
     .nav-links a{
-
         font-size:10px;
-
         letter-spacing:2px;
     }
 
 
     .magic-circle{
-
         width:420px;
         height:420px;
     }
 
 
     .magic-inner{
-
         width:230px;
         height:230px;
     }
@@ -2181,7 +1899,6 @@ body{
 
 
     .title-decoration{
-
         width:70vw;
     }
 
@@ -2207,7 +1924,6 @@ body{
 
 
     .enter-wrap{
-
         transform:scale(.85);
     }
 
@@ -2217,7 +1933,6 @@ body{
 @media(max-width:520px){
 
     .nav-links{
-
         gap:12px;
     }
 
@@ -2231,7 +1946,6 @@ body{
 
 
     .logo-text{
-
         display:none;
     }
 
@@ -2305,341 +2019,273 @@ body{
 
 
     .frame{
-
         inset:11px;
+    }
+
+
+    .corner{
+        width:55px;
+        height:55px;
+    }
+
+
+    .corner::before{
+        font-size:27px;
     }
 
 }
 
-
-</style>
-</head>
-
-
-<body>
-
-
-<div class="page">
-
-
-    <!-- =====================================================
-         星空
-    ====================================================== -->
-
-    <div class="stars"></div>
-
-
-    <!-- =====================================================
-         漂浮星星
-    ====================================================== -->
-
-    <div class="floating-stars">
-
-
-        <span class="floating-star star-a">✦</span>
-
-        <span class="floating-star star-b">✧</span>
-
-        <span class="floating-star star-c">✦</span>
-
-        <span class="floating-star star-d">✦</span>
-
-        <span class="floating-star star-e">✧</span>
-
-        <span class="floating-star star-f">✦</span>
-
-        <span class="floating-star star-g">·</span>
-
-        <span class="floating-star star-h">✧</span>
-
-        <span class="floating-star star-i">·</span>
-
-        <span class="floating-star star-j">✦</span>
-
-        <span class="floating-star star-k">·</span>
-
-        <span class="floating-star star-l">✧</span>
-
-
-        <span class="floating-star star-m">✡</span>
-
-        <span class="floating-star star-n">✶</span>
-
-        <span class="floating-star star-o">✡</span>
-
-        <span class="floating-star star-p">✶</span>
-
-
-    </div>
-
-
-    <!-- =====================================================
-         中央光晕
-    ====================================================== -->
-
-    <div class="glow"></div>
-
-
-    <!-- =====================================================
-         魔法阵
-         ★ 完全保持原样
-    ====================================================== -->
-
-    <div class="magic-circle">
-
-        <div class="magic-inner"></div>
-
-        <div class="orbit one"></div>
-
-        <div class="orbit two"></div>
-
-        <div class="orbit three"></div>
-
-        <div class="magic-line"></div>
-
-        <div class="magic-line vertical"></div>
-
-    </div>
-
-
-    <!-- =====================================================
-         中央大型星芒
-    ====================================================== -->
-
-    <div class="center-star">
-
-        <span></span>
-
-    </div>
-
-
-    <!-- =====================================================
-         页面边框
-    ====================================================== -->
-
-    <div class="frame">
-
-        <div class="corner tl"></div>
-
-        <div class="corner tr"></div>
-
-        <div class="corner bl"></div>
-
-        <div class="corner br"></div>
-
-    </div>
-
-
-    <!-- =====================================================
-         顶部导航
-    ====================================================== -->
-
-    <header class="nav">
-
-
-        <!-- Logo -->
-
-        <a
-            href="index.html"
-            class="logo"
-            style="text-decoration:none;"
-        >
-
-
-            <div class="logo-compass">
-
-                <div class="compass-horizontal"></div>
-
-                <div class="compass-star"></div>
-
-            </div>
-
-
-            <div class="logo-text">
-
-                <span class="logo-cn">
-                    塞垭弥大陆档案馆
-                </span>
-
-                <span class="logo-en">
-                    SEYAMI ARCHIVE
-                </span>
-
-            </div>
-
-
-        </a>
-
-
-        <!-- 导航 -->
-
-        <nav class="nav-links">
-
-            <a
-                href="index.html"
-                class="active"
-            >
-                首页
-            </a>
-
-
-            <a href="archive.html">
-                档案目录
-            </a>
-
-
-            <a href="#">
-                关于我们
-            </a>
-
-        </nav>
-
-
-    </header>
-
-
-    <!-- 顶部中央星芒 -->
-
-    <div class="header-line-star"></div>
-
-
-    <!-- =====================================================
-         主内容
-    ====================================================== -->
-
-    <main class="hero">
-
-
-        <!-- 英文标题 -->
-
-        <h1 class="title-en">
-
-
-            <span class="title-word">
-
-                SEYAMI
-
-            </span>
-
-
-            <span class="title-word">
-
-                ARCHIVE
-
-            </span>
-
-
-        </h1>
-
-
-        <!-- 标题装饰线 -->
-
-        <div class="title-decoration">
-
-
-            <div class="line"></div>
-
-
-            <div class="diamond"></div>
-
-
-            <div class="line right"></div>
-
-
-        </div>
-
-
-        <!-- 中文标题 -->
-
-        <h2 class="title-cn">
-
-            塞垭弥大陆档案馆
-
-        </h2>
-
-
-        <!-- 中央小星芒 -->
-
-        <div class="content-star">
-
-            <span></span>
-
-        </div>
-
-
-        <!-- 简介 -->
-
-        <p class="description">
-
-            记录关于这片大陆的一切。<br>
-
-            角色、种族、地域、历史，以及那些尚未被发现的故事。
-
-        </p>
-
-
-        <!-- =================================================
-             开启塞垭弥档案
-        ================================================== -->
-
-        <div class="enter-wrap">
-
-
-            <a
-                class="enter-button"
-                href="archive.html"
-            >
-
-
-                <span
-                    class="button-diamond left"
-                ></span>
-
-
-                <span
-                    class="button-diamond right"
-                ></span>
-
-
-                <span
-                    class="button-star top"
-                ></span>
-
-
-                <span
-                    class="button-star bottom"
-                ></span>
-
-
-                开启塞垭弥档案
-
-                <span style="margin-left:14px;">
-                    →
-                </span>
-
-
-            </a>
-
-
-        </div>
-
-
-    </main>
-
-
-    <!-- =====================================================
-         底部
-    ====================================================== -->
-
-    <div class="footer-mark">
-
-        ✦　THE ARCHIVES OF SEYAMI　✦
-
-    </div>
-
+</style></head><body><div class="page"><!-- =====================================================
+     星空
+====================================================== -->
+
+<div class="stars"></div>
+
+
+<!-- =====================================================
+     漂浮星星
+====================================================== -->
+
+<div class="floating-stars">
+
+    <span class="floating-star star-a">✦</span>
+    <span class="floating-star star-b">✧</span>
+    <span class="floating-star star-c">✦</span>
+    <span class="floating-star star-d">✦</span>
+    <span class="floating-star star-e">✧</span>
+    <span class="floating-star star-f">✦</span>
+    <span class="floating-star star-g">·</span>
+    <span class="floating-star star-h">✧</span>
+    <span class="floating-star star-i">·</span>
+    <span class="floating-star star-j">✦</span>
+    <span class="floating-star star-k">·</span>
+    <span class="floating-star star-l">✧</span>
+
+    <span class="floating-star star-m">✡</span>
+    <span class="floating-star star-n">✶</span>
+    <span class="floating-star star-o">✡</span>
+    <span class="floating-star star-p">✶</span>
 
 </div>
 
 
-</body>
+<!-- =====================================================
+     中央光晕
+====================================================== -->
+
+<div class="glow"></div>
+
+
+<!-- =====================================================
+     魔法阵
+====================================================== -->
+
+<div class="magic-circle">
+
+    <div class="magic-inner"></div>
+
+    <div class="orbit one"></div>
+
+    <div class="orbit two"></div>
+
+    <div class="orbit three"></div>
+
+    <div class="magic-line"></div>
+
+    <div class="magic-line vertical"></div>
+
+</div>
+
+
+<!-- =====================================================
+     页面边框
+====================================================== -->
+
+<div class="frame">
+
+    <div class="corner tl"></div>
+
+    <div class="corner tr"></div>
+
+    <div class="corner bl"></div>
+
+    <div class="corner br"></div>
+
+</div>
+
+
+<!-- =====================================================
+     顶部导航
+====================================================== -->
+
+<header class="nav">
+
+
+    <!-- 左上角 Logo -->
+
+    <a
+        href="index.html"
+        class="logo"
+        style="text-decoration:none;"
+    >
+
+        <div class="logo-compass">
+
+            <div class="compass-horizontal"></div>
+
+            <div class="compass-star"></div>
+
+        </div>
+
+
+        <div class="logo-text">
+
+            <span class="logo-cn">
+                塞垭弥大陆档案馆
+            </span>
+
+            <span class="logo-en">
+                SEYAMI ARCHIVE
+            </span>
+
+        </div>
+
+    </a>
+
+
+    <!-- 导航 -->
+
+    <nav class="nav-links">
+
+        <a
+            href="index.html"
+            class="active"
+        >
+            首页
+        </a>
+
+        <a href="archive.html">
+            档案目录
+        </a>
+
+        <a href="#">
+            关于我们
+        </a>
+
+    </nav>
+
+
+</header>
+
+
+<!-- =====================================================
+     顶部中央装饰
+====================================================== -->
+
+<div class="header-line-star"></div>
+
+
+<!-- =====================================================
+     主内容
+====================================================== -->
+
+<main class="hero">
+
+
+    <!-- 英文标题 -->
+
+    <h1 class="title-en">
+
+        <span class="title-word">
+            SEYAMI
+        </span>
+
+        <span class="title-word">
+            ARCHIVE
+        </span>
+
+    </h1>
+
+
+    <!-- 标题装饰线 -->
+
+    <div class="title-decoration">
+
+        <div class="line"></div>
+
+        <div class="diamond"></div>
+
+        <div class="line right"></div>
+
+    </div>
+
+
+    <!-- 中文标题 -->
+
+    <h2 class="title-cn">
+        塞垭弥大陆档案馆
+    </h2>
+
+
+    <!-- 简介 -->
+
+    <p class="description">
+
+        记录关于这片大陆的一切。<br>
+
+        角色、种族、地域、历史，以及那些尚未被发现的故事。
+
+    </p>
+
+
+    <!-- =================================================
+         开启塞垭弥档案
+    ================================================== -->
+
+    <div class="enter-wrap">
+
+
+        <a
+            class="enter-button"
+            href="archive.html"
+        >
+
+            <span class="button-star-side left">
+                ✡
+            </span>
+
+            <span class="button-star-side right">
+                ✡
+            </span>
+
+
+            <span class="enter-diamond top"></span>
+
+            <span class="enter-diamond bottom"></span>
+
+
+            <span class="enter-text">
+                开启塞垭弥档案　→
+            </span>
+
+        </a>
+
+
+    </div>
+
+
+</main>
+
+
+<!-- =====================================================
+     底部
+====================================================== -->
+
+<div class="footer-mark">
+
+    ✦　THE ARCHIVES OF SEYAMI　✦
+
+</div>
+
+</div></body>
 </html>
