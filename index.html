@@ -16,7 +16,6 @@
 
 <style>
 
-
 /* =========================================================
    基础
 ========================================================= */
@@ -38,14 +37,14 @@ body{
 
     background:
         radial-gradient(
-            circle at 50% 38%,
-            rgba(21,65,130,.34) 0%,
-            rgba(8,36,82,.28) 25%,
-            rgba(3,18,48,.72) 55%,
-            #020b24 100%
+            circle at 50% 43%,
+            rgba(17,52,100,.34) 0%,
+            rgba(7,29,62,.45) 28%,
+            rgba(3,17,39,.82) 62%,
+            #020a1b 100%
         );
 
-    color:#eaf5ff;
+    color:#dcecff;
 
     font-family:
         "Noto Serif SC",
@@ -60,8 +59,11 @@ body{
 .space{
     position:fixed;
     inset:0;
+
     overflow:hidden;
+
     pointer-events:none;
+
     z-index:0;
 }
 
@@ -73,11 +75,11 @@ body{
 
     border-radius:50%;
 
-    background:#d8ecff;
+    background:#c5e1ff;
 
     box-shadow:
-        0 0 5px rgba(150,205,255,.85),
-        0 0 12px rgba(75,145,235,.55);
+        0 0 4px rgba(130,190,245,.65),
+        0 0 9px rgba(62,125,205,.4);
 
     animation:
         twinkle 4s ease-in-out infinite;
@@ -87,13 +89,13 @@ body{
 
     0%,
     100%{
-        opacity:.25;
+        opacity:.2;
         transform:scale(.7);
     }
 
     50%{
-        opacity:1;
-        transform:scale(1.35);
+        opacity:.8;
+        transform:scale(1.3);
     }
 }
 
@@ -105,18 +107,18 @@ body{
 .big-star{
     position:absolute;
 
-    width:8px;
-    height:8px;
+    width:7px;
+    height:7px;
 
-    background:#dff1ff;
+    background:#d5eaff;
 
     transform:rotate(45deg);
 
     box-shadow:
-        0 0 8px #79baff,
-        0 0 22px rgba(68,137,225,.85);
+        0 0 7px #6ca9df,
+        0 0 17px rgba(53,112,185,.65);
 
-    opacity:.9;
+    opacity:.72;
 
     animation:
         bigStar 5s ease-in-out infinite;
@@ -136,24 +138,24 @@ body{
     background:linear-gradient(
         to bottom,
         transparent,
-        #b8dcff,
+        #9bc8ed,
         transparent
     );
 }
 
 .big-star::before{
     width:1px;
-    height:34px;
+    height:30px;
 }
 
 .big-star::after{
-    width:34px;
+    width:30px;
     height:1px;
 
     background:linear-gradient(
         to right,
         transparent,
-        #b8dcff,
+        #9bc8ed,
         transparent
     );
 }
@@ -162,12 +164,12 @@ body{
 
     0%,
     100%{
-        opacity:.35;
+        opacity:.28;
         transform:rotate(45deg) scale(.75);
     }
 
     50%{
-        opacity:1;
+        opacity:.85;
         transform:rotate(45deg) scale(1);
     }
 }
@@ -179,9 +181,10 @@ body{
 
 .frame{
     position:fixed;
+
     inset:22px;
 
-    border:1px solid rgba(78,145,225,.32);
+    border:1px solid rgba(69,128,191,.38);
 
     pointer-events:none;
 
@@ -202,9 +205,9 @@ body{
     background:linear-gradient(
         to right,
         transparent,
-        rgba(75,145,235,.72),
-        rgba(140,195,255,.85),
-        rgba(75,145,235,.72),
+        rgba(65,126,191,.58),
+        rgba(111,166,218,.68),
+        rgba(65,126,191,.58),
         transparent
     );
 }
@@ -219,36 +222,50 @@ body{
 
 
 /* =========================================================
-   四角装饰
+   四角六芒星矢量装饰
 ========================================================= */
 
 .corner{
     position:absolute;
 
-    width:65px;
-    height:65px;
+    width:72px;
+    height:72px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
 }
 
-.corner::before,
-.corner::after{
-    content:"";
+.corner svg{
+    width:72px;
+    height:72px;
 
-    position:absolute;
+    overflow:visible;
 
-    background:#71aef3;
+    opacity:.72;
 
-    box-shadow:
-        0 0 7px rgba(73,145,235,.65);
+    filter:
+        drop-shadow(
+            0 0 5px rgba(79,147,211,.28)
+        );
 }
 
-.corner::before{
-    width:1px;
-    height:100%;
+.corner svg line,
+.corner svg polygon{
+    fill:none;
+
+    stroke:#6eaddd;
+
+    stroke-width:1;
+
+    vector-effect:non-scaling-stroke;
 }
 
-.corner::after{
-    width:100%;
-    height:1px;
+.corner svg .soft{
+    stroke:#4d8cbd;
+
+    opacity:.72;
 }
 
 .corner.tl{
@@ -295,18 +312,20 @@ body{
         translate(-50%,-50%)
         rotate(-8deg);
 
-    opacity:.5;
+    opacity:.39;
 
     filter:
         drop-shadow(
-            0 0 14px rgba(45,120,215,.38)
+            0 0 12px rgba(38,101,169,.28)
         );
 
     pointer-events:none;
 }
 
 
-/* 圆环 */
+/* =========================================================
+   圆环
+========================================================= */
 
 .circle{
     position:absolute;
@@ -316,7 +335,7 @@ body{
 
     border-radius:50%;
 
-    border:1px solid rgba(91,163,240,.55);
+    border:1px solid rgba(70,135,196,.48);
 
     transform:translate(-50%,-50%);
 }
@@ -331,7 +350,7 @@ body{
     height:420px;
 
     border-color:
-        rgba(79,145,228,.45);
+        rgba(62,121,183,.38);
 }
 
 .circle.c3{
@@ -341,7 +360,7 @@ body{
     border-style:dashed;
 
     border-color:
-        rgba(100,175,248,.52);
+        rgba(75,143,204,.42);
 }
 
 .circle.c4{
@@ -349,7 +368,7 @@ body{
     height:250px;
 
     border-color:
-        rgba(80,147,231,.46);
+        rgba(64,124,188,.38);
 }
 
 .circle.c5{
@@ -359,7 +378,7 @@ body{
     border-style:dashed;
 
     border-color:
-        rgba(111,182,255,.52);
+        rgba(82,151,211,.42);
 }
 
 
@@ -373,7 +392,7 @@ body{
     left:50%;
     top:50%;
 
-    border:1px solid rgba(83,153,235,.56);
+    border:1px solid rgba(66,131,194,.46);
 
     border-radius:50%;
 
@@ -395,7 +414,7 @@ body{
     height:140px;
 
     border-color:
-        rgba(102,173,246,.55);
+        rgba(79,143,201,.44);
 
     transform:
         translate(-50%,-50%)
@@ -410,7 +429,7 @@ body{
     height:110px;
 
     border-color:
-        rgba(73,140,226,.62);
+        rgba(59,119,181,.5);
 
     transform:
         translate(-50%,-50%)
@@ -482,7 +501,7 @@ body{
         linear-gradient(
             to right,
             transparent,
-            rgba(96,167,242,.7),
+            rgba(74,139,199,.55),
             transparent
         );
 }
@@ -500,14 +519,14 @@ body{
         linear-gradient(
             to bottom,
             transparent,
-            rgba(96,167,242,.7),
+            rgba(74,139,199,.55),
             transparent
         );
 }
 
 
 /* =========================================================
-   六芒星
+   中央六芒星
 ========================================================= */
 
 .magic-circle::before,
@@ -522,7 +541,7 @@ body{
     width:210px;
     height:182px;
 
-    border:1px solid rgba(99,174,248,.45);
+    border:1px solid rgba(76,143,204,.38);
 
     transform:
         translate(-50%,-50%)
@@ -543,7 +562,7 @@ body{
         translate(-50%,-50%)
         rotate(90deg);
 
-    opacity:.65;
+    opacity:.6;
 }
 
 
@@ -569,7 +588,9 @@ header{
 }
 
 
-/* 左侧 LOGO */
+/* =========================================================
+   左侧 LOGO
+========================================================= */
 
 .logo{
     display:flex;
@@ -580,7 +601,7 @@ header{
 
     text-decoration:none;
 
-    color:#c9e4ff;
+    color:#bdd7ef;
 }
 
 .logo-symbol{
@@ -592,16 +613,16 @@ header{
     align-items:center;
     justify-content:center;
 
-    border:1px solid rgba(104,171,244,.65);
+    border:1px solid rgba(83,145,198,.58);
 
     border-radius:50%;
 
-    color:#78b8ff;
+    color:#75add9;
 
     font-size:18px;
 
     box-shadow:
-        0 0 12px rgba(58,130,220,.25);
+        0 0 10px rgba(48,104,164,.18);
 }
 
 .logo-text{
@@ -611,7 +632,7 @@ header{
 
     letter-spacing:.22em;
 
-    color:#b9d8fa;
+    color:#aac9e6;
 
     line-height:1.4;
 }
@@ -627,11 +648,13 @@ header{
 
     letter-spacing:.25em;
 
-    color:#769bc7;
+    color:#55799d;
 }
 
 
-/* 导航 */
+/* =========================================================
+   导航
+========================================================= */
 
 nav{
     display:flex;
@@ -644,7 +667,7 @@ nav{
 nav a{
     position:relative;
 
-    color:#a9c1df;
+    color:#8caac8;
 
     text-decoration:none;
 
@@ -656,11 +679,11 @@ nav a{
 }
 
 nav a:hover{
-    color:#edf7ff;
+    color:#d5e8f8;
 }
 
 nav a.active{
-    color:#e9f5ff;
+    color:#d3e7f8;
 }
 
 nav a.active::after{
@@ -676,10 +699,10 @@ nav a.active::after{
 
     border-radius:50%;
 
-    background:#83c1ff;
+    background:#70acd8;
 
     box-shadow:
-        0 0 8px #5aa8ff;
+        0 0 7px #5595c5;
 
     transform:translateX(-50%);
 }
@@ -697,13 +720,13 @@ nav a.active::after{
 
     transform:translateX(-50%);
 
-    color:#b9ddff;
+    color:#8fbcd9;
 
     font-size:15px;
 
     text-shadow:
-        0 0 10px #5ba8ff,
-        0 0 20px rgba(62,133,222,.75);
+        0 0 8px #4c8ab8,
+        0 0 16px rgba(42,100,155,.55);
 
     animation:
         headerStar 4s ease-in-out infinite;
@@ -713,11 +736,11 @@ nav a.active::after{
 
     0%,
     100%{
-        opacity:.55;
+        opacity:.4;
     }
 
     50%{
-        opacity:1;
+        opacity:.85;
     }
 }
 
@@ -742,9 +765,9 @@ nav a.active::after{
 
 .hero-content{
 
-    width:min(1200px, calc(100% - 70px));
+    width:min(1000px, calc(100% - 70px));
 
-    margin-top:45px;
+    margin-top:75px;
 
     text-align:center;
 }
@@ -764,68 +787,26 @@ nav a.active::after{
     font-family:"Cinzel",serif;
 
     font-size:clamp(
-        58px,
-        7.8vw,
+        66px,
+        8.2vw,
         118px
     );
 
     font-weight:400;
 
-    letter-spacing:.055em;
+    letter-spacing:.075em;
 
-    line-height:1;
+    line-height:.98;
 
-    white-space:nowrap;
-
-    color:#eef7ff;
+    color:#e1edf7;
 
     text-shadow:
-        0 0 5px rgba(215,237,255,.7),
-        0 0 18px rgba(84,158,239,.55),
-        0 0 42px rgba(42,106,195,.35);
+        0 0 5px rgba(196,222,242,.38),
+        0 0 18px rgba(65,124,176,.25);
 }
-
-
-/* 标题文字 */
 
 .title span{
-    display:inline;
-}
-
-
-/* 标题两侧细线 */
-
-.title::before,
-.title::after{
-    content:"";
-
-    position:absolute;
-
-    top:50%;
-
-    width:120px;
-    height:1px;
-
-    background:
-        linear-gradient(
-            to right,
-            transparent,
-            rgba(91,162,238,.72)
-        );
-}
-
-.title::before{
-    right:100%;
-
-    margin-right:30px;
-}
-
-.title::after{
-    left:100%;
-
-    margin-left:30px;
-
-    transform:scaleX(-1);
+    display:block;
 }
 
 
@@ -834,22 +815,24 @@ nav a.active::after{
 ========================================================= */
 
 .subtitle{
-    margin-top:24px;
+    margin-top:28px;
 
-    font-size:19px;
+    font-size:18px;
 
-    letter-spacing:.55em;
+    letter-spacing:.48em;
 
-    text-indent:.55em;
+    text-indent:.48em;
 
-    color:#dcecff;
+    color:#bcd4e9;
 
     text-shadow:
-        0 0 15px rgba(77,150,230,.35);
+        0 0 10px rgba(63,119,170,.2);
 }
 
 
-/* 副标题装饰 */
+/* =========================================================
+   副标题装饰
+========================================================= */
 
 .subtitle-decoration{
     width:min(620px, 72vw);
@@ -875,7 +858,7 @@ nav a.active::after{
         linear-gradient(
             to right,
             transparent,
-            rgba(77,145,229,.7)
+            rgba(65,126,184,.52)
         );
 }
 
@@ -884,15 +867,15 @@ nav a.active::after{
 }
 
 .subtitle-decoration span{
-    width:6px;
-    height:6px;
+    width:5px;
+    height:5px;
 
-    background:#9bd1ff;
+    background:#80b6dc;
 
     transform:rotate(45deg);
 
     box-shadow:
-        0 0 8px #61afff;
+        0 0 6px #528cb8;
 }
 
 
@@ -901,17 +884,17 @@ nav a.active::after{
 ========================================================= */
 
 .center-star{
-    margin-top:17px;
+    margin-top:16px;
 
-    color:#a9d6ff;
+    color:#88b6d8;
 
-    font-size:16px;
+    font-size:15px;
 
     letter-spacing:.5em;
 
     text-shadow:
-        0 0 10px #5ba8ff,
-        0 0 22px rgba(67,140,225,.7);
+        0 0 8px #528eb9,
+        0 0 17px rgba(55,111,165,.55);
 }
 
 
@@ -921,25 +904,25 @@ nav a.active::after{
 
 .description{
 
-    width:min(760px, 82vw);
+    width:min(650px, 82vw);
 
-    margin:24px auto 0;
+    margin:22px auto 0;
 
-    color:#a9c5e8;
+    color:#7f9fbd;
 
     font-size:13px;
 
-    line-height:2.1;
+    line-height:2.15;
 
     letter-spacing:.12em;
 
     text-shadow:
-        0 0 8px rgba(55,120,210,.18);
+        0 0 7px rgba(43,94,145,.14);
 }
 
 
 /* =========================================================
-   进入按钮
+   进入档案馆按钮
 ========================================================= */
 
 .enter-wrap{
@@ -961,118 +944,194 @@ nav a.active::after{
     align-items:center;
     justify-content:center;
 
-    width:245px;
-    height:58px;
+    width:300px;
+    height:62px;
 
-    border:1px solid rgba(101,173,246,.72);
+    border:none;
 
     background:
         linear-gradient(
-            135deg,
-            rgba(10,42,89,.82),
-            rgba(4,20,50,.88)
+            to bottom,
+            rgba(7,29,57,.08),
+            rgba(7,29,57,.22)
         );
 
-    color:#e7f4ff;
+    color:#c5dcec;
 
     text-decoration:none;
 
     font-size:13px;
 
-    letter-spacing:.35em;
+    letter-spacing:.38em;
 
-    text-indent:.35em;
+    text-indent:.38em;
 
     transition:.4s ease;
-
-    box-shadow:
-        0 0 18px rgba(54,125,218,.16),
-        inset 0 0 20px rgba(42,102,184,.1);
-}
-
-.enter-button:hover{
-
-    border-color:#9bd1ff;
-
-    color:#fff;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(15,55,111,.9),
-            rgba(5,25,60,.95)
-        );
-
-    box-shadow:
-        0 0 25px rgba(69,145,231,.3),
-        inset 0 0 24px rgba(65,135,225,.14);
-
-    transform:translateY(-2px);
 }
 
 
-/* 按钮四角 */
+/* 上下多层线 */
 
-.enter-button::before,
-.enter-button::after{
-
+.enter-button::before{
     content:"";
 
     position:absolute;
 
-    width:9px;
-    height:9px;
+    left:0;
+    right:0;
 
-    border:1px solid #8bc7ff;
+    top:0;
+
+    height:1px;
+
+    background:
+        linear-gradient(
+            to right,
+            transparent,
+            rgba(100,158,201,.72),
+            rgba(139,185,217,.82),
+            rgba(100,158,201,.72),
+            transparent
+        );
+
+    box-shadow:
+        0 9px 0 rgba(69,128,174,.34),
+        0 52px 0 rgba(69,128,174,.34),
+        0 61px 0 rgba(100,158,201,.72);
 }
 
-.enter-button::before{
 
-    left:-5px;
-    top:-5px;
-
-    border-right:none;
-    border-bottom:none;
-}
+/* 菱形两侧 */
 
 .enter-button::after{
 
-    right:-5px;
-    bottom:-5px;
+    content:"◇";
 
-    border-left:none;
-    border-top:none;
+    position:absolute;
+
+    left:-18px;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:#83b8d9;
+
+    font-size:25px;
+
+    font-family:"Cinzel",serif;
+
+    text-shadow:
+        0 0 7px rgba(73,137,181,.45);
 }
 
 
-/* 按钮星星 */
+/* 右侧菱形 */
+.enter-wrap::after{
+
+    content:"◇";
+
+    position:absolute;
+
+    right:calc(50% - 168px);
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:#83b8d9;
+
+    font-size:25px;
+
+    font-family:"Cinzel",serif;
+
+    text-shadow:
+        0 0 7px rgba(73,137,181,.45);
+
+    pointer-events:none;
+}
+
+
+/* 按钮悬停 */
+
+.enter-button:hover{
+
+    color:#e0eef8;
+
+    text-shadow:
+        0 0 8px rgba(107,165,207,.42);
+
+    transform:translateY(-1px);
+}
+
+
+/* =========================================================
+   按钮上下十字星
+========================================================= */
 
 .button-star{
 
     position:absolute;
 
-    color:#b8dcff;
+    color:#8ab8d8;
 
-    font-size:10px;
+    font-size:24px;
+
+    line-height:1;
 
     text-shadow:
-        0 0 8px #5ba8ff;
+        0 0 7px rgba(74,137,182,.45);
 }
 
 .button-star.left{
 
-    left:-24px;
-    top:50%;
+    left:50%;
 
-    transform:translateY(-50%);
+    top:-18px;
+
+    transform:translateX(-50%);
 }
 
 .button-star.right{
 
-    right:-24px;
-    top:50%;
+    right:auto;
 
-    transform:translateY(-50%);
+    left:50%;
+
+    top:auto;
+
+    bottom:-20px;
+
+    transform:translateX(-50%);
+}
+
+
+/* =========================================================
+   底部档案文字
+========================================================= */
+
+.archive-footer{
+    position:absolute;
+
+    left:50%;
+    bottom:28px;
+
+    transform:translateX(-50%);
+
+    color:rgba(90,121,151,.38);
+
+    font-family:"Cinzel",serif;
+
+    font-size:10px;
+
+    letter-spacing:.38em;
+
+    white-space:nowrap;
+}
+
+.archive-footer span{
+    color:rgba(111,158,192,.5);
+
+    margin:0 12px;
 }
 
 
@@ -1101,22 +1160,16 @@ nav a.active::after{
 
     .hero-content{
 
-        margin-top:60px;
+        margin-top:65px;
     }
 
     .title{
 
         font-size:clamp(
-            48px,
+            54px,
             9vw,
-            80px
+            86px
         );
-    }
-
-    .title::before,
-    .title::after{
-
-        width:70px;
     }
 
     .magic-circle{
@@ -1155,64 +1208,98 @@ nav a.active::after{
         padding-top:30px;
     }
 
+    .logo{
+
+        gap:9px;
+    }
+
+    .logo-symbol{
+
+        width:29px;
+        height:29px;
+
+        font-size:15px;
+    }
+
     .logo-text{
 
-        font-size:11px;
+        font-size:10px;
+
+        letter-spacing:.17em;
     }
 
     .logo-text span{
 
-        font-size:8px;
+        font-size:7px;
+
+        letter-spacing:.2em;
     }
 
     nav{
 
-        gap:13px;
+        gap:11px;
     }
 
     nav a{
 
-        font-size:9px;
+        font-size:8px;
 
-        letter-spacing:.08em;
+        letter-spacing:.06em;
     }
 
     .header-star{
 
         top:42px;
+
+        font-size:12px;
     }
 
 
+    /* 四角六芒星 */
+
+    .corner{
+
+        width:58px;
+        height:58px;
+    }
+
+    .corner svg{
+
+        width:58px;
+        height:58px;
+    }
+
+
+    /* 内容 */
+
     .hero-content{
 
-        width:calc(100% - 40px);
+        width:calc(100% - 30px);
 
-        margin-top:70px;
+        margin-top:65px;
     }
 
 
     /* =====================================================
-       手机标题：强制两行
+       手机标题
     ===================================================== */
 
     .title{
 
         width:100%;
 
-        white-space:normal;
-
         font-size:
             clamp(
-                42px,
-                14vw,
-                64px
+                48px,
+                15vw,
+                68px
             );
 
-        line-height:1.05;
+        line-height:1.02;
 
-        letter-spacing:.08em;
+        letter-spacing:.075em;
 
-        padding:0 20px;
+        padding:0 5px;
     }
 
     .title span{
@@ -1220,49 +1307,104 @@ nav a.active::after{
         display:block;
     }
 
-    .title::before,
-    .title::after{
-
-        display:none;
-    }
-
 
     .subtitle{
 
-        margin-top:25px;
+        margin-top:26px;
 
-        font-size:15px;
+        font-size:14px;
 
-        letter-spacing:.35em;
+        letter-spacing:.3em;
 
-        text-indent:.35em;
+        text-indent:.3em;
     }
 
     .subtitle-decoration{
 
-        width:88%;
+        width:86%;
 
-        gap:10px;
+        gap:9px;
+
+        margin-top:14px;
     }
 
     .description{
 
-        width:90%;
+        width:86%;
 
-        font-size:11px;
+        font-size:10px;
 
-        line-height:2;
+        line-height:2.05;
 
         letter-spacing:.08em;
+
+        margin-top:20px;
+    }
+
+
+    /* =====================================================
+       手机按钮
+    ===================================================== */
+
+    .enter-wrap{
+
+        margin-top:34px;
     }
 
     .enter-button{
 
-        width:210px;
-        height:54px;
+        width:235px;
+
+        height:58px;
 
         font-size:11px;
+
+        letter-spacing:.32em;
+
+        text-indent:.32em;
     }
+
+    .enter-button::before{
+
+        box-shadow:
+            0 8px 0 rgba(69,128,174,.32),
+            0 49px 0 rgba(69,128,174,.32),
+            0 57px 0 rgba(100,158,201,.65);
+    }
+
+    .enter-button::after{
+
+        left:-16px;
+
+        font-size:22px;
+    }
+
+    .enter-wrap::after{
+
+        right:calc(50% - 134px);
+
+        font-size:22px;
+    }
+
+    .button-star{
+
+        font-size:21px;
+    }
+
+    .button-star.left{
+
+        top:-17px;
+    }
+
+    .button-star.right{
+
+        bottom:-18px;
+    }
+
+
+    /* =====================================================
+       魔法阵
+    ===================================================== */
 
     .magic-circle{
 
@@ -1305,6 +1447,21 @@ nav a.active::after{
         height:180px;
     }
 
+
+    .archive-footer{
+
+        bottom:20px;
+
+        font-size:7px;
+
+        letter-spacing:.25em;
+    }
+
+    .archive-footer span{
+
+        margin:0 7px;
+    }
+
 }
 
 
@@ -1316,44 +1473,45 @@ nav a.active::after{
 
     nav{
 
-        gap:9px;
+        gap:8px;
     }
 
     nav a{
 
-        font-size:8px;
+        font-size:7px;
     }
 
     .hero-content{
 
-        margin-top:58px;
+        margin-top:55px;
     }
 
     .title{
 
-        font-size:39px;
+        font-size:43px;
     }
 
     .subtitle{
 
-        font-size:13px;
+        font-size:12px;
+    }
+
+    .description{
+
+        font-size:9px;
+    }
+
+    .enter-button{
+
+        width:220px;
     }
 
 }
 
 
 /* =========================================================
-   防止手机横向溢出
+   四角六芒星 SVG
 ========================================================= */
-
-@media(max-width:600px){
-
-    .title{
-
-        overflow-wrap:break-word;
-    }
-
-}
 
 </style>
 
@@ -1376,13 +1534,88 @@ nav a.active::after{
 
 <div class="frame">
 
-    <div class="corner tl"></div>
+    <div class="corner tl">
 
-    <div class="corner tr"></div>
+        <svg viewBox="0 0 72 72">
 
-    <div class="corner bl"></div>
+            <polygon points="36,3 67,21 67,51 36,69 5,51 5,21"/>
 
-    <div class="corner br"></div>
+            <polygon
+                points="36,3 36,69 5,21 67,51 5,51 67,21"
+                class="soft"
+            />
+
+            <polygon
+                points="36,10 60,24 60,48 36,62 12,48 12,24"
+                class="soft"
+            />
+
+        </svg>
+
+    </div>
+
+
+    <div class="corner tr">
+
+        <svg viewBox="0 0 72 72">
+
+            <polygon points="36,3 67,21 67,51 36,69 5,51 5,21"/>
+
+            <polygon
+                points="36,3 36,69 5,21 67,51 5,51 67,21"
+                class="soft"
+            />
+
+            <polygon
+                points="36,10 60,24 60,48 36,62 12,48 12,24"
+                class="soft"
+            />
+
+        </svg>
+
+    </div>
+
+
+    <div class="corner bl">
+
+        <svg viewBox="0 0 72 72">
+
+            <polygon points="36,3 67,21 67,51 36,69 5,51 5,21"/>
+
+            <polygon
+                points="36,3 36,69 5,21 67,51 5,51 67,21"
+                class="soft"
+            />
+
+            <polygon
+                points="36,10 60,24 60,48 36,62 12,48 12,24"
+                class="soft"
+            />
+
+        </svg>
+
+    </div>
+
+
+    <div class="corner br">
+
+        <svg viewBox="0 0 72 72">
+
+            <polygon points="36,3 67,21 67,51 36,69 5,51 5,21"/>
+
+            <polygon
+                points="36,3 36,69 5,21 67,51 5,51 67,21"
+                class="soft"
+            />
+
+            <polygon
+                points="36,10 60,24 60,48 36,62 12,48 12,24"
+                class="soft"
+            />
+
+        </svg>
+
+    </div>
 
 </div>
 
@@ -1486,7 +1719,8 @@ nav a.active::after{
     <h1 class="title">
 
         <span>SEYAMI</span>
-        <span> ARCHIVE</span>
+
+        <span>ARCHIVE</span>
 
     </h1>
 
@@ -1539,7 +1773,7 @@ nav a.active::after{
             href="archive.html"
             class="enter-button"
         >
-            进入档案馆
+            进入档案馆　→
         </a>
 
         <span class="button-star right">
@@ -1552,6 +1786,23 @@ nav a.active::after{
 </div>
 
 </main>
+
+
+<!-- =======================================================
+     底部
+======================================================= -->
+
+<div class="archive-footer">
+
+    ✦
+
+    <span>
+        THE ARCHIVES OF SEYAMI
+    </span>
+
+    ✦
+
+</div>
 
 
 <script>
@@ -1669,13 +1920,13 @@ for(let i = 0; i < 18; i++){
         "50%";
 
     dust.style.background =
-        "rgba(150,205,255,.75)";
+        "rgba(120,178,220,.65)";
 
     dust.style.boxShadow =
-        "0 0 6px rgba(80,150,230,.7)";
+        "0 0 5px rgba(62,120,174,.55)";
 
     dust.style.opacity =
-        .2 + Math.random() * .6;
+        .15 + Math.random() * .5;
 
     dust.style.animation =
         "twinkle " +
