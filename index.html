@@ -289,16 +289,6 @@ body{
         0 0 13px rgba(43,124,190,.28);
 }
 
-
-/*
-   关键修正：
-
-   corner 本身是 68×68，
-   所以让它向外移动 34px，
-   六芒星中心就会刚好落在
-   frame 四个角的交点。
-*/
-
 .corner.tl{
     left:-34px;
     top:-34px;
@@ -351,43 +341,33 @@ body{
     color:#d9edff;
 }
 
+
+/*
+   改成魔法星芒 ✶
+*/
+
 .logo-mark{
     width:27px;
     height:27px;
-
-    border:1px solid rgba(132,194,237,.58);
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    transform:rotate(45deg);
+    font-family:
+        "Times New Roman",
+        serif;
 
-    position:relative;
-}
+    font-size:23px;
+    font-weight:400;
 
-.logo-mark::before{
-    content:"";
+    line-height:1;
 
-    width:8px;
-    height:8px;
+    color:rgba(137,201,239,.9);
 
-    border:1px solid rgba(132,194,237,.72);
-
-    transform:rotate(-45deg);
-}
-
-.logo-mark::after{
-    content:"";
-
-    position:absolute;
-
-    width:33px;
-    height:1px;
-
-    background:rgba(132,194,237,.18);
-
-    transform:rotate(-45deg);
+    text-shadow:
+        0 0 7px rgba(76,159,216,.5),
+        0 0 15px rgba(49,132,191,.22);
 }
 
 .logo-text{
@@ -569,7 +549,12 @@ body{
 }
 
 
+/* ==============================
+   外层圆环旋转
+================================ */
+
 @keyframes rotateCircle{
+
     from{
         transform:rotate(0deg);
     }
@@ -577,9 +562,11 @@ body{
     to{
         transform:rotate(360deg);
     }
+
 }
 
 @keyframes rotateCircleReverse{
+
     from{
         transform:rotate(360deg);
     }
@@ -587,12 +574,22 @@ body{
     to{
         transform:rotate(0deg);
     }
+
 }
 
 
 /* ==============================
-   魔法阵内部星轨
+   多层星轨
 ================================ */
+
+/*
+   这里是这次最重要的修复。
+
+   原本 orbit 只有位置，没有 animation，
+   所以星轨实际上是静止的。
+
+   现在四条轨道分别缓慢旋转。
+*/
 
 .orbit{
     position:absolute;
@@ -604,41 +601,81 @@ body{
 
     border:1px solid rgba(94,165,214,.18);
 
-    transform:
-        translate(-50%,-50%)
-        rotate(25deg);
+    transform-origin:center center;
+
+    animation:
+        orbitRotate 48s linear infinite;
 }
+
+
+/* 第一层 */
 
 .orbit-1{
     width:470px;
     height:170px;
+
+    animation-duration:48s;
+    animation-direction:normal;
 }
+
+
+/* 第二层 */
 
 .orbit-2{
     width:470px;
     height:170px;
 
-    transform:
-        translate(-50%,-50%)
-        rotate(-25deg);
+    animation-duration:62s;
+    animation-direction:reverse;
 }
+
+
+/* 第三层 */
 
 .orbit-3{
     width:430px;
     height:230px;
 
-    transform:
-        translate(-50%,-50%)
-        rotate(65deg);
+    animation-duration:55s;
+    animation-direction:normal;
 }
+
+
+/* 第四层 */
 
 .orbit-4{
     width:430px;
     height:230px;
 
-    transform:
-        translate(-50%,-50%)
-        rotate(-65deg);
+    animation-duration:70s;
+    animation-direction:reverse;
+}
+
+
+/*
+   星轨旋转的关键帧
+
+   因为 orbit 本身已经是绝对定位，
+   所以这里直接使用：
+   translate(-50%,-50%) + rotate()
+   
+   这样旋转的时候不会跑离魔法阵中心。
+*/
+
+@keyframes orbitRotate{
+
+    from{
+        transform:
+            translate(-50%,-50%)
+            rotate(0deg);
+    }
+
+    to{
+        transform:
+            translate(-50%,-50%)
+            rotate(360deg);
+    }
+
 }
 
 
@@ -866,7 +903,7 @@ body{
 
 
 /* ==============================
-   进入按钮区域
+   进入按钮
 ================================ */
 
 .enter-wrap{
@@ -881,9 +918,6 @@ body{
     align-items:center;
     justify-content:center;
 }
-
-
-/* 外框 */
 
 .enter-wrap::before{
     content:"";
@@ -917,9 +951,6 @@ body{
 
     pointer-events:none;
 }
-
-
-/* 内框 */
 
 .enter-wrap::after{
     content:"";
@@ -1092,7 +1123,7 @@ body{
 
 
 /* ==============================
-   响应式
+   平板
 ================================ */
 
 @media(max-width:800px){
@@ -1158,6 +1189,8 @@ body{
     .logo-mark{
         width:23px;
         height:23px;
+
+        font-size:20px;
     }
 
     .logo-cn{
@@ -1181,6 +1214,7 @@ body{
 
 
     /* 手机四角六芒星 */
+
     .corner{
         width:55px;
         height:55px;
@@ -1328,13 +1362,16 @@ body{
 
 <div class="page">
 
+
     <!-- ==========================
          背景星光
     =========================== -->
 
     <div class="stars"></div>
 
+
     <div class="floating-stars">
+
         <span>✦</span>
         <span>✧</span>
         <span>·</span>
@@ -1347,6 +1384,7 @@ body{
         <span>✶</span>
         <span>·</span>
         <span>✧</span>
+
     </div>
 
 
@@ -1370,9 +1408,15 @@ body{
 
     <header class="top-nav">
 
+
         <div class="logo">
 
-            <div class="logo-mark"></div>
+            <!-- 左上角魔法星芒 -->
+
+            <div class="logo-mark">
+                ✶
+            </div>
+
 
             <div class="logo-text">
 
@@ -1415,9 +1459,12 @@ body{
     <main class="main">
 
 
-        <!-- 魔法阵 -->
+        <!-- ==========================
+             魔法阵 + 多层星轨
+        =========================== -->
 
         <div class="magic-circle">
+
 
             <div class="orbit orbit-1"></div>
 
@@ -1427,18 +1474,23 @@ body{
 
             <div class="orbit orbit-4"></div>
 
+
             <div class="magic-line horizontal"></div>
 
             <div class="magic-line vertical"></div>
 
             <div class="magic-center"></div>
 
+
         </div>
 
 
-        <!-- 标题 -->
+        <!-- ==========================
+             标题
+        =========================== -->
 
         <section class="title-area">
+
 
             <h1 class="main-title">
 
@@ -1483,14 +1535,16 @@ body{
 
 
             <!-- ==========================
-                 进入档案馆按钮
+                 进入档案馆
             =========================== -->
 
             <div class="enter-wrap">
 
+
                 <span class="enter-star left">
                     ✡
                 </span>
+
 
                 <button
                     class="enter-button"
@@ -1499,16 +1553,22 @@ body{
                     开启塞垭弥档案　→
                 </button>
 
+
                 <span class="enter-star right">
                     ✡
                 </span>
 
+
                 <span class="enter-diamond top"></span>
+
                 <span class="enter-diamond bottom"></span>
+
 
             </div>
 
+
         </section>
+
 
     </main>
 
@@ -1518,8 +1578,11 @@ body{
     =========================== -->
 
     <footer class="footer">
+
         ✦　THE ARCHIVES OF SEYAMI　✦
+
     </footer>
+
 
 </div>
 
