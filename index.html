@@ -1,17 +1,38 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>塞垭弥大陆档案馆 · Seyami Archive</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+<!-- =========================
+     字体
+========================= -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&display=swap"
+    rel="stylesheet"
+>
+
 
 <style>
+
 
 /* =========================================================
    基础
@@ -23,13 +44,18 @@
     box-sizing: border-box;
 }
 
+
 html,
 body {
+
     width: 100%;
     height: 100%;
+
 }
 
+
 body {
+
     overflow: hidden;
 
     background: #06111d;
@@ -41,11 +67,12 @@ body {
         "Microsoft YaHei",
         "PingFang SC",
         sans-serif;
+
 }
 
 
 /* =========================================================
-   页面主体
+   页面
 ========================================================= */
 
 .page {
@@ -62,7 +89,7 @@ body {
     background:
 
         radial-gradient(
-            circle at 50% 45%,
+            circle at 50% 44%,
             rgba(38, 111, 153, .24) 0%,
             rgba(13, 48, 72, .18) 23%,
             rgba(5, 18, 31, .72) 55%,
@@ -73,7 +100,7 @@ body {
 
 
 /* =========================================================
-   星空背景
+   背景星空
 ========================================================= */
 
 .stars {
@@ -82,42 +109,47 @@ body {
 
     inset: 0;
 
-    opacity: .82;
-
-    pointer-events: none;
+    opacity: .8;
 
     background-image:
 
         radial-gradient(
             circle,
-            rgba(255,255,255,.78) 0 1px,
+            rgba(255,255,255,.75) 0 1px,
             transparent 1.5px
         ),
 
         radial-gradient(
             circle,
-            rgba(170,225,255,.58) 0 1px,
+            rgba(170,225,255,.55) 0 1px,
             transparent 1.5px
         ),
 
         radial-gradient(
             circle,
-            rgba(255,255,255,.42) 0 1px,
+            rgba(255,255,255,.4) 0 1px,
             transparent 1.5px
         );
 
     background-size:
+
         190px 190px,
         270px 270px,
         340px 340px;
 
     background-position:
+
         20px 30px,
         100px 120px,
         40px 80px;
 
     animation:
-        starFieldMove 30s linear infinite;
+        starFieldMove
+        28s
+        linear
+        infinite;
+
+    pointer-events: none;
 
 }
 
@@ -125,190 +157,19 @@ body {
 @keyframes starFieldMove {
 
     0% {
-        transform: translate3d(0,0,0);
+        transform:
+            translate3d(0,0,0);
     }
 
     50% {
-        transform: translate3d(-18px,12px,0);
+        transform:
+            translate3d(-18px,12px,0);
     }
 
     100% {
-        transform: translate3d(0,0,0);
+        transform:
+            translate3d(0,0,0);
     }
-
-}
-
-
-/* =========================================================
-   外层边框
-========================================================= */
-
-.frame {
-
-    position: absolute;
-
-    inset: 18px;
-
-    border:
-        1px solid
-        rgba(92,170,224,.48);
-
-    pointer-events: none;
-
-    z-index: 20;
-
-}
-
-
-/* =========================================================
-   顶部横线
-========================================================= */
-
-.frame::before {
-
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    right: 0;
-
-    top: 68px;
-
-    height: 1px;
-
-    background:
-        linear-gradient(
-            to right,
-            transparent 0%,
-            rgba(75,160,220,.75) 8%,
-            rgba(75,160,220,.75) 92%,
-            transparent 100%
-        );
-
-}
-
-
-/* =========================================================
-   四角六芒星
-========================================================= */
-
-.corner {
-
-    position: absolute;
-
-    width: 62px;
-    height: 62px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    color: #79caff;
-
-    opacity: .88;
-
-}
-
-
-/* SVG 本身 */
-
-.corner svg {
-
-    width: 100%;
-    height: 100%;
-
-    overflow: visible;
-
-}
-
-
-/* 六芒星线 */
-
-.corner polygon {
-
-    fill: none;
-
-    stroke:
-        rgba(105,195,245,.82);
-
-    stroke-width: 1;
-
-}
-
-
-/* 外围圆 */
-
-.corner circle {
-
-    fill: none;
-
-    stroke:
-        rgba(77,170,225,.45);
-
-    stroke-width: 1;
-
-}
-
-
-/* 装饰线 */
-
-.corner line {
-
-    stroke:
-        rgba(93,185,235,.68);
-
-    stroke-width: 1;
-
-}
-
-
-/* 左上 */
-
-.corner-tl {
-
-    left: -20px;
-    top: -20px;
-
-}
-
-
-/* 右上 */
-
-.corner-tr {
-
-    right: -20px;
-    top: -20px;
-
-    transform:
-        rotate(90deg);
-
-}
-
-
-/* 左下 */
-
-.corner-bl {
-
-    left: -20px;
-    bottom: -20px;
-
-    transform:
-        rotate(-90deg);
-
-}
-
-
-/* 右下 */
-
-.corner-br {
-
-    right: -20px;
-    bottom: -20px;
-
-    transform:
-        rotate(180deg);
 
 }
 
@@ -325,7 +186,7 @@ body {
 
     pointer-events: none;
 
-    z-index: 4;
+    z-index: 3;
 
 }
 
@@ -335,103 +196,120 @@ body {
     position: absolute;
 
     color:
-        rgba(190,235,255,.84);
+        rgba(190, 235, 255, .82);
 
     font-family:
         "Times New Roman",
         serif;
 
-    opacity: .42;
+    text-shadow:
+        0 0 5px rgba(185, 235, 255, .9),
+        0 0 16px rgba(74, 181, 235, .65),
+        0 0 30px rgba(55, 160, 220, .3);
+
+    opacity: .35;
 
     animation:
-        starFloat 8s ease-in-out infinite,
-        starTwinkle 4s ease-in-out infinite;
+
+        starFloat
+        8s
+        ease-in-out
+        infinite,
+
+        starTwinkle
+        4s
+        ease-in-out
+        infinite;
 
 }
 
+
+/* =========================================================
+   原本的星星位置
+========================================================= */
 
 .star-a {
     left: 12%;
     top: 23%;
     font-size: 13px;
-    animation-delay: 0s,.4s;
+    animation-delay: 0s, .4s;
 }
 
 .star-b {
     left: 23%;
     top: 67%;
     font-size: 10px;
-    animation-delay: 1.8s,1.2s;
+    animation-delay: 1.8s, 1.2s;
 }
 
 .star-c {
     left: 30%;
     top: 17%;
     font-size: 17px;
-    animation-delay: 3s,.8s;
+    animation-delay: 3s, .8s;
 }
 
 .star-d {
     left: 76%;
     top: 22%;
     font-size: 14px;
-    animation-delay: 1s,2s;
+    animation-delay: 1s, 2s;
 }
 
 .star-e {
     left: 86%;
     top: 36%;
     font-size: 11px;
-    animation-delay: 2.5s,.2s;
+    animation-delay: 2.5s, .2s;
 }
 
 .star-f {
     left: 72%;
     top: 72%;
     font-size: 16px;
-    animation-delay: 4s,1.5s;
+    animation-delay: 4s, 1.5s;
 }
 
 .star-g {
     left: 15%;
     top: 48%;
     font-size: 14px;
-    animation-delay: 2s,2.5s;
+    animation-delay: 2s, 2.5s;
 }
 
 .star-h {
     left: 91%;
     top: 69%;
     font-size: 13px;
-    animation-delay: 3.5s,1s;
+    animation-delay: 3.5s, 1s;
 }
 
 .star-i {
     left: 58%;
     top: 14%;
     font-size: 9px;
-    animation-delay: 1.5s,3s;
+    animation-delay: 1.5s, 3s;
 }
 
 .star-j {
     left: 63%;
     top: 83%;
     font-size: 14px;
-    animation-delay: 4.5s,2s;
+    animation-delay: 4.5s, 2s;
 }
 
 .star-k {
     left: 39%;
     top: 78%;
     font-size: 9px;
-    animation-delay: 2.2s,.5s;
+    animation-delay: 2.2s, .5s;
 }
 
 .star-l {
     left: 81%;
     top: 54%;
     font-size: 15px;
-    animation-delay: 3.8s,2.8s;
+    animation-delay: 3.8s, 2.8s;
 }
 
 
@@ -444,7 +322,7 @@ body {
     top: 35%;
     font-size: 15px;
     opacity: .42;
-    animation-delay: 1.2s,2.4s;
+    animation-delay: 1.2s, 2.4s;
 }
 
 .star-n {
@@ -452,7 +330,7 @@ body {
     top: 25%;
     font-size: 13px;
     opacity: .50;
-    animation-delay: 3.4s,1.3s;
+    animation-delay: 3.4s, 1.3s;
 }
 
 .star-o {
@@ -460,7 +338,7 @@ body {
     top: 62%;
     font-size: 18px;
     opacity: .38;
-    animation-delay: 2.6s,.7s;
+    animation-delay: 2.6s, .7s;
 }
 
 .star-p {
@@ -468,23 +346,31 @@ body {
     top: 18%;
     font-size: 12px;
     opacity: .48;
-    animation-delay: 4.2s,2.1s;
+    animation-delay: 4.2s, 2.1s;
 }
 
+
+/* =========================================================
+   星星动画
+========================================================= */
 
 @keyframes starFloat {
 
     0%,
     100% {
+
         transform:
             translate3d(0,0,0)
             rotate(0deg);
+
     }
 
     50% {
+
         transform:
             translate3d(0,-18px,0)
             rotate(10deg);
+
     }
 
 }
@@ -494,18 +380,32 @@ body {
 
     0%,
     100% {
+
         opacity: .25;
+
+        filter:
+            blur(.2px);
+
     }
 
     50% {
-        opacity: .95;
+
+        opacity: 1;
+
+        filter:
+            blur(0)
+            drop-shadow(
+                0 0 7px
+                rgba(160,225,255,.8)
+            );
+
     }
 
 }
 
 
 /* =========================================================
-   中央柔和光晕
+   中央光晕
 ========================================================= */
 
 .glow {
@@ -513,21 +413,22 @@ body {
     position: absolute;
 
     left: 50%;
-    top: 46%;
+    top: 43%;
 
-    width: 650px;
-    height: 650px;
+    width: 600px;
+    height: 600px;
 
     transform:
-        translate(-50%,-50%);
+        translate(-50%, -50%);
 
     border-radius: 50%;
 
     background:
+
         radial-gradient(
             circle,
-            rgba(67,163,210,.12) 0%,
-            rgba(55,135,180,.06) 28%,
+            rgba(67, 163, 210, .12) 0%,
+            rgba(55, 135, 180, .06) 28%,
             transparent 68%
         );
 
@@ -539,7 +440,7 @@ body {
 
 
 /* =========================================================
-   魔法阵主体
+   魔法阵
 ========================================================= */
 
 .magic-circle {
@@ -547,25 +448,29 @@ body {
     position: absolute;
 
     left: 50%;
-    top: 53%;
+    top: 52%;
 
-    width: 570px;
-    height: 570px;
+    width: 560px;
+    height: 560px;
 
     transform:
-        translate(-50%,-50%);
+        translate(-50%, -50%);
 
     border-radius: 50%;
 
     border:
         1px solid
-        rgba(72,167,224,.22);
+        rgba(110, 196, 235, .12);
 
     box-shadow:
-        0 0 45px rgba(55,145,205,.06),
-        inset 0 0 45px rgba(55,145,205,.05);
 
-    opacity: .88;
+        0 0 40px
+        rgba(76, 170, 220, .06),
+
+        inset 0 0 40px
+        rgba(76, 170, 220, .05);
+
+    opacity: .7;
 
     pointer-events: none;
 
@@ -580,13 +485,13 @@ body {
 
     position: absolute;
 
-    inset: 40px;
+    inset: 42px;
 
     border-radius: 50%;
 
     border:
         1px solid
-        rgba(80,180,235,.18);
+        rgba(120, 205, 240, .09);
 
 }
 
@@ -605,153 +510,124 @@ body {
 
     border:
         1px dashed
-        rgba(93,190,240,.20);
+        rgba(135, 215, 245, .08);
 
     animation:
-        circleRotate 45s linear infinite;
+        circleRotate
+        40s
+        linear
+        infinite;
+
+}
+
+
+@keyframes circleRotate {
+
+    from {
+        transform:
+            rotate(0deg);
+    }
+
+    to {
+        transform:
+            rotate(360deg);
+    }
 
 }
 
 
 /* =========================================================
-   多层星轨
+   魔法阵额外星轨
 ========================================================= */
 
-.orbit {
+.magic-orbit {
 
     position: absolute;
 
     left: 50%;
     top: 50%;
 
-    border-radius: 50%;
+    width: 470px;
+    height: 185px;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(25deg);
 
     border:
         1px solid
-        rgba(74,171,229,.20);
+        rgba(100,190,235,.09);
 
-    pointer-events: none;
+    border-radius: 50%;
 
-}
-
-
-/* 最大横向椭圆 */
-
-.orbit-1 {
-
-    width: 650px;
-    height: 250px;
-
-    transform:
-        translate(-50%,-50%)
-        rotate(0deg);
+    animation:
+        orbitRotate
+        45s
+        linear
+        infinite;
 
 }
 
 
-/* 第二层 */
+.magic-orbit.two {
 
-.orbit-2 {
-
-    width: 610px;
-    height: 300px;
-
-    transform:
-        translate(-50%,-50%)
-        rotate(28deg);
-
-}
-
-
-/* 第三层 */
-
-.orbit-3 {
-
-    width: 600px;
-    height: 270px;
-
-    transform:
-        translate(-50%,-50%)
-        rotate(-28deg);
-
-}
-
-
-/* 第四层 */
-
-.orbit-4 {
-
-    width: 520px;
-    height: 210px;
-
-    transform:
-        translate(-50%,-50%)
-        rotate(58deg);
-
-}
-
-
-/* 第五层 */
-
-.orbit-5 {
-
-    width: 500px;
-    height: 190px;
-
-    transform:
-        translate(-50%,-50%)
-        rotate(-58deg);
-
-}
-
-
-/* 第六层 */
-
-.orbit-6 {
-
-    width: 440px;
+    width: 400px;
     height: 150px;
 
     transform:
         translate(-50%,-50%)
-        rotate(90deg);
+        rotate(-32deg);
+
+    animation-duration:
+        34s;
+
+    animation-direction:
+        reverse;
+
+}
+
+
+.magic-orbit.three {
+
+    width: 330px;
+    height: 120px;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(70deg);
+
+    animation-duration:
+        28s;
+
+}
+
+
+@keyframes orbitRotate {
+
+    from {
+
+        transform:
+            translate(-50%,-50%)
+            rotate(0deg);
+
+    }
+
+    to {
+
+        transform:
+            translate(-50%,-50%)
+            rotate(360deg);
+
+    }
 
 }
 
 
 /* =========================================================
-   魔法阵中心十字
+   魔法阵十字轴
 ========================================================= */
 
-.magic-cross {
-
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    width: 1px;
-    height: 500px;
-
-    background:
-        linear-gradient(
-            to bottom,
-            transparent,
-            rgba(84,176,230,.18),
-            transparent
-        );
-
-    transform:
-        translate(-50%,-50%);
-
-    pointer-events: none;
-
-}
-
-
-.magic-cross::after {
-
-    content: "";
+.magic-axis {
 
     position: absolute;
 
@@ -765,82 +641,155 @@ body {
         translate(-50%,-50%);
 
     background:
+
         linear-gradient(
-            to right,
+            90deg,
             transparent,
-            rgba(84,176,230,.18),
+            rgba(85,174,225,.22),
             transparent
         );
 
 }
 
 
-/* =========================================================
-   魔法阵旋转细线
-========================================================= */
-
-.arc {
-
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    width: 470px;
-    height: 470px;
+.magic-axis.vertical {
 
     transform:
         translate(-50%,-50%)
-        rotate(20deg);
-
-    border-radius: 50%;
-
-    border:
-        1px solid
-        rgba(88,181,235,.12);
-
-    border-left-color:
-        rgba(88,181,235,.35);
-
-    border-right-color:
-        rgba(88,181,235,.35);
-
-    animation:
-        circleRotateReverse 55s linear infinite;
+        rotate(90deg);
 
 }
 
 
 /* =========================================================
-   旋转
+   四角边框
 ========================================================= */
 
-@keyframes circleRotate {
+.frame {
 
-    from {
-        transform: rotate(0deg);
-    }
+    position: absolute;
 
-    to {
-        transform: rotate(360deg);
-    }
+    inset: 18px;
+
+    border:
+        1px solid
+        rgba(155, 218, 245, .25);
+
+    pointer-events: none;
+
+    z-index: 20;
 
 }
 
 
-@keyframes circleRotateReverse {
+/* =========================================================
+   六芒星角落 SVG
+========================================================= */
 
-    from {
-        transform:
-            translate(-50%,-50%)
-            rotate(20deg);
-    }
+.corner-star {
 
-    to {
-        transform:
-            translate(-50%,-50%)
-            rotate(-340deg);
-    }
+    position: absolute;
+
+    width: 64px;
+    height: 64px;
+
+    display: block;
+
+}
+
+
+.corner-star svg {
+
+    width: 100%;
+    height: 100%;
+
+    overflow: visible;
+
+}
+
+
+.corner-star svg .hexagram {
+
+    fill: none;
+
+    stroke:
+        rgba(128, 207, 241, .68);
+
+    stroke-width: 1;
+
+    vector-effect:
+        non-scaling-stroke;
+
+}
+
+
+.corner-star svg .inner {
+
+    fill: none;
+
+    stroke:
+        rgba(112, 194, 232, .34);
+
+    stroke-width: .8;
+
+}
+
+
+.corner-star svg .line {
+
+    stroke:
+        rgba(146, 220, 247, .48);
+
+    stroke-width: 1;
+
+}
+
+
+/* 左上 */
+
+.corner-tl {
+
+    left: 1px;
+    top: 1px;
+
+}
+
+
+/* 右上 */
+
+.corner-tr {
+
+    right: 1px;
+    top: 1px;
+
+    transform:
+        rotate(90deg);
+
+}
+
+
+/* 左下 */
+
+.corner-bl {
+
+    left: 1px;
+    bottom: 1px;
+
+    transform:
+        rotate(-90deg);
+
+}
+
+
+/* 右下 */
+
+.corner-br {
+
+    right: 1px;
+    bottom: 1px;
+
+    transform:
+        rotate(180deg);
 
 }
 
@@ -855,7 +804,7 @@ body {
 
     left: 58px;
     right: 58px;
-    top: 35px;
+    top: 46px;
 
     display: flex;
 
@@ -869,7 +818,7 @@ body {
 
 
 /* =========================================================
-   左上 Logo —— 恢复你原来的
+   左上角 Logo
 ========================================================= */
 
 .logo {
@@ -937,6 +886,8 @@ body {
 
 .logo-en {
 
+    display: block;
+
     font-family:
         "Cormorant Garamond",
         "Times New Roman",
@@ -951,7 +902,7 @@ body {
     color:
         rgba(190,225,245,.72);
 
-    opacity: .72;
+    opacity: .65;
 
 }
 
@@ -974,7 +925,7 @@ body {
     position: relative;
 
     color:
-        rgba(208,232,244,.72);
+        rgba(208,232,244,.65);
 
     text-decoration: none;
 
@@ -1029,6 +980,23 @@ body {
 }
 
 
+/* 当前页 */
+
+.nav-links a.active {
+
+    color:
+        rgba(235,250,255,.95);
+
+}
+
+
+.nav-links a.active::after {
+
+    width: 100%;
+
+}
+
+
 /* =========================================================
    Hero
 ========================================================= */
@@ -1041,10 +1009,10 @@ body {
     top: 50%;
 
     width:
-        min(1000px,90vw);
+        min(1200px, 92vw);
 
     transform:
-        translate(-50%,-46%);
+        translate(-50%, -47%);
 
     text-align: center;
 
@@ -1055,22 +1023,27 @@ body {
 
 /* =========================================================
    英文标题
+   PC：一整行
 ========================================================= */
 
 .title-en {
 
-    display: flex;
+    display: block;
 
-    flex-direction: column;
-
-    align-items: center;
+    white-space: nowrap;
 
     font-family:
+
         "Cormorant Garamond",
+
         "Bodoni 72",
+
         "Didot",
+
         "Baskerville",
+
         "Times New Roman",
+
         serif;
 
     font-weight: 300;
@@ -1078,14 +1051,14 @@ body {
     color:
         rgba(244,250,255,.96);
 
-    /* 已经去掉字体发光 */
+    /* 注意：
+       这里故意没有 text-shadow
+       = 去掉字体发光 */
 
-    text-shadow: none;
+    line-height: 1;
 
     transform:
         scaleX(.92);
-
-    line-height: .82;
 
     -webkit-font-smoothing:
         antialiased;
@@ -1096,9 +1069,13 @@ body {
 }
 
 
+/* =========================================================
+   PC 一行标题
+========================================================= */
+
 .title-word {
 
-    display: block;
+    display: inline;
 
     white-space: nowrap;
 
@@ -1110,15 +1087,13 @@ body {
 .title-word:first-child {
 
     font-size:
-        clamp(76px,10.5vw,136px);
-
-    font-weight: 300;
+        clamp(68px, 8vw, 122px);
 
     letter-spacing:
-        clamp(11px,1.8vw,24px);
+        clamp(8px, 1.35vw, 20px);
 
     padding-left:
-        clamp(11px,1.8vw,24px);
+        clamp(8px, 1.35vw, 20px);
 
 }
 
@@ -1127,18 +1102,17 @@ body {
 
 .title-word:last-child {
 
-    margin-top: 14px;
+    margin-left:
+        clamp(18px, 2vw, 34px);
 
     font-size:
-        clamp(68px,9.6vw,124px);
-
-    font-weight: 300;
+        clamp(68px, 8vw, 122px);
 
     letter-spacing:
-        clamp(14px,2.2vw,29px);
+        clamp(10px, 1.55vw, 23px);
 
     padding-left:
-        clamp(14px,2.2vw,29px);
+        clamp(10px, 1.55vw, 23px);
 
     opacity: .96;
 
@@ -1146,23 +1120,26 @@ body {
 
 
 /* =========================================================
-   标题下方装饰线
+   标题下面的装饰线
 ========================================================= */
 
 .title-line {
 
-    width: 250px;
+    position: relative;
+
+    width: 190px;
 
     height: 1px;
 
     margin:
-        34px auto 24px;
+        28px auto 21px;
 
     background:
+
         linear-gradient(
             to right,
             transparent,
-            rgba(105,190,235,.65),
+            rgba(175,225,247,.58),
             transparent
         );
 
@@ -1176,6 +1153,7 @@ body {
 .title-cn {
 
     font-family:
+
         "Noto Sans SC",
         "Microsoft YaHei",
         "PingFang SC",
@@ -1190,9 +1168,7 @@ body {
     padding-left: 8px;
 
     color:
-        rgba(224,244,252,.90);
-
-    text-shadow: none;
+        rgba(224,244,252,.88);
 
 }
 
@@ -1206,7 +1182,7 @@ body {
     margin-top: 22px;
 
     color:
-        rgba(190,219,234,.64);
+        rgba(190,219,234,.58);
 
     font-size: 12px;
 
@@ -1235,46 +1211,75 @@ body {
 
     justify-content: center;
 
-    margin-top: 34px;
+    margin-top: 32px;
 
-    width: 225px;
-
+    width: 235px;
     height: 52px;
 
+    padding: 0 30px;
+
     color:
-        rgba(224,246,255,.92);
+        rgba(220,245,255,.9);
 
     text-decoration: none;
 
     font-family:
+
         "Noto Sans SC",
         "Microsoft YaHei",
         sans-serif;
 
-    font-size: 12px;
+    font-size: 13px;
 
     font-weight: 300;
 
-    letter-spacing: 5px;
+    letter-spacing: 4px;
 
     background:
-        rgba(8,31,53,.34);
+        rgba(100,175,210,.035);
+
+    transition:
+        background .4s ease,
+        border-color .4s ease,
+        box-shadow .4s ease,
+        color .4s ease,
+        transform .4s ease;
+
+}
+
+
+/* 外框 */
+
+.enter-button::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
 
     border:
         1px solid
-        rgba(82,171,228,.58);
+        rgba(150,215,240,.52);
 
-    transition:
-        background .35s ease,
-        border-color .35s ease,
-        transform .35s ease;
+    clip-path:
+        polygon(
+            13px 0,
+            calc(100% - 13px) 0,
+            100% 13px,
+            100% calc(100% - 13px),
+            calc(100% - 13px) 100%,
+            13px 100%,
+            0 calc(100% - 13px),
+            0 13px
+        );
 
 }
 
 
 /* 内框 */
 
-.enter-button::before {
+.enter-button::after {
 
     content: "";
 
@@ -1284,79 +1289,169 @@ body {
 
     border:
         1px solid
-        rgba(84,176,231,.30);
+        rgba(120,195,232,.25);
 
-    pointer-events: none;
+    clip-path:
+        polygon(
+            8px 0,
+            calc(100% - 8px) 0,
+            100% 8px,
+            100% calc(100% - 8px),
+            calc(100% - 8px) 100%,
+            8px 100%,
+            0 calc(100% - 8px),
+            0 8px
+        );
 
 }
 
 
-/* 左右六边装饰 */
+/* 两侧菱形 */
 
-.enter-button::after {
-
-    content: "◇";
+.button-diamond {
 
     position: absolute;
 
-    left: -11px;
+    width: 9px;
+    height: 9px;
 
-    top: 50%;
+    border:
+        1px solid
+        rgba(153,220,247,.8);
 
     transform:
-        translateY(-50%);
-
-    width: 20px;
-    height: 20px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    color:
-        rgba(104,196,243,.90);
-
-    font-size: 16px;
+        rotate(45deg);
 
     background:
         #06111d;
 
-}
-
-
-/* 右侧菱形 */
-
-.enter-button span {
-
-    margin-left: 15px;
+    z-index: 2;
 
 }
 
 
-/* 左右延伸线 */
+.button-diamond.left {
 
-.enter-button {
-
-    box-shadow:
-
-        -18px 0 0 -17px rgba(92,185,235,.65),
-
-        18px 0 0 -17px rgba(92,185,235,.65);
+    left: -4px;
 
 }
 
+
+.button-diamond.right {
+
+    right: -4px;
+
+}
+
+
+/* 上下装饰短线 */
+
+.button-line {
+
+    position: absolute;
+
+    width: 38px;
+    height: 1px;
+
+    background:
+        rgba(135,208,239,.55);
+
+}
+
+
+.button-line.top {
+
+    top: -7px;
+
+}
+
+
+.button-line.bottom {
+
+    bottom: -7px;
+
+}
+
+
+/* 按钮星芒 */
+
+.button-star {
+
+    position: absolute;
+
+    width: 18px;
+    height: 18px;
+
+    z-index: 3;
+
+}
+
+
+.button-star::before,
+.button-star::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    background:
+        rgba(195,235,250,.9);
+
+}
+
+
+.button-star::before {
+
+    width: 1px;
+    height: 22px;
+
+}
+
+
+.button-star::after {
+
+    width: 22px;
+    height: 1px;
+
+}
+
+
+.button-star.top {
+
+    top: -17px;
+
+}
+
+
+.button-star.bottom {
+
+    bottom: -17px;
+
+}
+
+
+/* hover */
 
 .enter-button:hover {
 
     color:
-        #f4fbff;
-
-    border-color:
-        rgba(116,204,248,.82);
+        #f2fbff;
 
     background:
-        rgba(36,102,145,.12);
+        rgba(100,185,225,.08);
+
+    box-shadow:
+        0 0 25px
+        rgba(80,190,240,.12),
+
+        inset 0 0 25px
+        rgba(80,190,240,.06);
 
     transform:
         translateY(-2px);
@@ -1382,6 +1477,7 @@ body {
         rgba(160,205,225,.28);
 
     font-family:
+
         "Cormorant Garamond",
         "Times New Roman",
         serif;
@@ -1403,7 +1499,8 @@ body {
    手机端
 ========================================================= */
 
-@media (max-width:700px) {
+@media (max-width: 700px) {
+
 
     .page {
 
@@ -1412,21 +1509,18 @@ body {
     }
 
 
+    /* 手机边框 */
+
     .frame {
 
-        inset: 11px;
+        inset: 10px;
 
     }
 
 
-    .frame::before {
+    /* 手机四角六芒星 */
 
-        top: 53px;
-
-    }
-
-
-    .corner {
+    .corner-star {
 
         width: 48px;
         height: 48px;
@@ -1434,43 +1528,13 @@ body {
     }
 
 
-    .corner-tl {
-
-        left: -15px;
-        top: -15px;
-
-    }
-
-
-    .corner-tr {
-
-        right: -15px;
-        top: -15px;
-
-    }
-
-
-    .corner-bl {
-
-        left: -15px;
-        bottom: -15px;
-
-    }
-
-
-    .corner-br {
-
-        right: -15px;
-        bottom: -15px;
-
-    }
-
+    /* 顶部 */
 
     .nav {
 
         left: 30px;
         right: 30px;
-        top: 28px;
+        top: 30px;
 
     }
 
@@ -1523,117 +1587,31 @@ body {
     }
 
 
-    .nav-links a:nth-child(3) {
-
-        display: none;
-
-    }
-
-
-    /* 手机魔法阵 */
-
-    .magic-circle {
-
-        width: 430px;
-        height: 430px;
-
-        top: 51%;
-
-    }
-
-
-    .magic-circle::before {
-
-        inset: 32px;
-
-    }
-
-
-    .magic-circle::after {
-
-        inset: 65px;
-
-    }
-
-
-    .orbit-1 {
-
-        width: 500px;
-        height: 190px;
-
-    }
-
-
-    .orbit-2 {
-
-        width: 470px;
-        height: 220px;
-
-    }
-
-
-    .orbit-3 {
-
-        width: 460px;
-        height: 200px;
-
-    }
-
-
-    .orbit-4 {
-
-        width: 400px;
-        height: 165px;
-
-    }
-
-
-    .orbit-5 {
-
-        width: 390px;
-        height: 145px;
-
-    }
-
-
-    .orbit-6 {
-
-        width: 350px;
-        height: 125px;
-
-    }
-
-
-    .magic-cross {
-
-        height: 390px;
-
-    }
-
-
-    .magic-cross::after {
-
-        width: 390px;
-
-    }
-
-
-    .arc {
-
-        width: 360px;
-        height: 360px;
-
-    }
-
-
-    /* Hero */
+    /* 手机标题允许换行 */
 
     .hero {
 
         width: 94vw;
 
         transform:
-            translate(-50%,-45%);
+            translate(-50%, -46%);
+
+    }
+
+
+    .title-en {
+
+        white-space: normal;
+
+        transform:
+            scaleX(.95);
+
+    }
+
+
+    .title-word {
+
+        display: block;
 
     }
 
@@ -1641,7 +1619,7 @@ body {
     .title-word:first-child {
 
         font-size:
-            clamp(55px,15.5vw,88px);
+            clamp(54px, 15vw, 82px);
 
         letter-spacing: 6px;
 
@@ -1652,10 +1630,12 @@ body {
 
     .title-word:last-child {
 
-        margin-top: 10px;
+        margin-left: 0;
+
+        margin-top: 9px;
 
         font-size:
-            clamp(50px,14vw,80px);
+            clamp(50px, 14vw, 78px);
 
         letter-spacing: 8px;
 
@@ -1666,10 +1646,10 @@ body {
 
     .title-line {
 
-        width: 150px;
+        width: 120px;
 
         margin:
-            27px auto 19px;
+            24px auto 19px;
 
     }
 
@@ -1695,27 +1675,87 @@ body {
 
         line-height: 2;
 
+        padding:
+            0 15px;
+
     }
 
 
     .enter-button {
 
-        margin-top: 27px;
+        margin-top: 26px;
 
-        width: 195px;
+        width: 205px;
 
-        height: 45px;
+        height: 46px;
 
-        font-size: 10px;
+        font-size: 11px;
 
         letter-spacing: 3px;
 
     }
 
 
+    /* 手机魔法阵 */
+
+    .magic-circle {
+
+        width: 390px;
+        height: 390px;
+
+        top: 50%;
+
+    }
+
+
+    .magic-circle::before {
+
+        inset: 32px;
+
+    }
+
+
+    .magic-circle::after {
+
+        inset: 62px;
+
+    }
+
+
+    .magic-orbit {
+
+        width: 340px;
+        height: 135px;
+
+    }
+
+
+    .magic-orbit.two {
+
+        width: 300px;
+        height: 110px;
+
+    }
+
+
+    .magic-orbit.three {
+
+        width: 250px;
+        height: 90px;
+
+    }
+
+
+    .magic-axis {
+
+        width: 350px;
+
+    }
+
+
     .footer-mark {
 
-        bottom: 25px;
+        bottom: 23px;
 
         font-size: 8px;
 
@@ -1730,7 +1770,32 @@ body {
    超小屏
 ========================================================= */
 
-@media (max-width:420px) {
+@media (max-width: 420px) {
+
+
+    .frame {
+
+        inset: 8px;
+
+    }
+
+
+    .corner-star {
+
+        width: 40px;
+        height: 40px;
+
+    }
+
+
+    .nav {
+
+        left: 23px;
+        right: 23px;
+        top: 25px;
+
+    }
+
 
     .nav-links {
 
@@ -1739,10 +1804,9 @@ body {
     }
 
 
-    .nav {
+    .hero {
 
-        justify-content:
-            flex-start;
+        width: 96vw;
 
     }
 
@@ -1760,7 +1824,7 @@ body {
 
     .title-word:last-child {
 
-        font-size: 49px;
+        font-size: 51px;
 
         letter-spacing: 6px;
 
@@ -1771,7 +1835,11 @@ body {
 
     .title-cn {
 
-        font-size: 13px;
+        font-size: 12px;
+
+        letter-spacing: 4px;
+
+        padding-left: 4px;
 
     }
 
@@ -1780,356 +1848,371 @@ body {
 
         font-size: 9px;
 
+        letter-spacing: 1.5px;
+
     }
 
 
     .magic-circle {
 
-        width: 390px;
-        height: 390px;
+        width: 320px;
+        height: 320px;
 
     }
 
 
-    .orbit-1 {
+    .magic-orbit {
 
-        width: 450px;
-        height: 170px;
-
-    }
-
-
-    .orbit-2 {
-
-        width: 420px;
-        height: 200px;
-
-    }
-
-
-    .orbit-3 {
-
-        width: 410px;
-        height: 180px;
-
-    }
-
-
-    .orbit-4 {
-
-        width: 350px;
-        height: 145px;
-
-    }
-
-
-    .orbit-5 {
-
-        width: 340px;
-        height: 130px;
-
-    }
-
-
-    .orbit-6 {
-
-        width: 310px;
+        width: 280px;
         height: 110px;
 
     }
 
+
+    .magic-orbit.two {
+
+        width: 240px;
+        height: 90px;
+
+    }
+
+
+    .magic-orbit.three {
+
+        width: 200px;
+        height: 75px;
+
+    }
+
+
 }
 
+
+/* =========================================================
+   防止横向滚动
+========================================================= */
+
+::-webkit-scrollbar {
+
+    display: none;
+
+}
+
+
 </style>
+
 </head>
 
 
 <body>
 
+
 <div class="page">
 
 
-    <!-- =====================================================
-         星空
-    ====================================================== -->
+    <!-- =================================================
+         背景星空
+    ================================================== -->
 
     <div class="stars"></div>
 
 
-    <!-- =====================================================
+    <!-- =================================================
          漂浮星星
-    ====================================================== -->
+    ================================================== -->
 
     <div class="floating-stars">
 
         <span class="floating-star star-a">✦</span>
+
         <span class="floating-star star-b">✧</span>
+
         <span class="floating-star star-c">✦</span>
+
         <span class="floating-star star-d">✦</span>
+
         <span class="floating-star star-e">✧</span>
+
         <span class="floating-star star-f">✦</span>
+
         <span class="floating-star star-g">·</span>
+
         <span class="floating-star star-h">✧</span>
+
         <span class="floating-star star-i">·</span>
+
         <span class="floating-star star-j">✦</span>
+
         <span class="floating-star star-k">·</span>
+
         <span class="floating-star star-l">✧</span>
 
+
+        <!-- 你要求保留的两个星象符号 -->
+
         <span class="floating-star star-m">✡</span>
+
         <span class="floating-star star-n">✶</span>
+
         <span class="floating-star star-o">✡</span>
+
         <span class="floating-star star-p">✶</span>
 
     </div>
 
 
-    <!-- =====================================================
+    <!-- =================================================
          中央光晕
-    ====================================================== -->
+    ================================================== -->
 
     <div class="glow"></div>
 
 
-    <!-- =====================================================
+    <!-- =================================================
          魔法阵
-    ====================================================== -->
+    ================================================== -->
 
     <div class="magic-circle"></div>
 
-    <div class="orbit orbit-1"></div>
-    <div class="orbit orbit-2"></div>
-    <div class="orbit orbit-3"></div>
-    <div class="orbit orbit-4"></div>
-    <div class="orbit orbit-5"></div>
-    <div class="orbit orbit-6"></div>
+    <div class="magic-orbit"></div>
 
-    <div class="magic-cross"></div>
+    <div class="magic-orbit two"></div>
 
-    <div class="arc"></div>
+    <div class="magic-orbit three"></div>
 
+    <div class="magic-axis"></div>
 
-    <!-- =====================================================
-         外框
-    ====================================================== -->
-
-    <div class="frame">
+    <div class="magic-axis vertical"></div>
 
 
-        <!-- 左上六芒星 -->
-
-        <div class="corner corner-tl">
-
-            <svg viewBox="0 0 100 100">
-
-                <circle
-                    cx="50"
-                    cy="50"
-                    r="31"
-                />
-
-                <circle
-                    cx="50"
-                    cy="50"
-                    r="22"
-                    opacity=".45"
-                />
-
-                <polygon
-                    points="
-                    50,16
-                    79,67
-                    21,67
-                    "
-                />
-
-                <polygon
-                    points="
-                    50,84
-                    21,33
-                    79,33
-                    "
-                />
-
-                <line
-                    x1="8"
-                    y1="50"
-                    x2="27"
-                    y2="50"
-                />
-
-                <line
-                    x1="73"
-                    y1="50"
-                    x2="92"
-                    y2="50"
-                />
-
-            </svg>
-
-        </div>
+    <!-- =================================================
+         四角六芒星
+    ================================================== -->
 
 
-        <!-- 右上 -->
+    <!-- 左上 -->
 
-        <div class="corner corner-tr">
+    <div class="corner-star corner-tl">
 
-            <svg viewBox="0 0 100 100">
+        <svg viewBox="0 0 100 100">
 
-                <circle cx="50" cy="50" r="31"/>
+            <polygon
+                class="hexagram"
+                points="
+                    50,7
+                    92,76
+                    8,76
+                "
+            />
 
-                <circle
-                    cx="50"
-                    cy="50"
-                    r="22"
-                    opacity=".45"
-                />
+            <polygon
+                class="hexagram"
+                points="
+                    50,93
+                    92,24
+                    8,24
+                "
+            />
 
-                <polygon
-                    points="
-                    50,16
-                    79,67
-                    21,67
-                    "
-                />
+            <circle
+                class="inner"
+                cx="50"
+                cy="50"
+                r="28"
+            />
 
-                <polygon
-                    points="
-                    50,84
-                    21,33
-                    79,33
-                    "
-                />
+            <line
+                class="line"
+                x1="50"
+                y1="0"
+                x2="50"
+                y2="100"
+            />
 
-                <line
-                    x1="8"
-                    y1="50"
-                    x2="27"
-                    y2="50"
-                />
+            <line
+                class="line"
+                x1="7"
+                y1="75"
+                x2="93"
+                y2="25"
+            />
 
-                <line
-                    x1="73"
-                    y1="50"
-                    x2="92"
-                    y2="50"
-                />
-
-            </svg>
-
-        </div>
-
-
-        <!-- 左下 -->
-
-        <div class="corner corner-bl">
-
-            <svg viewBox="0 0 100 100">
-
-                <circle cx="50" cy="50" r="31"/>
-
-                <circle
-                    cx="50"
-                    cy="50"
-                    r="22"
-                    opacity=".45"
-                />
-
-                <polygon
-                    points="
-                    50,16
-                    79,67
-                    21,67
-                    "
-                />
-
-                <polygon
-                    points="
-                    50,84
-                    21,33
-                    79,33
-                    "
-                />
-
-                <line
-                    x1="8"
-                    y1="50"
-                    x2="27"
-                    y2="50"
-                />
-
-                <line
-                    x1="73"
-                    y1="50"
-                    x2="92"
-                    y2="50"
-                />
-
-            </svg>
-
-        </div>
-
-
-        <!-- 右下 -->
-
-        <div class="corner corner-br">
-
-            <svg viewBox="0 0 100 100">
-
-                <circle cx="50" cy="50" r="31"/>
-
-                <circle
-                    cx="50"
-                    cy="50"
-                    r="22"
-                    opacity=".45"
-                />
-
-                <polygon
-                    points="
-                    50,16
-                    79,67
-                    21,67
-                    "
-                />
-
-                <polygon
-                    points="
-                    50,84
-                    21,33
-                    79,33
-                    "
-                />
-
-                <line
-                    x1="8"
-                    y1="50"
-                    x2="27"
-                    y2="50"
-                />
-
-                <line
-                    x1="73"
-                    y1="50"
-                    x2="92"
-                    y2="50"
-                />
-
-            </svg>
-
-        </div>
-
+        </svg>
 
     </div>
 
 
-    <!-- =====================================================
+    <!-- 右上 -->
+
+    <div class="corner-star corner-tr">
+
+        <svg viewBox="0 0 100 100">
+
+            <polygon
+                class="hexagram"
+                points="
+                    50,7
+                    92,76
+                    8,76
+                "
+            />
+
+            <polygon
+                class="hexagram"
+                points="
+                    50,93
+                    92,24
+                    8,24
+                "
+            />
+
+            <circle
+                class="inner"
+                cx="50"
+                cy="50"
+                r="28"
+            />
+
+            <line
+                class="line"
+                x1="50"
+                y1="0"
+                x2="50"
+                y2="100"
+            />
+
+            <line
+                class="line"
+                x1="7"
+                y1="75"
+                x2="93"
+                y2="25"
+            />
+
+        </svg>
+
+    </div>
+
+
+    <!-- 左下 -->
+
+    <div class="corner-star corner-bl">
+
+        <svg viewBox="0 0 100 100">
+
+            <polygon
+                class="hexagram"
+                points="
+                    50,7
+                    92,76
+                    8,76
+                "
+            />
+
+            <polygon
+                class="hexagram"
+                points="
+                    50,93
+                    92,24
+                    8,24
+                "
+            />
+
+            <circle
+                class="inner"
+                cx="50"
+                cy="50"
+                r="28"
+            />
+
+            <line
+                class="line"
+                x1="50"
+                y1="0"
+                x2="50"
+                y2="100"
+            />
+
+            <line
+                class="line"
+                x1="7"
+                y1="75"
+                x2="93"
+                y2="25"
+            />
+
+        </svg>
+
+    </div>
+
+
+    <!-- 右下 -->
+
+    <div class="corner-star corner-br">
+
+        <svg viewBox="0 0 100 100">
+
+            <polygon
+                class="hexagram"
+                points="
+                    50,7
+                    92,76
+                    8,76
+                "
+            />
+
+            <polygon
+                class="hexagram"
+                points="
+                    50,93
+                    92,24
+                    8,24
+                "
+            />
+
+            <circle
+                class="inner"
+                cx="50"
+                cy="50"
+                r="28"
+            />
+
+            <line
+                class="line"
+                x1="50"
+                y1="0"
+                x2="50"
+                y2="100"
+            />
+
+            <line
+                class="line"
+                x1="7"
+                y1="75"
+                x2="93"
+                y2="25"
+            />
+
+        </svg>
+
+    </div>
+
+
+    <!-- =================================================
+         页面边框
+    ================================================== -->
+
+    <div class="frame"></div>
+
+
+    <!-- =================================================
          顶部导航
-    ====================================================== -->
+    ================================================== -->
 
     <header class="nav">
 
 
-        <!-- 左上角 Logo -->
+        <!-- 左上 Logo -->
 
         <div class="logo">
 
@@ -2156,11 +2239,16 @@ body {
 
         <nav class="nav-links">
 
-            <a href="index.html">
+            <a
+                href="index.html"
+                class="active"
+            >
                 首页
             </a>
 
-            <a href="archive.html">
+            <a
+                href="archive.html"
+            >
                 档案目录
             </a>
 
@@ -2170,44 +2258,50 @@ body {
 
         </nav>
 
+
     </header>
 
 
-    <!-- =====================================================
-         Hero
-    ====================================================== -->
+    <!-- =================================================
+         中央内容
+    ================================================== -->
 
     <main class="hero">
 
 
-        <!-- 英文标题 -->
+        <!-- 英文标题
+             PC 一行
+        -->
 
         <h1 class="title-en">
+
 
             <span class="title-word">
                 SEYAMI
             </span>
 
+
             <span class="title-word">
                 ARCHIVE
             </span>
 
+
         </h1>
 
 
-        <!-- 标题下方横线 -->
+        <!-- 标题下方装饰线 -->
 
         <div class="title-line"></div>
 
 
-        <!-- 中文标题 -->
+        <!-- 中文 -->
 
         <h2 class="title-cn">
             塞垭弥大陆档案馆
         </h2>
 
 
-        <!-- 简介 -->
+        <!-- 描述 -->
 
         <p class="description">
 
@@ -2220,18 +2314,57 @@ body {
         </p>
 
 
-        <!-- 进入档案馆 -->
+        <!-- =================================================
+             进入档案馆
+        ================================================== -->
 
         <a
             class="enter-button"
             href="archive.html"
         >
 
+
+            <span
+                class="button-diamond left"
+            ></span>
+
+
+            <span
+                class="button-diamond right"
+            ></span>
+
+
+            <span
+                class="button-line top"
+            ></span>
+
+
+            <span
+                class="button-line bottom"
+            ></span>
+
+
+            <span
+                class="button-star top"
+            ></span>
+
+
+            <span
+                class="button-star bottom"
+            ></span>
+
+
             进入档案馆
 
-            <span>
+
+            <span
+                style="
+                    margin-left:14px;
+                "
+            >
                 →
             </span>
+
 
         </a>
 
@@ -2239,9 +2372,9 @@ body {
     </main>
 
 
-    <!-- =====================================================
-         Footer
-    ====================================================== -->
+    <!-- =================================================
+         底部
+    ================================================== -->
 
     <div class="footer-mark">
 
@@ -2252,5 +2385,7 @@ body {
 
 </div>
 
+
 </body>
+
 </html>
