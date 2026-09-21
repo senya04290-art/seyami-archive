@@ -13,9 +13,9 @@
 
 <style>
 
-/* ==============================
+/* =========================
    基础
-================================ */
+========================= */
 
 *{
     box-sizing:border-box;
@@ -33,16 +33,13 @@ body{
     background:#061426;
     color:#dcecff;
     overflow-x:hidden;
-    font-family:
-        "Cormorant Garamond",
-        "Noto Serif SC",
-        serif;
+    font-family:"Cormorant Garamond","Noto Serif SC",serif;
 }
 
 
-/* ==============================
+/* =========================
    页面背景
-================================ */
+========================= */
 
 .page{
     position:relative;
@@ -65,9 +62,9 @@ body{
 }
 
 
-/* ==============================
-   星光背景
-================================ */
+/* =========================
+   背景星尘
+========================= */
 
 .stars{
     position:absolute;
@@ -83,9 +80,21 @@ body{
     inset:-20%;
 
     background-image:
-        radial-gradient(circle,rgba(182,220,255,.7) 0 1px,transparent 1.5px),
-        radial-gradient(circle,rgba(130,191,239,.45) 0 1px,transparent 1.5px),
-        radial-gradient(circle,rgba(220,240,255,.35) 0 1px,transparent 1.5px);
+        radial-gradient(
+            circle,
+            rgba(182,220,255,.7) 0 1px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(130,191,239,.45) 0 1px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(220,240,255,.35) 0 1px,
+            transparent 1.5px
+        );
 
     background-size:
         180px 180px,
@@ -98,6 +107,7 @@ body{
         150px 70px;
 
     opacity:.45;
+
     animation:starMove 35s linear infinite;
 }
 
@@ -108,6 +118,7 @@ body{
 }
 
 @keyframes starMove{
+
     from{
         transform:translate3d(0,0,0);
     }
@@ -115,12 +126,13 @@ body{
     to{
         transform:translate3d(-80px,50px,0);
     }
+
 }
 
 
-/* ==============================
-   漂浮星星
-================================ */
+/* =========================
+   浮动星星
+========================= */
 
 .floating-stars{
     position:absolute;
@@ -131,7 +143,9 @@ body{
 
 .floating-stars span{
     position:absolute;
+
     color:rgba(158,207,247,.62);
+
     font-family:serif;
     font-size:14px;
 
@@ -215,28 +229,36 @@ body{
 }
 
 @keyframes floatStar{
+
     0%,
     100%{
         opacity:.35;
-        transform:translateY(0) rotate(0deg);
+        transform:
+            translateY(0)
+            rotate(0deg);
     }
 
     50%{
         opacity:.85;
-        transform:translateY(-8px) rotate(12deg);
+        transform:
+            translateY(-8px)
+            rotate(12deg);
     }
+
 }
 
 
-/* ==============================
-   四角框架
-================================ */
+/* =========================
+   外框
+========================= */
 
 .frame{
     position:absolute;
     inset:18px;
 
-    border:1px solid rgba(111,174,224,.32);
+    border:
+        1px solid
+        rgba(111,174,224,.32);
 
     pointer-events:none;
     z-index:10;
@@ -244,16 +266,19 @@ body{
 
 .frame::before{
     content:"";
+
     position:absolute;
     inset:7px;
 
-    border:1px solid rgba(81,142,193,.08);
+    border:
+        1px solid
+        rgba(81,142,193,.08);
 }
 
 
-/* ==============================
+/* =========================
    四角六芒星
-================================ */
+========================= */
 
 .corner{
     position:absolute;
@@ -273,13 +298,12 @@ body{
 
     display:block;
 
-    font-family:
-        "Times New Roman",
-        serif;
+    font-family:"Times New Roman",serif;
 
-    font-size:25px;
+    /* 放大 */
+    font-size:31px;
+
     font-weight:400;
-
     line-height:1;
 
     color:rgba(108,178,230,.88);
@@ -310,9 +334,9 @@ body{
 }
 
 
-/* ==============================
+/* =========================
    顶部导航
-================================ */
+========================= */
 
 .top-nav{
     position:absolute;
@@ -329,41 +353,52 @@ body{
 }
 
 
-/* ==============================
-   左上角 LOGO
-================================ */
+/* =========================
+   左上角 Logo
+========================= */
 
 .logo{
     display:flex;
+
     align-items:center;
-    gap:12px;
+
+    gap:10px;
 
     color:#d9edff;
 }
 
 
 /*
-   改成魔法星芒 ✶
+   ✶
+
+   不再给它固定方框，
+   这样它会直接和中文文字对齐
 */
 
 .logo-mark{
-    width:27px;
-    height:27px;
+    width:auto;
+    height:auto;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
-    font-family:
-        "Times New Roman",
-        serif;
+    flex-shrink:0;
 
-    font-size:23px;
+    font-family:"Times New Roman",serif;
+
+    font-size:21px;
     font-weight:400;
 
     line-height:1;
 
     color:rgba(137,201,239,.9);
+
+    /*
+       微调垂直位置
+    */
+    transform:translateY(-1px);
 
     text-shadow:
         0 0 7px rgba(76,159,216,.5),
@@ -378,9 +413,7 @@ body{
 }
 
 .logo-cn{
-    font-family:
-        "Noto Serif SC",
-        serif;
+    font-family:"Noto Serif SC",serif;
 
     font-size:15px;
     font-weight:400;
@@ -391,9 +424,7 @@ body{
 .logo-en{
     margin-top:5px;
 
-    font-family:
-        "Cinzel",
-        serif;
+    font-family:"Cinzel",serif;
 
     font-size:8px;
     letter-spacing:3px;
@@ -402,13 +433,15 @@ body{
 }
 
 
-/* ==============================
-   导航链接
-================================ */
+/* =========================
+   导航
+========================= */
 
 .nav-links{
     display:flex;
+
     align-items:center;
+
     gap:31px;
 }
 
@@ -419,11 +452,10 @@ body{
 
     text-decoration:none;
 
-    font-family:
-        "Noto Serif SC",
-        serif;
+    font-family:"Noto Serif SC",serif;
 
     font-size:12px;
+
     letter-spacing:2px;
 
     transition:
@@ -461,9 +493,9 @@ body{
 }
 
 
-/* ==============================
+/* =========================
    主区域
-================================ */
+========================= */
 
 .main{
     position:relative;
@@ -472,6 +504,7 @@ body{
     min-height:100vh;
 
     display:flex;
+
     flex-direction:column;
 
     align-items:center;
@@ -479,13 +512,16 @@ body{
 
     z-index:5;
 
-    padding:80px 20px 70px;
+    padding:
+        80px
+        20px
+        70px;
 }
 
 
-/* ==============================
+/* =========================
    魔法阵
-================================ */
+========================= */
 
 .magic-circle{
     position:absolute;
@@ -496,7 +532,8 @@ body{
     left:50%;
     top:50%;
 
-    transform:translate(-50%,-50%);
+    transform:
+        translate(-50%,-50%);
 
     border-radius:50%;
 
@@ -506,28 +543,34 @@ body{
 }
 
 
-/* 外环 */
+/* 外圈 */
 
 .magic-circle::before{
     content:"";
 
     position:absolute;
+
     inset:0;
 
     border-radius:50%;
 
     border:
-        1px solid rgba(73,143,198,.28);
+        1px solid
+        rgba(73,143,198,.28);
 
     box-shadow:
-        0 0 22px rgba(47,126,184,.08);
+        0 0 22px
+        rgba(47,126,184,.08);
 
     animation:
-        rotateCircle 80s linear infinite;
+        rotateCircle
+        80s
+        linear
+        infinite;
 }
 
 
-/* 第二层 */
+/* 内圈 */
 
 .magic-circle::after{
     content:"";
@@ -539,19 +582,19 @@ body{
     border-radius:50%;
 
     border:
-        1px solid rgba(91,162,213,.22);
+        1px solid
+        rgba(91,162,213,.22);
 
     box-shadow:
-        inset 0 0 20px rgba(62,139,194,.04);
+        inset 0 0 20px
+        rgba(62,139,194,.04);
 
     animation:
-        rotateCircleReverse 55s linear infinite;
+        rotateCircleReverse
+        55s
+        linear
+        infinite;
 }
-
-
-/* ==============================
-   外层圆环旋转
-================================ */
 
 @keyframes rotateCircle{
 
@@ -578,18 +621,23 @@ body{
 }
 
 
-/* ==============================
-   多层星轨
-================================ */
+/* =========================
+   星轨
+========================= */
 
 /*
-   这里是这次最重要的修复。
+   这里是这次重点修复。
 
-   原本 orbit 只有位置，没有 animation，
-   所以星轨实际上是静止的。
+   原本的星轨在动画过程中
+   会从 0° 开始，所以视觉上的
+   交叉角度会消失。
 
-   现在四条轨道分别缓慢旋转。
+   现在让每一条星轨：
+   1. 保持原本角度
+   2. 自己缓慢旋转
+   3. 正反方向交替
 */
+
 
 .orbit{
     position:absolute;
@@ -599,89 +647,167 @@ body{
 
     border-radius:50%;
 
-    border:1px solid rgba(94,165,214,.18);
+    border:
+        1px solid
+        rgba(94,165,214,.18);
 
     transform-origin:center center;
 
-    animation:
-        orbitRotate 48s linear infinite;
+    pointer-events:none;
 }
 
 
-/* 第一层 */
+/* 第一条 */
 
 .orbit-1{
     width:470px;
     height:170px;
 
-    animation-duration:48s;
-    animation-direction:normal;
+    transform:
+        translate(-50%,-50%)
+        rotate(25deg);
+
+    animation:
+        orbitSpin1
+        55s
+        linear
+        infinite;
 }
 
 
-/* 第二层 */
+/* 第二条 */
 
 .orbit-2{
     width:470px;
     height:170px;
 
-    animation-duration:62s;
-    animation-direction:reverse;
+    transform:
+        translate(-50%,-50%)
+        rotate(-25deg);
+
+    animation:
+        orbitSpin2
+        72s
+        linear
+        infinite;
 }
 
 
-/* 第三层 */
+/* 第三条 */
 
 .orbit-3{
     width:430px;
     height:230px;
 
-    animation-duration:55s;
-    animation-direction:normal;
+    transform:
+        translate(-50%,-50%)
+        rotate(65deg);
+
+    animation:
+        orbitSpin3
+        64s
+        linear
+        infinite;
 }
 
 
-/* 第四层 */
+/* 第四条 */
 
 .orbit-4{
     width:430px;
     height:230px;
 
-    animation-duration:70s;
-    animation-direction:reverse;
+    transform:
+        translate(-50%,-50%)
+        rotate(-65deg);
+
+    animation:
+        orbitSpin4
+        82s
+        linear
+        infinite;
 }
 
 
-/*
-   星轨旋转的关键帧
+/* 第一条顺时针 */
 
-   因为 orbit 本身已经是绝对定位，
-   所以这里直接使用：
-   translate(-50%,-50%) + rotate()
-   
-   这样旋转的时候不会跑离魔法阵中心。
-*/
-
-@keyframes orbitRotate{
+@keyframes orbitSpin1{
 
     from{
         transform:
             translate(-50%,-50%)
-            rotate(0deg);
+            rotate(25deg);
     }
 
     to{
         transform:
             translate(-50%,-50%)
-            rotate(360deg);
+            rotate(385deg);
     }
 
 }
 
 
-/* ==============================
+/* 第二条逆时针 */
+
+@keyframes orbitSpin2{
+
+    from{
+        transform:
+            translate(-50%,-50%)
+            rotate(-25deg);
+    }
+
+    to{
+        transform:
+            translate(-50%,-50%)
+            rotate(-385deg);
+    }
+
+}
+
+
+/* 第三条顺时针 */
+
+@keyframes orbitSpin3{
+
+    from{
+        transform:
+            translate(-50%,-50%)
+            rotate(65deg);
+    }
+
+    to{
+        transform:
+            translate(-50%,-50%)
+            rotate(425deg);
+    }
+
+}
+
+
+/* 第四条逆时针 */
+
+@keyframes orbitSpin4{
+
+    from{
+        transform:
+            translate(-50%,-50%)
+            rotate(-65deg);
+    }
+
+    to{
+        transform:
+            translate(-50%,-50%)
+            rotate(-425deg);
+    }
+
+}
+
+
+/* =========================
    魔法阵十字线
-================================ */
+========================= */
 
 .magic-line{
     position:absolute;
@@ -689,9 +815,11 @@ body{
     left:50%;
     top:50%;
 
-    transform:translate(-50%,-50%);
+    transform:
+        translate(-50%,-50%);
 
-    background:rgba(92,164,213,.13);
+    background:
+        rgba(92,164,213,.13);
 }
 
 .magic-line.horizontal{
@@ -705,9 +833,9 @@ body{
 }
 
 
-/* ==============================
-   魔法阵中心小圆
-================================ */
+/* =========================
+   魔法阵中心
+========================= */
 
 .magic-center{
     position:absolute;
@@ -718,14 +846,18 @@ body{
     width:12px;
     height:12px;
 
-    transform:translate(-50%,-50%);
+    transform:
+        translate(-50%,-50%);
 
-    border:1px solid rgba(133,202,242,.48);
+    border:
+        1px solid
+        rgba(133,202,242,.48);
 
     border-radius:50%;
 
     box-shadow:
-        0 0 10px rgba(88,171,224,.25);
+        0 0 10px
+        rgba(88,171,224,.25);
 }
 
 .magic-center::before{
@@ -739,20 +871,23 @@ body{
     width:3px;
     height:3px;
 
-    transform:translate(-50%,-50%);
+    transform:
+        translate(-50%,-50%);
 
     border-radius:50%;
 
-    background:rgba(174,221,249,.7);
+    background:
+        rgba(174,221,249,.7);
 
     box-shadow:
-        0 0 8px rgba(126,203,244,.8);
+        0 0 8px
+        rgba(126,203,244,.8);
 }
 
 
-/* ==============================
-   标题区域
-================================ */
+/* =========================
+   标题
+========================= */
 
 .title-area{
     position:relative;
@@ -764,13 +899,9 @@ body{
     margin-top:-18px;
 }
 
-
-/* ==============================
-   英文主标题
-================================ */
-
 .main-title{
     display:flex;
+
     flex-direction:column;
 
     align-items:center;
@@ -789,7 +920,8 @@ body{
     color:#dceeff;
 
     text-shadow:
-        0 0 18px rgba(94,172,222,.08);
+        0 0 18px
+        rgba(94,172,222,.08);
 }
 
 .main-title .seyami{
@@ -805,9 +937,9 @@ body{
 }
 
 
-/* ==============================
-   标题装饰线
-================================ */
+/* =========================
+   标题装饰
+========================= */
 
 .title-decoration{
     display:flex;
@@ -847,15 +979,17 @@ body{
     width:6px;
     height:6px;
 
-    border:1px solid rgba(143,202,237,.8);
+    border:
+        1px solid
+        rgba(143,202,237,.8);
 
     transform:rotate(45deg);
 }
 
 
-/* ==============================
+/* =========================
    中文标题
-================================ */
+========================= */
 
 .chinese-title{
     margin-top:24px;
@@ -870,25 +1004,28 @@ body{
 
     letter-spacing:8px;
 
-    color:rgba(207,229,246,.86);
+    color:
+        rgba(207,229,246,.86);
 }
 
 
-/* ==============================
-   描述
-================================ */
+/* =========================
+   描述文字
+========================= */
 
 .description{
     margin-top:20px;
 
     display:flex;
+
     flex-direction:column;
 
     gap:7px;
 
     text-align:center;
 
-    color:rgba(177,207,230,.62);
+    color:
+        rgba(177,207,230,.62);
 
     font-family:
         "Noto Serif SC",
@@ -902,9 +1039,9 @@ body{
 }
 
 
-/* ==============================
+/* =========================
    进入按钮
-================================ */
+========================= */
 
 .enter-wrap{
     position:relative;
@@ -915,14 +1052,19 @@ body{
     margin-top:42px;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 }
+
+
+/* 外层魔法边框 */
 
 .enter-wrap::before{
     content:"";
 
     position:absolute;
+
     inset:0;
 
     clip-path:
@@ -941,16 +1083,22 @@ body{
             0 80%
         );
 
-    border:1px solid rgba(91,167,218,.38);
+    border:
+        1px solid
+        rgba(91,167,218,.38);
 
     background:
         rgba(8,28,49,.48);
 
     box-shadow:
-        0 0 22px rgba(39,120,180,.08);
+        0 0 22px
+        rgba(39,120,180,.08);
 
     pointer-events:none;
 }
+
+
+/* 内框 */
 
 .enter-wrap::after{
     content:"";
@@ -959,19 +1107,19 @@ body{
 
     left:13px;
     right:13px;
+
     top:13px;
     bottom:13px;
 
     border:
-        1px solid rgba(91,164,213,.16);
+        1px solid
+        rgba(91,164,213,.16);
 
     pointer-events:none;
 }
 
 
-/* ==============================
-   进入按钮
-================================ */
+/* 按钮 */
 
 .enter-button{
     position:relative;
@@ -1005,10 +1153,12 @@ body{
         );
 
     border-top:
-        1px solid rgba(105,180,225,.38);
+        1px solid
+        rgba(105,180,225,.38);
 
     border-bottom:
-        1px solid rgba(105,180,225,.38);
+        1px solid
+        rgba(105,180,225,.38);
 
     transition:
         background .35s ease,
@@ -1017,6 +1167,7 @@ body{
 }
 
 .enter-button:hover{
+
     background:
         linear-gradient(
             90deg,
@@ -1026,7 +1177,8 @@ body{
         );
 
     box-shadow:
-        0 0 22px rgba(56,143,201,.18);
+        0 0 22px
+        rgba(56,143,201,.18);
 
     letter-spacing:5px;
 }
@@ -1036,23 +1188,24 @@ body{
 }
 
 
-/* ==============================
-   按钮六芒星
-================================ */
+/* 按钮两侧星星 */
 
 .enter-star{
     position:absolute;
 
     top:50%;
 
-    transform:translateY(-50%);
+    transform:
+        translateY(-50%);
 
-    color:rgba(111,186,229,.75);
+    color:
+        rgba(111,186,229,.75);
 
     font-size:16px;
 
     text-shadow:
-        0 0 9px rgba(67,158,215,.45);
+        0 0 9px
+        rgba(67,158,215,.45);
 }
 
 .enter-star.left{
@@ -1064,9 +1217,7 @@ body{
 }
 
 
-/* ==============================
-   按钮上下菱形
-================================ */
+/* 按钮上下菱形 */
 
 .enter-diamond{
     position:absolute;
@@ -1080,7 +1231,9 @@ body{
         translateX(-50%)
         rotate(45deg);
 
-    border:1px solid rgba(116,187,226,.65);
+    border:
+        1px solid
+        rgba(116,187,226,.65);
 
     background:#061426;
 }
@@ -1094,9 +1247,9 @@ body{
 }
 
 
-/* ==============================
-   Footer
-================================ */
+/* =========================
+   页脚
+========================= */
 
 .footer{
     position:absolute;
@@ -1104,11 +1257,13 @@ body{
     left:50%;
     bottom:32px;
 
-    transform:translateX(-50%);
+    transform:
+        translateX(-50%);
 
     z-index:15;
 
-    color:rgba(133,177,207,.38);
+    color:
+        rgba(133,177,207,.38);
 
     font-family:
         "Cinzel",
@@ -1122,9 +1277,9 @@ body{
 }
 
 
-/* ==============================
-   平板
-================================ */
+/* =========================
+   平板 / 小屏
+========================= */
 
 @media(max-width:800px){
 
@@ -1163,12 +1318,13 @@ body{
     .description{
         font-size:11px;
     }
+
 }
 
 
-/* ==============================
+/* =========================
    手机
-================================ */
+========================= */
 
 @media(max-width:520px){
 
@@ -1186,12 +1342,19 @@ body{
         gap:8px;
     }
 
-    .logo-mark{
-        width:23px;
-        height:23px;
 
-        font-size:20px;
+    /* 手机端 ✶ */
+
+    .logo-mark{
+        width:auto;
+        height:auto;
+
+        font-size:18px;
+
+        transform:
+            translateY(-1px);
     }
+
 
     .logo-cn{
         font-size:12px;
@@ -1213,7 +1376,7 @@ body{
     }
 
 
-    /* 手机四角六芒星 */
+    /* 手机端四角 */
 
     .corner{
         width:55px;
@@ -1241,14 +1404,21 @@ body{
     }
 
     .corner::before{
-        font-size:21px;
+        font-size:26px;
     }
 
+
+    /* 手机主区域 */
 
     .main{
         padding:
-            100px 15px 70px;
+            100px
+            15px
+            70px;
     }
+
+
+    /* 手机魔法阵 */
 
     .magic-circle{
         width:390px;
@@ -1256,6 +1426,9 @@ body{
 
         opacity:.48;
     }
+
+
+    /* 手机星轨 */
 
     .orbit-1,
     .orbit-2{
@@ -1269,6 +1442,9 @@ body{
         height:165px;
     }
 
+
+    /* 手机十字线 */
+
     .magic-line.horizontal{
         width:350px;
     }
@@ -1277,6 +1453,8 @@ body{
         height:350px;
     }
 
+
+    /* 手机标题 */
 
     .main-title{
         letter-spacing:5px;
@@ -1295,6 +1473,8 @@ body{
     }
 
 
+    /* 手机装饰 */
+
     .title-decoration{
         margin-top:23px;
     }
@@ -1302,6 +1482,9 @@ body{
     .title-decoration .line{
         width:55px;
     }
+
+
+    /* 手机中文 */
 
     .chinese-title{
         margin-top:20px;
@@ -1311,6 +1494,9 @@ body{
         letter-spacing:5px;
     }
 
+
+    /* 手机描述 */
+
     .description{
         margin-top:16px;
 
@@ -1319,6 +1505,8 @@ body{
         letter-spacing:1px;
     }
 
+
+    /* 手机按钮 */
 
     .enter-wrap{
         width:320px;
@@ -1345,6 +1533,8 @@ body{
     }
 
 
+    /* 手机页脚 */
+
     .footer{
         bottom:21px;
 
@@ -1352,6 +1542,7 @@ body{
 
         letter-spacing:2px;
     }
+
 }
 
 </style>
@@ -1363,12 +1554,16 @@ body{
 <div class="page">
 
 
-    <!-- ==========================
-         背景星光
-    =========================== -->
+    <!-- =========================
+         背景星尘
+    ========================== -->
 
     <div class="stars"></div>
 
+
+    <!-- =========================
+         浮动星星
+    ========================== -->
 
     <div class="floating-stars">
 
@@ -1388,9 +1583,9 @@ body{
     </div>
 
 
-    <!-- ==========================
-         页面四角框架
-    =========================== -->
+    <!-- =========================
+         外框
+    ========================== -->
 
     <div class="frame">
 
@@ -1402,21 +1597,18 @@ body{
     </div>
 
 
-    <!-- ==========================
+    <!-- =========================
          顶部导航
-    =========================== -->
+    ========================== -->
 
     <header class="top-nav">
 
 
+        <!-- 左上角 Logo -->
+
         <div class="logo">
 
-            <!-- 左上角魔法星芒 -->
-
-            <div class="logo-mark">
-                ✶
-            </div>
-
+            <div class="logo-mark">✶</div>
 
             <div class="logo-text">
 
@@ -1432,6 +1624,8 @@ body{
 
         </div>
 
+
+        <!-- 导航 -->
 
         <nav class="nav-links">
 
@@ -1452,19 +1646,21 @@ body{
     </header>
 
 
-    <!-- ==========================
+    <!-- =========================
          主内容
-    =========================== -->
+    ========================== -->
 
     <main class="main">
 
 
-        <!-- ==========================
-             魔法阵 + 多层星轨
-        =========================== -->
+        <!-- =========================
+             魔法阵 + 星轨
+        ========================== -->
 
         <div class="magic-circle">
 
+
+            <!-- 四条星轨 -->
 
             <div class="orbit orbit-1"></div>
 
@@ -1475,19 +1671,23 @@ body{
             <div class="orbit orbit-4"></div>
 
 
+            <!-- 十字魔法线 -->
+
             <div class="magic-line horizontal"></div>
 
             <div class="magic-line vertical"></div>
 
-            <div class="magic-center"></div>
 
+            <!-- 魔法阵中心 -->
+
+            <div class="magic-center"></div>
 
         </div>
 
 
-        <!-- ==========================
+        <!-- =========================
              标题
-        =========================== -->
+        ========================== -->
 
         <section class="title-area">
 
@@ -1505,6 +1705,8 @@ body{
             </h1>
 
 
+            <!-- 标题装饰 -->
+
             <div class="title-decoration">
 
                 <span class="line"></span>
@@ -1516,10 +1718,14 @@ body{
             </div>
 
 
+            <!-- 中文标题 -->
+
             <div class="chinese-title">
                 塞垭弥大陆档案馆
             </div>
 
+
+            <!-- 描述 -->
 
             <div class="description">
 
@@ -1534,17 +1740,15 @@ body{
             </div>
 
 
-            <!-- ==========================
-                 进入档案馆
-            =========================== -->
+            <!-- =========================
+                 进入档案馆按钮
+            ========================== -->
 
             <div class="enter-wrap">
-
 
                 <span class="enter-star left">
                     ✡
                 </span>
-
 
                 <button
                     class="enter-button"
@@ -1552,7 +1756,6 @@ body{
                 >
                     开启塞垭弥档案　→
                 </button>
-
 
                 <span class="enter-star right">
                     ✡
@@ -1563,7 +1766,6 @@ body{
 
                 <span class="enter-diamond bottom"></span>
 
-
             </div>
 
 
@@ -1573,9 +1775,9 @@ body{
     </main>
 
 
-    <!-- ==========================
-         Footer
-    =========================== -->
+    <!-- =========================
+         页脚
+    ========================== -->
 
     <footer class="footer">
 
