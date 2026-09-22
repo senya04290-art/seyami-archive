@@ -4,147 +4,153 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>档案目录｜塞垭弥大陆档案馆</title>
+<title>塞垭弥大陆档案馆 · Seyami Archive</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
-* {
-  box-sizing: border-box;
+
+*{
+  box-sizing:border-box;
 }
 
 html,
-body {
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
+body{
+  margin:0;
+  padding:0;
+  width:100%;
+  min-height:100%;
 }
 
-body {
-  min-height: 100vh;
-  color: #eaf7ff;
-  font-family:
-    "Noto Sans SC",
-    "Microsoft YaHei",
-    "PingFang SC",
-    sans-serif;
-
+body{
   background:
     radial-gradient(
-      circle at 50% 40%,
-      rgba(35,110,170,0.15),
-      transparent 40%
-    ),
-    radial-gradient(
-      circle at 15% 15%,
-      rgba(40,110,170,0.08),
-      transparent 28%
+      circle at 50% 42%,
+      rgba(35,83,120,.18),
+      transparent 42%
     ),
     linear-gradient(
       180deg,
-      #020a16 0%,
-      #041426 48%,
-      #020914 100%
+      #071523 0%,
+      #06111f 48%,
+      #040c17 100%
     );
 
-  overflow-x: hidden;
+  color:#dcefff;
+  font-family:
+    "Noto Serif SC",
+    "Times New Roman",
+    serif;
+
+  overflow-x:hidden;
+}
+
+.page{
+  position:relative;
+  min-height:100vh;
+  padding:30px clamp(24px,6vw,90px) 70px;
+  overflow:hidden;
 }
 
 
-/* =========================
-   页面
-   ========================= */
+/* =========================================================
+   背景星尘
+========================================================= */
 
-.page {
-  position: relative;
-  min-height: 100vh;
-
-  padding: 30px clamp(24px,6vw,90px) 70px;
-
-  overflow: hidden;
-}
-
-
-/* =========================
-   原本的小星空
-   ========================= */
-
-.stars {
-  position: absolute;
-  inset: 0;
-
-  pointer-events: none;
-  opacity: .8;
-
-  z-index: 0;
+.stars{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  overflow:hidden;
 }
 
 .stars::before,
-.stars::after {
-  content: "";
+.stars::after{
+  content:"";
+  position:absolute;
+  width:2px;
+  height:2px;
+  border-radius:50%;
 
-  position: absolute;
-
-  width: 2px;
-  height: 2px;
-
-  background: #c8ecff;
-
-  border-radius: 50%;
+  background:rgba(170,220,255,.55);
 
   box-shadow:
-    7vw 12vh rgba(190,225,255,.45),
-    15vw 25vh rgba(210,240,255,.55),
-    23vw 9vh rgba(170,220,255,.40),
-    31vw 30vh rgba(200,235,255,.50),
-    42vw 15vh rgba(180,225,255,.45),
-    51vw 27vh rgba(215,242,255,.55),
-    63vw 10vh rgba(180,220,255,.42),
-    72vw 24vh rgba(210,240,255,.50),
-    82vw 13vh rgba(185,225,255,.42),
-    91vw 32vh rgba(210,240,255,.50),
-    8vw 67vh rgba(190,225,255,.40),
-    19vw 82vh rgba(210,240,255,.48),
-    29vw 61vh rgba(180,225,255,.42),
-    41vw 76vh rgba(210,240,255,.52),
-    55vw 65vh rgba(185,225,255,.42),
-    67vw 84vh rgba(210,240,255,.48),
-    78vw 62vh rgba(180,220,255,.42),
-    89vw 78vh rgba(210,240,255,.50);
+    8vw 12vh rgba(150,210,250,.25),
+    17vw 28vh rgba(160,220,255,.2),
+    26vw 9vh rgba(170,220,255,.28),
+    36vw 23vh rgba(150,210,255,.2),
+    47vw 13vh rgba(180,225,255,.3),
+    58vw 31vh rgba(160,220,255,.22),
+    69vw 16vh rgba(180,225,255,.26),
+    78vw 28vh rgba(160,220,255,.2),
+    89vw 11vh rgba(180,225,255,.28),
+
+    12vw 62vh rgba(160,220,255,.2),
+    23vw 76vh rgba(180,225,255,.25),
+    34vw 66vh rgba(160,220,255,.18),
+    51vw 82vh rgba(180,225,255,.25),
+    64vw 68vh rgba(160,220,255,.2),
+    77vw 79vh rgba(180,225,255,.23),
+    91vw 63vh rgba(160,220,255,.2);
+
+  opacity:.7;
+}
+
+.stars::after{
+  width:1px;
+  height:1px;
+
+  box-shadow:
+    5vw 19vh rgba(180,225,255,.3),
+    15vw 44vh rgba(180,225,255,.25),
+    31vw 17vh rgba(180,225,255,.2),
+    43vw 38vh rgba(180,225,255,.25),
+    57vw 21vh rgba(180,225,255,.2),
+    72vw 44vh rgba(180,225,255,.25),
+    84vw 36vh rgba(180,225,255,.2),
+    95vw 23vh rgba(180,225,255,.25),
+
+    7vw 84vh rgba(180,225,255,.2),
+    19vw 70vh rgba(180,225,255,.25),
+    29vw 90vh rgba(180,225,255,.2),
+    42vw 72vh rgba(180,225,255,.25),
+    55vw 93vh rgba(180,225,255,.2),
+    70vw 84vh rgba(180,225,255,.25),
+    86vw 91vh rgba(180,225,255,.2);
 }
 
 
-/* =========================
+/* =========================================================
    ✦ ✶ ✡ 魔法星辰
-   ========================= */
+========================================================= */
 
-.arcane-stars {
-  position: absolute;
-
-  inset: 0;
-
-  z-index: 1;
-
-  pointer-events: none;
-
-  overflow: hidden;
+.arcane-stars{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  overflow:hidden;
 }
 
-.arcane-star {
-  position: absolute;
+.arcane-star{
+  position:absolute;
+  display:block;
 
-  display: block;
-
-  color: rgba(145,215,250,.42);
+  color:rgba(145,215,250,.42);
 
   font-family:
     "Times New Roman",
     "Noto Serif",
     serif;
 
-  font-weight: 400;
+  font-weight:400;
+  line-height:1;
 
-  line-height: 1;
-
-  user-select: none;
+  user-select:none;
 
   text-shadow:
     0 0 5px rgba(90,190,240,.25),
@@ -160,181 +166,301 @@ body {
 }
 
 
-/* ✦ */
+/* 第一组 */
 
-.arcane-star.star-a {
-  left: 13%;
-  top: 17%;
+.arcane-star.star-a{
+  left:13%;
+  top:17%;
+  font-size:15px;
 
-  font-size: 15px;
+  --float-time:7s;
+  --twinkle-time:4s;
+  --float-delay:-2s;
+  --twinkle-delay:-1s;
 
-  --float-time: 7s;
-  --twinkle-time: 4s;
+  opacity:.58;
+}
 
-  --float-delay: -2s;
-  --twinkle-delay: -1s;
+.arcane-star.star-b{
+  left:82%;
+  top:20%;
+  font-size:20px;
 
-  opacity: .58;
+  --float-time:9s;
+  --twinkle-time:5s;
+  --float-delay:-5s;
+  --twinkle-delay:-2s;
+
+  opacity:.42;
+}
+
+.arcane-star.star-c{
+  left:9%;
+  top:48%;
+  font-size:18px;
+
+  --float-time:11s;
+  --twinkle-time:6s;
+  --float-delay:-7s;
+  --twinkle-delay:-3s;
+
+  opacity:.32;
+}
+
+.arcane-star.star-d{
+  right:10%;
+  top:49%;
+  font-size:13px;
+
+  --float-time:8s;
+  --twinkle-time:4.5s;
+  --float-delay:-3s;
+  --twinkle-delay:-1.5s;
+
+  opacity:.52;
+}
+
+.arcane-star.star-e{
+  left:18%;
+  bottom:16%;
+  font-size:17px;
+
+  --float-time:10s;
+  --twinkle-time:5.5s;
+  --float-delay:-6s;
+  --twinkle-delay:-2.5s;
+
+  opacity:.36;
+}
+
+.arcane-star.star-f{
+  right:16%;
+  bottom:13%;
+  font-size:16px;
+
+  --float-time:12s;
+  --twinkle-time:7s;
+  --float-delay:-4s;
+  --twinkle-delay:-4s;
+
+  opacity:.28;
+}
+
+.arcane-star.star-g{
+  left:28%;
+  top:35%;
+  font-size:10px;
+
+  --float-time:6s;
+  --twinkle-time:3.5s;
+  --float-delay:-2s;
+  --twinkle-delay:-.5s;
+
+  opacity:.30;
+}
+
+.arcane-star.star-h{
+  right:28%;
+  top:34%;
+  font-size:11px;
+
+  --float-time:7.5s;
+  --twinkle-time:4s;
+  --float-delay:-5s;
+  --twinkle-delay:-2s;
+
+  opacity:.34;
 }
 
 
-/* ✶ */
+/* 第二组 */
 
-.arcane-star.star-b {
-  left: 82%;
-  top: 20%;
+.arcane-star.star-i{
+  left:4%;
+  top:29%;
+  font-size:9px;
 
-  font-size: 20px;
+  --float-time:6s;
+  --twinkle-time:4s;
+  --float-delay:-1s;
+  --twinkle-delay:-2s;
 
-  --float-time: 9s;
-  --twinkle-time: 5s;
+  opacity:.32;
+}
 
-  --float-delay: -5s;
-  --twinkle-delay: -2s;
+.arcane-star.star-j{
+  left:38%;
+  top:12%;
+  font-size:12px;
 
-  opacity: .42;
+  --float-time:8s;
+  --twinkle-time:5s;
+  --float-delay:-4s;
+  --twinkle-delay:-1s;
+
+  opacity:.38;
+}
+
+.arcane-star.star-k{
+  right:5%;
+  top:31%;
+  font-size:15px;
+
+  --float-time:10s;
+  --twinkle-time:6s;
+  --float-delay:-6s;
+  --twinkle-delay:-3s;
+
+  opacity:.30;
+}
+
+.arcane-star.star-l{
+  left:24%;
+  top:53%;
+  font-size:8px;
+
+  --float-time:7s;
+  --twinkle-time:4.5s;
+  --float-delay:-3s;
+  --twinkle-delay:-1s;
+
+  opacity:.28;
+}
+
+.arcane-star.star-m{
+  right:24%;
+  top:53%;
+  font-size:14px;
+
+  --float-time:11s;
+  --twinkle-time:6.5s;
+  --float-delay:-7s;
+  --twinkle-delay:-2s;
+
+  opacity:.24;
+}
+
+.arcane-star.star-n{
+  left:6%;
+  top:72%;
+  font-size:12px;
+
+  --float-time:9s;
+  --twinkle-time:5s;
+  --float-delay:-5s;
+  --twinkle-delay:-3s;
+
+  opacity:.34;
+}
+
+.arcane-star.star-o{
+  right:7%;
+  top:70%;
+  font-size:18px;
+
+  --float-time:12s;
+  --twinkle-time:7s;
+  --float-delay:-8s;
+  --twinkle-delay:-4s;
+
+  opacity:.25;
+}
+
+.arcane-star.star-p{
+  left:34%;
+  bottom:9%;
+  font-size:10px;
+
+  --float-time:7.5s;
+  --twinkle-time:4s;
+  --float-delay:-2s;
+  --twinkle-delay:-2s;
+
+  opacity:.30;
+}
+
+.arcane-star.star-q{
+  right:36%;
+  bottom:8%;
+  font-size:11px;
+
+  --float-time:8.5s;
+  --twinkle-time:5.5s;
+  --float-delay:-5s;
+  --twinkle-delay:-1s;
+
+  opacity:.34;
+}
+
+.arcane-star.star-r{
+  left:46%;
+  top:8%;
+  font-size:13px;
+
+  --float-time:13s;
+  --twinkle-time:7s;
+  --float-delay:-9s;
+  --twinkle-delay:-4s;
+
+  opacity:.20;
+}
+
+.arcane-star.star-s{
+  right:40%;
+  top:76%;
+  font-size:15px;
+
+  --float-time:10s;
+  --twinkle-time:5s;
+  --float-delay:-4s;
+  --twinkle-delay:-2s;
+
+  opacity:.26;
+}
+
+.arcane-star.star-t{
+  left:91%;
+  top:57%;
+  font-size:9px;
+
+  --float-time:6.5s;
+  --twinkle-time:3.5s;
+  --float-delay:-3s;
+  --twinkle-delay:-1s;
+
+  opacity:.38;
 }
 
 
-/* ✡ */
+/* 星辰动画 */
 
-.arcane-star.star-c {
-  left: 9%;
-  top: 48%;
+@keyframes arcaneFloat{
 
-  font-size: 18px;
-
-  --float-time: 11s;
-  --twinkle-time: 6s;
-
-  --float-delay: -7s;
-  --twinkle-delay: -3s;
-
-  opacity: .32;
-}
-
-
-/* ✦ */
-
-.arcane-star.star-d {
-  right: 10%;
-  top: 49%;
-
-  font-size: 13px;
-
-  --float-time: 8s;
-  --twinkle-time: 4.5s;
-
-  --float-delay: -3s;
-  --twinkle-delay: -1.5s;
-
-  opacity: .52;
-}
-
-
-/* ✶ */
-
-.arcane-star.star-e {
-  left: 18%;
-  bottom: 16%;
-
-  font-size: 17px;
-
-  --float-time: 10s;
-  --twinkle-time: 5.5s;
-
-  --float-delay: -6s;
-  --twinkle-delay: -2.5s;
-
-  opacity: .36;
-}
-
-
-/* ✡ */
-
-.arcane-star.star-f {
-  right: 16%;
-  bottom: 13%;
-
-  font-size: 16px;
-
-  --float-time: 12s;
-  --twinkle-time: 7s;
-
-  --float-delay: -4s;
-  --twinkle-delay: -4s;
-
-  opacity: .28;
-}
-
-
-/* 中央附近的小星星 */
-
-.arcane-star.star-g {
-  left: 28%;
-  top: 35%;
-
-  font-size: 10px;
-
-  --float-time: 6s;
-  --twinkle-time: 3.5s;
-
-  --float-delay: -2s;
-  --twinkle-delay: -.5s;
-
-  opacity: .30;
-}
-
-
-/* 右侧小星星 */
-
-.arcane-star.star-h {
-  right: 28%;
-  top: 34%;
-
-  font-size: 11px;
-
-  --float-time: 7.5s;
-  --twinkle-time: 4s;
-
-  --float-delay: -5s;
-  --twinkle-delay: -2s;
-
-  opacity: .34;
-}
-
-
-/* =========================
-   星辰动画
-   ========================= */
-
-@keyframes arcaneFloat {
-
-  0% {
+  0%{
     transform:
       translate3d(0,0,0)
       rotate(0deg);
   }
 
-  25% {
+  25%{
     transform:
       translate3d(4px,-7px,0)
       rotate(4deg);
   }
 
-  50% {
+  50%{
     transform:
       translate3d(-3px,-11px,0)
       rotate(-3deg);
   }
 
-  75% {
+  75%{
     transform:
       translate3d(-6px,-4px,0)
       rotate(3deg);
   }
 
-  100% {
+  100%{
     transform:
       translate3d(0,0,0)
       rotate(0deg);
@@ -342,559 +468,532 @@ body {
 
 }
 
-
-@keyframes arcaneTwinkle {
+@keyframes arcaneTwinkle{
 
   0%,
-  100% {
-    opacity: .25;
+  100%{
+    opacity:.25;
   }
 
-  50% {
-    opacity: .75;
+  50%{
+    opacity:.75;
   }
 
 }
 
 
-/* =========================
-   外框
-   ========================= */
+/* =========================================================
+   魔法阵
+========================================================= */
 
-.frame {
-  position: absolute;
+.magic-circle{
+  position:absolute;
 
-  top: 24px;
-  left: 24px;
-  right: 24px;
-  bottom: 24px;
+  width:min(72vw,760px);
+  height:min(72vw,760px);
 
-  border: 1px solid rgba(105,190,235,.18);
+  left:50%;
+  top:47%;
 
-  pointer-events: none;
+  transform:translate(-50%,-50%);
 
-  z-index: 4;
+  border-radius:50%;
+
+  border:
+    1px solid rgba(104,190,235,.07);
+
+  box-shadow:
+    0 0 50px rgba(70,150,210,.035),
+    inset 0 0 60px rgba(70,150,210,.025);
+
+  z-index:0;
+  pointer-events:none;
+}
+
+.magic-circle::before,
+.magic-circle::after{
+  content:"";
+
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  transform:translate(-50%,-50%);
+
+  border-radius:50%;
+
+  pointer-events:none;
+}
+
+.magic-circle::before{
+  width:82%;
+  height:82%;
+
+  border:
+    1px solid rgba(120,205,245,.055);
+
+  box-shadow:
+    0 0 25px rgba(80,170,220,.025);
+}
+
+.magic-circle::after{
+  width:61%;
+  height:61%;
+
+  border:
+    1px solid rgba(130,215,250,.06);
+
+  box-shadow:
+    0 0 18px rgba(90,180,230,.025);
+}
+
+
+/* =========================================================
+   四角框线
+========================================================= */
+
+.frame{
+  position:absolute;
+
+  top:20px;
+  left:20px;
+  right:20px;
+  bottom:20px;
+
+  border:
+    1px solid rgba(130,200,235,.12);
+
+  pointer-events:none;
+
+  z-index:2;
 }
 
 .frame::before,
-.frame::after {
-  content: "";
+.frame::after{
+  content:"";
 
-  position: absolute;
+  position:absolute;
 
-  width: 65px;
-  height: 65px;
-
-  border-color: rgba(130,210,255,.45);
-
-  border-style: solid;
+  width:45px;
+  height:45px;
 }
 
-.frame::before {
-  top: -1px;
-  left: -1px;
+.frame::before{
+  left:-1px;
+  top:-1px;
 
-  border-width: 1px 0 0 1px;
+  border-left:
+    1px solid rgba(160,220,250,.45);
+
+  border-top:
+    1px solid rgba(160,220,250,.45);
 }
 
-.frame::after {
-  right: -1px;
-  bottom: -1px;
+.frame::after{
+  right:-1px;
+  bottom:-1px;
 
-  border-width: 0 1px 1px 0;
-}
+  border-right:
+    1px solid rgba(160,220,250,.45);
 
-
-/* =========================
-   顶部 Logo
-   ========================= */
-
-.header {
-  position: absolute;
-
-  left: 58px;
-  right: 58px;
-  top: 38px;
-
-  z-index: 20;
-
-  display: flex;
-
-  align-items: flex-start;
-
-  justify-content: space-between;
-
-  width: auto;
-
-  max-width: none;
-
-  margin: 0;
-
-  padding: 0;
+  border-bottom:
+    1px solid rgba(160,220,250,.45);
 }
 
 
-.logo {
-  display: flex;
+/* =========================================================
+   顶部 Header
+========================================================= */
 
-  align-items: flex-start;
+.header{
+  position:absolute;
 
-  gap: 12px;
+  left:58px;
+  right:58px;
+  top:38px;
 
-  color: rgba(225,246,255,.92);
+  z-index:20;
+
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+
+  width:auto;
+  max-width:none;
+
+  margin:0;
+  padding:0;
 }
 
-.logo-symbol {
-  color: #9edcff;
 
-  width: 17px;
-  height: 13px;
+/* Logo */
 
-  display: flex;
+.logo{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
 
-  align-items: flex-start;
-  justify-content: center;
+  color:rgba(225,246,255,.92);
 
-  font-size: 17px;
-  line-height: 13px;
+  text-decoration:none;
+}
 
-  margin: 0;
-  padding: 0;
+.logo-symbol{
+  color:#9edcff;
+
+  width:17px;
+  height:13px;
+
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+
+  font-size:17px;
+  line-height:13px;
+
+  margin:0;
+  padding:0;
 
   text-shadow:
     0 0 12px rgba(90,200,255,.7);
 
-  flex-shrink: 0;
+  flex-shrink:0;
 }
 
-.logo-text {
-  display: flex;
+.logo-text{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
 
-  flex-direction: column;
-
-  align-items: flex-start;
-
-  line-height: 1;
+  line-height:1;
 }
 
-.logo-cn {
-  display: block;
+.logo-cn{
+  display:block;
 
-  height: 13px;
-  line-height: 13px;
+  height:13px;
+  line-height:13px;
 
-  color: rgba(225,246,255,.92);
+  color:rgba(225,246,255,.92);
 
-  font-size: 13px;
+  font-size:13px;
+  letter-spacing:3px;
 
-  letter-spacing: 3px;
-
-  white-space: nowrap;
+  white-space:nowrap;
 }
 
-.logo-en {
-  display: block;
+.logo-en{
+  display:block;
 
-  margin-top: 5px;
+  margin-top:5px;
 
-  color: rgba(200,230,245,.45);
+  color:rgba(200,230,245,.45);
 
   font-family:
     "Times New Roman",
     serif;
 
-  font-size: 8px;
+  font-size:8px;
+  line-height:8px;
 
-  line-height: 8px;
+  letter-spacing:3px;
 
-  letter-spacing: 3px;
-
-  white-space: nowrap;
+  white-space:nowrap;
 }
 
 
-/* =========================
-   返回首页
-   ========================= */
+/* 返回 */
 
-.back {
-  color: rgba(210,238,250,.60);
+.back{
+  color:rgba(190,225,245,.58);
 
-  text-decoration: none;
-
-  font-size: 11px;
-
-  letter-spacing: 2px;
-
-  transition: color .3s ease;
-}
-
-.back:hover {
-  color: #edfaff;
-}
-
-
-/* =========================
-   标题
-   ========================= */
-
-.heading {
-  position: relative;
-
-  z-index: 2;
-
-  max-width: 1000px;
-
-  margin: 55px auto 55px;
-
-  text-align: center;
-}
-
-.heading-small {
-  margin-bottom: 17px;
-
-  color: rgba(145,211,245,.65);
+  text-decoration:none;
 
   font-family:
-    "Times New Roman",
+    "Cinzel",
+    "Noto Serif SC",
     serif;
 
-  font-size: 11px;
+  font-size:11px;
+  letter-spacing:1px;
 
-  letter-spacing: 5px;
+  transition:
+    color .3s ease,
+    text-shadow .3s ease;
 }
 
-.heading-en {
-  margin: 0;
-
-  font-family:
-    "Bodoni 72",
-    "Didot",
-    "Baskerville",
-    "Times New Roman",
-    serif;
-
-  font-weight: 300;
-
-  font-size:
-    clamp(43px,6vw,72px);
-
-  line-height: 1;
-
-  letter-spacing:
-    clamp(5px,1vw,12px);
-
-  color: #edf9ff;
+.back:hover{
+  color:rgba(220,245,255,.95);
 
   text-shadow:
-    0 0 7px rgba(220,245,255,.45),
-    0 0 25px rgba(60,170,235,.25);
+    0 0 10px rgba(100,200,245,.35);
 }
 
-.heading-line {
-  width:
-    min(470px,65vw);
 
-  height: 1px;
+/* =========================================================
+   主内容
+========================================================= */
 
-  margin: 22px auto 17px;
+.content{
+  position:relative;
+
+  z-index:5;
+
+  width:min(1080px,100%);
+
+  margin:0 auto;
+
+  padding-top:150px;
+}
+
+
+/* 标题 */
+
+.heading{
+  text-align:center;
+
+  margin-bottom:55px;
+}
+
+.heading-small{
+  font-family:
+    "Cinzel",
+    serif;
+
+  font-size:11px;
+
+  letter-spacing:6px;
+
+  color:rgba(145,205,235,.55);
+
+  margin-bottom:12px;
+}
+
+.heading-main{
+  font-family:
+    "Cinzel",
+    serif;
+
+  font-size:clamp(34px,5vw,58px);
+
+  font-weight:400;
+
+  letter-spacing:8px;
+
+  color:rgba(225,245,255,.9);
+
+  line-height:1;
+}
+
+.heading-cn{
+  margin-top:15px;
+
+  font-size:13px;
+
+  letter-spacing:5px;
+
+  color:rgba(170,210,230,.48);
+}
+
+
+/* =========================================================
+   档案卡片
+========================================================= */
+
+.archive-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:18px;
+
+  width:100%;
+}
+
+.archive-card{
+  position:relative;
+
+  min-height:190px;
+
+  padding:30px 26px;
+
+  border:
+    1px solid rgba(110,180,220,.16);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(18,48,72,.35),
+      rgba(6,19,32,.38)
+    );
+
+  overflow:hidden;
+
+  text-decoration:none;
+
+  color:inherit;
+
+  transition:
+    border-color .35s ease,
+    background .35s ease,
+    transform .35s ease,
+    box-shadow .35s ease;
+}
+
+.archive-card::before{
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  top:0;
+
+  width:100%;
+  height:1px;
 
   background:
     linear-gradient(
       90deg,
       transparent,
-      rgba(105,200,255,.45),
+      rgba(150,220,250,.45),
       transparent
     );
+
+  opacity:.5;
 }
 
-.heading-cn {
-  margin: 0;
+.archive-card::after{
+  content:"";
 
-  color: rgba(220,242,252,.78);
+  position:absolute;
 
-  font-size:
-    clamp(15px,2vw,20px);
+  width:100px;
+  height:100px;
 
-  font-weight: 300;
+  right:-45px;
+  bottom:-45px;
 
-  letter-spacing: 7px;
+  border-radius:50%;
 
-  text-indent: 7px;
+  border:
+    1px solid rgba(120,200,240,.08);
 }
 
+.archive-card:hover{
+  transform:translateY(-4px);
 
-/* =========================
-   档案卡片
-   ========================= */
-
-.archive-grid {
-  position: relative;
-
-  z-index: 3;
-
-  width:
-    min(1050px,100%);
-
-  margin: 0 auto;
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap: 22px;
-}
-
-.archive-card {
-  position: relative;
-
-  min-height: 230px;
-
-  padding: 35px 25px;
-
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: center;
-
-  justify-content: center;
-
-  text-align: center;
-
-  color: inherit;
-
-  text-decoration: none;
+  border-color:
+    rgba(125,210,250,.32);
 
   background:
     linear-gradient(
       145deg,
-      rgba(10,38,61,.72),
-      rgba(3,19,34,.70)
-    );
-
-  border: 1px solid rgba(105,190,235,.18);
-
-  transition:
-    transform .35s ease,
-    border-color .35s ease,
-    background .35s ease,
-    box-shadow .35s ease;
-
-  backdrop-filter: blur(6px);
-}
-
-.archive-card::before,
-.archive-card::after {
-  content: "";
-
-  position: absolute;
-
-  width: 13px;
-  height: 13px;
-
-  border-color:
-    rgba(130,210,255,.55);
-
-  border-style: solid;
-
-  opacity: .7;
-
-  transition:
-    opacity .3s ease,
-    width .3s ease,
-    height .3s ease;
-}
-
-.archive-card::before {
-  top: -1px;
-  left: -1px;
-
-  border-width:
-    1px 0 0 1px;
-}
-
-.archive-card::after {
-  right: -1px;
-  bottom: -1px;
-
-  border-width:
-    0 1px 1px 0;
-}
-
-.archive-card:hover {
-  transform: translateY(-6px);
-
-  border-color:
-    rgba(130,215,255,.52);
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(13,51,80,.82),
-      rgba(4,25,44,.82)
+      rgba(22,59,86,.48),
+      rgba(7,22,37,.5)
     );
 
   box-shadow:
-    0 12px 35px rgba(25,130,190,.12),
-    inset 0 0 25px rgba(80,180,230,.035);
+    0 10px 35px rgba(0,0,0,.2),
+    0 0 25px rgba(70,160,215,.04);
 }
 
-.archive-card:hover::before,
-.archive-card:hover::after {
-  width: 20px;
-  height: 20px;
+.card-number{
+  font-family:
+    "Cinzel",
+    serif;
 
-  opacity: 1;
+  font-size:10px;
+
+  letter-spacing:3px;
+
+  color:rgba(120,195,235,.48);
+
+  margin-bottom:26px;
 }
 
+.card-title{
+  font-family:
+    "Cinzel",
+    serif;
 
-/* =========================
-   图标
-   ========================= */
+  font-size:22px;
 
-.icon {
-  width: 62px;
-  height: 62px;
+  font-weight:400;
 
-  margin-bottom: 23px;
+  letter-spacing:4px;
 
-  color: #9ddcff;
+  color:rgba(220,242,252,.86);
 
-  filter:
-    drop-shadow(
-      0 0 7px rgba(100,205,255,.22)
-    );
-
-  transition:
-    transform .35s ease,
-    filter .35s ease;
+  margin-bottom:9px;
 }
 
-.archive-card:hover .icon {
-  transform: translateY(-3px);
+.card-cn{
+  font-size:12px;
 
-  filter:
-    drop-shadow(
-      0 0 12px rgba(100,210,255,.40)
-    );
+  letter-spacing:3px;
+
+  color:rgba(175,215,235,.48);
 }
 
-.card-en {
-  margin-bottom: 8px;
+.card-symbol{
+  position:absolute;
 
-  color: rgba(160,218,245,.60);
+  right:24px;
+  top:25px;
+
+  color:rgba(120,200,240,.25);
 
   font-family:
     "Times New Roman",
     serif;
 
-  font-size: 10px;
+  font-size:19px;
 
-  letter-spacing: 3px;
-}
-
-.card-cn {
-  color: rgba(231,248,255,.90);
-
-  font-size: 17px;
-
-  font-weight: 300;
-
-  letter-spacing: 4px;
-
-  text-indent: 4px;
-}
-
-.card-desc {
-  margin-top: 12px;
-
-  color: rgba(170,207,225,.47);
-
-  font-size: 10px;
-
-  letter-spacing: 1px;
-
-  line-height: 1.8;
+  text-shadow:
+    0 0 12px rgba(80,180,230,.25);
 }
 
 
-/* =========================
-   底部
-   ========================= */
+/* =========================================================
+   Footer
+========================================================= */
 
-.footer {
-  position: relative;
+.footer{
+  position:relative;
 
-  z-index: 2;
+  z-index:5;
 
-  margin-top: 55px;
+  text-align:center;
 
-  text-align: center;
-
-  color: rgba(150,200,225,.30);
+  margin-top:60px;
 
   font-family:
-    "Times New Roman",
+    "Cinzel",
     serif;
 
-  font-size: 9px;
+  font-size:8px;
 
-  letter-spacing: 5px;
+  letter-spacing:4px;
+
+  color:rgba(145,190,215,.3);
 }
 
 
-/* =========================
-   魔法圆环
-   ========================= */
-
-.magic-circle {
-  position: fixed;
-
-  z-index: 0;
-
-  left: 50%;
-  top: 50%;
-
-  width:
-    min(700px,90vw);
-
-  height:
-    min(700px,90vw);
-
-  border:
-    1px solid rgba(90,175,220,.045);
-
-  border-radius: 50%;
-
-  transform:
-    translate(-50%,-50%);
-
-  pointer-events: none;
-}
-
-.magic-circle::before {
-  content: "";
-
-  position: absolute;
-
-  inset: 7%;
-
-  border:
-    1px solid rgba(110,195,235,.035);
-
-  border-radius: 50%;
-}
-
-
-/* =========================
+/* =========================================================
    平板
-   ========================= */
+========================================================= */
 
-@media (max-width: 850px) {
+@media (max-width:800px){
 
-  .archive-grid {
+  .header{
+    left:35px;
+    right:35px;
+    top:30px;
+  }
+
+  .archive-grid{
     grid-template-columns:
       repeat(2,1fr);
   }
@@ -902,214 +1001,187 @@ body {
 }
 
 
-/* =========================
-   平板顶部位置
-   与首页完全一致
-   ========================= */
-
-@media (max-width: 800px) {
-
-  .header {
-    left: 35px;
-    right: 35px;
-    top: 30px;
-  }
-
-}
-
-
-/* =========================
+/* =========================================================
    手机
-   ========================= */
+========================================================= */
 
-@media (max-width: 600px) {
+@media (max-width:600px){
 
-  .page {
+  .page{
     padding:
-      22px 20px 55px;
+      22px
+      20px
+      55px;
   }
 
-  .frame {
-    top: 14px;
-    left: 14px;
-    right: 14px;
-    bottom: 14px;
+  .frame{
+    top:14px;
+    left:14px;
+    right:14px;
+    bottom:14px;
+  }
+
+  .header{
+    left:25px;
+    right:25px;
+    top:24px;
+
+    width:auto;
+    max-width:none;
+
+    margin:0;
+    padding:0;
+
+    align-items:flex-start;
+  }
+
+  .logo{
+    align-items:flex-start;
+    gap:10px;
+  }
+
+  .logo-symbol{
+    width:15px;
+    height:11px;
+
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+
+    font-size:15px;
+    line-height:11px;
+
+    margin-top:2px;
+  }
+
+  .logo-cn{
+    height:11px;
+    line-height:11px;
+
+    font-size:11px;
+    letter-spacing:2px;
+  }
+
+  .logo-en{
+    display:block;
+
+    margin-top:4px;
+
+    font-size:7px;
+    line-height:7px;
+
+    letter-spacing:2px;
+  }
+
+  .back{
+    font-size:10px;
+  }
+
+  .content{
+    padding-top:120px;
+  }
+
+  .heading{
+    margin-bottom:35px;
+  }
+
+  .heading-small{
+    font-size:8px;
+    letter-spacing:4px;
+  }
+
+  .heading-main{
+    font-size:31px;
+    letter-spacing:5px;
+  }
+
+  .heading-cn{
+    font-size:10px;
+    letter-spacing:3px;
+  }
+
+  .archive-grid{
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+
+  .archive-card{
+    min-height:160px;
+    padding:25px 22px;
+  }
+
+  .card-number{
+    margin-bottom:20px;
+  }
+
+  .card-title{
+    font-size:19px;
+  }
+
+  .magic-circle{
+    width:125vw;
+    height:125vw;
   }
 
 
-  /*
-    顶部位置与首页完全一致
-  */
+  /* 手机星辰稍微缩小 */
 
-  .header {
-    left: 25px;
-    right: 25px;
-    top: 24px;
+  .arcane-star.star-a{font-size:13px;}
+  .arcane-star.star-b{font-size:17px;}
+  .arcane-star.star-c{font-size:15px;}
+  .arcane-star.star-d{font-size:11px;}
+  .arcane-star.star-e{font-size:14px;}
+  .arcane-star.star-f{font-size:13px;}
+  .arcane-star.star-g{font-size:8px;}
+  .arcane-star.star-h{font-size:9px;}
 
-    width: auto;
-
-    max-width: none;
-
-    margin: 0;
-
-    padding: 0;
-
-    align-items: flex-start;
-  }
-
-  .logo {
-    align-items: flex-start;
-
-    gap: 10px;
-  }
-
-  .logo-symbol {
-    width: 15px;
-    height: 11px;
-
-    display: flex;
-
-    align-items: flex-start;
-    justify-content: center;
-
-    font-size: 15px;
-    line-height: 11px;
-
-    margin-top: 2px;
-  }
-
-  .logo-cn {
-    height: 11px;
-
-    line-height: 11px;
-
-    font-size: 11px;
-
-    letter-spacing: 2px;
-  }
-
-  .logo-en {
-    display: block;
-
-    margin-top: 4px;
-
-    font-size: 7px;
-
-    line-height: 7px;
-
-    letter-spacing: 2px;
-  }
-
-  .back {
-    font-size: 10px;
-  }
-
-  .heading {
-    margin:
-      42px auto 38px;
-  }
-
-  .heading-en {
-    font-size:
-      clamp(35px,11vw,55px);
-
-    letter-spacing: 4px;
-  }
-
-  .heading-cn {
-    font-size: 14px;
-
-    letter-spacing: 5px;
-
-    text-indent: 5px;
-  }
-
-  .archive-grid {
-    grid-template-columns: 1fr;
-
-    gap: 15px;
-
-    max-width: 390px;
-  }
-
-  .archive-card {
-    min-height: 190px;
-
-    padding: 28px 20px;
-  }
-
-  .icon {
-    width: 54px;
-    height: 54px;
-
-    margin-bottom: 18px;
-  }
-
-  .card-cn {
-    font-size: 16px;
-  }
-
-  .footer {
-    margin-top: 40px;
-  }
-
-  /* 手机端星辰稍微缩小 */
-  .arcane-star.star-a {
-    font-size: 12px;
-  }
-
-  .arcane-star.star-b {
-    font-size: 16px;
-  }
-
-  .arcane-star.star-c {
-    font-size: 14px;
-  }
-
-  .arcane-star.star-d {
-    font-size: 11px;
-  }
-
-  .arcane-star.star-e {
-    font-size: 14px;
-  }
-
-  .arcane-star.star-f {
-    font-size: 13px;
-  }
-
-  .arcane-star.star-g,
-  .arcane-star.star-h {
-    font-size: 8px;
-  }
+  .arcane-star.star-i{font-size:8px;}
+  .arcane-star.star-j{font-size:10px;}
+  .arcane-star.star-k{font-size:12px;}
+  .arcane-star.star-l{font-size:7px;}
+  .arcane-star.star-m{font-size:11px;}
+  .arcane-star.star-n{font-size:10px;}
+  .arcane-star.star-o{font-size:15px;}
+  .arcane-star.star-p{font-size:8px;}
+  .arcane-star.star-q{font-size:9px;}
+  .arcane-star.star-r{font-size:11px;}
+  .arcane-star.star-s{font-size:12px;}
+  .arcane-star.star-t{font-size:8px;}
 
 }
 
 
-/* =========================
+/* =========================================================
    超小屏
-   与首页完全一致
-   ========================= */
+========================================================= */
 
-@media (max-width: 360px) {
+@media (max-width:360px){
 
-  .header {
-    left: 20px;
-    right: 20px;
-    top: 24px;
+  .header{
+    left:20px;
+    right:20px;
+    top:24px;
+  }
+
+  .heading-main{
+    font-size:27px;
   }
 
 }
 
 
-/* =========================
-   减少动态效果
-   ========================= */
+/* =========================================================
+   减少动画
+========================================================= */
 
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion:reduce){
 
-  .arcane-star {
-    animation: none;
+  .arcane-star{
+    animation:none;
+  }
+
+  .archive-card{
+    transition:none;
   }
 
 }
@@ -1122,49 +1194,54 @@ body {
 
 <div class="page">
 
-  <!-- 原本的小星空 -->
+  <!-- 背景星尘 -->
   <div class="stars"></div>
 
 
-  <!-- =========================
-       ✦ ✶ ✡ 魔法星辰
-       ========================= -->
-
+  <!-- ✦ ✶ ✡ 魔法星辰 -->
   <div class="arcane-stars">
 
     <span class="arcane-star star-a">✦</span>
-
     <span class="arcane-star star-b">✶</span>
-
     <span class="arcane-star star-c">✡</span>
-
     <span class="arcane-star star-d">✦</span>
-
     <span class="arcane-star star-e">✶</span>
-
     <span class="arcane-star star-f">✡</span>
-
     <span class="arcane-star star-g">✦</span>
-
     <span class="arcane-star star-h">✶</span>
+
+    <span class="arcane-star star-i">✦</span>
+    <span class="arcane-star star-j">✦</span>
+    <span class="arcane-star star-k">✶</span>
+    <span class="arcane-star star-l">✦</span>
+    <span class="arcane-star star-m">✡</span>
+    <span class="arcane-star star-n">✦</span>
+    <span class="arcane-star star-o">✶</span>
+    <span class="arcane-star star-p">✦</span>
+    <span class="arcane-star star-q">✦</span>
+    <span class="arcane-star star-r">✡</span>
+    <span class="arcane-star star-s">✶</span>
+    <span class="arcane-star star-t">✦</span>
 
   </div>
 
 
+  <!-- 魔法阵 -->
   <div class="magic-circle"></div>
 
+
+  <!-- 四角框线 -->
   <div class="frame"></div>
 
 
+  <!-- 顶部 -->
   <header class="header">
 
-    <div class="logo">
+    <a href="index.html" class="logo">
 
-      <span class="logo-symbol">
-        ✦
-      </span>
+      <span class="logo-symbol">✦</span>
 
-      <div class="logo-text">
+      <span class="logo-text">
 
         <span class="logo-cn">
           塞垭弥大陆档案馆
@@ -1174,406 +1251,184 @@ body {
           SEYAMI ARCHIVE
         </span>
 
-      </div>
+      </span>
 
-    </div>
+    </a>
 
 
-    <a class="back" href="index.html">
+    <a href="index.html" class="back">
       ← 返回首页
     </a>
 
   </header>
 
 
-  <section class="heading">
-
-    <div class="heading-small">
-      THE ARCHIVE CATALOGUE
-    </div>
-
-    <h1 class="heading-en">
-      ARCHIVE
-    </h1>
-
-    <div class="heading-line"></div>
-
-    <h2 class="heading-cn">
-      档案目录
-    </h2>
-
-  </section>
+  <!-- 主内容 -->
+  <main class="content">
 
 
-  <main class="archive-grid">
+    <section class="heading">
 
-
-    <!-- =====================
-         角色档案
-         ===================== -->
-
-    <a class="archive-card" href="#">
-
-      <svg
-        class="icon"
-        viewBox="0 0 64 64"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-
-        <circle
-          cx="32"
-          cy="21"
-          r="9"
-          stroke="currentColor"
-          stroke-width="1.4"
-        />
-
-        <path
-          d="M16 52C16 41.5 23 35 32 35C41 35 48 41.5 48 52"
-          stroke="currentColor"
-          stroke-width="1.4"
-          stroke-linecap="round"
-        />
-
-        <path
-          d="M11 21H17M47 21H53"
-          stroke="currentColor"
-          stroke-width="1"
-          opacity=".45"
-        />
-
-      </svg>
-
-      <div class="card-en">
-        CHARACTERS
+      <div class="heading-small">
+        THE ARCHIVE CATALOGUE
       </div>
 
-      <div class="card-cn">
-        角色档案
+      <div class="heading-main">
+        ARCHIVE
       </div>
 
-      <div class="card-desc">
-        记录大陆上的人物与故事
+      <div class="heading-cn">
+        档案目录
       </div>
 
-    </a>
-
-
-    <!-- =====================
-         世界设定
-         ===================== -->
-
-    <a class="archive-card" href="#">
-
-      <svg
-        class="icon"
-        viewBox="0 0 64 64"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-
-        <circle
-          cx="32"
-          cy="32"
-          r="21"
-          stroke="currentColor"
-          stroke-width="1.3"
-        />
-
-        <path
-          d="M11 32H53"
-          stroke="currentColor"
-          stroke-width="1"
-          opacity=".6"
-        />
-
-        <path
-          d="M32 11C25 18 23 25 23 32C23 39 25 46 32 53"
-          stroke="currentColor"
-          stroke-width="1"
-        />
-
-        <path
-          d="M32 11C39 18 41 25 41 32C41 39 39 46 32 53"
-          stroke="currentColor"
-          stroke-width="1"
-        />
-
-        <path
-          d="M15 22C21 25 26 26 32 26C38 26 43 25 49 22"
-          stroke="currentColor"
-          stroke-width="1"
-          opacity=".65"
-        />
-
-        <path
-          d="M15 42C21 39 26 38 32 38C38 38 43 39 49 42"
-          stroke="currentColor"
-          stroke-width="1"
-          opacity=".65"
-        />
-
-      </svg>
-
-      <div class="card-en">
-        WORLD
-      </div>
-
-      <div class="card-cn">
-        世界设定
-      </div>
-
-      <div class="card-desc">
-        关于塞垭弥大陆的世界规则
-      </div>
-
-    </a>
-
-
-    <!-- =====================
-         地区档案
-         ===================== -->
-
-    <a class="archive-card" href="#">
-
-      <svg
-        class="icon"
-        viewBox="0 0 64 64"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-
-        <path
-          d="M10 15L24 10L40 15L54 10V49L40 54L24 49L10 54V15Z"
-          stroke="currentColor"
-          stroke-width="1.3"
-          stroke-linejoin="round"
-        />
-
-        <path
-          d="M24 10V49"
-          stroke="currentColor"
-          stroke-width="1"
-          opacity=".7"
-        />
-
-        <path
-          d="M40 15V54"
-          stroke="currentColor"
-          stroke-width="1"
-          opacity=".7"
-        />
-
-        <path
-          d="M30 27C30 24.8 31.8 23 34 23C36.2 23 38 24.8 38 27C38 30.5 34 35 34 35C34 35 30 30.5 30 27Z"
-          stroke="currentColor"
-          stroke-width="1"
-        />
-
-        <circle
-          cx="34"
-          cy="27"
-          r="1.2"
-          fill="currentColor"
-        />
-
-      </svg>
-
-      <div class="card-en">
-        REGIONS
-      </div>
-
-      <div class="card-cn">
-        地区档案
-      </div>
-
-      <div class="card-desc">
-        山川、城市与未知之地
-      </div>
-
-    </a>
-
-
-    <!-- =====================
-         种族档案
-         ===================== -->
-
-    <a class="archive-card" href="#">
-
-      <svg
-        class="icon"
-        viewBox="0 0 64 64"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-
-        <path
-          d="M32 11L36 25L50 20L42 33L53 40L38 42L40 55L32 45L24 55L26 42L11 40L22 33L14 20L28 25L32 11Z"
-          stroke="currentColor"
-          stroke-width="1.2"
-          stroke-linejoin="round"
-        />
-
-        <circle
-          cx="32"
-          cy="33"
-          r="5"
-          stroke="currentColor"
-          stroke-width="1"
-        />
-
-      </svg>
-
-      <div class="card-en">
-        RACES
-      </div>
-
-      <div class="card-cn">
-        种族档案
-      </div>
-
-      <div class="card-desc">
-        记录大陆上的各类族群
-      </div>
-
-    </a>
-
-
-    <!-- =====================
-         历史记录
-         ===================== -->
-
-    <a class="archive-card" href="#">
-
-      <svg
-        class="icon"
-        viewBox="0 0 64 64"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-
-        <path
-          d="M18 13H46V51H18C14.7 51 12 48.3 12 45C12 41.7 14.7 39 18 39H46"
-          stroke="currentColor"
-          stroke-width="1.4"
-          stroke-linejoin="round"
-        />
-
-        <path
-          d="M18 13C14.7 13 12 15.7 12 19C12 22.3 14.7 25 18 25H46"
-          stroke="currentColor"
-          stroke-width="1.4"
-          stroke-linecap="round"
-        />
-
-        <path
-          d="M18 39C14.7 39 12 41.7 12 45C12 48.3 14.7 51 18 51"
-          stroke="currentColor"
-          stroke-width="1.4"
-          stroke-linecap="round"
-        />
-
-        <path
-          d="M25 31H39"
-          stroke="currentColor"
-          stroke-width="1"
-          stroke-linecap="round"
-          opacity=".7"
-        />
-
-        <path
-          d="M25 35H36"
-          stroke="currentColor"
-          stroke-width="1"
-          stroke-linecap="round"
-          opacity=".5"
-        />
-
-        <path
-          d="M49 16L50 18L52 19L50 20L49 22L48 20L46 19L48 18L49 16Z"
-          fill="currentColor"
-          opacity=".8"
-        />
-
-      </svg>
-
-      <div class="card-en">
-        HISTORY
-      </div>
-
-      <div class="card-cn">
-        历史记录
-      </div>
-
-      <div class="card-desc">
-        这片大陆曾经发生过什么
-      </div>
-
-    </a>
-
-
-    <!-- =====================
-         档案画廊
-         ===================== -->
-
-    <a class="archive-card" href="#">
-
-      <svg
-        class="icon"
-        viewBox="0 0 64 64"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-
-        <rect
-          x="11"
-          y="14"
-          width="42"
-          height="36"
-          rx="1"
-          stroke="currentColor"
-          stroke-width="1.3"
-        />
-
-        <circle
-          cx="23"
-          cy="25"
-          r="4"
-          stroke="currentColor"
-          stroke-width="1"
-        />
-
-        <path
-          d="M14 45L27 33L35 40L41 34L50 45"
-          stroke="currentColor"
-          stroke-width="1.2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-
-      </svg>
-
-      <div class="card-en">
-        GALLERY
-      </div>
-
-      <div class="card-cn">
-        档案画廊
-      </div>
-
-      <div class="card-desc">
-        保存那些值得被看见的画面
-      </div>
-
-    </a>
+    </section>
+
+
+    <!-- 档案目录 -->
+    <section class="archive-grid">
+
+
+      <!-- 01 -->
+      <a href="#" class="archive-card">
+
+        <span class="card-number">
+          01
+        </span>
+
+        <span class="card-symbol">
+          ✦
+        </span>
+
+        <div class="card-title">
+          CHARACTERS
+        </div>
+
+        <div class="card-cn">
+          角色档案
+        </div>
+
+      </a>
+
+
+      <!-- 02 -->
+      <a href="#" class="archive-card">
+
+        <span class="card-number">
+          02
+        </span>
+
+        <span class="card-symbol">
+          ✶
+        </span>
+
+        <div class="card-title">
+          WORLD
+        </div>
+
+        <div class="card-cn">
+          世界设定
+        </div>
+
+      </a>
+
+
+      <!-- 03 -->
+      <a href="#" class="archive-card">
+
+        <span class="card-number">
+          03
+        </span>
+
+        <span class="card-symbol">
+          ✡
+        </span>
+
+        <div class="card-title">
+          REGIONS
+        </div>
+
+        <div class="card-cn">
+          地区档案
+        </div>
+
+      </a>
+
+
+      <!-- 04 -->
+      <a href="#" class="archive-card">
+
+        <span class="card-number">
+          04
+        </span>
+
+        <span class="card-symbol">
+          ✦
+        </span>
+
+        <div class="card-title">
+          RACES
+        </div>
+
+        <div class="card-cn">
+          种族档案
+        </div>
+
+      </a>
+
+
+      <!-- 05 -->
+      <a href="#" class="archive-card">
+
+        <span class="card-number">
+          05
+        </span>
+
+        <span class="card-symbol">
+          ✶
+        </span>
+
+        <div class="card-title">
+          HISTORY
+        </div>
+
+        <div class="card-cn">
+          历史记录
+        </div>
+
+      </a>
+
+
+      <!-- 06 -->
+      <a href="#" class="archive-card">
+
+        <span class="card-number">
+          06
+        </span>
+
+        <span class="card-symbol">
+          ✡
+        </span>
+
+        <div class="card-title">
+          GALLERY
+        </div>
+
+        <div class="card-cn">
+          档案画廊
+        </div>
+
+      </a>
+
+
+    </section>
+
+
+    <footer class="footer">
+      SEYAMI CONTINENT · ARCHIVE SYSTEM
+    </footer>
+
 
   </main>
-
-
-  <footer class="footer">
-    ✦　THE ARCHIVES OF SEYAMI　✦
-  </footer>
 
 </div>
 
