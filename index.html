@@ -803,7 +803,6 @@ body{
     font-size:16px;
     text-shadow:0 0 9px rgba(67,158,215,.45);
 
-    /* 让按钮两侧的 ✡ 显示在按钮上层，不再被遮住 */
     z-index:3;
 }
 
@@ -1026,13 +1025,31 @@ body{
 
 
     /* ==========================================
-       手机端：整个按钮框 + 内容一起缩短
+       手机端：整个按钮框 + 模糊层 + 内容一起缩短
        ========================================== */
 
     .enter-wrap{
         width:285px;
         height:76px;
         margin-top:35px;
+    }
+
+    /*
+       模糊/半透明外层也一起缩短。
+       原本跟随 enter-wrap 的 285px，
+       现在再向内收 10px。
+    */
+    .enter-wrap::before{
+        left:10px;
+        right:10px;
+    }
+
+    /*
+       内侧模糊边框也跟着缩短
+    */
+    .enter-wrap::after{
+        left:21px;
+        right:21px;
     }
 
     .enter-button{
