@@ -83,6 +83,7 @@ body{
 
 /* =========================================================
    背景星空
+   ★ 本次：去掉背景星星的发光
 ========================================================= */
 
 .stars{
@@ -95,7 +96,6 @@ body{
 
 .stars::before,
 .stars::after{
-
     content:"";
 
     position:absolute;
@@ -137,18 +137,17 @@ body{
         infinite;
 
     transition:
-        opacity 1s ease,
-        filter 1s ease;
+        opacity 1s ease;
 }
 
 .stars::after{
-
     opacity:.22;
 
     transform:scale(1.15);
 
     animation-duration:50s;
 }
+
 
 @keyframes starMove{
 
@@ -165,28 +164,30 @@ body{
 
 /* =========================================================
    浮动星星
+   ★ 本次：去掉 text-shadow 光晕
 ========================================================= */
 
 .floating-stars{
     position:absolute;
+
     inset:0;
 
     pointer-events:none;
+
     z-index:2;
 }
 
 .floating-stars span{
-
     position:absolute;
 
     color:rgba(158,207,247,.62);
 
     font-family:serif;
+
     font-size:14px;
 
-    text-shadow:
-        0 0 8px
-        rgba(96,177,242,.5);
+    /* 去掉发光 */
+    text-shadow:none;
 
     animation:
         floatStar
@@ -195,8 +196,7 @@ body{
         infinite;
 
     transition:
-        color 1s ease,
-        text-shadow 1s ease;
+        color 1s ease;
 }
 
 
@@ -405,8 +405,8 @@ body{
 ========================================================= */
 
 .frame{
-
     position:absolute;
+
     inset:18px;
 
     border:
@@ -414,6 +414,7 @@ body{
         rgba(111,174,224,.32);
 
     pointer-events:none;
+
     z-index:10;
 
     transition:
@@ -421,10 +422,10 @@ body{
 }
 
 .frame::before{
-
     content:"";
 
     position:absolute;
+
     inset:7px;
 
     border:
@@ -438,10 +439,10 @@ body{
 
 /* =========================================================
    四角六芒星
+   ★ 本次：去掉 text-shadow
 ========================================================= */
 
 .corner{
-
     position:absolute;
 
     width:68px;
@@ -456,7 +457,6 @@ body{
 }
 
 .corner::before{
-
     content:"✡";
 
     display:block;
@@ -473,16 +473,11 @@ body{
     color:
         rgba(108,178,230,.88);
 
-    text-shadow:
-        0 0 5px
-        rgba(67,153,218,.5),
-
-        0 0 13px
-        rgba(43,124,190,.28);
+    /* 去掉发光 */
+    text-shadow:none;
 
     transition:
-        color 1s ease,
-        text-shadow 1s ease;
+        color 1s ease;
 }
 
 .corner.tl{
@@ -511,7 +506,6 @@ body{
 ========================================================= */
 
 .top-nav{
-
     position:absolute;
 
     left:58px;
@@ -519,7 +513,6 @@ body{
     top:38px;
 
     display:flex;
-
     align-items:flex-start;
     justify-content:space-between;
 
@@ -527,9 +520,7 @@ body{
 }
 
 .logo{
-
     display:flex;
-
     align-items:baseline;
 
     gap:10px;
@@ -543,7 +534,6 @@ body{
 }
 
 .logo-mark{
-
     width:auto;
     height:auto;
 
@@ -567,11 +557,8 @@ body{
     top:1px;
 
     text-shadow:
-        0 0 7px
-        rgba(76,159,216,.5),
-
-        0 0 15px
-        rgba(49,132,191,.22);
+        0 0 7px rgba(76,159,216,.5),
+        0 0 15px rgba(49,132,191,.22);
 
     transition:
         color 1s ease,
@@ -579,16 +566,13 @@ body{
 }
 
 .logo-text{
-
     display:flex;
-
     flex-direction:column;
 
     line-height:1.05;
 }
 
 .logo-cn{
-
     font-family:
         "Noto Serif SC",
         serif;
@@ -600,7 +584,6 @@ body{
 }
 
 .logo-en{
-
     margin-top:5px;
 
     font-family:
@@ -624,16 +607,13 @@ body{
 ========================================================= */
 
 .nav-links{
-
     display:flex;
-
     align-items:center;
 
     gap:31px;
 }
 
 .nav-links a{
-
     position:relative;
 
     color:
@@ -655,7 +635,6 @@ body{
 }
 
 .nav-links a::after{
-
     content:"";
 
     position:absolute;
@@ -677,7 +656,6 @@ body{
 }
 
 .nav-links a:hover{
-
     color:#d9efff;
 
     text-shadow:
@@ -729,6 +707,7 @@ body{
     display:flex;
 
     align-items:center;
+
     justify-content:center;
 
     gap:7px;
@@ -767,14 +746,12 @@ body{
 ========================================================= */
 
 .main{
-
     position:relative;
 
     width:100%;
     min-height:100vh;
 
     display:flex;
-
     flex-direction:column;
 
     align-items:center;
@@ -794,7 +771,6 @@ body{
 ========================================================= */
 
 .magic-circle{
-
     position:absolute;
 
     width:560px;
@@ -817,11 +793,9 @@ body{
 }
 
 .magic-circle::before{
-
     content:"";
 
     position:absolute;
-
     inset:0;
 
     border-radius:50%;
@@ -846,7 +820,6 @@ body{
 }
 
 .magic-circle::after{
-
     content:"";
 
     position:absolute;
@@ -905,7 +878,6 @@ body{
 ========================================================= */
 
 .orbit-system{
-
     position:absolute;
 
     inset:0;
@@ -917,7 +889,6 @@ body{
 }
 
 .orbit-track{
-
     fill:none;
 
     stroke:
@@ -945,7 +916,6 @@ body{
 ========================================================= */
 
 #travellingStar{
-
     font-family:
         "Times New Roman",
         serif;
@@ -977,7 +947,6 @@ body{
 }
 
 .star-glow{
-
     fill:
         rgba(143,210,246,.08);
 
@@ -995,7 +964,6 @@ body{
 ========================================================= */
 
 .magic-line{
-
     position:absolute;
 
     left:50%;
@@ -1027,7 +995,6 @@ body{
 ========================================================= */
 
 .magic-center{
-
     position:absolute;
 
     left:50%;
@@ -1055,7 +1022,6 @@ body{
 }
 
 .magic-center::before{
-
     content:"";
 
     position:absolute;
@@ -1089,7 +1055,6 @@ body{
 ========================================================= */
 
 .title-area{
-
     position:relative;
 
     text-align:center;
@@ -1174,6 +1139,7 @@ body{
 
 /* =========================================================
    标题装饰
+   ★ 保留标题下方的发光
 ========================================================= */
 
 .title-decoration{
@@ -1181,6 +1147,7 @@ body{
     display:flex;
 
     align-items:center;
+
     justify-content:center;
 
     gap:15px;
@@ -1312,6 +1279,7 @@ body{
     display:flex;
 
     align-items:center;
+
     justify-content:center;
 }
 
@@ -1549,16 +1517,14 @@ body{
 
 
 /* =========================================================
-   =========================================================
-   ❄️ ICE BLUE DAY MODE
-   =========================================================
+   ☀️ DAY MODE
 ========================================================= */
 
 body.day-mode{
 
-    background:#eef5fa;
+    background:#edf4f7;
 
-    color:#263f55;
+    color:#253c50;
 }
 
 body.day-mode .page{
@@ -1566,15 +1532,15 @@ body.day-mode .page{
     background:
         radial-gradient(
             circle at 50% 42%,
-            rgba(157,198,229,.27),
+            rgba(154,198,219,.28),
             transparent 38%
         ),
         radial-gradient(
             circle at 50% 52%,
-            rgba(218,232,243,.78),
+            rgba(213,229,235,.75),
             transparent 72%
         ),
-        #eef5fa;
+        #edf4f7;
 }
 
 
@@ -1586,26 +1552,23 @@ body.day-mode .stars::before,
 body.day-mode .stars::after{
 
     background-image:
-
         radial-gradient(
             circle,
-            rgba(69,119,165,.42) 0 1px,
+            rgba(77,127,158,.42) 0 1px,
             transparent 1.5px
         ),
-
         radial-gradient(
             circle,
-            rgba(91,143,190,.28) 0 1px,
+            rgba(104,154,181,.28) 0 1px,
             transparent 1.5px
         ),
-
         radial-gradient(
             circle,
-            rgba(61,108,151,.18) 0 1px,
+            rgba(56,107,139,.20) 0 1px,
             transparent 1.5px
         );
 
-    opacity:.30;
+    opacity:.3;
 
     filter:none;
 }
@@ -1617,16 +1580,15 @@ body.day-mode .stars::after{
 
 /* =========================================================
    日间浮动星星
+   ★ 不加光晕
 ========================================================= */
 
 body.day-mode .floating-stars span{
 
     color:
-        rgba(70,121,166,.55);
+        rgba(70,126,158,.52);
 
-    text-shadow:
-        0 0 7px
-        rgba(128,178,215,.38);
+    text-shadow:none;
 }
 
 
@@ -1637,31 +1599,27 @@ body.day-mode .floating-stars span{
 body.day-mode .frame{
 
     border-color:
-        rgba(73,116,155,.35);
+        rgba(75,119,145,.35);
 }
 
 body.day-mode .frame::before{
 
     border-color:
-        rgba(73,116,155,.12);
+        rgba(75,119,145,.12);
 }
 
 
 /* =========================================================
    日间六芒星
+   ★ 不加光晕
 ========================================================= */
 
 body.day-mode .corner::before{
 
     color:
-        rgba(68,112,153,.70);
+        rgba(72,119,145,.68);
 
-    text-shadow:
-        0 0 5px
-        rgba(91,145,190,.24),
-
-        0 0 12px
-        rgba(87,142,187,.13);
+    text-shadow:none;
 }
 
 
@@ -1671,23 +1629,23 @@ body.day-mode .corner::before{
 
 body.day-mode .logo{
 
-    color:#304b63;
+    color:#314b5e;
 }
 
 body.day-mode .logo-mark{
 
     color:
-        rgba(70,119,164,.84);
+        rgba(74,126,151,.82);
 
     text-shadow:
         0 0 7px
-        rgba(82,142,192,.27);
+        rgba(88,151,177,.25);
 }
 
 body.day-mode .logo-en{
 
     color:
-        rgba(73,117,153,.64);
+        rgba(76,119,141,.62);
 }
 
 
@@ -1698,22 +1656,22 @@ body.day-mode .logo-en{
 body.day-mode .nav-links a{
 
     color:
-        rgba(61,91,116,.74);
+        rgba(63,91,108,.72);
 }
 
 body.day-mode .nav-links a:hover{
 
-    color:#284962;
+    color:#29485c;
 
     text-shadow:
         0 0 8px
-        rgba(76,128,173,.20);
+        rgba(81,135,158,.18);
 }
 
 body.day-mode .nav-links a::after{
 
     background:
-        rgba(73,128,174,.58);
+        rgba(78,137,163,.55);
 }
 
 
@@ -1724,26 +1682,26 @@ body.day-mode .nav-links a::after{
 body.day-mode .theme-toggle{
 
     border-color:
-        rgba(72,116,155,.36);
+        rgba(75,119,145,.35);
 
     background:
-        rgba(239,247,252,.62);
+        rgba(239,247,249,.58);
 
     color:
-        rgba(55,87,112,.80);
+        rgba(57,89,106,.78);
 }
 
 body.day-mode .theme-toggle:hover{
 
     border-color:
-        rgba(67,123,170,.64);
+        rgba(72,130,157,.62);
 
     color:
-        #284960;
+        #29485b;
 
     box-shadow:
         0 0 14px
-        rgba(76,132,177,.16);
+        rgba(83,143,167,.15);
 }
 
 
@@ -1759,22 +1717,22 @@ body.day-mode .magic-circle{
 body.day-mode .magic-circle::before{
 
     border-color:
-        rgba(68,125,171,.25);
+        rgba(70,130,158,.24);
 
     box-shadow:
         0 0 22px
-        rgba(65,127,174,.075);
+        rgba(69,135,163,.07);
 }
 
 body.day-mode .magic-circle::after{
 
     border-color:
-        rgba(82,139,181,.21);
+        rgba(86,145,169,.20);
 
     box-shadow:
         inset
         0 0 20px
-        rgba(76,134,178,.04);
+        rgba(80,141,166,.035);
 }
 
 
@@ -1785,12 +1743,12 @@ body.day-mode .magic-circle::after{
 body.day-mode .orbit-track{
 
     stroke:
-        rgba(62,126,179,.27);
+        rgba(65,126,154,.25);
 
     filter:
         drop-shadow(
             0 0 4px
-            rgba(65,129,178,.09)
+            rgba(70,130,155,.08)
         );
 }
 
@@ -1802,23 +1760,23 @@ body.day-mode .orbit-track{
 body.day-mode #travellingStar{
 
     fill:
-        rgba(67,124,174,.86);
+        rgba(72,129,156,.82);
 
     filter:
         drop-shadow(
             0 0 3px
-            rgba(106,164,208,.50)
+            rgba(112,176,198,.45)
         )
         drop-shadow(
             0 0 8px
-            rgba(89,151,199,.28)
+            rgba(99,164,188,.25)
         );
 }
 
 body.day-mode .star-glow{
 
     fill:
-        rgba(99,166,210,.09);
+        rgba(104,175,197,.08);
 }
 
 
@@ -1829,7 +1787,7 @@ body.day-mode .star-glow{
 body.day-mode .magic-line{
 
     background:
-        rgba(69,125,171,.13);
+        rgba(74,130,156,.12);
 }
 
 
@@ -1840,21 +1798,21 @@ body.day-mode .magic-line{
 body.day-mode .magic-center{
 
     border-color:
-        rgba(72,130,177,.42);
+        rgba(77,137,163,.40);
 
     box-shadow:
         0 0 10px
-        rgba(83,143,192,.19);
+        rgba(89,151,176,.17);
 }
 
 body.day-mode .magic-center::before{
 
     background:
-        rgba(82,143,190,.60);
+        rgba(92,151,174,.58);
 
     box-shadow:
         0 0 8px
-        rgba(91,153,201,.48);
+        rgba(95,160,184,.45);
 }
 
 
@@ -1865,11 +1823,11 @@ body.day-mode .magic-center::before{
 body.day-mode .main-title{
 
     color:
-        #294b64;
+        #29465a;
 
     text-shadow:
         0 0 18px
-        rgba(78,132,177,.09);
+        rgba(82,135,158,.08);
 }
 
 body.day-mode .title-decoration .line{
@@ -1878,7 +1836,7 @@ body.day-mode .title-decoration .line{
         linear-gradient(
             90deg,
             transparent,
-            rgba(73,128,174,.53)
+            rgba(79,137,161,.50)
         );
 }
 
@@ -1887,7 +1845,7 @@ body.day-mode .title-decoration .line.right{
     background:
         linear-gradient(
             90deg,
-            rgba(73,128,174,.53),
+            rgba(79,137,161,.50),
             transparent
         );
 }
@@ -1895,19 +1853,19 @@ body.day-mode .title-decoration .line.right{
 body.day-mode .title-decoration .diamond{
 
     border-color:
-        rgba(76,133,179,.68);
+        rgba(82,139,163,.65);
 }
 
 body.day-mode .chinese-title{
 
     color:
-        rgba(45,75,99,.80);
+        rgba(48,76,92,.78);
 }
 
 body.day-mode .description{
 
     color:
-        rgba(66,99,126,.67);
+        rgba(69,101,118,.65);
 }
 
 
@@ -1918,40 +1876,40 @@ body.day-mode .description{
 body.day-mode .enter-wrap::before{
 
     border-color:
-        rgba(72,128,173,.37);
+        rgba(78,133,158,.35);
 
     background:
-        rgba(229,239,247,.60);
+        rgba(231,241,245,.56);
 
     box-shadow:
         0 0 22px
-        rgba(69,126,171,.08);
+        rgba(73,129,153,.07);
 }
 
 body.day-mode .enter-wrap::after{
 
     border-color:
-        rgba(73,129,175,.17);
+        rgba(79,135,159,.16);
 }
 
 body.day-mode .enter-button{
 
     color:
-        #35566e;
+        #38586b;
 
     background:
         linear-gradient(
             90deg,
-            rgba(221,233,243,.92),
-            rgba(239,247,251,.98),
-            rgba(221,233,243,.92)
+            rgba(222,235,240,.90),
+            rgba(237,246,248,.96),
+            rgba(222,235,240,.90)
         );
 
     border-top-color:
-        rgba(72,129,176,.40);
+        rgba(78,136,161,.38);
 
     border-bottom-color:
-        rgba(72,129,176,.40);
+        rgba(78,136,161,.38);
 }
 
 body.day-mode .enter-button:hover{
@@ -1959,33 +1917,33 @@ body.day-mode .enter-button:hover{
     background:
         linear-gradient(
             90deg,
-            rgba(213,228,240,.97),
-            rgba(237,247,251,1),
-            rgba(213,228,240,.97)
+            rgba(214,230,236,.96),
+            rgba(235,245,248,1),
+            rgba(214,230,236,.96)
         );
 
     box-shadow:
         0 0 22px
-        rgba(72,130,176,.17);
+        rgba(76,135,159,.16);
 }
 
 body.day-mode .enter-star{
 
     color:
-        rgba(70,125,171,.70);
+        rgba(76,133,158,.66);
 
     text-shadow:
         0 0 9px
-        rgba(79,139,187,.30);
+        rgba(82,143,167,.28);
 }
 
 body.day-mode .enter-diamond{
 
     border-color:
-        rgba(73,130,176,.60);
+        rgba(78,136,160,.58);
 
     background:
-        #eef5fa;
+        #edf4f7;
 }
 
 
@@ -1996,7 +1954,7 @@ body.day-mode .enter-diamond{
 body.day-mode .footer{
 
     color:
-        rgba(73,108,132,.42);
+        rgba(77,111,126,.40);
 }
 
 
@@ -2718,6 +2676,7 @@ body.day-mode .footer{
             "themeText"
         );
 
+
     if(
         !toggle ||
         !icon ||
@@ -2733,6 +2692,7 @@ body.day-mode .footer{
             document.body.classList.contains(
                 "day-mode"
             );
+
 
         if(isDay){
 
@@ -2778,12 +2738,14 @@ body.day-mode .footer{
                     "day-mode"
                 );
 
+
             localStorage.setItem(
                 "seyami-theme",
                 isDay
                     ? "day"
                     : "night"
             );
+
 
             updateButton();
 
@@ -2890,7 +2852,9 @@ body.day-mode .footer{
         if(
             angle < 0
         ){
+
             angle += 360;
+
         }
 
         return angle;
