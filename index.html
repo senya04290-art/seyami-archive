@@ -734,7 +734,7 @@ body{
 
 /* =========================================================
    ★ 星轨
-   ★ 仅增强线条可见度
+   ★ 只修改这里：让第一帧直接错开
 ========================================================= */
 
 .orbit{
@@ -756,12 +756,6 @@ body{
 
     transform:
         translate(-50%,-50%);
-
-    animation:
-        orbitRotate
-        38s
-        linear
-        infinite;
 }
 
 
@@ -771,6 +765,12 @@ body{
 
     width:500px;
     height:190px;
+
+    animation:
+        orbitRotateOne
+        38s
+        linear
+        infinite;
 }
 
 
@@ -781,11 +781,14 @@ body{
     width:420px;
     height:145px;
 
+    animation:
+        orbitRotateTwo
+        32s
+        linear
+        infinite;
+
     animation-direction:
         reverse;
-
-    animation-duration:
-        32s;
 }
 
 
@@ -796,14 +799,18 @@ body{
     width:330px;
     height:105px;
 
-    animation-duration:
-        25s;
+    animation:
+        orbitRotateThree
+        25s
+        linear
+        infinite;
 }
 
 
-/* 星轨运行 */
+/* 第一条星轨
+   第一帧：0° */
 
-@keyframes orbitRotate{
+@keyframes orbitRotateOne{
 
     from{
 
@@ -817,6 +824,49 @@ body{
         transform:
             translate(-50%,-50%)
             rotate(360deg);
+    }
+}
+
+
+/* 第二条星轨
+   第一帧：55°
+   保持原来的反方向运行 */
+
+@keyframes orbitRotateTwo{
+
+    from{
+
+        transform:
+            translate(-50%,-50%)
+            rotate(55deg);
+    }
+
+    to{
+
+        transform:
+            translate(-50%,-50%)
+            rotate(415deg);
+    }
+}
+
+
+/* 第三条星轨
+   第一帧：110° */
+
+@keyframes orbitRotateThree{
+
+    from{
+
+        transform:
+            translate(-50%,-50%)
+            rotate(110deg);
+    }
+
+    to{
+
+        transform:
+            translate(-50%,-50%)
+            rotate(470deg);
     }
 }
 
