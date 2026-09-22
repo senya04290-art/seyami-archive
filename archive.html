@@ -161,9 +161,13 @@ body {
    ========================= */
 
 .header {
-  position: relative;
+  position: absolute;
 
-  z-index: 5;
+  left: 58px;
+  right: 58px;
+  top: 38px;
+
+  z-index: 20;
 
   display: flex;
 
@@ -171,20 +175,13 @@ body {
 
   justify-content: space-between;
 
-  /*
-    PC端取消原来的 max-width 居中限制
-    让左右两个元素真正靠近页面左右上角
-  */
-
-  width: calc(100% + 120px);
+  width: auto;
 
   max-width: none;
 
-  margin-left: -60px;
+  margin: 0;
 
-  margin-right: -60px;
-
-  padding: 0 10px 35px;
+  padding: 0;
 }
 
 
@@ -657,6 +654,22 @@ body {
 
 
 /* =========================
+   平板顶部位置
+   与首页完全一致
+   ========================= */
+
+@media (max-width: 800px) {
+
+  .header {
+    left: 35px;
+    right: 35px;
+    top: 30px;
+  }
+
+}
+
+
+/* =========================
    手机
    ========================= */
 
@@ -676,18 +689,21 @@ body {
 
 
   /*
-    手机端恢复原来的顶部布局
-    不跟着 PC 端的位置修改走
+    顶部位置与首页完全一致
   */
 
   .header {
+    left: 25px;
+    right: 25px;
+    top: 24px;
+
     width: auto;
 
     max-width: none;
 
     margin: 0;
 
-    padding-top: 5px;
+    padding: 0;
 
     align-items: flex-start;
   }
@@ -786,6 +802,22 @@ body {
 
   .footer {
     margin-top: 40px;
+  }
+
+}
+
+
+/* =========================
+   超小屏
+   与首页完全一致
+   ========================= */
+
+@media (max-width: 360px) {
+
+  .header {
+    left: 20px;
+    right: 20px;
+    top: 24px;
   }
 
 }
