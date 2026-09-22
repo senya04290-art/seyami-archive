@@ -11,7 +11,7 @@ content="width=device-width, initial-scale=1.0">
       href="https://fonts.googleapis.com">
 
 <link rel="preconnect"
-      href="https://fonts.gstatic.com"
+      href="https://fonts.googleapis.com"
       crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500&display=swap"
@@ -83,7 +83,6 @@ body{
 
 /* =========================================================
    背景星空
-   ★ 本次：去掉背景星星的发光
 ========================================================= */
 
 .stars{
@@ -164,7 +163,6 @@ body{
 
 /* =========================================================
    浮动星星
-   ★ 本次：去掉 text-shadow 光晕
 ========================================================= */
 
 .floating-stars{
@@ -186,7 +184,6 @@ body{
 
     font-size:14px;
 
-    /* 去掉发光 */
     text-shadow:none;
 
     animation:
@@ -439,7 +436,6 @@ body{
 
 /* =========================================================
    四角六芒星
-   ★ 本次：去掉 text-shadow
 ========================================================= */
 
 .corner{
@@ -473,7 +469,6 @@ body{
     color:
         rgba(108,178,230,.88);
 
-    /* 去掉发光 */
     text-shadow:none;
 
     transition:
@@ -1139,7 +1134,6 @@ body{
 
 /* =========================================================
    标题装饰
-   ★ 保留标题下方的发光
 ========================================================= */
 
 .title-decoration{
@@ -1518,13 +1512,14 @@ body{
 
 /* =========================================================
    ☀️ DAY MODE
+   冷调冰蓝版
 ========================================================= */
 
 body.day-mode{
 
-    background:#edf4f7;
+    background:#edf5fa;
 
-    color:#253c50;
+    color:#29465b;
 }
 
 body.day-mode .page{
@@ -1532,15 +1527,15 @@ body.day-mode .page{
     background:
         radial-gradient(
             circle at 50% 42%,
-            rgba(154,198,219,.28),
+            rgba(130,190,224,.24),
             transparent 38%
         ),
         radial-gradient(
             circle at 50% 52%,
-            rgba(213,229,235,.75),
+            rgba(214,232,243,.78),
             transparent 72%
         ),
-        #edf4f7;
+        #edf5fa;
 }
 
 
@@ -1554,17 +1549,17 @@ body.day-mode .stars::after{
     background-image:
         radial-gradient(
             circle,
-            rgba(77,127,158,.42) 0 1px,
+            rgba(93,155,194,.46) 0 1px,
             transparent 1.5px
         ),
         radial-gradient(
             circle,
-            rgba(104,154,181,.28) 0 1px,
+            rgba(126,181,214,.30) 0 1px,
             transparent 1.5px
         ),
         radial-gradient(
             circle,
-            rgba(56,107,139,.20) 0 1px,
+            rgba(77,140,180,.22) 0 1px,
             transparent 1.5px
         );
 
@@ -1580,13 +1575,12 @@ body.day-mode .stars::after{
 
 /* =========================================================
    日间浮动星星
-   ★ 不加光晕
 ========================================================= */
 
 body.day-mode .floating-stars span{
 
     color:
-        rgba(70,126,158,.52);
+        rgba(78,145,188,.58);
 
     text-shadow:none;
 }
@@ -1599,25 +1593,24 @@ body.day-mode .floating-stars span{
 body.day-mode .frame{
 
     border-color:
-        rgba(75,119,145,.35);
+        rgba(78,137,174,.38);
 }
 
 body.day-mode .frame::before{
 
     border-color:
-        rgba(75,119,145,.12);
+        rgba(91,150,184,.13);
 }
 
 
 /* =========================================================
    日间六芒星
-   ★ 不加光晕
 ========================================================= */
 
 body.day-mode .corner::before{
 
     color:
-        rgba(72,119,145,.68);
+        rgba(69,132,172,.72);
 
     text-shadow:none;
 }
@@ -1629,23 +1622,23 @@ body.day-mode .corner::before{
 
 body.day-mode .logo{
 
-    color:#314b5e;
+    color:#2d4d63;
 }
 
 body.day-mode .logo-mark{
 
     color:
-        rgba(74,126,151,.82);
+        rgba(66,139,181,.86);
 
     text-shadow:
         0 0 7px
-        rgba(88,151,177,.25);
+        rgba(75,148,190,.22);
 }
 
 body.day-mode .logo-en{
 
     color:
-        rgba(76,119,141,.62);
+        rgba(69,125,158,.66);
 }
 
 
@@ -1656,22 +1649,22 @@ body.day-mode .logo-en{
 body.day-mode .nav-links a{
 
     color:
-        rgba(63,91,108,.72);
+        rgba(57,91,113,.74);
 }
 
 body.day-mode .nav-links a:hover{
 
-    color:#29485c;
+    color:#254b65;
 
     text-shadow:
         0 0 8px
-        rgba(81,135,158,.18);
+        rgba(72,140,180,.16);
 }
 
 body.day-mode .nav-links a::after{
 
     background:
-        rgba(78,137,163,.55);
+        rgba(70,143,183,.58);
 }
 
 
@@ -1682,26 +1675,26 @@ body.day-mode .nav-links a::after{
 body.day-mode .theme-toggle{
 
     border-color:
-        rgba(75,119,145,.35);
+        rgba(78,137,174,.38);
 
     background:
-        rgba(239,247,249,.58);
+        rgba(241,248,252,.62);
 
     color:
-        rgba(57,89,106,.78);
+        rgba(55,91,113,.80);
 }
 
 body.day-mode .theme-toggle:hover{
 
     border-color:
-        rgba(72,130,157,.62);
+        rgba(67,143,184,.65);
 
     color:
-        #29485b;
+        #254b65;
 
     box-shadow:
         0 0 14px
-        rgba(83,143,167,.15);
+        rgba(65,143,188,.13);
 }
 
 
@@ -1717,22 +1710,22 @@ body.day-mode .magic-circle{
 body.day-mode .magic-circle::before{
 
     border-color:
-        rgba(70,130,158,.24);
+        rgba(67,137,180,.27);
 
     box-shadow:
         0 0 22px
-        rgba(69,135,163,.07);
+        rgba(60,133,181,.07);
 }
 
 body.day-mode .magic-circle::after{
 
     border-color:
-        rgba(86,145,169,.20);
+        rgba(82,151,193,.22);
 
     box-shadow:
         inset
         0 0 20px
-        rgba(80,141,166,.035);
+        rgba(70,140,184,.035);
 }
 
 
@@ -1743,12 +1736,12 @@ body.day-mode .magic-circle::after{
 body.day-mode .orbit-track{
 
     stroke:
-        rgba(65,126,154,.25);
+        rgba(61,139,184,.29);
 
     filter:
         drop-shadow(
             0 0 4px
-            rgba(70,130,155,.08)
+            rgba(62,139,184,.08)
         );
 }
 
@@ -1760,23 +1753,23 @@ body.day-mode .orbit-track{
 body.day-mode #travellingStar{
 
     fill:
-        rgba(72,129,156,.82);
+        rgba(61,137,183,.88);
 
     filter:
         drop-shadow(
             0 0 3px
-            rgba(112,176,198,.45)
+            rgba(103,180,215,.42)
         )
         drop-shadow(
             0 0 8px
-            rgba(99,164,188,.25)
+            rgba(76,157,202,.22)
         );
 }
 
 body.day-mode .star-glow{
 
     fill:
-        rgba(104,175,197,.08);
+        rgba(103,181,216,.07);
 }
 
 
@@ -1787,7 +1780,7 @@ body.day-mode .star-glow{
 body.day-mode .magic-line{
 
     background:
-        rgba(74,130,156,.12);
+        rgba(67,139,181,.13);
 }
 
 
@@ -1798,21 +1791,21 @@ body.day-mode .magic-line{
 body.day-mode .magic-center{
 
     border-color:
-        rgba(77,137,163,.40);
+        rgba(69,143,185,.43);
 
     box-shadow:
         0 0 10px
-        rgba(89,151,176,.17);
+        rgba(73,151,193,.17);
 }
 
 body.day-mode .magic-center::before{
 
     background:
-        rgba(92,151,174,.58);
+        rgba(82,157,194,.62);
 
     box-shadow:
         0 0 8px
-        rgba(95,160,184,.45);
+        rgba(76,160,202,.45);
 }
 
 
@@ -1823,11 +1816,11 @@ body.day-mode .magic-center::before{
 body.day-mode .main-title{
 
     color:
-        #29465a;
+        #284c64;
 
     text-shadow:
         0 0 18px
-        rgba(82,135,158,.08);
+        rgba(72,145,187,.08);
 }
 
 body.day-mode .title-decoration .line{
@@ -1836,7 +1829,7 @@ body.day-mode .title-decoration .line{
         linear-gradient(
             90deg,
             transparent,
-            rgba(79,137,161,.50)
+            rgba(70,143,184,.56)
         );
 }
 
@@ -1845,7 +1838,7 @@ body.day-mode .title-decoration .line.right{
     background:
         linear-gradient(
             90deg,
-            rgba(79,137,161,.50),
+            rgba(70,143,184,.56),
             transparent
         );
 }
@@ -1853,19 +1846,19 @@ body.day-mode .title-decoration .line.right{
 body.day-mode .title-decoration .diamond{
 
     border-color:
-        rgba(82,139,163,.65);
+        rgba(74,149,190,.70);
 }
 
 body.day-mode .chinese-title{
 
     color:
-        rgba(48,76,92,.78);
+        rgba(43,78,99,.82);
 }
 
 body.day-mode .description{
 
     color:
-        rgba(69,101,118,.65);
+        rgba(61,101,126,.67);
 }
 
 
@@ -1876,40 +1869,40 @@ body.day-mode .description{
 body.day-mode .enter-wrap::before{
 
     border-color:
-        rgba(78,133,158,.35);
+        rgba(70,143,184,.38);
 
     background:
-        rgba(231,241,245,.56);
+        rgba(232,243,249,.60);
 
     box-shadow:
         0 0 22px
-        rgba(73,129,153,.07);
+        rgba(61,137,181,.07);
 }
 
 body.day-mode .enter-wrap::after{
 
     border-color:
-        rgba(79,135,159,.16);
+        rgba(73,146,187,.17);
 }
 
 body.day-mode .enter-button{
 
     color:
-        #38586b;
+        #31576f;
 
     background:
         linear-gradient(
             90deg,
-            rgba(222,235,240,.90),
-            rgba(237,246,248,.96),
-            rgba(222,235,240,.90)
+            rgba(222,237,245,.92),
+            rgba(238,247,251,.98),
+            rgba(222,237,245,.92)
         );
 
     border-top-color:
-        rgba(78,136,161,.38);
+        rgba(69,143,184,.40);
 
     border-bottom-color:
-        rgba(78,136,161,.38);
+        rgba(69,143,184,.40);
 }
 
 body.day-mode .enter-button:hover{
@@ -1917,33 +1910,33 @@ body.day-mode .enter-button:hover{
     background:
         linear-gradient(
             90deg,
-            rgba(214,230,236,.96),
-            rgba(235,245,248,1),
-            rgba(214,230,236,.96)
+            rgba(216,233,242,.98),
+            rgba(238,248,252,1),
+            rgba(216,233,242,.98)
         );
 
     box-shadow:
         0 0 22px
-        rgba(76,135,159,.16);
+        rgba(65,143,188,.15);
 }
 
 body.day-mode .enter-star{
 
     color:
-        rgba(76,133,158,.66);
+        rgba(67,143,185,.70);
 
     text-shadow:
         0 0 9px
-        rgba(82,143,167,.28);
+        rgba(70,150,194,.24);
 }
 
 body.day-mode .enter-diamond{
 
     border-color:
-        rgba(78,136,160,.58);
+        rgba(70,145,187,.62);
 
     background:
-        #edf4f7;
+        #edf5fa;
 }
 
 
@@ -1954,7 +1947,7 @@ body.day-mode .enter-diamond{
 body.day-mode .footer{
 
     color:
-        rgba(77,111,126,.40);
+        rgba(68,108,132,.43);
 }
 
 
