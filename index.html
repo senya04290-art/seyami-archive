@@ -17,11 +17,15 @@
       href="https://fonts.gstatic.com">
 
 <link rel="preconnect"
-      href="https://fonts.googleapis.com"
+      href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
       crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500&display=swap"
       rel="stylesheet">
+
 
 <style>
 
@@ -50,8 +54,16 @@ body{
     min-height:100vh;
     overflow:hidden;
     background:
-        radial-gradient(circle at 50% 45%, rgba(38,91,137,.18), transparent 38%),
-        radial-gradient(circle at 50% 50%, rgba(11,45,75,.45), transparent 70%),
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(38,91,137,.18),
+            transparent 38%
+        ),
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(11,45,75,.45),
+            transparent 70%
+        ),
         #061426;
 }
 
@@ -73,9 +85,21 @@ body{
     position:absolute;
     inset:-20%;
     background-image:
-        radial-gradient(circle, rgba(182,220,255,.7) 0 1px, transparent 1.5px),
-        radial-gradient(circle, rgba(130,191,239,.45) 0 1px, transparent 1.5px),
-        radial-gradient(circle, rgba(220,240,255,.35) 0 1px, transparent 1.5px);
+        radial-gradient(
+            circle,
+            rgba(182,220,255,.7) 0 1px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(130,191,239,.45) 0 1px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(220,240,255,.35) 0 1px,
+            transparent 1.5px
+        );
     background-size:
         180px 180px,
         240px 240px,
@@ -473,12 +497,23 @@ body{
     overflow:visible;
 }
 
+
+/*
+   三条轨道：
+
+   A = 38秒 / 顺时针
+   B = 32秒 / 逆时针
+   C = 25秒 / 顺时针
+*/
+
 .orbit-track{
     fill:none;
     stroke:rgba(69,164,230,.28);
     stroke-width:1;
     vector-effect:non-scaling-stroke;
-    filter:drop-shadow(0 0 4px rgba(70,155,210,.10));
+    filter:drop-shadow(
+        0 0 4px rgba(70,155,210,.10)
+    );
 }
 
 
@@ -489,17 +524,24 @@ body{
 #travellingStar{
     font-family:"Times New Roman",serif;
     font-size:15px;
-    fill:rgba(210,239,255,.98);
+    fill:rgba(190,228,255,.95);
     text-anchor:middle;
     dominant-baseline:middle;
     pointer-events:none;
     filter:
-        drop-shadow(0 0 3px rgba(131,207,250,.95))
-        drop-shadow(0 0 8px rgba(74,165,224,.65));
+        drop-shadow(
+            0 0 3px rgba(131,207,250,.9)
+        )
+        drop-shadow(
+            0 0 8px rgba(74,165,224,.55)
+        );
 }
 
+
+/* 小星辰旁边非常淡的一圈光 */
+
 .star-glow{
-    fill:rgba(143,210,246,.09);
+    fill:rgba(143,210,246,.08);
     filter:blur(2px);
     pointer-events:none;
 }
@@ -1018,12 +1060,16 @@ body{
 <div class="page">
 
 
-    <!-- 背景星空 -->
+    <!-- =========================
+         背景星空
+    ========================== -->
 
     <div class="stars"></div>
 
 
-    <!-- 浮动装饰星 -->
+    <!-- =========================
+         浮动装饰星
+    ========================== -->
 
     <div class="floating-stars">
 
@@ -1043,7 +1089,9 @@ body{
     </div>
 
 
-    <!-- 外框 -->
+    <!-- =========================
+         外框
+    ========================== -->
 
     <div class="frame">
 
@@ -1055,7 +1103,9 @@ body{
     </div>
 
 
-    <!-- 顶部 -->
+    <!-- =========================
+         顶部
+    ========================== -->
 
     <header class="top-nav">
 
@@ -1099,16 +1149,19 @@ body{
     </header>
 
 
-    <!-- 主体 -->
+    <!-- =========================
+         主体
+    ========================== -->
 
     <main class="main">
 
 
-        <!-- ==================================================
+        <!-- =========================
              魔法阵 + 三条动态星轨
-        =================================================== -->
+        ========================== -->
 
         <div class="magic-circle">
+
 
             <svg
                 id="orbitSVG"
@@ -1118,7 +1171,8 @@ body{
                 aria-hidden="true"
             >
 
-                <!-- 第一轨 -->
+
+                <!-- 第一轨 A -->
 
                 <g id="orbitA">
 
@@ -1134,7 +1188,7 @@ body{
                 </g>
 
 
-                <!-- 第二轨 -->
+                <!-- 第二轨 B -->
 
                 <g id="orbitB">
 
@@ -1150,7 +1204,7 @@ body{
                 </g>
 
 
-                <!-- 第三轨 -->
+                <!-- 第三轨 C -->
 
                 <g id="orbitC">
 
@@ -1173,7 +1227,7 @@ body{
                     class="star-glow"
                     cx="280"
                     cy="280"
-                    r="7"
+                    r="8"
                 />
 
 
@@ -1196,7 +1250,7 @@ body{
             <div class="magic-line vertical"></div>
 
 
-            <!-- 中央魔法点 -->
+            <!-- 中央小圆 -->
 
             <div class="magic-center"></div>
 
@@ -1204,9 +1258,9 @@ body{
         </div>
 
 
-        <!-- ==================================================
-             标题
-        =================================================== -->
+        <!-- =========================
+             标题区域
+        ========================== -->
 
         <section class="title-area">
 
@@ -1286,7 +1340,9 @@ body{
     </main>
 
 
-    <!-- Footer -->
+    <!-- =========================
+         Footer
+    ========================== -->
 
     <footer class="footer">
         ✦　THE ARCHIVES OF SEYAMI　✦
@@ -1300,7 +1356,7 @@ body{
 
 /* =========================================================
    SEYAMI ARCHIVE
-   三轨换轨星辰系统 · 修正版
+   三重动态星轨 · 真正贴轨版
 
    A：38秒 / 顺时针
    B：32秒 / 逆时针
@@ -1308,179 +1364,165 @@ body{
 
    路线：
 
-   A
-   ↓
-   A / B
-   ↓
-   B
-   ↓
-   B / C
-   ↓
-   C
-   ↓
-   C / A
-   ↓
-   A
+   A → A/B → B → B/C → C → C/A → A
 
-   核心修复：
+   核心原则：
 
-   每次换轨时，不再直接把上一条轨道的
-   参数角度复制给下一条轨道。
+   ★ 星星的位置永远使用与轨道完全相同
+     的椭圆数学公式。
 
-   而是：
+   ★ 换轨时使用“实际世界坐标”
+     转换成新轨道自己的参数角度。
 
-   1. 找到真实世界坐标交点
-   2. 星辰移动到交点
-   3. 把交点重新转换成下一轨的参数
-   4. 再沿下一轨继续运行
-
+   ★ 不直接把上一条轨道的角度
+     拿给下一条轨道。
 ========================================================= */
-
 
 (function(){
 
-
-    const svg =
-        document.getElementById("orbitSVG");
-
     const star =
-        document.getElementById("travellingStar");
+        document.getElementById(
+            "travellingStar"
+        );
 
     const glow =
-        document.getElementById("starGlow");
+        document.getElementById(
+            "starGlow"
+        );
 
 
-    if(!svg || !star || !glow){
+    if(!star || !glow){
         return;
     }
 
 
-    /* =========================
-       基础坐标
-    ========================= */
+    /* =====================================================
+       中心
+    ===================================================== */
 
     const CX = 280;
     const CY = 280;
 
 
-    /* =========================
+    /* =====================================================
        三条轨道
-
-       rotation：
-       初始倾角
-
-       angularSpeed：
-       轨道自身旋转速度
-    ========================= */
+    ===================================================== */
 
     const tracks = [
 
         {
             id:"A",
+
             rx:250,
             ry:95,
+
             rotation:0,
-            angularSpeed:360 / 38
+
+            /*
+               38 秒一圈
+               顺时针
+            */
+            speed:360 / 38,
+
+            direction:1
         },
+
 
         {
             id:"B",
+
             rx:210,
             ry:72.5,
+
             rotation:55,
-            angularSpeed:-360 / 32
+
+            /*
+               32 秒一圈
+               逆时针
+            */
+            speed:-360 / 32,
+
+            direction:-1
         },
+
 
         {
             id:"C",
+
             rx:165,
             ry:52.5,
+
             rotation:110,
-            angularSpeed:360 / 25
+
+            /*
+               25 秒一圈
+               顺时针
+            */
+            speed:360 / 25,
+
+            direction:1
         }
 
     ];
 
 
-    /* =========================
+    /* =====================================================
        当前轨道
-    ========================= */
+
+       0 A
+       1 B
+       2 C
+    ===================================================== */
 
     let currentTrack = 0;
 
 
-    /*
-       星辰在当前轨道上的
-       本地参数角度
-    */
+    /* =====================================================
+       星星在当前轨道上的参数角度
+    ===================================================== */
 
-    let starParameter = 25;
-
-
-    /*
-       目标参数
-    */
-
-    let targetParameter = 25;
+    let starAngle = 300;
 
 
-    /*
-       当前目标世界坐标
+    /* =====================================================
+       当前目标
+    ===================================================== */
 
-       换轨时使用
-    */
-
-    let targetWorld = null;
+    let targetAngle = null;
 
 
-    /*
-       是否已经拥有目标
-    */
-
-    let hasTarget = false;
+    let switching = false;
 
 
-    /*
-       动画开始时间
-    */
+    /* =====================================================
+       时间
+    ===================================================== */
 
     const animationStart =
         performance.now();
-
 
     let lastTime =
         animationStart;
 
 
-    /*
-       星辰移动速度
-
-       调低一点，
-       让它看起来像魔法星辰，
-       而不是快速飞行的小点。
-    */
-
-    const STAR_SPEED = 13;
-
-
-    /*
-       换轨完成后
-       休息一点点时间
-
-       让交界处有一种
-       “接触 → 换轨”的感觉。
-    */
-
-    let switchCooldown = 0;
-
-
     /* =====================================================
-       工具函数
+       角度工具
     ===================================================== */
 
-    function rad(deg){
+    function degToRad(angle){
 
-        return deg * Math.PI / 180;
+        return angle *
+               Math.PI /
+               180;
+
+    }
+
+
+    function radToDeg(angle){
+
+        return angle *
+               180 /
+               Math.PI;
 
     }
 
@@ -1498,119 +1540,174 @@ body{
     }
 
 
-    /*
-       当前时间下
-       某一轨道自己的旋转角度
-    */
+    /* =====================================================
+       当前轨道旋转角度
+    ===================================================== */
 
-    function trackRotation(
+    function getRotation(
         track,
         elapsed
     ){
 
         return (
             track.rotation +
-            track.angularSpeed *
-            elapsed / 1000
+            track.speed *
+            elapsed /
+            1000
         );
 
     }
 
 
-    /*
-       本地椭圆参数
-       → 世界坐标
-    */
+    /* =====================================================
+       ★★★ 核心：取得轨道真实坐标 ★★★
+       
+       这一个函数同时负责：
+       
+       1. 轨道的数学位置
+       2. 星星的位置
+       
+       所以星星和轨道绝不会使用
+       两套不同的计算方式。
+    ===================================================== */
 
-    function pointOnTrack(
+    function getPoint(
         track,
-        parameter,
+        angle,
         elapsed
     ){
 
-        const angle =
-            parameter +
-            trackRotation(
-                track,
-                elapsed
+        const rad =
+            degToRad(angle);
+
+
+        /*
+           椭圆本身的坐标
+        */
+
+        const localX =
+            track.rx *
+            Math.cos(rad);
+
+        const localY =
+            track.ry *
+            Math.sin(rad);
+
+
+        /*
+           轨道当前旋转
+        */
+
+        const rotation =
+            degToRad(
+                getRotation(
+                    track,
+                    elapsed
+                )
             );
 
 
-        const r =
-            rad(angle);
+        const cos =
+            Math.cos(rotation);
+
+        const sin =
+            Math.sin(rotation);
+
+
+        /*
+           旋转后的世界坐标
+        */
+
+        const worldX =
+            localX * cos -
+            localY * sin;
+
+        const worldY =
+            localX * sin +
+            localY * cos;
 
 
         return {
 
-            x:
-                CX +
-                track.rx *
-                Math.cos(r),
+            x:CX + worldX,
 
-            y:
-                CY +
-                track.ry *
-                Math.sin(r)
+            y:CY + worldY
 
         };
 
     }
 
 
-    /*
-       世界坐标
-       → 当前轨道的本地参数
+    /* =====================================================
+       ★ 世界坐标 → 轨道参数
+       
+       换轨的时候使用。
+       
+       例如：
+       
+       A轨道交点
+       ↓
+       得到真实 x / y
+       ↓
+       转成 B轨道的参数角度
+       ↓
+       星星继续在 B 上
+    ===================================================== */
 
-       这个函数就是这次修复的关键。
-    */
-
-    function parameterFromWorld(
+    function worldToTrackAngle(
         track,
         x,
         y,
         elapsed
     ){
 
-        const dx =
+        let dx =
             x - CX;
 
-        const dy =
+        let dy =
             y - CY;
 
 
         /*
-           先把轨道自身旋转反向抵消。
+           把世界坐标反向旋转
         */
 
         const rotation =
-            trackRotation(
-                track,
-                elapsed
+            degToRad(
+                getRotation(
+                    track,
+                    elapsed
+                )
             );
 
 
-        const r =
-            -rad(rotation);
+        const cos =
+            Math.cos(-rotation);
+
+        const sin =
+            Math.sin(-rotation);
 
 
         const localX =
-            dx * Math.cos(r) -
-            dy * Math.sin(r);
+            dx * cos -
+            dy * sin;
 
         const localY =
-            dx * Math.sin(r) +
-            dy * Math.cos(r);
+            dx * sin +
+            dy * cos;
 
 
         /*
-           再根据椭圆参数求角度。
+           得到椭圆参数角
         */
 
         const angle =
-            Math.atan2(
-                localY / track.ry,
-                localX / track.rx
-            ) * 180 / Math.PI;
+            radToDeg(
+                Math.atan2(
+                    localY / track.ry,
+                    localX / track.rx
+                )
+            );
 
 
         return normalize(angle);
@@ -1618,53 +1715,30 @@ body{
     }
 
 
-    /*
-       两个角度之间
-       顺着正方向前进多少
-    */
+    /* =====================================================
+       计算两个轨道之间最接近的交点
+    ===================================================== */
 
-    function forwardDistance(
-        from,
-        to
+    function findIntersection(
+        trackA,
+        trackB,
+        elapsed,
+        fromAngle
     ){
-
-        return normalize(
-            to - from
-        );
-
-    }
-
-
-    /*
-       计算两个轨道在当前时刻
-       的交点。
-
-       用高密度采样寻找，
-       不会影响页面视觉。
-    */
-
-    function findIntersections(
-        indexA,
-        indexB,
-        elapsed
-    ){
-
-        const A =
-            tracks[indexA];
-
-        const B =
-            tracks[indexB];
-
-
-        const candidates = [];
-
-
-        /*
-           720 个采样点足够精细。
-        */
 
         const samples = 720;
 
+        let best = null;
+
+        let bestDistance = Infinity;
+
+
+        /*
+           在 A 轨道上取 720 个点。
+           
+           每一个点都直接计算 B 轨道
+           对应的参数位置。
+        */
 
         for(
             let i = 0;
@@ -1672,215 +1746,226 @@ body{
             i++
         ){
 
-            const pA =
-                i * 360 / samples;
+            const angleA =
+                i *
+                360 /
+                samples;
 
 
-            const worldA =
-                pointOnTrack(
-                    A,
-                    pA,
+            const pointA =
+                getPoint(
+                    trackA,
+                    angleA,
                     elapsed
                 );
 
 
             /*
-               直接寻找 B 上
-               最接近的位置。
+               把这个世界坐标
+               转成 B 轨道参数
             */
 
-            let bestB = null;
+            const angleB =
+                worldToTrackAngle(
+                    trackB,
+                    pointA.x,
+                    pointA.y,
+                    elapsed
+                );
+
+
+            const pointB =
+                getPoint(
+                    trackB,
+                    angleB,
+                    elapsed
+                );
+
+
+            const dx =
+                pointA.x -
+                pointB.x;
+
+            const dy =
+                pointA.y -
+                pointB.y;
+
+
+            const distance =
+                Math.sqrt(
+                    dx * dx +
+                    dy * dy
+                );
+
+
+            /*
+               只考虑星星前进方向上的点
+            */
+
+            let travel =
+                normalize(
+                    (
+                        angleA -
+                        fromAngle
+                    ) *
+                    trackA.direction
+                );
+
+
+            /*
+               排除已经在后面的点
+            */
+
+            if(
+                travel < 0
+            ){
+
+                travel += 360;
+
+            }
+
+
+            /*
+               找到距离很近的交点
+            */
+
+            if(
+                distance < bestDistance &&
+                travel > 2
+            ){
+
+                bestDistance =
+                    distance;
+
+                best = {
+
+                    angleA,
+
+                    angleB,
+
+                    x:
+                        (
+                            pointA.x +
+                            pointB.x
+                        ) / 2,
+
+                    y:
+                        (
+                            pointA.y +
+                            pointB.y
+                        ) / 2,
+
+                    distance,
+
+                    travel
+
+                };
+
+            }
+
+        }
+
+
+        /*
+           如果没有找到理想交点，
+           允许选择最近点。
+        */
+
+        if(
+            !best ||
+            best.distance > 8
+        ){
+
+            best = null;
+
+            bestDistance =
+                Infinity;
 
 
             for(
-                let j = 0;
-                j < samples;
-                j += 2
+                let i = 0;
+                i < samples;
+                i++
             ){
 
-                const pB =
-                    j * 360 / samples;
+                const angleA =
+                    i *
+                    360 /
+                    samples;
 
 
-                const worldB =
-                    pointOnTrack(
-                        B,
-                        pB,
+                const pointA =
+                    getPoint(
+                        trackA,
+                        angleA,
+                        elapsed
+                    );
+
+
+                const angleB =
+                    worldToTrackAngle(
+                        trackB,
+                        pointA.x,
+                        pointA.y,
+                        elapsed
+                    );
+
+
+                const pointB =
+                    getPoint(
+                        trackB,
+                        angleB,
                         elapsed
                     );
 
 
                 const dx =
-                    worldA.x -
-                    worldB.x;
+                    pointA.x -
+                    pointB.x;
 
                 const dy =
-                    worldA.y -
-                    worldB.y;
+                    pointA.y -
+                    pointB.y;
 
 
-                const d =
-                    dx * dx +
-                    dy * dy;
+                const distance =
+                    Math.sqrt(
+                        dx * dx +
+                        dy * dy
+                    );
 
 
                 if(
-                    bestB === null ||
-                    d < bestB.distance
+                    distance <
+                    bestDistance
                 ){
 
-                    bestB = {
+                    bestDistance =
+                        distance;
 
-                        parameter:pB,
+                    best = {
 
-                        x:worldB.x,
-                        y:worldB.y,
+                        angleA,
 
-                        distance:d
+                        angleB,
+
+                        x:
+                            (
+                                pointA.x +
+                                pointB.x
+                            ) / 2,
+
+                        y:
+                            (
+                                pointA.y +
+                                pointB.y
+                            ) / 2,
+
+                        distance
 
                     };
 
                 }
-
-            }
-
-
-            /*
-               只接受真正靠近的交点。
-            */
-
-            if(
-                bestB &&
-                bestB.distance < 5
-            ){
-
-                const already =
-                    candidates.some(
-                        c => {
-
-                            const dx =
-                                c.x -
-                                worldA.x;
-
-                            const dy =
-                                c.y -
-                                worldA.y;
-
-                            return (
-                                Math.sqrt(
-                                    dx * dx +
-                                    dy * dy
-                                ) < 12
-                            );
-
-                        }
-                    );
-
-
-                if(!already){
-
-                    candidates.push({
-
-                        parameterA:pA,
-
-                        parameterB:
-                            bestB.parameter,
-
-                        x:
-                            (worldA.x +
-                             bestB.x) / 2,
-
-                        y:
-                            (worldA.y +
-                             bestB.y) / 2,
-
-                        distance:
-                            Math.sqrt(
-                                bestB.distance
-                            )
-
-                    });
-
-                }
-
-            }
-
-        }
-
-
-        return candidates;
-
-    }
-
-
-    /*
-       获取离星辰前进方向最近的交点
-    */
-
-    function getNextIntersection(
-        currentIndex,
-        nextIndex,
-        elapsed
-    ){
-
-        const intersections =
-            findIntersections(
-                currentIndex,
-                nextIndex,
-                elapsed
-            );
-
-
-        if(
-            intersections.length === 0
-        ){
-
-            return null;
-
-        }
-
-
-        let best = null;
-
-        let bestDistance =
-            Infinity;
-
-
-        for(
-            const intersection
-            of intersections
-        ){
-
-            const distance =
-                forwardDistance(
-                    starParameter,
-                    intersection.parameterA
-                );
-
-
-            /*
-               避免选择身后的交点。
-
-               如果距离太大，
-               仍然允许寻找最近的。
-            */
-
-            const score =
-                distance <= 180
-                ? distance
-                : distance + 360;
-
-
-            if(
-                score <
-                bestDistance
-            ){
-
-                bestDistance =
-                    score;
-
-                best =
-                    intersection;
 
             }
 
@@ -1893,22 +1978,37 @@ body{
 
 
     /* =====================================================
-       设置下一个交界
+       寻找下一条轨道
     ===================================================== */
 
-    function prepareNextIntersection(
+    function setNextTarget(
         elapsed
     ){
 
-        const nextTrack =
-            (currentTrack + 1) % 3;
+        const nextTrackIndex =
+            (
+                currentTrack +
+                1
+            ) % 3;
+
+
+        const current =
+            tracks[
+                currentTrack
+            ];
+
+        const next =
+            tracks[
+                nextTrackIndex
+            ];
 
 
         const intersection =
-            getNextIntersection(
-                currentTrack,
-                nextTrack,
-                elapsed
+            findIntersection(
+                current,
+                next,
+                elapsed,
+                starAngle
             );
 
 
@@ -1917,28 +2017,20 @@ body{
         }
 
 
-        targetParameter =
-            intersection.parameterA;
+        targetAngle =
+            intersection.angleA;
 
 
-        targetWorld = {
-
-            x:intersection.x,
-            y:intersection.y
-
-        };
-
-
-        hasTarget = true;
+        switching = true;
 
     }
 
 
     /* =====================================================
-       更新轨道旋转
+       更新三条轨道
     ===================================================== */
 
-    function updateOrbitTransforms(
+    function updateOrbits(
         elapsed
     ){
 
@@ -1958,49 +2050,61 @@ body{
             );
 
 
-        groupA.setAttribute(
-            "transform",
-            `rotate(
-                ${trackRotation(
-                    tracks[0],
-                    elapsed
-                )}
-                ${CX}
-                ${CY}
-            )`
-        );
+        if(groupA){
+
+            groupA.setAttribute(
+                "transform",
+                `rotate(
+                    ${getRotation(
+                        tracks[0],
+                        elapsed
+                    )}
+                    ${CX}
+                    ${CY}
+                )`
+            );
+
+        }
 
 
-        groupB.setAttribute(
-            "transform",
-            `rotate(
-                ${trackRotation(
-                    tracks[1],
-                    elapsed
-                )}
-                ${CX}
-                ${CY}
-            )`
-        );
+        if(groupB){
+
+            groupB.setAttribute(
+                "transform",
+                `rotate(
+                    ${getRotation(
+                        tracks[1],
+                        elapsed
+                    )}
+                    ${CX}
+                    ${CY}
+                )`
+            );
+
+        }
 
 
-        groupC.setAttribute(
-            "transform",
-            `rotate(
-                ${trackRotation(
-                    tracks[2],
-                    elapsed
-                )}
-                ${CX}
-                ${CY}
-            )`
-        );
+        if(groupC){
+
+            groupC.setAttribute(
+                "transform",
+                `rotate(
+                    ${getRotation(
+                        tracks[2],
+                        elapsed
+                    )}
+                    ${CX}
+                    ${CY}
+                )`
+            );
+
+        }
 
     }
 
 
     /* =====================================================
-       更新星辰
+       ★ 更新星星
     ===================================================== */
 
     function updateStar(
@@ -2008,116 +2112,52 @@ body{
     ){
 
         const track =
-            tracks[currentTrack];
+            tracks[
+                currentTrack
+            ];
 
 
         /*
-           当前轨道上的精确位置
+           ★ 直接使用轨道坐标
         */
 
-        const position =
-            pointOnTrack(
+        const point =
+            getPoint(
                 track,
-                starParameter,
+                starAngle,
                 elapsed
             );
 
 
         star.setAttribute(
             "x",
-            position.x
+            point.x.toFixed(3)
         );
-
 
         star.setAttribute(
             "y",
-            position.y
+            point.y.toFixed(3)
         );
 
 
         glow.setAttribute(
             "cx",
-            position.x
+            point.x.toFixed(3)
         );
-
 
         glow.setAttribute(
             "cy",
-            position.y
+            point.y.toFixed(3)
         );
 
     }
 
 
     /* =====================================================
-       真正换轨
+       星星速度
     ===================================================== */
 
-    function switchTrack(
-        elapsed
-    ){
-
-        /*
-           记录交界世界坐标
-        */
-
-        const x =
-            targetWorld.x;
-
-        const y =
-            targetWorld.y;
-
-
-        /*
-           下一轨
-        */
-
-        const nextTrack =
-            (currentTrack + 1) % 3;
-
-
-        /*
-           切换轨道
-        */
-
-        currentTrack =
-            nextTrack;
-
-
-        /*
-           ★ 核心：
-
-           把同一个世界交点
-           重新计算成下一轨自己的角度。
-
-           所以星辰不会突然
-           飞离轨道。
-        */
-
-        starParameter =
-            parameterFromWorld(
-                tracks[currentTrack],
-                x,
-                y,
-                elapsed
-            );
-
-
-        targetWorld = null;
-
-        hasTarget = false;
-
-
-        /*
-           极短冷却，
-           避免在同一个交点
-           立即再次换轨。
-        */
-
-        switchCooldown =
-            180;
-
-    }
+    const STAR_SPEED = 11;
 
 
     /* =====================================================
@@ -2127,94 +2167,95 @@ body{
     function animate(now){
 
         const elapsed =
-            now - animationStart;
+            now -
+            animationStart;
 
 
         const delta =
-            now - lastTime;
+            Math.min(
+                0.05,
+                (
+                    now -
+                    lastTime
+                ) / 1000
+            );
 
 
-        /*
-           三条轨道独立旋转
+        /* -----------------------------------------------
+           1. 三条轨道旋转
+        ------------------------------------------------ */
 
-           A = 38s
-           B = 32s
-           C = 25s
-        */
-
-        updateOrbitTransforms(
+        updateOrbits(
             elapsed
         );
 
 
-        /*
-           冷却倒计时
-        */
+        /* -----------------------------------------------
+           2. 没有目标 → 找交点
+        ------------------------------------------------ */
 
-        if(
-            switchCooldown > 0
-        ){
+        if(!switching){
 
-            switchCooldown -= delta;
-
-        }
-
-
-        /*
-           没有目标的时候，
-           寻找下一交界。
-        */
-
-        if(
-            !hasTarget &&
-            switchCooldown <= 0
-        ){
-
-            prepareNextIntersection(
+            setNextTarget(
                 elapsed
             );
 
         }
 
 
-        /*
-           星辰沿当前轨道前进
-        */
+        /* -----------------------------------------------
+           3. 星星前往交点
+        ------------------------------------------------ */
 
         if(
-            hasTarget &&
-            switchCooldown <= 0
+            switching &&
+            targetAngle !== null
         ){
 
-            const distance =
-                forwardDistance(
-                    starParameter,
-                    targetParameter
+            const track =
+                tracks[
+                    currentTrack
+                ];
+
+
+            /*
+               根据轨道方向运行
+            */
+
+            const direction =
+                track.direction;
+
+
+            /*
+               距离目标还有多少
+            */
+
+            let distance =
+                normalize(
+                    (
+                        targetAngle -
+                        starAngle
+                    ) *
+                    direction
                 );
 
 
             /*
-               正常速度
-            */
-
-            let movement =
-                STAR_SPEED *
-                delta /
-                1000;
-
-
-            /*
-               接近交界的时候
+               星星接近交点时
                稍微减速。
             */
+
+            let speed =
+                STAR_SPEED;
+
 
             if(
                 distance < 25
             ){
 
-                movement *=
+                speed *=
                     Math.max(
-                        0.28,
+                        0.25,
                         distance / 25
                     );
 
@@ -2222,41 +2263,127 @@ body{
 
 
             /*
-               如果已经非常接近，
-               直接进入交界。
+               移动
             */
 
+            starAngle +=
+                speed *
+                direction *
+                delta;
+
+
+            starAngle =
+                normalize(
+                    starAngle
+                );
+
+
+            /*
+               再计算距离
+            */
+
+            distance =
+                normalize(
+                    (
+                        targetAngle -
+                        starAngle
+                    ) *
+                    direction
+                );
+
+
+            /* -------------------------------------------
+               4. 到达交点
+            ------------------------------------------- */
+
             if(
-                distance < 1.5
+                distance < 1
             ){
 
                 /*
-                   先把星辰准确放到
-                   当前轨道交界位置。
+                   ★ 先取得当前轨道
+                   此刻真正的交点坐标
                 */
 
-                starParameter =
-                    targetParameter;
+                const intersection =
+                    getPoint(
+                        track,
+                        targetAngle,
+                        elapsed
+                    );
 
 
                 /*
-                   再执行换轨。
+                   下一条轨道
                 */
 
-                switchTrack(
-                    elapsed
-                );
+                const nextTrackIndex =
+                    (
+                        currentTrack +
+                        1
+                    ) % 3;
 
-            }else{
+
+                const nextTrack =
+                    tracks[
+                        nextTrackIndex
+                    ];
+
 
                 /*
-                   正常前进
+                   ★★★ 最关键 ★★★
+                   
+                   把真正的交点坐标
+                   转换成下一条轨道
+                   自己的参数角度。
                 */
 
-                starParameter =
+                const nextAngle =
+                    worldToTrackAngle(
+                        nextTrack,
+                        intersection.x,
+                        intersection.y,
+                        elapsed
+                    );
+
+
+                /*
+                   正式换轨
+                */
+
+                currentTrack =
+                    nextTrackIndex;
+
+
+                /*
+                   ★ 使用新轨道自己的角度
+                */
+
+                starAngle =
+                    nextAngle;
+
+
+                /*
+                   清空目标
+                */
+
+                targetAngle = null;
+
+                switching = false;
+
+
+                /*
+                   给一点点提前量，
+                   让星星不会卡在交点。
+                */
+
+                starAngle =
                     normalize(
-                        starParameter +
-                        movement
+                        starAngle +
+                        tracks[
+                            currentTrack
+                        ].direction *
+                        0.8
                     );
 
             }
@@ -2264,9 +2391,9 @@ body{
         }
 
 
-        /*
-           更新星辰位置
-        */
+        /* -----------------------------------------------
+           5. 最后把星星放到轨道上
+        ------------------------------------------------ */
 
         updateStar(
             elapsed
@@ -2284,19 +2411,21 @@ body{
     }
 
 
-    /*
-       初始位置
+    /* =====================================================
+       初始化
+    ===================================================== */
 
-       从第一轨开始。
-    */
-
-    starParameter =
-        25;
+    starAngle = 300;
 
 
-    /*
-       启动
-    */
+    updateOrbits(0);
+
+    updateStar(0);
+
+
+    /* =====================================================
+       开始动画
+    ===================================================== */
 
     requestAnimationFrame(
         animate
