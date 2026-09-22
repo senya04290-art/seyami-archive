@@ -169,6 +169,11 @@ body{
         infinite;
 }
 
+
+/* =========================================================
+   原有12颗
+========================================================= */
+
 .floating-stars span:nth-child(1){
     left:12%;
     top:24%;
@@ -240,6 +245,108 @@ body{
     top:18%;
     animation-delay:4.2s;
 }
+
+
+/* =========================================================
+   PC新增16颗
+========================================================= */
+
+.floating-stars span:nth-child(13){
+    left:26%;
+    top:31%;
+    animation-delay:2.7s;
+}
+
+.floating-stars span:nth-child(14){
+    left:35%;
+    top:76%;
+    animation-delay:4.5s;
+}
+
+.floating-stars span:nth-child(15){
+    left:63%;
+    top:19%;
+    animation-delay:1.7s;
+}
+
+.floating-stars span:nth-child(16){
+    left:73%;
+    top:36%;
+    animation-delay:3.8s;
+}
+
+.floating-stars span:nth-child(17){
+    left:91%;
+    top:58%;
+    animation-delay:2.4s;
+}
+
+.floating-stars span:nth-child(18){
+    left:11%;
+    top:58%;
+    animation-delay:4.8s;
+}
+
+.floating-stars span:nth-child(19){
+    left:47%;
+    top:24%;
+    animation-delay:1.3s;
+}
+
+.floating-stars span:nth-child(20){
+    left:54%;
+    top:73%;
+    animation-delay:3.1s;
+}
+
+.floating-stars span:nth-child(21){
+    left:82%;
+    top:81%;
+    animation-delay:4.1s;
+}
+
+.floating-stars span:nth-child(22){
+    left:4%;
+    top:34%;
+    animation-delay:2.1s;
+}
+
+.floating-stars span:nth-child(23){
+    left:68%;
+    top:88%;
+    animation-delay:5s;
+}
+
+.floating-stars span:nth-child(24){
+    left:39%;
+    top:91%;
+    animation-delay:3.6s;
+}
+
+.floating-stars span:nth-child(25){
+    left:58%;
+    top:8%;
+    animation-delay:1.9s;
+}
+
+.floating-stars span:nth-child(26){
+    left:96%;
+    top:77%;
+    animation-delay:4.4s;
+}
+
+.floating-stars span:nth-child(27){
+    left:22%;
+    top:88%;
+    animation-delay:2.9s;
+}
+
+.floating-stars span:nth-child(28){
+    left:87%;
+    top:27%;
+    animation-delay:3.3s;
+}
+
 
 @keyframes floatStar{
 
@@ -793,8 +900,7 @@ body{
 
 
 /* =========================================================
-   ★ PC标题
-   中间空格严格对准页面中心
+   PC标题
 ========================================================= */
 
 .main-title{
@@ -830,7 +936,6 @@ body{
         rgba(94,172,222,.08);
 }
 
-
 .main-title .seyami{
 
     position:absolute;
@@ -843,7 +948,6 @@ body{
 
     white-space:nowrap;
 }
-
 
 .main-title .archive{
 
@@ -864,8 +968,7 @@ body{
 
 
 /* =========================================================
-   ★ PC窄窗口自适应
-   ★ 这里只修改 ARCHIVE，使它与 SEYAMI 字号一致
+   PC窄窗口自适应
 ========================================================= */
 
 @media (min-width:521px) and (max-width:800px){
@@ -1272,7 +1375,6 @@ body{
         height:500px;
     }
 
-
     .main-title{
 
         width:max-content;
@@ -1303,6 +1405,13 @@ body{
 ========================================================= */
 
 @media(max-width:520px){
+
+    /* PC新增的16颗在手机端隐藏
+       原来的12颗完全保持不变 */
+
+    .floating-stars span:nth-child(n+13){
+        display:none;
+    }
 
     .frame{
         inset:12px;
@@ -1417,7 +1526,6 @@ body{
 
     /* =====================================================
        手机标题
-       两行，但缩小上下间距
     ===================================================== */
 
     .main-title{
@@ -1633,6 +1741,24 @@ body{
     <span>✶</span>
     <span>·</span>
     <span>✧</span>
+
+    <!-- PC新增 -->
+    <span>✡</span>
+    <span>✶</span>
+    <span>✦</span>
+    <span>✧</span>
+    <span>✡</span>
+    <span>✦</span>
+    <span>✶</span>
+    <span>·</span>
+    <span>✦</span>
+    <span>✡</span>
+    <span>✧</span>
+    <span>✶</span>
+    <span>✦</span>
+    <span>·</span>
+    <span>✡</span>
+    <span>✶</span>
 
 </div>
 
@@ -2622,4 +2748,4 @@ body{
 </script>
 
 </body>
-      </html>
+</html>
