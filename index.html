@@ -497,15 +497,6 @@ body{
     overflow:visible;
 }
 
-
-/*
-   三条轨道：
-
-   A = 38秒 / 顺时针
-   B = 32秒 / 逆时针
-   C = 25秒 / 顺时针
-*/
-
 .orbit-track{
     fill:none;
     stroke:rgba(69,164,230,.28);
@@ -536,9 +527,6 @@ body{
             0 0 8px rgba(74,165,224,.55)
         );
 }
-
-
-/* 小星辰旁边非常淡的一圈光 */
 
 .star-glow{
     fill:rgba(143,210,246,.08);
@@ -613,11 +601,12 @@ body{
 
 .main-title{
     display:flex;
-    flex-direction:column;
-    align-items:center;
+    flex-direction:row;
+    align-items:baseline;
+    justify-content:center;
     font-family:"Cinzel","Cormorant Garamond",serif;
     font-weight:400;
-    line-height:.83;
+    line-height:1;
     letter-spacing:8px;
     color:#dceeff;
     text-shadow:0 0 18px rgba(94,172,222,.08);
@@ -628,7 +617,8 @@ body{
 }
 
 .main-title .archive{
-    margin-top:15px;
+    margin-top:0;
+    margin-left:18px;
     font-size:87px;
     letter-spacing:9px;
 }
@@ -695,6 +685,7 @@ body{
     margin-top:20px;
     display:flex;
     flex-direction:column;
+    align-items:center;
     gap:7px;
     text-align:center;
     color:rgba(177,207,230,.62);
@@ -802,8 +793,6 @@ body{
     color:rgba(111,186,229,.75);
     font-size:16px;
     text-shadow:0 0 9px rgba(67,158,215,.45);
-
-    /* 让按钮两侧的 ✡ 显示在按钮上层，不再被遮住 */
     z-index:3;
 }
 
@@ -878,11 +867,18 @@ body{
         height:500px;
     }
 
+    .main-title{
+        flex-direction:row;
+        align-items:baseline;
+    }
+
     .main-title .seyami{
         font-size:58px;
     }
 
     .main-title .archive{
+        margin-top:0;
+        margin-left:14px;
         font-size:70px;
     }
 
@@ -990,7 +986,15 @@ body{
         height:350px;
     }
 
+
+    /* ==========================================
+       手机端标题恢复两行
+       ========================================== */
+
     .main-title{
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
         letter-spacing:5px;
     }
 
@@ -1000,9 +1004,11 @@ body{
 
     .main-title .archive{
         margin-top:11px;
+        margin-left:0;
         font-size:53px;
         letter-spacing:6px;
     }
+
 
     .title-decoration{
         margin-top:23px;
@@ -1022,11 +1028,13 @@ body{
         margin-top:16px;
         font-size:10px;
         letter-spacing:1px;
+        align-items:center;
+        text-align:center;
     }
 
 
     /* ==========================================
-       手机端：整个按钮框 + 内容一起缩短
+       手机端按钮
        ========================================== */
 
     .enter-wrap{
@@ -1179,9 +1187,6 @@ body{
                 aria-hidden="true"
             >
 
-
-                <!-- 第一轨 A -->
-
                 <g id="orbitA">
 
                     <ellipse
@@ -1195,8 +1200,6 @@ body{
 
                 </g>
 
-
-                <!-- 第二轨 B -->
 
                 <g id="orbitB">
 
@@ -1212,8 +1215,6 @@ body{
                 </g>
 
 
-                <!-- 第三轨 C -->
-
                 <g id="orbitC">
 
                     <ellipse
@@ -1228,8 +1229,6 @@ body{
                 </g>
 
 
-                <!-- 小星辰光晕 -->
-
                 <circle
                     id="starGlow"
                     class="star-glow"
@@ -1238,8 +1237,6 @@ body{
                     r="8"
                 />
 
-
-                <!-- 唯一的小星辰 -->
 
                 <text
                     id="travellingStar"
@@ -1251,14 +1248,9 @@ body{
             </svg>
 
 
-            <!-- 横竖魔法线 -->
-
             <div class="magic-line horizontal"></div>
 
             <div class="magic-line vertical"></div>
-
-
-            <!-- 中央小圆 -->
 
             <div class="magic-center"></div>
 
@@ -1373,17 +1365,6 @@ body{
    路线：
 
    A → A/B → B → B/C → C → C/A → A
-
-   核心原则：
-
-   ★ 星星的位置永远使用与轨道完全相同
-     的椭圆数学公式。
-
-   ★ 换轨时使用“实际世界坐标”
-     转换成新轨道自己的参数角度。
-
-   ★ 不直接把上一条轨道的角度
-     拿给下一条轨道。
 ========================================================= */
 
 (function(){
@@ -1404,91 +1385,52 @@ body{
     }
 
 
-    /* =====================================================
-       中心
-    ===================================================== */
-
     const CX = 280;
     const CY = 280;
 
-
-    /* =====================================================
-       三条轨道
-    ===================================================== */
 
     const tracks = [
 
         {
             id:"A",
-
             rx:250,
             ry:95,
-
             rotation:0,
-
             speed:360 / 38,
-
             direction:1
         },
 
 
         {
             id:"B",
-
             rx:210,
             ry:72.5,
-
             rotation:55,
-
             speed:-360 / 32,
-
             direction:-1
         },
 
 
         {
             id:"C",
-
             rx:165,
-
             ry:52.5,
-
             rotation:110,
-
             speed:360 / 25,
-
             direction:1
         }
 
     ];
 
 
-    /* =====================================================
-       当前轨道
-    ===================================================== */
-
     let currentTrack = 0;
 
-
-    /* =====================================================
-       星星在当前轨道上的参数角度
-    ===================================================== */
-
     let starAngle = 300;
-
-
-    /* =====================================================
-       当前目标
-    ===================================================== */
 
     let targetAngle = null;
 
     let switching = false;
 
-
-    /* =====================================================
-       时间
-    ===================================================== */
 
     const animationStart =
         performance.now();
@@ -1496,10 +1438,6 @@ body{
     let lastTime =
         animationStart;
 
-
-    /* =====================================================
-       角度工具
-    ===================================================== */
 
     function degToRad(angle){
 
@@ -1532,10 +1470,6 @@ body{
     }
 
 
-    /* =====================================================
-       当前轨道旋转角度
-    ===================================================== */
-
     function getRotation(
         track,
         elapsed
@@ -1550,10 +1484,6 @@ body{
 
     }
 
-
-    /* =====================================================
-       取得轨道真实坐标
-    ===================================================== */
 
     function getPoint(
         track,
@@ -1610,10 +1540,6 @@ body{
     }
 
 
-    /* =====================================================
-       世界坐标 → 轨道参数
-    ===================================================== */
-
     function worldToTrackAngle(
         track,
         x,
@@ -1666,10 +1592,6 @@ body{
 
     }
 
-
-    /* =====================================================
-       计算两个轨道之间最接近的交点
-    ===================================================== */
 
     function findIntersection(
         trackA,
@@ -1900,10 +1822,6 @@ body{
     }
 
 
-    /* =====================================================
-       寻找下一条轨道
-    ===================================================== */
-
     function setNextTarget(
         elapsed
     ){
@@ -1947,10 +1865,6 @@ body{
 
     }
 
-
-    /* =====================================================
-       更新三条轨道
-    ===================================================== */
 
     function updateOrbits(
         elapsed
@@ -2025,10 +1939,6 @@ body{
     }
 
 
-    /* =====================================================
-       更新星星
-    ===================================================== */
-
     function updateStar(
         elapsed
     ){
@@ -2071,16 +1981,8 @@ body{
     }
 
 
-    /* =====================================================
-       星星速度
-    ===================================================== */
-
     const STAR_SPEED = 11;
 
-
-    /* =====================================================
-       主动画
-    ===================================================== */
 
     function animate(now){
 
@@ -2254,20 +2156,12 @@ body{
     }
 
 
-    /* =====================================================
-       初始化
-    ===================================================== */
-
     starAngle = 300;
 
     updateOrbits(0);
 
     updateStar(0);
 
-
-    /* =====================================================
-       开始动画
-    ===================================================== */
 
     requestAnimationFrame(
         animate
