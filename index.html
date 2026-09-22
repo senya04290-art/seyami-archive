@@ -14,10 +14,7 @@
       href="https://fonts.googleapis.com">
 
 <link rel="preconnect"
-      href="https://fonts.googleapis.com">
-
-<link rel="preconnect"
-      href="https://fonts.googleapis.com"
+      href="https://fonts.gstatic.com"
       crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500&display=swap"
@@ -728,7 +725,9 @@ body{
 /* =========================================================
    ★ 星轨
    ★ 三圈独立旋转
-   ★ 这里只调整转速
+   ★ 各自不同速度
+   ★ 各自不同方向
+   ★ 初始角度错开
 ========================================================= */
 
 .orbit{
@@ -750,9 +749,7 @@ body{
 }
 
 
-/* 第一圈
-   顺时针
-   ★ 52秒 */
+/* 第一圈 */
 
 .orbit.one{
 
@@ -761,15 +758,13 @@ body{
 
     animation:
         orbitRotateOne
-        52s
+        38s
         linear
         infinite;
 }
 
 
-/* 第二圈
-   逆时针
-   ★ 68秒 */
+/* 第二圈 */
 
 .orbit.two{
 
@@ -778,15 +773,13 @@ body{
 
     animation:
         orbitRotateTwo
-        68s
+        32s
         linear
         infinite;
 }
 
 
-/* 第三圈
-   顺时针
-   ★ 42秒 */
+/* 第三圈 */
 
 .orbit.three{
 
@@ -795,13 +788,14 @@ body{
 
     animation:
         orbitRotateThree
-        42s
+        25s
         linear
         infinite;
 }
 
 
 /* 第一圈
+   顺时针
    0° → 360° */
 
 @keyframes orbitRotateOne{
@@ -823,8 +817,8 @@ body{
 
 
 /* 第二圈
-   55° → -305°
-   逆时针 */
+   逆时针
+   55° → -305° */
 
 @keyframes orbitRotateTwo{
 
@@ -845,8 +839,8 @@ body{
 
 
 /* 第三圈
-   110° → 470°
-   顺时针 */
+   顺时针
+   110° → 470° */
 
 @keyframes orbitRotateThree{
 
@@ -862,6 +856,87 @@ body{
         transform:
             translate(-50%,-50%)
             rotate(470deg);
+    }
+}
+
+
+/* =========================================================
+   ★ 星轨上的小星辰
+   ★ 一颗
+   ★ 沿第一圈星轨运行
+========================================================= */
+
+.orbit-star{
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:500px;
+    height:190px;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(0deg);
+
+    pointer-events:none;
+
+    z-index:3;
+
+    animation:
+        orbitStarMove
+        38s
+        linear
+        infinite;
+}
+
+
+.orbit-star::before{
+
+    content:"✦";
+
+    position:absolute;
+
+    right:-5px;
+    top:50%;
+
+    transform:
+        translateY(-50%);
+
+    color:
+        rgba(190,225,249,.9);
+
+    font-family:serif;
+
+    font-size:12px;
+
+    text-shadow:
+        0 0 5px
+        rgba(111,190,239,.85),
+
+        0 0 12px
+        rgba(76,160,218,.5),
+
+        0 0 20px
+        rgba(66,145,207,.25);
+}
+
+
+@keyframes orbitStarMove{
+
+    from{
+
+        transform:
+            translate(-50%,-50%)
+            rotate(0deg);
+    }
+
+    to{
+
+        transform:
+            translate(-50%,-50%)
+            rotate(360deg);
     }
 }
 
@@ -1559,6 +1634,15 @@ body{
     }
 
 
+    /* 手机小星辰 */
+
+    .orbit-star{
+
+        width:350px;
+        height:133px;
+    }
+
+
     .magic-line.horizontal{
         width:350px;
     }
@@ -1784,6 +1868,10 @@ body{
             <div class="orbit two"></div>
 
             <div class="orbit three"></div>
+
+            <!-- ★ 沿第一圈星轨运行的小星辰 -->
+
+            <div class="orbit-star"></div>
 
             <div class="magic-line horizontal"></div>
 
