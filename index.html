@@ -14,7 +14,7 @@
       href="https://fonts.googleapis.com">
 
 <link rel="preconnect"
-      href="https://fonts.googleapis.com">
+      href="https://fonts.gstatic.com">
 
 <link rel="preconnect"
       href="https://fonts.googleapis.com"
@@ -23,12 +23,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500&display=swap"
       rel="stylesheet">
 
-
 <style>
-
-/* =========================================================
-   基础
-========================================================= */
 
 *{
     box-sizing:border-box;
@@ -46,46 +41,24 @@ body{
     background:#061426;
     color:#dcecff;
     overflow-x:hidden;
-
-    font-family:
-        "Cormorant Garamond",
-        "Noto Serif SC",
-        serif;
+    font-family:"Cormorant Garamond","Noto Serif SC",serif;
 }
-
-
-/* =========================================================
-   页面背景
-========================================================= */
 
 .page{
     position:relative;
-
     width:100%;
     min-height:100vh;
-
     overflow:hidden;
-
     background:
-        radial-gradient(
-            circle at 50% 45%,
-            rgba(38,91,137,.18),
-            transparent 38%
-        ),
-
-        radial-gradient(
-            circle at 50% 50%,
-            rgba(11,45,75,.45),
-            transparent 70%
-        ),
-
+        radial-gradient(circle at 50% 45%, rgba(38,91,137,.18), transparent 38%),
+        radial-gradient(circle at 50% 50%, rgba(11,45,75,.45), transparent 70%),
         #061426;
 }
 
 
-/* =========================================================
-   星空
-========================================================= */
+/* =========================
+   背景星空
+========================= */
 
 .stars{
     position:absolute;
@@ -96,113 +69,63 @@ body{
 
 .stars::before,
 .stars::after{
-
     content:"";
-
     position:absolute;
     inset:-20%;
-
     background-image:
-
-        radial-gradient(
-            circle,
-            rgba(182,220,255,.7) 0 1px,
-            transparent 1.5px
-        ),
-
-        radial-gradient(
-            circle,
-            rgba(130,191,239,.45) 0 1px,
-            transparent 1.5px
-        ),
-
-        radial-gradient(
-            circle,
-            rgba(220,240,255,.35) 0 1px,
-            transparent 1.5px
-        );
-
+        radial-gradient(circle, rgba(182,220,255,.7) 0 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(130,191,239,.45) 0 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(220,240,255,.35) 0 1px, transparent 1.5px);
     background-size:
         180px 180px,
         240px 240px,
         310px 310px;
-
     background-position:
         20px 30px,
         80px 120px,
         150px 70px;
-
     opacity:.45;
-
-    animation:
-        starMove
-        35s
-        linear
-        infinite;
+    animation:starMove 35s linear infinite;
 }
 
 .stars::after{
-
     opacity:.22;
-
     transform:scale(1.15);
-
     animation-duration:50s;
 }
-
 
 @keyframes starMove{
 
     from{
-        transform:
-            translate3d(0,0,0);
+        transform:translate3d(0,0,0);
     }
 
     to{
-        transform:
-            translate3d(-80px,50px,0);
+        transform:translate3d(-80px,50px,0);
     }
 
 }
 
 
-/* =========================================================
+/* =========================
    浮动星星
-========================================================= */
+========================= */
 
 .floating-stars{
-
     position:absolute;
     inset:0;
-
     pointer-events:none;
-
     z-index:2;
 }
 
 .floating-stars span{
-
     position:absolute;
-
-    color:
-        rgba(158,207,247,.62);
-
-    font-family:
-        serif;
-
+    color:rgba(158,207,247,.62);
+    font-family:serif;
     font-size:14px;
-
-    text-shadow:
-        0 0 8px
-        rgba(96,177,242,.5);
-
-    animation:
-        floatStar
-        6s
-        ease-in-out
-        infinite;
+    text-shadow:0 0 8px rgba(96,177,242,.5);
+    animation:floatStar 6s ease-in-out infinite;
 }
-
 
 .floating-stars span:nth-child(1){
     left:12%;
@@ -276,110 +199,67 @@ body{
     animation-delay:4.2s;
 }
 
-
 @keyframes floatStar{
 
-    0%,
-    100%{
-
+    0%,100%{
         opacity:.35;
-
-        transform:
-            translateY(0)
-            rotate(0deg);
+        transform:translateY(0) rotate(0deg);
     }
 
     50%{
-
         opacity:.85;
-
-        transform:
-            translateY(-8px)
-            rotate(12deg);
+        transform:translateY(-8px) rotate(12deg);
     }
 
 }
 
 
-/* =========================================================
+/* =========================
    外框
-========================================================= */
+========================= */
 
 .frame{
-
     position:absolute;
-
     inset:18px;
-
-    border:
-        1px solid
-        rgba(111,174,224,.32);
-
+    border:1px solid rgba(111,174,224,.32);
     pointer-events:none;
-
     z-index:10;
 }
 
 .frame::before{
-
     content:"";
-
     position:absolute;
-
     inset:7px;
-
-    border:
-        1px solid
-        rgba(81,142,193,.08);
+    border:1px solid rgba(81,142,193,.08);
 }
 
 
-/* =========================================================
+/* =========================
    四角六芒星
-========================================================= */
+========================= */
 
 .corner{
-
     position:absolute;
-
     width:68px;
     height:68px;
-
     display:flex;
-
     align-items:center;
     justify-content:center;
-
     pointer-events:none;
 }
 
 .corner::before{
-
     content:"✡";
-
     display:block;
-
-    font-family:
-        "Times New Roman",
-        serif;
-
+    font-family:"Times New Roman",serif;
     font-size:31px;
     font-weight:400;
-
     line-height:1;
-
-    color:
-        rgba(108,178,230,.88);
-
+    color:rgba(108,178,230,.88);
     text-shadow:
-
-        0 0 5px
-        rgba(67,153,218,.5),
-
-        0 0 13px
-        rgba(43,124,190,.28);
+        0 0 5px rgba(67,153,218,.5),
+        0 0 13px rgba(43,124,190,.28);
 }
-
 
 .corner.tl{
     left:-34px;
@@ -402,192 +282,100 @@ body{
 }
 
 
-/* =========================================================
+/* =========================
    顶部导航
-========================================================= */
+========================= */
 
 .top-nav{
-
     position:absolute;
-
     left:58px;
     right:58px;
-
     top:38px;
-
     display:flex;
-
     align-items:flex-start;
-
     justify-content:space-between;
-
     z-index:20;
 }
 
-
-/* =========================================================
-   Logo
-========================================================= */
-
 .logo{
-
     display:flex;
-
     align-items:baseline;
-
     gap:10px;
-
     color:#d9edff;
-
     text-decoration:none;
 }
 
-
 .logo-mark{
-
     width:auto;
     height:auto;
-
     display:block;
-
     flex-shrink:0;
-
-    font-family:
-        "Times New Roman",
-        serif;
-
+    font-family:"Times New Roman",serif;
     font-size:21px;
-
     font-weight:400;
-
     line-height:1;
-
-    color:
-        rgba(137,201,239,.9);
-
+    color:rgba(137,201,239,.9);
     position:relative;
-
     top:1px;
-
     text-shadow:
-
-        0 0 7px
-        rgba(76,159,216,.5),
-
-        0 0 15px
-        rgba(49,132,191,.22);
+        0 0 7px rgba(76,159,216,.5),
+        0 0 15px rgba(49,132,191,.22);
 }
 
-
-/* =========================================================
-   Logo文字
-========================================================= */
-
 .logo-text{
-
     display:flex;
-
     flex-direction:column;
-
     line-height:1.05;
 }
 
 .logo-cn{
-
-    font-family:
-        "Noto Serif SC",
-        serif;
-
+    font-family:"Noto Serif SC",serif;
     font-size:15px;
-
     font-weight:400;
-
     letter-spacing:2px;
 }
 
 .logo-en{
-
     margin-top:5px;
-
-    font-family:
-        "Cinzel",
-        serif;
-
+    font-family:"Cinzel",serif;
     font-size:8px;
-
     letter-spacing:3px;
-
-    color:
-        rgba(157,204,239,.63);
+    color:rgba(157,204,239,.63);
 }
 
-
-/* =========================================================
-   导航
-========================================================= */
-
 .nav-links{
-
     display:flex;
-
     align-items:center;
-
     gap:31px;
 }
 
 .nav-links a{
-
     position:relative;
-
-    color:
-        rgba(191,220,243,.68);
-
+    color:rgba(191,220,243,.68);
     text-decoration:none;
-
-    font-family:
-        "Noto Serif SC",
-        serif;
-
+    font-family:"Noto Serif SC",serif;
     font-size:12px;
-
     letter-spacing:2px;
-
     transition:
         color .3s ease,
         text-shadow .3s ease;
 }
 
 .nav-links a::after{
-
     content:"";
-
     position:absolute;
-
     left:50%;
-
     bottom:-8px;
-
     width:0;
-
     height:1px;
-
-    background:
-        rgba(122,192,235,.7);
-
-    transform:
-        translateX(-50%);
-
-    transition:
-        width .3s ease;
+    background:rgba(122,192,235,.7);
+    transform:translateX(-50%);
+    transition:width .3s ease;
 }
 
 .nav-links a:hover{
-
     color:#d9efff;
-
-    text-shadow:
-        0 0 8px
-        rgba(102,180,231,.35);
+    text-shadow:0 0 8px rgba(102,180,231,.35);
 }
 
 .nav-links a:hover::after{
@@ -595,111 +383,58 @@ body{
 }
 
 
-/* =========================================================
-   主区域
-========================================================= */
+/* =========================
+   主体
+========================= */
 
 .main{
-
     position:relative;
-
     width:100%;
-
     min-height:100vh;
-
     display:flex;
-
     flex-direction:column;
-
     align-items:center;
-
     justify-content:center;
-
     z-index:5;
-
-    padding:
-        80px
-        20px
-        70px;
+    padding:80px 20px 70px;
 }
 
 
-/* =========================================================
-   魔法阵
-========================================================= */
+/* =========================
+   魔法圆阵
+========================= */
 
 .magic-circle{
-
     position:absolute;
-
     width:560px;
     height:560px;
-
     left:50%;
     top:50%;
-
-    transform:
-        translate(-50%,-50%);
-
+    transform:translate(-50%,-50%);
     border-radius:50%;
-
     pointer-events:none;
-
     opacity:.55;
 }
 
-
 .magic-circle::before{
-
     content:"";
-
     position:absolute;
-
     inset:0;
-
     border-radius:50%;
-
-    border:
-        1px solid
-        rgba(73,143,198,.28);
-
-    box-shadow:
-        0 0 22px
-        rgba(47,126,184,.08);
-
-    animation:
-        rotateCircle
-        80s
-        linear
-        infinite;
+    border:1px solid rgba(73,143,198,.28);
+    box-shadow:0 0 22px rgba(47,126,184,.08);
+    animation:rotateCircle 80s linear infinite;
 }
-
 
 .magic-circle::after{
-
     content:"";
-
     position:absolute;
-
     inset:27px;
-
     border-radius:50%;
-
-    border:
-        1px solid
-        rgba(91,162,213,.22);
-
-    box-shadow:
-        inset 0 0 20px
-        rgba(62,139,194,.04);
-
-    animation:
-        rotateCircleReverse
-        55s
-        linear
-        infinite;
+    border:1px solid rgba(91,162,213,.22);
+    box-shadow:inset 0 0 20px rgba(62,139,194,.04);
+    animation:rotateCircleReverse 55s linear infinite;
 }
-
 
 @keyframes rotateCircle{
 
@@ -710,8 +445,8 @@ body{
     to{
         transform:rotate(360deg);
     }
-}
 
+}
 
 @keyframes rotateCircleReverse{
 
@@ -722,522 +457,291 @@ body{
     to{
         transform:rotate(0deg);
     }
+
 }
 
 
-/* =========================================================
-   ★ 星轨
-   ★ 三圈独立旋转
-   ★ 这里只调整转速
-========================================================= */
+/* ==========================================================
+   三重魔法星轨
+========================================================== */
 
-.orbit{
-
+.orbit-system{
     position:absolute;
-
-    left:50%;
-    top:50%;
-
-    border:
-        1px solid
-        rgba(69,164,230,.28);
-
-    border-radius:50%;
-
-    box-shadow:
-        0 0 6px
-        rgba(70,155,210,.12);
+    inset:0;
+    width:100%;
+    height:100%;
+    overflow:visible;
 }
 
 
-/* 第一圈
-   顺时针
-   ★ 52秒 */
+/*
+   三条轨道：
 
-.orbit.one{
+   A = 38秒 / 顺时针
+   B = 32秒 / 逆时针
+   C = 25秒 / 顺时针
+*/
 
-    width:500px;
-    height:190px;
-
-    animation:
-        orbitRotateOne
-        52s
-        linear
-        infinite;
+.orbit-track{
+    fill:none;
+    stroke:rgba(69,164,230,.28);
+    stroke-width:1;
+    vector-effect:non-scaling-stroke;
+    filter:drop-shadow(0 0 4px rgba(70,155,210,.10));
 }
 
 
-/* 第二圈
-   逆时针
-   ★ 68秒 */
+/* =========================
+   小星辰
+========================= */
 
-.orbit.two{
-
-    width:420px;
-    height:145px;
-
-    animation:
-        orbitRotateTwo
-        68s
-        linear
-        infinite;
+#travellingStar{
+    font-family:"Times New Roman",serif;
+    font-size:15px;
+    fill:rgba(190,228,255,.95);
+    text-anchor:middle;
+    dominant-baseline:middle;
+    filter:
+        drop-shadow(0 0 3px rgba(131,207,250,.9))
+        drop-shadow(0 0 8px rgba(74,165,224,.55));
 }
 
 
-/* 第三圈
-   顺时针
-   ★ 42秒 */
+/* 小星辰旁边非常淡的一圈光 */
 
-.orbit.three{
-
-    width:330px;
-    height:105px;
-
-    animation:
-        orbitRotateThree
-        42s
-        linear
-        infinite;
+.star-glow{
+    fill:rgba(143,210,246,.08);
+    filter:blur(2px);
 }
 
 
-/* 第一圈
-   0° → 360° */
-
-@keyframes orbitRotateOne{
-
-    from{
-
-        transform:
-            translate(-50%,-50%)
-            rotate(0deg);
-    }
-
-    to{
-
-        transform:
-            translate(-50%,-50%)
-            rotate(360deg);
-    }
-}
-
-
-/* 第二圈
-   55° → -305°
-   逆时针 */
-
-@keyframes orbitRotateTwo{
-
-    from{
-
-        transform:
-            translate(-50%,-50%)
-            rotate(55deg);
-    }
-
-    to{
-
-        transform:
-            translate(-50%,-50%)
-            rotate(-305deg);
-    }
-}
-
-
-/* 第三圈
-   110° → 470°
-   顺时针 */
-
-@keyframes orbitRotateThree{
-
-    from{
-
-        transform:
-            translate(-50%,-50%)
-            rotate(110deg);
-    }
-
-    to{
-
-        transform:
-            translate(-50%,-50%)
-            rotate(470deg);
-    }
-}
-
-
-/* =========================================================
-   魔法阵十字线
-========================================================= */
+/* =========================
+   中央魔法线
+========================= */
 
 .magic-line{
-
     position:absolute;
-
     left:50%;
     top:50%;
-
-    transform:
-        translate(-50%,-50%);
-
-    background:
-        rgba(92,164,213,.13);
+    transform:translate(-50%,-50%);
+    background:rgba(92,164,213,.13);
 }
 
 .magic-line.horizontal{
-
     width:490px;
-
     height:1px;
 }
 
 .magic-line.vertical{
-
     width:1px;
-
     height:490px;
 }
 
 
-/* =========================================================
-   魔法阵中心
-========================================================= */
+/* =========================
+   中央小圆
+========================= */
 
 .magic-center{
-
     position:absolute;
-
     left:50%;
     top:50%;
-
     width:12px;
     height:12px;
-
-    transform:
-        translate(-50%,-50%);
-
-    border:
-        1px solid
-        rgba(133,202,242,.48);
-
+    transform:translate(-50%,-50%);
+    border:1px solid rgba(133,202,242,.48);
     border-radius:50%;
-
-    box-shadow:
-        0 0 10px
-        rgba(88,171,224,.25);
+    box-shadow:0 0 10px rgba(88,171,224,.25);
 }
 
 .magic-center::before{
-
     content:"";
-
     position:absolute;
-
     left:50%;
     top:50%;
-
     width:3px;
     height:3px;
-
-    transform:
-        translate(-50%,-50%);
-
+    transform:translate(-50%,-50%);
     border-radius:50%;
-
-    background:
-        rgba(174,221,249,.7);
-
-    box-shadow:
-        0 0 8px
-        rgba(126,203,244,.8);
+    background:rgba(174,221,249,.7);
+    box-shadow:0 0 8px rgba(126,203,244,.8);
 }
 
 
-/* =========================================================
+/* =========================
    标题
-========================================================= */
+========================= */
 
 .title-area{
-
     position:relative;
-
     text-align:center;
-
     z-index:8;
-
     margin-top:-18px;
 }
 
 .main-title{
-
     display:flex;
-
     flex-direction:column;
-
     align-items:center;
-
-    font-family:
-        "Cinzel",
-        "Cormorant Garamond",
-        serif;
-
+    font-family:"Cinzel","Cormorant Garamond",serif;
     font-weight:400;
-
     line-height:.83;
-
     letter-spacing:8px;
-
     color:#dceeff;
-
-    text-shadow:
-        0 0 18px
-        rgba(94,172,222,.08);
+    text-shadow:0 0 18px rgba(94,172,222,.08);
 }
 
 .main-title .seyami{
-
     font-size:70px;
 }
 
 .main-title .archive{
-
     margin-top:15px;
-
     font-size:87px;
-
     letter-spacing:9px;
 }
 
 
-/* =========================================================
+/* =========================
    标题装饰
-========================================================= */
+========================= */
 
 .title-decoration{
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     gap:15px;
-
     margin-top:29px;
-
     opacity:.7;
 }
 
 .title-decoration .line{
-
     width:95px;
     height:1px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(115,182,224,.62)
-        );
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(115,182,224,.62)
+    );
 }
 
 .title-decoration .line.right{
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(115,182,224,.62),
-            transparent
-        );
+    background:linear-gradient(
+        90deg,
+        rgba(115,182,224,.62),
+        transparent
+    );
 }
 
 .title-decoration .diamond{
-
     width:6px;
     height:6px;
-
-    border:
-        1px solid
-        rgba(143,202,237,.8);
-
+    border:1px solid rgba(143,202,237,.8);
     transform:rotate(45deg);
 }
 
 
-/* =========================================================
+/* =========================
    中文标题
-========================================================= */
+========================= */
 
 .chinese-title{
-
     margin-top:24px;
-
-    font-family:
-        "Noto Serif SC",
-        serif;
-
+    font-family:"Noto Serif SC",serif;
     font-size:20px;
-
     font-weight:300;
-
     letter-spacing:8px;
-
-    color:
-        rgba(207,229,246,.86);
+    color:rgba(207,229,246,.86);
 }
 
 
-/* =========================================================
-   简介
-========================================================= */
+/* =========================
+   描述
+========================= */
 
 .description{
-
     margin-top:20px;
-
     display:flex;
-
     flex-direction:column;
-
     gap:7px;
-
     text-align:center;
-
-    color:
-        rgba(177,207,230,.62);
-
-    font-family:
-        "Noto Serif SC",
-        serif;
-
+    color:rgba(177,207,230,.62);
+    font-family:"Noto Serif SC",serif;
     font-size:12px;
-
     line-height:1.7;
-
     letter-spacing:2px;
 }
 
 
-/* =========================================================
-   进入档案馆
-========================================================= */
+/* =========================
+   进入按钮
+========================= */
 
 .enter-wrap{
-
     position:relative;
-
     width:370px;
     height:82px;
-
     margin-top:42px;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 }
 
 .enter-wrap::before{
-
     content:"";
-
     position:absolute;
-
     inset:0;
-
-    clip-path:
-        polygon(
-            0 20%,
-            5% 20%,
-            8% 0,
-            92% 0,
-            95% 20%,
-            100% 20%,
-            100% 80%,
-            95% 80%,
-            92% 100%,
-            8% 100%,
-            5% 80%,
-            0 80%
-        );
-
-    border:
-        1px solid
-        rgba(91,167,218,.38);
-
-    background:
-        rgba(8,28,49,.48);
-
-    box-shadow:
-        0 0 22px
-        rgba(39,120,180,.08);
-
+    clip-path:polygon(
+        0 20%,
+        5% 20%,
+        8% 0,
+        92% 0,
+        95% 20%,
+        100% 20%,
+        100% 80%,
+        95% 80%,
+        92% 100%,
+        8% 100%,
+        5% 80%,
+        0 80%
+    );
+    border:1px solid rgba(91,167,218,.38);
+    background:rgba(8,28,49,.48);
+    box-shadow:0 0 22px rgba(39,120,180,.08);
     pointer-events:none;
 }
-
 
 .enter-wrap::after{
-
     content:"";
-
     position:absolute;
-
     left:13px;
     right:13px;
-
     top:13px;
     bottom:13px;
-
-    border:
-        1px solid
-        rgba(91,164,213,.16);
-
+    border:1px solid rgba(91,164,213,.16);
     pointer-events:none;
 }
 
-
 .enter-button{
-
     position:relative;
-
     z-index:2;
-
     width:300px;
     height:50px;
-
     border:none;
-
     outline:none;
-
     cursor:pointer;
-
     color:#d9edff;
-
-    font-family:
-        "Noto Serif SC",
-        serif;
-
+    font-family:"Noto Serif SC",serif;
     font-size:13px;
-
     letter-spacing:4px;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(8,31,52,.88),
-            rgba(17,51,78,.88),
-            rgba(8,31,52,.88)
-        );
-
-    border-top:
-        1px solid
-        rgba(105,180,225,.38);
-
-    border-bottom:
-        1px solid
-        rgba(105,180,225,.38);
-
+    background:linear-gradient(
+        90deg,
+        rgba(8,31,52,.88),
+        rgba(17,51,78,.88),
+        rgba(8,31,52,.88)
+    );
+    border-top:1px solid rgba(105,180,225,.38);
+    border-bottom:1px solid rgba(105,180,225,.38);
     transition:
         background .35s ease,
         box-shadow .35s ease,
@@ -1245,19 +749,13 @@ body{
 }
 
 .enter-button:hover{
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(10,41,67,.95),
-            rgba(23,66,98,.95),
-            rgba(10,41,67,.95)
-        );
-
-    box-shadow:
-        0 0 22px
-        rgba(56,143,201,.18);
-
+    background:linear-gradient(
+        90deg,
+        rgba(10,41,67,.95),
+        rgba(23,66,98,.95),
+        rgba(10,41,67,.95)
+    );
+    box-shadow:0 0 22px rgba(56,143,201,.18);
     letter-spacing:5px;
 }
 
@@ -1265,28 +763,13 @@ body{
     transform:translateY(1px);
 }
 
-
-/* =========================================================
-   按钮星星
-========================================================= */
-
 .enter-star{
-
     position:absolute;
-
     top:50%;
-
-    transform:
-        translateY(-50%);
-
-    color:
-        rgba(111,186,229,.75);
-
+    transform:translateY(-50%);
+    color:rgba(111,186,229,.75);
     font-size:16px;
-
-    text-shadow:
-        0 0 9px
-        rgba(67,158,215,.45);
+    text-shadow:0 0 9px rgba(67,158,215,.45);
 }
 
 .enter-star.left{
@@ -1297,28 +780,13 @@ body{
     right:26px;
 }
 
-
-/* =========================================================
-   按钮菱形
-========================================================= */
-
 .enter-diamond{
-
     position:absolute;
-
     left:50%;
-
     width:6px;
     height:6px;
-
-    transform:
-        translateX(-50%)
-        rotate(45deg);
-
-    border:
-        1px solid
-        rgba(116,187,226,.65);
-
+    transform:translateX(-50%) rotate(45deg);
+    border:1px solid rgba(116,187,226,.65);
     background:#061426;
 }
 
@@ -1331,46 +799,31 @@ body{
 }
 
 
-/* =========================================================
-   页脚
-========================================================= */
+/* =========================
+   Footer
+========================= */
 
 .footer{
-
     position:absolute;
-
     left:50%;
-
     bottom:32px;
-
-    transform:
-        translateX(-50%);
-
+    transform:translateX(-50%);
     z-index:15;
-
-    color:
-        rgba(133,177,207,.38);
-
-    font-family:
-        "Cinzel",
-        serif;
-
+    color:rgba(133,177,207,.38);
+    font-family:"Cinzel",serif;
     font-size:8px;
-
     letter-spacing:4px;
-
     white-space:nowrap;
 }
 
 
-/* =========================================================
+/* ==========================================================
    平板
-========================================================= */
+========================================================== */
 
 @media(max-width:800px){
 
     .top-nav{
-
         left:35px;
         right:35px;
         top:30px;
@@ -1381,13 +834,11 @@ body{
     }
 
     .nav-links a{
-
         font-size:11px;
         letter-spacing:1px;
     }
 
     .magic-circle{
-
         width:500px;
         height:500px;
     }
@@ -1411,9 +862,9 @@ body{
 }
 
 
-/* =========================================================
+/* ==========================================================
    手机
-========================================================= */
+========================================================== */
 
 @media(max-width:520px){
 
@@ -1421,143 +872,80 @@ body{
         inset:12px;
     }
 
-
     .top-nav{
-
         left:25px;
         right:25px;
         top:24px;
     }
 
-
     .logo{
-
         gap:8px;
-
         align-items:baseline;
     }
 
-
     .logo-mark{
-
         font-size:18px;
-
         position:relative;
-
         top:1px;
     }
 
-
     .logo-cn{
-
         font-size:12px;
-
         letter-spacing:1px;
     }
 
-
     .logo-en{
-
         font-size:6px;
-
         letter-spacing:2px;
     }
-
 
     .nav-links{
         gap:12px;
     }
 
-
     .nav-links a{
-
         font-size:9px;
-
         letter-spacing:0;
     }
 
-
-    /* 手机四角 */
-
     .corner{
-
         width:55px;
         height:55px;
     }
 
-
     .corner.tl{
-
         left:-27.5px;
         top:-27.5px;
     }
 
     .corner.tr{
-
         right:-27.5px;
         top:-27.5px;
     }
 
     .corner.bl{
-
         left:-27.5px;
         bottom:-27.5px;
     }
 
     .corner.br{
-
         right:-27.5px;
         bottom:-27.5px;
     }
-
 
     .corner::before{
         font-size:26px;
     }
 
-
-    /* 手机主区域 */
-
     .main{
-
-        padding:
-            100px
-            15px
-            70px;
+        padding:100px 15px 70px;
     }
-
-
-    /* 手机魔法阵 */
 
     .magic-circle{
-
         width:390px;
         height:390px;
-
         opacity:.48;
     }
-
-
-    /* 手机星轨尺寸 */
-
-    .orbit.one{
-
-        width:350px;
-        height:133px;
-    }
-
-    .orbit.two{
-
-        width:295px;
-        height:102px;
-    }
-
-    .orbit.three{
-
-        width:235px;
-        height:75px;
-    }
-
 
     .magic-line.horizontal{
         width:350px;
@@ -1567,31 +955,21 @@ body{
         height:350px;
     }
 
-
-    /* 手机标题 */
-
     .main-title{
-
         letter-spacing:5px;
     }
 
     .main-title .seyami{
-
         font-size:43px;
     }
 
     .main-title .archive{
-
         margin-top:11px;
-
         font-size:53px;
-
         letter-spacing:6px;
     }
 
-
     .title-decoration{
-
         margin-top:23px;
     }
 
@@ -1599,46 +977,30 @@ body{
         width:55px;
     }
 
-
     .chinese-title{
-
         margin-top:20px;
-
         font-size:15px;
-
         letter-spacing:5px;
     }
 
-
     .description{
-
         margin-top:16px;
-
         font-size:10px;
-
         letter-spacing:1px;
     }
 
-
     .enter-wrap{
-
         width:320px;
         height:76px;
-
         margin-top:35px;
     }
 
-
     .enter-button{
-
         width:255px;
         height:46px;
-
         font-size:11px;
-
         letter-spacing:3px;
     }
-
 
     .enter-star.left{
         left:23px;
@@ -1648,13 +1010,9 @@ body{
         right:23px;
     }
 
-
     .footer{
-
         bottom:21px;
-
         font-size:6px;
-
         letter-spacing:2px;
     }
 
@@ -1670,16 +1028,12 @@ body{
 <div class="page">
 
 
-    <!-- =====================================================
-         背景星空
-    ====================================================== -->
+    <!-- 背景星空 -->
 
     <div class="stars"></div>
 
 
-    <!-- =====================================================
-         浮动星星
-    ====================================================== -->
+    <!-- 浮动装饰星 -->
 
     <div class="floating-stars">
 
@@ -1699,37 +1053,27 @@ body{
     </div>
 
 
-    <!-- =====================================================
-         页面边框
-    ====================================================== -->
+    <!-- 外框 -->
 
     <div class="frame">
 
         <div class="corner tl"></div>
         <div class="corner tr"></div>
-
         <div class="corner bl"></div>
         <div class="corner br"></div>
 
     </div>
 
 
-    <!-- =====================================================
-         顶部导航
-    ====================================================== -->
+    <!-- 顶部 -->
 
     <header class="top-nav">
 
-
-        <a
-            href="index.html"
-            class="logo"
-        >
+        <a href="index.html" class="logo">
 
             <div class="logo-mark">
                 ✶
             </div>
-
 
             <div class="logo-text">
 
@@ -1765,38 +1109,129 @@ body{
     </header>
 
 
-    <!-- =====================================================
-         主区域
-    ====================================================== -->
+    <!-- 主体 -->
 
     <main class="main">
 
 
-        <!-- =================================================
-             魔法阵
-        ================================================== -->
+        <!-- =========================
+             魔法阵 + 三条动态星轨
+        ========================== -->
 
         <div class="magic-circle">
 
 
-            <div class="orbit one"></div>
+            <!--
 
-            <div class="orbit two"></div>
+                这里使用 SVG 是为了让三条轨道
+                真正拥有可以相交的轨迹。
 
-            <div class="orbit three"></div>
+                A = 38秒
+                B = 32秒
+                C = 25秒
+
+            -->
+
+            <svg
+                id="orbitSVG"
+                class="orbit-system"
+                viewBox="0 0 560 560"
+                preserveAspectRatio="xMidYMid meet"
+                aria-hidden="true"
+            >
+
+
+                <!-- 第一轨 -->
+
+                <g id="orbitA">
+
+                    <ellipse
+                        id="ellipseA"
+                        class="orbit-track"
+                        cx="280"
+                        cy="280"
+                        rx="250"
+                        ry="95"
+                    />
+
+                </g>
+
+
+                <!-- 第二轨 -->
+
+                <g id="orbitB">
+
+                    <ellipse
+                        id="ellipseB"
+                        class="orbit-track"
+                        cx="280"
+                        cy="280"
+                        rx="210"
+                        ry="72.5"
+                    />
+
+                </g>
+
+
+                <!-- 第三轨 -->
+
+                <g id="orbitC">
+
+                    <ellipse
+                        id="ellipseC"
+                        class="orbit-track"
+                        cx="280"
+                        cy="280"
+                        rx="165"
+                        ry="52.5"
+                    />
+
+                </g>
+
+
+                <!-- 小星辰的微光 -->
+
+                <circle
+                    id="starGlow"
+                    class="star-glow"
+                    cx="280"
+                    cy="280"
+                    r="8"
+                />
+
+
+                <!-- 唯一的小星辰 -->
+
+                <text
+                    id="travellingStar"
+                    x="280"
+                    y="280"
+                >
+                    ✦
+                </text>
+
+
+            </svg>
+
+
+            <!-- 横竖魔法线 -->
 
             <div class="magic-line horizontal"></div>
 
             <div class="magic-line vertical"></div>
 
+
+            <!-- 中心 -->
+
             <div class="magic-center"></div>
+
 
         </div>
 
 
-        <!-- =================================================
-             标题
-        ================================================== -->
+        <!-- =========================
+             标题区域
+        ========================== -->
 
         <section class="title-area">
 
@@ -1876,19 +1311,911 @@ body{
     </main>
 
 
-    <!-- =====================================================
-         页脚
-    ====================================================== -->
+    <!-- Footer -->
 
     <footer class="footer">
-
         ✦　THE ARCHIVES OF SEYAMI　✦
-
     </footer>
 
 
 </div>
 
-</body>
 
+<script>
+
+/* =========================================================
+   SEYAMI ARCHIVE
+   三轨动态星辰系统
+
+   A：38秒 / 顺时针
+   B：32秒 / 逆时针
+   C：25秒 / 顺时针
+
+   星辰路线：
+
+   A
+   ↓
+   A / B 交界
+   ↓
+   B
+   ↓
+   B / C 交界
+   ↓
+   C
+   ↓
+   C / A 交界
+   ↓
+   A
+
+========================================================= */
+
+
+(function(){
+
+
+    const svg = document.getElementById("orbitSVG");
+
+    const star = document.getElementById("travellingStar");
+
+    const glow = document.getElementById("starGlow");
+
+
+    if(!svg || !star || !glow){
+        return;
+    }
+
+
+    const CX = 280;
+    const CY = 280;
+
+
+    /*
+       三条轨道的基础参数
+    */
+
+    const tracks = [
+
+        {
+            id:"A",
+            rx:250,
+            ry:95,
+            rotation:0,
+            speed:360 / 38
+        },
+
+        {
+            id:"B",
+            rx:210,
+            ry:72.5,
+            rotation:55,
+            speed:-360 / 32
+        },
+
+        {
+            id:"C",
+            rx:165,
+            ry:52.5,
+            rotation:110,
+            speed:360 / 25
+        }
+
+    ];
+
+
+    /*
+       星辰目前所在轨道
+
+       0 = A
+       1 = B
+       2 = C
+    */
+
+    let currentTrack = 0;
+
+
+    /*
+       星辰在当前轨道上的参数角度
+    */
+
+    let starParameter = 0;
+
+
+    /*
+       目标角度
+
+       星辰会从一个交界
+       移动到下一个交界
+    */
+
+    let targetParameter = 0;
+
+
+    /*
+       当前是否正在切换轨道
+    */
+
+    let switching = false;
+
+
+    /*
+       上一次动画时间
+    */
+
+    let lastTime = performance.now();
+
+
+    /*
+       每一轨需要经过的两个交界：
+
+       A：CA → AB
+       B：AB → BC
+       C：BC → CA
+    */
+
+    const routePairs = [
+
+        [2,1],
+
+        [0,2],
+
+        [1,0]
+
+    ];
+
+
+    /*
+       角度转弧度
+    */
+
+    function degToRad(deg){
+
+        return deg * Math.PI / 180;
+
+    }
+
+
+    /*
+       规范化角度
+
+       让角度始终处于 0～360
+    */
+
+    function normalizeAngle(angle){
+
+        angle %= 360;
+
+        if(angle < 0){
+            angle += 360;
+        }
+
+        return angle;
+
+    }
+
+
+    /*
+       当前时间下
+       三条轨道各自旋转到了什么角度
+    */
+
+    function getTrackRotation(track, elapsed){
+
+        return track.rotation +
+               track.speed * elapsed / 1000;
+
+    }
+
+
+    /*
+       根据椭圆参数角度
+       取得轨道上的实际坐标
+    */
+
+    function pointOnTrack(track, parameter, elapsed){
+
+        const angle =
+            parameter +
+            getTrackRotation(track, elapsed);
+
+        const rad = degToRad(angle);
+
+        const x =
+            track.rx * Math.cos(rad);
+
+        const y =
+            track.ry * Math.sin(rad);
+
+
+        return {
+
+            x:CX + x,
+            y:CY + y
+
+        };
+
+    }
+
+
+    /*
+       找到两条轨道之间
+       最接近的交界点。
+
+       因为三条轨道本身一直在转，
+       所以交界点也会跟着移动。
+    */
+
+    function findIntersection(trackA, trackB, elapsed, preferred){
+
+        let best = null;
+
+        const steps = 720;
+
+
+        for(let i=0; i<steps; i++){
+
+            const parameterA =
+                i * 360 / steps;
+
+
+            const pointA =
+                pointOnTrack(
+                    trackA,
+                    parameterA,
+                    elapsed
+                );
+
+
+            for(let j=0; j<steps; j += 2){
+
+                const parameterB =
+                    j * 360 / steps;
+
+
+                const pointB =
+                    pointOnTrack(
+                    trackB,
+                    parameterB,
+                    elapsed
+                );
+
+
+                const dx =
+                    pointA.x - pointB.x;
+
+                const dy =
+                    pointA.y - pointB.y;
+
+
+                const distance =
+                    Math.sqrt(
+                        dx * dx +
+                        dy * dy
+                    );
+
+
+                /*
+                   优先寻找真正接近的交点
+                */
+
+                if(
+                    distance < 3.2 &&
+                    (
+                        best === null ||
+                        distance < best.distance
+                    )
+                ){
+
+                    best = {
+
+                        parameterA,
+                        parameterB,
+
+                        x:(pointA.x + pointB.x) / 2,
+                        y:(pointA.y + pointB.y) / 2,
+
+                        distance
+
+                    };
+
+                }
+
+            }
+
+        }
+
+
+        /*
+           如果当前帧没有找到足够精确的交点，
+           就放宽一点。
+        */
+
+        if(best === null){
+
+            let closest = null;
+
+
+            for(let i=0; i<360; i++){
+
+                const parameterA = i;
+
+
+                const pointA =
+                    pointOnTrack(
+                        trackA,
+                        parameterA,
+                        elapsed
+                    );
+
+
+                /*
+                   根据椭圆关系，
+                   粗略寻找第二条轨道附近位置
+                */
+
+                for(let j=0; j<360; j += 3){
+
+                    const parameterB = j;
+
+
+                    const pointB =
+                        pointOnTrack(
+                            trackB,
+                            parameterB,
+                            elapsed
+                        );
+
+
+                    const dx =
+                        pointA.x - pointB.x;
+
+                    const dy =
+                        pointA.y - pointB.y;
+
+
+                    const distance =
+                        dx * dx + dy * dy;
+
+
+                    if(
+                        closest === null ||
+                        distance < closest.distance
+                    ){
+
+                        closest = {
+
+                            parameterA,
+                            parameterB,
+
+                            x:(pointA.x + pointB.x) / 2,
+                            y:(pointA.y + pointB.y) / 2,
+
+                            distance
+
+                        };
+
+                    }
+
+                }
+
+            }
+
+
+            best = closest;
+
+        }
+
+
+        return best;
+
+    }
+
+
+    /*
+       找到一个交界，
+       并根据当前星辰位置选择
+       更合适的那个交点。
+    */
+
+    function getBestIntersection(
+        trackIndexA,
+        trackIndexB,
+        elapsed,
+        currentParameter
+    ){
+
+        const trackA =
+            tracks[trackIndexA];
+
+        const trackB =
+            tracks[trackIndexB];
+
+
+        const candidates = [];
+
+
+        /*
+           先使用采样方法找出多个可能交点
+        */
+
+        const steps = 360;
+
+
+        for(let i=0; i<steps; i++){
+
+            const parameterA =
+                i;
+
+
+            const pointA =
+                pointOnTrack(
+                    trackA,
+                    parameterA,
+                    elapsed
+                );
+
+
+            for(let j=0; j<steps; j += 3){
+
+                const parameterB =
+                    j;
+
+
+                const pointB =
+                    pointOnTrack(
+                        trackB,
+                        parameterB,
+                        elapsed
+                    );
+
+
+                const dx =
+                    pointA.x - pointB.x;
+
+                const dy =
+                    pointA.y - pointB.y;
+
+
+                const distance =
+                    Math.sqrt(
+                        dx * dx +
+                        dy * dy
+                    );
+
+
+                if(distance < 2.8){
+
+                    candidates.push({
+
+                        parameterA,
+                        parameterB,
+
+                        x:(pointA.x + pointB.x)/2,
+                        y:(pointA.y + pointB.y)/2,
+
+                        distance
+
+                    });
+
+                }
+
+            }
+
+        }
+
+
+        /*
+           没找到时使用最近点
+        */
+
+        if(candidates.length === 0){
+
+            return findIntersection(
+                trackA,
+                trackB,
+                elapsed,
+                currentParameter
+            );
+
+        }
+
+
+        /*
+           根据当前参数
+           选择沿着运行方向最近的交点
+        */
+
+        let best =
+            candidates[0];
+
+        let bestDistance =
+            Infinity;
+
+
+        for(const candidate of candidates){
+
+            let difference =
+                normalizeAngle(
+                    candidate.parameterA -
+                    currentParameter
+                );
+
+
+            /*
+               我们让星辰继续向前走，
+               不突然倒着跑。
+            */
+
+            if(
+                difference > 180
+            ){
+
+                difference =
+                    360 - difference;
+
+            }
+
+
+            if(
+                difference < bestDistance
+            ){
+
+                bestDistance =
+                    difference;
+
+                best =
+                    candidate;
+
+            }
+
+        }
+
+
+        return best;
+
+    }
+
+
+    /*
+       设置星辰目标交界
+    */
+
+    function setNextTarget(elapsed){
+
+        const route =
+            routePairs[currentTrack];
+
+
+        const nextTrackIndex =
+            route[1];
+
+
+        const intersection =
+            getBestIntersection(
+                currentTrack,
+                nextTrackIndex,
+                elapsed,
+                starParameter
+            );
+
+
+        if(!intersection){
+            return;
+        }
+
+
+        /*
+           星辰所在轨道参数
+        */
+
+        targetParameter =
+            intersection.parameterA;
+
+
+        switching = true;
+
+    }
+
+
+    /*
+       一开始从 A 轨道启动。
+
+       我们把它放在 A 轨道上方一点，
+       让画面一开始就能看到它。
+    */
+
+    starParameter = 300;
+
+
+    /*
+       计算星辰移动速度。
+
+       数值越小越慢。
+       这里让它比较优雅，
+       不会像陀螺一样狂转。
+    */
+
+    const STAR_SPEED = 11;
+
+
+    /*
+       将 SVG transform
+       设置为当前三轨道各自的角度。
+    */
+
+    function updateOrbitTransforms(elapsed){
+
+        const groupA =
+            document.getElementById("orbitA");
+
+        const groupB =
+            document.getElementById("orbitB");
+
+        const groupC =
+            document.getElementById("orbitC");
+
+
+        groupA.setAttribute(
+            "transform",
+            `rotate(${getTrackRotation(tracks[0],elapsed)} ${CX} ${CY})`
+        );
+
+
+        groupB.setAttribute(
+            "transform",
+            `rotate(${getTrackRotation(tracks[1],elapsed)} ${CX} ${CY})`
+        );
+
+
+        groupC.setAttribute(
+            "transform",
+            `rotate(${getTrackRotation(tracks[2],elapsed)} ${CX} ${CY})`
+        );
+
+    }
+
+
+    /*
+       将星辰放到当前轨道
+    */
+
+    function updateStar(elapsed){
+
+        const track =
+            tracks[currentTrack];
+
+
+        const position =
+            pointOnTrack(
+                track,
+                starParameter,
+                elapsed
+            );
+
+
+        star.setAttribute(
+            "x",
+            position.x
+        );
+
+        star.setAttribute(
+            "y",
+            position.y
+        );
+
+
+        glow.setAttribute(
+            "cx",
+            position.x
+        );
+
+        glow.setAttribute(
+            "cy",
+            position.y
+        );
+
+    }
+
+
+    /*
+       判断两个角度之间的
+       顺时针前进距离
+    */
+
+    function forwardDistance(
+        from,
+        to
+    ){
+
+        let distance =
+            normalizeAngle(
+                to - from
+            );
+
+
+        return distance;
+
+    }
+
+
+    /*
+       主动画
+    */
+
+    function animate(now){
+
+        const elapsed =
+            now - animationStart;
+
+
+        /*
+           三条轨道独立旋转
+        */
+
+        updateOrbitTransforms(
+            elapsed
+        );
+
+
+        /*
+           如果没有目标，
+           就寻找下一交界。
+        */
+
+        if(!switching){
+
+            setNextTarget(
+                elapsed
+            );
+
+        }
+
+
+        /*
+           让星辰向目标交界前进
+        */
+
+        if(switching){
+
+            const distance =
+                forwardDistance(
+                    starParameter,
+                    targetParameter
+                );
+
+
+            /*
+               正常前进
+            */
+
+            const movement =
+                STAR_SPEED *
+                (now - lastTime) /
+                1000;
+
+
+            /*
+               接近目标时减速一点，
+               让换轨看起来更柔和。
+            */
+
+            if(distance < 20){
+
+                starParameter +=
+                    movement *
+                    Math.max(
+                        0.25,
+                        distance / 20
+                    );
+
+            }else{
+
+                starParameter +=
+                    movement;
+
+            }
+
+
+            starParameter =
+                normalizeAngle(
+                    starParameter
+                );
+
+
+            /*
+               到达交界
+            */
+
+            const remaining =
+                forwardDistance(
+                    starParameter,
+                    targetParameter
+                );
+
+
+            if(
+                remaining < 1.2 ||
+                distance < 1.2
+            ){
+
+                /*
+                   直接落到交界点
+                */
+
+                starParameter =
+                    targetParameter;
+
+
+                /*
+                   真正换轨！
+
+                   A → B
+                   B → C
+                   C → A
+                */
+
+                currentTrack =
+                    (currentTrack + 1) % 3;
+
+
+                switching = false;
+
+
+                /*
+                   给下一轨一个很小的提前量，
+                   防止星辰停在交点不动。
+                */
+
+                starParameter += 0.8;
+
+            }
+
+        }
+
+
+        /*
+           更新星辰位置
+        */
+
+        updateStar(
+            elapsed
+        );
+
+
+        lastTime = now;
+
+
+        requestAnimationFrame(
+            animate
+        );
+
+    }
+
+
+    /*
+       动画开始时间
+    */
+
+    const animationStart =
+        performance.now();
+
+
+    lastTime =
+        animationStart;
+
+
+    /*
+       开始
+    */
+
+    requestAnimationFrame(
+        animate
+    );
+
+
+})();
+
+</script>
+
+
+</body>
 </html>
