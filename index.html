@@ -732,10 +732,10 @@ body{
 
 /* =========================================================
    ★ 星轨
-   ★ 这里只修改运行方式
-   ★ 三层统一 38s，同方向运行
-   ★ 初始角度：0° / 55° / 110°
-   ★ 运行过程中不会再次追上重合
+   ★ 三圈独立旋转
+   ★ 各自不同速度
+   ★ 各自不同方向
+   ★ 初始角度错开
 ========================================================= */
 
 .orbit{
@@ -757,7 +757,7 @@ body{
 }
 
 
-/* 第一层 */
+/* 第一圈 */
 
 .orbit.one{
 
@@ -772,7 +772,7 @@ body{
 }
 
 
-/* 第二层 */
+/* 第二圈 */
 
 .orbit.two{
 
@@ -781,13 +781,13 @@ body{
 
     animation:
         orbitRotateTwo
-        38s
+        32s
         linear
         infinite;
 }
 
 
-/* 第三层 */
+/* 第三圈 */
 
 .orbit.three{
 
@@ -796,14 +796,15 @@ body{
 
     animation:
         orbitRotateThree
-        38s
+        25s
         linear
         infinite;
 }
 
 
-/* 第一层
-   第一帧：0° */
+/* 第一圈
+   顺时针
+   0° → 360° */
 
 @keyframes orbitRotateOne{
 
@@ -823,8 +824,9 @@ body{
 }
 
 
-/* 第二层
-   第一帧：55° */
+/* 第二圈
+   逆时针
+   55° → -305° */
 
 @keyframes orbitRotateTwo{
 
@@ -839,13 +841,14 @@ body{
 
         transform:
             translate(-50%,-50%)
-            rotate(415deg);
+            rotate(-305deg);
     }
 }
 
 
-/* 第三层
-   第一帧：110° */
+/* 第三圈
+   顺时针
+   110° → 470° */
 
 @keyframes orbitRotateThree{
 
@@ -1537,10 +1540,7 @@ body{
     }
 
 
-    /*
-       手机星轨尺寸
-       这里只改变尺寸，不改变运行方式
-    */
+    /* 手机星轨尺寸 */
 
     .orbit.one{
 
@@ -1790,7 +1790,6 @@ body{
             <div class="magic-line horizontal"></div>
 
             <div class="magic-line vertical"></div>
-
 
             <div class="magic-center"></div>
 
