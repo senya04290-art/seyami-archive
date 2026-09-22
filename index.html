@@ -1,1624 +1,1839 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!DOCTYPE html>  <html lang="zh-CN">  <head>  <meta charset="UTF-8">  <meta name="viewport"    content="width=device-width, initial-scale=1.0">
 
-<head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>塞垭弥大陆档案馆 · Seyami Archive</title>
-
-<link rel="preconnect"
-      href="https://fonts.googleapis.com">
-
-<link rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500&display=swap"
-      rel="stylesheet">
-
-
-<style>
-
-/* ==============================
-   基础
-============================== */
+<title>塞垭弥大陆档案馆 · Seyami Archive</title>  <link rel="preconnect"    
+      href="https://fonts.googleapis.com">  <link rel="preconnect"    
+      href="https://fonts.gstatic.com"    
+      crossorigin>  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500&display=swap"    
+      rel="stylesheet">  <style>    /* =========================================================
+基础
+========================================================= */
 
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
 html,
 body{
-    width:100%;
-    min-height:100%;
+width:100%;
+min-height:100%;
 }
 
 body{
-    background:#061426;
-    color:#dcecff;
+background:#061426;
+color:#dcecff;
+overflow-x:hidden;
 
-    font-family:
-        "Cormorant Garamond",
-        "Noto Serif SC",
-        serif;
+font-family:    
+    "Cormorant Garamond",    
+    "Noto Serif SC",    
+    serif;
 
-    overflow-x:hidden;
 }
 
-
-/* ==============================
-   页面
-============================== */
+/* =========================================================
+页面背景
+========================================================= */
 
 .page{
-    position:relative;
+position:relative;
 
-    min-height:100vh;
-    width:100%;
+width:100%;    
+min-height:100vh;    
 
-    overflow:hidden;
+overflow:hidden;    
 
-    background:
+background:    
+    radial-gradient(    
+        circle at 50% 45%,    
+        rgba(38,91,137,.18),    
+        transparent 38%    
+    ),    
 
-        radial-gradient(
-            circle at 50% 45%,
-            rgba(38,91,137,.18),
-            transparent 38%
-        ),
+    radial-gradient(    
+        circle at 50% 50%,    
+        rgba(11,45,75,.45),    
+        transparent 70%    
+    ),    
 
-        radial-gradient(
-            circle at 50% 50%,
-            rgba(11,45,75,.45),
-            transparent 70%
-        ),
+    #061426;
 
-        #061426;
 }
 
-
-/* ==============================
-   背景星尘
-============================== */
+/* =========================================================
+星空
+========================================================= */
 
 .stars{
-    position:absolute;
-    inset:0;
+position:absolute;
+inset:0;
 
-    pointer-events:none;
-
-    opacity:.45;
-
-    background-image:
-
-        radial-gradient(
-            1px 1px at 20% 30%,
-            rgba(190,225,250,.8),
-            transparent
-        ),
-
-        radial-gradient(
-            1px 1px at 70% 20%,
-            rgba(190,225,250,.7),
-            transparent
-        ),
-
-        radial-gradient(
-            1px 1px at 40% 80%,
-            rgba(190,225,250,.65),
-            transparent
-        ),
-
-        radial-gradient(
-            1px 1px at 85% 65%,
-            rgba(190,225,250,.55),
-            transparent
-        );
-
-    background-size:
-        180px 180px,
-        240px 240px,
-        310px 310px,
-        220px 220px;
-
-    animation:
-        starsMove 35s linear infinite,
-        starsGlow 50s ease-in-out infinite alternate;
-}
-
-@keyframes starsMove{
-
-    from{
-        background-position:
-            0 0,
-            0 0,
-            0 0,
-            0 0;
-    }
-
-    to{
-        background-position:
-            90px 60px,
-            -80px 100px,
-            120px -70px,
-            -100px 80px;
-    }
+pointer-events:none;    
+overflow:hidden;
 
 }
 
-@keyframes starsGlow{
+.stars::before,
+.stars::after{
 
-    from{
-        opacity:.32;
-    }
+content:"";    
 
-    to{
-        opacity:.52;
-    }
+position:absolute;    
+inset:-20%;    
+
+background-image:    
+
+    radial-gradient(    
+        circle,    
+        rgba(182,220,255,.7) 0 1px,    
+        transparent 1.5px    
+    ),    
+
+    radial-gradient(    
+        circle,    
+        rgba(130,191,239,.45) 0 1px,    
+        transparent 1.5px    
+    ),    
+
+    radial-gradient(    
+        circle,    
+        rgba(220,240,255,.35) 0 1px,    
+        transparent 1.5px    
+    );    
+
+background-size:    
+    180px 180px,    
+    240px 240px,    
+    310px 310px;    
+
+background-position:    
+    20px 30px,    
+    80px 120px,    
+    150px 70px;    
+
+opacity:.45;    
+
+animation:    
+    starMove    
+    35s    
+    linear    
+    infinite;
 
 }
 
+.stars::after{
 
-/* ==============================
-   浮动星星
-============================== */
+opacity:.22;    
+
+transform:scale(1.15);    
+
+animation-duration:50s;
+
+}
+
+@keyframes starMove{
+
+from{    
+    transform:    
+        translate3d(0,0,0);    
+}    
+
+to{    
+    transform:    
+        translate3d(-80px,50px,0);    
+}
+
+}
+
+/* =========================================================
+浮动星星
+========================================================= */
 
 .floating-stars{
-    position:absolute;
-    inset:0;
 
-    pointer-events:none;
+position:absolute;    
+inset:0;    
 
-    z-index:2;
+pointer-events:none;    
+
+z-index:2;
+
 }
 
 .floating-stars span{
-    position:absolute;
 
-    color:rgba(147,204,239,.55);
+position:absolute;    
 
-    font-family:
-        "Times New Roman",
-        serif;
+color:    
+    rgba(158,207,247,.62);    
 
-    animation:
-        floatStar 6s ease-in-out infinite;
+font-family:    
+    serif;    
+
+font-size:14px;    
+
+text-shadow:    
+    0 0 8px    
+    rgba(96,177,242,.5);    
+
+animation:    
+    floatStar    
+    6s    
+    ease-in-out    
+    infinite;
+
 }
 
 .floating-stars span:nth-child(1){
-    left:12%;
-    top:22%;
-    font-size:12px;
-    animation-delay:0s;
+left:12%;
+top:24%;
+animation-delay:0s;
 }
 
 .floating-stars span:nth-child(2){
-    left:82%;
-    top:19%;
-    font-size:10px;
-    animation-delay:1s;
+left:20%;
+top:67%;
+animation-delay:1.5s;
 }
 
 .floating-stars span:nth-child(3){
-    left:17%;
-    top:67%;
-    font-size:14px;
-    animation-delay:2s;
+left:77%;
+top:22%;
+animation-delay:2.5s;
 }
 
 .floating-stars span:nth-child(4){
-    left:87%;
-    top:72%;
-    font-size:13px;
-    animation-delay:3s;
+left:84%;
+top:70%;
+animation-delay:1s;
 }
 
 .floating-stars span:nth-child(5){
-    left:28%;
-    top:15%;
-    font-size:8px;
-    animation-delay:1.5s;
+left:30%;
+top:17%;
+animation-delay:3s;
 }
 
 .floating-stars span:nth-child(6){
-    left:72%;
-    top:37%;
-    font-size:13px;
-    animation-delay:2.5s;
+left:71%;
+top:61%;
+animation-delay:2s;
 }
 
 .floating-stars span:nth-child(7){
-    left:9%;
-    top:48%;
-    font-size:9px;
-    animation-delay:3.5s;
+left:16%;
+top:46%;
+animation-delay:4s;
 }
 
 .floating-stars span:nth-child(8){
-    left:91%;
-    top:47%;
-    font-size:11px;
-    animation-delay:1.2s;
+left:89%;
+top:43%;
+animation-delay:1.8s;
 }
 
 .floating-stars span:nth-child(9){
-    left:31%;
-    top:82%;
-    font-size:11px;
-    animation-delay:4s;
+left:42%;
+top:11%;
+animation-delay:2.2s;
 }
 
 .floating-stars span:nth-child(10){
-    left:68%;
-    top:84%;
-    font-size:10px;
-    animation-delay:2.2s;
+left:57%;
+top:83%;
+animation-delay:3.5s;
 }
 
 .floating-stars span:nth-child(11){
-    left:47%;
-    top:12%;
-    font-size:8px;
-    animation-delay:4.5s;
+left:7%;
+top:78%;
+animation-delay:1.2s;
 }
 
 .floating-stars span:nth-child(12){
-    left:54%;
-    top:89%;
-    font-size:12px;
-    animation-delay:3.2s;
+left:94%;
+top:18%;
+animation-delay:4.2s;
 }
 
 @keyframes floatStar{
 
-    0%,
-    100%{
-        transform:
-            translateY(0)
-            rotate(0deg);
+0%,    
+100%{    
 
-        opacity:.25;
-    }
+    opacity:.35;    
 
-    50%{
-        transform:
-            translateY(-9px)
-            rotate(20deg);
+    transform:    
+        translateY(0)    
+        rotate(0deg);    
+}    
 
-        opacity:.75;
-    }
+50%{    
+
+    opacity:.85;    
+
+    transform:    
+        translateY(-8px)    
+        rotate(12deg);    
+}
 
 }
 
-
-/* ==============================
-   外框
-============================== */
+/* =========================================================
+外框
+========================================================= */
 
 .frame{
-    position:absolute;
 
-    inset:18px;
+position:absolute;    
 
-    border:
-        1px solid
-        rgba(111,174,224,.32);
+inset:18px;    
 
-    pointer-events:none;
+border:    
+    1px solid    
+    rgba(111,174,224,.32);    
 
-    z-index:10;
+pointer-events:none;    
+
+z-index:10;
+
 }
 
 .frame::before{
-    content:"";
 
-    position:absolute;
+content:"";    
 
-    inset:7px;
+position:absolute;    
 
-    border:
-        1px solid
-        rgba(81,142,193,.08);
+inset:7px;    
+
+border:    
+    1px solid    
+    rgba(81,142,193,.08);
+
 }
 
-
-/* ==============================
-   四角六芒星
-============================== */
+/* =========================================================
+四角六芒星
+========================================================= */
 
 .corner{
-    position:absolute;
 
-    width:68px;
-    height:68px;
+position:absolute;    
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+width:68px;    
+height:68px;    
 
-    pointer-events:none;
+display:flex;    
+
+align-items:center;    
+justify-content:center;    
+
+pointer-events:none;
+
 }
 
 .corner::before{
-    content:"✡";
 
-    font-family:
-        "Times New Roman",
-        serif;
+content:"✡";    
 
-    font-size:31px;
+display:block;    
 
-    color:
-        rgba(108,178,230,.88);
+font-family:    
+    "Times New Roman",    
+    serif;    
 
-    text-shadow:
-        0 0 7px rgba(72,160,215,.25);
+font-size:31px;    
+
+font-weight:400;    
+
+line-height:1;    
+
+color:    
+    rgba(108,178,230,.88);    
+
+text-shadow:    
+
+    0 0 5px    
+    rgba(67,153,218,.5),    
+
+    0 0 13px    
+    rgba(43,124,190,.28);
+
 }
 
 .corner.tl{
-    left:-34px;
-    top:-34px;
+left:-34px;
+top:-34px;
 }
 
 .corner.tr{
-    right:-34px;
-    top:-34px;
+right:-34px;
+top:-34px;
 }
 
 .corner.bl{
-    left:-34px;
-    bottom:-34px;
+left:-34px;
+bottom:-34px;
 }
 
 .corner.br{
-    right:-34px;
-    bottom:-34px;
+right:-34px;
+bottom:-34px;
 }
 
-
-/* ==============================
-   顶部导航
-============================== */
+/* =========================================================
+顶部导航
+========================================================= */
 
 .top-nav{
-    position:absolute;
 
-    left:58px;
-    right:58px;
-    top:38px;
+position:absolute;    
 
-    display:flex;
+left:58px;    
+right:58px;    
 
-    justify-content:space-between;
-    align-items:flex-start;
+top:38px;    
 
-    z-index:20;
+display:flex;    
+
+align-items:flex-start;    
+
+justify-content:space-between;    
+
+z-index:20;
+
 }
 
-
-/* 左上角 LOGO */
+/* =========================================================
+Logo
+========================================================= */
 
 .logo{
-    display:flex;
 
-    align-items:baseline;
+display:flex;    
 
-    gap:10px;
+/*    
+   关键：    
+   不再整个 Logo 居中，    
+   而是按照文字基线排列    
+*/    
 
-    color:#d9edff;
+align-items:baseline;    
 
-    text-decoration:none;
+gap:10px;    
+
+color:#d9edff;    
+
+text-decoration:none;
+
 }
+
+/* =========================================================
+✶
+
+这里专门修正位置
+========================================================= */
 
 .logo-mark{
-    width:auto;
-    height:auto;
 
-    display:block;
+width:auto;    
+height:auto;    
 
-    flex-shrink:0;
+display:block;    
 
-    font-family:
-        "Times New Roman",
-        serif;
+flex-shrink:0;    
 
-    font-size:21px;
+font-family:    
+    "Times New Roman",    
+    serif;    
 
-    line-height:1;
+font-size:21px;    
 
-    position:relative;
+font-weight:400;    
 
-    top:1px;
+line-height:1;    
 
-    color:
-        rgba(137,201,239,.9);
+color:    
+    rgba(137,201,239,.9);    
 
-    text-shadow:
-        0 0 8px rgba(71,163,219,.22);
+/*    
+   ✶ 字符本身的字体基线    
+   和中文字体不同，    
+   所以只做非常小的视觉修正    
+*/    
+
+position:relative;    
+
+top:1px;    
+
+text-shadow:    
+
+    0 0 7px    
+    rgba(76,159,216,.5),    
+
+    0 0 15px    
+    rgba(49,132,191,.22);
+
 }
 
-.logo-text{
-    display:flex;
+/* =========================================================
+Logo文字
+========================================================= */
 
-    flex-direction:column;
+.logo-text{
+
+display:flex;    
+
+flex-direction:column;    
+
+line-height:1.05;
+
 }
 
 .logo-cn{
-    font-family:
-        "Noto Serif SC",
-        serif;
 
-    font-size:15px;
+font-family:    
+    "Noto Serif SC",    
+    serif;    
 
-    letter-spacing:2px;
+font-size:15px;    
 
-    line-height:1;
+font-weight:400;    
+
+letter-spacing:2px;
+
 }
 
 .logo-en{
-    margin-top:5px;
 
-    font-family:
-        "Cinzel",
-        serif;
+margin-top:5px;    
 
-    font-size:8px;
+font-family:    
+    "Cinzel",    
+    serif;    
 
-    letter-spacing:3px;
+font-size:8px;    
 
-    color:
-        rgba(157,204,239,.63);
+letter-spacing:3px;    
+
+color:    
+    rgba(157,204,239,.63);
+
 }
 
-
-/* 导航 */
+/* =========================================================
+导航
+========================================================= */
 
 .nav-links{
-    display:flex;
 
-    gap:31px;
+display:flex;    
 
-    padding-top:2px;
+align-items:center;    
+
+gap:31px;
+
 }
 
 .nav-links a{
-    color:
-        rgba(189,219,239,.65);
 
-    text-decoration:none;
+position:relative;    
 
-    font-family:
-        "Noto Serif SC",
-        serif;
+color:    
+    rgba(191,220,243,.68);    
 
-    font-size:12px;
+text-decoration:none;    
 
-    letter-spacing:2px;
+font-family:    
+    "Noto Serif SC",    
+    serif;    
 
-    transition:
-        color .3s ease;
+font-size:12px;    
+
+letter-spacing:2px;    
+
+transition:    
+    color .3s ease,    
+    text-shadow .3s ease;
+
+}
+
+.nav-links a::after{
+
+content:"";    
+
+position:absolute;    
+
+left:50%;    
+
+bottom:-8px;    
+
+width:0;    
+
+height:1px;    
+
+background:    
+    rgba(122,192,235,.7);    
+
+transform:    
+    translateX(-50%);    
+
+transition:    
+    width .3s ease;
+
 }
 
 .nav-links a:hover{
-    color:#e1f3ff;
+
+color:#d9efff;    
+
+text-shadow:    
+    0 0 8px    
+    rgba(102,180,231,.35);
+
 }
 
+.nav-links a:hover::after{
+width:100%;
+}
 
-/* ==============================
-   主区域
-============================== */
+/* =========================================================
+主区域
+========================================================= */
 
 .main{
-    position:relative;
 
-    width:100%;
-    min-height:100vh;
+position:relative;    
 
-    display:flex;
+width:100%;    
 
-    align-items:center;
-    justify-content:center;
+min-height:100vh;    
 
-    padding:
-        80px 20px 70px;
+display:flex;    
+
+flex-direction:column;    
+
+align-items:center;    
+
+justify-content:center;    
+
+z-index:5;    
+
+padding:    
+    80px    
+    20px    
+    70px;
+
 }
 
-
-/* ==============================
-   魔法阵
-============================== */
+/* =========================================================
+魔法阵
+========================================================= */
 
 .magic-circle{
-    position:absolute;
 
-    left:50%;
-    top:50%;
+position:absolute;    
 
-    width:560px;
-    height:560px;
+width:560px;    
+height:560px;    
 
-    transform:
-        translate(-50%,-50%);
+left:50%;    
+top:50%;    
 
-    opacity:.55;
+transform:    
+    translate(-50%,-50%);    
 
-    pointer-events:none;
+border-radius:50%;    
+
+pointer-events:none;    
+
+opacity:.55;
+
 }
-
 
 /* 外圈 */
 
 .magic-circle::before{
-    content:"";
 
-    position:absolute;
+content:"";    
 
-    inset:0;
+position:absolute;    
 
-    border:
-        1px solid
-        rgba(73,143,198,.28);
+inset:0;    
 
-    border-radius:50%;
+border-radius:50%;    
 
-    box-shadow:
-        0 0 22px
-        rgba(51,133,190,.07);
+border:    
+    1px solid    
+    rgba(73,143,198,.28);    
 
-    animation:
-        magicRotate 80s linear infinite;
+box-shadow:    
+    0 0 22px    
+    rgba(47,126,184,.08);    
+
+animation:    
+    rotateCircle    
+    80s    
+    linear    
+    infinite;
+
 }
-
 
 /* 内圈 */
 
 .magic-circle::after{
-    content:"";
 
-    position:absolute;
+content:"";    
 
-    inset:27px;
+position:absolute;    
 
-    border:
-        1px solid
-        rgba(91,162,213,.22);
+inset:27px;    
 
-    border-radius:50%;
+border-radius:50%;    
 
-    animation:
-        magicRotateReverse 55s linear infinite;
-}
+border:    
+    1px solid    
+    rgba(91,162,213,.22);    
 
-@keyframes magicRotate{
+box-shadow:    
+    inset 0 0 20px    
+    rgba(62,139,194,.04);    
 
-    from{
-        transform:rotate(0deg);
-    }
-
-    to{
-        transform:rotate(360deg);
-    }
+animation:    
+    rotateCircleReverse    
+    55s    
+    linear    
+    infinite;
 
 }
 
-@keyframes magicRotateReverse{
+@keyframes rotateCircle{
 
-    from{
-        transform:rotate(360deg);
-    }
+from{    
+    transform:rotate(0deg);    
+}    
 
-    to{
-        transform:rotate(0deg);
-    }
+to{    
+    transform:rotate(360deg);    
+}
 
 }
 
+@keyframes rotateCircleReverse{
 
-/* ==============================
-   星轨
-============================== */
+from{    
+    transform:rotate(360deg);    
+}    
+
+to{    
+    transform:rotate(0deg);    
+}
+
+}
+
+/* =========================================================
+★ 星轨
+★ 使用你刚刚发来的那版运行方式
+========================================================= */
 
 .orbit{
-    position:absolute;
 
-    left:50%;
-    top:50%;
+position:absolute;    
 
-    border-radius:50%;
+left:50%;    
+top:50%;    
 
-    border:
-        1px solid
-        rgba(94,165,214,.30);
+border:    
+    1px solid    
+    rgba(94,164,230,.30);    
 
-    box-shadow:
-        0 0 6px
-        rgba(70,155,210,.08);
+border-radius:50%;    
 
-    transform:
-        translate(-50%,-50%);
+transform:    
+    translate(-50%,-50%);    
 
-    transform-origin:center center;
+animation:    
+    orbitRotate    
+    38s    
+    linear    
+    infinite;
 
-    animation:
-        orbitRotate 38s linear infinite;
 }
+
+/* 第一层 */
 
 .orbit.one{
-    width:500px;
-    height:190px;
+
+width:500px;    
+height:190px;
+
 }
+
+/* 第二层 */
 
 .orbit.two{
-    width:420px;
-    height:145px;
 
-    animation-direction:reverse;
+width:420px;    
+height:145px;    
 
-    animation-duration:32s;
+animation-direction:    
+    reverse;    
+
+animation-duration:    
+    32s;
+
 }
+
+/* 第三层 */
 
 .orbit.three{
-    width:330px;
-    height:105px;
 
-    animation-duration:25s;
+width:330px;    
+height:105px;    
+
+animation-duration:    
+    25s;
+
 }
+
+/* 星轨运行
+★ 完全采用你给我的代码
+*/
 
 @keyframes orbitRotate{
 
-    from{
-        transform:
-            translate(-50%,-50%)
-            rotate(0deg);
-    }
+from{    
 
-    to{
-        transform:
-            translate(-50%,-50%)
-            rotate(360deg);
-    }
+    transform:    
+        translate(-50%,-50%)    
+        rotate(0deg);    
+}    
+
+to{    
+
+    transform:    
+        translate(-50%,-50%)    
+        rotate(360deg);    
+}
 
 }
 
-
-/* ==============================
-   魔法阵十字线
-============================== */
+/* =========================================================
+魔法阵十字线
+========================================================= */
 
 .magic-line{
-    position:absolute;
 
-    background:
-        rgba(92,164,213,.13);
+position:absolute;    
+
+left:50%;    
+top:50%;    
+
+transform:    
+    translate(-50%,-50%);    
+
+background:    
+    rgba(92,164,213,.13);
+
 }
 
 .magic-line.horizontal{
-    width:490px;
-    height:1px;
 
-    left:50%;
-    top:50%;
+width:490px;    
 
-    transform:
-        translate(-50%,-50%);
+height:1px;
+
 }
 
 .magic-line.vertical{
-    width:1px;
-    height:490px;
 
-    left:50%;
-    top:50%;
+width:1px;    
 
-    transform:
-        translate(-50%,-50%);
+height:490px;
+
 }
 
-
-/* ==============================
-   魔法阵中心
-============================== */
+/* =========================================================
+魔法阵中心
+========================================================= */
 
 .magic-center{
-    position:absolute;
 
-    left:50%;
-    top:50%;
+position:absolute;    
 
-    width:12px;
-    height:12px;
+left:50%;    
+top:50%;    
 
-    border:
-        1px solid
-        rgba(133,202,242,.48);
+width:12px;    
+height:12px;    
 
-    border-radius:50%;
+transform:    
+    translate(-50%,-50%);    
 
-    transform:
-        translate(-50%,-50%);
+border:    
+    1px solid    
+    rgba(133,202,242,.48);    
 
-    box-shadow:
-        0 0 9px
-        rgba(75,163,218,.2);
+border-radius:50%;    
+
+box-shadow:    
+    0 0 10px    
+    rgba(88,171,224,.25);
+
 }
 
 .magic-center::before{
-    content:"";
 
-    position:absolute;
+content:"";    
 
-    width:3px;
-    height:3px;
+position:absolute;    
 
-    left:50%;
-    top:50%;
+left:50%;    
+top:50%;    
 
-    transform:
-        translate(-50%,-50%);
+width:3px;    
+height:3px;    
 
-    background:
-        rgba(169,218,244,.75);
+transform:    
+    translate(-50%,-50%);    
 
-    border-radius:50%;
+border-radius:50%;    
+
+background:    
+    rgba(174,221,249,.7);    
+
+box-shadow:    
+    0 0 8px    
+    rgba(126,203,244,.8);
+
 }
 
-
-/* ==============================
-   标题
-============================== */
+/* =========================================================
+标题
+========================================================= */
 
 .title-area{
-    position:relative;
 
-    z-index:8;
+position:relative;    
 
-    text-align:center;
+text-align:center;    
 
-    margin-top:-18px;
+z-index:8;    
+
+margin-top:-18px;
+
 }
 
 .main-title{
-    display:flex;
 
-    flex-direction:column;
+display:flex;    
 
-    align-items:center;
+flex-direction:column;    
 
-    font-family:
-        "Cinzel",
-        "Cormorant Garamond",
-        serif;
+align-items:center;    
 
-    font-weight:400;
+font-family:    
+    "Cinzel",    
+    "Cormorant Garamond",    
+    serif;    
 
-    line-height:.83;
+font-weight:400;    
 
-    letter-spacing:8px;
+line-height:.83;    
 
-    color:#dceeff;
+letter-spacing:8px;    
 
-    text-shadow:
-        0 0 12px
-        rgba(108,182,228,.08);
+color:#dceeff;    
+
+text-shadow:    
+    0 0 18px    
+    rgba(94,172,222,.08);
+
 }
 
-.seyami{
-    font-size:70px;
+.main-title .seyami{
+
+font-size:70px;
+
 }
 
-.archive{
-    margin-top:15px;
+.main-title .archive{
 
-    font-size:87px;
+margin-top:15px;    
 
-    letter-spacing:9px;
+font-size:87px;    
+
+letter-spacing:9px;
+
 }
 
-
-/* ==============================
-   标题装饰线
-============================== */
+/* =========================================================
+标题装饰
+========================================================= */
 
 .title-decoration{
-    display:flex;
 
-    align-items:center;
-    justify-content:center;
+display:flex;    
 
-    gap:13px;
+align-items:center;    
 
-    margin-top:29px;
+justify-content:center;    
+
+gap:15px;    
+
+margin-top:29px;    
+
+opacity:.7;
+
 }
 
 .title-decoration .line{
-    width:95px;
-    height:1px;
 
-    background:
-        rgba(122,181,218,.4);
-}
+width:95px;    
+height:1px;    
 
-.title-decoration .diamond{
-    width:6px;
-    height:6px;
+background:    
+    linear-gradient(    
+        90deg,    
+        transparent,    
+        rgba(115,182,224,.62)    
+    );
 
-    transform:rotate(45deg);
-
-    border:
-        1px solid
-        rgba(141,202,235,.6);
 }
 
 .title-decoration .line.right{
-    transform:none;
+
+background:    
+    linear-gradient(    
+        90deg,    
+        rgba(115,182,224,.62),    
+        transparent    
+    );
+
 }
 
+.title-decoration .diamond{
 
-/* ==============================
-   中文标题
-============================== */
+width:6px;    
+height:6px;    
+
+border:    
+    1px solid    
+    rgba(143,202,237,.8);    
+
+transform:rotate(45deg);
+
+}
+
+/* =========================================================
+中文标题
+========================================================= */
 
 .chinese-title{
-    margin-top:24px;
 
-    font-family:
-        "Noto Serif SC",
-        serif;
+margin-top:24px;    
 
-    font-size:20px;
+font-family:    
+    "Noto Serif SC",    
+    serif;    
 
-    font-weight:300;
+font-size:20px;    
 
-    letter-spacing:8px;
+font-weight:300;    
 
-    color:
-        rgba(207,229,246,.86);
+letter-spacing:8px;    
+
+color:    
+    rgba(207,229,246,.86);
+
 }
 
-
-/* ==============================
-   描述
-============================== */
+/* =========================================================
+简介
+========================================================= */
 
 .description{
-    display:flex;
 
-    flex-direction:column;
+margin-top:20px;    
 
-    margin-top:20px;
+display:flex;    
 
-    gap:5px;
+flex-direction:column;    
 
-    font-family:
-        "Noto Serif SC",
-        serif;
+gap:7px;    
 
-    font-size:12px;
+text-align:center;    
 
-    line-height:1.6;
+color:    
+    rgba(177,207,230,.62);    
 
-    letter-spacing:2px;
+font-family:    
+    "Noto Serif SC",    
+    serif;    
 
-    color:
-        rgba(177,207,230,.62);
+font-size:12px;    
+
+line-height:1.7;    
+
+letter-spacing:2px;
+
 }
 
-
-/* ==============================
-   进入按钮外框
-============================== */
+/* =========================================================
+进入档案馆
+========================================================= */
 
 .enter-wrap{
-    position:relative;
 
-    width:370px;
-    height:82px;
+position:relative;    
 
-    margin:42px auto 0;
+width:370px;    
+height:82px;    
 
-    display:flex;
+margin-top:42px;    
 
-    align-items:center;
-    justify-content:center;
+display:flex;    
+
+align-items:center;    
+
+justify-content:center;
+
 }
 
-
-/* 魔法边框 */
-
 .enter-wrap::before{
-    content:"";
 
-    position:absolute;
+content:"";    
 
-    inset:10px 0;
+position:absolute;    
 
-    border:
-        1px solid
-        rgba(99,170,216,.35);
+inset:0;    
 
-    clip-path:
-        polygon(
-            0 25%,
-            5% 25%,
-            7% 0,
-            93% 0,
-            95% 25%,
-            100% 25%,
-            100% 75%,
-            95% 75%,
-            93% 100%,
-            7% 100%,
-            5% 75%,
-            0 75%
-        );
+clip-path:    
+    polygon(    
+        0 20%,    
+        5% 20%,    
+        8% 0,    
+        92% 0,    
+        95% 20%,    
+        100% 20%,    
+        100% 80%,    
+        95% 80%,    
+        92% 100%,    
+        8% 100%,    
+        5% 80%,    
+        0 80%    
+    );    
+
+border:    
+    1px solid    
+    rgba(91,167,218,.38);    
+
+background:    
+    rgba(8,28,49,.48);    
+
+box-shadow:    
+    0 0 22px    
+    rgba(39,120,180,.08);    
+
+pointer-events:none;
+
 }
 
 .enter-wrap::after{
-    content:"";
 
-    position:absolute;
+content:"";    
 
-    inset:15px 5px;
+position:absolute;    
 
-    border:
-        1px solid
-        rgba(80,143,190,.16);
+left:13px;    
+right:13px;    
 
-    pointer-events:none;
+top:13px;    
+bottom:13px;    
+
+border:    
+    1px solid    
+    rgba(91,164,213,.16);    
+
+pointer-events:none;
+
 }
 
-
-/* ==============================
-   按钮
-============================== */
-
 .enter-button{
-    position:relative;
 
-    width:300px;
-    height:50px;
+position:relative;    
 
-    border:none;
+z-index:2;    
 
-    background:
-        linear-gradient(
-            180deg,
-            rgba(12,43,69,.92),
-            rgba(7,29,50,.92)
-        );
+width:300px;    
+height:50px;    
 
-    border-top:
-        1px solid
-        rgba(116,188,229,.55);
+border:none;    
 
-    border-bottom:
-        1px solid
-        rgba(116,188,229,.3);
+outline:none;    
 
-    color:#dcefff;
+cursor:pointer;    
 
-    font-family:
-        "Noto Serif SC",
-        serif;
+color:#d9edff;    
 
-    font-size:13px;
+font-family:    
+    "Noto Serif SC",    
+    serif;    
 
-    letter-spacing:4px;
+font-size:13px;    
 
-    cursor:pointer;
+letter-spacing:4px;    
 
-    transition:
-        all .35s ease;
+background:    
+    linear-gradient(    
+        90deg,    
+        rgba(8,31,52,.88),    
+        rgba(17,51,78,.88),    
+        rgba(8,31,52,.88)    
+    );    
+
+border-top:    
+    1px solid    
+    rgba(105,180,225,.38);    
+
+border-bottom:    
+    1px solid    
+    rgba(105,180,225,.38);    
+
+transition:    
+    background .35s ease,    
+    box-shadow .35s ease,    
+    letter-spacing .35s ease;
+
 }
 
 .enter-button:hover{
-    background:
-        linear-gradient(
-            180deg,
-            rgba(19,60,91,.95),
-            rgba(9,38,63,.95)
-        );
 
-    color:#ffffff;
+background:    
+    linear-gradient(    
+        90deg,    
+        rgba(10,41,67,.95),    
+        rgba(23,66,98,.95),    
+        rgba(10,41,67,.95)    
+    );    
 
-    box-shadow:
-        0 0 18px
-        rgba(70,157,211,.14);
+box-shadow:    
+    0 0 22px    
+    rgba(56,143,201,.18);    
+
+letter-spacing:5px;
+
 }
 
+.enter-button:active{
+transform:translateY(1px);
+}
 
-/* ==============================
-   按钮两侧六芒星
-============================== */
+/* =========================================================
+按钮星星
+========================================================= */
 
 .enter-star{
-    position:absolute;
 
-    z-index:3;
+position:absolute;    
 
-    font-family:
-        "Times New Roman",
-        serif;
+top:50%;    
 
-    font-size:17px;
+transform:    
+    translateY(-50%);    
 
-    color:
-        rgba(116,191,231,.72);
+color:    
+    rgba(111,186,229,.75);    
 
-    text-shadow:
-        0 0 8px
-        rgba(67,157,211,.18);
+font-size:16px;    
+
+text-shadow:    
+    0 0 9px    
+    rgba(67,158,215,.45);
+
 }
 
 .enter-star.left{
-    left:19px;
+left:26px;
 }
 
 .enter-star.right{
-    right:19px;
+right:26px;
 }
 
-
-/* ==============================
-   按钮上下菱形
-============================== */
+/* =========================================================
+按钮菱形
+========================================================= */
 
 .enter-diamond{
-    position:absolute;
 
-    width:5px;
-    height:5px;
+position:absolute;    
 
-    transform:rotate(45deg);
+left:50%;    
 
-    border:
-        1px solid
-        rgba(126,192,226,.45);
+width:6px;    
+height:6px;    
+
+transform:    
+    translateX(-50%)    
+    rotate(45deg);    
+
+border:    
+    1px solid    
+    rgba(116,187,226,.65);    
+
+background:#061426;
+
 }
 
 .enter-diamond.top{
-    top:5px;
-    left:50%;
+top:-3px;
 }
 
 .enter-diamond.bottom{
-    bottom:5px;
-    left:50%;
+bottom:-3px;
 }
 
-
-/* ==============================
-   底部
-============================== */
+/* =========================================================
+页脚
+========================================================= */
 
 .footer{
-    position:absolute;
 
-    left:50%;
-    bottom:32px;
+position:absolute;    
 
-    transform:
-        translateX(-50%);
+left:50%;    
+bottom:32px;    
 
-    z-index:20;
+transform:    
+    translateX(-50%);    
 
-    white-space:nowrap;
+z-index:15;    
 
-    font-family:
-        "Cinzel",
-        serif;
+color:    
+    rgba(133,177,207,.38);    
 
-    font-size:8px;
+font-family:    
+    "Cinzel",    
+    serif;    
 
-    letter-spacing:4px;
+font-size:8px;    
 
-    color:
-        rgba(133,177,207,.38);
+letter-spacing:4px;    
+
+white-space:nowrap;
+
 }
 
-
-/* ==============================
-   平板
-============================== */
+/* =========================================================
+平板
+========================================================= */
 
 @media(max-width:800px){
 
-    .top-nav{
-        left:35px;
-        right:35px;
-    }
+.top-nav{    
 
-    .nav-links{
-        gap:20px;
-    }
+    left:35px;    
+    right:35px;    
+    top:30px;    
+}    
 
-    .magic-circle{
-        width:480px;
-        height:480px;
-    }
+.nav-links{    
+    gap:17px;    
+}    
 
-    .orbit.one{
-        width:430px;
-        height:165px;
-    }
+.nav-links a{    
 
-    .orbit.two{
-        width:360px;
-        height:125px;
-    }
+    font-size:11px;    
 
-    .orbit.three{
-        width:285px;
-        height:90px;
-    }
+    letter-spacing:1px;    
+}    
+
+.magic-circle{    
+
+    width:500px;    
+    height:500px;    
+}    
+
+.main-title .seyami{    
+    font-size:58px;    
+}    
+
+.main-title .archive{    
+    font-size:70px;    
+}    
+
+.chinese-title{    
+    font-size:18px;    
+}    
+
+.description{    
+    font-size:11px;    
+}
 
 }
 
-
-/* ==============================
-   手机
-============================== */
+/* =========================================================
+手机
+========================================================= */
 
 @media(max-width:520px){
 
-    .frame{
-        inset:12px;
-    }
+.frame{    
+    inset:12px;    
+}    
 
-    .top-nav{
-        left:25px;
-        right:25px;
-        top:24px;
-    }
-
-    .logo{
-        gap:7px;
-    }
 
-    .logo-mark{
-        font-size:18px;
-    }
+.top-nav{    
 
-    .logo-cn{
-        font-size:12px;
-        letter-spacing:1px;
-    }
+    left:25px;    
+    right:25px;    
+    top:24px;    
+}    
 
-    .logo-en{
-        font-size:6px;
-        letter-spacing:2px;
-        margin-top:4px;
-    }
 
-    .nav-links{
-        gap:12px;
-    }
+.logo{    
 
-    .nav-links a{
-        font-size:9px;
-        letter-spacing:1px;
-    }
+    gap:8px;    
 
+    /*    
+       手机同样使用基线对齐    
+    */    
 
-    /* 手机四角 */
+    align-items:baseline;    
+}    
 
-    .corner{
-        width:55px;
-        height:55px;
-    }
 
-    .corner::before{
-        font-size:26px;
-    }
+.logo-mark{    
 
-    .corner.tl{
-        left:-27.5px;
-        top:-27.5px;
-    }
+    font-size:18px;    
 
-    .corner.tr{
-        right:-27.5px;
-        top:-27.5px;
-    }
+    position:relative;    
 
-    .corner.bl{
-        left:-27.5px;
-        bottom:-27.5px;
-    }
+    top:1px;    
+}    
 
-    .corner.br{
-        right:-27.5px;
-        bottom:-27.5px;
-    }
 
+.logo-cn{    
 
-    /* 主区域 */
+    font-size:12px;    
 
-    .main{
-        padding:
-            100px 15px 70px;
-    }
+    letter-spacing:1px;    
+}    
 
 
-    /* 魔法阵 */
+.logo-en{    
 
-    .magic-circle{
-        width:390px;
-        height:390px;
+    font-size:6px;    
 
-        opacity:.48;
-    }
+    letter-spacing:2px;    
+}    
 
-    .orbit.one{
-        width:350px;
-        height:133px;
-    }
 
-    .orbit.two{
-        width:295px;
-        height:102px;
-    }
+.nav-links{    
 
-    .orbit.three{
-        width:235px;
-        height:75px;
-    }
+    gap:12px;    
+}    
 
-    .magic-line.horizontal{
-        width:350px;
-    }
 
-    .magic-line.vertical{
-        height:350px;
-    }
+.nav-links a{    
 
+    font-size:9px;    
 
-    /* 标题 */
+    letter-spacing:0;    
+}    
 
-    .title-area{
-        margin-top:-10px;
-    }
 
-    .main-title{
-        letter-spacing:5px;
-    }
+/* 手机四角 */    
 
-    .seyami{
-        font-size:43px;
-    }
+.corner{    
 
-    .archive{
-        margin-top:12px;
+    width:55px;    
+    height:55px;    
+}    
 
-        font-size:53px;
 
-        letter-spacing:6px;
-    }
+.corner.tl{    
 
+    left:-27.5px;    
+    top:-27.5px;    
+}    
 
-    /* 标题装饰 */
+.corner.tr{    
 
-    .title-decoration{
-        margin-top:23px;
+    right:-27.5px;    
+    top:-27.5px;    
+}    
 
-        gap:9px;
-    }
+.corner.bl{    
 
-    .title-decoration .line{
-        width:55px;
-    }
+    left:-27.5px;    
+    bottom:-27.5px;    
+}    
 
+.corner.br{    
 
-    /* 中文 */
+    right:-27.5px;    
+    bottom:-27.5px;    
+}    
 
-    .chinese-title{
-        margin-top:19px;
 
-        font-size:15px;
+.corner::before{    
 
-        letter-spacing:5px;
-    }
+    font-size:26px;    
+}    
 
 
-    /* 描述 */
+/* 手机主区域 */    
 
-    .description{
-        margin-top:16px;
+.main{    
 
-        font-size:10px;
+    padding:    
+        100px    
+        15px    
+        70px;    
+}    
 
-        letter-spacing:1px;
 
-        gap:4px;
-    }
+/* 手机魔法阵 */    
 
+.magic-circle{    
 
-    /* 按钮 */
+    width:390px;    
+    height:390px;    
 
-    .enter-wrap{
-        width:320px;
-        height:76px;
+    opacity:.48;    
+}    
 
-        margin-top:34px;
-    }
 
-    .enter-button{
-        width:255px;
-        height:46px;
+/*    
+   手机星轨尺寸    
+   运行方式仍然和你提供的版本一致    
+*/    
 
-        font-size:11px;
+.orbit.one{    
 
-        letter-spacing:3px;
-    }
+    width:350px;    
+    height:133px;    
+}    
 
-    .enter-star{
-        font-size:14px;
-    }
+.orbit.two{    
 
-    .enter-star.left{
-        left:15px;
-    }
+    width:295px;    
+    height:102px;    
+}    
 
-    .enter-star.right{
-        right:15px;
-    }
+.orbit.three{    
 
+    width:235px;    
+    height:75px;    
+}    
 
-    /* 底部 */
 
-    .footer{
-        bottom:21px;
+.magic-line.horizontal{    
+    width:350px;    
+}    
 
-        font-size:6px;
+.magic-line.vertical{    
+    height:350px;    
+}    
 
-        letter-spacing:3px;
-    }
+
+/* 手机标题 */    
+
+.main-title{    
+
+    letter-spacing:5px;    
+}    
+
+.main-title .seyami{    
+
+    font-size:43px;    
+}    
+
+.main-title .archive{    
+
+    margin-top:11px;    
+
+    font-size:53px;    
+
+    letter-spacing:6px;    
+}    
+
+
+.title-decoration{    
+
+    margin-top:23px;    
+}    
+
+.title-decoration .line{    
+
+    width:55px;    
+}    
+
+
+.chinese-title{    
+
+    margin-top:20px;    
+
+    font-size:15px;    
+
+    letter-spacing:5px;    
+}    
+
+
+.description{    
+
+    margin-top:16px;    
+
+    font-size:10px;    
+
+    letter-spacing:1px;    
+}    
+
+
+.enter-wrap{    
+
+    width:320px;    
+    height:76px;    
+
+    margin-top:35px;    
+}    
+
+
+.enter-button{    
+
+    width:255px;    
+    height:46px;    
+
+    font-size:11px;    
+
+    letter-spacing:3px;    
+}    
+
+
+.enter-star.left{    
+    left:23px;    
+}    
+
+.enter-star.right{    
+    right:23px;    
+}    
+
+
+.footer{    
+
+    bottom:21px;    
+
+    font-size:6px;    
+
+    letter-spacing:2px;    
+}
 
 }
 
-</style>
+</style>  </head>  <body>  <div class="page">  <!-- =====================================================    
+背景星空    
+====================================================== -->
 
-</head>
+<div class="stars"></div>    <!-- =====================================================    
+     浮动星星    
+====================================================== -->    <div class="floating-stars">    <span>✦</span>    
+<span>✧</span>    
+<span>·</span>    
+<span>✶</span>    
+<span>✦</span>    
+<span>·</span>    
+<span>✧</span>    
+<span>✡</span>    
+<span>✦</span>    
+<span>✶</span>    
+<span>·</span>    
+<span>✧</span>
 
+</div>    <!-- =====================================================    
+     页面边框    
+====================================================== -->    <div class="frame">    <div class="corner tl"></div>    
 
-<body>
+<div class="corner tr"></div>    
 
-<div class="page">
+<div class="corner bl"></div>    
 
+<div class="corner br"></div>
 
-<!-- ==============================
-     背景星尘
-============================== -->
+</div>    <!-- =====================================================    
+     顶部导航    
+====================================================== -->    <header class="top-nav">    <!-- 左上角 Logo -->    
 
-<div class="stars"></div>
+<a    
+    href="index.html"    
+    class="logo"    
+>    
 
+    <!-- 只保留你要求的 ✶ -->    
 
-<!-- ==============================
-     浮动星星
-============================== -->
+    <div class="logo-mark">    
+        ✶    
+    </div>    
 
-<div class="floating-stars">
 
-    <span>✦</span>
-    <span>✧</span>
-    <span>·</span>
-    <span>✶</span>
-    <span>✦</span>
-    <span>·</span>
-    <span>✧</span>
-    <span>✡</span>
-    <span>✦</span>
-    <span>✶</span>
-    <span>·</span>
-    <span>✧</span>
+    <div class="logo-text">    
 
-</div>
+        <span class="logo-cn">    
+            塞垭弥大陆档案馆    
+        </span>    
 
+        <span class="logo-en">    
+            SEYAMI ARCHIVE    
+        </span>    
 
-<!-- ==============================
-     页面外框
-============================== -->
+    </div>    
 
-<div class="frame">
+</a>    
 
-    <div class="corner tl"></div>
-    <div class="corner tr"></div>
-    <div class="corner bl"></div>
-    <div class="corner br"></div>
 
-</div>
+<!-- 导航 -->    
 
+<nav class="nav-links">    
 
-<!-- ==============================
-     顶部导航
-============================== -->
+    <a href="index.html">    
+        首页    
+    </a>    
 
-<header class="top-nav">
+    <a href="archive.html">    
+        档案目录    
+    </a>    
 
+    <a href="about.html">    
+        关于我们    
+    </a>    
 
-    <!-- 左上角 -->
+</nav>
 
-    <a href="index.html"
-       class="logo">
+</header>    <!-- =====================================================    
+     主区域    
+====================================================== -->    <main class="main">    <!-- =================================================    
+     魔法阵    
+================================================== -->    
 
-        <div class="logo-mark">✶</div>
+<div class="magic-circle">    
 
-        <div class="logo-text">
 
-            <span class="logo-cn">
-                塞垭弥大陆档案馆
-            </span>
+    <!-- ★ 使用你提供的三层星轨 -->    
 
-            <span class="logo-en">
-                SEYAMI ARCHIVE
-            </span>
+    <div class="orbit one"></div>    
 
-        </div>
+    <div class="orbit two"></div>    
 
-    </a>
+    <div class="orbit three"></div>    
 
 
-    <!-- 右上角导航 -->
+    <!-- 十字 -->    
 
-    <nav class="nav-links">
+    <div class="magic-line horizontal"></div>    
 
-        <a href="index.html">
-            首页
-        </a>
+    <div class="magic-line vertical"></div>    
 
-        <a href="archive.html">
-            档案目录
-        </a>
 
-        <a href="about.html">
-            关于我们
-        </a>
+    <!-- 中心 -->    
 
-    </nav>
+    <div class="magic-center"></div>    
 
-</header>
+</div>    
 
 
-<!-- ==============================
-     主内容
-============================== -->
+<!-- =================================================    
+     标题    
+================================================== -->    
 
-<main class="main">
+<section class="title-area">    
 
 
-    <!-- 魔法阵 -->
+    <h1 class="main-title">    
 
-    <div class="magic-circle">
+        <span class="seyami">    
+            SEYAMI    
+        </span>    
 
+        <span class="archive">    
+            ARCHIVE    
+        </span>    
 
-        <!-- 星轨 -->
+    </h1>    
 
-        <div class="orbit one"></div>
 
-        <div class="orbit two"></div>
+    <!-- 标题装饰 -->    
 
-        <div class="orbit three"></div>
+    <div class="title-decoration">    
 
+        <span class="line"></span>    
 
-        <!-- 十字线 -->
+        <span class="diamond"></span>    
 
-        <div class="magic-line horizontal"></div>
+        <span class="line right"></span>    
 
-        <div class="magic-line vertical"></div>
+    </div>    
 
 
-        <!-- 中心 -->
+    <!-- 中文标题 -->    
 
-        <div class="magic-center"></div>
+    <div class="chinese-title">    
+        塞垭弥大陆档案馆    
+    </div>    
 
-    </div>
 
+    <!-- 简介 -->    
 
-    <!-- 标题区域 -->
+    <div class="description">    
 
-    <section class="title-area">
+        <span>    
+            记录关于这片大陆的一切。    
+        </span>    
 
+        <span>    
+            角色、种族、地域、历史，以及那些尚未被发现的故事。    
+        </span>    
 
-        <!-- 英文标题 -->
+    </div>    
 
-        <h1 class="main-title">
 
-            <span class="seyami">
-                SEYAMI
-            </span>
+    <!-- =================================================    
+         进入档案馆    
+    ================================================== -->    
 
-            <span class="archive">
-                ARCHIVE
-            </span>
+    <div class="enter-wrap">    
 
-        </h1>
+        <span class="enter-star left">    
+            ✡    
+        </span>    
 
 
-        <!-- 装饰线 -->
+        <button    
+            class="enter-button"    
+            onclick="location.href='archive.html'"    
+        >    
+            开启塞垭弥档案　→    
+        </button>    
 
-        <div class="title-decoration">
 
-            <span class="line"></span>
+        <span class="enter-star right">    
+            ✡    
+        </span>    
 
-            <span class="diamond"></span>
 
-            <span class="line right"></span>
+        <span class="enter-diamond top"></span>    
 
-        </div>
+        <span class="enter-diamond bottom"></span>    
 
+    </div>    
 
-        <!-- 中文标题 -->
 
-        <div class="chinese-title">
-            塞垭弥大陆档案馆
-        </div>
+</section>
 
+</main>    <!-- =====================================================    
+     页脚    
+====================================================== -->    <footer class="footer">    ✦　THE ARCHIVES OF SEYAMI　✦
 
-        <!-- 简介 -->
-
-        <div class="description">
-
-            <span>
-                记录关于这片大陆的一切。
-            </span>
-
-            <span>
-                角色、种族、地域、历史，以及那些尚未被发现的故事。
-            </span>
-
-        </div>
-
-
-        <!-- 进入按钮 -->
-
-        <div class="enter-wrap">
-
-            <span class="enter-star left">
-                ✡
-            </span>
-
-            <button
-                class="enter-button"
-                onclick="location.href='archive.html'">
-
-                开启塞垭弥档案　→
-
-            </button>
-
-            <span class="enter-star right">
-                ✡
-            </span>
-
-
-            <span class="enter-diamond top"></span>
-
-            <span class="enter-diamond bottom"></span>
-
-        </div>
-
-    </section>
-
-</main>
-
-
-<!-- ==============================
-     页脚
-============================== -->
-
-<footer class="footer">
-
-    ✦　THE ARCHIVES OF SEYAMI　✦
-
-</footer>
-
-
-</div>
-
-</body>
-
-</html>
+</footer>  </div>  </body>  </html>
