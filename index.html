@@ -1,35 +1,1477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+    塞垭弥大陆档案馆 · Seyami Archive
+</title>
+
+
+<!-- =====================================================
+     Google Fonts
+===================================================== -->
+
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@300;400;500&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500&display=swap"
+    rel="stylesheet"
+>
+
+
+<style>
+
+/* =========================================================
+   基础
+========================================================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+
+    min-height:100vh;
+
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(16,52,86,.20),
+            transparent 42%
+        ),
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(5,22,40,.35),
+            transparent 68%
+        ),
+        #061426;
+
+    color:#d8e8f4;
+
+    font-family:
+        "Noto Serif SC",
+        serif;
+
+}
+
+
+/* =========================================================
+   背景星星
+========================================================= */
+
+.star-field{
+
+    position:fixed;
+
+    inset:0;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    z-index:0;
+
+}
+
+
+.bg-star{
+
+    position:absolute;
+
+    color:rgba(
+        180,
+        220,
+        245,
+        .45
+    );
+
+    font-family:
+        "Times New Roman",
+        serif;
+
+    animation:
+        starFloat
+        var(--duration)
+        ease-in-out
+        infinite;
+
+    animation-delay:
+        var(--delay);
+
+}
+
+
+@keyframes starFloat{
+
+    0%,
+    100%{
+
+        opacity:.15;
+
+        transform:
+            translate3d(
+                0,
+                0,
+                0
+            )
+            scale(.75);
+
+    }
+
+    50%{
+
+        opacity:.75;
+
+        transform:
+            translate3d(
+                0,
+                -12px,
+                0
+            )
+            scale(1);
+
+    }
+
+}
+
+
+/* =========================================================
+   外框
+========================================================= */
+
+.archive-frame{
+
+    position:fixed;
+
+    inset:18px;
+
+    border:
+        1px solid
+        rgba(
+            95,
+            151,
+            188,
+            .24
+        );
+
+    pointer-events:none;
+
+    z-index:10;
+
+}
+
+
+.archive-frame::before,
+.archive-frame::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:7px;
+
+    border:
+        1px solid
+        rgba(
+            91,
+            146,
+            182,
+            .08
+        );
+
+}
+
+
+/* =========================================================
+   四角六芒星
+========================================================= */
+
+.corner-star{
+
+    position:absolute;
+
+    font-family:
+        "Times New Roman",
+        serif;
+
+    font-size:18px;
+
+    color:
+        rgba(
+            151,
+            207,
+            239,
+            .58
+        );
+
+    line-height:1;
+
+}
+
+
+.corner-star.tl{
+
+    top:-9px;
+    left:-9px;
+
+}
+
+
+.corner-star.tr{
+
+    top:-9px;
+    right:-9px;
+
+}
+
+
+.corner-star.bl{
+
+    bottom:-9px;
+    left:-9px;
+
+}
+
+
+.corner-star.br{
+
+    bottom:-9px;
+    right:-9px;
+
+}
+
+
+/* =========================================================
+   顶部导航
+========================================================= */
+
+.topbar{
+
+    position:relative;
+
+    z-index:20;
+
+    width:100%;
+
+    height:92px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:
+        0 52px;
+
+}
+
+
+.logo{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:2px;
+
+}
+
+
+.logo-cn{
+
+    font-size:15px;
+
+    letter-spacing:
+        .22em;
+
+    color:
+        rgba(
+            219,
+            235,
+            246,
+            .88
+        );
+
+}
+
+
+.logo-en{
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size:9px;
+
+    letter-spacing:
+        .34em;
+
+    color:
+        rgba(
+            121,
+            174,
+            207,
+            .72
+        );
+
+}
+
+
+.logo-mark{
+
+    color:
+        rgba(
+            117,
+            191,
+            232,
+            .82
+        );
+
+    margin-right:6px;
+
+}
+
+
+.nav{
+
+    display:flex;
+
+    gap:32px;
+
+}
+
+
+.nav a{
+
+    text-decoration:none;
+
+    font-size:12px;
+
+    letter-spacing:
+        .16em;
+
+    color:
+        rgba(
+            175,
+            205,
+            224,
+            .65
+        );
+
+    transition:
+        color .3s ease;
+
+}
+
+
+.nav a:hover{
+
+    color:
+        rgba(
+            218,
+            237,
+            250,
+            .95
+        );
+
+}
+
+
+/* =========================================================
+   主区域
+========================================================= */
+
+.hero{
+
+    position:relative;
+
+    z-index:5;
+
+    min-height:
+        calc(100vh - 92px);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+}
+
+
+.hero-content{
+
+    position:relative;
+
+    width:min(
+        760px,
+        92vw
+    );
+
+    height:min(
+        680px,
+        78vh
+    );
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+
+/* =========================================================
+   魔法阵
+========================================================= */
+
+.magic-circle{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    width:
+        min(
+            620px,
+            90vw
+        );
+
+    aspect-ratio:1;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
+
+    pointer-events:none;
+
+}
+
+
+/* =========================================================
+   三层轨道 SVG
+========================================================= */
+
+.orbit-system{
+
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+
+    height:100%;
+
+    overflow:visible;
+
+}
+
+
+/* =========================================================
+   星轨
+========================================================= */
+
+.orbit-track{
+
+    fill:none;
+
+    stroke:
+        rgba(
+            69,
+            164,
+            230,
+            .28
+        );
+
+    stroke-width:1;
+
+    vector-effect:
+        non-scaling-stroke;
+
+    filter:
+        drop-shadow(
+            0 0 4px
+            rgba(
+                70,
+                155,
+                210,
+                .10
+            )
+        );
+
+}
+
+
+/* =========================================================
+   小星辰
+========================================================= */
+
+#travellingStar{
+
+    font-family:
+        "Times New Roman",
+        serif;
+
+    font-size:15px;
+
+    fill:
+        rgba(
+            190,
+            228,
+            255,
+            .95
+        );
+
+    text-anchor:middle;
+
+    dominant-baseline:middle;
+
+    pointer-events:none;
+
+    filter:
+        drop-shadow(
+            0 0 3px
+            rgba(
+                131,
+                207,
+                250,
+                .9
+            )
+        )
+        drop-shadow(
+            0 0 8px
+            rgba(
+                74,
+                165,
+                224,
+                .55
+            )
+        );
+
+}
+
+
+.star-glow{
+
+    fill:
+        rgba(
+            143,
+            210,
+            246,
+            .08
+        );
+
+    filter:
+        blur(2px);
+
+    pointer-events:none;
+
+}
+
+
+/* =========================================================
+   魔法十字线
+========================================================= */
+
+.magic-line{
+
+    position:absolute;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(
+                73,
+                152,
+                202,
+                .12
+            ),
+            transparent
+        );
+
+}
+
+
+.magic-line.horizontal{
+
+    left:7%;
+
+    right:7%;
+
+    top:50%;
+
+    height:1px;
+
+}
+
+
+.magic-line.vertical{
+
+    top:7%;
+
+    bottom:7%;
+
+    left:50%;
+
+    width:1px;
+
+    background:
+        linear-gradient(
+            180deg,
+            transparent,
+            rgba(
+                73,
+                152,
+                202,
+                .12
+            ),
+            transparent
+        );
+
+}
+
+
+/* =========================================================
+   中心
+========================================================= */
+
+.magic-center{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    width:7px;
+
+    height:7px;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
+
+    border:
+        1px solid
+        rgba(
+            148,
+            208,
+            240,
+            .65
+        );
+
+    border-radius:50%;
+
+    box-shadow:
+        0 0 10px
+        rgba(
+            74,
+            160,
+            215,
+            .35
+        );
+
+}
+
+
+/* =========================================================
+   标题
+========================================================= */
+
+.title-wrap{
+
+    position:relative;
+
+    z-index:5;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
+
+.title-en{
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-weight:300;
+
+    font-size:
+        clamp(
+            48px,
+            8vw,
+            92px
+        );
+
+    line-height:.88;
+
+    letter-spacing:
+        .16em;
+
+    padding-left:
+        .16em;
+
+    color:
+        rgba(
+            220,
+            236,
+            246,
+            .93
+        );
+
+}
+
+
+.title-en.archive{
+
+    font-size:
+        clamp(
+            58px,
+            9.5vw,
+            108px
+        );
+
+    margin-top:4px;
+
+}
+
+
+.title-cn{
+
+    margin-top:30px;
+
+    font-family:
+        "Noto Serif SC",
+        serif;
+
+    font-weight:300;
+
+    font-size:
+        clamp(
+            15px,
+            2vw,
+            20px
+        );
+
+    letter-spacing:
+        .42em;
+
+    padding-left:
+        .42em;
+
+    color:
+        rgba(
+            198,
+            219,
+            232,
+            .78
+        );
+
+}
+
+
+/* =========================================================
+   描述
+========================================================= */
+
+.description{
+
+    margin-top:22px;
+
+    font-family:
+        "Noto Serif SC",
+        serif;
+
+    font-weight:300;
+
+    font-size:11px;
+
+    line-height:2.1;
+
+    letter-spacing:
+        .12em;
+
+    color:
+        rgba(
+            151,
+            184,
+            204,
+            .58
+        );
+
+}
+
+
+/* =========================================================
+   进入按钮
+========================================================= */
+
+.enter-button{
+
+    position:relative;
+
+    z-index:5;
+
+    margin-top:34px;
+
+    padding:
+        13px 28px;
+
+    border:
+        1px solid
+        rgba(
+            100,
+            169,
+            210,
+            .42
+        );
+
+    background:
+        rgba(
+            7,
+            25,
+            43,
+            .30
+        );
+
+    color:
+        rgba(
+            197,
+            224,
+            239,
+            .82
+        );
+
+    font-family:
+        "Noto Serif SC",
+        serif;
+
+    font-size:11px;
+
+    letter-spacing:
+        .22em;
+
+    cursor:pointer;
+
+    transition:
+        border-color .3s ease,
+        background .3s ease,
+        color .3s ease;
+
+}
+
+
+.enter-button:hover{
+
+    border-color:
+        rgba(
+            131,
+            197,
+            231,
+            .68
+        );
+
+    background:
+        rgba(
+            19,
+            54,
+            79,
+            .34
+        );
+
+    color:
+        rgba(
+            225,
+            240,
+            248,
+            .96
+        );
+
+}
+
+
+/* =========================================================
+   底部
+========================================================= */
+
+.footer{
+
+    position:fixed;
+
+    z-index:20;
+
+    left:50%;
+
+    bottom:25px;
+
+    transform:
+        translateX(-50%);
+
+    white-space:nowrap;
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size:8px;
+
+    letter-spacing:
+        .34em;
+
+    color:
+        rgba(
+            101,
+            151,
+            181,
+            .48
+        );
+
+}
+
+
+/* =========================================================
+   手机适配
+========================================================= */
+
+@media(max-width:600px){
+
+    .archive-frame{
+
+        inset:10px;
+
+    }
+
+
+    .topbar{
+
+        height:76px;
+
+        padding:
+            0 25px;
+
+    }
+
+
+    .logo-cn{
+
+        font-size:12px;
+
+    }
+
+
+    .logo-en{
+
+        font-size:7px;
+
+    }
+
+
+    .nav{
+
+        gap:15px;
+
+    }
+
+
+    .nav a{
+
+        font-size:9px;
+
+    }
+
+
+    .hero-content{
+
+        height:72vh;
+
+    }
+
+
+    .magic-circle{
+
+        width:
+            min(
+                570px,
+                108vw
+            );
+
+    }
+
+
+    .title-cn{
+
+        margin-top:24px;
+
+        font-size:12px;
+
+    }
+
+
+    .description{
+
+        padding:
+            0 25px;
+
+        font-size:9px;
+
+    }
+
+
+    .enter-button{
+
+        margin-top:27px;
+
+        padding:
+            11px 20px;
+
+        font-size:9px;
+
+    }
+
+
+    .footer{
+
+        bottom:15px;
+
+        font-size:6px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     背景星星
+===================================================== -->
+
+<div class="star-field">
+
+    <span
+        class="bg-star"
+        style="
+            left:8%;
+            top:18%;
+            --duration:5s;
+            --delay:-1s;
+        "
+    >✦</span>
+
+    <span
+        class="bg-star"
+        style="
+            left:17%;
+            top:67%;
+            --duration:7s;
+            --delay:-3s;
+        "
+    >✧</span>
+
+    <span
+        class="bg-star"
+        style="
+            left:30%;
+            top:12%;
+            --duration:6s;
+            --delay:-2s;
+        "
+    >·</span>
+
+    <span
+        class="bg-star"
+        style="
+            left:72%;
+            top:16%;
+            --duration:8s;
+            --delay:-4s;
+        "
+    >✶</span>
+
+    <span
+        class="bg-star"
+        style="
+            left:88%;
+            top:30%;
+            --duration:6s;
+            --delay:-1s;
+        "
+    >✡</span>
+
+    <span
+        class="bg-star"
+        style="
+            left:78%;
+            top:70%;
+            --duration:7s;
+            --delay:-5s;
+        "
+    >✦</span>
+
+    <span
+        class="bg-star"
+        style="
+            left:14%;
+            top:84%;
+            --duration:5s;
+            --delay:-2s;
+        "
+    >✶</span>
+
+    <span
+        class="bg-star"
+        style="
+            left:92%;
+            top:82%;
+            --duration:8s;
+            --delay:-6s;
+        "
+    >✧</span>
+
+</div>
+
+
+<!-- =====================================================
+     外框
+===================================================== -->
+
+<div class="archive-frame">
+
+    <span class="corner-star tl">✡</span>
+
+    <span class="corner-star tr">✡</span>
+
+    <span class="corner-star bl">✡</span>
+
+    <span class="corner-star br">✡</span>
+
+</div>
+
+
+<!-- =====================================================
+     顶部
+===================================================== -->
+
+<header class="topbar">
+
+
+    <div class="logo">
+
+        <div class="logo-cn">
+
+            <span class="logo-mark">✶</span>
+
+            塞垭弥大陆档案馆
+
+        </div>
+
+        <div class="logo-en">
+
+            SEYAMI ARCHIVE
+
+        </div>
+
+    </div>
+
+
+    <nav class="nav">
+
+        <a href="#">
+            首页
+        </a>
+
+        <a href="#">
+            档案目录
+        </a>
+
+        <a href="#">
+            关于我们
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- =====================================================
+     主区域
+===================================================== -->
+
+<main class="hero">
+
+
+    <div class="hero-content">
+
+
+        <!-- =================================================
+             魔法阵
+        ================================================== -->
+
+        <div class="magic-circle">
+
+
+            <svg
+                id="orbitSVG"
+                class="orbit-system"
+                viewBox="0 0 560 560"
+                preserveAspectRatio="xMidYMid meet"
+                aria-hidden="true"
+            >
+
+
+                <!-- =========================================
+                     A轨道
+                ========================================== -->
+
+                <g id="orbitA">
+
+                    <ellipse
+                        id="ellipseA"
+                        class="orbit-track"
+                        cx="280"
+                        cy="280"
+                        rx="250"
+                        ry="95"
+                    />
+
+                </g>
+
+
+                <!-- =========================================
+                     B轨道
+                ========================================== -->
+
+                <g id="orbitB">
+
+                    <ellipse
+                        id="ellipseB"
+                        class="orbit-track"
+                        cx="280"
+                        cy="280"
+                        rx="210"
+                        ry="72.5"
+                    />
+
+                </g>
+
+
+                <!-- =========================================
+                     C轨道
+                ========================================== -->
+
+                <g id="orbitC">
+
+                    <ellipse
+                        id="ellipseC"
+                        class="orbit-track"
+                        cx="280"
+                        cy="280"
+                        rx="165"
+                        ry="52.5"
+                    />
+
+                </g>
+
+
+                <!-- =========================================
+                     小星辰光晕
+                ========================================== -->
+
+                <circle
+                    id="starGlow"
+                    class="star-glow"
+                    cx="280"
+                    cy="280"
+                    r="8"
+                />
+
+
+                <!-- =========================================
+                     唯一一颗移动星辰
+                ========================================== -->
+
+                <text
+                    id="travellingStar"
+                    x="280"
+                    y="280"
+                >✦</text>
+
+
+            </svg>
+
+
+            <div
+                class="magic-line horizontal"
+            ></div>
+
+
+            <div
+                class="magic-line vertical"
+            ></div>
+
+
+            <div
+                class="magic-center"
+            ></div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             标题
+        ================================================== -->
+
+        <div class="title-wrap">
+
+
+            <div class="title-en">
+
+                SEYAMI
+
+            </div>
+
+
+            <div
+                class="title-en archive"
+            >
+
+                ARCHIVE
+
+            </div>
+
+
+            <div class="title-cn">
+
+                塞垭弥大陆档案馆
+
+            </div>
+
+
+            <div class="description">
+
+                记录关于这片大陆的一切。<br>
+
+                角色、种族、地域、历史，以及那些尚未被发现的故事。
+
+            </div>
+
+
+            <button
+                class="enter-button"
+                onclick="enterArchive()"
+            >
+
+                开启塞垭弥档案　→
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+<!-- =====================================================
+     Footer
+===================================================== -->
+
+<footer class="footer">
+
+    ✦　THE ARCHIVES OF SEYAMI　✦
+
+</footer>
+
+
 <script>
 
 /* =========================================================
    SEYAMI ARCHIVE
-   三重动态星轨 · 平滑换轨版
+   三重动态星轨 · 平滑换轨系统
 
-   A：38秒 / 顺时针
-   B：32秒 / 逆时针
-   C：25秒 / 顺时针
+   A：38 秒 / 顺时针
+   B：32 秒 / 逆时针
+   C：25 秒 / 顺时针
 
    路线：
 
-   A → A/B → B → B/C → C → C/A → A
-
-   ★ 本版本重点：
-   星星不会在交点瞬间“跳轨”。
-
-   接近交点：
-       A ───────╮
-                 ✦
-       B ───────╯
-
-   星星会在交点附近进行短距离的
-   平滑方向过渡，然后自然进入下一条轨道。
+   A
+   ↓
+   A / B 交点
+   ↓
+   B
+   ↓
+   B / C 交点
+   ↓
+   C
+   ↓
+   C / A 交点
+   ↓
+   A
 ========================================================= */
 
+
 (function(){
+
+
+    /* =====================================================
+       DOM
+    ===================================================== */
 
     const star =
         document.getElementById(
             "travellingStar"
         );
+
 
     const glow =
         document.getElementById(
@@ -37,8 +1479,31 @@
         );
 
 
-    if(!star || !glow){
+    const groupA =
+        document.getElementById(
+            "orbitA"
+        );
+
+
+    const groupB =
+        document.getElementById(
+            "orbitB"
+        );
+
+
+    const groupC =
+        document.getElementById(
+            "orbitC"
+        );
+
+
+    if(
+        !star ||
+        !glow
+    ){
+
         return;
+
     }
 
 
@@ -47,6 +1512,7 @@
     ===================================================== */
 
     const CX = 280;
+
     const CY = 280;
 
 
@@ -57,47 +1523,69 @@
     const tracks = [
 
         {
+
             id:"A",
 
             rx:250,
+
             ry:95,
 
             rotation:0,
 
-            /* 38 秒一圈 / 顺时针 */
-            speed:360 / 38,
+            /*
+               38 秒一圈
+            */
+
+            speed:
+                360 / 38,
 
             direction:1
+
         },
 
 
         {
+
             id:"B",
 
             rx:210,
+
             ry:72.5,
 
             rotation:55,
 
-            /* 32 秒一圈 / 逆时针 */
-            speed:-360 / 32,
+            /*
+               32 秒一圈
+               逆时针
+            */
+
+            speed:
+                -360 / 32,
 
             direction:-1
+
         },
 
 
         {
+
             id:"C",
 
             rx:165,
+
             ry:52.5,
 
-            /* 25 秒一圈 / 顺时针 */
             rotation:110,
 
-            speed:360 / 25,
+            /*
+               25 秒一圈
+            */
+
+            speed:
+                360 / 25,
 
             direction:1
+
         }
 
     ];
@@ -111,31 +1599,71 @@
 
 
     /* =====================================================
-       星星参数角度
+       星星当前位置
     ===================================================== */
 
     let starAngle = 300;
 
 
     /* =====================================================
-       目标交点
+       当前目标
     ===================================================== */
 
     let targetAngle = null;
 
-
-    /*
-       交点的真实世界坐标
-    */
-
     let targetWorld = null;
 
 
-    /*
-       是否正在前往交点
-    */
+    /* =====================================================
+       平滑换轨状态
+    ===================================================== */
 
     let switching = false;
+
+
+    /*
+       换轨开始时间
+    */
+
+    let transitionStart = 0;
+
+
+    /*
+       换轨持续时间
+
+       半秒不到。
+
+       足够让方向自然改变，
+       又不会让星星明显离开轨道。
+    */
+
+    const TRANSITION_DURATION = 420;
+
+
+    /*
+       开始进入交点的距离。
+
+       12° 是一个非常短的范围。
+    */
+
+    const TRANSITION_ANGLE = 12;
+
+
+    /*
+       过渡时记录的数据
+    */
+
+    let transitionFromTrack = 0;
+
+    let transitionToTrack = 0;
+
+    let transitionFromAngle = 0;
+
+    let transitionToAngle = 0;
+
+    let transitionCrossX = 0;
+
+    let transitionCrossY = 0;
 
 
     /* =====================================================
@@ -145,63 +1673,56 @@
     const animationStart =
         performance.now();
 
+
     let lastTime =
         animationStart;
 
 
     /* =====================================================
-       平滑换轨参数
+       角度工具
     ===================================================== */
 
-    /*
-       进入交点前多少角度
-       开始准备换轨。
+    function degToRad(
+        angle
+    ){
 
-       数值越大：
-       过渡越早、越柔和。
-
-       这里保持比较自然的短过渡。
-    */
-
-    const TRANSITION_ANGLE = 12;
-
-
-    /*
-       交点附近的平滑比例
-    */
-
-    let transitionProgress = 0;
-
-
-    /* =====================================================
-       工具
-    ===================================================== */
-
-    function degToRad(angle){
-
-        return angle *
-               Math.PI /
-               180;
+        return (
+            angle *
+            Math.PI /
+            180
+        );
 
     }
 
 
-    function radToDeg(angle){
+    function radToDeg(
+        angle
+    ){
 
-        return angle *
-               180 /
-               Math.PI;
+        return (
+            angle *
+            180 /
+            Math.PI
+        );
 
     }
 
 
-    function normalize(angle){
+    function normalize(
+        angle
+    ){
 
         angle %= 360;
 
-        if(angle < 0){
+
+        if(
+            angle < 0
+        ){
+
             angle += 360;
+
         }
+
 
         return angle;
 
@@ -209,7 +1730,7 @@
 
 
     /* =====================================================
-       当前轨道旋转角
+       轨道当前旋转
     ===================================================== */
 
     function getRotation(
@@ -218,17 +1739,20 @@
     ){
 
         return (
+
             track.rotation +
+
             track.speed *
             elapsed /
             1000
+
         );
 
     }
 
 
     /* =====================================================
-       ★ 轨道真实坐标
+       轨道坐标
     ===================================================== */
 
     function getPoint(
@@ -238,20 +1762,27 @@
     ){
 
         const rad =
-            degToRad(angle);
+            degToRad(
+                angle
+            );
 
 
         /*
-           椭圆自身坐标
+           椭圆本地坐标
         */
 
         const localX =
             track.rx *
-            Math.cos(rad);
+            Math.cos(
+                rad
+            );
+
 
         const localY =
             track.ry *
-            Math.sin(rad);
+            Math.sin(
+                rad
+            );
 
 
         /*
@@ -268,19 +1799,25 @@
 
 
         const cos =
-            Math.cos(rotation);
+            Math.cos(
+                rotation
+            );
+
 
         const sin =
-            Math.sin(rotation);
+            Math.sin(
+                rotation
+            );
 
 
         /*
-           旋转后的坐标
+           旋转到世界坐标
         */
 
         const worldX =
             localX * cos -
             localY * sin;
+
 
         const worldY =
             localX * sin +
@@ -289,9 +1826,11 @@
 
         return {
 
-            x:CX + worldX,
+            x:
+                CX + worldX,
 
-            y:CY + worldY
+            y:
+                CY + worldY
 
         };
 
@@ -299,7 +1838,7 @@
 
 
     /* =====================================================
-       世界坐标 → 轨道参数
+       世界坐标 → 轨道角度
     ===================================================== */
 
     function worldToTrackAngle(
@@ -312,13 +1851,10 @@
         const dx =
             x - CX;
 
+
         const dy =
             y - CY;
 
-
-        /*
-           反向旋转
-        */
 
         const rotation =
             degToRad(
@@ -329,16 +1865,26 @@
             );
 
 
+        /*
+           反向旋转
+        */
+
         const cos =
-            Math.cos(-rotation);
+            Math.cos(
+                -rotation
+            );
+
 
         const sin =
-            Math.sin(-rotation);
+            Math.sin(
+                -rotation
+            );
 
 
         const localX =
             dx * cos -
             dy * sin;
+
 
         const localY =
             dx * sin +
@@ -354,13 +1900,15 @@
             );
 
 
-        return normalize(angle);
+        return normalize(
+            angle
+        );
 
     }
 
 
     /* =====================================================
-       寻找两条轨道交点
+       两条轨道的交点搜索
     ===================================================== */
 
     function findIntersection(
@@ -372,9 +1920,11 @@
 
         const samples = 720;
 
+
         let best = null;
 
-        let bestScore = Infinity;
+        let bestScore =
+            Infinity;
 
 
         for(
@@ -390,7 +1940,7 @@
 
 
             /*
-               当前轨道上的点
+               A上的点
             */
 
             const pointA =
@@ -402,7 +1952,7 @@
 
 
             /*
-               转换到 B 轨道
+               转换到B
             */
 
             const angleB =
@@ -422,9 +1972,14 @@
                 );
 
 
+            /*
+               两点距离
+            */
+
             const dx =
                 pointA.x -
                 pointB.x;
+
 
             const dy =
                 pointA.y -
@@ -439,7 +1994,7 @@
 
 
             /*
-               当前星星前进方向
+               沿当前方向的距离
             */
 
             const travel =
@@ -453,21 +2008,20 @@
 
 
             /*
-               不选择刚刚经过的交点
+               排除已经经过的位置
             */
 
             if(
                 travel < 2
             ){
+
                 continue;
+
             }
 
 
             /*
-               分数：
-               距离越近越好。
-               
-               同时优先选择前方最近交点。
+               优先选择前方最近交点
             */
 
             const score =
@@ -482,6 +2036,7 @@
 
                 bestScore =
                     score;
+
 
                 best = {
 
@@ -518,14 +2073,14 @@
 
 
     /* =====================================================
-       设置下一交点
+       寻找下一交点
     ===================================================== */
 
     function setNextTarget(
         elapsed
     ){
 
-        const nextTrackIndex =
+        const nextIndex =
             (
                 currentTrack +
                 1
@@ -537,9 +2092,10 @@
                 currentTrack
             ];
 
+
         const next =
             tracks[
-                nextTrackIndex
+                nextIndex
             ];
 
 
@@ -552,8 +2108,12 @@
             );
 
 
-        if(!intersection){
+        if(
+            !intersection
+        ){
+
             return;
+
         }
 
 
@@ -563,53 +2123,110 @@
 
         targetWorld = {
 
-            x:intersection.x,
+            x:
+                intersection.x,
 
-            y:intersection.y
+            y:
+                intersection.y
 
         };
 
 
-        switching = true;
-
-        transitionProgress = 0;
+        switching = false;
 
     }
 
 
     /* =====================================================
-       更新三条轨道
+       Smoothstep
+       让速度在开始/结束时都很柔和
+    ===================================================== */
+
+    function smoothstep(
+        t
+    ){
+
+        t =
+            Math.max(
+                0,
+                Math.min(
+                    1,
+                    t
+                )
+            );
+
+
+        return (
+
+            t *
+            t *
+            (
+                3 -
+                2 * t
+            )
+
+        );
+
+    }
+
+
+    /* =====================================================
+       更柔和的五次缓动
+    ===================================================== */
+
+    function smootherstep(
+        t
+    ){
+
+        t =
+            Math.max(
+                0,
+                Math.min(
+                    1,
+                    t
+                )
+            );
+
+
+        return (
+
+            t *
+            t *
+            t *
+            (
+                t *
+                (
+                    t *
+                    6 -
+                    15
+                ) +
+                10
+            )
+
+        );
+
+    }
+
+
+    /* =====================================================
+       轨道旋转
     ===================================================== */
 
     function updateOrbits(
         elapsed
     ){
 
-        const groupA =
-            document.getElementById(
-                "orbitA"
-            );
-
-        const groupB =
-            document.getElementById(
-                "orbitB"
-            );
-
-        const groupC =
-            document.getElementById(
-                "orbitC"
-            );
-
-
         if(groupA){
 
             groupA.setAttribute(
                 "transform",
                 `rotate(
-                    ${getRotation(
-                        tracks[0],
-                        elapsed
-                    )}
+                    ${
+                        getRotation(
+                            tracks[0],
+                            elapsed
+                        )
+                    }
                     ${CX}
                     ${CY}
                 )`
@@ -623,10 +2240,12 @@
             groupB.setAttribute(
                 "transform",
                 `rotate(
-                    ${getRotation(
-                        tracks[1],
-                        elapsed
-                    )}
+                    ${
+                        getRotation(
+                            tracks[1],
+                            elapsed
+                        )
+                    }
                     ${CX}
                     ${CY}
                 )`
@@ -640,10 +2259,12 @@
             groupC.setAttribute(
                 "transform",
                 `rotate(
-                    ${getRotation(
-                        tracks[2],
-                        elapsed
-                    )}
+                    ${
+                        getRotation(
+                            tracks[2],
+                            elapsed
+                        )
+                    }
                     ${CX}
                     ${CY}
                 )`
@@ -655,10 +2276,133 @@
 
 
     /* =====================================================
-       ★ 平滑函数
+       ★ 开始一次平滑换轨
     ===================================================== */
 
-    function smoothstep(t){
+    function beginTransition(
+        elapsed
+    ){
+
+        const from =
+            tracks[
+                currentTrack
+            ];
+
+
+        const toIndex =
+            (
+                currentTrack +
+                1
+            ) % 3;
+
+
+        const to =
+            tracks[
+                toIndex
+            ];
+
+
+        /*
+           记录换轨前轨道
+        */
+
+        transitionFromTrack =
+            currentTrack;
+
+
+        transitionToTrack =
+            toIndex;
+
+
+        /*
+           当前轨道的交点角度
+        */
+
+        transitionFromAngle =
+            targetAngle;
+
+
+        /*
+           找到交点在下一轨道上的角度
+        */
+
+        transitionToAngle =
+            worldToTrackAngle(
+                to,
+                targetWorld.x,
+                targetWorld.y,
+                elapsed
+            );
+
+
+        /*
+           记录交点
+        */
+
+        transitionCrossX =
+            targetWorld.x;
+
+
+        transitionCrossY =
+            targetWorld.y;
+
+
+        /*
+           开始时间
+        */
+
+        transitionStart =
+            performance.now();
+
+
+        switching = true;
+
+    }
+
+
+    /* =====================================================
+       ★ 平滑换轨位置
+
+       重点就在这里。
+
+       不是：
+
+           A → B
+
+       而是：
+
+           A → A/B交点附近
+                ↘
+                 ↘
+                  B
+
+       中间用平滑插值。
+    ===================================================== */
+
+    function getTransitionPosition(
+        now,
+        elapsed
+    ){
+
+        const from =
+            tracks[
+                transitionFromTrack
+            ];
+
+
+        const to =
+            tracks[
+                transitionToTrack
+            ];
+
+
+        let t =
+            (
+                now -
+                transitionStart
+            ) /
+            TRANSITION_DURATION;
+
 
         t =
             Math.max(
@@ -670,181 +2414,104 @@
             );
 
 
-        return (
-            t *
-            t *
-            (
-                3 -
-                2 * t
-            )
-        );
-
-    }
-
-
-    /* =====================================================
-       ★ 计算星星在交点附近的平滑位置
-       
-       这里不是简单“瞬间换轨”。
-       
-       而是：
-       
-       当前轨道位置
-          ↓
-       逐渐靠近交点
-          ↓
-       交点
-          ↓
-       新轨道位置
-    ===================================================== */
-
-    function getSmoothStarPosition(
-        elapsed
-    ){
-
-        const current =
-            tracks[
-                currentTrack
-            ];
-
-
-        const nextIndex =
-            (
-                currentTrack +
-                1
-            ) % 3;
-
-
-        const next =
-            tracks[
-                nextIndex
-            ];
-
-
         /*
-           当前距离交点还有多少
+           五次缓动。
+
+           起点速度很低，
+           中间自然加速，
+           终点又自然减速。
         */
 
-        let distance =
-            normalize(
-                (
-                    targetAngle -
-                    starAngle
-                ) *
-                current.direction
+        const eased =
+            smootherstep(
+                t
             );
 
 
         /*
-           进入过渡区域
+           当前轨道的点
+
+           从交点前一点
+           滑到交点。
         */
 
-        if(
-            distance <=
-            TRANSITION_ANGLE
-        ){
-
-            transitionProgress =
-                1 -
-                distance /
-                TRANSITION_ANGLE;
-
-
-            transitionProgress =
-                smoothstep(
-                    transitionProgress
-                );
-
-
-            /*
-               当前轨道的位置
-            */
-
-            const currentPoint =
-                getPoint(
-                    current,
-                    starAngle,
-                    elapsed
-                );
-
-
-            /*
-               新轨道交点参数
-            */
-
-            const nextAngle =
-                worldToTrackAngle(
-                    next,
-                    targetWorld.x,
-                    targetWorld.y,
-                    elapsed
-                );
-
-
-            /*
-               沿着新轨道稍微向前一点
-            */
-
-            const nextAdvance =
-                next.direction *
-                0.8;
-
-
-            const nextPoint =
-                getPoint(
-                    next,
-                    normalize(
-                        nextAngle +
-                        nextAdvance
-                    ),
-                    elapsed
-                );
-
-
-            /*
-               ★ 在两个位置之间
-               使用平滑插值。
-            */
-
-            const x =
-                currentPoint.x *
-                (1 - transitionProgress) +
-                nextPoint.x *
-                transitionProgress;
-
-
-            const y =
-                currentPoint.y *
-                (1 - transitionProgress) +
-                nextPoint.y *
-                transitionProgress;
-
-
-            return {
-
-                x,
-                y,
-
-                blended:true
-
-            };
-
-        }
+        const fromAngle =
+            normalize(
+                transitionFromAngle -
+                from.direction *
+                (
+                    5 *
+                    (
+                        1 -
+                        eased
+                    )
+                )
+            );
 
 
         /*
-           正常状态
+           下一轨道从交点开始
+           向前一点。
         */
+
+        const toAngle =
+            normalize(
+                transitionToAngle +
+                to.direction *
+                (
+                    5 *
+                    eased
+                )
+            );
+
+
+        const p1 =
+            getPoint(
+                from,
+                fromAngle,
+                elapsed
+            );
+
+
+        const p2 =
+            getPoint(
+                to,
+                toAngle,
+                elapsed
+            );
+
+
+        /*
+           世界坐标平滑融合
+        */
+
+        const x =
+            p1.x *
+            (
+                1 -
+                eased
+            ) +
+            p2.x *
+            eased;
+
+
+        const y =
+            p1.y *
+            (
+                1 -
+                eased
+            ) +
+            p2.y *
+            eased;
+
 
         return {
 
-            ...getPoint(
-                current,
-                starAngle,
-                elapsed
-            ),
+            x,
 
-            blended:false
+            y,
+
+            progress:t
 
         };
 
@@ -852,18 +2519,64 @@
 
 
     /* =====================================================
-       ★ 更新星星
+       ★ 正常星星位置
     ===================================================== */
 
-    function updateStar(
+    function getNormalPosition(
         elapsed
     ){
 
-        const position =
-            getSmoothStarPosition(
-                elapsed
-            );
+        const track =
+            tracks[
+                currentTrack
+            ];
 
+
+        return getPoint(
+            track,
+            starAngle,
+            elapsed
+        );
+
+    }
+
+
+    /* =====================================================
+       更新星星
+    ===================================================== */
+
+    function updateStar(
+        now,
+        elapsed
+    ){
+
+        let position;
+
+
+        if(
+            switching
+        ){
+
+            position =
+                getTransitionPosition(
+                    now,
+                    elapsed
+                );
+
+        }
+        else{
+
+            position =
+                getNormalPosition(
+                    elapsed
+                );
+
+        }
+
+
+        /*
+           星星
+        */
 
         star.setAttribute(
             "x",
@@ -876,6 +2589,10 @@
             position.y.toFixed(3)
         );
 
+
+        /*
+           光晕
+        */
 
         glow.setAttribute(
             "cx",
@@ -893,6 +2610,8 @@
 
     /* =====================================================
        星星速度
+
+       保持原来的速度感。
     ===================================================== */
 
     const STAR_SPEED = 11;
@@ -902,7 +2621,9 @@
        主动画
     ===================================================== */
 
-    function animate(now){
+    function animate(
+        now
+    ){
 
         const elapsed =
             now -
@@ -920,8 +2641,7 @@
 
 
         /* -----------------------------------------------
-           1.
-           三条轨道独立旋转
+           轨道旋转
         ------------------------------------------------ */
 
         updateOrbits(
@@ -930,186 +2650,78 @@
 
 
         /* -----------------------------------------------
-           2.
-           如果没有目标，
-           寻找下一个交点
-        ------------------------------------------------ */
-
-        if(!switching){
-
-            setNextTarget(
-                elapsed
-            );
-
-        }
-
-
-        /* -----------------------------------------------
-           3.
-           星星前往交点
+           如果正在换轨
         ------------------------------------------------ */
 
         if(
-            switching &&
-            targetAngle !== null
+            switching
         ){
 
-            const track =
-                tracks[
-                    currentTrack
-                ];
-
-
-            const direction =
-                track.direction;
-
-
-            /*
-               当前距离
-            */
-
-            let distance =
-                normalize(
-                    (
-                        targetAngle -
-                        starAngle
-                    ) *
-                    direction
-                );
+            const progress =
+                (
+                    now -
+                    transitionStart
+                ) /
+                TRANSITION_DURATION;
 
 
             /*
-               正常速度
-            */
-
-            let speed =
-                STAR_SPEED;
-
-
-            /*
-               靠近交点时慢慢减速
+               换轨完成
             */
 
             if(
-                distance <
-                TRANSITION_ANGLE * 2
-            ){
-
-                speed *=
-                    Math.max(
-                        0.2,
-                        distance /
-                        (
-                            TRANSITION_ANGLE *
-                            2
-                        )
-                    );
-
-            }
-
-
-            /*
-               前进
-            */
-
-            starAngle +=
-                speed *
-                direction *
-                delta;
-
-
-            starAngle =
-                normalize(
-                    starAngle
-                );
-
-
-            /*
-               更新距离
-            */
-
-            distance =
-                normalize(
-                    (
-                        targetAngle -
-                        starAngle
-                    ) *
-                    direction
-                );
-
-
-            /* -------------------------------------------
-               4.
-               到达真正交点
-            ------------------------------------------- */
-
-            if(
-                distance < 0.7
+                progress >= 1
             ){
 
                 /*
-                   ★ 此时重新计算
-                   当前轨道上的真实交点
-                */
-
-                const intersection =
-                    getPoint(
-                        track,
-                        targetAngle,
-                        elapsed
-                    );
-
-
-                /*
-                   下一条轨道
-                */
-
-                const nextIndex =
-                    (
-                        currentTrack +
-                        1
-                    ) % 3;
-
-
-                const nextTrack =
-                    tracks[
-                        nextIndex
-                    ];
-
-
-                /*
-                   ★ 将真实交点
-                   转换成下一轨道自己的角度
-                */
-
-                const nextAngle =
-                    worldToTrackAngle(
-                        nextTrack,
-                        intersection.x,
-                        intersection.y,
-                        elapsed
-                    );
-
-
-                /*
-                   正式换轨
+                   正式进入下一轨道
                 */
 
                 currentTrack =
-                    nextIndex;
+                    transitionToTrack;
 
 
                 /*
-                   使用新轨道自己的参数
+                   重新根据当前时间
+                   获取交点对应的角度
+                */
+
+                const next =
+                    tracks[
+                        currentTrack
+                    ];
+
+
+                const currentPoint =
+                    getPoint(
+                        next,
+                        transitionToAngle,
+                        elapsed
+                    );
+
+
+                starAngle =
+                    worldToTrackAngle(
+                        next,
+                        currentPoint.x,
+                        currentPoint.y,
+                        elapsed
+                    );
+
+
+                /*
+                   向前走一点。
+
+                   避免停在交点。
                 */
 
                 starAngle =
-                    nextAngle;
+                    normalize(
+                        starAngle +
+                        next.direction *
+                        1.2
+                    );
 
-
-                /*
-                   清除旧目标
-                */
 
                 targetAngle = null;
 
@@ -1117,19 +2729,139 @@
 
                 switching = false;
 
-                transitionProgress = 0;
+            }
+
+        }
+
+
+        /* -----------------------------------------------
+           正常移动
+        ------------------------------------------------ */
+
+        if(
+            !switching
+        ){
+
+            /*
+               没有目标，
+               寻找下一交点。
+            */
+
+            if(
+                targetAngle === null
+            ){
+
+                setNextTarget(
+                    elapsed
+                );
+
+            }
+
+
+            if(
+                targetAngle !== null
+            ){
+
+                const track =
+                    tracks[
+                        currentTrack
+                    ];
 
 
                 /*
-                   微小前进量
+                   距离交点
                 */
+
+                let distance =
+                    normalize(
+                        (
+                            targetAngle -
+                            starAngle
+                        ) *
+                        track.direction
+                    );
+
+
+                /*
+                   正常速度
+                */
+
+                let speed =
+                    STAR_SPEED;
+
+
+                /*
+                   靠近交点：
+
+                   先慢慢减速。
+                */
+
+                if(
+                    distance <
+                    TRANSITION_ANGLE * 2
+                ){
+
+                    const factor =
+                        distance /
+                        (
+                            TRANSITION_ANGLE *
+                            2
+                        );
+
+
+                    speed *=
+                        Math.max(
+                            .22,
+                            factor
+                        );
+
+                }
+
+
+                /*
+                   移动
+                */
+
+                starAngle +=
+                    speed *
+                    track.direction *
+                    delta;
+
 
                 starAngle =
                     normalize(
-                        starAngle +
-                        nextTrack.direction *
-                        0.8
+                        starAngle
                     );
+
+
+                /*
+                   更新距离
+                */
+
+                distance =
+                    normalize(
+                        (
+                            targetAngle -
+                            starAngle
+                        ) *
+                        track.direction
+                    );
+
+
+                /*
+                   到达平滑换轨区
+                */
+
+                if(
+                    distance <=
+                    TRANSITION_ANGLE
+                ){
+
+                    beginTransition(
+                        elapsed
+                    );
+
+                }
 
             }
 
@@ -1137,11 +2869,11 @@
 
 
         /* -----------------------------------------------
-           5.
            更新星星
         ------------------------------------------------ */
 
         updateStar(
+            now,
             elapsed
         );
 
@@ -1166,7 +2898,11 @@
 
     updateOrbits(0);
 
-    updateStar(0);
+
+    updateStar(
+        animationStart,
+        0
+    );
 
 
     /* =====================================================
@@ -1180,4 +2916,34 @@
 
 })();
 
-              </script>
+
+/* =========================================================
+   进入档案馆
+========================================================= */
+
+function enterArchive(){
+
+    /*
+       这里暂时保持首页按钮原本行为。
+
+       如果你的档案目录页面已经有文件，
+       后面可以把这里改成：
+
+       location.href =
+           "archive.html";
+
+       现在不动你的其他页面。
+    */
+
+    console.log(
+        "Welcome to Seyami Archive."
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>
