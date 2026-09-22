@@ -39,6 +39,7 @@ body{
     background:#061426;
     color:#dcecff;
     overflow-x:hidden;
+
     font-family:
         "Cormorant Garamond",
         "Noto Serif SC",
@@ -47,8 +48,10 @@ body{
 
 .page{
     position:relative;
+
     width:100%;
     min-height:100vh;
+
     overflow:hidden;
 
     background:
@@ -73,6 +76,7 @@ body{
 .stars{
     position:absolute;
     inset:0;
+
     pointer-events:none;
     overflow:hidden;
 }
@@ -80,6 +84,7 @@ body{
 .stars::before,
 .stars::after{
     content:"";
+
     position:absolute;
     inset:-20%;
 
@@ -147,6 +152,7 @@ body{
 .floating-stars{
     position:absolute;
     inset:0;
+
     pointer-events:none;
     z-index:2;
 }
@@ -160,7 +166,8 @@ body{
     font-size:14px;
 
     text-shadow:
-        0 0 8px rgba(96,177,242,.5);
+        0 0 8px
+        rgba(96,177,242,.5);
 
     animation:
         floatStar
@@ -246,6 +253,7 @@ body{
     0%,
     100%{
         opacity:.35;
+
         transform:
             translateY(0)
             rotate(0deg);
@@ -253,6 +261,7 @@ body{
 
     50%{
         opacity:.85;
+
         transform:
             translateY(-8px)
             rotate(12deg);
@@ -274,6 +283,7 @@ body{
         rgba(111,174,224,.32);
 
     pointer-events:none;
+
     z-index:10;
 }
 
@@ -300,6 +310,7 @@ body{
     height:68px;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
@@ -361,6 +372,7 @@ body{
     top:38px;
 
     display:flex;
+
     align-items:flex-start;
     justify-content:space-between;
 
@@ -369,6 +381,7 @@ body{
 
 .logo{
     display:flex;
+
     align-items:baseline;
 
     gap:10px;
@@ -408,6 +421,7 @@ body{
 
 .logo-text{
     display:flex;
+
     flex-direction:column;
 
     line-height:1.05;
@@ -441,6 +455,7 @@ body{
 
 .nav-links{
     display:flex;
+
     align-items:center;
 
     gap:31px;
@@ -512,6 +527,7 @@ body{
     min-height:100vh;
 
     display:flex;
+
     flex-direction:column;
 
     align-items:center;
@@ -794,7 +810,7 @@ body{
 
 /* =========================================================
    ★ PC标题
-   中间空格严格对准页面中心
+   SEYAMI / ARCHIVE 统一字号
 ========================================================= */
 
 .main-title{
@@ -819,8 +835,6 @@ body{
 
     line-height:1;
 
-    letter-spacing:8px;
-
     color:#dceeff;
 
     text-align:center;
@@ -831,72 +845,59 @@ body{
 }
 
 
-.main-title .seyami{
+/* =========================================================
+   ★ 两个英文标题完全统一
+========================================================= */
 
-    position:absolute;
-
-    right:50%;
-
-    margin-right:20px;
-
-    font-size:clamp(56px, 7.9vw, 87px);
-
-    white-space:nowrap;
-}
-
-
+.main-title .seyami,
 .main-title .archive{
 
     position:absolute;
 
-    left:50%;
+    top:0;
 
-    margin-left:20px;
+    font-family:
+        "Cinzel",
+        "Cormorant Garamond",
+        serif;
 
-    margin-top:0;
+    font-size:clamp(
+        42px,
+        7.2vw,
+        72px
+    );
 
-    font-size:clamp(56px, 7.9vw, 87px);
+    font-weight:400;
 
-    letter-spacing:9px;
+    line-height:1;
+
+    letter-spacing:8px;
 
     white-space:nowrap;
 }
 
 
 /* =========================================================
-   ★ PC窄窗口标题自适应
-   801px ～ 521px
-
-   根据窗口宽度连续缩小，
-   保持 SEYAMI ARCHIVE 一行
+   左侧 SEYAMI
 ========================================================= */
 
-@media (min-width:521px) and (max-width:800px){
+.main-title .seyami{
 
-    .main-title .seyami{
+    right:50%;
 
-        font-size:clamp(
-            36px,
-            6vw,
-            52px
-        );
+    margin-right:20px;
+}
 
-        margin-right:8px;
-    }
 
-    .main-title .archive{
+/* =========================================================
+   右侧 ARCHIVE
+========================================================= */
 
-        font-size:clamp(
-            42px,
-            7.2vw,
-            63px
-        );
+.main-title .archive{
 
-        margin-left:8px;
+    left:50%;
 
-        letter-spacing:6px;
-    }
-
+    margin-left:20px;
 }
 
 
@@ -909,7 +910,6 @@ body{
     display:flex;
 
     align-items:center;
-
     justify-content:center;
 
     gap:15px;
@@ -1029,7 +1029,6 @@ body{
     display:flex;
 
     align-items:center;
-
     justify-content:center;
 }
 
@@ -1290,6 +1289,32 @@ body{
         align-items:baseline;
     }
 
+
+    /* =====================================================
+       平板标题统一
+    ===================================================== */
+
+    .main-title .seyami,
+    .main-title .archive{
+
+        font-size:58px;
+
+        letter-spacing:7px;
+
+        font-weight:400;
+    }
+
+    .main-title .seyami{
+
+        margin-right:14px;
+    }
+
+    .main-title .archive{
+
+        margin-left:14px;
+    }
+
+
     .chinese-title{
         font-size:18px;
     }
@@ -1420,7 +1445,7 @@ body{
 
     /* =====================================================
        手机标题
-       两行，但缩小上下间距
+       两行 + 两个单词完全统一
     ===================================================== */
 
     .main-title{
@@ -1438,37 +1463,33 @@ body{
 
         justify-content:center;
 
-        letter-spacing:5px;
-
         line-height:.88;
 
         height:auto;
     }
 
-    .main-title .seyami{
+    .main-title .seyami,
+    .main-title .archive{
 
         position:static;
 
+        margin-left:0;
         margin-right:0;
 
         font-size:43px;
+
+        font-weight:400;
+
+        line-height:1;
+
+        letter-spacing:6px;
 
         white-space:nowrap;
     }
 
     .main-title .archive{
 
-        position:static;
-
         margin-top:3px;
-
-        margin-left:0;
-
-        font-size:53px;
-
-        letter-spacing:6px;
-
-        white-space:nowrap;
     }
 
 
@@ -1583,21 +1604,33 @@ body{
         font-size:8px;
     }
 
-    .main-title .seyami{
+
+    /* =====================================================
+       超小屏标题继续保持完全一致
+    ===================================================== */
+
+    .main-title .seyami,
+    .main-title .archive{
+
         font-size:39px;
+
+        letter-spacing:5px;
     }
 
     .main-title .archive{
-        font-size:48px;
+
         margin-top:2px;
     }
+
 
     .title-decoration .line{
         width:42px;
     }
 
     .chinese-title{
+
         font-size:14px;
+
         letter-spacing:4px;
     }
 
@@ -1619,8 +1652,17 @@ body{
 
 <div class="page">
 
+
+<!-- =====================================================
+     背景
+====================================================== -->
+
 <div class="stars"></div>
 
+
+<!-- =====================================================
+     浮动星星
+====================================================== -->
 
 <div class="floating-stars">
 
@@ -1640,6 +1682,10 @@ body{
 </div>
 
 
+<!-- =====================================================
+     外框
+====================================================== -->
+
 <div class="frame">
 
     <div class="corner tl"></div>
@@ -1649,6 +1695,10 @@ body{
 
 </div>
 
+
+<!-- =====================================================
+     顶部导航
+====================================================== -->
 
 <header class="top-nav">
 
@@ -1693,8 +1743,16 @@ body{
 </header>
 
 
+<!-- =====================================================
+     主体
+========================================================= -->
+
 <main class="main">
 
+
+    <!-- =================================================
+         魔法阵
+    ================================================== -->
 
     <div class="magic-circle">
 
@@ -1707,6 +1765,8 @@ body{
             aria-hidden="true"
         >
 
+
+            <!-- A轨 -->
 
             <g id="orbitA">
 
@@ -1722,6 +1782,8 @@ body{
             </g>
 
 
+            <!-- B轨 -->
+
             <g id="orbitB">
 
                 <ellipse
@@ -1735,6 +1797,8 @@ body{
 
             </g>
 
+
+            <!-- C轨 -->
 
             <g id="orbitC">
 
@@ -1750,6 +1814,8 @@ body{
             </g>
 
 
+            <!-- 小星辰光晕 -->
+
             <circle
                 id="starGlow"
                 class="star-glow"
@@ -1758,6 +1824,8 @@ body{
                 r="8"
             />
 
+
+            <!-- 小星辰 -->
 
             <text
                 id="travellingStar"
@@ -1779,6 +1847,10 @@ body{
     </div>
 
 
+    <!-- =================================================
+         标题区域
+    ================================================== -->
+
     <section class="title-area">
 
 
@@ -1795,6 +1867,8 @@ body{
         </h1>
 
 
+        <!-- 标题装饰 -->
+
         <div class="title-decoration">
 
             <span class="line"></span>
@@ -1806,10 +1880,14 @@ body{
         </div>
 
 
+        <!-- 中文标题 -->
+
         <div class="chinese-title">
             塞垭弥大陆档案馆
         </div>
 
+
+        <!-- 描述 -->
 
         <div class="description">
 
@@ -1823,6 +1901,8 @@ body{
 
         </div>
 
+
+        <!-- 进入按钮 -->
 
         <div class="enter-wrap">
 
@@ -1857,25 +1937,58 @@ body{
 </main>
 
 
+<!-- =====================================================
+     Footer
+========================================================= -->
+
 <footer class="footer">
     ✦　THE ARCHIVES OF SEYAMI　✦
 </footer>
 
 </div>
 
+
 <script>
 
+/* =========================================================
+   SEYAMI ARCHIVE
+   三层星轨
+
+   A：38秒 / 顺时针
+   B：32秒 / 逆时针
+   C：25秒 / 顺时针
+
+   路线：
+
+   A
+   ↓
+   A/B
+   ↓
+   B
+   ↓
+   B/C
+   ↓
+   C
+   ↓
+   C/A
+   ↓
+   A
+========================================================= */
+
 (function(){
+
 
     const star =
         document.getElementById(
             "travellingStar"
         );
 
+
     const glow =
         document.getElementById(
             "starGlow"
         );
+
 
     if(
         !star ||
@@ -1884,39 +1997,56 @@ body{
         return;
     }
 
+
     const CX = 280;
     const CY = 280;
+
 
     const tracks = [
 
         {
             id:"A",
+
             rx:250,
             ry:95,
+
             rotation:0,
+
             speed:360 / 38,
+
             direction:1
         },
 
+
         {
             id:"B",
+
             rx:210,
             ry:72.5,
+
             rotation:55,
+
             speed:-360 / 32,
+
             direction:-1
         },
 
+
         {
             id:"C",
+
             rx:165,
             ry:52.5,
+
             rotation:110,
+
             speed:360 / 25,
+
             direction:1
         }
 
     ];
+
 
     let currentTrack = 0;
 
@@ -1926,12 +2056,18 @@ body{
 
     let switching = false;
 
+
     const animationStart =
         performance.now();
+
 
     let lastTime =
         animationStart;
 
+
+    /* =====================================================
+       角度
+    ====================================================== */
 
     function degToRad(angle){
 
@@ -1966,6 +2102,10 @@ body{
     }
 
 
+    /* =====================================================
+       获取轨道旋转角
+    ====================================================== */
+
     function getRotation(
         track,
         elapsed
@@ -1981,6 +2121,10 @@ body{
     }
 
 
+    /* =====================================================
+       根据轨道角度获取实际屏幕坐标
+    ====================================================== */
+
     function getPoint(
         track,
         angle,
@@ -1990,13 +2134,16 @@ body{
         const rad =
             degToRad(angle);
 
+
         const localX =
             track.rx *
             Math.cos(rad);
 
+
         const localY =
             track.ry *
             Math.sin(rad);
+
 
         const rotation =
             degToRad(
@@ -2006,19 +2153,24 @@ body{
                 )
             );
 
+
         const cos =
             Math.cos(rotation);
 
+
         const sin =
             Math.sin(rotation);
+
 
         const worldX =
             localX * cos -
             localY * sin;
 
+
         const worldY =
             localX * sin +
             localY * cos;
+
 
         return {
 
@@ -2033,6 +2185,10 @@ body{
     }
 
 
+    /* =====================================================
+       屏幕坐标 → 轨道角度
+    ====================================================== */
+
     function worldToTrackAngle(
         track,
         x,
@@ -2043,8 +2199,10 @@ body{
         let dx =
             x - CX;
 
+
         let dy =
             y - CY;
+
 
         const rotation =
             degToRad(
@@ -2054,23 +2212,28 @@ body{
                 )
             );
 
+
         const cos =
             Math.cos(
                 -rotation
             );
+
 
         const sin =
             Math.sin(
                 -rotation
             );
 
+
         const localX =
             dx * cos -
             dy * sin;
 
+
         const localY =
             dx * sin +
             dy * cos;
+
 
         const angle =
             radToDeg(
@@ -2080,12 +2243,17 @@ body{
                 )
             );
 
+
         return normalize(
             angle
         );
 
     }
 
+
+    /* =====================================================
+       寻找两条轨道交接位置
+    ====================================================== */
 
     function findIntersection(
         trackA,
@@ -2096,10 +2264,12 @@ body{
 
         const samples = 720;
 
+
         let best = null;
 
         let bestDistance =
             Infinity;
+
 
         for(
             let i = 0;
@@ -2112,12 +2282,14 @@ body{
                 360 /
                 samples;
 
+
             const pointA =
                 getPoint(
                     trackA,
                     angleA,
                     elapsed
                 );
+
 
             const angleB =
                 worldToTrackAngle(
@@ -2127,6 +2299,7 @@ body{
                     elapsed
                 );
 
+
             const pointB =
                 getPoint(
                     trackB,
@@ -2134,19 +2307,23 @@ body{
                     elapsed
                 );
 
+
             const dx =
                 pointA.x -
                 pointB.x;
 
+
             const dy =
                 pointA.y -
                 pointB.y;
+
 
             const distance =
                 Math.sqrt(
                     dx * dx +
                     dy * dy
                 );
+
 
             let travel =
                 normalize(
@@ -2157,6 +2334,7 @@ body{
                     trackA.direction
                 );
 
+
             if(
                 travel < 0
             ){
@@ -2164,6 +2342,7 @@ body{
                 travel += 360;
 
             }
+
 
             if(
                 distance <
@@ -2174,6 +2353,7 @@ body{
 
                 bestDistance =
                     distance;
+
 
                 best = {
 
@@ -2214,6 +2394,7 @@ body{
             bestDistance =
                 Infinity;
 
+
             for(
                 let i = 0;
                 i < samples;
@@ -2225,12 +2406,14 @@ body{
                     360 /
                     samples;
 
+
                 const pointA =
                     getPoint(
                         trackA,
                         angleA,
                         elapsed
                     );
+
 
                 const angleB =
                     worldToTrackAngle(
@@ -2240,6 +2423,7 @@ body{
                         elapsed
                     );
 
+
                 const pointB =
                     getPoint(
                         trackB,
@@ -2247,19 +2431,23 @@ body{
                         elapsed
                     );
 
+
                 const dx =
                     pointA.x -
                     pointB.x;
 
+
                 const dy =
                     pointA.y -
                     pointB.y;
+
 
                 const distance =
                     Math.sqrt(
                         dx * dx +
                         dy * dy
                     );
+
 
                 if(
                     distance <
@@ -2268,6 +2456,7 @@ body{
 
                     bestDistance =
                         distance;
+
 
                     best = {
 
@@ -2297,10 +2486,15 @@ body{
 
         }
 
+
         return best;
 
     }
 
+
+    /* =====================================================
+       设置下一段轨道
+    ====================================================== */
 
     function setNextTarget(
         elapsed
@@ -2312,15 +2506,18 @@ body{
                 1
             ) % 3;
 
+
         const current =
             tracks[
                 currentTrack
             ];
 
+
         const next =
             tracks[
                 nextTrackIndex
             ];
+
 
         const intersection =
             findIntersection(
@@ -2330,17 +2527,24 @@ body{
                 starAngle
             );
 
+
         if(!intersection){
             return;
         }
 
+
         targetAngle =
             intersection.angleA;
+
 
         switching = true;
 
     }
 
+
+    /* =====================================================
+       更新三条轨道
+    ====================================================== */
 
     function updateOrbits(
         elapsed
@@ -2351,15 +2555,18 @@ body{
                 "orbitA"
             );
 
+
         const groupB =
             document.getElementById(
                 "orbitB"
             );
 
+
         const groupC =
             document.getElementById(
                 "orbitC"
             );
+
 
         if(groupA){
 
@@ -2378,6 +2585,7 @@ body{
 
         }
 
+
         if(groupB){
 
             groupB.setAttribute(
@@ -2394,6 +2602,7 @@ body{
             );
 
         }
+
 
         if(groupC){
 
@@ -2415,6 +2624,10 @@ body{
     }
 
 
+    /* =====================================================
+       更新星辰
+    ====================================================== */
+
     function updateStar(
         elapsed
     ){
@@ -2424,6 +2637,7 @@ body{
                 currentTrack
             ];
 
+
         const point =
             getPoint(
                 track,
@@ -2431,20 +2645,24 @@ body{
                 elapsed
             );
 
+
         star.setAttribute(
             "x",
             point.x.toFixed(3)
         );
+
 
         star.setAttribute(
             "y",
             point.y.toFixed(3)
         );
 
+
         glow.setAttribute(
             "cx",
             point.x.toFixed(3)
         );
+
 
         glow.setAttribute(
             "cy",
@@ -2454,14 +2672,23 @@ body{
     }
 
 
+    /* =====================================================
+       星辰运行速度
+    ====================================================== */
+
     const STAR_SPEED = 11;
 
+
+    /* =====================================================
+       动画
+    ====================================================== */
 
     function animate(now){
 
         const elapsed =
             now -
             animationStart;
+
 
         const delta =
             Math.min(
@@ -2472,9 +2699,11 @@ body{
                 ) / 1000
             );
 
+
         updateOrbits(
             elapsed
         );
+
 
         if(!switching){
 
@@ -2483,6 +2712,7 @@ body{
             );
 
         }
+
 
         if(
             switching &&
@@ -2494,8 +2724,10 @@ body{
                     currentTrack
                 ];
 
+
             const direction =
                 track.direction;
+
 
             let distance =
                 normalize(
@@ -2506,8 +2738,10 @@ body{
                     direction
                 );
 
+
             let speed =
                 STAR_SPEED;
+
 
             if(
                 distance < 25
@@ -2521,15 +2755,18 @@ body{
 
             }
 
+
             starAngle +=
                 speed *
                 direction *
                 delta;
 
+
             starAngle =
                 normalize(
                     starAngle
                 );
+
 
             distance =
                 normalize(
@@ -2539,6 +2776,7 @@ body{
                     ) *
                     direction
                 );
+
 
             if(
                 distance < 1
@@ -2551,16 +2789,19 @@ body{
                         elapsed
                     );
 
+
                 const nextTrackIndex =
                     (
                         currentTrack +
                         1
                     ) % 3;
 
+
                 const nextTrack =
                     tracks[
                         nextTrackIndex
                     ];
+
 
                 const nextAngle =
                     worldToTrackAngle(
@@ -2570,17 +2811,22 @@ body{
                         elapsed
                     );
 
+
                 currentTrack =
                     nextTrackIndex;
+
 
                 starAngle =
                     nextAngle;
 
+
                 targetAngle =
                     null;
 
+
                 switching =
                     false;
+
 
                 starAngle =
                     normalize(
@@ -2595,12 +2841,15 @@ body{
 
         }
 
+
         updateStar(
             elapsed
         );
 
+
         lastTime =
             now;
+
 
         requestAnimationFrame(
             animate
@@ -2608,6 +2857,10 @@ body{
 
     }
 
+
+    /* =====================================================
+       初始化
+    ====================================================== */
 
     starAngle = 300;
 
