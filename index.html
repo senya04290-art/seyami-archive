@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
 <title>塞垭弥大陆档案馆 · Seyami Archive</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500&display=swap"
+      rel="stylesheet">
+
 
 <style>
+
+/* =========================================================
+   基础
+========================================================= */
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -26,7 +41,7 @@ body{
 
 body{
     background:#061426;
-    color:#d9e8f8;
+    color:#dcecff;
     overflow-x:hidden;
     font-family:
         "Cormorant Garamond",
@@ -34,29 +49,30 @@ body{
         serif;
 }
 
-/* =========================
-   背景
-========================= */
-
 .page{
     position:relative;
-    min-height:100vh;
     width:100%;
+    min-height:100vh;
     overflow:hidden;
 
     background:
         radial-gradient(
-            circle at 50% 48%,
-            rgba(24,67,112,.20) 0%,
-            rgba(10,32,58,.12) 28%,
-            rgba(6,20,38,0) 58%
+            circle at 50% 45%,
+            rgba(38,91,137,.18),
+            transparent 38%
+        ),
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(11,45,75,.45),
+            transparent 70%
         ),
         #061426;
 }
 
-/* =========================
-   星空
-========================= */
+
+/* =========================================================
+   背景星空
+========================================================= */
 
 .stars{
     position:absolute;
@@ -65,116 +81,288 @@ body{
     overflow:hidden;
 }
 
-.star{
+.stars::before,
+.stars::after{
+    content:"";
     position:absolute;
-    color:rgba(177,213,246,.7);
+    inset:-20%;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(182,220,255,.7) 0 1px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(130,191,239,.45) 0 1px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(220,240,255,.35) 0 1px,
+            transparent 1.5px
+        );
+
+    background-size:
+        180px 180px,
+        240px 240px,
+        310px 310px;
+
+    background-position:
+        20px 30px,
+        80px 120px,
+        150px 70px;
+
+    opacity:.45;
+
+    animation:
+        starMove
+        35s
+        linear
+        infinite;
+}
+
+.stars::after{
+    opacity:.22;
+
+    transform:scale(1.15);
+
+    animation-duration:50s;
+}
+
+@keyframes starMove{
+
+    from{
+        transform:translate3d(0,0,0);
+    }
+
+    to{
+        transform:translate3d(-80px,50px,0);
+    }
+
+}
+
+
+/* =========================================================
+   浮动星星
+========================================================= */
+
+.floating-stars{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    z-index:2;
+}
+
+.floating-stars span{
+    position:absolute;
+
+    color:rgba(158,207,247,.62);
+
     font-family:serif;
-    font-size:8px;
-    opacity:.5;
-    animation:floatStar linear infinite;
+    font-size:14px;
+
+    text-shadow:
+        0 0 8px rgba(96,177,242,.5);
+
+    animation:
+        floatStar
+        6s
+        ease-in-out
+        infinite;
+}
+
+.floating-stars span:nth-child(1){
+    left:12%;
+    top:24%;
+    animation-delay:0s;
+}
+
+.floating-stars span:nth-child(2){
+    left:20%;
+    top:67%;
+    animation-delay:1.5s;
+}
+
+.floating-stars span:nth-child(3){
+    left:77%;
+    top:22%;
+    animation-delay:2.5s;
+}
+
+.floating-stars span:nth-child(4){
+    left:84%;
+    top:70%;
+    animation-delay:1s;
+}
+
+.floating-stars span:nth-child(5){
+    left:30%;
+    top:17%;
+    animation-delay:3s;
+}
+
+.floating-stars span:nth-child(6){
+    left:71%;
+    top:61%;
+    animation-delay:2s;
+}
+
+.floating-stars span:nth-child(7){
+    left:16%;
+    top:46%;
+    animation-delay:4s;
+}
+
+.floating-stars span:nth-child(8){
+    left:89%;
+    top:43%;
+    animation-delay:1.8s;
+}
+
+.floating-stars span:nth-child(9){
+    left:42%;
+    top:11%;
+    animation-delay:2.2s;
+}
+
+.floating-stars span:nth-child(10){
+    left:57%;
+    top:83%;
+    animation-delay:3.5s;
+}
+
+.floating-stars span:nth-child(11){
+    left:7%;
+    top:78%;
+    animation-delay:1.2s;
+}
+
+.floating-stars span:nth-child(12){
+    left:94%;
+    top:18%;
+    animation-delay:4.2s;
 }
 
 @keyframes floatStar{
-    0%{
-        transform:translateY(0) scale(.8);
-        opacity:.25;
-    }
-    50%{
-        opacity:.75;
-    }
+
+    0%,
     100%{
-        transform:translateY(-22px) scale(1);
-        opacity:.15;
+        opacity:.35;
+        transform:
+            translateY(0)
+            rotate(0deg);
     }
+
+    50%{
+        opacity:.85;
+        transform:
+            translateY(-8px)
+            rotate(12deg);
+    }
+
 }
 
-.s1{left:8%;top:18%;animation-duration:5s;}
-.s2{left:17%;top:72%;animation-duration:7s;}
-.s3{left:29%;top:25%;animation-duration:6s;}
-.s4{left:42%;top:11%;animation-duration:8s;}
-.s5{left:56%;top:20%;animation-duration:5s;}
-.s6{left:72%;top:16%;animation-duration:7s;}
-.s7{left:86%;top:28%;animation-duration:6s;}
-.s8{left:93%;top:68%;animation-duration:8s;}
-.s9{left:74%;top:82%;animation-duration:6s;}
-.s10{left:49%;top:88%;animation-duration:7s;}
-.s11{left:24%;top:91%;animation-duration:5s;}
-.s12{left:5%;top:48%;animation-duration:8s;}
-.s13{left:64%;top:52%;animation-duration:6s;}
-.s14{left:35%;top:67%;animation-duration:7s;}
-.s15{left:81%;top:47%;animation-duration:5s;}
 
-/* =========================
+/* =========================================================
    外框
-========================= */
+========================================================= */
 
 .frame{
     position:absolute;
     inset:18px;
-    border:1px solid rgba(133,178,221,.28);
-    pointer-events:none;
-}
 
-.frame::before,
-.frame::after{
-    content:"";
-    position:absolute;
+    border:
+        1px solid
+        rgba(111,174,224,.32);
+
     pointer-events:none;
+    z-index:10;
 }
 
 .frame::before{
+    content:"";
+
+    position:absolute;
     inset:7px;
-    border:1px solid rgba(110,158,204,.08);
+
+    border:
+        1px solid
+        rgba(81,142,193,.08);
 }
 
-.frame::after{
-    inset:0;
-    box-shadow:
-        inset 0 0 80px rgba(31,87,137,.05);
-}
 
-/* =========================
+/* =========================================================
    四角六芒星
-========================= */
+========================================================= */
 
 .corner{
     position:absolute;
-    color:rgba(132,181,224,.72);
-    font-size:20px;
+
+    width:68px;
+    height:68px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    pointer-events:none;
+}
+
+.corner::before{
+    content:"✡";
+
+    display:block;
+
+    font-family:
+        "Times New Roman",
+        serif;
+
+    font-size:31px;
+    font-weight:400;
+
     line-height:1;
-    font-family:serif;
-    text-shadow:0 0 10px rgba(99,167,224,.15);
+
+    color:
+        rgba(108,178,230,.88);
+
+    text-shadow:
+        0 0 5px rgba(67,153,218,.5),
+        0 0 13px rgba(43,124,190,.28);
 }
 
 .corner.tl{
-    top:30px;
-    left:30px;
+    left:-34px;
+    top:-34px;
 }
 
 .corner.tr{
-    top:30px;
-    right:30px;
+    right:-34px;
+    top:-34px;
 }
 
 .corner.bl{
-    bottom:30px;
-    left:30px;
+    left:-34px;
+    bottom:-34px;
 }
 
 .corner.br{
-    bottom:30px;
-    right:30px;
+    right:-34px;
+    bottom:-34px;
 }
 
-/* =========================
-   顶部导航
-========================= */
 
-.topbar{
+/* =========================================================
+   顶部导航
+========================================================= */
+
+.top-nav{
     position:absolute;
-    top:42px;
-    left:54px;
-    right:54px;
+
+    left:58px;
+    right:58px;
+    top:38px;
 
     display:flex;
     align-items:flex-start;
@@ -185,460 +373,883 @@ body{
 
 .logo{
     display:flex;
-    align-items:flex-start;
+    align-items:baseline;
+
     gap:10px;
+
+    color:#d9edff;
+
+    text-decoration:none;
 }
 
 .logo-mark{
-    font-family:serif;
-    font-size:24px;
+    width:auto;
+    height:auto;
+
+    display:block;
+
+    flex-shrink:0;
+
+    font-family:
+        "Times New Roman",
+        serif;
+
+    font-size:21px;
+    font-weight:400;
+
     line-height:1;
-    color:#9dc9ec;
-    margin-top:1px;
+
+    color:
+        rgba(137,201,239,.9);
+
+    position:relative;
+    top:1px;
+
+    text-shadow:
+        0 0 7px rgba(76,159,216,.5),
+        0 0 15px rgba(49,132,191,.22);
 }
 
 .logo-text{
     display:flex;
     flex-direction:column;
-    gap:2px;
+
+    line-height:1.05;
 }
 
 .logo-cn{
-    font-family:"Noto Serif SC",serif;
-    font-size:14px;
-    letter-spacing:3px;
-    color:#b7d0e7;
+    font-family:
+        "Noto Serif SC",
+        serif;
+
+    font-size:15px;
     font-weight:400;
+
+    letter-spacing:2px;
 }
 
 .logo-en{
-    font-family:"Cinzel",serif;
+    margin-top:5px;
+
+    font-family:
+        "Cinzel",
+        serif;
+
     font-size:8px;
+
     letter-spacing:3px;
-    color:rgba(147,188,222,.55);
-    font-weight:300;
+
+    color:
+        rgba(157,204,239,.63);
 }
 
-.nav{
+.nav-links{
     display:flex;
     align-items:center;
-    gap:34px;
+
+    gap:31px;
 }
 
-.nav a{
-    color:rgba(177,205,230,.72);
-    text-decoration:none;
-    font-family:"Noto Serif SC",serif;
-    font-size:12px;
-    letter-spacing:3px;
-    transition:.3s ease;
-}
-
-.nav a:hover{
-    color:#d9ebfb;
-}
-
-/* =========================
-   中央区域
-========================= */
-
-.hero{
+.nav-links a{
     position:relative;
+
+    color:
+        rgba(191,220,243,.68);
+
+    text-decoration:none;
+
+    font-family:
+        "Noto Serif SC",
+        serif;
+
+    font-size:12px;
+
+    letter-spacing:2px;
+
+    transition:
+        color .3s ease,
+        text-shadow .3s ease;
+}
+
+.nav-links a::after{
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    bottom:-8px;
+
+    width:0;
+    height:1px;
+
+    background:
+        rgba(122,192,235,.7);
+
+    transform:
+        translateX(-50%);
+
+    transition:
+        width .3s ease;
+}
+
+.nav-links a:hover{
+    color:#d9efff;
+
+    text-shadow:
+        0 0 8px
+        rgba(102,180,231,.35);
+}
+
+.nav-links a:hover::after{
+    width:100%;
+}
+
+
+/* =========================================================
+   主体
+========================================================= */
+
+.main{
+    position:relative;
+
     width:100%;
     min-height:100vh;
 
     display:flex;
+    flex-direction:column;
+
     align-items:center;
     justify-content:center;
 
-    padding:120px 30px 80px;
+    z-index:5;
+
+    padding:
+        80px
+        20px
+        70px;
 }
 
-.hero-inner{
-    position:relative;
-    width:100%;
-    max-width:1100px;
-    min-height:620px;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-/* =========================
-   魔法阵
-========================= */
-
-.magic{
-    position:absolute;
-    left:50%;
-    top:50%;
-
-    width:590px;
-    height:590px;
-
-    transform:translate(-50%,-50%);
-
-    pointer-events:none;
-    opacity:.95;
-}
+/* =========================================================
+   魔法圆阵
+========================================================= */
 
 .magic-circle{
     position:absolute;
+
+    width:560px;
+    height:560px;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
     border-radius:50%;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
+
+    pointer-events:none;
+
+    opacity:.55;
 }
 
-.magic-circle.c1{
-    width:590px;
-    height:590px;
-    border:1px solid rgba(102,160,211,.14);
-}
+.magic-circle::before{
+    content:"";
 
-.magic-circle.c2{
-    width:520px;
-    height:520px;
-    border:1px solid rgba(123,177,222,.12);
-}
-
-.magic-circle.c3{
-    width:445px;
-    height:445px;
-    border:1px solid rgba(109,167,216,.15);
-}
-
-.magic-circle.c4{
-    width:365px;
-    height:365px;
-    border:1px solid rgba(125,181,227,.12);
-}
-
-.magic-circle.c5{
-    width:275px;
-    height:275px;
-    border:1px solid rgba(127,181,225,.15);
-}
-
-/* 魔法阵横线 */
-
-.magic-line{
     position:absolute;
-    left:50%;
-    top:50%;
-    width:590px;
-    height:1px;
-    transform:translate(-50%,-50%);
-    background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(117,174,221,.16),
-        transparent
-    );
+    inset:0;
+
+    border-radius:50%;
+
+    border:
+        1px solid
+        rgba(73,143,198,.28);
+
+    box-shadow:
+        0 0 22px
+        rgba(47,126,184,.08);
+
+    animation:
+        rotateCircle
+        80s
+        linear
+        infinite;
 }
 
-.magic-line.vertical{
-    transform:translate(-50%,-50%) rotate(90deg);
+.magic-circle::after{
+    content:"";
+
+    position:absolute;
+
+    inset:27px;
+
+    border-radius:50%;
+
+    border:
+        1px solid
+        rgba(91,162,213,.22);
+
+    box-shadow:
+        inset
+        0 0 20px
+        rgba(62,139,194,.04);
+
+    animation:
+        rotateCircleReverse
+        55s
+        linear
+        infinite;
 }
 
-/* =========================
-   星轨
-========================= */
+@keyframes rotateCircle{
+
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+@keyframes rotateCircleReverse{
+
+    from{
+        transform:rotate(360deg);
+    }
+
+    to{
+        transform:rotate(0deg);
+    }
+
+}
+
+
+/* =========================================================
+   三重魔法星轨
+========================================================= */
 
 .orbit-system{
     position:absolute;
-    left:50%;
-    top:50%;
 
-    width:590px;
-    height:590px;
+    inset:0;
 
-    transform:translate(-50%,-50%);
+    width:100%;
+    height:100%;
+
+    overflow:visible;
+}
+
+.orbit-track{
+    fill:none;
+
+    stroke:
+        rgba(69,164,230,.28);
+
+    stroke-width:1;
+
+    vector-effect:
+        non-scaling-stroke;
+
+    filter:
+        drop-shadow(
+            0 0 4px
+            rgba(70,155,210,.10)
+        );
+}
+
+
+/* =========================================================
+   小星辰
+========================================================= */
+
+#travellingStar{
+    font-family:
+        "Times New Roman",
+        serif;
+
+    font-size:15px;
+
+    fill:
+        rgba(190,228,255,.95);
+
+    text-anchor:middle;
+
+    dominant-baseline:middle;
+
+    pointer-events:none;
+
+    filter:
+        drop-shadow(
+            0 0 3px
+            rgba(131,207,250,.9)
+        )
+        drop-shadow(
+            0 0 8px
+            rgba(74,165,224,.55)
+        );
+}
+
+.star-glow{
+    fill:
+        rgba(143,210,246,.08);
+
+    filter:blur(2px);
 
     pointer-events:none;
 }
 
-.orbit-track{
+
+/* =========================================================
+   中央魔法线
+========================================================= */
+
+.magic-line{
     position:absolute;
+
     left:50%;
     top:50%;
 
-    border:1px solid rgba(117,177,224,.16);
+    transform:
+        translate(-50%,-50%);
+
+    background:
+        rgba(92,164,213,.13);
+}
+
+.magic-line.horizontal{
+    width:490px;
+    height:1px;
+}
+
+.magic-line.vertical{
+    width:1px;
+    height:490px;
+}
+
+
+/* =========================================================
+   中央小圆
+========================================================= */
+
+.magic-center{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:12px;
+    height:12px;
+
+    transform:
+        translate(-50%,-50%);
+
+    border:
+        1px solid
+        rgba(133,202,242,.48);
+
     border-radius:50%;
 
-    transform:translate(-50%,-50%);
+    box-shadow:
+        0 0 10px
+        rgba(88,171,224,.25);
 }
 
-.orbit-a{
-    width:500px;
-    height:190px;
+.magic-center::before{
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:3px;
+    height:3px;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+        rgba(174,221,249,.7);
+
+    box-shadow:
+        0 0 8px
+        rgba(126,203,244,.8);
 }
 
-.orbit-b{
-    width:420px;
-    height:145px;
-}
 
-.orbit-c{
-    width:330px;
-    height:105px;
-}
-
-/* =========================
+/* =========================================================
    标题区域
-========================= */
+========================================================= */
 
 .title-area{
     position:relative;
-    z-index:5;
-
-    width:100%;
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
 
     text-align:center;
+
+    z-index:8;
+
+    margin-top:-18px;
 }
 
-/* PC：SEYAMI ARCHIVE 一行 */
+
+/* =========================================================
+   ★ PC标题
+   整个英文标题作为一个整体居中
+========================================================= */
 
 .main-title{
+
     display:flex;
+
     flex-direction:row;
+
     align-items:baseline;
+
     justify-content:center;
 
     width:max-content;
+
     max-width:100%;
 
     margin-left:auto;
     margin-right:auto;
 
-    font-family:"Cinzel",serif;
-    font-weight:300;
+    font-family:
+        "Cinzel",
+        "Cormorant Garamond",
+        serif;
 
-    color:#dceafa;
+    font-weight:400;
 
-    letter-spacing:7px;
-    line-height:.9;
+    line-height:1;
+
+    letter-spacing:8px;
+
+    color:#dceeff;
+
+    text-align:center;
+
+    text-shadow:
+        0 0 18px
+        rgba(94,172,222,.08);
 }
 
+
 .main-title .seyami{
+
     font-size:70px;
+
     white-space:nowrap;
 }
 
+
 .main-title .archive{
+
     margin-top:0;
+
     margin-left:20px;
 
     font-size:87px;
+
     letter-spacing:9px;
 
     white-space:nowrap;
 }
 
-/* =========================
-   标题下方装饰
-========================= */
+
+/* =========================================================
+   标题装饰
+========================================================= */
 
 .title-decoration{
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
-    gap:14px;
+    gap:15px;
 
-    margin-top:22px;
+    margin-top:29px;
 
-    width:100%;
+    opacity:.7;
 }
 
 .title-decoration .line{
-    width:82px;
+
+    width:95px;
     height:1px;
 
-    background:rgba(119,174,219,.30);
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(115,182,224,.62)
+        );
 }
 
-.title-decoration .symbol{
-    font-size:10px;
-    color:rgba(150,195,230,.75);
+.title-decoration .line.right{
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(115,182,224,.62),
+            transparent
+        );
 }
 
-/* =========================
+.title-decoration .diamond{
+
+    width:6px;
+    height:6px;
+
+    border:
+        1px solid
+        rgba(143,202,237,.8);
+
+    transform:rotate(45deg);
+}
+
+
+/* =========================================================
    中文标题
-========================= */
+========================================================= */
 
 .chinese-title{
-    margin-top:19px;
 
-    font-family:"Noto Serif SC",serif;
-    font-size:16px;
+    margin-top:24px;
 
-    letter-spacing:7px;
+    font-family:
+        "Noto Serif SC",
+        serif;
+
+    font-size:20px;
+
     font-weight:300;
 
-    color:#b7cfe4;
+    letter-spacing:8px;
+
+    color:
+        rgba(207,229,246,.86);
+
+    text-align:center;
 }
 
-/* =========================
+
+/* =========================================================
    描述
-========================= */
+========================================================= */
 
 .description{
-    margin-top:17px;
 
-    font-family:"Noto Serif SC",serif;
-    font-size:11px;
+    margin-top:20px;
 
-    line-height:2.1;
-    letter-spacing:3px;
+    display:flex;
 
-    color:rgba(164,190,214,.58);
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:7px;
+
+    text-align:center;
+
+    color:
+        rgba(177,207,230,.62);
+
+    font-family:
+        "Noto Serif SC",
+        serif;
+
+    font-size:12px;
+
+    line-height:1.7;
+
+    letter-spacing:2px;
 }
 
-/* =========================
+
+/* =========================================================
    进入按钮
-========================= */
+========================================================= */
 
 .enter-wrap{
+
     position:relative;
 
     width:370px;
     height:82px;
 
-    /* 关键修正：让整个按钮容器和上方标题中心对齐 */
+    /* ★ 仅此处修改：PC端左右自动居中 */
     margin:42px auto 0;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 }
 
-.enter-button{
-    position:relative;
+.enter-wrap::before{
 
-    width:100%;
-    height:52px;
-
-    border:1px solid rgba(130,181,224,.35);
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(27,64,101,.22),
-            rgba(38,82,125,.16),
-            rgba(27,64,101,.22)
-        );
-
-    color:#c8deef;
-
-    font-family:"Noto Serif SC",serif;
-    font-size:12px;
-
-    letter-spacing:5px;
-
-    cursor:pointer;
-
-    transition:
-        border-color .35s ease,
-        background .35s ease,
-        color .35s ease;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.enter-button::before,
-.enter-button::after{
     content:"";
 
     position:absolute;
 
-    width:8px;
-    height:8px;
+    inset:0;
 
-    border:1px solid rgba(138,190,231,.65);
+    clip-path:
+        polygon(
+            0 20%,
+            5% 20%,
+            8% 0,
+            92% 0,
+            95% 20%,
+            100% 20%,
+            100% 80%,
+            95% 80%,
+            92% 100%,
+            8% 100%,
+            5% 80%,
+            0 80%
+        );
+
+    border:
+        1px solid
+        rgba(91,167,218,.38);
+
+    background:
+        rgba(8,28,49,.48);
+
+    box-shadow:
+        0 0 22px
+        rgba(39,120,180,.08);
+
+    pointer-events:none;
 }
 
-.enter-button::before{
-    left:-5px;
-    top:-5px;
+.enter-wrap::after{
 
-    border-right:none;
-    border-bottom:none;
+    content:"";
+
+    position:absolute;
+
+    left:13px;
+    right:13px;
+    top:13px;
+    bottom:13px;
+
+    border:
+        1px solid
+        rgba(91,164,213,.16);
+
+    pointer-events:none;
 }
 
-.enter-button::after{
-    right:-5px;
-    bottom:-5px;
+.enter-button{
 
-    border-left:none;
-    border-top:none;
-}
+    position:relative;
 
-.enter-button:hover{
-    border-color:rgba(151,202,240,.7);
+    z-index:2;
+
+    width:300px;
+    height:50px;
+
+    border:none;
+    outline:none;
+
+    cursor:pointer;
+
+    color:#d9edff;
+
+    font-family:
+        "Noto Serif SC",
+        serif;
+
+    font-size:13px;
+
+    letter-spacing:4px;
 
     background:
         linear-gradient(
             90deg,
-            rgba(38,83,128,.30),
-            rgba(50,100,149,.24),
-            rgba(38,83,128,.30)
+            rgba(8,31,52,.88),
+            rgba(17,51,78,.88),
+            rgba(8,31,52,.88)
         );
 
-    color:#e2f1ff;
+    border-top:
+        1px solid
+        rgba(105,180,225,.38);
+
+    border-bottom:
+        1px solid
+        rgba(105,180,225,.38);
+
+    transition:
+        background .35s ease,
+        box-shadow .35s ease,
+        letter-spacing .35s ease;
 }
 
-/* =========================
-   底部
-========================= */
+.enter-button:hover{
 
-.footer{
+    background:
+        linear-gradient(
+            90deg,
+            rgba(10,41,67,.95),
+            rgba(23,66,98,.95),
+            rgba(10,41,67,.95)
+        );
+
+    box-shadow:
+        0 0 22px
+        rgba(56,143,201,.18);
+
+    letter-spacing:5px;
+}
+
+.enter-button:active{
+    transform:translateY(1px);
+}
+
+.enter-star{
+
+    position:absolute;
+
+    top:50%;
+
+    transform:
+        translateY(-50%);
+
+    color:
+        rgba(111,186,229,.75);
+
+    font-size:16px;
+
+    text-shadow:
+        0 0 9px
+        rgba(67,158,215,.45);
+
+    z-index:3;
+}
+
+.enter-star.left{
+    left:18px;
+}
+
+.enter-star.right{
+    right:18px;
+}
+
+.enter-diamond{
+
     position:absolute;
 
     left:50%;
-    bottom:38px;
 
-    transform:translateX(-50%);
+    width:6px;
+    height:6px;
 
-    width:100%;
+    transform:
+        translateX(-50%)
+        rotate(45deg);
 
-    text-align:center;
+    border:
+        1px solid
+        rgba(116,187,226,.65);
 
-    font-family:"Cinzel",serif;
-
-    font-size:8px;
-    letter-spacing:5px;
-
-    color:rgba(130,169,201,.42);
-
-    z-index:10;
+    background:#061426;
 }
 
-/* =========================
+.enter-diamond.top{
+    top:-3px;
+}
+
+.enter-diamond.bottom{
+    bottom:-3px;
+}
+
+
+/* =========================================================
+   Footer
+========================================================= */
+
+.footer{
+
+    position:absolute;
+
+    left:50%;
+    bottom:32px;
+
+    transform:
+        translateX(-50%);
+
+    z-index:15;
+
+    color:
+        rgba(133,177,207,.38);
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size:8px;
+
+    letter-spacing:4px;
+
+    white-space:nowrap;
+}
+
+
+/* =========================================================
    平板
-========================= */
+========================================================= */
 
-@media(max-width:900px){
+@media(max-width:800px){
 
-    .topbar{
-        left:38px;
-        right:38px;
+    .top-nav{
+
+        left:35px;
+        right:35px;
+        top:30px;
     }
 
-    .nav{
-        gap:20px;
+    .nav-links{
+        gap:17px;
     }
 
-    .magic,
-    .orbit-system{
-        transform:translate(-50%,-50%) scale(.82);
+    .nav-links a{
+
+        font-size:11px;
+
+        letter-spacing:1px;
+    }
+
+    .magic-circle{
+
+        width:500px;
+        height:500px;
+    }
+
+
+    .main-title{
+
+        width:max-content;
+
+        max-width:calc(100vw - 40px);
+
+        margin-left:auto;
+        margin-right:auto;
+
+        flex-direction:row;
+
+        align-items:baseline;
     }
 
     .main-title .seyami{
@@ -646,655 +1257,1565 @@ body{
     }
 
     .main-title .archive{
-        font-size:72px;
+
+        margin-top:0;
+
+        margin-left:14px;
+
+        font-size:70px;
     }
+
+    .chinese-title{
+        font-size:18px;
+    }
+
+    .description{
+        font-size:11px;
+    }
+
 }
 
-/* =========================
-   手机
-========================= */
 
-@media(max-width:600px){
+/* =========================================================
+   ★ 手机端
+========================================================= */
+
+@media(max-width:520px){
 
     .frame{
         inset:12px;
     }
 
-    .corner{
-        font-size:16px;
-    }
+    .top-nav{
 
-    .corner.tl{
-        top:21px;
-        left:21px;
-    }
-
-    .corner.tr{
-        top:21px;
-        right:21px;
-    }
-
-    .corner.bl{
-        bottom:21px;
-        left:21px;
-    }
-
-    .corner.br{
-        bottom:21px;
-        right:21px;
-    }
-
-    .topbar{
-        top:30px;
-        left:28px;
-        right:28px;
+        left:25px;
+        right:25px;
+        top:24px;
     }
 
     .logo{
-        gap:7px;
+
+        gap:8px;
+
+        align-items:baseline;
     }
 
     .logo-mark{
+
         font-size:18px;
+
+        position:relative;
+
+        top:1px;
     }
 
     .logo-cn{
-        font-size:10px;
-        letter-spacing:2px;
-    }
 
-    .logo-en{
-        font-size:6px;
-        letter-spacing:2px;
-    }
+        font-size:12px;
 
-    .nav{
-        gap:11px;
-    }
-
-    .nav a{
-        font-size:8px;
         letter-spacing:1px;
     }
 
-    .hero{
-        padding:110px 18px 70px;
+    .logo-en{
+
+        font-size:6px;
+
+        letter-spacing:2px;
     }
 
-    .hero-inner{
-        min-height:560px;
+    .nav-links{
+        gap:12px;
     }
 
-    .magic,
-    .orbit-system{
-        width:500px;
-        height:500px;
-        transform:translate(-50%,-50%) scale(.65);
+    .nav-links a{
+
+        font-size:9px;
+
+        letter-spacing:0;
     }
 
-    /* 手机继续保持两行 */
+    .corner{
+
+        width:55px;
+        height:55px;
+    }
+
+    .corner.tl{
+
+        left:-27.5px;
+        top:-27.5px;
+    }
+
+    .corner.tr{
+
+        right:-27.5px;
+        top:-27.5px;
+    }
+
+    .corner.bl{
+
+        left:-27.5px;
+        bottom:-27.5px;
+    }
+
+    .corner.br{
+
+        right:-27.5px;
+        bottom:-27.5px;
+    }
+
+    .corner::before{
+        font-size:26px;
+    }
+
+    .main{
+
+        padding:
+            100px
+            15px
+            70px;
+    }
+
+    .magic-circle{
+
+        width:390px;
+        height:390px;
+
+        opacity:.48;
+    }
+
+    .magic-line.horizontal{
+        width:350px;
+    }
+
+    .magic-line.vertical{
+        height:350px;
+    }
+
+
+    /* =====================================================
+       手机标题
+       两行，但缩小上下间距
+    ===================================================== */
 
     .main-title{
+
         width:auto;
+
         max-width:none;
 
         margin-left:0;
         margin-right:0;
 
         flex-direction:column;
+
         align-items:center;
+
         justify-content:center;
 
         letter-spacing:5px;
+
         line-height:.88;
     }
 
     .main-title .seyami{
+
         font-size:43px;
+
+        white-space:nowrap;
     }
 
     .main-title .archive{
+
         margin-top:3px;
+
         margin-left:0;
 
         font-size:53px;
+
         letter-spacing:6px;
 
         white-space:nowrap;
     }
 
+
+    /* =====================================================
+       手机标题装饰
+    ===================================================== */
+
     .title-decoration{
-        margin-top:18px;
-        gap:10px;
+
+        margin-top:23px;
     }
 
     .title-decoration .line{
-        width:52px;
+
+        width:55px;
     }
 
+
+    /* =====================================================
+       手机中文标题
+    ===================================================== */
+
     .chinese-title{
-        margin-top:16px;
-        font-size:12px;
+
+        margin-top:20px;
+
+        font-size:15px;
+
         letter-spacing:5px;
     }
 
-    .description{
-        margin-top:13px;
 
-        font-size:9px;
-        line-height:2;
+    /* =====================================================
+       手机描述
+    ===================================================== */
+
+    .description{
+
+        margin-top:16px;
+
+        font-size:10px;
+
+        letter-spacing:1px;
+
+        align-items:center;
+
+        text-align:center;
+    }
+
+
+    /* =====================================================
+       手机按钮
+    ===================================================== */
+
+    .enter-wrap{
+
+        width:285px;
+
+        height:76px;
+
+        margin-top:35px;
+    }
+
+    .enter-button{
+
+        width:230px;
+
+        height:46px;
+
+        font-size:11px;
+
+        letter-spacing:3px;
+    }
+
+    .enter-star.left{
+        left:16px;
+    }
+
+    .enter-star.right{
+        right:16px;
+    }
+
+    .footer{
+
+        bottom:21px;
+
+        font-size:6px;
 
         letter-spacing:2px;
     }
 
-    .enter-wrap{
-        width:285px;
-        height:76px;
-
-        /* 手机同样保持居中 */
-        margin:35px auto 0;
-    }
-
-    .enter-button{
-        height:48px;
-        font-size:10px;
-        letter-spacing:4px;
-    }
-
-    .footer{
-        bottom:27px;
-        font-size:6px;
-        letter-spacing:3px;
-    }
 }
 
-/* =========================
+
+/* =========================================================
    超小屏
-========================= */
+========================================================= */
 
-@media(max-width:380px){
+@media(max-width:360px){
 
-    .topbar{
-        left:22px;
-        right:22px;
+    .top-nav{
+
+        left:20px;
+        right:20px;
     }
 
-    .nav{
+    .nav-links{
         gap:8px;
     }
 
-    .nav a{
-        font-size:7px;
-    }
-
-    .main-title .seyami{
-        font-size:38px;
-    }
-
-    .main-title .archive{
-        font-size:47px;
-    }
-
-    .chinese-title{
-        font-size:11px;
-    }
-
-    .description{
+    .nav-links a{
         font-size:8px;
     }
 
-    .enter-wrap{
-        width:260px;
+    .main-title .seyami{
+        font-size:39px;
     }
+
+    .main-title .archive{
+        font-size:48px;
+        margin-top:2px;
+    }
+
+    .title-decoration .line{
+        width:42px;
+    }
+
+    .chinese-title{
+        font-size:14px;
+        letter-spacing:4px;
+    }
+
+    .description{
+        font-size:9px;
+    }
+
 }
+
+
+/* =========================================================
+   星轨 JS
+========================================================= */
+
 </style>
+
 </head>
+
 
 <body>
 
 <div class="page">
 
-    <!-- 星空 -->
-    <div class="stars">
-        <span class="star s1">✦</span>
-        <span class="star s2">·</span>
-        <span class="star s3">✧</span>
-        <span class="star s4">✶</span>
-        <span class="star s5">·</span>
-        <span class="star s6">✦</span>
-        <span class="star s7">✧</span>
-        <span class="star s8">·</span>
-        <span class="star s9">✶</span>
-        <span class="star s10">✦</span>
-        <span class="star s11">·</span>
-        <span class="star s12">✧</span>
-        <span class="star s13">✶</span>
-        <span class="star s14">·</span>
-        <span class="star s15">✦</span>
+
+    <!-- =====================================================
+         背景
+    ====================================================== -->
+
+    <div class="stars"></div>
+
+
+    <!-- =====================================================
+         浮动星星
+    ====================================================== -->
+
+    <div class="floating-stars">
+
+        <span>✦</span>
+        <span>✧</span>
+        <span>·</span>
+        <span>✶</span>
+        <span>✦</span>
+        <span>·</span>
+        <span>✧</span>
+        <span>✡</span>
+        <span>✦</span>
+        <span>✶</span>
+        <span>·</span>
+        <span>✧</span>
+
     </div>
 
-    <!-- 外框 -->
+
+    <!-- =====================================================
+         外框
+    ====================================================== -->
+
     <div class="frame">
-        <div class="corner tl">✡</div>
-        <div class="corner tr">✡</div>
-        <div class="corner bl">✡</div>
-        <div class="corner br">✡</div>
+
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
+
     </div>
 
-    <!-- 顶部 -->
-    <header class="topbar">
 
-        <div class="logo">
-            <div class="logo-mark">✶</div>
+    <!-- =====================================================
+         顶部导航
+    ====================================================== -->
+
+    <header class="top-nav">
+
+        <a href="index.html"
+           class="logo">
+
+            <div class="logo-mark">
+                ✶
+            </div>
 
             <div class="logo-text">
-                <div class="logo-cn">塞垭弥大陆档案馆</div>
-                <div class="logo-en">SEYAMI ARCHIVE</div>
-            </div>
-        </div>
 
-        <nav class="nav">
-            <a href="index.html">首页</a>
-            <a href="archive.html">档案目录</a>
-            <a href="about.html">关于我们</a>
+                <span class="logo-cn">
+                    塞垭弥大陆档案馆
+                </span>
+
+                <span class="logo-en">
+                    SEYAMI ARCHIVE
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="index.html">
+                首页
+            </a>
+
+            <a href="archive.html">
+                档案目录
+            </a>
+
+            <a href="about.html">
+                关于我们
+            </a>
+
         </nav>
 
     </header>
 
-    <!-- 主体 -->
-    <main class="hero">
 
-        <div class="hero-inner">
+    <!-- =====================================================
+         主体
+    ====================================================== -->
 
-            <!-- 魔法阵 -->
-            <div class="magic">
+    <main class="main">
 
-                <div class="magic-circle c1"></div>
-                <div class="magic-circle c2"></div>
-                <div class="magic-circle c3"></div>
-                <div class="magic-circle c4"></div>
-                <div class="magic-circle c5"></div>
 
-                <div class="magic-line"></div>
-                <div class="magic-line vertical"></div>
+        <!-- =================================================
+             魔法阵
+        ================================================== -->
 
-            </div>
+        <div class="magic-circle">
 
-            <!-- 星轨 -->
-            <div class="orbit-system">
 
-                <div class="orbit-track orbit-a"></div>
-                <div class="orbit-track orbit-b"></div>
-                <div class="orbit-track orbit-c"></div>
+            <svg
+                id="orbitSVG"
+                class="orbit-system"
+                viewBox="0 0 560 560"
+                preserveAspectRatio="xMidYMid meet"
+                aria-hidden="true"
+            >
 
-            </div>
 
-            <!-- 标题 -->
-            <section class="title-area">
+                <!-- A轨 -->
 
-                <h1 class="main-title">
-                    <span class="seyami">SEYAMI</span>
-                    <span class="archive">ARCHIVE</span>
-                </h1>
+                <g id="orbitA">
 
-                <div class="title-decoration">
-                    <span class="line"></span>
-                    <span class="symbol">✦</span>
-                    <span class="line"></span>
-                </div>
+                    <ellipse
+                        id="ellipseA"
+                        class="orbit-track"
+                        cx="280"
+                        cy="280"
+                        rx="250"
+                        ry="95"
+                    />
 
-                <div class="chinese-title">
-                    塞垭弥大陆档案馆
-                </div>
+                </g>
 
-                <div class="description">
-                    记录关于这片大陆的一切。<br>
-                    角色、种族、地域、历史，以及那些尚未被发现的故事。
-                </div>
 
-                <div class="enter-wrap">
-                    <button class="enter-button" onclick="enterArchive()">
-                        开启塞垭弥档案　→
-                    </button>
-                </div>
+                <!-- B轨 -->
 
-            </section>
+                <g id="orbitB">
+
+                    <ellipse
+                        id="ellipseB"
+                        class="orbit-track"
+                        cx="280"
+                        cy="280"
+                        rx="210"
+                        ry="72.5"
+                    />
+
+                </g>
+
+
+                <!-- C轨 -->
+
+                <g id="orbitC">
+
+                    <ellipse
+                        id="ellipseC"
+                        class="orbit-track"
+                        cx="280"
+                        cy="280"
+                        rx="165"
+                        ry="52.5"
+                    />
+
+                </g>
+
+
+                <!-- 小星辰光晕 -->
+
+                <circle
+                    id="starGlow"
+                    class="star-glow"
+                    cx="280"
+                    cy="280"
+                    r="8"
+                />
+
+
+                <!-- 小星辰 -->
+
+                <text
+                    id="travellingStar"
+                    x="280"
+                    y="280"
+                >✦</text>
+
+
+            </svg>
+
+
+            <div class="magic-line horizontal"></div>
+
+            <div class="magic-line vertical"></div>
+
+            <div class="magic-center"></div>
+
 
         </div>
 
+
+        <!-- =================================================
+             标题区域
+        ================================================== -->
+
+        <section class="title-area">
+
+
+            <h1 class="main-title">
+
+                <span class="seyami">
+                    SEYAMI
+                </span>
+
+                <span class="archive">
+                    ARCHIVE
+                </span>
+
+            </h1>
+
+
+            <!-- 标题装饰 -->
+
+            <div class="title-decoration">
+
+                <span class="line"></span>
+
+                <span class="diamond"></span>
+
+                <span class="line right"></span>
+
+            </div>
+
+
+            <!-- 中文标题 -->
+
+            <div class="chinese-title">
+                塞垭弥大陆档案馆
+            </div>
+
+
+            <!-- 描述 -->
+
+            <div class="description">
+
+                <span>
+                    记录关于这片大陆的一切。
+                </span>
+
+                <span>
+                    角色、种族、地域、历史，以及那些尚未被发现的故事。
+                </span>
+
+            </div>
+
+
+            <!-- 进入按钮 -->
+
+            <div class="enter-wrap">
+
+                <span class="enter-star left">
+                    ✡
+                </span>
+
+
+                <button
+                    class="enter-button"
+                    onclick="location.href='archive.html'"
+                >
+                    开启塞垭弥档案　→
+                </button>
+
+
+                <span class="enter-star right">
+                    ✡
+                </span>
+
+
+                <span class="enter-diamond top"></span>
+
+                <span class="enter-diamond bottom"></span>
+
+            </div>
+
+
+        </section>
+
+
     </main>
 
-    <!-- 底部 -->
+
+    <!-- =====================================================
+         Footer
+    ====================================================== -->
+
     <footer class="footer">
         ✦　THE ARCHIVES OF SEYAMI　✦
     </footer>
 
+
 </div>
+
 
 <script>
 
-/* =========================
-   进入档案馆
-========================= */
+/* =========================================================
+   SEYAMI ARCHIVE
+   三层星轨
 
-function enterArchive(){
+   A：38秒 / 顺时针
+   B：32秒 / 逆时针
+   C：25秒 / 顺时针
 
-    window.location.href = "archive.html";
+   路线：
 
-}
+   A
+   ↓
+   A/B
+   ↓
+   B
+   ↓
+   B/C
+   ↓
+   C
+   ↓
+   C/A
+   ↓
+   A
+========================================================= */
 
 
-/* =========================
-   星轨运行
-   A → A/B → B → B/C → C → C/A → A
-========================= */
+(function(){
 
-const orbitSystem = document.querySelector(".orbit-system");
 
-const tracks = {
+    const star =
+        document.getElementById(
+            "travellingStar"
+        );
 
-    A:{
-        rx:250,
-        ry:95,
-        rotation:0,
-        speed:360/38,
-        direction:1
-    },
 
-    B:{
-        rx:210,
-        ry:72.5,
-        rotation:55,
-        speed:-360/32,
-        direction:-1
-    },
+    const glow =
+        document.getElementById(
+            "starGlow"
+        );
 
-    C:{
-        rx:165,
-        ry:52.5,
-        rotation:110,
-        speed:360/25,
-        direction:1
+
+    if(
+        !star ||
+        !glow
+    ){
+        return;
     }
 
-};
+
+    const CX = 280;
+    const CY = 280;
 
 
-/* =========================
-   创建小星辰
-========================= */
+    const tracks = [
 
-const tinyStar = document.createElement("div");
+        {
+            id:"A",
 
-tinyStar.innerHTML = `
-    <span style="
-        position:absolute;
-        left:50%;
-        top:50%;
-        transform:translate(-50%,-50%);
-        color:#d8ecff;
-        font-size:12px;
-        line-height:1;
-        text-shadow:
-            0 0 4px rgba(151,210,255,.8),
-            0 0 10px rgba(100,170,230,.45);
-    ">✦</span>
-`;
+            rx:250,
+            ry:95,
 
-tinyStar.style.position = "absolute";
-tinyStar.style.left = "0";
-tinyStar.style.top = "0";
-tinyStar.style.width = "1px";
-tinyStar.style.height = "1px";
-tinyStar.style.pointerEvents = "none";
+            rotation:0,
 
-orbitSystem.appendChild(tinyStar);
+            speed:360 / 38,
+
+            direction:1
+        },
 
 
-/* =========================
-   轨道位置计算
-========================= */
+        {
+            id:"B",
 
-function ellipsePoint(rx,ry,angle){
+            rx:210,
+            ry:72.5,
 
-    const rad = angle * Math.PI / 180;
+            rotation:55,
 
-    return {
-        x:Math.cos(rad) * rx,
-        y:Math.sin(rad) * ry
-    };
+            speed:-360 / 32,
 
-}
+            direction:-1
+        },
 
 
-/* =========================
-   坐标旋转
-========================= */
+        {
+            id:"C",
 
-function rotatePoint(x,y,angle){
+            rx:165,
+            ry:52.5,
 
-    const rad = angle * Math.PI / 180;
+            rotation:110,
 
-    return {
+            speed:360 / 25,
 
-        x:
-            x * Math.cos(rad)
-            -
-            y * Math.sin(rad),
+            direction:1
+        }
 
-        y:
-            x * Math.sin(rad)
-            +
-            y * Math.cos(rad)
-
-    };
-
-}
+    ];
 
 
-/* =========================
-   两个轨道之间的插值
-========================= */
+    let currentTrack = 0;
 
-function interpolateOrbit(a,b,t){
+    let starAngle = 300;
 
-    return {
+    let targetAngle = null;
 
-        rx:a.rx + (b.rx-a.rx)*t,
-
-        ry:a.ry + (b.ry-a.ry)*t,
-
-        rotation:
-            a.rotation
-            +
-            (b.rotation-a.rotation)*t
-
-    };
-
-}
+    let switching = false;
 
 
-/* =========================
-   动画状态
-========================= */
-
-let startTime = performance.now();
-
-const durationA  = 38000;
-const durationAB = 5000;
-const durationB  = 32000;
-const durationBC = 5000;
-const durationC  = 25000;
-const durationCA = 5000;
-
-const totalDuration =
-    durationA +
-    durationAB +
-    durationB +
-    durationBC +
-    durationC +
-    durationCA;
+    const animationStart =
+        performance.now();
 
 
-/* =========================
-   动画
-========================= */
-
-function animate(now){
-
-    const elapsed =
-        (now - startTime)
-        % totalDuration;
-
-    let time = elapsed;
-
-    let orbit;
-    let angle;
+    let lastTime =
+        animationStart;
 
 
-    /* A */
+    /* =====================================================
+       角度
+    ====================================================== */
 
-    if(time < durationA){
+    function degToRad(angle){
 
-        const p = time / durationA;
-
-        orbit = tracks.A;
-
-        angle =
-            p * 360;
+        return angle *
+               Math.PI /
+               180;
 
     }
 
-    /* A → B */
 
-    else if(
-        (time -= durationA)
-        < durationAB
+    function radToDeg(angle){
+
+        return angle *
+               180 /
+               Math.PI;
+
+    }
+
+
+    function normalize(angle){
+
+        angle %= 360;
+
+        if(
+            angle < 0
+        ){
+            angle += 360;
+        }
+
+        return angle;
+
+    }
+
+
+    /* =====================================================
+       获取轨道旋转角
+    ====================================================== */
+
+    function getRotation(
+        track,
+        elapsed
     ){
 
-        const p = time / durationAB;
+        return (
+            track.rotation +
+            track.speed *
+            elapsed /
+            1000
+        );
 
-        orbit =
-            interpolateOrbit(
-                tracks.A,
-                tracks.B,
-                p
+    }
+
+
+    /* =====================================================
+       根据轨道角度获取实际屏幕坐标
+    ====================================================== */
+
+    function getPoint(
+        track,
+        angle,
+        elapsed
+    ){
+
+        const rad =
+            degToRad(angle);
+
+
+        const localX =
+            track.rx *
+            Math.cos(rad);
+
+
+        const localY =
+            track.ry *
+            Math.sin(rad);
+
+
+        const rotation =
+            degToRad(
+                getRotation(
+                    track,
+                    elapsed
+                )
             );
 
-        angle =
-            p * 360;
+
+        const cos =
+            Math.cos(rotation);
+
+
+        const sin =
+            Math.sin(rotation);
+
+
+        const worldX =
+            localX * cos -
+            localY * sin;
+
+
+        const worldY =
+            localX * sin +
+            localY * cos;
+
+
+        return {
+
+            x:
+                CX + worldX,
+
+            y:
+                CY + worldY
+
+        };
 
     }
 
-    /* B */
 
-    else if(
-        (time -= durationAB)
-        < durationB
+    /* =====================================================
+       屏幕坐标 → 轨道角度
+    ====================================================== */
+
+    function worldToTrackAngle(
+        track,
+        x,
+        y,
+        elapsed
     ){
 
-        const p = time / durationB;
+        let dx =
+            x - CX;
 
-        orbit = tracks.B;
 
-        angle =
-            360 - p * 360;
+        let dy =
+            y - CY;
 
-    }
 
-    /* B → C */
-
-    else if(
-        (time -= durationB)
-        < durationBC
-    ){
-
-        const p = time / durationBC;
-
-        orbit =
-            interpolateOrbit(
-                tracks.B,
-                tracks.C,
-                p
+        const rotation =
+            degToRad(
+                getRotation(
+                    track,
+                    elapsed
+                )
             );
 
-        angle =
-            360 - p * 360;
 
-    }
-
-    /* C */
-
-    else if(
-        (time -= durationBC)
-        < durationC
-    ){
-
-        const p = time / durationC;
-
-        orbit = tracks.C;
-
-        angle =
-            p * 360;
-
-    }
-
-    /* C → A */
-
-    else{
-
-        time -= durationC;
-
-        const p = time / durationCA;
-
-        orbit =
-            interpolateOrbit(
-                tracks.C,
-                tracks.A,
-                p
+        const cos =
+            Math.cos(
+                -rotation
             );
 
-        angle =
-            p * 360;
 
-    }
+        const sin =
+            Math.sin(
+                -rotation
+            );
 
 
-    const point =
-        ellipsePoint(
-            orbit.rx,
-            orbit.ry,
+        const localX =
+            dx * cos -
+            dy * sin;
+
+
+        const localY =
+            dx * sin +
+            dy * cos;
+
+
+        const angle =
+            radToDeg(
+                Math.atan2(
+                    localY / track.ry,
+                    localX / track.rx
+                )
+            );
+
+
+        return normalize(
             angle
         );
 
+    }
 
-    const rotated =
-        rotatePoint(
-            point.x,
-            point.y,
-            orbit.rotation
+
+    /* =====================================================
+       寻找两条轨道交接位置
+    ====================================================== */
+
+    function findIntersection(
+        trackA,
+        trackB,
+        elapsed,
+        fromAngle
+    ){
+
+        const samples = 720;
+
+
+        let best = null;
+
+        let bestDistance =
+            Infinity;
+
+
+        for(
+            let i = 0;
+            i < samples;
+            i++
+        ){
+
+            const angleA =
+                i *
+                360 /
+                samples;
+
+
+            const pointA =
+                getPoint(
+                    trackA,
+                    angleA,
+                    elapsed
+                );
+
+
+            const angleB =
+                worldToTrackAngle(
+                    trackB,
+                    pointA.x,
+                    pointA.y,
+                    elapsed
+                );
+
+
+            const pointB =
+                getPoint(
+                    trackB,
+                    angleB,
+                    elapsed
+                );
+
+
+            const dx =
+                pointA.x -
+                pointB.x;
+
+
+            const dy =
+                pointA.y -
+                pointB.y;
+
+
+            const distance =
+                Math.sqrt(
+                    dx * dx +
+                    dy * dy
+                );
+
+
+            let travel =
+                normalize(
+                    (
+                        angleA -
+                        fromAngle
+                    ) *
+                    trackA.direction
+                );
+
+
+            if(
+                travel < 0
+            ){
+
+                travel += 360;
+
+            }
+
+
+            if(
+                distance <
+                    bestDistance
+                &&
+                travel > 2
+            ){
+
+                bestDistance =
+                    distance;
+
+
+                best = {
+
+                    angleA,
+
+                    angleB,
+
+                    x:
+                        (
+                            pointA.x +
+                            pointB.x
+                        ) / 2,
+
+                    y:
+                        (
+                            pointA.y +
+                            pointB.y
+                        ) / 2,
+
+                    distance,
+
+                    travel
+
+                };
+
+            }
+
+        }
+
+
+        if(
+            !best ||
+            best.distance > 8
+        ){
+
+            best = null;
+
+            bestDistance =
+                Infinity;
+
+
+            for(
+                let i = 0;
+                i < samples;
+                i++
+            ){
+
+                const angleA =
+                    i *
+                    360 /
+                    samples;
+
+
+                const pointA =
+                    getPoint(
+                        trackA,
+                        angleA,
+                        elapsed
+                    );
+
+
+                const angleB =
+                    worldToTrackAngle(
+                        trackB,
+                        pointA.x,
+                        pointA.y,
+                        elapsed
+                    );
+
+
+                const pointB =
+                    getPoint(
+                        trackB,
+                        angleB,
+                        elapsed
+                    );
+
+
+                const dx =
+                    pointA.x -
+                    pointB.x;
+
+
+                const dy =
+                    pointA.y -
+                    pointB.y;
+
+
+                const distance =
+                    Math.sqrt(
+                        dx * dx +
+                        dy * dy
+                    );
+
+
+                if(
+                    distance <
+                    bestDistance
+                ){
+
+                    bestDistance =
+                        distance;
+
+
+                    best = {
+
+                        angleA,
+
+                        angleB,
+
+                        x:
+                            (
+                                pointA.x +
+                                pointB.x
+                            ) / 2,
+
+                        y:
+                            (
+                                pointA.y +
+                                pointB.y
+                            ) / 2,
+
+                        distance
+
+                    };
+
+                }
+
+            }
+
+        }
+
+
+        return best;
+
+    }
+
+
+    /* =====================================================
+       设置下一段轨道
+    ====================================================== */
+
+    function setNextTarget(
+        elapsed
+    ){
+
+        const nextTrackIndex =
+            (
+                currentTrack +
+                1
+            ) % 3;
+
+
+        const current =
+            tracks[
+                currentTrack
+            ];
+
+
+        const next =
+            tracks[
+                nextTrackIndex
+            ];
+
+
+        const intersection =
+            findIntersection(
+                current,
+                next,
+                elapsed,
+                starAngle
+            );
+
+
+        if(!intersection){
+            return;
+        }
+
+
+        targetAngle =
+            intersection.angleA;
+
+
+        switching = true;
+
+    }
+
+
+    /* =====================================================
+       更新三条轨道
+    ====================================================== */
+
+    function updateOrbits(
+        elapsed
+    ){
+
+        const groupA =
+            document.getElementById(
+                "orbitA"
+            );
+
+
+        const groupB =
+            document.getElementById(
+                "orbitB"
+            );
+
+
+        const groupC =
+            document.getElementById(
+                "orbitC"
+            );
+
+
+        if(groupA){
+
+            groupA.setAttribute(
+                "transform",
+
+                `rotate(
+                    ${getRotation(
+                        tracks[0],
+                        elapsed
+                    )}
+                    ${CX}
+                    ${CY}
+                )`
+            );
+
+        }
+
+
+        if(groupB){
+
+            groupB.setAttribute(
+                "transform",
+
+                `rotate(
+                    ${getRotation(
+                        tracks[1],
+                        elapsed
+                    )}
+                    ${CX}
+                    ${CY}
+                )`
+            );
+
+        }
+
+
+        if(groupC){
+
+            groupC.setAttribute(
+                "transform",
+
+                `rotate(
+                    ${getRotation(
+                        tracks[2],
+                        elapsed
+                    )}
+                    ${CX}
+                    ${CY}
+                )`
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       更新星辰
+    ====================================================== */
+
+    function updateStar(
+        elapsed
+    ){
+
+        const track =
+            tracks[
+                currentTrack
+            ];
+
+
+        const point =
+            getPoint(
+                track,
+                starAngle,
+                elapsed
+            );
+
+
+        star.setAttribute(
+            "x",
+            point.x.toFixed(3)
         );
 
 
-    /*
-       orbit-system 本身是 590 × 590
-       所以中心点是 295 / 295
-    */
-
-    tinyStar.style.left =
-        `${295 + rotated.x}px`;
-
-    tinyStar.style.top =
-        `${295 + rotated.y}px`;
+        star.setAttribute(
+            "y",
+            point.y.toFixed(3)
+        );
 
 
-    requestAnimationFrame(animate);
+        glow.setAttribute(
+            "cx",
+            point.x.toFixed(3)
+        );
 
-}
 
-requestAnimationFrame(animate);
+        glow.setAttribute(
+            "cy",
+            point.y.toFixed(3)
+        );
+
+    }
+
+
+    /* =====================================================
+       星辰运行速度
+    ====================================================== */
+
+    const STAR_SPEED = 11;
+
+
+    /* =====================================================
+       动画
+    ====================================================== */
+
+    function animate(now){
+
+        const elapsed =
+            now -
+            animationStart;
+
+
+        const delta =
+            Math.min(
+                0.05,
+                (
+                    now -
+                    lastTime
+                ) / 1000
+            );
+
+
+        updateOrbits(
+            elapsed
+        );
+
+
+        if(!switching){
+
+            setNextTarget(
+                elapsed
+            );
+
+        }
+
+
+        if(
+            switching &&
+            targetAngle !== null
+        ){
+
+            const track =
+                tracks[
+                    currentTrack
+                ];
+
+
+            const direction =
+                track.direction;
+
+
+            let distance =
+                normalize(
+                    (
+                        targetAngle -
+                        starAngle
+                    ) *
+                    direction
+                );
+
+
+            let speed =
+                STAR_SPEED;
+
+
+            if(
+                distance < 25
+            ){
+
+                speed *=
+                    Math.max(
+                        0.25,
+                        distance / 25
+                    );
+
+            }
+
+
+            starAngle +=
+                speed *
+                direction *
+                delta;
+
+
+            starAngle =
+                normalize(
+                    starAngle
+                );
+
+
+            distance =
+                normalize(
+                    (
+                        targetAngle -
+                        starAngle
+                    ) *
+                    direction
+                );
+
+
+            if(
+                distance < 1
+            ){
+
+                const intersection =
+                    getPoint(
+                        track,
+                        targetAngle,
+                        elapsed
+                    );
+
+
+                const nextTrackIndex =
+                    (
+                        currentTrack +
+                        1
+                    ) % 3;
+
+
+                const nextTrack =
+                    tracks[
+                        nextTrackIndex
+                    ];
+
+
+                const nextAngle =
+                    worldToTrackAngle(
+                        nextTrack,
+                        intersection.x,
+                        intersection.y,
+                        elapsed
+                    );
+
+
+                currentTrack =
+                    nextTrackIndex;
+
+
+                starAngle =
+                    nextAngle;
+
+
+                targetAngle =
+                    null;
+
+
+                switching =
+                    false;
+
+
+                starAngle =
+                    normalize(
+                        starAngle +
+                        tracks[
+                            currentTrack
+                        ].direction *
+                        0.8
+                    );
+
+            }
+
+        }
+
+
+        updateStar(
+            elapsed
+        );
+
+
+        lastTime =
+            now;
+
+
+        requestAnimationFrame(
+            animate
+        );
+
+    }
+
+
+    /* =====================================================
+       初始化
+    ====================================================== */
+
+    starAngle = 300;
+
+    updateOrbits(0);
+
+    updateStar(0);
+
+    requestAnimationFrame(
+        animate
+    );
+
+
+})();
 
 </script>
 
+
 </body>
+
 </html>
