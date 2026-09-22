@@ -87,7 +87,6 @@ body{
 .stars{
     position:absolute;
     inset:0;
-
     pointer-events:none;
     overflow:hidden;
 }
@@ -362,7 +361,6 @@ body{
         serif;
 
     font-size:31px;
-
     font-weight:400;
 
     line-height:1;
@@ -734,7 +732,10 @@ body{
 
 /* =========================================================
    ★ 星轨
-   ★ 只修改这里：让第一帧直接错开
+   ★ 这里只修改运行方式
+   ★ 三层统一 38s，同方向运行
+   ★ 初始角度：0° / 55° / 110°
+   ★ 运行过程中不会再次追上重合
 ========================================================= */
 
 .orbit{
@@ -753,9 +754,6 @@ body{
     box-shadow:
         0 0 6px
         rgba(70,155,210,.12);
-
-    transform:
-        translate(-50%,-50%);
 }
 
 
@@ -783,12 +781,9 @@ body{
 
     animation:
         orbitRotateTwo
-        32s
+        38s
         linear
         infinite;
-
-    animation-direction:
-        reverse;
 }
 
 
@@ -801,13 +796,13 @@ body{
 
     animation:
         orbitRotateThree
-        25s
+        38s
         linear
         infinite;
 }
 
 
-/* 第一条星轨
+/* 第一层
    第一帧：0° */
 
 @keyframes orbitRotateOne{
@@ -828,9 +823,8 @@ body{
 }
 
 
-/* 第二条星轨
-   第一帧：55°
-   保持原来的反方向运行 */
+/* 第二层
+   第一帧：55° */
 
 @keyframes orbitRotateTwo{
 
@@ -850,7 +844,7 @@ body{
 }
 
 
-/* 第三条星轨
+/* 第三层
    第一帧：110° */
 
 @keyframes orbitRotateThree{
@@ -1143,7 +1137,6 @@ body{
     justify-content:center;
 }
 
-
 .enter-wrap::before{
 
     content:"";
@@ -1346,6 +1339,7 @@ body{
     position:absolute;
 
     left:50%;
+
     bottom:32px;
 
     transform:
@@ -1388,7 +1382,6 @@ body{
     .nav-links a{
 
         font-size:11px;
-
         letter-spacing:1px;
     }
 
@@ -1471,7 +1464,6 @@ body{
 
 
     .nav-links{
-
         gap:12px;
     }
 
@@ -1519,7 +1511,6 @@ body{
 
 
     .corner::before{
-
         font-size:26px;
     }
 
@@ -1548,7 +1539,7 @@ body{
 
     /*
        手机星轨尺寸
-       运行方式仍然和你提供的版本一致
+       这里只改变尺寸，不改变运行方式
     */
 
     .orbit.one{
@@ -1607,7 +1598,6 @@ body{
     }
 
     .title-decoration .line{
-
         width:55px;
     }
 
@@ -1718,11 +1708,9 @@ body{
     <div class="frame">
 
         <div class="corner tl"></div>
-
         <div class="corner tr"></div>
 
         <div class="corner bl"></div>
-
         <div class="corner br"></div>
 
     </div>
@@ -1798,7 +1786,6 @@ body{
             <div class="orbit two"></div>
 
             <div class="orbit three"></div>
-
 
             <div class="magic-line horizontal"></div>
 
