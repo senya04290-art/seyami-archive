@@ -13,33 +13,32 @@
 
 <style>
 
+/* =========================================================
+   基础
+========================================================= */
+
 *{
   box-sizing:border-box;
 }
 
-html,
-body{
-  margin:0;
-  padding:0;
-  width:100%;
+html{
   min-height:100%;
+  background:#061426;
 }
 
 body{
+  margin:0;
+  min-height:100vh;
+
   background:
     radial-gradient(
-      circle at 50% 38%,
-      rgba(35,83,120,.18),
-      transparent 43%
+      circle at 50% 50%,
+      rgba(38,91,137,.18),
+      rgba(11,45,75,.45)
     ),
-    linear-gradient(
-      180deg,
-      #071523 0%,
-      #06111f 50%,
-      #040c17 100%
-    );
+    #061426;
 
-  color:#dcefff;
+  color:#dcecff;
 
   font-family:
     "Noto Serif SC",
@@ -49,14 +48,12 @@ body{
   overflow-x:hidden;
 }
 
-
-/* =========================================================
-   页面
-========================================================= */
+a{
+  color:inherit;
+}
 
 .page{
   position:relative;
-
   min-height:100vh;
 
   padding:
@@ -74,14 +71,11 @@ body{
 
 .stars{
   position:absolute;
-
   inset:0;
 
   z-index:0;
 
   pointer-events:none;
-
-  overflow:hidden;
 }
 
 .stars::before,
@@ -95,61 +89,73 @@ body{
 
   border-radius:50%;
 
-  background:rgba(170,220,255,.55);
+  background:rgba(137,201,239,.55);
 
   box-shadow:
-    8vw 12vh rgba(150,210,250,.25),
-    17vw 28vh rgba(160,220,255,.2),
-    26vw 9vh rgba(170,220,255,.28),
-    36vw 23vh rgba(150,210,255,.2),
-    47vw 13vh rgba(180,225,255,.3),
-    58vw 31vh rgba(160,220,255,.22),
-    69vw 16vh rgba(180,225,255,.26),
-    78vw 28vh rgba(160,220,255,.2),
-    89vw 11vh rgba(180,225,255,.28),
+    8vw 12vh 0 rgba(137,201,239,.18),
+    17vw 28vh 0 rgba(137,201,239,.30),
+    25vw 9vh 0 rgba(137,201,239,.16),
+    34vw 19vh 0 rgba(137,201,239,.25),
+    43vw 11vh 0 rgba(137,201,239,.18),
+    53vw 25vh 0 rgba(137,201,239,.24),
+    64vw 8vh 0 rgba(137,201,239,.17),
+    72vw 20vh 0 rgba(137,201,239,.30),
+    83vw 13vh 0 rgba(137,201,239,.20),
+    92vw 31vh 0 rgba(137,201,239,.25),
 
-    12vw 62vh rgba(160,220,255,.2),
-    23vw 76vh rgba(180,225,255,.25),
-    34vw 66vh rgba(160,220,255,.18),
-    51vw 82vh rgba(180,225,255,.25),
-    64vw 68vh rgba(160,220,255,.2),
-    77vw 79vh rgba(160,220,255,.23),
-    91vw 63vh rgba(160,220,255,.2);
+    5vw 47vh 0 rgba(137,201,239,.18),
+    15vw 61vh 0 rgba(137,201,239,.25),
+    27vw 52vh 0 rgba(137,201,239,.16),
+    39vw 67vh 0 rgba(137,201,239,.24),
+    51vw 48vh 0 rgba(137,201,239,.20),
+    63vw 62vh 0 rgba(137,201,239,.18),
+    75vw 51vh 0 rgba(137,201,239,.27),
+    88vw 66vh 0 rgba(137,201,239,.19),
 
-  opacity:.7;
+    11vw 82vh 0 rgba(137,201,239,.20),
+    24vw 91vh 0 rgba(137,201,239,.15),
+    37vw 78vh 0 rgba(137,201,239,.22),
+    49vw 94vh 0 rgba(137,201,239,.18),
+    61vw 83vh 0 rgba(137,201,239,.23),
+    74vw 91vh 0 rgba(137,201,239,.15),
+    87vw 80vh 0 rgba(137,201,239,.20);
+
+  opacity:.75;
 }
 
 .stars::after{
   width:1px;
   height:1px;
 
-  box-shadow:
-    5vw 19vh rgba(180,225,255,.3),
-    15vw 44vh rgba(180,225,255,.25),
-    31vw 17vh rgba(180,225,255,.2),
-    43vw 38vh rgba(180,225,255,.25),
-    57vw 21vh rgba(180,225,255,.2),
-    72vw 44vh rgba(180,225,255,.25),
-    84vw 36vh rgba(180,225,255,.2),
-    95vw 23vh rgba(180,225,255,.25),
+  background:rgba(157,204,239,.65);
 
-    7vw 84vh rgba(180,225,255,.2),
-    19vw 70vh rgba(180,225,255,.25),
-    29vw 90vh rgba(180,225,255,.2),
-    42vw 72vh rgba(180,225,255,.25),
-    55vw 93vh rgba(180,225,255,.2),
-    70vw 84vh rgba(180,225,255,.25),
-    86vw 91vh rgba(180,225,255,.2);
+  box-shadow:
+    12vw 17vh 0 rgba(157,204,239,.20),
+    22vw 35vh 0 rgba(157,204,239,.18),
+    31vw 14vh 0 rgba(157,204,239,.25),
+    47vw 33vh 0 rgba(157,204,239,.17),
+    58vw 16vh 0 rgba(157,204,239,.22),
+    69vw 37vh 0 rgba(157,204,239,.20),
+    81vw 27vh 0 rgba(157,204,239,.25),
+    95vw 43vh 0 rgba(157,204,239,.18),
+
+    7vw 57vh 0 rgba(157,204,239,.20),
+    19vw 73vh 0 rgba(157,204,239,.16),
+    33vw 59vh 0 rgba(157,204,239,.21),
+    45vw 72vh 0 rgba(157,204,239,.18),
+    57vw 57vh 0 rgba(157,204,239,.20),
+    68vw 76vh 0 rgba(157,204,239,.17),
+    82vw 61vh 0 rgba(157,204,239,.21),
+    94vw 74vh 0 rgba(157,204,239,.16);
 }
 
 
 /* =========================================================
-   ✦ ✶ ✡ 浮动星辰
+   浮动星辰
 ========================================================= */
 
 .arcane-stars{
   position:absolute;
-
   inset:0;
 
   z-index:1;
@@ -164,7 +170,7 @@ body{
 
   display:block;
 
-  color:rgba(145,215,250,.42);
+  color:rgba(137,201,239,.42);
 
   font-family:
     "Times New Roman",
@@ -172,19 +178,17 @@ body{
     serif;
 
   font-weight:400;
-
   line-height:1;
 
   user-select:none;
 
   text-shadow:
-    0 0 5px rgba(90,190,240,.25),
-    0 0 14px rgba(60,160,220,.12);
+    0 0 7px rgba(76,159,216,.35),
+    0 0 15px rgba(49,132,191,.18);
 
   animation:
     arcaneFloat var(--float-time)
     ease-in-out infinite,
-
     arcaneTwinkle var(--twinkle-time)
     ease-in-out infinite;
 
@@ -194,8 +198,10 @@ body{
 }
 
 
-.star-a{
-  left:10%;
+/* 星辰位置 */
+
+.arcane-star.star-a{
+  left:13%;
   top:17%;
   font-size:15px;
 
@@ -207,10 +213,10 @@ body{
   opacity:.58;
 }
 
-.star-b{
-  left:84%;
-  top:19%;
-  font-size:19px;
+.arcane-star.star-b{
+  left:82%;
+  top:20%;
+  font-size:20px;
 
   --float-time:9s;
   --twinkle-time:5s;
@@ -220,10 +226,10 @@ body{
   opacity:.42;
 }
 
-.star-c{
-  left:8%;
-  top:47%;
-  font-size:17px;
+.arcane-star.star-c{
+  left:9%;
+  top:48%;
+  font-size:18px;
 
   --float-time:11s;
   --twinkle-time:6s;
@@ -233,8 +239,8 @@ body{
   opacity:.32;
 }
 
-.star-d{
-  right:9%;
+.arcane-star.star-d{
+  right:10%;
   top:49%;
   font-size:13px;
 
@@ -246,10 +252,10 @@ body{
   opacity:.52;
 }
 
-.star-e{
-  left:17%;
-  bottom:15%;
-  font-size:16px;
+.arcane-star.star-e{
+  left:18%;
+  bottom:16%;
+  font-size:17px;
 
   --float-time:10s;
   --twinkle-time:5.5s;
@@ -259,10 +265,10 @@ body{
   opacity:.36;
 }
 
-.star-f{
-  right:15%;
+.arcane-star.star-f{
+  right:16%;
   bottom:13%;
-  font-size:15px;
+  font-size:16px;
 
   --float-time:12s;
   --twinkle-time:7s;
@@ -272,8 +278,8 @@ body{
   opacity:.28;
 }
 
-.star-g{
-  left:27%;
+.arcane-star.star-g{
+  left:28%;
   top:35%;
   font-size:10px;
 
@@ -285,8 +291,8 @@ body{
   opacity:.30;
 }
 
-.star-h{
-  right:27%;
+.arcane-star.star-h{
+  right:28%;
   top:34%;
   font-size:11px;
 
@@ -298,7 +304,7 @@ body{
   opacity:.34;
 }
 
-.star-i{
+.arcane-star.star-i{
   left:4%;
   top:29%;
   font-size:9px;
@@ -311,7 +317,7 @@ body{
   opacity:.32;
 }
 
-.star-j{
+.arcane-star.star-j{
   left:38%;
   top:12%;
   font-size:12px;
@@ -324,7 +330,7 @@ body{
   opacity:.38;
 }
 
-.star-k{
+.arcane-star.star-k{
   right:5%;
   top:31%;
   font-size:15px;
@@ -337,7 +343,7 @@ body{
   opacity:.30;
 }
 
-.star-l{
+.arcane-star.star-l{
   left:24%;
   top:53%;
   font-size:8px;
@@ -350,7 +356,7 @@ body{
   opacity:.28;
 }
 
-.star-m{
+.arcane-star.star-m{
   right:24%;
   top:53%;
   font-size:14px;
@@ -363,7 +369,7 @@ body{
   opacity:.24;
 }
 
-.star-n{
+.arcane-star.star-n{
   left:6%;
   top:72%;
   font-size:12px;
@@ -376,7 +382,7 @@ body{
   opacity:.34;
 }
 
-.star-o{
+.arcane-star.star-o{
   right:7%;
   top:70%;
   font-size:18px;
@@ -389,7 +395,7 @@ body{
   opacity:.25;
 }
 
-.star-p{
+.arcane-star.star-p{
   left:34%;
   bottom:9%;
   font-size:10px;
@@ -402,7 +408,7 @@ body{
   opacity:.30;
 }
 
-.star-q{
+.arcane-star.star-q{
   right:36%;
   bottom:8%;
   font-size:11px;
@@ -415,7 +421,7 @@ body{
   opacity:.34;
 }
 
-.star-r{
+.arcane-star.star-r{
   left:46%;
   top:8%;
   font-size:13px;
@@ -428,7 +434,7 @@ body{
   opacity:.20;
 }
 
-.star-s{
+.arcane-star.star-s{
   right:40%;
   top:76%;
   font-size:15px;
@@ -441,7 +447,7 @@ body{
   opacity:.26;
 }
 
-.star-t{
+.arcane-star.star-t{
   left:91%;
   top:57%;
   font-size:9px;
@@ -455,36 +461,19 @@ body{
 }
 
 
+/* =========================================================
+   星辰动画
+========================================================= */
+
 @keyframes arcaneFloat{
 
-  0%{
-    transform:
-      translate3d(0,0,0)
-      rotate(0deg);
-  }
-
-  25%{
-    transform:
-      translate3d(4px,-7px,0)
-      rotate(4deg);
+  0%,
+  100%{
+    transform:translate3d(0,0,0);
   }
 
   50%{
-    transform:
-      translate3d(-3px,-11px,0)
-      rotate(-3deg);
-  }
-
-  75%{
-    transform:
-      translate3d(-6px,-4px,0)
-      rotate(3deg);
-  }
-
-  100%{
-    transform:
-      translate3d(0,0,0)
-      rotate(0deg);
+    transform:translate3d(0,-7px,0);
   }
 }
 
@@ -492,11 +481,11 @@ body{
 
   0%,
   100%{
-    opacity:.25;
+    opacity:.28;
   }
 
   50%{
-    opacity:.75;
+    opacity:.85;
   }
 }
 
@@ -514,17 +503,16 @@ body{
   left:50%;
   top:47%;
 
-  transform:
-    translate(-50%,-50%);
+  transform:translate(-50%,-50%);
 
   border:
-    1px solid rgba(104,190,235,.07);
+    1px solid rgba(69,164,230,.13);
 
   border-radius:50%;
 
   box-shadow:
-    0 0 50px rgba(70,150,210,.035),
-    inset 0 0 60px rgba(70,150,210,.025);
+    0 0 50px rgba(69,164,230,.035),
+    inset 0 0 60px rgba(69,164,230,.025);
 
   z-index:0;
 
@@ -540,8 +528,7 @@ body{
   left:50%;
   top:50%;
 
-  transform:
-    translate(-50%,-50%);
+  transform:translate(-50%,-50%);
 
   border-radius:50%;
 
@@ -553,7 +540,7 @@ body{
   height:82%;
 
   border:
-    1px solid rgba(120,205,245,.055);
+    1px solid rgba(111,174,224,.10);
 }
 
 .magic-circle::after{
@@ -561,12 +548,12 @@ body{
   height:61%;
 
   border:
-    1px solid rgba(130,215,250,.06);
+    1px solid rgba(137,201,239,.10);
 }
 
 
 /* =========================================================
-   边框
+   外框
 ========================================================= */
 
 .frame{
@@ -578,7 +565,7 @@ body{
   bottom:20px;
 
   border:
-    1px solid rgba(130,200,235,.12);
+    1px solid rgba(111,174,224,.32);
 
   pointer-events:none;
 
@@ -600,10 +587,10 @@ body{
   top:-1px;
 
   border-left:
-    1px solid rgba(160,220,250,.45);
+    1px solid rgba(137,201,239,.45);
 
   border-top:
-    1px solid rgba(160,220,250,.45);
+    1px solid rgba(137,201,239,.45);
 }
 
 .frame::after{
@@ -611,15 +598,15 @@ body{
   bottom:-1px;
 
   border-right:
-    1px solid rgba(160,220,250,.45);
+    1px solid rgba(137,201,239,.45);
 
   border-bottom:
-    1px solid rgba(160,220,250,.45);
+    1px solid rgba(137,201,239,.45);
 }
 
 
 /* =========================================================
-   顶部
+   顶部 Header
 ========================================================= */
 
 .header{
@@ -644,7 +631,9 @@ body{
 }
 
 
-/* Logo */
+/* =========================================================
+   Logo
+========================================================= */
 
 .logo{
   display:flex;
@@ -653,13 +642,13 @@ body{
 
   gap:12px;
 
-  color:rgba(225,246,255,.92);
+  color:rgba(220,236,255,.92);
 
   text-decoration:none;
 }
 
 .logo-symbol{
-  color:#9edcff;
+  color:rgba(137,201,239,.9);
 
   width:17px;
   height:13px;
@@ -676,7 +665,8 @@ body{
   padding:0;
 
   text-shadow:
-    0 0 12px rgba(90,200,255,.7);
+    0 0 7px rgba(76,159,216,.5),
+    0 0 15px rgba(49,132,191,.22);
 
   flex-shrink:0;
 }
@@ -696,7 +686,7 @@ body{
   height:13px;
   line-height:13px;
 
-  color:rgba(225,246,255,.92);
+  color:rgba(220,236,255,.92);
 
   font-size:13px;
 
@@ -710,7 +700,7 @@ body{
 
   margin-top:5px;
 
-  color:rgba(200,230,245,.45);
+  color:rgba(157,204,239,.63);
 
   font-family:
     "Times New Roman",
@@ -726,10 +716,12 @@ body{
 }
 
 
-/* 返回 */
+/* =========================================================
+   返回按钮
+========================================================= */
 
 .back{
-  color:rgba(190,225,245,.58);
+  color:rgba(157,204,239,.63);
 
   text-decoration:none;
 
@@ -748,10 +740,10 @@ body{
 }
 
 .back:hover{
-  color:rgba(220,245,255,.95);
+  color:#dcecff;
 
   text-shadow:
-    0 0 10px rgba(100,200,245,.35);
+    0 0 10px rgba(76,159,216,.35);
 }
 
 
@@ -773,7 +765,7 @@ body{
 
 
 /* =========================================================
-   页面标题
+   标题
 ========================================================= */
 
 .heading{
@@ -783,23 +775,19 @@ body{
 }
 
 .heading-small{
-  font-family:
-    "Cinzel",
-    serif;
+  font-family:"Cinzel",serif;
 
   font-size:10px;
 
   letter-spacing:6px;
 
-  color:rgba(145,205,235,.55);
+  color:rgba(137,201,239,.58);
 
   margin-bottom:12px;
 }
 
 .heading-main{
-  font-family:
-    "Cinzel",
-    serif;
+  font-family:"Cinzel",serif;
 
   font-size:clamp(34px,5vw,56px);
 
@@ -809,7 +797,7 @@ body{
 
   line-height:1;
 
-  color:rgba(225,245,255,.9);
+  color:#dcecff;
 }
 
 .heading-cn{
@@ -819,12 +807,12 @@ body{
 
   letter-spacing:5px;
 
-  color:rgba(170,210,230,.48);
+  color:rgba(157,204,239,.63);
 }
 
 
 /* =========================================================
-   角色档案主体
+   角色面板
 ========================================================= */
 
 .character-panel{
@@ -843,13 +831,13 @@ body{
   padding:38px;
 
   border:
-    1px solid rgba(110,180,220,.16);
+    1px solid rgba(111,174,224,.32);
 
   background:
     linear-gradient(
       145deg,
-      rgba(18,48,72,.34),
-      rgba(6,19,32,.42)
+      rgba(38,91,137,.13),
+      rgba(11,45,75,.10)
     );
 
   box-shadow:
@@ -858,7 +846,7 @@ body{
 
 
 /* =========================================================
-   图片区域
+   角色图片
 ========================================================= */
 
 .character-image{
@@ -872,15 +860,15 @@ body{
   justify-content:center;
 
   border:
-    1px solid rgba(120,195,235,.14);
+    1px solid rgba(111,174,224,.20);
 
   background:
     radial-gradient(
       circle at 50% 45%,
-      rgba(55,120,165,.14),
+      rgba(38,91,137,.14),
       transparent 58%
     ),
-    rgba(4,15,27,.4);
+    rgba(6,20,38,.4);
 
   overflow:hidden;
 }
@@ -893,7 +881,7 @@ body{
   inset:18px;
 
   border:
-    1px solid rgba(140,210,245,.07);
+    1px solid rgba(137,201,239,.10);
 
   pointer-events:none;
 }
@@ -906,25 +894,20 @@ body{
   right:24px;
   top:20px;
 
-  color:rgba(145,215,250,.25);
+  color:rgba(137,201,239,.25);
 
   font-size:16px;
 
   text-shadow:
-    0 0 10px rgba(90,190,240,.25);
+    0 0 10px rgba(76,159,216,.25);
 }
-
-
-/* 占位图 */
 
 .image-placeholder{
   text-align:center;
 
-  color:rgba(155,205,230,.35);
+  color:rgba(157,204,239,.35);
 
-  font-family:
-    "Cinzel",
-    serif;
+  font-family:"Cinzel",serif;
 
   letter-spacing:4px;
 
@@ -942,7 +925,7 @@ body{
 
   font-size:34px;
 
-  color:rgba(130,205,240,.25);
+  color:rgba(137,201,239,.25);
 }
 
 .image-placeholder-cn{
@@ -958,12 +941,12 @@ body{
 
   letter-spacing:3px;
 
-  color:rgba(160,205,225,.28);
+  color:rgba(157,204,239,.28);
 }
 
 
 /* =========================================================
-   角色资料
+   角色信息
 ========================================================= */
 
 .character-info{
@@ -974,30 +957,20 @@ body{
   justify-content:center;
 }
 
-
-/* 编号 */
-
 .character-number{
-  font-family:
-    "Cinzel",
-    serif;
+  font-family:"Cinzel",serif;
 
   font-size:9px;
 
   letter-spacing:4px;
 
-  color:rgba(120,195,235,.45);
+  color:rgba(137,201,239,.45);
 
   margin-bottom:22px;
 }
 
-
-/* 姓名 */
-
 .character-name-en{
-  font-family:
-    "Cinzel",
-    serif;
+  font-family:"Cinzel",serif;
 
   font-size:clamp(32px,4vw,52px);
 
@@ -1007,7 +980,7 @@ body{
 
   line-height:1;
 
-  color:rgba(225,245,255,.92);
+  color:rgba(220,236,255,.92);
 }
 
 .character-name-cn{
@@ -1017,28 +990,25 @@ body{
 
   letter-spacing:7px;
 
-  color:rgba(195,230,245,.7);
+  color:rgba(195,225,244,.70);
 }
-
-
-/* 小标题 */
 
 .character-role{
   margin-top:18px;
 
-  font-family:
-    "Cinzel",
-    serif;
+  font-family:"Cinzel",serif;
 
   font-size:10px;
 
   letter-spacing:4px;
 
-  color:rgba(130,200,235,.55);
+  color:rgba(137,201,239,.55);
 }
 
 
-/* 分隔线 */
+/* =========================================================
+   分割线
+========================================================= */
 
 .divider{
   width:100%;
@@ -1050,14 +1020,16 @@ body{
   background:
     linear-gradient(
       90deg,
-      rgba(120,195,235,.3),
-      rgba(120,195,235,.06),
+      rgba(111,174,224,.32),
+      rgba(111,174,224,.06),
       transparent
     );
 }
 
 
-/* 基本资料 */
+/* =========================================================
+   基础信息
+========================================================= */
 
 .basic-info{
   display:grid;
@@ -1077,15 +1049,13 @@ body{
 }
 
 .info-label{
-  font-family:
-    "Cinzel",
-    serif;
+  font-family:"Cinzel",serif;
 
   font-size:8px;
 
   letter-spacing:3px;
 
-  color:rgba(125,190,220,.42);
+  color:rgba(137,201,239,.42);
 }
 
 .info-value{
@@ -1097,18 +1067,18 @@ body{
 }
 
 
-/* 简介 */
+/* =========================================================
+   PROFILE
+========================================================= */
 
 .description-title{
-  font-family:
-    "Cinzel",
-    serif;
+  font-family:"Cinzel",serif;
 
   font-size:9px;
 
   letter-spacing:4px;
 
-  color:rgba(130,200,235,.5);
+  color:rgba(137,201,239,.50);
 
   margin-bottom:13px;
 }
@@ -1120,12 +1090,12 @@ body{
 
   letter-spacing:1px;
 
-  color:rgba(190,220,235,.58);
+  color:rgba(190,220,239,.58);
 }
 
 
 /* =========================================================
-   档案编号装饰
+   档案标记
 ========================================================= */
 
 .archive-mark{
@@ -1134,15 +1104,13 @@ body{
   right:25px;
   bottom:20px;
 
-  font-family:
-    "Cinzel",
-    serif;
+  font-family:"Cinzel",serif;
 
   font-size:8px;
 
   letter-spacing:3px;
 
-  color:rgba(120,190,220,.22);
+  color:rgba(137,201,239,.28);
 }
 
 
@@ -1151,23 +1119,17 @@ body{
 ========================================================= */
 
 .footer{
-  position:relative;
-
-  z-index:5;
+  margin-top:34px;
 
   text-align:center;
 
-  margin-top:45px;
-
-  font-family:
-    "Cinzel",
-    serif;
+  font-family:"Cinzel",serif;
 
   font-size:8px;
 
   letter-spacing:4px;
 
-  color:rgba(145,190,215,.3);
+  color:rgba(137,201,239,.30);
 }
 
 
@@ -1206,9 +1168,7 @@ body{
 
   .page{
     padding:
-      22px
-      20px
-      55px;
+      22px 20px 55px;
   }
 
   .frame{
@@ -1241,6 +1201,11 @@ body{
     width:15px;
     height:11px;
 
+    display:flex;
+
+    align-items:flex-start;
+    justify-content:center;
+
     font-size:15px;
     line-height:11px;
 
@@ -1257,6 +1222,8 @@ body{
   }
 
   .logo-en{
+    display:block;
+
     margin-top:4px;
 
     font-size:7px;
@@ -1268,7 +1235,6 @@ body{
   .back{
     font-size:10px;
   }
-
 
   .content{
     padding-top:120px;
@@ -1293,7 +1259,6 @@ body{
     letter-spacing:3px;
   }
 
-
   .character-panel{
     padding:20px;
 
@@ -1310,13 +1275,11 @@ body{
 
   .character-name-en{
     font-size:32px;
-
     letter-spacing:4px;
   }
 
   .character-name-cn{
     font-size:15px;
-
     letter-spacing:5px;
   }
 
@@ -1338,32 +1301,118 @@ body{
   }
 
 
-  .arcane-star.star-a{font-size:13px;}
-  .arcane-star.star-b{font-size:17px;}
-  .arcane-star.star-c{font-size:15px;}
-  .arcane-star.star-d{font-size:11px;}
-  .arcane-star.star-e{font-size:14px;}
-  .arcane-star.star-f{font-size:13px;}
-  .arcane-star.star-g{font-size:8px;}
-  .arcane-star.star-h{font-size:9px;}
-  .arcane-star.star-i{font-size:8px;}
-  .arcane-star.star-j{font-size:10px;}
-  .arcane-star.star-k{font-size:12px;}
-  .arcane-star.star-l{font-size:7px;}
-  .arcane-star.star-m{font-size:11px;}
-  .arcane-star.star-n{font-size:10px;}
-  .arcane-star.star-o{font-size:15px;}
-  .arcane-star.star-p{font-size:8px;}
-  .arcane-star.star-q{font-size:9px;}
-  .arcane-star.star-r{font-size:11px;}
-  .arcane-star.star-s{font-size:12px;}
-  .arcane-star.star-t{font-size:8px;}
+  /* -----------------------------------------
+     手机端档案标记
+     防止覆盖 PROFILE 中文内容
+  ----------------------------------------- */
+
+  .archive-mark{
+    position:relative;
+
+    right:auto;
+    bottom:auto;
+
+    margin-top:24px;
+
+    text-align:right;
+
+    font-size:7px;
+
+    letter-spacing:2px;
+
+    line-height:1.4;
+
+    white-space:nowrap;
+  }
+
+
+  /* 手机端星辰缩小 */
+
+  .arcane-star.star-a{
+    font-size:12px;
+  }
+
+  .arcane-star.star-b{
+    font-size:15px;
+  }
+
+  .arcane-star.star-c{
+    font-size:14px;
+  }
+
+  .arcane-star.star-d{
+    font-size:11px;
+  }
+
+  .arcane-star.star-e{
+    font-size:13px;
+  }
+
+  .arcane-star.star-f{
+    font-size:12px;
+  }
+
+  .arcane-star.star-g{
+    font-size:8px;
+  }
+
+  .arcane-star.star-h{
+    font-size:9px;
+  }
+
+  .arcane-star.star-i{
+    font-size:7px;
+  }
+
+  .arcane-star.star-j{
+    font-size:9px;
+  }
+
+  .arcane-star.star-k{
+    font-size:11px;
+  }
+
+  .arcane-star.star-l{
+    font-size:7px;
+  }
+
+  .arcane-star.star-m{
+    font-size:10px;
+  }
+
+  .arcane-star.star-n{
+    font-size:9px;
+  }
+
+  .arcane-star.star-o{
+    font-size:13px;
+  }
+
+  .arcane-star.star-p{
+    font-size:8px;
+  }
+
+  .arcane-star.star-q{
+    font-size:9px;
+  }
+
+  .arcane-star.star-r{
+    font-size:10px;
+  }
+
+  .arcane-star.star-s{
+    font-size:11px;
+  }
+
+  .arcane-star.star-t{
+    font-size:7px;
+  }
 
 }
 
 
 /* =========================================================
-   超小屏
+   超小屏幕
 ========================================================= */
 
 @media(max-width:360px){
@@ -1382,7 +1431,7 @@ body{
 
 
 /* =========================================================
-   减少动画
+   减少动态效果
 ========================================================= */
 
 @media(prefers-reduced-motion:reduce){
@@ -1401,12 +1450,11 @@ body{
 
 <div class="page">
 
-
-  <!-- 背景 -->
+  <!-- 背景星尘 -->
   <div class="stars"></div>
 
 
-  <!-- ✦ ✶ ✡ -->
+  <!-- 浮动星辰 -->
   <div class="arcane-stars">
 
     <span class="arcane-star star-a">✦</span>
@@ -1417,6 +1465,7 @@ body{
     <span class="arcane-star star-f">✡</span>
     <span class="arcane-star star-g">✦</span>
     <span class="arcane-star star-h">✶</span>
+
     <span class="arcane-star star-i">✦</span>
     <span class="arcane-star star-j">✦</span>
     <span class="arcane-star star-k">✶</span>
@@ -1441,10 +1490,7 @@ body{
   <div class="frame"></div>
 
 
-  <!-- =====================================================
-       顶部
-  ====================================================== -->
-
+  <!-- 顶部 -->
   <header class="header">
 
     <a href="index.html" class="logo">
@@ -1473,14 +1519,8 @@ body{
   </header>
 
 
-  <!-- =====================================================
-       内容
-  ====================================================== -->
-
+  <!-- 主内容 -->
   <main class="content">
-
-
-    <!-- 页面标题 -->
 
     <section class="heading">
 
@@ -1499,15 +1539,11 @@ body{
     </section>
 
 
-    <!-- ===================================================
-         伊莉娜档案
-    ==================================================== -->
-
+    <!-- 角色档案 -->
     <section class="character-panel">
 
 
-      <!-- 左侧图片 -->
-
+      <!-- 角色图片 -->
       <div class="character-image">
 
         <div class="image-placeholder">
@@ -1527,10 +1563,8 @@ body{
       </div>
 
 
-      <!-- 右侧资料 -->
-
+      <!-- 角色信息 -->
       <div class="character-info">
-
 
         <div class="character-number">
           CHARACTER · 001
@@ -1555,10 +1589,7 @@ body{
         <div class="divider"></div>
 
 
-        <!-- 基本资料 -->
-
         <div class="basic-info">
-
 
           <div class="info-item">
 
@@ -1611,50 +1642,42 @@ body{
 
           </div>
 
-
         </div>
 
 
         <div class="divider"></div>
 
 
-        <!-- 简介 -->
-
         <div class="description-title">
           PROFILE
         </div>
 
-        <div class="description">
 
+        <div class="description">
           雪山之上的神女，非人类的存在。
           她行走于塞垭弥大陆之间，穿越不同的国度与地域，
           见证大陆上不断发生的故事。
-
         </div>
-
 
       </div>
 
 
+      <!-- 档案标记 -->
       <div class="archive-mark">
         SEYAMI · CHARACTER ARCHIVE
       </div>
 
-
     </section>
 
 
-    <!-- Footer -->
-
+    <!-- 页脚 -->
     <footer class="footer">
       SEYAMI CONTINENT · CHARACTER RECORDS
     </footer>
 
-
   </main>
 
 </div>
-
 
 </body>
 </html>
