@@ -64,7 +64,7 @@ body {
 
 
 /* =========================
-   星星
+   原本的小星空
    ========================= */
 
 .stars {
@@ -73,6 +73,8 @@ body {
 
   pointer-events: none;
   opacity: .8;
+
+  z-index: 0;
 }
 
 .stars::before,
@@ -111,6 +113,251 @@ body {
 
 
 /* =========================
+   ✦ ✶ ✡ 魔法星辰
+   ========================= */
+
+.arcane-stars {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+  pointer-events: none;
+
+  overflow: hidden;
+}
+
+.arcane-star {
+  position: absolute;
+
+  display: block;
+
+  color: rgba(145,215,250,.42);
+
+  font-family:
+    "Times New Roman",
+    "Noto Serif",
+    serif;
+
+  font-weight: 400;
+
+  line-height: 1;
+
+  user-select: none;
+
+  text-shadow:
+    0 0 5px rgba(90,190,240,.25),
+    0 0 14px rgba(60,160,220,.12);
+
+  animation:
+    arcaneFloat var(--float-time) ease-in-out infinite,
+    arcaneTwinkle var(--twinkle-time) ease-in-out infinite;
+
+  animation-delay:
+    var(--float-delay),
+    var(--twinkle-delay);
+}
+
+
+/* ✦ */
+
+.arcane-star.star-a {
+  left: 13%;
+  top: 17%;
+
+  font-size: 15px;
+
+  --float-time: 7s;
+  --twinkle-time: 4s;
+
+  --float-delay: -2s;
+  --twinkle-delay: -1s;
+
+  opacity: .58;
+}
+
+
+/* ✶ */
+
+.arcane-star.star-b {
+  left: 82%;
+  top: 20%;
+
+  font-size: 20px;
+
+  --float-time: 9s;
+  --twinkle-time: 5s;
+
+  --float-delay: -5s;
+  --twinkle-delay: -2s;
+
+  opacity: .42;
+}
+
+
+/* ✡ */
+
+.arcane-star.star-c {
+  left: 9%;
+  top: 48%;
+
+  font-size: 18px;
+
+  --float-time: 11s;
+  --twinkle-time: 6s;
+
+  --float-delay: -7s;
+  --twinkle-delay: -3s;
+
+  opacity: .32;
+}
+
+
+/* ✦ */
+
+.arcane-star.star-d {
+  right: 10%;
+  top: 49%;
+
+  font-size: 13px;
+
+  --float-time: 8s;
+  --twinkle-time: 4.5s;
+
+  --float-delay: -3s;
+  --twinkle-delay: -1.5s;
+
+  opacity: .52;
+}
+
+
+/* ✶ */
+
+.arcane-star.star-e {
+  left: 18%;
+  bottom: 16%;
+
+  font-size: 17px;
+
+  --float-time: 10s;
+  --twinkle-time: 5.5s;
+
+  --float-delay: -6s;
+  --twinkle-delay: -2.5s;
+
+  opacity: .36;
+}
+
+
+/* ✡ */
+
+.arcane-star.star-f {
+  right: 16%;
+  bottom: 13%;
+
+  font-size: 16px;
+
+  --float-time: 12s;
+  --twinkle-time: 7s;
+
+  --float-delay: -4s;
+  --twinkle-delay: -4s;
+
+  opacity: .28;
+}
+
+
+/* 中央附近的小星星 */
+
+.arcane-star.star-g {
+  left: 28%;
+  top: 35%;
+
+  font-size: 10px;
+
+  --float-time: 6s;
+  --twinkle-time: 3.5s;
+
+  --float-delay: -2s;
+  --twinkle-delay: -.5s;
+
+  opacity: .30;
+}
+
+
+/* 右侧小星星 */
+
+.arcane-star.star-h {
+  right: 28%;
+  top: 34%;
+
+  font-size: 11px;
+
+  --float-time: 7.5s;
+  --twinkle-time: 4s;
+
+  --float-delay: -5s;
+  --twinkle-delay: -2s;
+
+  opacity: .34;
+}
+
+
+/* =========================
+   星辰动画
+   ========================= */
+
+@keyframes arcaneFloat {
+
+  0% {
+    transform:
+      translate3d(0,0,0)
+      rotate(0deg);
+  }
+
+  25% {
+    transform:
+      translate3d(4px,-7px,0)
+      rotate(4deg);
+  }
+
+  50% {
+    transform:
+      translate3d(-3px,-11px,0)
+      rotate(-3deg);
+  }
+
+  75% {
+    transform:
+      translate3d(-6px,-4px,0)
+      rotate(3deg);
+  }
+
+  100% {
+    transform:
+      translate3d(0,0,0)
+      rotate(0deg);
+  }
+
+}
+
+
+@keyframes arcaneTwinkle {
+
+  0%,
+  100% {
+    opacity: .25;
+  }
+
+  50% {
+    opacity: .75;
+  }
+
+}
+
+
+/* =========================
    外框
    ========================= */
 
@@ -125,6 +372,8 @@ body {
   border: 1px solid rgba(105,190,235,.18);
 
   pointer-events: none;
+
+  z-index: 4;
 }
 
 .frame::before,
@@ -804,6 +1053,36 @@ body {
     margin-top: 40px;
   }
 
+  /* 手机端星辰稍微缩小 */
+  .arcane-star.star-a {
+    font-size: 12px;
+  }
+
+  .arcane-star.star-b {
+    font-size: 16px;
+  }
+
+  .arcane-star.star-c {
+    font-size: 14px;
+  }
+
+  .arcane-star.star-d {
+    font-size: 11px;
+  }
+
+  .arcane-star.star-e {
+    font-size: 14px;
+  }
+
+  .arcane-star.star-f {
+    font-size: 13px;
+  }
+
+  .arcane-star.star-g,
+  .arcane-star.star-h {
+    font-size: 8px;
+  }
+
 }
 
 
@@ -822,6 +1101,19 @@ body {
 
 }
 
+
+/* =========================
+   减少动态效果
+   ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .arcane-star {
+    animation: none;
+  }
+
+}
+
 </style>
 </head>
 
@@ -830,7 +1122,34 @@ body {
 
 <div class="page">
 
+  <!-- 原本的小星空 -->
   <div class="stars"></div>
+
+
+  <!-- =========================
+       ✦ ✶ ✡ 魔法星辰
+       ========================= -->
+
+  <div class="arcane-stars">
+
+    <span class="arcane-star star-a">✦</span>
+
+    <span class="arcane-star star-b">✶</span>
+
+    <span class="arcane-star star-c">✡</span>
+
+    <span class="arcane-star star-d">✦</span>
+
+    <span class="arcane-star star-e">✶</span>
+
+    <span class="arcane-star star-f">✡</span>
+
+    <span class="arcane-star star-g">✦</span>
+
+    <span class="arcane-star star-h">✶</span>
+
+  </div>
+
 
   <div class="magic-circle"></div>
 
