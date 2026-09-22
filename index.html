@@ -14,7 +14,10 @@
       href="https://fonts.googleapis.com">
 
 <link rel="preconnect"
-      href="https://fonts.gstatic.com"
+      href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.googleapis.com"
       crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500&display=swap"
@@ -440,10 +443,6 @@ body{
 }
 
 
-/* =========================================================
-   ✶
-========================================================= */
-
 .logo-mark{
 
     width:auto;
@@ -650,8 +649,6 @@ body{
 }
 
 
-/* 外圈 */
-
 .magic-circle::before{
 
     content:"";
@@ -677,8 +674,6 @@ body{
         infinite;
 }
 
-
-/* 内圈 */
 
 .magic-circle::after{
 
@@ -733,9 +728,7 @@ body{
 /* =========================================================
    ★ 星轨
    ★ 三圈独立旋转
-   ★ 各自不同速度
-   ★ 各自不同方向
-   ★ 初始角度错开
+   ★ 这里只调整转速
 ========================================================= */
 
 .orbit{
@@ -757,7 +750,9 @@ body{
 }
 
 
-/* 第一圈 */
+/* 第一圈
+   顺时针
+   ★ 52秒 */
 
 .orbit.one{
 
@@ -766,13 +761,15 @@ body{
 
     animation:
         orbitRotateOne
-        38s
+        52s
         linear
         infinite;
 }
 
 
-/* 第二圈 */
+/* 第二圈
+   逆时针
+   ★ 68秒 */
 
 .orbit.two{
 
@@ -781,13 +778,15 @@ body{
 
     animation:
         orbitRotateTwo
-        32s
+        68s
         linear
         infinite;
 }
 
 
-/* 第三圈 */
+/* 第三圈
+   顺时针
+   ★ 42秒 */
 
 .orbit.three{
 
@@ -796,14 +795,13 @@ body{
 
     animation:
         orbitRotateThree
-        25s
+        42s
         linear
         infinite;
 }
 
 
 /* 第一圈
-   顺时针
    0° → 360° */
 
 @keyframes orbitRotateOne{
@@ -825,8 +823,8 @@ body{
 
 
 /* 第二圈
-   逆时针
-   55° → -305° */
+   55° → -305°
+   逆时针 */
 
 @keyframes orbitRotateTwo{
 
@@ -847,8 +845,8 @@ body{
 
 
 /* 第三圈
-   顺时针
-   110° → 470° */
+   110° → 470°
+   顺时针 */
 
 @keyframes orbitRotateThree{
 
