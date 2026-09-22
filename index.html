@@ -432,12 +432,6 @@ body{
 
     display:flex;
 
-    /*
-       关键：
-       不再整个 Logo 居中，
-       而是按照文字基线排列
-    */
-
     align-items:baseline;
 
     gap:10px;
@@ -450,8 +444,6 @@ body{
 
 /* =========================================================
    ✶
-
-   这里专门修正位置
 ========================================================= */
 
 .logo-mark{
@@ -475,12 +467,6 @@ body{
 
     color:
         rgba(137,201,239,.9);
-
-    /*
-       ✶ 字符本身的字体基线
-       和中文字体不同，
-       所以只做非常小的视觉修正
-    */
 
     position:relative;
 
@@ -748,7 +734,7 @@ body{
 
 /* =========================================================
    ★ 星轨
-   ★ 使用你刚刚发来的那版运行方式
+   ★ 仅增强线条可见度
 ========================================================= */
 
 .orbit{
@@ -760,9 +746,13 @@ body{
 
     border:
         1px solid
-        rgba(69,164,230,.13);
+        rgba(69,164,230,.28);
 
     border-radius:50%;
+
+    box-shadow:
+        0 0 6px
+        rgba(70,155,210,.12);
 
     transform:
         translate(-50%,-50%);
@@ -811,9 +801,7 @@ body{
 }
 
 
-/* 星轨运行
-   ★ 完全采用你给我的代码
-*/
+/* 星轨运行 */
 
 @keyframes orbitRotate{
 
@@ -1402,10 +1390,6 @@ body{
 
         gap:8px;
 
-        /*
-           手机同样使用基线对齐
-        */
-
         align-items:baseline;
     }
 
@@ -1701,14 +1685,10 @@ body{
     <header class="top-nav">
 
 
-        <!-- 左上角 Logo -->
-
         <a
             href="index.html"
             class="logo"
         >
-
-            <!-- 只保留你要求的 ✶ -->
 
             <div class="logo-mark">
                 ✶
@@ -1729,8 +1709,6 @@ body{
 
         </a>
 
-
-        <!-- 导航 -->
 
         <nav class="nav-links">
 
@@ -1765,8 +1743,6 @@ body{
         <div class="magic-circle">
 
 
-            <!-- ★ 使用你提供的三层星轨 -->
-
             <div class="orbit one"></div>
 
             <div class="orbit two"></div>
@@ -1774,14 +1750,10 @@ body{
             <div class="orbit three"></div>
 
 
-            <!-- 十字 -->
-
             <div class="magic-line horizontal"></div>
 
             <div class="magic-line vertical"></div>
 
-
-            <!-- 中心 -->
 
             <div class="magic-center"></div>
 
@@ -1808,8 +1780,6 @@ body{
             </h1>
 
 
-            <!-- 标题装饰 -->
-
             <div class="title-decoration">
 
                 <span class="line"></span>
@@ -1821,14 +1791,10 @@ body{
             </div>
 
 
-            <!-- 中文标题 -->
-
             <div class="chinese-title">
                 塞垭弥大陆档案馆
             </div>
 
-
-            <!-- 简介 -->
 
             <div class="description">
 
@@ -1842,10 +1808,6 @@ body{
 
             </div>
 
-
-            <!-- =================================================
-                 进入档案馆
-            ================================================== -->
 
             <div class="enter-wrap">
 
