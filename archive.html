@@ -61,7 +61,7 @@ body {
     91vw 32vh rgba(210,240,255,.50),
     8vw 67vh rgba(190,225,255,.40),
     19vw 82vh rgba(210,240,255,.48),
-    29vw 61vh rgba(180,225,255,.42),
+    29vw 61vh rgba(180,220,255,.42),
     41vw 76vh rgba(210,240,255,.52),
     55vw 65vh rgba(185,225,255,.42),
     67vw 84vh rgba(210,240,255,.48),
@@ -447,18 +447,21 @@ body {
     align-items:flex-start;
   }
 
-  /* 手机端也强制以中文第一行作为对齐基准 */
   .logo {
     align-items:flex-start;
     gap:10px;
   }
 
+  /* 手机端 ✦ 单独向下微调 2px */
   .logo-symbol {
     width:15px;
     height:11px;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
     font-size:15px;
     line-height:11px;
-    margin-top:0;
+    margin-top:2px;
   }
 
   .logo-cn {
@@ -544,13 +547,9 @@ body {
 
       <div class="logo-text">
 
-        <span class="logo-cn">
-          塞垭弥大陆档案馆
-        </span>
+        <span class="logo-cn">塞垭弥大陆档案馆</span>
 
-        <span class="logo-en">
-          SEYAMI ARCHIVE
-        </span>
+        <span class="logo-en">SEYAMI ARCHIVE</span>
 
       </div>
 
@@ -586,6 +585,8 @@ body {
   <main class="archive-grid">
 
 
+    <!-- 角色档案 -->
+
     <a class="archive-card" href="#">
 
       <svg class="icon"
@@ -614,13 +615,9 @@ body {
 
       </svg>
 
-      <div class="card-en">
-        CHARACTERS
-      </div>
+      <div class="card-en">CHARACTERS</div>
 
-      <div class="card-cn">
-        角色档案
-      </div>
+      <div class="card-cn">角色档案</div>
 
       <div class="card-desc">
         记录大陆上的人物与故事
@@ -628,6 +625,8 @@ body {
 
     </a>
 
+
+    <!-- 世界设定 -->
 
     <a class="archive-card" href="#">
 
@@ -673,13 +672,9 @@ body {
 
       </svg>
 
-      <div class="card-en">
-        WORLD
-      </div>
+      <div class="card-en">WORLD</div>
 
-      <div class="card-cn">
-        世界设定
-      </div>
+      <div class="card-cn">世界设定</div>
 
       <div class="card-desc">
         关于塞垭弥大陆的世界规则
@@ -687,6 +682,8 @@ body {
 
     </a>
 
+
+    <!-- 地区档案 -->
 
     <a class="archive-card" href="#">
 
@@ -726,13 +723,9 @@ body {
 
       </svg>
 
-      <div class="card-en">
-        REGIONS
-      </div>
+      <div class="card-en">REGIONS</div>
 
-      <div class="card-cn">
-        地区档案
-      </div>
+      <div class="card-cn">地区档案</div>
 
       <div class="card-desc">
         山川、城市与未知之地
@@ -740,6 +733,8 @@ body {
 
     </a>
 
+
+    <!-- 种族档案 -->
 
     <a class="archive-card" href="#">
 
@@ -763,13 +758,9 @@ body {
 
       </svg>
 
-      <div class="card-en">
-        RACES
-      </div>
+      <div class="card-en">RACES</div>
 
-      <div class="card-cn">
-        种族档案
-      </div>
+      <div class="card-cn">种族档案</div>
 
       <div class="card-desc">
         记录大陆上的各类族群
@@ -777,6 +768,8 @@ body {
 
     </a>
 
+
+    <!-- 历史记录 -->
 
     <a class="archive-card" href="#">
 
@@ -824,13 +817,9 @@ body {
 
       </svg>
 
-      <div class="card-en">
-        HISTORY
-      </div>
+      <div class="card-en">HISTORY</div>
 
-      <div class="card-cn">
-        历史记录
-      </div>
+      <div class="card-cn">历史记录</div>
 
       <div class="card-desc">
         这片大陆曾经发生过什么
@@ -838,6 +827,8 @@ body {
 
     </a>
 
+
+    <!-- 档案画廊 -->
 
     <a class="archive-card" href="#">
 
@@ -871,13 +862,9 @@ body {
 
       </svg>
 
-      <div class="card-en">
-        GALLERY
-      </div>
+      <div class="card-en">GALLERY</div>
 
-      <div class="card-cn">
-        档案画廊
-      </div>
+      <div class="card-cn">档案画廊</div>
 
       <div class="card-desc">
         保存那些值得被看见的画面
