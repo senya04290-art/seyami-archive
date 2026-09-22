@@ -267,6 +267,7 @@ body{
 
 /* =========================================================
    外框
+   古籍魔法典籍风格
 ========================================================= */
 
 .frame{
@@ -275,21 +276,220 @@ body{
 
     border:
         1px solid
-        rgba(111,174,224,.32);
+        rgba(111,174,224,.30);
 
     pointer-events:none;
     z-index:10;
 }
 
+
+/* =========================================================
+   内层古籍边框
+========================================================= */
+
 .frame::before{
+
     content:"";
 
     position:absolute;
+
     inset:7px;
 
     border:
         1px solid
-        rgba(81,142,193,.08);
+        rgba(81,142,193,.13);
+
+}
+
+
+/* =========================================================
+   外框装饰线
+========================================================= */
+
+.frame::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:3px;
+
+    pointer-events:none;
+
+    background:
+
+        /* 上边 */
+        linear-gradient(
+            90deg,
+            transparent 0%,
+            transparent 10%,
+            rgba(103,165,211,.18) 10%,
+            rgba(103,165,211,.18) 27%,
+            transparent 27%,
+            transparent 73%,
+            rgba(103,165,211,.18) 73%,
+            rgba(103,165,211,.18) 90%,
+            transparent 90%
+        )
+        top / 100% 1px
+        no-repeat,
+
+        /* 下边 */
+        linear-gradient(
+            90deg,
+            transparent 0%,
+            transparent 10%,
+            rgba(103,165,211,.18) 10%,
+            rgba(103,165,211,.18) 27%,
+            transparent 27%,
+            transparent 73%,
+            rgba(103,165,211,.18) 73%,
+            rgba(103,165,211,.18) 90%,
+            transparent 90%
+        )
+        bottom / 100% 1px
+        no-repeat,
+
+        /* 左边 */
+        linear-gradient(
+            180deg,
+            transparent 0%,
+            transparent 10%,
+            rgba(103,165,211,.18) 10%,
+            rgba(103,165,211,.18) 27%,
+            transparent 27%,
+            transparent 73%,
+            rgba(103,165,211,.18) 73%,
+            rgba(103,165,211,.18) 90%,
+            transparent 90%
+        )
+        left / 1px 100%
+        no-repeat,
+
+        /* 右边 */
+        linear-gradient(
+            180deg,
+            transparent 0%,
+            transparent 10%,
+            rgba(103,165,211,.18) 10%,
+            rgba(103,165,211,.18) 27%,
+            transparent 27%,
+            transparent 73%,
+            rgba(103,165,211,.18) 73%,
+            rgba(103,165,211,.18) 90%,
+            transparent 90%
+        )
+        right / 1px 100%
+        no-repeat;
+}
+
+
+/* =========================================================
+   四边魔法节点
+========================================================= */
+
+.frame-node{
+
+    position:absolute;
+
+    width:11px;
+    height:11px;
+
+    transform:rotate(45deg);
+
+    border:
+        1px solid
+        rgba(119,188,229,.55);
+
+    background:
+        #061426;
+
+    box-shadow:
+        0 0 7px
+        rgba(65,151,211,.16);
+
+}
+
+
+/* 上边节点 */
+
+.frame-node.top-left{
+    left:27%;
+    top:-5px;
+}
+
+.frame-node.top-right{
+    right:27%;
+    top:-5px;
+}
+
+
+/* 下边节点 */
+
+.frame-node.bottom-left{
+    left:27%;
+    bottom:-5px;
+}
+
+.frame-node.bottom-right{
+    right:27%;
+    bottom:-5px;
+}
+
+
+/* 左边节点 */
+
+.frame-node.left-top{
+    left:-5px;
+    top:27%;
+}
+
+.frame-node.left-bottom{
+    left:-5px;
+    bottom:27%;
+}
+
+
+/* 右边节点 */
+
+.frame-node.right-top{
+    right:-5px;
+    top:27%;
+}
+
+.frame-node.right-bottom{
+    right:-5px;
+    bottom:27%;
+}
+
+
+/* =========================================================
+   节点中心小点
+========================================================= */
+
+.frame-node::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:2px;
+    height:2px;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+        rgba(157,213,244,.65);
+
+    box-shadow:
+        0 0 5px
+        rgba(102,185,230,.55);
 }
 
 
@@ -308,6 +508,8 @@ body{
     justify-content:center;
 
     pointer-events:none;
+
+    z-index:3;
 }
 
 .corner::before{
@@ -991,7 +1193,6 @@ body{
     width:370px;
     height:82px;
 
-    /* ★ 仅此处修改：PC端左右自动居中 */
     margin:42px auto 0;
 
     display:flex;
@@ -1637,6 +1838,19 @@ body{
     ====================================================== -->
 
     <div class="frame">
+
+        <div class="frame-node top-left"></div>
+        <div class="frame-node top-right"></div>
+
+        <div class="frame-node bottom-left"></div>
+        <div class="frame-node bottom-right"></div>
+
+        <div class="frame-node left-top"></div>
+        <div class="frame-node left-bottom"></div>
+
+        <div class="frame-node right-top"></div>
+        <div class="frame-node right-bottom"></div>
+
 
         <div class="corner tl"></div>
         <div class="corner tr"></div>
@@ -2833,4 +3047,4 @@ body{
 
 </body>
 
-</html>
+      </html>
