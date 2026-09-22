@@ -808,11 +808,11 @@ body{
 }
 
 .enter-star.left{
-    left:26px;
+    left:18px;
 }
 
 .enter-star.right{
-    right:26px;
+    right:18px;
 }
 
 .enter-diamond{
@@ -1038,11 +1038,11 @@ body{
     }
 
     .enter-star.left{
-        left:23px;
+        left:16px;
     }
 
     .enter-star.right{
-        right:23px;
+        right:16px;
     }
 
     .footer{
@@ -1421,10 +1421,6 @@ body{
 
             rotation:0,
 
-            /*
-               38 秒一圈
-               顺时针
-            */
             speed:360 / 38,
 
             direction:1
@@ -1439,10 +1435,6 @@ body{
 
             rotation:55,
 
-            /*
-               32 秒一圈
-               逆时针
-            */
             speed:-360 / 32,
 
             direction:-1
@@ -1453,14 +1445,11 @@ body{
             id:"C",
 
             rx:165,
+
             ry:52.5,
 
             rotation:110,
 
-            /*
-               25 秒一圈
-               顺时针
-            */
             speed:360 / 25,
 
             direction:1
@@ -1471,10 +1460,6 @@ body{
 
     /* =====================================================
        当前轨道
-
-       0 A
-       1 B
-       2 C
     ===================================================== */
 
     let currentTrack = 0;
@@ -1492,7 +1477,6 @@ body{
     ===================================================== */
 
     let targetAngle = null;
-
 
     let switching = false;
 
@@ -1563,15 +1547,7 @@ body{
 
 
     /* =====================================================
-       ★★★ 核心：取得轨道真实坐标 ★★★
-       
-       这一个函数同时负责：
-       
-       1. 轨道的数学位置
-       2. 星星的位置
-       
-       所以星星和轨道绝不会使用
-       两套不同的计算方式。
+       取得轨道真实坐标
     ===================================================== */
 
     function getPoint(
@@ -1584,10 +1560,6 @@ body{
             degToRad(angle);
 
 
-        /*
-           椭圆本身的坐标
-        */
-
         const localX =
             track.rx *
             Math.cos(rad);
@@ -1596,10 +1568,6 @@ body{
             track.ry *
             Math.sin(rad);
 
-
-        /*
-           轨道当前旋转
-        */
 
         const rotation =
             degToRad(
@@ -1616,10 +1584,6 @@ body{
         const sin =
             Math.sin(rotation);
 
-
-        /*
-           旋转后的世界坐标
-        */
 
         const worldX =
             localX * cos -
@@ -1642,19 +1606,7 @@ body{
 
 
     /* =====================================================
-       ★ 世界坐标 → 轨道参数
-       
-       换轨的时候使用。
-       
-       例如：
-       
-       A轨道交点
-       ↓
-       得到真实 x / y
-       ↓
-       转成 B轨道的参数角度
-       ↓
-       星星继续在 B 上
+       世界坐标 → 轨道参数
     ===================================================== */
 
     function worldToTrackAngle(
@@ -1670,10 +1622,6 @@ body{
         let dy =
             y - CY;
 
-
-        /*
-           把世界坐标反向旋转
-        */
 
         const rotation =
             degToRad(
@@ -1699,10 +1647,6 @@ body{
             dx * sin +
             dy * cos;
 
-
-        /*
-           得到椭圆参数角
-        */
 
         const angle =
             radToDeg(
@@ -1736,13 +1680,6 @@ body{
         let bestDistance = Infinity;
 
 
-        /*
-           在 A 轨道上取 720 个点。
-           
-           每一个点都直接计算 B 轨道
-           对应的参数位置。
-        */
-
         for(
             let i = 0;
             i < samples;
@@ -1762,11 +1699,6 @@ body{
                     elapsed
                 );
 
-
-            /*
-               把这个世界坐标
-               转成 B 轨道参数
-            */
 
             const angleB =
                 worldToTrackAngle(
@@ -1801,10 +1733,6 @@ body{
                 );
 
 
-            /*
-               只考虑星星前进方向上的点
-            */
-
             let travel =
                 normalize(
                     (
@@ -1815,10 +1743,6 @@ body{
                 );
 
 
-            /*
-               排除已经在后面的点
-            */
-
             if(
                 travel < 0
             ){
@@ -1827,10 +1751,6 @@ body{
 
             }
 
-
-            /*
-               找到距离很近的交点
-            */
 
             if(
                 distance < bestDistance &&
@@ -1868,11 +1788,6 @@ body{
 
         }
 
-
-        /*
-           如果没有找到理想交点，
-           允许选择最近点。
-        */
 
         if(
             !best ||
@@ -2023,7 +1938,6 @@ body{
         targetAngle =
             intersection.angleA;
 
-
         switching = true;
 
     }
@@ -2107,7 +2021,7 @@ body{
 
 
     /* =====================================================
-       ★ 更新星星
+       更新星星
     ===================================================== */
 
     function updateStar(
@@ -2119,10 +2033,6 @@ body{
                 currentTrack
             ];
 
-
-        /*
-           ★ 直接使用轨道坐标
-        */
 
         const point =
             getPoint(
@@ -2184,18 +2094,10 @@ body{
             );
 
 
-        /* -----------------------------------------------
-           1. 三条轨道旋转
-        ------------------------------------------------ */
-
         updateOrbits(
             elapsed
         );
 
-
-        /* -----------------------------------------------
-           2. 没有目标 → 找交点
-        ------------------------------------------------ */
 
         if(!switching){
 
@@ -2205,10 +2107,6 @@ body{
 
         }
 
-
-        /* -----------------------------------------------
-           3. 星星前往交点
-        ------------------------------------------------ */
 
         if(
             switching &&
@@ -2221,17 +2119,9 @@ body{
                 ];
 
 
-            /*
-               根据轨道方向运行
-            */
-
             const direction =
                 track.direction;
 
-
-            /*
-               距离目标还有多少
-            */
 
             let distance =
                 normalize(
@@ -2242,11 +2132,6 @@ body{
                     direction
                 );
 
-
-            /*
-               星星接近交点时
-               稍微减速。
-            */
 
             let speed =
                 STAR_SPEED;
@@ -2265,10 +2150,6 @@ body{
             }
 
 
-            /*
-               移动
-            */
-
             starAngle +=
                 speed *
                 direction *
@@ -2281,10 +2162,6 @@ body{
                 );
 
 
-            /*
-               再计算距离
-            */
-
             distance =
                 normalize(
                     (
@@ -2295,18 +2172,9 @@ body{
                 );
 
 
-            /* -------------------------------------------
-               4. 到达交点
-            ------------------------------------------- */
-
             if(
                 distance < 1
             ){
-
-                /*
-                   ★ 先取得当前轨道
-                   此刻真正的交点坐标
-                */
 
                 const intersection =
                     getPoint(
@@ -2315,10 +2183,6 @@ body{
                         elapsed
                     );
 
-
-                /*
-                   下一条轨道
-                */
 
                 const nextTrackIndex =
                     (
@@ -2333,14 +2197,6 @@ body{
                     ];
 
 
-                /*
-                   ★★★ 最关键 ★★★
-                   
-                   把真正的交点坐标
-                   转换成下一条轨道
-                   自己的参数角度。
-                */
-
                 const nextAngle =
                     worldToTrackAngle(
                         nextTrack,
@@ -2350,35 +2206,18 @@ body{
                     );
 
 
-                /*
-                   正式换轨
-                */
-
                 currentTrack =
                     nextTrackIndex;
 
-
-                /*
-                   ★ 使用新轨道自己的角度
-                */
 
                 starAngle =
                     nextAngle;
 
 
-                /*
-                   清空目标
-                */
-
                 targetAngle = null;
 
                 switching = false;
 
-
-                /*
-                   给一点点提前量，
-                   让星星不会卡在交点。
-                */
 
                 starAngle =
                     normalize(
@@ -2393,10 +2232,6 @@ body{
 
         }
 
-
-        /* -----------------------------------------------
-           5. 最后把星星放到轨道上
-        ------------------------------------------------ */
 
         updateStar(
             elapsed
@@ -2419,7 +2254,6 @@ body{
     ===================================================== */
 
     starAngle = 300;
-
 
     updateOrbits(0);
 
