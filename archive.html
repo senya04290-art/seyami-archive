@@ -121,7 +121,7 @@ body{
 
     12vw 62vh rgba(160,220,255,.2),
     23vw 76vh rgba(180,225,255,.25),
-    34vw 66vh rgba(160,220,255,.18),
+    34vw 66vh rgba(180,225,255,.18),
     51vw 82vh rgba(180,225,255,.25),
     64vw 68vh rgba(160,220,255,.2),
     77vw 79vh rgba(160,220,255,.23),
@@ -769,13 +769,7 @@ body{
   margin:0;
   padding:0;
 
-  text-shadow:
-
-    0 0 7px
-    rgba(76,159,216,.5),
-
-    0 0 15px
-    rgba(49,132,191,.22);
+  text-shadow:none;
 
   flex-shrink:0;
 
@@ -1078,12 +1072,13 @@ body{
     1px solid
     rgba(111,174,224,.20);
 
+  /* 半透明档案卡片 */
   background:
 
     linear-gradient(
       145deg,
-      rgba(18,48,72,.38),
-      rgba(6,19,32,.42)
+      rgba(18,48,72,.24),
+      rgba(6,19,32,.28)
     );
 
   overflow:hidden;
@@ -1160,8 +1155,8 @@ body{
 
     linear-gradient(
       145deg,
-      rgba(22,59,86,.48),
-      rgba(7,22,37,.52)
+      rgba(22,59,86,.32),
+      rgba(7,22,37,.36)
     );
 
   box-shadow:
@@ -1734,9 +1729,7 @@ body.day-mode .logo-symbol{
   color:
     rgba(79,151,201,.84);
 
-  text-shadow:
-    0 0 7px
-    rgba(86,158,208,.20);
+  text-shadow:none;
 }
 
 body.day-mode .logo-cn{
@@ -1831,12 +1824,13 @@ body.day-mode .archive-card{
   border-color:
     rgba(82,151,198,.24);
 
+  /* 日间模式半透明卡片 */
   background:
 
     linear-gradient(
       145deg,
-      rgba(255,255,255,.84),
-      rgba(239,247,251,.64)
+      rgba(255,255,255,.58),
+      rgba(239,247,251,.40)
     );
 
   box-shadow:
@@ -1871,8 +1865,8 @@ body.day-mode .archive-card:hover{
 
     linear-gradient(
       145deg,
-      rgba(255,255,255,.93),
-      rgba(233,243,249,.74)
+      rgba(255,255,255,.72),
+      rgba(233,243,249,.52)
     );
 
   box-shadow:
