@@ -43,10 +43,6 @@ body{
         "Cormorant Garamond",
         "Noto Serif SC",
         serif;
-
-    transition:
-        background .5s ease,
-        color .5s ease;
 }
 
 .page{
@@ -67,9 +63,6 @@ body{
             transparent 70%
         ),
         #061426;
-
-    transition:
-        background .5s ease;
 }
 
 
@@ -124,9 +117,6 @@ body{
         35s
         linear
         infinite;
-
-    transition:
-        opacity .5s ease;
 }
 
 .stars::after{
@@ -177,16 +167,7 @@ body{
         6s
         ease-in-out
         infinite;
-
-    transition:
-        color .5s ease,
-        text-shadow .5s ease;
 }
-
-
-/* =========================================================
-   原有12颗
-========================================================= */
 
 .floating-stars span:nth-child(1){
     left:12%;
@@ -260,108 +241,6 @@ body{
     animation-delay:4.2s;
 }
 
-
-/* =========================================================
-   PC新增16颗
-========================================================= */
-
-.floating-stars span:nth-child(13){
-    left:26%;
-    top:31%;
-    animation-delay:2.7s;
-}
-
-.floating-stars span:nth-child(14){
-    left:35%;
-    top:76%;
-    animation-delay:4.5s;
-}
-
-.floating-stars span:nth-child(15){
-    left:63%;
-    top:19%;
-    animation-delay:1.7s;
-}
-
-.floating-stars span:nth-child(16){
-    left:73%;
-    top:36%;
-    animation-delay:3.8s;
-}
-
-.floating-stars span:nth-child(17){
-    left:91%;
-    top:58%;
-    animation-delay:2.4s;
-}
-
-.floating-stars span:nth-child(18){
-    left:11%;
-    top:58%;
-    animation-delay:4.8s;
-}
-
-.floating-stars span:nth-child(19){
-    left:47%;
-    top:24%;
-    animation-delay:1.3s;
-}
-
-.floating-stars span:nth-child(20){
-    left:54%;
-    top:73%;
-    animation-delay:3.1s;
-}
-
-.floating-stars span:nth-child(21){
-    left:82%;
-    top:81%;
-    animation-delay:4.1s;
-}
-
-.floating-stars span:nth-child(22){
-    left:4%;
-    top:34%;
-    animation-delay:2.1s;
-}
-
-.floating-stars span:nth-child(23){
-    left:68%;
-    top:88%;
-    animation-delay:5s;
-}
-
-.floating-stars span:nth-child(24){
-    left:39%;
-    top:91%;
-    animation-delay:3.6s;
-}
-
-.floating-stars span:nth-child(25){
-    left:58%;
-    top:8%;
-    animation-delay:1.9s;
-}
-
-.floating-stars span:nth-child(26){
-    left:96%;
-    top:77%;
-    animation-delay:4.4s;
-}
-
-.floating-stars span:nth-child(27){
-    left:22%;
-    top:88%;
-    animation-delay:2.9s;
-}
-
-.floating-stars span:nth-child(28){
-    left:87%;
-    top:27%;
-    animation-delay:3.3s;
-}
-
-
 @keyframes floatStar{
 
     0%,
@@ -396,9 +275,6 @@ body{
 
     pointer-events:none;
     z-index:10;
-
-    transition:
-        border-color .5s ease;
 }
 
 .frame::before{
@@ -410,9 +286,6 @@ body{
     border:
         1px solid
         rgba(81,142,193,.08);
-
-    transition:
-        border-color .5s ease;
 }
 
 
@@ -453,10 +326,6 @@ body{
     text-shadow:
         0 0 5px rgba(67,153,218,.5),
         0 0 13px rgba(43,124,190,.28);
-
-    transition:
-        color .5s ease,
-        text-shadow .5s ease;
 }
 
 .corner.tl{
@@ -507,9 +376,6 @@ body{
     color:#d9edff;
 
     text-decoration:none;
-
-    transition:
-        color .5s ease;
 }
 
 .logo-mark{
@@ -538,10 +404,6 @@ body{
     text-shadow:
         0 0 7px rgba(76,159,216,.5),
         0 0 15px rgba(49,132,191,.22);
-
-    transition:
-        color .5s ease,
-        text-shadow .5s ease;
 }
 
 .logo-text{
@@ -575,9 +437,6 @@ body{
 
     color:
         rgba(157,204,239,.63);
-
-    transition:
-        color .5s ease;
 }
 
 .nav-links{
@@ -643,71 +502,67 @@ body{
 
 
 /* =========================================================
-   ☀️ 日间模式按钮
-   独立定位，不参与 nav-links 宽度计算
+   ☼ 日间模式按钮
 ========================================================= */
 
 .theme-toggle{
-    position:fixed;
 
-    right:28px;
-    top:22px;
+    position:relative;
 
-    height:28px;
+    margin-left:4px;
 
-    padding:0 11px;
+    width:25px;
+    height:25px;
 
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:6px;
+
+    padding:0;
 
     border:
         1px solid
-        rgba(111,174,224,.32);
+        rgba(145,196,228,.28);
+
+    border-radius:50%;
 
     background:
-        rgba(8,28,49,.35);
+        rgba(8,28,49,.32);
 
     color:
-        rgba(191,220,243,.68);
+        rgba(190,222,244,.72);
 
-    font-family:
-        "Cinzel",
-        "Noto Serif SC",
-        serif;
+    font-family:serif;
 
-    font-size:8px;
+    font-size:13px;
 
-    letter-spacing:1.5px;
+    line-height:1;
 
     cursor:pointer;
 
-    white-space:nowrap;
-
-    z-index:30;
-
     transition:
-        border-color .35s ease,
-        background .35s ease,
         color .35s ease,
-        box-shadow .35s ease;
+        background .35s ease,
+        border-color .35s ease,
+        box-shadow .35s ease,
+        transform .35s ease;
 }
 
 .theme-toggle:hover{
-    border-color:
-        rgba(122,192,235,.62);
 
-    color:#d9efff;
+    color:#e4f5ff;
+
+    background:
+        rgba(31,75,108,.45);
+
+    border-color:
+        rgba(119,190,230,.55);
 
     box-shadow:
-        0 0 14px
-        rgba(76,151,202,.12);
-}
+        0 0 12px
+        rgba(88,169,220,.22);
 
-.theme-icon{
-    font-size:12px;
-    line-height:1;
+    transform:rotate(18deg);
 }
 
 
@@ -757,9 +612,6 @@ body{
     pointer-events:none;
 
     opacity:.55;
-
-    transition:
-        opacity .5s ease;
 }
 
 .magic-circle::before{
@@ -783,10 +635,6 @@ body{
         80s
         linear
         infinite;
-
-    transition:
-        border-color .5s ease,
-        box-shadow .5s ease;
 }
 
 .magic-circle::after{
@@ -812,10 +660,6 @@ body{
         55s
         linear
         infinite;
-
-    transition:
-        border-color .5s ease,
-        box-shadow .5s ease;
 }
 
 @keyframes rotateCircle{
@@ -874,10 +718,6 @@ body{
             0 0 4px
             rgba(70,155,210,.10)
         );
-
-    transition:
-        stroke .5s ease,
-        filter .5s ease;
 }
 
 
@@ -910,10 +750,6 @@ body{
             0 0 8px
             rgba(74,165,224,.55)
         );
-
-    transition:
-        fill .5s ease,
-        filter .5s ease;
 }
 
 .star-glow{
@@ -923,9 +759,6 @@ body{
     filter:blur(2px);
 
     pointer-events:none;
-
-    transition:
-        fill .5s ease;
 }
 
 
@@ -944,9 +777,6 @@ body{
 
     background:
         rgba(92,164,213,.13);
-
-    transition:
-        background .5s ease;
 }
 
 .magic-line.horizontal{
@@ -985,10 +815,6 @@ body{
     box-shadow:
         0 0 10px
         rgba(88,171,224,.25);
-
-    transition:
-        border-color .5s ease,
-        box-shadow .5s ease;
 }
 
 .magic-center::before{
@@ -1013,10 +839,6 @@ body{
     box-shadow:
         0 0 8px
         rgba(126,203,244,.8);
-
-    transition:
-        background .5s ease,
-        box-shadow .5s ease;
 }
 
 
@@ -1036,7 +858,7 @@ body{
 
 
 /* =========================================================
-   PC标题
+   ★ PC标题
 ========================================================= */
 
 .main-title{
@@ -1070,11 +892,8 @@ body{
     text-shadow:
         0 0 18px
         rgba(94,172,222,.08);
-
-    transition:
-        color .5s ease,
-        text-shadow .5s ease;
 }
+
 
 .main-title .seyami{
 
@@ -1088,6 +907,7 @@ body{
 
     white-space:nowrap;
 }
+
 
 .main-title .archive{
 
@@ -1108,7 +928,7 @@ body{
 
 
 /* =========================================================
-   PC窄窗口自适应
+   ★ PC窄窗口标题自适应
 ========================================================= */
 
 @media (min-width:521px) and (max-width:800px){
@@ -1127,9 +947,9 @@ body{
     .main-title .archive{
 
         font-size:clamp(
-            36px,
-            6vw,
-            52px
+            42px,
+            7.2vw,
+            63px
         );
 
         margin-left:8px;
@@ -1170,9 +990,6 @@ body{
             transparent,
             rgba(115,182,224,.62)
         );
-
-    transition:
-        background .5s ease;
 }
 
 .title-decoration .line.right{
@@ -1195,9 +1012,6 @@ body{
         rgba(143,202,237,.8);
 
     transform:rotate(45deg);
-
-    transition:
-        border-color .5s ease;
 }
 
 
@@ -1223,9 +1037,6 @@ body{
         rgba(207,229,246,.86);
 
     text-align:center;
-
-    transition:
-        color .5s ease;
 }
 
 
@@ -1259,9 +1070,6 @@ body{
     line-height:1.7;
 
     letter-spacing:2px;
-
-    transition:
-        color .5s ease;
 }
 
 
@@ -1321,11 +1129,6 @@ body{
         rgba(39,120,180,.08);
 
     pointer-events:none;
-
-    transition:
-        border-color .5s ease,
-        background .5s ease,
-        box-shadow .5s ease;
 }
 
 .enter-wrap::after{
@@ -1344,9 +1147,6 @@ body{
         rgba(91,164,213,.16);
 
     pointer-events:none;
-
-    transition:
-        border-color .5s ease;
 }
 
 .enter-button{
@@ -1392,8 +1192,7 @@ body{
     transition:
         background .35s ease,
         box-shadow .35s ease,
-        letter-spacing .35s ease,
-        color .5s ease;
+        letter-spacing .35s ease;
 }
 
 .enter-button:hover{
@@ -1436,10 +1235,6 @@ body{
         rgba(67,158,215,.45);
 
     z-index:3;
-
-    transition:
-        color .5s ease,
-        text-shadow .5s ease;
 }
 
 .enter-star.left{
@@ -1468,10 +1263,6 @@ body{
         rgba(116,187,226,.65);
 
     background:#061426;
-
-    transition:
-        border-color .5s ease,
-        background .5s ease;
 }
 
 .enter-diamond.top{
@@ -1511,9 +1302,6 @@ body{
     letter-spacing:4px;
 
     white-space:nowrap;
-
-    transition:
-        color .5s ease;
 }
 
 
@@ -1547,6 +1335,7 @@ body{
         height:500px;
     }
 
+
     .main-title{
 
         width:max-content;
@@ -1569,14 +1358,6 @@ body{
         font-size:11px;
     }
 
-    /* 昼夜按钮只调整自己的位置，不影响导航布局 */
-    .theme-toggle{
-        right:20px;
-        top:17px;
-        height:26px;
-        padding:0 8px;
-    }
-
 }
 
 
@@ -1585,13 +1366,6 @@ body{
 ========================================================= */
 
 @media(max-width:520px){
-
-    /* PC新增的16颗在手机端隐藏
-       原来的12颗完全保持不变 */
-
-    .floating-stars span:nth-child(n+13){
-        display:none;
-    }
 
     .frame{
         inset:12px;
@@ -1643,6 +1417,16 @@ body{
         font-size:9px;
 
         letter-spacing:0;
+    }
+
+    .theme-toggle{
+
+        width:22px;
+        height:22px;
+
+        margin-left:1px;
+
+        font-size:11px;
     }
 
     .corner{
@@ -1845,21 +1629,6 @@ body{
         letter-spacing:2px;
     }
 
-    /* 昼夜按钮独立于导航 */
-    .theme-toggle{
-        right:15px;
-        top:12px;
-        height:24px;
-        padding:0 6px;
-        gap:3px;
-        font-size:6px;
-        letter-spacing:.7px;
-    }
-
-    .theme-icon{
-        font-size:10px;
-    }
-
 }
 
 
@@ -1881,6 +1650,14 @@ body{
 
     .nav-links a{
         font-size:8px;
+    }
+
+    .theme-toggle{
+
+        width:20px;
+        height:20px;
+
+        font-size:10px;
     }
 
     .main-title .seyami{
@@ -1905,297 +1682,433 @@ body{
         font-size:9px;
     }
 
-    .theme-toggle{
-        right:10px;
-        top:9px;
-        padding:0 5px;
-    }
-
-    .theme-toggle #themeText{
-        display:none;
-    }
-
 }
 
 
 /* =========================================================
-   ☀️ DAY MODE
-   白昼冰蓝版
+   ★ 日间模式
+   只增加，不改变原夜间模式
 ========================================================= */
 
 body.day-mode{
-    background:#f4f9fd;
-    color:#2e5069;
+
+    background:#dce8ef;
+
+    color:#243b4d;
 }
 
 body.day-mode .page{
+
     background:
         radial-gradient(
-            circle at 50% 42%,
-            rgba(165,211,238,.20),
+            circle at 50% 45%,
+            rgba(255,255,255,.72),
             transparent 38%
         ),
         radial-gradient(
-            circle at 50% 52%,
-            rgba(226,240,249,.68),
-            transparent 72%
+            circle at 50% 50%,
+            rgba(171,202,220,.42),
+            transparent 70%
         ),
-        #f4f9fd;
+        #dce8ef;
 }
+
+
+/* 日间星空 */
 
 body.day-mode .stars::before,
 body.day-mode .stars::after{
-    background-image:
-        radial-gradient(
-            circle,
-            rgba(103,166,207,.42) 0 1px,
-            transparent 1.5px
-        ),
-        radial-gradient(
-            circle,
-            rgba(139,190,220,.26) 0 1px,
-            transparent 1.5px
-        ),
-        radial-gradient(
-            circle,
-            rgba(88,151,194,.18) 0 1px,
-            transparent 1.5px
-        );
 
-    opacity:.24;
-}
+    opacity:.16;
 
-body.day-mode .stars::after{
-    opacity:.11;
+    filter:
+        sepia(.08)
+        saturate(.65);
 }
 
 body.day-mode .floating-stars span{
-    color:rgba(87,151,199,.50);
-    text-shadow:none;
+
+    color:
+        rgba(67,119,151,.42);
+
+    text-shadow:
+        0 0 8px
+        rgba(112,163,190,.25);
 }
 
+
+/* 日间外框 */
+
 body.day-mode .frame{
-    border-color:rgba(91,145,184,.34);
+
+    border-color:
+        rgba(75,125,151,.32);
 }
 
 body.day-mode .frame::before{
-    border-color:rgba(108,161,195,.11);
+
+    border-color:
+        rgba(86,137,161,.12);
 }
+
+
+/* 日间四角六芒星 */
 
 body.day-mode .corner::before{
-    color:rgba(79,141,190,.68);
-    text-shadow:none;
+
+    color:
+        rgba(69,122,150,.68);
+
+    text-shadow:
+        0 0 5px
+        rgba(81,145,174,.25),
+        0 0 13px
+        rgba(92,157,184,.12);
 }
 
+
+/* 日间 Logo */
+
 body.day-mode .logo{
-    color:#2e526c;
+
+    color:#29485d;
 }
 
 body.day-mode .logo-mark{
-    color:rgba(79,151,201,.84);
+
+    color:
+        rgba(70,126,155,.78);
 
     text-shadow:
-        0 0 7px rgba(86,158,208,.20);
+        0 0 7px
+        rgba(86,151,181,.25);
 }
 
 body.day-mode .logo-en{
-    color:rgba(81,137,173,.62);
+
+    color:
+        rgba(65,108,133,.62);
 }
 
+
+/* 日间导航 */
+
 body.day-mode .nav-links a{
-    color:rgba(62,99,127,.70);
+
+    color:
+        rgba(53,83,101,.72);
 }
 
 body.day-mode .nav-links a:hover{
-    color:#28536f;
+
+    color:
+        #29485d;
 
     text-shadow:
-        0 0 8px rgba(76,151,202,.14);
+        0 0 8px
+        rgba(74,137,167,.22);
 }
 
 body.day-mode .nav-links a::after{
-    background:rgba(80,151,200,.54);
+
+    background:
+        rgba(75,143,175,.55);
 }
 
+
+/* 日间按钮 */
+
 body.day-mode .theme-toggle{
-    border-color:rgba(91,145,184,.34);
-    background:rgba(248,252,255,.78);
-    color:rgba(61,98,125,.76);
+
+    border-color:
+        rgba(71,121,147,.35);
+
+    background:
+        rgba(255,255,255,.28);
+
+    color:
+        rgba(62,105,128,.78);
 }
 
 body.day-mode .theme-toggle:hover{
-    border-color:rgba(79,151,200,.62);
-    color:#28536f;
+
+    color:
+        #315d73;
+
+    background:
+        rgba(255,255,255,.55);
+
+    border-color:
+        rgba(72,137,168,.55);
 
     box-shadow:
-        0 0 14px rgba(76,151,202,.11);
+        0 0 12px
+        rgba(80,144,174,.18);
 }
 
+
+/* 日间魔法圆阵 */
+
 body.day-mode .magic-circle{
-    opacity:.48;
+
+    opacity:.62;
 }
 
 body.day-mode .magic-circle::before{
-    border-color:rgba(79,148,196,.26);
+
+    border-color:
+        rgba(71,132,161,.25);
 
     box-shadow:
-        0 0 22px rgba(70,142,196,.055);
+        0 0 22px
+        rgba(69,130,158,.08);
 }
 
 body.day-mode .magic-circle::after{
-    border-color:rgba(101,168,207,.20);
+
+    border-color:
+        rgba(82,143,170,.20);
 
     box-shadow:
-        inset 0 0 20px rgba(78,151,204,.028);
+        inset 0 0 20px
+        rgba(72,137,164,.04);
 }
 
+
+/* 日间星轨 */
+
 body.day-mode .orbit-track{
-    stroke:rgba(73,149,201,.28);
+
+    stroke:
+        rgba(65,133,164,.28);
 
     filter:
         drop-shadow(
             0 0 4px
-            rgba(76,151,202,.065)
+            rgba(70,140,169,.08)
         );
 }
 
 body.day-mode #travellingStar{
-    fill:rgba(76,151,201,.88);
+
+    fill:
+        rgba(69,126,153,.82);
 
     filter:
         drop-shadow(
             0 0 3px
-            rgba(112,188,224,.38)
+            rgba(91,157,184,.45)
         )
         drop-shadow(
             0 0 8px
-            rgba(82,164,211,.19)
+            rgba(87,151,180,.22)
         );
 }
 
 body.day-mode .star-glow{
-    fill:rgba(112,188,224,.055);
+
+    fill:
+        rgba(95,160,185,.06);
 }
 
+
+/* 日间中央线 */
+
 body.day-mode .magic-line{
-    background:rgba(79,149,199,.11);
+
+    background:
+        rgba(67,128,157,.12);
 }
 
 body.day-mode .magic-center{
-    border-color:rgba(82,155,201,.40);
+
+    border-color:
+        rgba(72,137,165,.40);
 
     box-shadow:
-        0 0 10px rgba(82,159,207,.14);
+        0 0 10px
+        rgba(78,145,172,.18);
 }
 
 body.day-mode .magic-center::before{
-    background:rgba(102,177,217,.60);
+
+    background:
+        rgba(74,143,171,.58);
 
     box-shadow:
-        0 0 8px rgba(91,171,216,.40);
+        0 0 8px
+        rgba(87,157,184,.45);
 }
 
+
+/* 日间标题 */
+
 body.day-mode .main-title{
-    color:#2b506a;
+
+    color:
+        #294354;
 
     text-shadow:
-        0 0 18px rgba(80,151,201,.065);
+        0 0 18px
+        rgba(93,147,172,.10);
+}
+
+body.day-mode .title-decoration{
+
+    opacity:.72;
 }
 
 body.day-mode .title-decoration .line{
+
     background:
         linear-gradient(
             90deg,
             transparent,
-            rgba(81,151,198,.54)
+            rgba(78,140,167,.48)
         );
 }
 
 body.day-mode .title-decoration .line.right{
+
     background:
         linear-gradient(
             90deg,
-            rgba(81,151,198,.54),
+            rgba(78,140,167,.48),
             transparent
         );
 }
 
 body.day-mode .title-decoration .diamond{
-    border-color:rgba(91,160,207,.68);
+
+    border-color:
+        rgba(74,137,165,.62);
 }
+
+
+/* 日间中文标题 */
 
 body.day-mode .chinese-title{
-    color:rgba(45,82,106,.80);
+
+    color:
+        rgba(48,76,91,.82);
 }
+
+
+/* 日间描述 */
 
 body.day-mode .description{
-    color:rgba(65,106,133,.64);
+
+    color:
+        rgba(65,94,109,.62);
 }
 
-body.day-mode .enter-wrap::before{
-    border-color:rgba(82,151,198,.36);
 
-    background:rgba(242,249,253,.76);
+/* 日间进入按钮 */
+
+body.day-mode .enter-wrap::before{
+
+    border-color:
+        rgba(73,133,160,.35);
+
+    background:
+        rgba(239,247,250,.48);
 
     box-shadow:
-        0 0 22px rgba(76,151,202,.055);
+        0 0 22px
+        rgba(72,135,163,.08);
 }
 
 body.day-mode .enter-wrap::after{
-    border-color:rgba(85,154,202,.16);
+
+    border-color:
+        rgba(78,139,165,.16);
 }
 
 body.day-mode .enter-button{
-    color:#335e79;
+
+    color:
+        #345568;
 
     background:
         linear-gradient(
             90deg,
-            rgba(230,241,248,.95),
-            rgba(249,252,254,1),
-            rgba(230,241,248,.95)
+            rgba(222,235,241,.88),
+            rgba(239,247,250,.94),
+            rgba(222,235,241,.88)
         );
 
     border-top-color:
-        rgba(80,151,200,.38);
+        rgba(76,139,166,.35);
 
     border-bottom-color:
-        rgba(80,151,200,.38);
+        rgba(76,139,166,.35);
 }
 
 body.day-mode .enter-button:hover{
+
     background:
         linear-gradient(
             90deg,
-            rgba(225,238,247,1),
-            rgba(250,253,255,1),
-            rgba(225,238,247,1)
+            rgba(214,231,239,.95),
+            rgba(246,251,253,.98),
+            rgba(214,231,239,.95)
         );
 
     box-shadow:
-        0 0 22px rgba(76,151,202,.13);
+        0 0 22px
+        rgba(70,137,166,.15);
 }
 
 body.day-mode .enter-star{
-    color:rgba(78,151,200,.68);
+
+    color:
+        rgba(67,130,158,.65);
 
     text-shadow:
-        0 0 9px rgba(81,158,207,.20);
+        0 0 9px
+        rgba(74,145,173,.25);
 }
 
 body.day-mode .enter-diamond{
-    border-color:rgba(82,155,203,.60);
-    background:#f4f9fd;
+
+    border-color:
+        rgba(76,139,166,.55);
+
+    background:#dce8ef;
 }
 
+
+/* 日间 Footer */
+
 body.day-mode .footer{
-    color:rgba(73,115,143,.40);
+
+    color:
+        rgba(72,110,127,.40);
 }
 
 
 /* =========================================================
-   星轨 JS
+   日夜模式过渡
 ========================================================= */
+
+body,
+.page,
+.frame,
+.main-title,
+.chinese-title,
+.description,
+.enter-button,
+.enter-wrap::before,
+.enter-wrap::after,
+.theme-toggle{
+
+    transition:
+        background .6s ease,
+        color .6s ease,
+        border-color .6s ease,
+        box-shadow .6s ease,
+        text-shadow .6s ease;
+}
 
 </style>
 </head>
@@ -2221,24 +2134,6 @@ body.day-mode .footer{
     <span>✶</span>
     <span>·</span>
     <span>✧</span>
-
-    <!-- PC新增 -->
-    <span>✡</span>
-    <span>✶</span>
-    <span>✦</span>
-    <span>✧</span>
-    <span>✡</span>
-    <span>✦</span>
-    <span>✶</span>
-    <span>·</span>
-    <span>✦</span>
-    <span>✡</span>
-    <span>✧</span>
-    <span>✶</span>
-    <span>✦</span>
-    <span>·</span>
-    <span>✡</span>
-    <span>✶</span>
 
 </div>
 
@@ -2291,31 +2186,14 @@ body.day-mode .footer{
             关于我们
         </a>
 
+        <button
+            class="theme-toggle"
+            id="themeToggle"
+            aria-label="切换日间模式"
+            title="切换日间模式"
+        >☼</button>
+
     </nav>
-
-
-    <!--
-        昼夜按钮：
-        从 nav-links 中独立出来
-        不再参与导航栏宽度计算
-    -->
-    <button
-        class="theme-toggle"
-        id="themeToggle"
-        type="button"
-        aria-label="切换昼夜模式"
-    >
-
-        <span
-            class="theme-icon"
-            id="themeIcon"
-        >☾</span>
-
-        <span
-            id="themeText"
-        >NIGHT</span>
-
-    </button>
 
 </header>
 
@@ -2494,105 +2372,7 @@ body.day-mode .footer{
 <script>
 
 /* =========================================================
-   ☀️ 昼夜模式
-========================================================= */
-
-(function(){
-
-    const toggle =
-        document.getElementById(
-            "themeToggle"
-        );
-
-    const icon =
-        document.getElementById(
-            "themeIcon"
-        );
-
-    const text =
-        document.getElementById(
-            "themeText"
-        );
-
-    if(
-        !toggle ||
-        !icon ||
-        !text
-    ){
-        return;
-    }
-
-
-    function updateButton(){
-
-        const isDay =
-            document.body.classList.contains(
-                "day-mode"
-            );
-
-        if(isDay){
-
-            icon.textContent = "☀";
-
-            text.textContent = "DAY";
-
-        }else{
-
-            icon.textContent = "☾";
-
-            text.textContent = "NIGHT";
-
-        }
-
-    }
-
-
-    const savedTheme =
-        localStorage.getItem(
-            "seyami-theme"
-        );
-
-
-    if(
-        savedTheme === "day"
-    ){
-
-        document.body.classList.add(
-            "day-mode"
-        );
-
-    }
-
-
-    updateButton();
-
-
-    toggle.addEventListener(
-        "click",
-        function(){
-
-            const isDay =
-                document.body.classList.toggle(
-                    "day-mode"
-                );
-
-            localStorage.setItem(
-                "seyami-theme",
-                isDay
-                    ? "day"
-                    : "night"
-            );
-
-            updateButton();
-
-        }
-    );
-
-})();
-
-
-/* =========================================================
-   星轨 JS
+   三重星轨 + 小星辰
 ========================================================= */
 
 (function(){
@@ -3351,6 +3131,105 @@ body.day-mode .footer{
 
 
 })();
+
+
+/* =========================================================
+   日间 / 夜间模式
+========================================================= */
+
+const themeToggle =
+    document.getElementById(
+        "themeToggle"
+    );
+
+const savedTheme =
+    localStorage.getItem(
+        "seyami-theme"
+    );
+
+
+/* 读取上一次选择 */
+
+if(savedTheme === "day"){
+
+    document.body.classList.add(
+        "day-mode"
+    );
+
+    if(themeToggle){
+
+        themeToggle.textContent =
+            "☾";
+
+        themeToggle.setAttribute(
+            "aria-label",
+            "切换夜间模式"
+        );
+
+        themeToggle.setAttribute(
+            "title",
+            "切换夜间模式"
+        );
+
+    }
+
+}
+
+
+/* 点击切换 */
+
+if(themeToggle){
+
+    themeToggle.addEventListener(
+        "click",
+        function(){
+
+            document.body.classList.toggle(
+                "day-mode"
+            );
+
+            const isDay =
+                document.body.classList.contains(
+                    "day-mode"
+                );
+
+
+            /* 保存选择 */
+
+            localStorage.setItem(
+                "seyami-theme",
+                isDay
+                    ? "day"
+                    : "night"
+            );
+
+
+            /* 更换图标 */
+
+            themeToggle.textContent =
+                isDay
+                    ? "☾"
+                    : "☼";
+
+
+            themeToggle.setAttribute(
+                "aria-label",
+                isDay
+                    ? "切换夜间模式"
+                    : "切换日间模式"
+            );
+
+            themeToggle.setAttribute(
+                "title",
+                isDay
+                    ? "切换夜间模式"
+                    : "切换日间模式"
+            );
+
+        }
+    );
+
+}
 
 </script>
 
