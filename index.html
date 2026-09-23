@@ -865,36 +865,52 @@ body{
 
 /* =========================================================
    ★ PC窄窗口标题自适应
-   801px ～ 521px
+   521px ～ 800px
 
-   根据窗口宽度连续缩小，
-   保持 SEYAMI ARCHIVE 一行
+   连续缩放，不再在800px突然跳变
 ========================================================= */
 
 @media (min-width:521px) and (max-width:800px){
 
     .main-title .seyami{
 
-        font-size:clamp(
-            36px,
-            6vw,
-            52px
-        );
+        font-size:
+            clamp(
+                42px,
+                7.9vw,
+                63px
+            );
 
-        margin-right:8px;
+        margin-right:
+            clamp(
+                8px,
+                2.5vw,
+                20px
+            );
     }
 
     .main-title .archive{
 
-        font-size:clamp(
-            42px,
-            7.2vw,
-            63px
-        );
+        font-size:
+            clamp(
+                42px,
+                7.9vw,
+                63px
+            );
 
-        margin-left:8px;
+        margin-left:
+            clamp(
+                8px,
+                2.5vw,
+                20px
+            );
 
-        letter-spacing:6px;
+        letter-spacing:
+            clamp(
+                6px,
+                1.125vw,
+                9px
+            );
     }
 
 }
@@ -1271,8 +1287,39 @@ body{
 
     .magic-circle{
 
-        width:500px;
-        height:500px;
+        width:
+            clamp(
+                390px,
+                70vw,
+                560px
+            );
+
+        height:
+            clamp(
+                390px,
+                70vw,
+                560px
+            );
+    }
+
+    .magic-line.horizontal{
+
+        width:
+            clamp(
+                350px,
+                61.25vw,
+                490px
+            );
+    }
+
+    .magic-line.vertical{
+
+        height:
+            clamp(
+                350px,
+                61.25vw,
+                490px
+            );
     }
 
 
@@ -2625,4 +2672,4 @@ body{
 </script>
 
 </body>
-      </html>
+</html>
