@@ -2,26 +2,16 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>塞垭弥大陆档案馆 · Seyami Archive</title>
 
-<link rel="preconnect"
-      href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Noto+Serif+SC:wght@300;400;500&display=swap"
-      rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
-
-/* =========================
-   基础
-========================= */
 
 *{
   box-sizing:border-box;
@@ -36,260 +26,567 @@ body{
 }
 
 body{
+
   background:#061426;
+
   color:#dcecff;
+
   font-family:
     "Noto Serif SC",
+    "Times New Roman",
     serif;
+
   overflow-x:hidden;
+
   transition:
-    background .8s ease,
-    color .8s ease;
+    background .6s ease,
+    color .6s ease;
 }
-
-
-/* =========================
-   页面
-========================= */
 
 .page{
   position:relative;
+
   min-height:100vh;
+
+  padding:
+    30px
+    clamp(24px,6vw,90px)
+    70px;
+
   overflow:hidden;
 
   background:
+
     radial-gradient(
       circle at 50% 45%,
       rgba(38,91,137,.18),
       transparent 38%
     ),
+
     radial-gradient(
       circle at 50% 50%,
       rgba(11,45,75,.45),
       transparent 70%
     ),
+
     #061426;
-}
-
-
-/* =========================
-   顶部导航
-========================= */
-
-.topbar{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:82px;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  padding:0 42px;
-
-  z-index:20;
-}
-
-
-/* 左上角 Logo */
-
-.logo{
-  display:flex;
-  align-items:center;
-  gap:9px;
-
-  color:#c9e5f7;
-  text-decoration:none;
-
-  font-family:"Cinzel",serif;
-  font-size:14px;
-  letter-spacing:3px;
-
-  white-space:nowrap;
-}
-
-.logo-symbol{
-  font-size:13px;
-  color:#78b9df;
-
-  /* 去掉星星发光 */
-  text-shadow:none;
-}
-
-
-/* 右侧 */
-
-.top-right{
-  display:flex;
-  align-items:center;
-  gap:24px;
-}
-
-.about{
-  color:rgba(207,230,245,.72);
-  text-decoration:none;
-
-  font-family:"Noto Serif SC",serif;
-  font-size:13px;
-  letter-spacing:2px;
 
   transition:
-    color .3s ease;
-}
-
-.about:hover{
-  color:#dcefff;
+    background .6s ease;
 }
 
 
-/* =========================
-   日夜切换
-========================= */
+/* =========================================================
+   背景星尘
+========================================================= */
 
-.theme-toggle{
-  width:42px;
-  height:42px;
-
-  border:1px solid rgba(110,174,214,.25);
-  border-radius:50%;
-
-  background:rgba(8,28,47,.38);
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  cursor:pointer;
-
-  color:#9dcce8;
-
-  transition:
-    background .4s ease,
-    border-color .4s ease,
-    color .4s ease,
-    transform .3s ease;
-}
-
-.theme-toggle:hover{
-  transform:rotate(8deg);
-
-  border-color:rgba(110,174,214,.48);
-  background:rgba(16,48,74,.48);
-}
-
-.theme-icon{
-  font-size:17px;
-  line-height:1;
-}
-
-
-/* =========================
-   浮动星星
-========================= */
-
-.arcane-star{
+.stars{
   position:absolute;
 
-  color:rgba(123,188,226,.48);
+  inset:0;
 
-  font-family:"Cinzel",serif;
+  z-index:0;
 
   pointer-events:none;
 
-  /* 去掉浮动星星发光 */
-  text-shadow:none;
+  overflow:hidden;
+}
+
+.stars::before,
+.stars::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:2px;
+  height:2px;
+
+  border-radius:50%;
+
+  background:
+    rgba(182,220,255,.7);
+
+  box-shadow:
+
+    8vw 12vh rgba(150,210,250,.25),
+    17vw 28vh rgba(160,220,255,.2),
+    26vw 9vh rgba(170,220,255,.28),
+    36vw 23vh rgba(150,210,255,.2),
+    47vw 13vh rgba(180,225,255,.3),
+    58vw 31vh rgba(160,220,255,.22),
+    69vw 16vh rgba(180,225,255,.26),
+    78vw 28vh rgba(160,220,255,.2),
+    89vw 11vh rgba(180,225,255,.28),
+
+    12vw 62vh rgba(160,220,255,.2),
+    23vw 76vh rgba(180,225,255,.25),
+    34vw 66vh rgba(160,220,255,.18),
+    51vw 82vh rgba(180,225,255,.25),
+    64vw 68vh rgba(160,220,255,.2),
+    77vw 79vh rgba(160,220,255,.23),
+    91vw 63vh rgba(160,220,255,.2);
+
+  opacity:.7;
+
+  transition:
+    background .6s ease,
+    box-shadow .6s ease,
+    opacity .6s ease;
+}
+
+.stars::after{
+
+  width:1px;
+  height:1px;
+
+  box-shadow:
+
+    5vw 19vh rgba(180,225,255,.3),
+    15vw 44vh rgba(180,225,255,.25),
+    31vw 17vh rgba(180,225,255,.2),
+    43vw 38vh rgba(180,225,255,.25),
+    57vw 21vh rgba(180,225,255,.2),
+    72vw 44vh rgba(180,225,255,.25),
+    84vw 36vh rgba(180,225,255,.2),
+    95vw 23vh rgba(180,225,255,.25),
+
+    7vw 84vh rgba(180,225,255,.2),
+    19vw 70vh rgba(180,225,255,.25),
+    29vw 90vh rgba(180,225,255,.2),
+    42vw 72vh rgba(180,225,255,.25),
+    55vw 93vh rgba(180,225,255,.2),
+    70vw 84vh rgba(180,225,255,.25),
+    86vw 91vh rgba(180,225,255,.2);
 }
 
 
-/* =========================
-   中央区域
-========================= */
+/* =========================================================
+   ✦ ✶ ✡ 魔法星辰
+========================================================= */
 
-.archive-main{
-  position:relative;
+.arcane-stars{
 
-  width:100%;
-  min-height:100vh;
+  position:absolute;
 
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
+  inset:0;
 
-  padding:
-    130px 30px
-    100px;
+  z-index:1;
+
+  pointer-events:none;
+
+  overflow:hidden;
+
+  transition:
+    opacity .6s ease;
 }
 
+.arcane-star{
 
-/* =========================
-   标题
-========================= */
+  position:absolute;
 
-.archive-heading{
-  position:relative;
+  display:block;
 
-  text-align:center;
+  color:
+    rgba(158,207,247,.62);
 
-  margin-bottom:70px;
-
-  z-index:5;
-}
-
-.archive-heading-en{
-  margin:0;
-
-  font-family:"Cinzel",serif;
-
-  font-size:
-    clamp(42px,6vw,72px);
+  font-family:
+    "Times New Roman",
+    "Noto Serif",
+    serif;
 
   font-weight:400;
 
-  letter-spacing:
-    clamp(7px,1.5vw,15px);
+  line-height:1;
 
-  line-height:1.1;
+  user-select:none;
 
-  color:#d7ecfb;
+  /* 去掉浮动魔法星辰的发光 */
+  text-shadow:none;
+
+  animation:
+
+    arcaneFloat
+    var(--float-time)
+    ease-in-out
+    infinite,
+
+    arcaneTwinkle
+    var(--twinkle-time)
+    ease-in-out
+    infinite;
+
+  animation-delay:
+
+    var(--float-delay),
+    var(--twinkle-delay);
+
+  transition:
+    color .6s ease,
+    text-shadow .6s ease;
 }
 
-.archive-heading-sub{
-  margin-top:16px;
 
+/* 第一组 */
+
+.arcane-star.star-a{
+  left:13%;
+  top:17%;
+  font-size:15px;
+
+  --float-time:7s;
+  --twinkle-time:4s;
+  --float-delay:-2s;
+  --twinkle-delay:-1s;
+
+  opacity:.58;
+}
+
+.arcane-star.star-b{
+  left:82%;
+  top:20%;
+  font-size:20px;
+
+  --float-time:9s;
+  --twinkle-time:5s;
+  --float-delay:-5s;
+  --twinkle-delay:-2s;
+
+  opacity:.42;
+}
+
+.arcane-star.star-c{
+  left:9%;
+  top:48%;
+  font-size:18px;
+
+  --float-time:11s;
+  --twinkle-time:6s;
+  --float-delay:-7s;
+  --twinkle-delay:-3s;
+
+  opacity:.32;
+}
+
+.arcane-star.star-d{
+  right:10%;
+  top:49%;
   font-size:13px;
 
-  letter-spacing:7px;
+  --float-time:8s;
+  --twinkle-time:4.5s;
+  --float-delay:-3s;
+  --twinkle-delay:-1.5s;
 
-  color:rgba(178,211,232,.58);
+  opacity:.52;
+}
+
+.arcane-star.star-e{
+  left:18%;
+  bottom:16%;
+  font-size:17px;
+
+  --float-time:10s;
+  --twinkle-time:5.5s;
+  --float-delay:-6s;
+  --twinkle-delay:-2.5s;
+
+  opacity:.36;
+}
+
+.arcane-star.star-f{
+  right:16%;
+  bottom:13%;
+  font-size:16px;
+
+  --float-time:12s;
+  --twinkle-time:7s;
+  --float-delay:-4s;
+  --twinkle-delay:-4s;
+
+  opacity:.28;
+}
+
+.arcane-star.star-g{
+  left:28%;
+  top:35%;
+  font-size:10px;
+
+  --float-time:6s;
+  --twinkle-time:3.5s;
+  --float-delay:-2s;
+  --twinkle-delay:-.5s;
+
+  opacity:.30;
+}
+
+.arcane-star.star-h{
+  right:28%;
+  top:34%;
+  font-size:11px;
+
+  --float-time:7.5s;
+  --twinkle-time:4s;
+  --float-delay:-5s;
+  --twinkle-delay:-2s;
+
+  opacity:.34;
 }
 
 
-/* =========================
+/* 第二组 */
+
+.arcane-star.star-i{
+  left:4%;
+  top:29%;
+  font-size:9px;
+
+  --float-time:6s;
+  --twinkle-time:4s;
+  --float-delay:-1s;
+  --twinkle-delay:-2s;
+
+  opacity:.32;
+}
+
+.arcane-star.star-j{
+  left:38%;
+  top:12%;
+  font-size:12px;
+
+  --float-time:8s;
+  --twinkle-time:5s;
+  --float-delay:-4s;
+  --twinkle-delay:-1s;
+
+  opacity:.38;
+}
+
+.arcane-star.star-k{
+  right:5%;
+  top:31%;
+  font-size:15px;
+
+  --float-time:10s;
+  --twinkle-time:6s;
+  --float-delay:-6s;
+  --twinkle-delay:-3s;
+
+  opacity:.30;
+}
+
+.arcane-star.star-l{
+  left:24%;
+  top:53%;
+  font-size:8px;
+
+  --float-time:7s;
+  --twinkle-time:4.5s;
+  --float-delay:-3s;
+  --twinkle-delay:-1s;
+
+  opacity:.28;
+}
+
+.arcane-star.star-m{
+  right:24%;
+  top:53%;
+  font-size:14px;
+
+  --float-time:11s;
+  --twinkle-time:6.5s;
+  --float-delay:-7s;
+  --twinkle-delay:-2s;
+
+  opacity:.24;
+}
+
+.arcane-star.star-n{
+  left:6%;
+  top:72%;
+  font-size:12px;
+
+  --float-time:9s;
+  --twinkle-time:5s;
+  --float-delay:-5s;
+  --twinkle-delay:-3s;
+
+  opacity:.34;
+}
+
+.arcane-star.star-o{
+  right:7%;
+  top:70%;
+  font-size:18px;
+
+  --float-time:12s;
+  --twinkle-time:7s;
+  --float-delay:-8s;
+  --twinkle-delay:-4s;
+
+  opacity:.25;
+}
+
+.arcane-star.star-p{
+  left:34%;
+  bottom:9%;
+  font-size:10px;
+
+  --float-time:7.5s;
+  --twinkle-time:4s;
+  --float-delay:-2s;
+  --twinkle-delay:-2s;
+
+  opacity:.30;
+}
+
+.arcane-star.star-q{
+  right:36%;
+  bottom:8%;
+  font-size:11px;
+
+  --float-time:8.5s;
+  --twinkle-time:5.5s;
+  --float-delay:-5s;
+  --twinkle-delay:-1s;
+
+  opacity:.34;
+}
+
+.arcane-star.star-r{
+  left:46%;
+  top:8%;
+  font-size:13px;
+
+  --float-time:13s;
+  --twinkle-time:7s;
+  --float-delay:-9s;
+  --twinkle-delay:-4s;
+
+  opacity:.20;
+}
+
+.arcane-star.star-s{
+  right:40%;
+  top:76%;
+  font-size:15px;
+
+  --float-time:10s;
+  --twinkle-time:5s;
+  --float-delay:-4s;
+  --twinkle-delay:-2s;
+
+  opacity:.26;
+}
+
+.arcane-star.star-t{
+  left:91%;
+  top:57%;
+  font-size:9px;
+
+  --float-time:6.5s;
+  --twinkle-time:3.5s;
+  --float-delay:-3s;
+  --twinkle-delay:-1s;
+
+  opacity:.38;
+}
+
+
+/* 星辰动画 */
+
+@keyframes arcaneFloat{
+
+  0%{
+    transform:
+      translate3d(0,0,0)
+      rotate(0deg);
+  }
+
+  25%{
+    transform:
+      translate3d(4px,-7px,0)
+      rotate(4deg);
+  }
+
+  50%{
+    transform:
+      translate3d(-3px,-11px,0)
+      rotate(-3deg);
+  }
+
+  75%{
+    transform:
+      translate3d(-6px,-4px,0)
+      rotate(3deg);
+  }
+
+  100%{
+    transform:
+      translate3d(0,0,0)
+      rotate(0deg);
+  }
+
+}
+
+@keyframes arcaneTwinkle{
+
+  0%,
+  100%{
+    opacity:.25;
+  }
+
+  50%{
+    opacity:.75;
+  }
+
+}
+
+
+/* =========================================================
    魔法阵
-========================= */
+========================================================= */
 
 .magic-circle{
+
   position:absolute;
 
-  width:min(760px,92vw);
-  aspect-ratio:1;
+  width:min(72vw,760px);
+  height:min(72vw,760px);
 
   left:50%;
-  top:50%;
+  top:47%;
 
   transform:
     translate(-50%,-50%);
 
+  border-radius:50%;
+
+  border:
+    1px solid
+    rgba(73,143,198,.12);
+
+  box-shadow:
+
+    0 0 50px
+    rgba(47,126,184,.05),
+
+    inset
+    0 0 60px
+    rgba(62,139,194,.025);
+
+  z-index:0;
+
   pointer-events:none;
 
-  opacity:.48;
+  transition:
+    border-color .6s ease,
+    box-shadow .6s ease;
 }
 
 .magic-circle::before,
 .magic-circle::after{
+
   content:"";
 
   position:absolute;
@@ -302,429 +599,1240 @@ body{
 
   border-radius:50%;
 
-  border:1px solid
-    rgba(77,151,201,.13);
+  pointer-events:none;
+
+  transition:
+    border-color .6s ease,
+    box-shadow .6s ease;
 }
 
 .magic-circle::before{
-  width:74%;
-  height:74%;
-}
 
-.magic-circle::after{
-  width:53%;
-  height:53%;
-}
-
-
-/* =========================
-   星轨
-========================= */
-
-.orbit{
-  position:absolute;
-
-  left:50%;
-  top:50%;
-
-  border-radius:50%;
+  width:82%;
+  height:82%;
 
   border:
     1px solid
-    rgba(91,164,211,.13);
+    rgba(91,162,213,.10);
 
-  transform:
-    translate(-50%,-50%);
+  box-shadow:
+    0 0 25px
+    rgba(80,170,220,.035);
 }
 
-.orbit-1{
-  width:88%;
-  height:31%;
+.magic-circle::after{
 
-  transform:
-    translate(-50%,-50%)
-    rotate(-24deg);
-}
+  width:61%;
+  height:61%;
 
-.orbit-2{
-  width:78%;
-  height:27%;
+  border:
+    1px solid
+    rgba(108,178,230,.10);
 
-  transform:
-    translate(-50%,-50%)
-    rotate(28deg);
-}
-
-.orbit-3{
-  width:67%;
-  height:23%;
-
-  transform:
-    translate(-50%,-50%)
-    rotate(-5deg);
+  box-shadow:
+    0 0 18px
+    rgba(90,180,230,.035);
 }
 
 
-/* =========================
-   档案卡片
-========================= */
+/* =========================================================
+   四角框线
+========================================================= */
 
-.archive-grid{
+.frame{
+
+  position:absolute;
+
+  top:20px;
+  left:20px;
+  right:20px;
+  bottom:20px;
+
+  border:
+    1px solid
+    rgba(111,174,224,.32);
+
+  pointer-events:none;
+
+  z-index:2;
+
+  transition:
+    border-color .6s ease;
+}
+
+.frame::before,
+.frame::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:45px;
+  height:45px;
+
+  transition:
+    border-color .6s ease;
+}
+
+.frame::before{
+
+  left:-1px;
+  top:-1px;
+
+  border-left:
+    1px solid
+    rgba(137,201,239,.45);
+
+  border-top:
+    1px solid
+    rgba(137,201,239,.45);
+}
+
+.frame::after{
+
+  right:-1px;
+  bottom:-1px;
+
+  border-right:
+    1px solid
+    rgba(137,201,239,.45);
+
+  border-bottom:
+    1px solid
+    rgba(137,201,239,.45);
+}
+
+
+/* =========================================================
+   顶部 Header
+========================================================= */
+
+.header{
+
+  position:absolute;
+
+  left:58px;
+  right:58px;
+  top:38px;
+
+  z-index:20;
+
+  display:flex;
+
+  align-items:flex-start;
+
+  justify-content:space-between;
+
+  width:auto;
+  max-width:none;
+
+  margin:0;
+  padding:0;
+}
+
+
+/* Logo */
+
+.logo{
+
+  display:flex;
+
+  align-items:flex-start;
+
+  gap:12px;
+
+  color:
+    rgba(225,246,255,.92);
+
+  text-decoration:none;
+
+  transition:
+    color .6s ease;
+}
+
+.logo-symbol{
+
+  color:
+    rgba(137,201,239,.9);
+
+  width:17px;
+  height:13px;
+
+  display:flex;
+
+  align-items:flex-start;
+  justify-content:center;
+
+  font-size:17px;
+  line-height:13px;
+
+  margin:0;
+  padding:0;
+
+  text-shadow:
+
+    0 0 7px
+    rgba(76,159,216,.5),
+
+    0 0 15px
+    rgba(49,132,191,.22);
+
+  flex-shrink:0;
+
+  transition:
+    color .6s ease,
+    text-shadow .6s ease;
+}
+
+.logo-text{
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:flex-start;
+
+  line-height:1;
+}
+
+.logo-cn{
+
+  display:block;
+
+  height:13px;
+  line-height:13px;
+
+  color:
+    rgba(225,246,255,.92);
+
+  font-size:13px;
+
+  letter-spacing:3px;
+
+  white-space:nowrap;
+
+  transition:
+    color .6s ease;
+}
+
+.logo-en{
+
+  display:block;
+
+  margin-top:5px;
+
+  color:
+    rgba(157,204,239,.63);
+
+  font-family:
+    "Times New Roman",
+    serif;
+
+  font-size:8px;
+  line-height:8px;
+
+  letter-spacing:3px;
+
+  white-space:nowrap;
+
+  transition:
+    color .6s ease;
+}
+
+
+/* =========================================================
+   返回
+========================================================= */
+
+.header-right{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:20px;
+}
+
+.back{
+
+  color:
+    rgba(191,220,243,.68);
+
+  text-decoration:none;
+
+  font-family:
+    "Cinzel",
+    "Noto Serif SC",
+    serif;
+
+  font-size:11px;
+
+  letter-spacing:1px;
+
+  transition:
+    color .3s ease,
+    text-shadow .3s ease;
+}
+
+.back:hover{
+
+  color:#d9efff;
+
+  text-shadow:
+    0 0 8px
+    rgba(102,180,231,.35);
+}
+
+
+/* =========================================================
+   昼夜切换
+========================================================= */
+
+.theme-toggle{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  height:28px;
+
+  padding:
+    0 11px;
+
+  border:
+    1px solid
+    rgba(111,174,224,.32);
+
+  background:
+    rgba(8,28,49,.35);
+
+  color:
+    rgba(191,220,243,.68);
+
+  font-family:
+    "Cinzel",
+    "Noto Serif SC",
+    serif;
+
+  font-size:8px;
+
+  letter-spacing:2px;
+
+  cursor:pointer;
+
+  border-radius:0;
+
+  white-space:nowrap;
+
+  transition:
+    color .35s ease,
+    border-color .35s ease,
+    background .35s ease,
+    box-shadow .35s ease;
+}
+
+.theme-toggle:hover{
+
+  color:#d9efff;
+
+  border-color:
+    rgba(122,192,235,.62);
+
+  background:
+    rgba(8,31,52,.55);
+
+  box-shadow:
+    0 0 14px
+    rgba(76,151,202,.12);
+}
+
+.theme-icon{
+
+  font-size:12px;
+
+  line-height:1;
+
+  letter-spacing:0;
+}
+
+
+/* =========================================================
+   主内容
+========================================================= */
+
+.content{
+
   position:relative;
 
-  width:min(1100px,92vw);
+  z-index:5;
+
+  width:
+    min(1080px,100%);
+
+  margin:
+    0 auto;
+
+  padding-top:150px;
+}
+
+
+/* 标题 */
+
+.heading{
+
+  text-align:center;
+
+  margin-bottom:55px;
+}
+
+.heading-small{
+
+  font-family:
+    "Cinzel",
+    serif;
+
+  font-size:11px;
+
+  letter-spacing:6px;
+
+  color:
+    rgba(157,204,239,.63);
+
+  margin-bottom:12px;
+
+  transition:
+    color .6s ease;
+}
+
+.heading-main{
+
+  font-family:
+    "Cinzel",
+    serif;
+
+  font-size:
+    clamp(
+      34px,
+      5vw,
+      58px
+    );
+
+  font-weight:400;
+
+  letter-spacing:8px;
+
+  color:
+    rgba(220,238,255,.92);
+
+  line-height:1;
+
+  transition:
+    color .6s ease,
+    text-shadow .6s ease;
+}
+
+.heading-cn{
+
+  margin-top:15px;
+
+  font-size:13px;
+
+  letter-spacing:5px;
+
+  color:
+    rgba(177,207,230,.62);
+
+  transition:
+    color .6s ease;
+}
+
+
+/* =========================================================
+   档案卡片
+========================================================= */
+
+.archive-grid{
 
   display:grid;
 
   grid-template-columns:
     repeat(3,1fr);
 
-  gap:24px;
+  gap:18px;
 
-  z-index:6;
+  width:100%;
 }
 
 .archive-card{
+
   position:relative;
 
-  min-height:230px;
+  min-height:190px;
 
-  padding:34px 30px;
+  padding:
+    30px 26px;
 
-  border:1px solid
-    rgba(85,153,196,.20);
+  border:
+    1px solid
+    rgba(111,174,224,.20);
 
   background:
+
     linear-gradient(
       145deg,
-      rgba(12,37,59,.68),
-      rgba(7,25,43,.58)
+      rgba(18,48,72,.38),
+      rgba(6,19,32,.42)
     );
 
-  backdrop-filter:
-    blur(8px);
-
-  -webkit-backdrop-filter:
-    blur(8px);
+  overflow:hidden;
 
   text-decoration:none;
 
   color:inherit;
 
   transition:
-    transform .4s ease,
-    border-color .4s ease,
-    background .4s ease,
-    box-shadow .4s ease;
-
-  overflow:hidden;
+    border-color .35s ease,
+    background .35s ease,
+    transform .35s ease,
+    box-shadow .35s ease;
 }
 
 .archive-card::before{
+
   content:"";
 
   position:absolute;
 
-  inset:8px;
+  left:0;
+  top:0;
 
-  border:1px solid
-    rgba(104,175,216,.06);
+  width:100%;
+  height:1px;
 
-  pointer-events:none;
+  background:
+
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(150,220,250,.45),
+      transparent
+    );
+
+  opacity:.5;
+
+  transition:
+    background .6s ease;
+}
+
+.archive-card::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:100px;
+  height:100px;
+
+  right:-45px;
+  bottom:-45px;
+
+  border-radius:50%;
+
+  border:
+    1px solid
+    rgba(120,200,240,.10);
+
+  transition:
+    border-color .6s ease;
 }
 
 .archive-card:hover{
-  transform:translateY(-6px);
+
+  transform:
+    translateY(-4px);
 
   border-color:
-    rgba(91,165,211,.45);
+    rgba(122,192,235,.40);
 
   background:
+
     linear-gradient(
       145deg,
-      rgba(16,49,76,.78),
-      rgba(8,29,49,.72)
+      rgba(22,59,86,.48),
+      rgba(7,22,37,.52)
     );
 
   box-shadow:
-    0 12px 40px
-      rgba(0,0,0,.22),
-    0 0 30px
-      rgba(65,142,194,.07);
+
+    0 10px 35px
+    rgba(0,0,0,.2),
+
+    0 0 25px
+    rgba(70,160,215,.06);
 }
-
-
-/* =========================
-   卡片星星
-========================= */
-
-.card-symbol{
-  position:absolute;
-
-  right:24px;
-  top:19px;
-
-  font-size:17px;
-
-  color:
-    rgba(105,177,216,.40);
-
-  /* 去掉卡片星星发光 */
-  text-shadow:none;
-}
-
-
-/* =========================
-   卡片文字
-========================= */
 
 .card-number{
-  font-family:"Cinzel",serif;
 
-  font-size:12px;
+  font-family:
+    "Cinzel",
+    serif;
+
+  font-size:10px;
 
   letter-spacing:3px;
 
   color:
-    rgba(116,177,209,.48);
+    rgba(120,195,235,.52);
 
-  margin-bottom:24px;
+  margin-bottom:26px;
+
+  transition:
+    color .6s ease;
 }
 
 .card-title{
-  margin:0;
 
-  font-family:"Cinzel",serif;
+  font-family:
+    "Cinzel",
+    serif;
 
-  font-size:25px;
+  font-size:22px;
 
   font-weight:400;
 
-  letter-spacing:3px;
-
-  color:#d9edfb;
-}
-
-.card-title-cn{
-  margin-top:9px;
-
-  font-size:13px;
-
   letter-spacing:4px;
 
   color:
-    rgba(178,211,232,.58);
+    rgba(220,242,252,.90);
+
+  margin-bottom:9px;
+
+  transition:
+    color .6s ease,
+    text-shadow .6s ease;
 }
 
-.card-desc{
-  margin-top:24px;
+.card-cn{
 
   font-size:12px;
 
-  line-height:2;
-
-  letter-spacing:1px;
+  letter-spacing:3px;
 
   color:
-    rgba(180,207,225,.48);
+    rgba(177,207,230,.62);
+
+  transition:
+    color .6s ease;
 }
 
-
-/* =========================
-   六芒星装饰
-========================= */
-
-.corner-star{
-  position:absolute;
-
-  width:22px;
-  height:22px;
-
-  opacity:.42;
-
-  pointer-events:none;
-}
-
-.corner-star::before,
-.corner-star::after{
-  content:"";
+.card-symbol{
 
   position:absolute;
 
-  left:50%;
-  top:50%;
+  right:24px;
+  top:25px;
 
-  width:1px;
-  height:22px;
+  color:
+    rgba(137,201,239,.32);
 
-  background:
-    rgba(104,174,215,.42);
+  font-family:
+    "Times New Roman",
+    serif;
 
-  transform:
-    translate(-50%,-50%);
-}
+  font-size:19px;
 
-.corner-star::after{
-  transform:
-    translate(-50%,-50%)
-    rotate(60deg);
-}
+  /* 去掉档案卡片星星/符号的发光 */
+  text-shadow:none;
 
-.corner-star-1{
-  top:105px;
-  left:38px;
-}
-
-.corner-star-2{
-  top:105px;
-  right:38px;
-}
-
-.corner-star-3{
-  bottom:36px;
-  left:38px;
-}
-
-.corner-star-4{
-  bottom:36px;
-  right:38px;
+  transition:
+    color .6s ease,
+    text-shadow .6s ease;
 }
 
 
-/* =========================
-   底部
-========================= */
+/* =========================================================
+   Footer
+========================================================= */
 
-.archive-footer{
-  position:absolute;
+.footer{
 
-  bottom:25px;
-  left:0;
+  position:relative;
 
-  width:100%;
+  z-index:5;
 
   text-align:center;
 
-  font-family:"Cinzel",serif;
+  margin-top:60px;
 
-  font-size:9px;
+  font-family:
+    "Cinzel",
+    serif;
+
+  font-size:8px;
 
   letter-spacing:4px;
 
   color:
-    rgba(138,179,205,.32);
+    rgba(133,177,207,.38);
 
-  z-index:8;
+  transition:
+    color .6s ease;
 }
 
 
-/* =========================
-   DAY MODE
-========================= */
+/* =========================================================
+   平板
+========================================================= */
+
+@media (max-width:800px){
+
+  .header{
+
+    left:35px;
+    right:35px;
+    top:30px;
+  }
+
+  .header-right{
+
+    gap:14px;
+  }
+
+  .theme-toggle{
+
+    height:27px;
+
+    padding:
+      0 9px;
+
+    font-size:7px;
+  }
+
+  .archive-grid{
+
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
+}
+
+
+/* =========================================================
+   手机
+========================================================= */
+
+@media (max-width:600px){
+
+  .page{
+
+    padding:
+      22px
+      20px
+      55px;
+  }
+
+  .frame{
+
+    top:14px;
+    left:14px;
+    right:14px;
+    bottom:14px;
+  }
+
+  .header{
+
+    left:25px;
+    right:25px;
+    top:24px;
+
+    width:auto;
+    max-width:none;
+
+    margin:0;
+    padding:0;
+
+    align-items:flex-start;
+  }
+
+  .logo{
+
+    align-items:flex-start;
+
+    gap:10px;
+  }
+
+  .logo-symbol{
+
+    width:15px;
+    height:11px;
+
+    display:flex;
+
+    align-items:flex-start;
+    justify-content:center;
+
+    font-size:15px;
+    line-height:11px;
+
+    margin-top:2px;
+  }
+
+  .logo-cn{
+
+    height:11px;
+    line-height:11px;
+
+    font-size:11px;
+
+    letter-spacing:2px;
+  }
+
+  .logo-en{
+
+    display:block;
+
+    margin-top:4px;
+
+    font-size:7px;
+    line-height:7px;
+
+    letter-spacing:2px;
+  }
+
+  .header-right{
+
+    gap:8px;
+  }
+
+  .back{
+
+    font-size:10px;
+  }
+
+  .theme-toggle{
+
+    height:25px;
+
+    padding:
+      0 7px;
+
+    gap:5px;
+
+    font-size:6px;
+
+    letter-spacing:1px;
+  }
+
+  .theme-icon{
+
+    font-size:10px;
+  }
+
+  .content{
+
+    padding-top:120px;
+  }
+
+  .heading{
+
+    margin-bottom:35px;
+  }
+
+  .heading-small{
+
+    font-size:8px;
+
+    letter-spacing:4px;
+  }
+
+  .heading-main{
+
+    font-size:31px;
+
+    letter-spacing:5px;
+  }
+
+  .heading-cn{
+
+    font-size:10px;
+
+    letter-spacing:3px;
+  }
+
+  .archive-grid{
+
+    grid-template-columns:1fr;
+
+    gap:14px;
+  }
+
+  .archive-card{
+
+    min-height:160px;
+
+    padding:
+      25px 22px;
+  }
+
+  .card-number{
+
+    margin-bottom:20px;
+  }
+
+  .card-title{
+
+    font-size:19px;
+  }
+
+  .magic-circle{
+
+    width:125vw;
+    height:125vw;
+  }
+
+
+  /* 手机星辰稍微缩小 */
+
+  .arcane-star.star-a{font-size:13px;}
+  .arcane-star.star-b{font-size:17px;}
+  .arcane-star.star-c{font-size:15px;}
+  .arcane-star.star-d{font-size:11px;}
+  .arcane-star.star-e{font-size:14px;}
+  .arcane-star.star-f{font-size:13px;}
+  .arcane-star.star-g{font-size:8px;}
+  .arcane-star.star-h{font-size:9px;}
+
+  .arcane-star.star-i{font-size:8px;}
+  .arcane-star.star-j{font-size:10px;}
+  .arcane-star.star-k{font-size:12px;}
+  .arcane-star.star-l{font-size:7px;}
+  .arcane-star.star-m{font-size:11px;}
+  .arcane-star.star-n{font-size:10px;}
+  .arcane-star.star-o{font-size:15px;}
+  .arcane-star.star-p{font-size:8px;}
+  .arcane-star.star-q{font-size:9px;}
+  .arcane-star.star-r{font-size:11px;}
+  .arcane-star.star-s{font-size:12px;}
+  .arcane-star.star-t{font-size:8px;}
+
+}
+
+
+/* =========================================================
+   超小屏
+========================================================= */
+
+@media (max-width:360px){
+
+  .header{
+
+    left:20px;
+    right:20px;
+    top:24px;
+  }
+
+  .heading-main{
+
+    font-size:27px;
+  }
+
+  .header-right{
+
+    gap:5px;
+  }
+
+  .back{
+
+    font-size:9px;
+  }
+
+  .theme-toggle{
+
+    padding:
+      0 6px;
+
+    font-size:6px;
+  }
+
+}
+
+
+/* =========================================================
+   ★ 日间模式
+   ★ 与首页 #f4f9fd 统一
+========================================================= */
 
 body.day-mode{
+
   background:#f4f9fd;
-  color:#29445a;
+
+  color:#2e5069;
 }
 
 body.day-mode .page{
+
   background:
+
     radial-gradient(
       circle at 50% 42%,
       rgba(165,211,238,.11),
       transparent 38%
     ),
+
     radial-gradient(
       circle at 50% 52%,
       rgba(255,255,255,.82),
       transparent 72%
     ),
+
     #f4f9fd;
 }
 
-body.day-mode .logo{
-  color:#47687d;
-}
 
-body.day-mode .logo-symbol{
-  color:#5795b8;
+/* 背景星尘 */
 
-  /* 去掉 Logo 星星发光 */
-  text-shadow:none;
-}
-
-body.day-mode .about{
-  color:
-    rgba(62,102,126,.72);
-}
-
-body.day-mode .about:hover{
-  color:#355b72;
-}
-
-body.day-mode .theme-toggle{
-  border-color:
-    rgba(82,151,198,.24);
+body.day-mode .stars::before,
+body.day-mode .stars::after{
 
   background:
-    rgba(255,255,255,.52);
+    rgba(103,166,207,.42);
 
-  color:#4e8caf;
+  box-shadow:
+
+    8vw 12vh rgba(70,130,160,.17),
+    17vw 28vh rgba(80,140,170,.14),
+    26vw 9vh rgba(75,135,165,.16),
+    36vw 23vh rgba(80,140,170,.14),
+    47vw 13vh rgba(75,135,165,.18),
+    58vw 31vh rgba(80,145,175,.15),
+    69vw 16vh rgba(75,135,165,.17),
+    78vw 28vh rgba(80,140,170,.14),
+    89vw 11vh rgba(75,135,165,.16),
+
+    12vw 62vh rgba(80,140,170,.14),
+    23vw 76vh rgba(75,135,165,.16),
+    34vw 66vh rgba(80,145,175,.13),
+    51vw 82vh rgba(75,135,165,.16),
+    64vw 68vh rgba(80,140,170,.14),
+    77vw 79vh rgba(75,135,165,.15),
+    91vw 63vh rgba(80,140,170,.14);
+
+  opacity:.8;
 }
 
-body.day-mode .theme-toggle:hover{
-  border-color:
-    rgba(82,151,198,.42);
+body.day-mode .stars::after{
 
-  background:
-    rgba(255,255,255,.78);
+  box-shadow:
+
+    5vw 19vh rgba(70,135,165,.18),
+    15vw 44vh rgba(80,145,175,.16),
+    31vw 17vh rgba(70,135,165,.14),
+    43vw 38vh rgba(80,145,175,.16),
+    57vw 21vh rgba(70,135,165,.14),
+    72vw 44vh rgba(80,145,175,.16),
+    84vw 36vh rgba(70,135,165,.14),
+    95vw 23vh rgba(80,145,175,.16),
+
+    7vw 84vh rgba(70,135,165,.14),
+    19vw 70vh rgba(80,145,175,.16),
+    29vw 90vh rgba(70,135,165,.14),
+    42vw 72vh rgba(80,145,175,.16),
+    55vw 93vh rgba(70,135,165,.14),
+    70vw 84vh rgba(80,145,175,.16),
+    86vw 91vh rgba(80,145,175,.14);
 }
 
 
-/* DAY 浮动星星 */
+/* 魔法星辰 */
 
 body.day-mode .arcane-star{
+
   color:
     rgba(76,145,190,.48);
 
-  /* 去掉 DAY 星星发光 */
+  /* 去掉日间模式下浮动星辰的发光 */
   text-shadow:none;
 }
 
 
-/* DAY 标题 */
+/* 魔法阵 */
 
-body.day-mode .archive-heading-en{
-  color:#355d74;
+body.day-mode .magic-circle{
+
+  border-color:
+    rgba(79,148,196,.13);
+
+  box-shadow:
+
+    0 0 50px
+    rgba(70,142,196,.055),
+
+    inset
+    0 0 60px
+    rgba(78,151,204,.035);
 }
 
-body.day-mode .archive-heading-sub{
-  color:
-    rgba(73,113,136,.62);
+body.day-mode .magic-circle::before{
+
+  border-color:
+    rgba(79,148,196,.10);
+
+  box-shadow:
+    0 0 25px
+    rgba(70,145,180,.035);
 }
 
-
-/* DAY 魔法阵 */
-
-body.day-mode .magic-circle::before,
 body.day-mode .magic-circle::after{
+
   border-color:
-    rgba(82,151,198,.13);
+    rgba(101,168,207,.11);
+
+  box-shadow:
+    0 0 18px
+    rgba(75,150,180,.035);
 }
 
-body.day-mode .orbit{
+
+/* 四角边框 */
+
+body.day-mode .frame{
+
   border-color:
-    rgba(82,151,198,.13);
+    rgba(91,145,184,.34);
+}
+
+body.day-mode .frame::before{
+
+  border-left-color:
+    rgba(79,151,200,.48);
+
+  border-top-color:
+    rgba(79,151,200,.48);
+}
+
+body.day-mode .frame::after{
+
+  border-right-color:
+    rgba(79,151,200,.48);
+
+  border-bottom-color:
+    rgba(79,151,200,.48);
 }
 
 
-/* DAY 卡片 */
+/* Logo */
+
+body.day-mode .logo{
+
+  color:#2e526c;
+}
+
+body.day-mode .logo-symbol{
+
+  color:
+    rgba(79,151,201,.84);
+
+  text-shadow:
+    0 0 7px
+    rgba(86,158,208,.20);
+}
+
+body.day-mode .logo-cn{
+
+  color:
+    rgba(46,82,108,.92);
+}
+
+body.day-mode .logo-en{
+
+  color:
+    rgba(81,137,173,.62);
+}
+
+
+/* 返回 */
+
+body.day-mode .back{
+
+  color:
+    rgba(62,99,127,.70);
+}
+
+body.day-mode .back:hover{
+
+  color:#28536f;
+
+  text-shadow:
+    0 0 8px
+    rgba(76,151,202,.14);
+}
+
+
+/* 日夜按钮 */
+
+body.day-mode .theme-toggle{
+
+  border-color:
+    rgba(91,145,184,.34);
+
+  background:
+    rgba(248,252,255,.78);
+
+  color:
+    rgba(61,98,125,.76);
+}
+
+body.day-mode .theme-toggle:hover{
+
+  border-color:
+    rgba(79,151,200,.62);
+
+  background:
+    rgba(248,252,255,.90);
+
+  color:#28536f;
+
+  box-shadow:
+    0 0 14px
+    rgba(76,151,202,.11);
+}
+
+
+/* 标题 */
+
+body.day-mode .heading-small{
+
+  color:
+    rgba(81,137,173,.68);
+}
+
+body.day-mode .heading-main{
+
+  color:#2b506a;
+
+  text-shadow:
+    0 0 18px
+    rgba(80,151,201,.065);
+}
+
+body.day-mode .heading-cn{
+
+  color:
+    rgba(45,82,106,.80);
+}
+
+
+/* 卡片 */
 
 body.day-mode .archive-card{
+
   border-color:
     rgba(82,151,198,.24);
 
   background:
+
     linear-gradient(
       145deg,
       rgba(255,255,255,.84),
@@ -733,14 +1841,34 @@ body.day-mode .archive-card{
 
   box-shadow:
     0 5px 20px
-      rgba(70,110,130,.04);
+    rgba(70,110,130,.04);
+}
+
+body.day-mode .archive-card::before{
+
+  background:
+
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(81,151,198,.54),
+      transparent
+    );
+}
+
+body.day-mode .archive-card::after{
+
+  border-color:
+    rgba(82,155,203,.12);
 }
 
 body.day-mode .archive-card:hover{
+
   border-color:
     rgba(79,151,200,.42);
 
   background:
+
     linear-gradient(
       145deg,
       rgba(255,255,255,.93),
@@ -748,140 +1876,88 @@ body.day-mode .archive-card:hover{
     );
 
   box-shadow:
+
     0 10px 35px
-      rgba(55,95,115,.10),
+    rgba(55,95,115,.10),
+
     0 0 25px
-      rgba(76,151,202,.06);
-}
-
-
-/* DAY 卡片星星 */
-
-body.day-mode .card-symbol{
-  color:
-    rgba(70,135,165,.38);
-
-  /* 去掉卡片星星发光 */
-  text-shadow:none;
+    rgba(76,151,202,.06);
 }
 
 body.day-mode .card-number{
+
   color:
-    rgba(72,127,157,.58);
+    rgba(65,130,160,.65);
 }
 
 body.day-mode .card-title{
-  color:#365b70;
-}
 
-body.day-mode .card-title-cn{
   color:
-    rgba(77,113,132,.62);
+    rgba(48,80,94,.92);
+
+  text-shadow:none;
 }
 
-body.day-mode .card-desc{
+body.day-mode .card-cn{
+
   color:
-    rgba(78,108,124,.58);
+    rgba(80,113,128,.68);
 }
 
+body.day-mode .card-symbol{
 
-/* DAY 六芒星 */
-
-body.day-mode .corner-star::before,
-body.day-mode .corner-star::after{
-  background:
-    rgba(82,151,198,.36);
-}
-
-body.day-mode .archive-footer{
   color:
-    rgba(82,120,139,.36);
+    rgba(70,135,165,.38);
+
+  /* 去掉日间模式下卡片星星的发光 */
+  text-shadow:none;
 }
 
 
-/* =========================
-   手机适配
-========================= */
+/* Footer */
 
-@media(max-width:800px){
+body.day-mode .footer{
 
-  .topbar{
-    padding:0 20px;
-    height:70px;
-  }
+  color:
+    rgba(73,115,143,.40);
+}
 
-  .logo{
-    font-size:11px;
-    letter-spacing:2px;
-  }
 
-  .top-right{
-    gap:12px;
-  }
+/* =========================================================
+   减少动画
+========================================================= */
 
-  .about{
-    font-size:11px;
-    letter-spacing:1px;
-  }
+@media (prefers-reduced-motion:reduce){
 
-  .theme-toggle{
-    width:36px;
-    height:36px;
-  }
+  .arcane-star{
 
-  .archive-main{
-    padding:
-      110px 20px
-      80px;
-  }
-
-  .archive-heading{
-    margin-bottom:45px;
-  }
-
-  .archive-heading-en{
-    font-size:
-      clamp(30px,9vw,48px);
-
-    letter-spacing:
-      clamp(4px,1.5vw,9px);
-  }
-
-  .archive-heading-sub{
-    font-size:10px;
-    letter-spacing:4px;
-  }
-
-  .archive-grid{
-    grid-template-columns:1fr;
-    gap:18px;
-
-    width:min(520px,92vw);
+    animation:none;
   }
 
   .archive-card{
-    min-height:200px;
+
+    transition:none;
   }
 
-  .corner-star-1{
-    top:88px;
-    left:20px;
+  body,
+  .theme-toggle,
+  .magic-circle,
+  .frame,
+  .logo-symbol,
+  .logo-cn,
+  .logo-en,
+  .heading-small,
+  .heading-main,
+  .heading-cn,
+  .card-number,
+  .card-title,
+  .card-cn,
+  .card-symbol,
+  .footer{
+
+    transition:none;
   }
 
-  .corner-star-2{
-    top:88px;
-    right:20px;
-  }
-
-  .corner-star-3{
-    bottom:28px;
-    left:20px;
-  }
-
-  .corner-star-4{
-    bottom:28px;
-    right:20px;
-  }
 }
 
 </style>
@@ -892,40 +1968,90 @@ body.day-mode .archive-footer{
 
 <div class="page">
 
-  <!-- =========================
-       顶部
-  ========================== -->
+  <!-- 背景星尘 -->
+  <div class="stars"></div>
 
-  <header class="topbar">
 
-    <a href="index.html"
-       class="logo">
+  <!-- ✦ ✶ ✡ 魔法星辰 -->
+  <div class="arcane-stars">
+
+    <span class="arcane-star star-a">✦</span>
+    <span class="arcane-star star-b">✶</span>
+    <span class="arcane-star star-c">✡</span>
+    <span class="arcane-star star-d">✦</span>
+    <span class="arcane-star star-e">✶</span>
+    <span class="arcane-star star-f">✡</span>
+    <span class="arcane-star star-g">✦</span>
+    <span class="arcane-star star-h">✶</span>
+
+    <span class="arcane-star star-i">✦</span>
+    <span class="arcane-star star-j">✦</span>
+    <span class="arcane-star star-k">✶</span>
+    <span class="arcane-star star-l">✦</span>
+    <span class="arcane-star star-m">✡</span>
+    <span class="arcane-star star-n">✦</span>
+    <span class="arcane-star star-o">✶</span>
+    <span class="arcane-star star-p">✦</span>
+    <span class="arcane-star star-q">✦</span>
+    <span class="arcane-star star-r">✡</span>
+    <span class="arcane-star star-s">✶</span>
+    <span class="arcane-star star-t">✦</span>
+
+  </div>
+
+
+  <!-- 魔法阵 -->
+  <div class="magic-circle"></div>
+
+
+  <!-- 四角框线 -->
+  <div class="frame"></div>
+
+
+  <!-- 顶部 -->
+  <header class="header">
+
+    <a href="index.html" class="logo">
 
       <span class="logo-symbol">✦</span>
 
-      <span>
-        SEYAMI ARCHIVE
+      <span class="logo-text">
+
+        <span class="logo-cn">
+          塞垭弥大陆档案馆
+        </span>
+
+        <span class="logo-en">
+          SEYAMI ARCHIVE
+        </span>
+
       </span>
 
     </a>
 
 
-    <div class="top-right">
+    <div class="header-right">
 
-      <a href="#"
-         class="about">
-        关于我们
+      <a href="index.html" class="back">
+        ← 返回首页
       </a>
 
       <button
         class="theme-toggle"
         id="themeToggle"
-        aria-label="切换日夜模式">
+        type="button"
+        aria-label="切换昼夜模式"
+      >
 
         <span
           class="theme-icon"
-          id="themeIcon">
+          id="themeIcon"
+        >
           ☾
+        </span>
+
+        <span id="themeText">
+          NIGHT
         </span>
 
       </button>
@@ -935,296 +2061,158 @@ body.day-mode .archive-footer{
   </header>
 
 
-  <!-- =========================
-       装饰星星
-  ========================== -->
-
-  <span
-    class="arcane-star"
-    style="
-      top:18%;
-      left:12%;
-      font-size:13px;
-    ">
-    ✦
-  </span>
-
-  <span
-    class="arcane-star"
-    style="
-      top:27%;
-      right:13%;
-      font-size:10px;
-    ">
-    ✦
-  </span>
-
-  <span
-    class="arcane-star"
-    style="
-      top:62%;
-      left:8%;
-      font-size:9px;
-    ">
-    ✦
-  </span>
-
-  <span
-    class="arcane-star"
-    style="
-      top:70%;
-      right:10%;
-      font-size:14px;
-    ">
-    ✦
-  </span>
-
-  <span
-    class="arcane-star"
-    style="
-      top:44%;
-      left:18%;
-      font-size:7px;
-    ">
-    ✦
-  </span>
-
-  <span
-    class="arcane-star"
-    style="
-      top:53%;
-      right:20%;
-      font-size:8px;
-    ">
-    ✦
-  </span>
+  <!-- 主内容 -->
+  <main class="content">
 
 
-  <!-- =========================
-       四角六芒星
-  ========================== -->
+    <section class="heading">
 
-  <span class="corner-star corner-star-1"></span>
-  <span class="corner-star corner-star-2"></span>
-  <span class="corner-star corner-star-3"></span>
-  <span class="corner-star corner-star-4"></span>
-
-
-  <!-- =========================
-       主体
-  ========================== -->
-
-  <main class="archive-main">
-
-
-    <!-- 魔法阵 -->
-
-    <div class="magic-circle">
-
-      <div class="orbit orbit-1"></div>
-      <div class="orbit orbit-2"></div>
-      <div class="orbit orbit-3"></div>
-
-    </div>
-
-
-    <!-- 标题 -->
-
-    <section class="archive-heading">
-
-      <h1 class="archive-heading-en">
+      <div class="heading-small">
         THE ARCHIVE CATALOGUE
-      </h1>
+      </div>
 
-      <div class="archive-heading-sub">
-        ARCHIVE · 档案目录
+      <div class="heading-main">
+        ARCHIVE
+      </div>
+
+      <div class="heading-cn">
+        档案目录
       </div>
 
     </section>
 
 
-    <!-- =========================
-         档案卡片
-    ========================== -->
-
+    <!-- 档案目录 -->
     <section class="archive-grid">
 
 
-      <!-- 角色档案 -->
+      <!-- 01 -->
+      <a href="characters.html" class="archive-card">
 
-      <a
-        href="#"
-        class="archive-card">
+        <span class="card-number">
+          01
+        </span>
 
         <span class="card-symbol">
           ✦
         </span>
 
-        <div class="card-number">
-          ARCHIVE 01
+        <div class="card-title">
+          CHARACTERS
         </div>
 
-        <h2 class="card-title">
-          CHARACTERS
-        </h2>
-
-        <div class="card-title-cn">
+        <div class="card-cn">
           角色档案
         </div>
 
-        <div class="card-desc">
-          记录塞垭弥大陆上<br>
-          每一位重要角色的存在。
-        </div>
-
       </a>
 
 
-      <!-- 世界观 -->
+      <!-- 02 -->
+      <a href="#" class="archive-card">
 
-      <a
-        href="#"
-        class="archive-card">
-
-        <span class="card-symbol">
-          ✦
+        <span class="card-number">
+          02
         </span>
 
-        <div class="card-number">
-          ARCHIVE 02
-        </div>
+        <span class="card-symbol">
+          ✶
+        </span>
 
-        <h2 class="card-title">
+        <div class="card-title">
           WORLD
-        </h2>
-
-        <div class="card-title-cn">
-          世界观
         </div>
 
-        <div class="card-desc">
-          关于大陆、国度、种族<br>
-          与历史的记录。
+        <div class="card-cn">
+          世界设定
         </div>
 
       </a>
 
 
-      <!-- 地区 -->
+      <!-- 03 -->
+      <a href="#" class="archive-card">
 
-      <a
-        href="#"
-        class="archive-card">
-
-        <span class="card-symbol">
-          ✦
+        <span class="card-number">
+          03
         </span>
 
-        <div class="card-number">
-          ARCHIVE 03
-        </div>
+        <span class="card-symbol">
+          ✡
+        </span>
 
-        <h2 class="card-title">
+        <div class="card-title">
           REGIONS
-        </h2>
-
-        <div class="card-title-cn">
-          地区志
         </div>
 
-        <div class="card-desc">
-          山脉、森林、城市<br>
-          以及大陆各处的记录。
+        <div class="card-cn">
+          地区档案
         </div>
 
       </a>
 
 
-      <!-- 种族 -->
+      <!-- 04 -->
+      <a href="#" class="archive-card">
 
-      <a
-        href="#"
-        class="archive-card">
+        <span class="card-number">
+          04
+        </span>
 
         <span class="card-symbol">
           ✦
         </span>
 
-        <div class="card-number">
-          ARCHIVE 04
-        </div>
-
-        <h2 class="card-title">
+        <div class="card-title">
           RACES
-        </h2>
-
-        <div class="card-title-cn">
-          种族
         </div>
 
-        <div class="card-desc">
-          塞垭弥大陆上的<br>
-          各类种族与生命。
+        <div class="card-cn">
+          种族档案
         </div>
 
       </a>
 
 
-      <!-- 神话 -->
+      <!-- 05 -->
+      <a href="#" class="archive-card">
 
-      <a
-        href="#"
-        class="archive-card">
-
-        <span class="card-symbol">
-          ✦
+        <span class="card-number">
+          05
         </span>
 
-        <div class="card-number">
-          ARCHIVE 05
+        <span class="card-symbol">
+          ✶
+        </span>
+
+        <div class="card-title">
+          HISTORY
         </div>
 
-        <h2 class="card-title">
-          MYTHS
-        </h2>
-
-        <div class="card-title-cn">
-          神话与传说
-        </div>
-
-        <div class="card-desc">
-          被时间掩埋的故事<br>
-          与古老传说。
+        <div class="card-cn">
+          历史记录
         </div>
 
       </a>
 
 
-      <!-- 未分类 -->
+      <!-- 06 -->
+      <a href="#" class="archive-card">
 
-      <a
-        href="#"
-        class="archive-card">
-
-        <span class="card-symbol">
-          ✦
+        <span class="card-number">
+          06
         </span>
 
-        <div class="card-number">
-          ARCHIVE 06
+        <span class="card-symbol">
+          ✡
+        </span>
+
+        <div class="card-title">
+          GALLERY
         </div>
 
-        <h2 class="card-title">
-          FRAGMENTS
-        </h2>
-
-        <div class="card-title-cn">
-          未分类档案
-        </div>
-
-        <div class="card-desc">
-          尚未归档的记录<br>
-          与未知的碎片。
+        <div class="card-cn">
+          档案画廊
         </div>
 
       </a>
@@ -1232,91 +2220,108 @@ body.day-mode .archive-footer{
 
     </section>
 
+
+    <footer class="footer">
+      SEYAMI CONTINENT · ARCHIVE SYSTEM
+    </footer>
+
+
   </main>
-
-
-  <!-- =========================
-       底部
-  ========================== -->
-
-  <footer class="archive-footer">
-    SEYAMI CONTINENT · ARCHIVE CATALOGUE
-  </footer>
 
 </div>
 
 
 <script>
 
-/* =========================
-   日夜模式
-========================= */
+/* =========================================================
+   昼夜模式
+   与首页共用：seyami-theme
+========================================================= */
 
 const themeToggle =
-  document.getElementById("themeToggle");
+  document.getElementById(
+    "themeToggle"
+  );
 
 const themeIcon =
-  document.getElementById("themeIcon");
+  document.getElementById(
+    "themeIcon"
+  );
+
+const themeText =
+  document.getElementById(
+    "themeText"
+  );
 
 
-function updateThemeIcon(){
+function applyTheme(theme){
 
-  if(
-    document.body.classList.contains(
+  if(theme === "day"){
+
+    document.body.classList.add(
       "day-mode"
-    )
-  ){
+    );
 
     themeIcon.textContent = "☀";
 
+    themeText.textContent = "DAY";
+
   }else{
 
+    document.body.classList.remove(
+      "day-mode"
+    );
+
     themeIcon.textContent = "☾";
+
+    themeText.textContent = "NIGHT";
 
   }
 
 }
 
 
-/* 读取保存的主题 */
+/* 读取首页 / 其他页面保存的模式 */
 
 const savedTheme =
   localStorage.getItem(
     "seyami-theme"
   );
 
-if(savedTheme === "day"){
 
-  document.body.classList.add(
-    "day-mode"
-  );
+/* 默认夜间 */
 
-}
+applyTheme(
+  savedTheme === "day"
+    ? "day"
+    : "night"
+);
 
-updateThemeIcon();
 
-
-/* 切换 */
+/* 点击切换 */
 
 themeToggle.addEventListener(
   "click",
   () => {
-
-    document.body.classList.toggle(
-      "day-mode"
-    );
 
     const isDay =
       document.body.classList.contains(
         "day-mode"
       );
 
+    const nextTheme =
+      isDay
+        ? "night"
+        : "day";
+
     localStorage.setItem(
       "seyami-theme",
-      isDay ? "day" : "night"
+      nextTheme
     );
 
-    updateThemeIcon();
+    applyTheme(
+      nextTheme
+    );
 
   }
 );
