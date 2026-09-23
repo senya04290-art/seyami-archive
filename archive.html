@@ -163,7 +163,6 @@ body{
 
 /* =========================================================
    【新增】微型星点
-   不替换原来的背景星尘
 ========================================================= */
 
 .micro-stars{
@@ -197,9 +196,6 @@ body{
   animation-delay:
     var(--micro-delay);
 }
-
-
-/* 一些更小的星点 */
 
 .micro-star.tiny{
   width:1px;
@@ -269,7 +265,6 @@ body{
 
   user-select:none;
 
-  /* 去掉浮动魔法星辰的发光 */
   text-shadow:none;
 
   animation:
@@ -563,7 +558,6 @@ body{
 
 /* =========================================================
    【新增】少量细小 ✧ 装饰
-   与原来的 ✦ ✶ ✡ 错开
 ========================================================= */
 
 .arcane-star.extra-u{
@@ -1226,7 +1220,6 @@ body{
     1px solid
     rgba(111,174,224,.32);
 
-  /* 半透明档案卡片 */
   background:
 
     linear-gradient(
@@ -1392,7 +1385,6 @@ body{
 
   font-size:19px;
 
-  /* 去掉档案卡片星星/符号的发光 */
   text-shadow:none;
 
   transition:
@@ -1719,7 +1711,6 @@ body{
 
 /* =========================================================
    ★ 日间模式
-   ★ 与首页 #f4f9fd 统一
 ========================================================= */
 
 body.day-mode{
@@ -1776,7 +1767,6 @@ body.day-mode .stars::after{
     64vw 68vh rgba(103,166,207,.14),
     77vw 79vh rgba(103,166,207,.15),
     91vw 63vh rgba(103,166,207,.14);
-
   opacity:.8;
 }
 
@@ -1803,7 +1793,7 @@ body.day-mode .stars::after{
 }
 
 
-/* 【新增】日间模式微型星点 */
+/* 日间模式微型星点 */
 
 body.day-mode .micro-star{
 
@@ -1819,7 +1809,6 @@ body.day-mode .arcane-star{
   color:
     rgba(87,151,199,.50);
 
-  /* 去掉日间模式下浮动星辰的发光 */
   text-shadow:none;
 }
 
@@ -1998,7 +1987,6 @@ body.day-mode .archive-card{
   border-color:
     rgba(82,151,198,.36);
 
-  /* 日间模式半透明卡片 */
   background:
 
     linear-gradient(
@@ -2077,7 +2065,6 @@ body.day-mode .card-symbol{
   color:
     rgba(79,151,201,.50);
 
-  /* 去掉日间模式下卡片星星的发光 */
   text-shadow:none;
 }
 
@@ -2232,7 +2219,6 @@ body.day-mode .footer{
     <span class="arcane-star star-s">✶</span>
     <span class="arcane-star star-t">✦</span>
 
-
     <!-- 【新增】少量 ✧ 装饰 -->
 
     <span class="arcane-star extra-u">✧</span>
@@ -2354,7 +2340,7 @@ body.day-mode .footer{
 
 
       <!-- 02 -->
-      <a href="#" class="archive-card">
+      <a href="world.html" class="archive-card">
 
         <span class="card-number">
           02
