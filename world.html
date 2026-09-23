@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>塞垭弥大陆档案馆 · 世界设定 · Seyami Archive</title>
+<title>塞垭弥大陆档案馆 · 世界设定</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,6 +44,7 @@ body{
 }
 
 .page{
+
   position:relative;
 
   min-height:100vh;
@@ -81,6 +82,7 @@ body{
 ========================================================= */
 
 .stars{
+
   position:absolute;
 
   inset:0;
@@ -166,15 +168,22 @@ body{
 ========================================================= */
 
 .micro-stars{
+
   position:absolute;
+
   inset:0;
+
   z-index:1;
+
   pointer-events:none;
+
   overflow:hidden;
 }
 
 .micro-star{
+
   position:absolute;
+
   display:block;
 
   width:2px;
@@ -198,14 +207,18 @@ body{
 }
 
 .micro-star.tiny{
+
   width:1px;
   height:1px;
+
   opacity:.30;
 }
 
 .micro-star.bright{
+
   width:2px;
   height:2px;
+
   opacity:.48;
 }
 
@@ -213,12 +226,16 @@ body{
 
   0%,
   100%{
+
     opacity:.16;
+
     transform:scale(.75);
   }
 
   50%{
+
     opacity:.58;
+
     transform:scale(1.25);
   }
 
@@ -226,7 +243,7 @@ body{
 
 
 /* =========================================================
-   ✦ ✶ ✡ 魔法星辰
+   魔法星辰
 ========================================================= */
 
 .arcane-stars{
@@ -556,9 +573,7 @@ body{
 }
 
 
-/* =========================================================
-   少量细小 ✧ 装饰
-========================================================= */
+/* 小型 ✧ */
 
 .arcane-star.extra-u{
   left:20%;
@@ -639,7 +654,9 @@ body{
 }
 
 
-/* 星辰动画 */
+/* =========================================================
+   星辰动画
+========================================================= */
 
 @keyframes arcaneFloat{
 
@@ -850,7 +867,7 @@ body{
 
 
 /* =========================================================
-   顶部 Header
+   Header
 ========================================================= */
 
 .header{
@@ -868,12 +885,6 @@ body{
   align-items:flex-start;
 
   justify-content:space-between;
-
-  width:auto;
-  max-width:none;
-
-  margin:0;
-  padding:0;
 }
 
 
@@ -887,8 +898,7 @@ body{
 
   gap:12px;
 
-  color:
-    #d9edff;
+  color:#d9edff;
 
   text-decoration:none;
 
@@ -911,9 +921,6 @@ body{
 
   font-size:17px;
   line-height:13px;
-
-  margin:0;
-  padding:0;
 
   text-shadow:
     0 0 7px rgba(76,159,216,.5),
@@ -944,17 +951,13 @@ body{
   height:13px;
   line-height:13px;
 
-  color:
-    #d9edff;
+  color:#d9edff;
 
   font-size:13px;
 
   letter-spacing:3px;
 
   white-space:nowrap;
-
-  transition:
-    color .6s ease;
 }
 
 .logo-en{
@@ -976,15 +979,10 @@ body{
   letter-spacing:3px;
 
   white-space:nowrap;
-
-  transition:
-    color .6s ease;
 }
 
 
-/* =========================================================
-   返回
-========================================================= */
+/* 返回 */
 
 .header-right{
 
@@ -1145,9 +1143,6 @@ body{
     rgba(157,204,239,.63);
 
   margin-bottom:12px;
-
-  transition:
-    color .6s ease;
 }
 
 .heading-main{
@@ -1171,10 +1166,6 @@ body{
     #dceeff;
 
   line-height:1;
-
-  transition:
-    color .6s ease,
-    text-shadow .6s ease;
 }
 
 .heading-cn{
@@ -1187,14 +1178,11 @@ body{
 
   color:
     rgba(177,207,230,.62);
-
-  transition:
-    color .6s ease;
 }
 
 
 /* =========================================================
-   世界设定栏目
+   世界设定内容
 ========================================================= */
 
 .world-grid{
@@ -1216,7 +1204,7 @@ body{
   min-height:220px;
 
   padding:
-    32px 28px;
+    30px 28px;
 
   border:
     1px solid
@@ -1231,10 +1219,6 @@ body{
     );
 
   overflow:hidden;
-
-  text-decoration:none;
-
-  color:inherit;
 
   transition:
     border-color .35s ease,
@@ -1265,9 +1249,6 @@ body{
     );
 
   opacity:.5;
-
-  transition:
-    background .6s ease;
 }
 
 .world-card::after{
@@ -1288,8 +1269,7 @@ body{
     1px solid
     rgba(91,162,213,.22);
 
-  transition:
-    border-color .6s ease;
+  pointer-events:none;
 }
 
 .world-card:hover{
@@ -1332,10 +1312,7 @@ body{
   color:
     rgba(137,201,239,.62);
 
-  margin-bottom:25px;
-
-  transition:
-    color .6s ease;
+  margin-bottom:22px;
 }
 
 .world-title{
@@ -1344,22 +1321,16 @@ body{
     "Cinzel",
     serif;
 
-  font-size:21px;
+  font-size:22px;
 
   font-weight:400;
 
-  letter-spacing:3px;
+  letter-spacing:4px;
 
   color:
     rgba(220,238,255,.92);
 
-  margin-bottom:10px;
-
-  line-height:1.35;
-
-  transition:
-    color .6s ease,
-    text-shadow .6s ease;
+  margin-bottom:8px;
 }
 
 .world-cn{
@@ -1371,31 +1342,149 @@ body{
   color:
     rgba(177,207,230,.62);
 
-  transition:
-    color .6s ease;
+  margin-bottom:24px;
 }
 
-.world-symbol{
+.world-text{
 
-  position:absolute;
+  font-size:12px;
 
-  right:25px;
-  top:25px;
+  line-height:2;
+
+  letter-spacing:1px;
 
   color:
-    rgba(137,201,239,.32);
+    rgba(177,207,230,.55);
+
+  max-width:90%;
+}
+
+
+/* =========================================================
+   国家档案
+========================================================= */
+
+.nations-section{
+
+  margin-top:55px;
+}
+
+.section-title{
+
+  text-align:center;
+
+  margin-bottom:28px;
+}
+
+.section-title-en{
 
   font-family:
-    "Times New Roman",
+    "Cinzel",
     serif;
 
-  font-size:19px;
+  font-size:10px;
 
-  text-shadow:none;
+  letter-spacing:5px;
+
+  color:
+    rgba(157,204,239,.63);
+}
+
+.section-title-cn{
+
+  margin-top:9px;
+
+  font-size:12px;
+
+  letter-spacing:4px;
+
+  color:
+    rgba(177,207,230,.62);
+}
+
+.nation-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:16px;
+}
+
+.nation-card{
+
+  position:relative;
+
+  min-height:145px;
+
+  padding:24px;
+
+  border:
+    1px solid
+    rgba(111,174,224,.28);
+
+  background:
+    rgba(11,45,75,.28);
 
   transition:
-    color .6s ease,
-    text-shadow .6s ease;
+    border-color .35s ease,
+    background .35s ease,
+    transform .35s ease;
+}
+
+.nation-card:hover{
+
+  transform:
+    translateY(-3px);
+
+  border-color:
+    rgba(122,192,235,.55);
+
+  background:
+    rgba(38,91,137,.20);
+}
+
+.nation-number{
+
+  font-family:
+    "Cinzel",
+    serif;
+
+  font-size:9px;
+
+  letter-spacing:2px;
+
+  color:
+    rgba(137,201,239,.55);
+
+  margin-bottom:17px;
+}
+
+.nation-name{
+
+  font-family:
+    "Cinzel",
+    serif;
+
+  font-size:17px;
+
+  letter-spacing:3px;
+
+  color:
+    rgba(220,238,255,.88);
+
+  margin-bottom:7px;
+}
+
+.nation-cn{
+
+  font-size:11px;
+
+  letter-spacing:2px;
+
+  color:
+    rgba(177,207,230,.55);
 }
 
 
@@ -1423,9 +1512,6 @@ body{
 
   color:
     rgba(133,177,207,.38);
-
-  transition:
-    color .6s ease;
 }
 
 
@@ -1457,7 +1543,7 @@ body{
     font-size:7px;
   }
 
-  .world-grid{
+  .nation-grid{
 
     grid-template-columns:
       repeat(2,1fr);
@@ -1493,19 +1579,9 @@ body{
     left:25px;
     right:25px;
     top:24px;
-
-    width:auto;
-    max-width:none;
-
-    margin:0;
-    padding:0;
-
-    align-items:flex-start;
   }
 
   .logo{
-
-    align-items:flex-start;
 
     gap:10px;
   }
@@ -1514,11 +1590,6 @@ body{
 
     width:15px;
     height:11px;
-
-    display:flex;
-
-    align-items:flex-start;
-    justify-content:center;
 
     font-size:15px;
     line-height:11px;
@@ -1537,8 +1608,6 @@ body{
   }
 
   .logo-en{
-
-    display:block;
 
     margin-top:4px;
 
@@ -1617,22 +1686,41 @@ body{
 
   .world-card{
 
-    min-height:175px;
+    min-height:190px;
 
     padding:
       25px 22px;
   }
 
-  .world-number{
-
-    margin-bottom:19px;
-  }
-
   .world-title{
 
-    font-size:18px;
+    font-size:19px;
+  }
 
-    letter-spacing:2px;
+  .world-text{
+
+    font-size:11px;
+
+    line-height:1.9;
+  }
+
+  .nations-section{
+
+    margin-top:40px;
+  }
+
+  .nation-grid{
+
+    grid-template-columns:1fr;
+
+    gap:12px;
+  }
+
+  .nation-card{
+
+    min-height:125px;
+
+    padding:22px;
   }
 
   .magic-circle{
@@ -1642,7 +1730,7 @@ body{
   }
 
 
-  /* 手机星辰稍微缩小 */
+  /* 手机星辰 */
 
   .arcane-star.star-a{font-size:13px;}
   .arcane-star.star-b{font-size:17px;}
@@ -1717,7 +1805,6 @@ body{
 
 /* =========================================================
    ★ 日间模式
-   ★ 与首页 #f4f9fd 统一
 ========================================================= */
 
 body.day-mode{
@@ -1747,7 +1834,7 @@ body.day-mode .page{
 }
 
 
-/* 背景星尘 */
+/* 星尘 */
 
 body.day-mode .stars::before,
 body.day-mode .stars::after{
@@ -1774,8 +1861,6 @@ body.day-mode .stars::after{
     64vw 68vh rgba(103,166,207,.14),
     77vw 79vh rgba(103,166,207,.15),
     91vw 63vh rgba(103,166,207,.14);
-  
-  opacity:.8;
 }
 
 body.day-mode .stars::after{
@@ -1801,7 +1886,7 @@ body.day-mode .stars::after{
 }
 
 
-/* 日间微型星点 */
+/* 微型星点 */
 
 body.day-mode .micro-star{
 
@@ -1859,7 +1944,7 @@ body.day-mode .magic-circle::after{
 }
 
 
-/* 四角边框 */
+/* 四角框线 */
 
 body.day-mode .frame{
 
@@ -1905,8 +1990,7 @@ body.day-mode .logo-symbol{
 
 body.day-mode .logo-cn{
 
-  color:
-    #2e526c;
+  color:#2e526c;
 }
 
 body.day-mode .logo-en{
@@ -1988,7 +2072,7 @@ body.day-mode .heading-cn{
 }
 
 
-/* 世界设定卡片 */
+/* 世界卡片 */
 
 body.day-mode .world-card{
 
@@ -2058,8 +2142,6 @@ body.day-mode .world-title{
 
   color:
     #2b506a;
-
-  text-shadow:none;
 }
 
 body.day-mode .world-cn{
@@ -2068,12 +2150,64 @@ body.day-mode .world-cn{
     rgba(65,106,133,.64);
 }
 
-body.day-mode .world-symbol{
+body.day-mode .world-text{
 
   color:
-    rgba(79,151,201,.50);
+    rgba(65,106,133,.64);
+}
 
-  text-shadow:none;
+
+/* 小标题 */
+
+body.day-mode .section-title-en{
+
+  color:
+    rgba(81,137,173,.68);
+}
+
+body.day-mode .section-title-cn{
+
+  color:
+    rgba(45,82,106,.80);
+}
+
+
+/* 国家卡片 */
+
+body.day-mode .nation-card{
+
+  border-color:
+    rgba(82,151,198,.32);
+
+  background:
+    rgba(242,249,253,.60);
+}
+
+body.day-mode .nation-card:hover{
+
+  border-color:
+    rgba(79,151,200,.62);
+
+  background:
+    rgba(235,246,252,.85);
+}
+
+body.day-mode .nation-number{
+
+  color:
+    rgba(81,137,173,.60);
+}
+
+body.day-mode .nation-name{
+
+  color:
+    #2b506a;
+}
+
+body.day-mode .nation-cn{
+
+  color:
+    rgba(65,106,133,.64);
 }
 
 
@@ -2098,7 +2232,8 @@ body.day-mode .footer{
     animation:none;
   }
 
-  .world-card{
+  .world-card,
+  .nation-card{
 
     transition:none;
   }
@@ -2116,7 +2251,10 @@ body.day-mode .footer{
   .world-number,
   .world-title,
   .world-cn,
-  .world-symbol,
+  .world-text,
+  .nation-number,
+  .nation-name,
+  .nation-cn,
   .footer{
 
     transition:none;
@@ -2157,7 +2295,6 @@ body.day-mode .footer{
     <span class="micro-star tiny"
           style="left:94%;top:17%;--micro-time:4.5s;--micro-delay:-3.5s;"></span>
 
-
     <span class="micro-star"
           style="left:16%;top:37%;--micro-time:5.8s;--micro-delay:-2.5s;"></span>
 
@@ -2170,7 +2307,6 @@ body.day-mode .footer{
     <span class="micro-star tiny"
           style="left:87%;top:42%;--micro-time:6.2s;--micro-delay:-2s;"></span>
 
-
     <span class="micro-star tiny"
           style="left:15%;top:57%;--micro-time:4.9s;--micro-delay:-4s;"></span>
 
@@ -2182,7 +2318,6 @@ body.day-mode .footer{
 
     <span class="micro-star tiny"
           style="left:85%;top:62%;--micro-time:5.9s;--micro-delay:-3s;"></span>
-
 
     <span class="micro-star"
           style="left:10%;top:78%;--micro-time:5.1s;--micro-delay:-2s;"></span>
@@ -2202,7 +2337,7 @@ body.day-mode .footer{
   </div>
 
 
-  <!-- ✦ ✶ ✡ 魔法星辰 -->
+  <!-- 魔法星辰 -->
   <div class="arcane-stars">
 
     <span class="arcane-star star-a">✦</span>
@@ -2269,8 +2404,8 @@ body.day-mode .footer{
 
     <div class="header-right">
 
-      <a href="index.html" class="back">
-        ← 返回首页
+      <a href="archive.html" class="back">
+        ← 返回档案目录
       </a>
 
       <button
@@ -2319,97 +2454,249 @@ body.day-mode .footer{
     </section>
 
 
-    <!-- 世界设定 -->
+    <!-- 世界基础设定 -->
+
     <section class="world-grid">
 
 
-      <!-- 01 -->
-      <a href="#" class="world-card">
+      <!-- 世界概览 -->
 
-        <span class="world-number">
-          01
-        </span>
+      <article class="world-card">
 
-        <span class="world-symbol">
-          ✦
-        </span>
+        <div class="world-number">
+          01 · OVERVIEW
+        </div>
 
         <div class="world-title">
-          CONTINENT
+          WORLD OVERVIEW
         </div>
 
         <div class="world-cn">
-          大陆
+          世界概览
         </div>
 
-      </a>
+        <div class="world-text">
+          塞垭弥大陆的整体世界观、文明结构、
+          人类与非人种族之间的关系，
+          以及大陆整体的基本设定。
+        </div>
+
+      </article>
 
 
-      <!-- 02 -->
-      <a href="#" class="world-card">
+      <!-- 国家 -->
 
-        <span class="world-number">
-          02
-        </span>
+      <article class="world-card">
 
-        <span class="world-symbol">
-          ✶
-        </span>
+        <div class="world-number">
+          02 · NATIONS
+        </div>
 
         <div class="world-title">
-          COUNTRIES
+          NATIONS
         </div>
 
         <div class="world-cn">
           国家
         </div>
 
-      </a>
+        <div class="world-text">
+          记录塞垭弥大陆上的主要国家、
+          政治结构、文化、王室与重要势力。
+        </div>
+
+      </article>
 
 
-      <!-- 03 -->
-      <a href="#" class="world-card">
+      <!-- 地理 -->
 
-        <span class="world-number">
-          03
-        </span>
+      <article class="world-card">
 
-        <span class="world-symbol">
-          ✡
-        </span>
+        <div class="world-number">
+          03 · GEOGRAPHY
+        </div>
 
         <div class="world-title">
-          GODS &amp; BELIEFS
+          GEOGRAPHY
         </div>
 
         <div class="world-cn">
-          神祇与信仰
+          地理
         </div>
 
-      </a>
+        <div class="world-text">
+          记录大陆、山脉、森林、海域、
+          城市与其他重要地理区域。
+        </div>
+
+      </article>
 
 
-      <!-- 04 -->
-      <a href="#" class="world-card">
+      <!-- 种族 -->
 
-        <span class="world-number">
-          04
-        </span>
+      <article class="world-card">
 
-        <span class="world-symbol">
-          ✦
-        </span>
+        <div class="world-number">
+          04 · RACES
+        </div>
 
         <div class="world-title">
-          HISTORY
+          RACES
         </div>
 
         <div class="world-cn">
-          历史
+          种族
         </div>
 
-      </a>
+        <div class="world-text">
+          记录大陆上存在的不同种族、
+          生存区域、文化特征以及彼此之间的关系。
+        </div>
 
+      </article>
+
+
+    </section>
+
+
+    <!-- =====================================================
+         国家档案
+    ====================================================== -->
+
+    <section class="nations-section">
+
+
+      <div class="section-title">
+
+        <div class="section-title-en">
+          NATION ARCHIVE
+        </div>
+
+        <div class="section-title-cn">
+          国家档案
+        </div>
+
+      </div>
+
+
+      <div class="nation-grid">
+
+
+        <!-- 国家 01 -->
+
+        <article class="nation-card">
+
+          <div class="nation-number">
+            NATION · 01
+          </div>
+
+          <div class="nation-name">
+            UNKNOWN
+          </div>
+
+          <div class="nation-cn">
+            未设定
+          </div>
+
+        </article>
+
+
+        <!-- 国家 02 -->
+
+        <article class="nation-card">
+
+          <div class="nation-number">
+            NATION · 02
+          </div>
+
+          <div class="nation-name">
+            UNKNOWN
+          </div>
+
+          <div class="nation-cn">
+            未设定
+          </div>
+
+        </article>
+
+
+        <!-- 国家 03 -->
+
+        <article class="nation-card">
+
+          <div class="nation-number">
+            NATION · 03
+          </div>
+
+          <div class="nation-name">
+            UNKNOWN
+          </div>
+
+          <div class="nation-cn">
+            未设定
+          </div>
+
+        </article>
+
+
+        <!-- 国家 04 -->
+
+        <article class="nation-card">
+
+          <div class="nation-number">
+            NATION · 04
+          </div>
+
+          <div class="nation-name">
+            UNKNOWN
+          </div>
+
+          <div class="nation-cn">
+            未设定
+          </div>
+
+        </article>
+
+
+        <!-- 国家 05 -->
+
+        <article class="nation-card">
+
+          <div class="nation-number">
+            NATION · 05
+          </div>
+
+          <div class="nation-name">
+            UNKNOWN
+          </div>
+
+          <div class="nation-cn">
+            未设定
+          </div>
+
+        </article>
+
+
+        <!-- 国家 06 -->
+
+        <article class="nation-card">
+
+          <div class="nation-number">
+            NATION · 06
+          </div>
+
+          <div class="nation-name">
+            UNKNOWN
+          </div>
+
+          <div class="nation-cn">
+            未设定
+          </div>
+
+        </article>
+
+
+      </div>
 
     </section>
 
@@ -2428,7 +2715,7 @@ body.day-mode .footer{
 
 /* =========================================================
    昼夜模式
-   与首页共用：seyami-theme
+   与其他页面共用：seyami-theme
 ========================================================= */
 
 const themeToggle =
@@ -2474,15 +2761,11 @@ function applyTheme(theme){
 }
 
 
-/* 读取首页 / 其他页面保存的模式 */
-
 const savedTheme =
   localStorage.getItem(
     "seyami-theme"
   );
 
-
-/* 默认夜间 */
 
 applyTheme(
   savedTheme === "day"
@@ -2490,8 +2773,6 @@ applyTheme(
     : "night"
 );
 
-
-/* 点击切换 */
 
 themeToggle.addEventListener(
   "click",
