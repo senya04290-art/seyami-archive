@@ -43,6 +43,10 @@ body{
         "Cormorant Garamond",
         "Noto Serif SC",
         serif;
+
+    transition:
+        background .5s ease,
+        color .5s ease;
 }
 
 .page{
@@ -63,6 +67,9 @@ body{
             transparent 70%
         ),
         #061426;
+
+    transition:
+        background .5s ease;
 }
 
 
@@ -80,7 +87,6 @@ body{
 .stars::before,
 .stars::after{
     content:"";
-
     position:absolute;
     inset:-20%;
 
@@ -503,6 +509,73 @@ body{
 
 
 /* =========================================================
+   ★ 日间 / 夜间模式按钮
+   放在「关于我们」后面
+========================================================= */
+
+.theme-toggle{
+    position:relative;
+
+    height:28px;
+
+    padding:0 11px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:6px;
+
+    flex-shrink:0;
+
+    border:
+        1px solid
+        rgba(111,174,224,.32);
+
+    background:
+        rgba(8,28,49,.35);
+
+    color:
+        rgba(191,220,243,.68);
+
+    font-family:
+        "Cinzel",
+        "Noto Serif SC",
+        serif;
+
+    font-size:8px;
+
+    letter-spacing:1.5px;
+
+    cursor:pointer;
+
+    white-space:nowrap;
+
+    transition:
+        border-color .35s ease,
+        background .35s ease,
+        color .35s ease,
+        box-shadow .35s ease;
+}
+
+.theme-toggle:hover{
+    border-color:
+        rgba(122,192,235,.62);
+
+    color:#d9efff;
+
+    box-shadow:
+        0 0 14px
+        rgba(76,151,202,.12);
+}
+
+.theme-icon{
+    font-size:12px;
+    line-height:1;
+}
+
+
+/* =========================================================
    主体
 ========================================================= */
 
@@ -794,8 +867,7 @@ body{
 
 
 /* =========================================================
-   ★ PC标题
-   中间空格严格对准页面中心
+   PC标题
 ========================================================= */
 
 .main-title{
@@ -865,10 +937,7 @@ body{
 
 
 /* =========================================================
-   ★ PC窄窗口标题自适应
-   521px ～ 800px
-
-   连续缩放，不再在800px突然跳变
+   PC窄窗口标题自适应
 ========================================================= */
 
 @media (min-width:521px) and (max-width:800px){
@@ -1286,6 +1355,14 @@ body{
         letter-spacing:1px;
     }
 
+    .theme-toggle{
+        height:26px;
+        padding:0 8px;
+        gap:5px;
+        font-size:7px;
+        letter-spacing:1px;
+    }
+
     .magic-circle{
 
         width:
@@ -1350,7 +1427,7 @@ body{
 
 
 /* =========================================================
-   ★ 手机端
+   手机端
 ========================================================= */
 
 @media(max-width:520px){
@@ -1405,6 +1482,18 @@ body{
         font-size:9px;
 
         letter-spacing:0;
+    }
+
+    .theme-toggle{
+        height:24px;
+        padding:0 6px;
+        gap:3px;
+        font-size:6px;
+        letter-spacing:.7px;
+    }
+
+    .theme-icon{
+        font-size:10px;
     }
 
     .corner{
@@ -1466,10 +1555,7 @@ body{
     }
 
 
-    /* =====================================================
-       手机标题
-       两行，但缩小上下间距
-    ===================================================== */
+    /* 手机标题 */
 
     .main-title{
 
@@ -1520,9 +1606,7 @@ body{
     }
 
 
-    /* =====================================================
-       手机标题装饰
-    ===================================================== */
+    /* 手机标题装饰 */
 
     .title-decoration{
 
@@ -1535,9 +1619,7 @@ body{
     }
 
 
-    /* =====================================================
-       手机中文标题
-    ===================================================== */
+    /* 手机中文标题 */
 
     .chinese-title{
 
@@ -1549,9 +1631,7 @@ body{
     }
 
 
-    /* =====================================================
-       手机描述
-    ===================================================== */
+    /* 手机描述 */
 
     .description{
 
@@ -1567,9 +1647,7 @@ body{
     }
 
 
-    /* =====================================================
-       手机按钮
-    ===================================================== */
+    /* 手机按钮 */
 
     .enter-wrap{
 
@@ -1631,6 +1709,14 @@ body{
         font-size:8px;
     }
 
+    .theme-toggle{
+        padding:0 5px;
+    }
+
+    .theme-text{
+        display:none;
+    }
+
     .main-title .seyami{
         font-size:39px;
     }
@@ -1657,97 +1743,9 @@ body{
 
 
 /* =========================================================
-   星轨 JS
+   ★ 日间模式
+   冷淡冰蓝色，不改变原本布局
 ========================================================= */
-
-
-/* =========================================================
-   ★★★ 新增：昼夜模式按钮
-   按钮不会参与原导航布局
-========================================================= */
-
-.theme-toggle{
-    position:fixed;
-
-    z-index:30;
-
-    height:28px;
-
-    min-width:76px;
-
-    padding:0 10px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    gap:6px;
-
-    border:
-        1px solid
-        rgba(111,174,224,.32);
-
-    background:
-        rgba(8,28,49,.35);
-
-    color:
-        rgba(191,220,243,.68);
-
-    font-family:
-        "Cinzel",
-        "Noto Serif SC",
-        serif;
-
-    font-size:8px;
-
-    letter-spacing:1.5px;
-
-    cursor:pointer;
-
-    white-space:nowrap;
-
-    transition:
-        border-color .35s ease,
-        background .35s ease,
-        color .35s ease,
-        box-shadow .35s ease,
-        opacity .35s ease;
-}
-
-.theme-toggle:hover{
-
-    border-color:
-        rgba(122,192,235,.62);
-
-    color:#d9efff;
-
-    box-shadow:
-        0 0 14px
-        rgba(76,151,202,.12);
-}
-
-.theme-icon{
-    font-size:12px;
-    line-height:1;
-}
-
-
-/* =========================================================
-   ★★★ 新增：日间模式
-   冷调冰蓝 / 雪白
-========================================================= */
-
-body{
-    transition:
-        background .5s ease,
-        color .5s ease;
-}
-
-.page{
-    transition:
-        background .5s ease;
-}
 
 body.day-mode{
     background:#f4f9fd;
@@ -1755,7 +1753,6 @@ body.day-mode{
 }
 
 body.day-mode .page{
-
     background:
         radial-gradient(
             circle at 50% 42%,
@@ -1770,26 +1767,19 @@ body.day-mode .page{
         #f4f9fd;
 }
 
-
-/* 星空 */
-
 body.day-mode .stars::before,
 body.day-mode .stars::after{
-
     background-image:
-
         radial-gradient(
             circle,
             rgba(103,166,207,.42) 0 1px,
             transparent 1.5px
         ),
-
         radial-gradient(
             circle,
             rgba(139,190,220,.26) 0 1px,
             transparent 1.5px
         ),
-
         radial-gradient(
             circle,
             rgba(88,151,194,.18) 0 1px,
@@ -1803,160 +1793,88 @@ body.day-mode .stars::after{
     opacity:.11;
 }
 
-
-/* 浮动星星 */
-
 body.day-mode .floating-stars span{
-
-    color:
-        rgba(87,151,199,.50);
-
+    color:rgba(87,151,199,.50);
     text-shadow:none;
 }
 
-
-/* 外框 */
-
 body.day-mode .frame{
-
-    border-color:
-        rgba(91,145,184,.34);
-
-    transition:
-        border-color .5s ease;
+    border-color:rgba(91,145,184,.34);
 }
 
 body.day-mode .frame::before{
-
-    border-color:
-        rgba(108,161,195,.11);
+    border-color:rgba(108,161,195,.11);
 }
-
-
-/* 六芒星 */
 
 body.day-mode .corner::before{
-
-    color:
-        rgba(79,141,190,.68);
-
+    color:rgba(79,141,190,.68);
     text-shadow:none;
 }
-
-
-/* Logo */
 
 body.day-mode .logo{
     color:#2e526c;
 }
 
 body.day-mode .logo-mark{
-
-    color:
-        rgba(79,151,201,.84);
-
+    color:rgba(79,151,201,.84);
     text-shadow:
         0 0 7px
         rgba(86,158,208,.20);
 }
 
 body.day-mode .logo-en{
-
-    color:
-        rgba(81,137,173,.62);
+    color:rgba(81,137,173,.62);
 }
 
-
-/* 导航 */
-
 body.day-mode .nav-links a{
-
-    color:
-        rgba(62,99,127,.70);
-
-    transition:
-        color .35s ease,
-        text-shadow .35s ease;
+    color:rgba(62,99,127,.70);
 }
 
 body.day-mode .nav-links a:hover{
-
     color:#28536f;
-
     text-shadow:
         0 0 8px
         rgba(76,151,202,.14);
 }
 
 body.day-mode .nav-links a::after{
-
-    background:
-        rgba(80,151,200,.54);
+    background:rgba(80,151,200,.54);
 }
 
-
-/* 昼夜按钮 */
-
 body.day-mode .theme-toggle{
-
-    border-color:
-        rgba(91,145,184,.34);
-
-    background:
-        rgba(248,252,255,.78);
-
-    color:
-        rgba(61,98,125,.76);
+    border-color:rgba(91,145,184,.34);
+    background:rgba(248,252,255,.78);
+    color:rgba(61,98,125,.76);
 }
 
 body.day-mode .theme-toggle:hover{
-
-    border-color:
-        rgba(79,151,200,.62);
-
+    border-color:rgba(79,151,200,.62);
     color:#28536f;
-
     box-shadow:
         0 0 14px
         rgba(76,151,202,.11);
 }
-
-
-/* 魔法阵 */
 
 body.day-mode .magic-circle{
     opacity:.48;
 }
 
 body.day-mode .magic-circle::before{
-
-    border-color:
-        rgba(79,148,196,.26);
-
+    border-color:rgba(79,148,196,.26);
     box-shadow:
         0 0 22px
         rgba(70,142,196,.055);
 }
 
 body.day-mode .magic-circle::after{
-
-    border-color:
-        rgba(101,168,207,.20);
-
+    border-color:rgba(101,168,207,.20);
     box-shadow:
-        inset
-        0 0 20px
+        inset 0 0 20px
         rgba(78,151,204,.028);
 }
 
-
-/* 星轨 */
-
 body.day-mode .orbit-track{
-
-    stroke:
-        rgba(73,149,201,.28);
-
+    stroke:rgba(73,149,201,.28);
     filter:
         drop-shadow(
             0 0 4px
@@ -1965,10 +1883,7 @@ body.day-mode .orbit-track{
 }
 
 body.day-mode #travellingStar{
-
-    fill:
-        rgba(76,151,201,.88);
-
+    fill:rgba(76,151,201,.88);
     filter:
         drop-shadow(
             0 0 3px
@@ -1981,57 +1896,35 @@ body.day-mode #travellingStar{
 }
 
 body.day-mode .star-glow{
-
-    fill:
-        rgba(112,188,224,.055);
+    fill:rgba(112,188,224,.055);
 }
 
-
-/* 中央魔法线 */
-
 body.day-mode .magic-line{
-
-    background:
-        rgba(79,149,199,.11);
+    background:rgba(79,149,199,.11);
 }
 
 body.day-mode .magic-center{
-
-    border-color:
-        rgba(82,155,201,.40);
-
+    border-color:rgba(82,155,201,.40);
     box-shadow:
         0 0 10px
         rgba(82,159,207,.14);
 }
 
 body.day-mode .magic-center::before{
-
-    background:
-        rgba(102,177,217,.60);
-
+    background:rgba(102,177,217,.60);
     box-shadow:
         0 0 8px
         rgba(91,171,216,.40);
 }
 
-
-/* 标题 */
-
 body.day-mode .main-title{
-
     color:#2b506a;
-
     text-shadow:
         0 0 18px
         rgba(80,151,201,.065);
 }
 
-
-/* 标题装饰 */
-
 body.day-mode .title-decoration .line{
-
     background:
         linear-gradient(
             90deg,
@@ -2041,7 +1934,6 @@ body.day-mode .title-decoration .line{
 }
 
 body.day-mode .title-decoration .line.right{
-
     background:
         linear-gradient(
             90deg,
@@ -2051,53 +1943,30 @@ body.day-mode .title-decoration .line.right{
 }
 
 body.day-mode .title-decoration .diamond{
-
-    border-color:
-        rgba(91,160,207,.68);
+    border-color:rgba(91,160,207,.68);
 }
-
-
-/* 中文标题 */
 
 body.day-mode .chinese-title{
-
-    color:
-        rgba(45,82,106,.80);
+    color:rgba(45,82,106,.80);
 }
-
-
-/* 描述 */
 
 body.day-mode .description{
-
-    color:
-        rgba(65,106,133,.64);
+    color:rgba(65,106,133,.64);
 }
 
-
-/* 进入按钮 */
-
 body.day-mode .enter-wrap::before{
-
-    border-color:
-        rgba(82,151,198,.36);
-
-    background:
-        rgba(242,249,253,.76);
-
+    border-color:rgba(82,151,198,.36);
+    background:rgba(242,249,253,.76);
     box-shadow:
         0 0 22px
         rgba(76,151,202,.055);
 }
 
 body.day-mode .enter-wrap::after{
-
-    border-color:
-        rgba(85,154,202,.16);
+    border-color:rgba(85,154,202,.16);
 }
 
 body.day-mode .enter-button{
-
     color:#335e79;
 
     background:
@@ -2108,15 +1977,11 @@ body.day-mode .enter-button{
             rgba(230,241,248,.95)
         );
 
-    border-top-color:
-        rgba(80,151,200,.38);
-
-    border-bottom-color:
-        rgba(80,151,200,.38);
+    border-top-color:rgba(80,151,200,.38);
+    border-bottom-color:rgba(80,151,200,.38);
 }
 
 body.day-mode .enter-button:hover{
-
     background:
         linear-gradient(
             90deg,
@@ -2131,99 +1996,25 @@ body.day-mode .enter-button:hover{
 }
 
 body.day-mode .enter-star{
-
-    color:
-        rgba(78,151,200,.68);
-
+    color:rgba(78,151,200,.68);
     text-shadow:
         0 0 9px
         rgba(81,158,207,.20);
 }
 
 body.day-mode .enter-diamond{
-
-    border-color:
-        rgba(82,155,203,.60);
-
+    border-color:rgba(82,155,203,.60);
     background:#f4f9fd;
 }
 
-
-/* Footer */
-
 body.day-mode .footer{
-
-    color:
-        rgba(73,115,143,.40);
+    color:rgba(73,115,143,.40);
 }
 
 
 /* =========================================================
-   ★★★ 新增：昼夜模式按钮响应式
+   星轨 JS
 ========================================================= */
-
-@media(max-width:520px){
-
-    .theme-toggle{
-
-        height:24px;
-
-        min-width:60px;
-
-        padding:0 6px;
-
-        gap:3px;
-
-        font-size:6px;
-
-        letter-spacing:.7px;
-    }
-
-    .theme-icon{
-        font-size:10px;
-    }
-
-}
-
-
-@media(max-width:360px){
-
-    .theme-toggle{
-
-        min-width:24px;
-
-        width:24px;
-
-        height:24px;
-
-        padding:0;
-
-    }
-
-    .theme-toggle #themeText{
-        display:none;
-    }
-
-}
-
-
-/* =========================================================
-   ★★★ 新增：日间模式按钮边缘检测
-========================================================= */
-
-@media(max-width:420px){
-
-    .theme-toggle{
-        min-width:24px;
-        width:24px;
-        padding:0;
-    }
-
-    .theme-toggle #themeText{
-        display:none;
-    }
-
-}
 
 </style>
 </head>
@@ -2300,6 +2091,23 @@ body.day-mode .footer{
         <a href="about.html">
             关于我们
         </a>
+
+        <!-- ★ 日间 / 夜间切换 -->
+        <button
+            class="theme-toggle"
+            id="themeToggle"
+            type="button"
+            aria-label="切换昼夜模式"
+        >
+            <span
+                class="theme-icon"
+                id="themeIcon"
+            >☾</span>
+
+            <span id="themeText">
+                NIGHT
+            </span>
+        </button>
 
     </nav>
 
@@ -2478,6 +2286,109 @@ body.day-mode .footer{
 
 
 <script>
+
+/* =========================================================
+   日间 / 夜间模式
+========================================================= */
+
+(function(){
+
+    const toggle =
+        document.getElementById(
+            "themeToggle"
+        );
+
+    const icon =
+        document.getElementById(
+            "themeIcon"
+        );
+
+    const text =
+        document.getElementById(
+            "themeText"
+        );
+
+    if(
+        !toggle ||
+        !icon ||
+        !text
+    ){
+        return;
+    }
+
+
+    function updateButton(){
+
+        const isDay =
+            document.body.classList.contains(
+                "day-mode"
+            );
+
+        if(isDay){
+
+            icon.textContent = "☀";
+
+            text.textContent = "DAY";
+
+        }else{
+
+            icon.textContent = "☾";
+
+            text.textContent = "NIGHT";
+
+        }
+
+    }
+
+
+    const savedTheme =
+        localStorage.getItem(
+            "seyami-theme"
+        );
+
+
+    if(
+        savedTheme === "day"
+    ){
+
+        document.body.classList.add(
+            "day-mode"
+        );
+
+    }
+
+
+    updateButton();
+
+
+    toggle.addEventListener(
+        "click",
+        function(){
+
+            const isDay =
+                document.body.classList.toggle(
+                    "day-mode"
+                );
+
+            localStorage.setItem(
+                "seyami-theme",
+                isDay
+                    ? "day"
+                    : "night"
+            );
+
+            updateButton();
+
+        }
+    );
+
+})();
+
+
+/* =========================================================
+   星轨
+   ★ 原来的代码完全保留
+========================================================= */
 
 (function(){
 
@@ -3233,292 +3144,6 @@ body.day-mode .footer{
         animate
     );
 
-
-})();
-
-</script>
-
-
-<!-- =======================================================
-     ★★★ 新增：昼夜模式功能
-======================================================= -->
-
-<script>
-
-(function(){
-
-    /* -------------------------------------------------------
-       创建按钮
-       不修改原来的 nav-links 布局
-    ------------------------------------------------------- */
-
-    const nav =
-        document.querySelector(".nav-links");
-
-    if(!nav){
-        return;
-    }
-
-
-    const lastLink =
-        nav.querySelector(
-            'a[href="about.html"]'
-        );
-
-    if(!lastLink){
-        return;
-    }
-
-
-    const toggle =
-        document.createElement("button");
-
-    toggle.className =
-        "theme-toggle";
-
-    toggle.id =
-        "themeToggle";
-
-    toggle.type =
-        "button";
-
-    toggle.setAttribute(
-        "aria-label",
-        "切换昼夜模式"
-    );
-
-
-    toggle.innerHTML = `
-        <span
-            class="theme-icon"
-            id="themeIcon"
-        >☾</span>
-
-        <span
-            id="themeText"
-        >NIGHT</span>
-    `;
-
-
-    document.body.appendChild(
-        toggle
-    );
-
-
-    const icon =
-        document.getElementById(
-            "themeIcon"
-        );
-
-    const text =
-        document.getElementById(
-            "themeText"
-        );
-
-
-    /* -------------------------------------------------------
-       按钮位置
-       永远跟在「关于我们」后面
-    ------------------------------------------------------- */
-
-    function positionThemeButton(){
-
-        if(!lastLink){
-            return;
-        }
-
-
-        const rect =
-            lastLink.getBoundingClientRect();
-
-
-        const buttonWidth =
-            toggle.offsetWidth;
-
-        const buttonHeight =
-            toggle.offsetHeight;
-
-
-        let left =
-            rect.right + 14;
-
-
-        let top =
-            rect.top +
-            (
-                rect.height -
-                buttonHeight
-            ) / 2;
-
-
-        const rightSafe =
-            window.innerWidth -
-            buttonWidth -
-            16;
-
-
-        if(
-            left >
-            rightSafe
-        ){
-
-            left =
-                rightSafe;
-
-        }
-
-
-        if(left < 8){
-            left = 8;
-        }
-
-
-        if(top < 8){
-            top = 8;
-        }
-
-
-        toggle.style.left =
-            left + "px";
-
-        toggle.style.top =
-            top + "px";
-
-    }
-
-
-    /* -------------------------------------------------------
-       日间 / 夜间按钮文字
-    ------------------------------------------------------- */
-
-    function updateButton(){
-
-        const isDay =
-            document.body.classList.contains(
-                "day-mode"
-            );
-
-
-        if(isDay){
-
-            icon.textContent =
-                "☀";
-
-            text.textContent =
-                "DAY";
-
-        }else{
-
-            icon.textContent =
-                "☾";
-
-            text.textContent =
-                "NIGHT";
-
-        }
-
-    }
-
-
-    /* -------------------------------------------------------
-       读取保存的主题
-    ------------------------------------------------------- */
-
-    const savedTheme =
-        localStorage.getItem(
-            "seyami-theme"
-        );
-
-
-    if(
-        savedTheme === "day"
-    ){
-
-        document.body.classList.add(
-            "day-mode"
-        );
-
-    }
-
-
-    updateButton();
-
-
-    /* -------------------------------------------------------
-       点击切换
-    ------------------------------------------------------- */
-
-    toggle.addEventListener(
-        "click",
-        function(){
-
-            const isDay =
-                document.body.classList.toggle(
-                    "day-mode"
-                );
-
-
-            localStorage.setItem(
-                "seyami-theme",
-                isDay
-                    ? "day"
-                    : "night"
-            );
-
-
-            updateButton();
-
-            positionThemeButton();
-
-        }
-    );
-
-
-    /* -------------------------------------------------------
-       初始定位
-    ------------------------------------------------------- */
-
-    requestAnimationFrame(
-        function(){
-
-            positionThemeButton();
-
-        }
-    );
-
-
-    /* -------------------------------------------------------
-       窗口缩放时重新定位
-       不影响原来的响应式代码
-    ------------------------------------------------------- */
-
-    window.addEventListener(
-        "resize",
-        function(){
-
-            requestAnimationFrame(
-                positionThemeButton
-            );
-
-        }
-    );
-
-
-    /* -------------------------------------------------------
-       字体加载完成后再定位一次
-    ------------------------------------------------------- */
-
-    if(document.fonts){
-
-        document.fonts.ready.then(
-            function(){
-
-                positionThemeButton();
-
-            }
-        );
-
-    }
 
 })();
 
