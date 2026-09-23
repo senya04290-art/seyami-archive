@@ -40,12 +40,17 @@ body{
     );
 
   color:#dcefff;
+
   font-family:
     "Noto Serif SC",
     "Times New Roman",
     serif;
 
   overflow-x:hidden;
+
+  transition:
+    background .6s ease,
+    color .6s ease;
 }
 
 .page{
@@ -71,9 +76,12 @@ body{
 .stars::before,
 .stars::after{
   content:"";
+
   position:absolute;
+
   width:2px;
   height:2px;
+
   border-radius:50%;
 
   background:rgba(170,220,255,.55);
@@ -98,6 +106,11 @@ body{
     91vw 63vh rgba(160,220,255,.2);
 
   opacity:.7;
+
+  transition:
+    background .6s ease,
+    box-shadow .6s ease,
+    opacity .6s ease;
 }
 
 .stars::after{
@@ -131,13 +144,19 @@ body{
 .arcane-stars{
   position:absolute;
   inset:0;
+
   z-index:1;
+
   pointer-events:none;
+
   overflow:hidden;
+
+  transition:opacity .6s ease;
 }
 
 .arcane-star{
   position:absolute;
+
   display:block;
 
   color:rgba(145,215,250,.42);
@@ -148,6 +167,7 @@ body{
     serif;
 
   font-weight:400;
+
   line-height:1;
 
   user-select:none;
@@ -163,6 +183,10 @@ body{
   animation-delay:
     var(--float-delay),
     var(--twinkle-delay);
+
+  transition:
+    color .6s ease,
+    text-shadow .6s ease;
 }
 
 
@@ -507,7 +531,12 @@ body{
     inset 0 0 60px rgba(70,150,210,.025);
 
   z-index:0;
+
   pointer-events:none;
+
+  transition:
+    border-color .6s ease,
+    box-shadow .6s ease;
 }
 
 .magic-circle::before,
@@ -524,6 +553,10 @@ body{
   border-radius:50%;
 
   pointer-events:none;
+
+  transition:
+    border-color .6s ease,
+    box-shadow .6s ease;
 }
 
 .magic-circle::before{
@@ -567,6 +600,9 @@ body{
   pointer-events:none;
 
   z-index:2;
+
+  transition:
+    border-color .6s ease;
 }
 
 .frame::before,
@@ -577,6 +613,9 @@ body{
 
   width:45px;
   height:45px;
+
+  transition:
+    border-color .6s ease;
 }
 
 .frame::before{
@@ -616,7 +655,9 @@ body{
   z-index:20;
 
   display:flex;
+
   align-items:flex-start;
+
   justify-content:space-between;
 
   width:auto;
@@ -631,12 +672,17 @@ body{
 
 .logo{
   display:flex;
+
   align-items:flex-start;
+
   gap:12px;
 
   color:rgba(225,246,255,.92);
 
   text-decoration:none;
+
+  transition:
+    color .6s ease;
 }
 
 .logo-symbol{
@@ -646,6 +692,7 @@ body{
   height:13px;
 
   display:flex;
+
   align-items:flex-start;
   justify-content:center;
 
@@ -659,10 +706,15 @@ body{
     0 0 12px rgba(90,200,255,.7);
 
   flex-shrink:0;
+
+  transition:
+    color .6s ease,
+    text-shadow .6s ease;
 }
 
 .logo-text{
   display:flex;
+
   flex-direction:column;
   align-items:flex-start;
 
@@ -678,9 +730,13 @@ body{
   color:rgba(225,246,255,.92);
 
   font-size:13px;
+
   letter-spacing:3px;
 
   white-space:nowrap;
+
+  transition:
+    color .6s ease;
 }
 
 .logo-en{
@@ -700,10 +756,23 @@ body{
   letter-spacing:3px;
 
   white-space:nowrap;
+
+  transition:
+    color .6s ease;
 }
 
 
-/* 返回 */
+/* =========================================================
+   返回
+========================================================= */
+
+.header-right{
+  display:flex;
+
+  align-items:center;
+
+  gap:20px;
+}
 
 .back{
   color:rgba(190,225,245,.58);
@@ -716,6 +785,7 @@ body{
     serif;
 
   font-size:11px;
+
   letter-spacing:1px;
 
   transition:
@@ -728,6 +798,73 @@ body{
 
   text-shadow:
     0 0 10px rgba(100,200,245,.35);
+}
+
+
+/* =========================================================
+   昼夜切换
+========================================================= */
+
+.theme-toggle{
+  display:flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  height:28px;
+
+  padding:0 11px;
+
+  border:
+    1px solid rgba(130,200,235,.22);
+
+  background:
+    rgba(8,24,40,.35);
+
+  color:rgba(185,225,245,.62);
+
+  font-family:
+    "Cinzel",
+    "Noto Serif SC",
+    serif;
+
+  font-size:8px;
+
+  letter-spacing:2px;
+
+  cursor:pointer;
+
+  border-radius:0;
+
+  white-space:nowrap;
+
+  transition:
+    color .35s ease,
+    border-color .35s ease,
+    background .35s ease,
+    box-shadow .35s ease;
+}
+
+.theme-toggle:hover{
+  color:rgba(225,247,255,.95);
+
+  border-color:
+    rgba(130,215,250,.48);
+
+  background:
+    rgba(12,37,59,.55);
+
+  box-shadow:
+    0 0 18px rgba(70,170,220,.06);
+}
+
+.theme-icon{
+  font-size:12px;
+
+  line-height:1;
+
+  letter-spacing:0;
 }
 
 
@@ -768,6 +905,9 @@ body{
   color:rgba(145,205,235,.55);
 
   margin-bottom:12px;
+
+  transition:
+    color .6s ease;
 }
 
 .heading-main{
@@ -784,6 +924,10 @@ body{
   color:rgba(225,245,255,.9);
 
   line-height:1;
+
+  transition:
+    color .6s ease,
+    text-shadow .6s ease;
 }
 
 .heading-cn{
@@ -794,6 +938,9 @@ body{
   letter-spacing:5px;
 
   color:rgba(170,210,230,.48);
+
+  transition:
+    color .6s ease;
 }
 
 
@@ -862,6 +1009,9 @@ body{
     );
 
   opacity:.5;
+
+  transition:
+    background .6s ease;
 }
 
 .archive-card::after{
@@ -879,6 +1029,9 @@ body{
 
   border:
     1px solid rgba(120,200,240,.08);
+
+  transition:
+    border-color .6s ease;
 }
 
 .archive-card:hover{
@@ -911,6 +1064,9 @@ body{
   color:rgba(120,195,235,.48);
 
   margin-bottom:26px;
+
+  transition:
+    color .6s ease;
 }
 
 .card-title{
@@ -927,6 +1083,10 @@ body{
   color:rgba(220,242,252,.86);
 
   margin-bottom:9px;
+
+  transition:
+    color .6s ease,
+    text-shadow .6s ease;
 }
 
 .card-cn{
@@ -935,6 +1095,9 @@ body{
   letter-spacing:3px;
 
   color:rgba(175,215,235,.48);
+
+  transition:
+    color .6s ease;
 }
 
 .card-symbol{
@@ -953,6 +1116,10 @@ body{
 
   text-shadow:
     0 0 12px rgba(80,180,230,.25);
+
+  transition:
+    color .6s ease,
+    text-shadow .6s ease;
 }
 
 
@@ -978,6 +1145,9 @@ body{
   letter-spacing:4px;
 
   color:rgba(145,190,215,.3);
+
+  transition:
+    color .6s ease;
 }
 
 
@@ -991,6 +1161,16 @@ body{
     left:35px;
     right:35px;
     top:30px;
+  }
+
+  .header-right{
+    gap:14px;
+  }
+
+  .theme-toggle{
+    height:27px;
+    padding:0 9px;
+    font-size:7px;
   }
 
   .archive-grid{
@@ -1045,6 +1225,7 @@ body{
     height:11px;
 
     display:flex;
+
     align-items:flex-start;
     justify-content:center;
 
@@ -1073,7 +1254,28 @@ body{
     letter-spacing:2px;
   }
 
+  .header-right{
+    gap:8px;
+  }
+
   .back{
+    font-size:10px;
+  }
+
+  .theme-toggle{
+    height:25px;
+
+    padding:
+      0 7px;
+
+    gap:5px;
+
+    font-size:6px;
+
+    letter-spacing:1px;
+  }
+
+  .theme-icon{
     font-size:10px;
   }
 
@@ -1167,6 +1369,355 @@ body{
     font-size:27px;
   }
 
+  .header-right{
+    gap:5px;
+  }
+
+  .back{
+    font-size:9px;
+  }
+
+  .theme-toggle{
+    padding:0 6px;
+    font-size:6px;
+  }
+
+}
+
+
+/* =========================================================
+   日间模式
+========================================================= */
+
+body.day-mode{
+
+  background:
+    radial-gradient(
+      circle at 50% 42%,
+      rgba(130,190,220,.22),
+      transparent 44%
+    ),
+    linear-gradient(
+      180deg,
+      #eaf6fb 0%,
+      #dceef5 48%,
+      #cddfe8 100%
+    );
+
+  color:#294456;
+}
+
+
+/* 背景星尘 */
+
+body.day-mode .stars::before,
+body.day-mode .stars::after{
+
+  background:rgba(75,130,160,.28);
+
+  box-shadow:
+    8vw 12vh rgba(70,130,160,.17),
+    17vw 28vh rgba(80,140,170,.14),
+    26vw 9vh rgba(75,135,165,.16),
+    36vw 23vh rgba(80,140,170,.14),
+    47vw 13vh rgba(75,135,165,.18),
+    58vw 31vh rgba(80,145,175,.15),
+    69vw 16vh rgba(75,135,165,.17),
+    78vw 28vh rgba(80,140,170,.14),
+    89vw 11vh rgba(75,135,165,.16),
+
+    12vw 62vh rgba(80,140,170,.14),
+    23vw 76vh rgba(75,135,165,.16),
+    34vw 66vh rgba(80,145,175,.13),
+    51vw 82vh rgba(75,135,165,.16),
+    64vw 68vh rgba(80,140,170,.14),
+    77vw 79vh rgba(75,135,165,.15),
+    91vw 63vh rgba(80,140,170,.14);
+
+  opacity:.8;
+}
+
+body.day-mode .stars::after{
+
+  box-shadow:
+    5vw 19vh rgba(70,135,165,.18),
+    15vw 44vh rgba(80,145,175,.16),
+    31vw 17vh rgba(70,135,165,.14),
+    43vw 38vh rgba(80,145,175,.16),
+    57vw 21vh rgba(70,135,165,.14),
+    72vw 44vh rgba(80,145,175,.16),
+    84vw 36vh rgba(70,135,165,.14),
+    95vw 23vh rgba(80,145,175,.16),
+
+    7vw 84vh rgba(70,135,165,.14),
+    19vw 70vh rgba(80,145,175,.16),
+    29vw 90vh rgba(70,135,165,.14),
+    42vw 72vh rgba(80,145,175,.16),
+    55vw 93vh rgba(70,135,165,.14),
+    70vw 84vh rgba(80,145,175,.16),
+    86vw 91vh rgba(70,135,165,.14);
+}
+
+
+/* 魔法星辰 */
+
+body.day-mode .arcane-star{
+
+  color:rgba(65,125,155,.48);
+
+  text-shadow:
+    0 0 5px rgba(80,150,180,.13),
+    0 0 14px rgba(80,150,180,.06);
+}
+
+
+/* 魔法阵 */
+
+body.day-mode .magic-circle{
+
+  border-color:
+    rgba(70,140,175,.13);
+
+  box-shadow:
+    0 0 50px rgba(70,145,180,.055),
+    inset 0 0 60px rgba(70,145,180,.035);
+}
+
+body.day-mode .magic-circle::before{
+
+  border-color:
+    rgba(75,150,180,.10);
+
+  box-shadow:
+    0 0 25px rgba(70,145,180,.035);
+}
+
+body.day-mode .magic-circle::after{
+
+  border-color:
+    rgba(80,160,190,.11);
+
+  box-shadow:
+    0 0 18px rgba(75,150,180,.035);
+}
+
+
+/* 四角边框 */
+
+body.day-mode .frame{
+
+  border-color:
+    rgba(70,125,155,.20);
+}
+
+body.day-mode .frame::before{
+
+  border-left-color:
+    rgba(75,140,170,.48);
+
+  border-top-color:
+    rgba(75,140,170,.48);
+}
+
+body.day-mode .frame::after{
+
+  border-right-color:
+    rgba(75,140,170,.48);
+
+  border-bottom-color:
+    rgba(75,140,170,.48);
+}
+
+
+/* Logo */
+
+body.day-mode .logo{
+
+  color:
+    rgba(38,67,82,.92);
+}
+
+body.day-mode .logo-symbol{
+
+  color:#5b9fbe;
+
+  text-shadow:
+    0 0 10px rgba(85,160,190,.28);
+}
+
+body.day-mode .logo-cn{
+
+  color:
+    rgba(38,67,82,.92);
+}
+
+body.day-mode .logo-en{
+
+  color:
+    rgba(55,88,104,.55);
+}
+
+
+/* 返回 */
+
+body.day-mode .back{
+
+  color:
+    rgba(55,88,104,.68);
+}
+
+body.day-mode .back:hover{
+
+  color:
+    rgba(40,75,92,.96);
+
+  text-shadow:
+    0 0 10px rgba(70,140,170,.20);
+}
+
+
+/* 日夜按钮 */
+
+body.day-mode .theme-toggle{
+
+  border-color:
+    rgba(75,135,165,.30);
+
+  background:
+    rgba(225,243,248,.55);
+
+  color:
+    rgba(45,82,98,.72);
+}
+
+body.day-mode .theme-toggle:hover{
+
+  border-color:
+    rgba(75,145,175,.50);
+
+  background:
+    rgba(235,247,250,.78);
+
+  color:
+    rgba(35,70,86,.95);
+
+  box-shadow:
+    0 0 18px rgba(70,145,175,.08);
+}
+
+
+/* 标题 */
+
+body.day-mode .heading-small{
+
+  color:
+    rgba(65,120,145,.68);
+}
+
+body.day-mode .heading-main{
+
+  color:
+    rgba(43,73,88,.92);
+
+  text-shadow:
+    none;
+}
+
+body.day-mode .heading-cn{
+
+  color:
+    rgba(73,111,126,.66);
+}
+
+
+/* 卡片 */
+
+body.day-mode .archive-card{
+
+  border-color:
+    rgba(75,135,165,.24);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(232,246,250,.68),
+      rgba(205,226,235,.48)
+    );
+
+  box-shadow:
+    0 5px 20px rgba(70,110,130,.04);
+}
+
+body.day-mode .archive-card::before{
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(80,150,180,.42),
+      transparent
+    );
+}
+
+body.day-mode .archive-card::after{
+
+  border-color:
+    rgba(75,140,170,.12);
+}
+
+body.day-mode .archive-card:hover{
+
+  border-color:
+    rgba(70,140,175,.42);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(238,249,252,.82),
+      rgba(211,231,239,.62)
+    );
+
+  box-shadow:
+    0 10px 35px rgba(55,95,115,.10),
+    0 0 25px rgba(70,145,175,.06);
+}
+
+body.day-mode .card-number{
+
+  color:
+    rgba(65,130,160,.65);
+}
+
+body.day-mode .card-title{
+
+  color:
+    rgba(48,80,94,.92);
+
+  text-shadow:none;
+}
+
+body.day-mode .card-cn{
+
+  color:
+    rgba(80,113,128,.68);
+}
+
+body.day-mode .card-symbol{
+
+  color:
+    rgba(70,135,165,.38);
+
+  text-shadow:
+    0 0 10px rgba(80,150,180,.16);
+}
+
+
+/* Footer */
+
+body.day-mode .footer{
+
+  color:
+    rgba(75,110,125,.46);
 }
 
 
@@ -1181,6 +1732,24 @@ body{
   }
 
   .archive-card{
+    transition:none;
+  }
+
+  body,
+  .theme-toggle,
+  .magic-circle,
+  .frame,
+  .logo-symbol,
+  .logo-cn,
+  .logo-en,
+  .heading-small,
+  .heading-main,
+  .heading-cn,
+  .card-number,
+  .card-title,
+  .card-cn,
+  .card-symbol,
+  .footer{
     transition:none;
   }
 
@@ -1256,9 +1825,23 @@ body{
     </a>
 
 
-    <a href="index.html" class="back">
-      ← 返回首页
-    </a>
+    <div class="header-right">
+
+      <a href="index.html" class="back">
+        ← 返回首页
+      </a>
+
+      <button
+        class="theme-toggle"
+        id="themeToggle"
+        type="button"
+        aria-label="切换昼夜模式"
+      >
+        <span class="theme-icon" id="themeIcon">☾</span>
+        <span id="themeText">NIGHT</span>
+      </button>
+
+    </div>
 
   </header>
 
@@ -1431,6 +2014,78 @@ body{
   </main>
 
 </div>
+
+
+<script>
+
+/* =========================================================
+   昼夜模式
+   与首页共用：seyami-theme
+========================================================= */
+
+const themeToggle = document.getElementById("themeToggle");
+const themeIcon = document.getElementById("themeIcon");
+const themeText = document.getElementById("themeText");
+
+
+function applyTheme(theme){
+
+  if(theme === "day"){
+
+    document.body.classList.add("day-mode");
+
+    themeIcon.textContent = "☀";
+    themeText.textContent = "DAY";
+
+  }else{
+
+    document.body.classList.remove("day-mode");
+
+    themeIcon.textContent = "☾";
+    themeText.textContent = "NIGHT";
+
+  }
+
+}
+
+
+/* 读取首页 / 其他页面保存的模式 */
+
+const savedTheme =
+  localStorage.getItem("seyami-theme");
+
+
+/* 默认夜间 */
+
+applyTheme(
+  savedTheme === "day"
+    ? "day"
+    : "night"
+);
+
+
+/* 点击切换 */
+
+themeToggle.addEventListener("click", () => {
+
+  const isDay =
+    document.body.classList.contains("day-mode");
+
+  const nextTheme =
+    isDay
+      ? "night"
+      : "day";
+
+  localStorage.setItem(
+    "seyami-theme",
+    nextTheme
+  );
+
+  applyTheme(nextTheme);
+
+});
+
+</script>
 
 </body>
 </html>
