@@ -11,7 +11,7 @@ content="width=device-width, initial-scale=1.0">
       href="https://fonts.googleapis.com">
 
 <link rel="preconnect"
-      href="https://fonts.gstatic.com"
+      href="https://fonts.googleapis.com"
       crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500&display=swap"
@@ -43,10 +43,6 @@ body{
         "Cormorant Garamond",
         "Noto Serif SC",
         serif;
-
-    transition:
-        background .5s ease,
-        color .5s ease;
 }
 
 .page{
@@ -67,9 +63,6 @@ body{
             transparent 70%
         ),
         #061426;
-
-    transition:
-        background .5s ease;
 }
 
 
@@ -174,10 +167,6 @@ body{
         6s
         ease-in-out
         infinite;
-
-    transition:
-        color .5s ease,
-        text-shadow .5s ease;
 }
 
 
@@ -393,9 +382,6 @@ body{
 
     pointer-events:none;
     z-index:10;
-
-    transition:
-        border-color .5s ease;
 }
 
 .frame::before{
@@ -407,9 +393,6 @@ body{
     border:
         1px solid
         rgba(81,142,193,.08);
-
-    transition:
-        border-color .5s ease;
 }
 
 
@@ -450,10 +433,6 @@ body{
     text-shadow:
         0 0 5px rgba(67,153,218,.5),
         0 0 13px rgba(43,124,190,.28);
-
-    transition:
-        color .5s ease,
-        text-shadow .5s ease;
 }
 
 .corner.tl{
@@ -504,9 +483,6 @@ body{
     color:#d9edff;
 
     text-decoration:none;
-
-    transition:
-        color .5s ease;
 }
 
 .logo-mark{
@@ -535,10 +511,6 @@ body{
     text-shadow:
         0 0 7px rgba(76,159,216,.5),
         0 0 15px rgba(49,132,191,.22);
-
-    transition:
-        color .5s ease,
-        text-shadow .5s ease;
 }
 
 .logo-text{
@@ -572,9 +544,6 @@ body{
 
     color:
         rgba(157,204,239,.63);
-
-    transition:
-        color .5s ease;
 }
 
 .nav-links{
@@ -640,30 +609,33 @@ body{
 
 
 /* =========================================================
-   ☀️ 日间模式按钮
+   日间模式按钮
+   注意：
+   position:absolute 不参与原导航宽度计算
 ========================================================= */
 
 .theme-toggle{
+    position:absolute;
 
-    margin-left:24px;
+    right:0;
+    top:45px;
 
-    flex-shrink:0;
+    height:25px;
 
-    height:28px;
-    padding:0 11px;
+    padding:0 10px;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    gap:6px;
+    gap:5px;
 
     border:
         1px solid
         rgba(111,174,224,.28);
 
     background:
-        rgba(7,25,43,.38);
+        rgba(7,25,43,.42);
 
     color:
         rgba(185,218,241,.68);
@@ -672,19 +644,19 @@ body{
         "Cinzel",
         serif;
 
-    font-size:8px;
+    font-size:7px;
 
     letter-spacing:1.5px;
 
     cursor:pointer;
+
+    white-space:nowrap;
 
     transition:
         color .35s ease,
         background .35s ease,
         border-color .35s ease,
         box-shadow .35s ease;
-
-    white-space:nowrap;
 }
 
 .theme-toggle:hover{
@@ -706,7 +678,7 @@ body{
 
     font-family:serif;
 
-    font-size:12px;
+    font-size:11px;
 
     line-height:1;
 }
@@ -758,9 +730,6 @@ body{
     pointer-events:none;
 
     opacity:.55;
-
-    transition:
-        opacity .5s ease;
 }
 
 .magic-circle::before{
@@ -784,10 +753,6 @@ body{
         80s
         linear
         infinite;
-
-    transition:
-        border-color .5s ease,
-        box-shadow .5s ease;
 }
 
 .magic-circle::after{
@@ -813,10 +778,6 @@ body{
         55s
         linear
         infinite;
-
-    transition:
-        border-color .5s ease,
-        box-shadow .5s ease;
 }
 
 @keyframes rotateCircle{
@@ -875,10 +836,6 @@ body{
             0 0 4px
             rgba(70,155,210,.10)
         );
-
-    transition:
-        stroke .5s ease,
-        filter .5s ease;
 }
 
 
@@ -911,10 +868,6 @@ body{
             0 0 8px
             rgba(74,165,224,.55)
         );
-
-    transition:
-        fill .5s ease,
-        filter .5s ease;
 }
 
 .star-glow{
@@ -924,9 +877,6 @@ body{
     filter:blur(2px);
 
     pointer-events:none;
-
-    transition:
-        fill .5s ease;
 }
 
 
@@ -945,9 +895,6 @@ body{
 
     background:
         rgba(92,164,213,.13);
-
-    transition:
-        background .5s ease;
 }
 
 .magic-line.horizontal{
@@ -986,10 +933,6 @@ body{
     box-shadow:
         0 0 10px
         rgba(88,171,224,.25);
-
-    transition:
-        border-color .5s ease,
-        box-shadow .5s ease;
 }
 
 .magic-center::before{
@@ -1014,10 +957,6 @@ body{
     box-shadow:
         0 0 8px
         rgba(126,203,244,.8);
-
-    transition:
-        background .5s ease,
-        box-shadow .5s ease;
 }
 
 
@@ -1071,10 +1010,6 @@ body{
     text-shadow:
         0 0 18px
         rgba(94,172,222,.08);
-
-    transition:
-        color .5s ease,
-        text-shadow .5s ease;
 }
 
 .main-title .seyami{
@@ -1171,9 +1106,6 @@ body{
             transparent,
             rgba(115,182,224,.62)
         );
-
-    transition:
-        background .5s ease;
 }
 
 .title-decoration .line.right{
@@ -1196,9 +1128,6 @@ body{
         rgba(143,202,237,.8);
 
     transform:rotate(45deg);
-
-    transition:
-        border-color .5s ease;
 }
 
 
@@ -1224,9 +1153,6 @@ body{
         rgba(207,229,246,.86);
 
     text-align:center;
-
-    transition:
-        color .5s ease;
 }
 
 
@@ -1260,9 +1186,6 @@ body{
     line-height:1.7;
 
     letter-spacing:2px;
-
-    transition:
-        color .5s ease;
 }
 
 
@@ -1322,11 +1245,6 @@ body{
         rgba(39,120,180,.08);
 
     pointer-events:none;
-
-    transition:
-        border-color .5s ease,
-        background .5s ease,
-        box-shadow .5s ease;
 }
 
 .enter-wrap::after{
@@ -1345,9 +1263,6 @@ body{
         rgba(91,164,213,.16);
 
     pointer-events:none;
-
-    transition:
-        border-color .5s ease;
 }
 
 .enter-button{
@@ -1393,9 +1308,7 @@ body{
     transition:
         background .35s ease,
         box-shadow .35s ease,
-        letter-spacing .35s ease,
-        color .5s ease,
-        border-color .5s ease;
+        letter-spacing .35s ease;
 }
 
 .enter-button:hover{
@@ -1438,10 +1351,6 @@ body{
         rgba(67,158,215,.45);
 
     z-index:3;
-
-    transition:
-        color .5s ease,
-        text-shadow .5s ease;
 }
 
 .enter-star.left{
@@ -1470,10 +1379,6 @@ body{
         rgba(116,187,226,.65);
 
     background:#061426;
-
-    transition:
-        border-color .5s ease,
-        background .5s ease;
 }
 
 .enter-diamond.top{
@@ -1513,413 +1418,6 @@ body{
     letter-spacing:4px;
 
     white-space:nowrap;
-
-    transition:
-        color .5s ease;
-}
-
-
-/* =========================================================
-   ☀️ DAY MODE
-   白昼冰蓝版
-========================================================= */
-
-body.day-mode{
-
-    background:#f4f9fd;
-
-    color:#2e5069;
-}
-
-body.day-mode .page{
-
-    background:
-        radial-gradient(
-            circle at 50% 42%,
-            rgba(165,211,238,.20),
-            transparent 38%
-        ),
-        radial-gradient(
-            circle at 50% 52%,
-            rgba(226,240,249,.68),
-            transparent 72%
-        ),
-        #f4f9fd;
-}
-
-
-/* 星空 */
-
-body.day-mode .stars::before,
-body.day-mode .stars::after{
-
-    background-image:
-        radial-gradient(
-            circle,
-            rgba(103,166,207,.42) 0 1px,
-            transparent 1.5px
-        ),
-        radial-gradient(
-            circle,
-            rgba(139,190,220,.26) 0 1px,
-            transparent 1.5px
-        ),
-        radial-gradient(
-            circle,
-            rgba(88,151,194,.18) 0 1px,
-            transparent 1.5px
-        );
-
-    opacity:.24;
-
-    filter:none;
-}
-
-body.day-mode .stars::after{
-    opacity:.11;
-}
-
-
-/* 浮动星星 */
-
-body.day-mode .floating-stars span{
-
-    color:
-        rgba(87,151,199,.50);
-
-    text-shadow:none;
-}
-
-
-/* 外框 */
-
-body.day-mode .frame{
-
-    border-color:
-        rgba(91,145,184,.34);
-}
-
-body.day-mode .frame::before{
-
-    border-color:
-        rgba(108,161,195,.11);
-}
-
-
-/* 六芒星 */
-
-body.day-mode .corner::before{
-
-    color:
-        rgba(79,141,190,.68);
-
-    text-shadow:none;
-}
-
-
-/* Logo */
-
-body.day-mode .logo{
-
-    color:#2e526c;
-}
-
-body.day-mode .logo-mark{
-
-    color:
-        rgba(79,151,201,.84);
-
-    text-shadow:
-        0 0 7px
-        rgba(86,158,208,.20);
-}
-
-body.day-mode .logo-en{
-
-    color:
-        rgba(81,137,173,.62);
-}
-
-
-/* 导航 */
-
-body.day-mode .nav-links a{
-
-    color:
-        rgba(62,99,127,.70);
-}
-
-body.day-mode .nav-links a:hover{
-
-    color:#28536f;
-
-    text-shadow:
-        0 0 8px
-        rgba(76,151,202,.14);
-}
-
-body.day-mode .nav-links a::after{
-
-    background:
-        rgba(80,151,200,.54);
-}
-
-
-/* 日间模式按钮 */
-
-body.day-mode .theme-toggle{
-
-    border-color:
-        rgba(91,145,184,.34);
-
-    background:
-        rgba(248,252,255,.78);
-
-    color:
-        rgba(61,98,125,.76);
-}
-
-body.day-mode .theme-toggle:hover{
-
-    border-color:
-        rgba(79,151,200,.62);
-
-    color:#28536f;
-
-    box-shadow:
-        0 0 14px
-        rgba(76,151,202,.11);
-}
-
-
-/* 魔法圆 */
-
-body.day-mode .magic-circle{
-
-    opacity:.48;
-}
-
-body.day-mode .magic-circle::before{
-
-    border-color:
-        rgba(79,148,196,.26);
-
-    box-shadow:
-        0 0 22px
-        rgba(70,142,196,.055);
-}
-
-body.day-mode .magic-circle::after{
-
-    border-color:
-        rgba(101,168,207,.20);
-
-    box-shadow:
-        inset
-        0 0 20px
-        rgba(78,151,204,.028);
-}
-
-
-/* 星轨 */
-
-body.day-mode .orbit-track{
-
-    stroke:
-        rgba(73,149,201,.28);
-
-    filter:
-        drop-shadow(
-            0 0 4px
-            rgba(76,151,202,.065)
-        );
-}
-
-
-/* 星辰 */
-
-body.day-mode #travellingStar{
-
-    fill:
-        rgba(76,151,201,.88);
-
-    filter:
-        drop-shadow(
-            0 0 3px
-            rgba(112,188,224,.38)
-        )
-        drop-shadow(
-            0 0 8px
-            rgba(82,164,211,.19)
-        );
-}
-
-body.day-mode .star-glow{
-
-    fill:
-        rgba(112,188,224,.055);
-}
-
-
-/* 中央 */
-
-body.day-mode .magic-line{
-
-    background:
-        rgba(79,149,199,.11);
-}
-
-body.day-mode .magic-center{
-
-    border-color:
-        rgba(82,155,201,.40);
-
-    box-shadow:
-        0 0 10px
-        rgba(82,159,207,.14);
-}
-
-body.day-mode .magic-center::before{
-
-    background:
-        rgba(102,177,217,.60);
-
-    box-shadow:
-        0 0 8px
-        rgba(91,171,216,.40);
-}
-
-
-/* 标题 */
-
-body.day-mode .main-title{
-
-    color:#2b506a;
-
-    text-shadow:
-        0 0 18px
-        rgba(80,151,201,.065);
-}
-
-body.day-mode .title-decoration .line{
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(81,151,198,.54)
-        );
-}
-
-body.day-mode .title-decoration .line.right{
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(81,151,198,.54),
-            transparent
-        );
-}
-
-body.day-mode .title-decoration .diamond{
-
-    border-color:
-        rgba(91,160,207,.68);
-}
-
-body.day-mode .chinese-title{
-
-    color:
-        rgba(45,82,106,.80);
-}
-
-body.day-mode .description{
-
-    color:
-        rgba(65,106,133,.64);
-}
-
-
-/* 进入按钮 */
-
-body.day-mode .enter-wrap::before{
-
-    border-color:
-        rgba(82,151,198,.36);
-
-    background:
-        rgba(242,249,253,.76);
-
-    box-shadow:
-        0 0 22px
-        rgba(76,151,202,.055);
-}
-
-body.day-mode .enter-wrap::after{
-
-    border-color:
-        rgba(85,154,202,.16);
-}
-
-body.day-mode .enter-button{
-
-    color:#335e79;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(230,241,248,.95),
-            rgba(249,252,254,1),
-            rgba(230,241,248,.95)
-        );
-
-    border-top-color:
-        rgba(80,151,200,.38);
-
-    border-bottom-color:
-        rgba(80,151,200,.38);
-}
-
-body.day-mode .enter-button:hover{
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(225,238,247,1),
-            rgba(250,253,255,1),
-            rgba(225,238,247,1)
-        );
-
-    box-shadow:
-        0 0 22px
-        rgba(76,151,202,.13);
-}
-
-body.day-mode .enter-star{
-
-    color:
-        rgba(78,151,200,.68);
-
-    text-shadow:
-        0 0 9px
-        rgba(81,158,207,.20);
-}
-
-body.day-mode .enter-diamond{
-
-    border-color:
-        rgba(82,155,203,.60);
-
-    background:#f4f9fd;
-}
-
-
-/* Footer */
-
-body.day-mode .footer{
-
-    color:
-        rgba(73,115,143,.40);
 }
 
 
@@ -1945,17 +1443,6 @@ body.day-mode .footer{
         font-size:11px;
 
         letter-spacing:1px;
-    }
-
-    .theme-toggle{
-
-        margin-left:12px;
-
-        padding:0 8px;
-
-        height:26px;
-
-        font-size:7px;
     }
 
     .magic-circle{
@@ -2051,19 +1538,21 @@ body.day-mode .footer{
         letter-spacing:0;
     }
 
+    /* 日间按钮不参与导航排版 */
     .theme-toggle{
 
-        margin-left:8px;
+        right:0;
+        top:38px;
 
-        height:24px;
+        height:22px;
 
-        padding:0 6px;
+        padding:0 7px;
 
         gap:3px;
 
         font-size:6px;
 
-        letter-spacing:.8px;
+        letter-spacing:1px;
     }
 
     .theme-icon{
@@ -2295,11 +1784,15 @@ body.day-mode .footer{
 
     .theme-toggle{
 
-        margin-left:5px;
+        top:36px;
 
-        padding:0 5px;
+        height:21px;
+
+        padding:0 6px;
 
         font-size:5.5px;
+
+        letter-spacing:.8px;
     }
 
     .main-title .seyami{
@@ -2324,6 +1817,374 @@ body.day-mode .footer{
         font-size:9px;
     }
 
+}
+
+
+/* =========================================================
+   日间模式
+   ❄️ 白昼冰蓝版
+========================================================= */
+
+body.day-mode{
+    background:#f4f9fd;
+    color:#2e5069;
+}
+
+body.day-mode .page{
+    background:
+        radial-gradient(
+            circle at 50% 42%,
+            rgba(165,211,238,.20),
+            transparent 38%
+        ),
+        radial-gradient(
+            circle at 50% 52%,
+            rgba(226,240,249,.68),
+            transparent 72%
+        ),
+        #f4f9fd;
+}
+
+body.day-mode .stars::before,
+body.day-mode .stars::after{
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(103,166,207,.42) 0 1px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(139,190,220,.26) 0 1px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(88,151,194,.18) 0 1px,
+            transparent 1.5px
+        );
+
+    opacity:.24;
+
+    filter:none;
+}
+
+body.day-mode .stars::after{
+    opacity:.11;
+}
+
+body.day-mode .floating-stars span{
+    color:rgba(87,151,199,.50);
+    text-shadow:none;
+}
+
+body.day-mode .frame{
+    border-color:rgba(91,145,184,.34);
+}
+
+body.day-mode .frame::before{
+    border-color:rgba(108,161,195,.11);
+}
+
+body.day-mode .corner::before{
+    color:rgba(79,141,190,.68);
+    text-shadow:none;
+}
+
+body.day-mode .logo{
+    color:#2e526c;
+}
+
+body.day-mode .logo-mark{
+    color:rgba(79,151,201,.84);
+
+    text-shadow:
+        0 0 7px
+        rgba(86,158,208,.20);
+}
+
+body.day-mode .logo-en{
+    color:rgba(81,137,173,.62);
+}
+
+body.day-mode .nav-links a{
+    color:rgba(62,99,127,.70);
+}
+
+body.day-mode .nav-links a:hover{
+    color:#28536f;
+
+    text-shadow:
+        0 0 8px
+        rgba(76,151,202,.14);
+}
+
+body.day-mode .nav-links a::after{
+    background:rgba(80,151,200,.54);
+}
+
+
+/* =========================================================
+   日间按钮
+========================================================= */
+
+body.day-mode .theme-toggle{
+
+    border-color:
+        rgba(91,145,184,.34);
+
+    background:
+        rgba(248,252,255,.78);
+
+    color:
+        rgba(61,98,125,.76);
+}
+
+body.day-mode .theme-toggle:hover{
+
+    border-color:
+        rgba(79,151,200,.62);
+
+    color:#28536f;
+
+    box-shadow:
+        0 0 14px
+        rgba(76,151,202,.11);
+}
+
+
+/* =========================================================
+   魔法阵
+========================================================= */
+
+body.day-mode .magic-circle{
+    opacity:.48;
+}
+
+body.day-mode .magic-circle::before{
+    border-color:rgba(79,148,196,.26);
+
+    box-shadow:
+        0 0 22px
+        rgba(70,142,196,.055);
+}
+
+body.day-mode .magic-circle::after{
+    border-color:rgba(101,168,207,.20);
+
+    box-shadow:
+        inset
+        0 0 20px
+        rgba(78,151,204,.028);
+}
+
+body.day-mode .orbit-track{
+    stroke:rgba(73,149,201,.28);
+
+    filter:
+        drop-shadow(
+            0 0 4px
+            rgba(76,151,202,.065)
+        );
+}
+
+body.day-mode #travellingStar{
+    fill:rgba(76,151,201,.88);
+
+    filter:
+        drop-shadow(
+            0 0 3px
+            rgba(112,188,224,.38)
+        )
+        drop-shadow(
+            0 0 8px
+            rgba(82,164,211,.19)
+        );
+}
+
+body.day-mode .star-glow{
+    fill:rgba(112,188,224,.055);
+}
+
+body.day-mode .magic-line{
+    background:rgba(79,149,199,.11);
+}
+
+body.day-mode .magic-center{
+    border-color:rgba(82,155,201,.40);
+
+    box-shadow:
+        0 0 10px
+        rgba(82,159,207,.14);
+}
+
+body.day-mode .magic-center::before{
+    background:rgba(102,177,217,.60);
+
+    box-shadow:
+        0 0 8px
+        rgba(91,171,216,.40);
+}
+
+
+/* =========================================================
+   日间标题
+========================================================= */
+
+body.day-mode .main-title{
+    color:#2b506a;
+
+    text-shadow:
+        0 0 18px
+        rgba(80,151,201,.065);
+}
+
+body.day-mode .title-decoration .line{
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(81,151,198,.54)
+        );
+}
+
+body.day-mode .title-decoration .line.right{
+    background:
+        linear-gradient(
+            90deg,
+            rgba(81,151,198,.54),
+            transparent
+        );
+}
+
+body.day-mode .title-decoration .diamond{
+    border-color:rgba(91,160,207,.68);
+}
+
+body.day-mode .chinese-title{
+    color:rgba(45,82,106,.80);
+}
+
+body.day-mode .description{
+    color:rgba(65,106,133,.64);
+}
+
+
+/* =========================================================
+   日间进入按钮
+========================================================= */
+
+body.day-mode .enter-wrap::before{
+    border-color:rgba(82,151,198,.36);
+
+    background:
+        rgba(242,249,253,.76);
+
+    box-shadow:
+        0 0 22px
+        rgba(76,151,202,.055);
+}
+
+body.day-mode .enter-wrap::after{
+    border-color:rgba(85,154,202,.16);
+}
+
+body.day-mode .enter-button{
+    color:#335e79;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(230,241,248,.95),
+            rgba(249,252,254,1),
+            rgba(230,241,248,.95)
+        );
+
+    border-top-color:
+        rgba(80,151,200,.38);
+
+    border-bottom-color:
+        rgba(80,151,200,.38);
+}
+
+body.day-mode .enter-button:hover{
+    background:
+        linear-gradient(
+            90deg,
+            rgba(225,238,247,1),
+            rgba(250,253,255,1),
+            rgba(225,238,247,1)
+        );
+
+    box-shadow:
+        0 0 22px
+        rgba(76,151,202,.13);
+}
+
+body.day-mode .enter-star{
+    color:rgba(78,151,200,.68);
+
+    text-shadow:
+        0 0 9px
+        rgba(81,158,207,.20);
+}
+
+body.day-mode .enter-diamond{
+    border-color:rgba(82,155,203,.60);
+
+    background:#f4f9fd;
+}
+
+body.day-mode .footer{
+    color:rgba(73,115,143,.40);
+}
+
+
+/* =========================================================
+   日间按钮过渡
+========================================================= */
+
+body,
+.page,
+.frame,
+.frame::before,
+.corner::before,
+.logo,
+.logo-mark,
+.logo-en,
+.nav-links a,
+.theme-toggle,
+.magic-circle,
+.magic-circle::before,
+.magic-circle::after,
+.orbit-track,
+#travellingStar,
+.star-glow,
+.magic-line,
+.magic-center,
+.magic-center::before,
+.main-title,
+.title-decoration .line,
+.title-decoration .diamond,
+.chinese-title,
+.description,
+.enter-wrap::before,
+.enter-wrap::after,
+.enter-button,
+.enter-star,
+.enter-diamond,
+.footer{
+
+    transition:
+        background-color .45s ease,
+        background .45s ease,
+        border-color .45s ease,
+        color .45s ease,
+        fill .45s ease,
+        stroke .45s ease,
+        box-shadow .45s ease,
+        text-shadow .45s ease,
+        filter .45s ease;
 }
 
 
@@ -2424,23 +2285,27 @@ body.day-mode .footer{
             关于我们
         </a>
 
-        <button
-            class="theme-toggle"
-            id="themeToggle"
-            type="button"
-            aria-label="切换日间与夜间模式"
-        >
-            <span
-                class="theme-icon"
-                id="themeIcon"
-            >☾</span>
-
-            <span
-                id="themeText"
-            >NIGHT</span>
-        </button>
-
     </nav>
+
+
+    <!-- 日间模式按钮 -->
+    <button
+        class="theme-toggle"
+        id="themeToggle"
+        type="button"
+        aria-label="切换日间与夜间模式"
+    >
+
+        <span
+            class="theme-icon"
+            id="themeIcon"
+        >☾</span>
+
+        <span
+            id="themeText"
+        >NIGHT</span>
+
+    </button>
 
 </header>
 
@@ -2619,7 +2484,7 @@ body.day-mode .footer{
 <script>
 
 /* =========================================================
-   ☀️ 日间 / 夜间模式
+   日间 / 夜间模式
 ========================================================= */
 
 (function(){
@@ -2719,7 +2584,7 @@ body.day-mode .footer{
 
 
 /* =========================================================
-   星轨
+   星轨 JS
 ========================================================= */
 
 (function(){
