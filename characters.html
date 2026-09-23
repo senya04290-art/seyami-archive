@@ -53,6 +53,10 @@ body{
     serif;
 
   overflow-x:hidden;
+
+  transition:
+    background .6s ease,
+    color .6s ease;
 }
 
 
@@ -72,6 +76,9 @@ body{
     70px;
 
   overflow:hidden;
+
+  transition:
+    background .6s ease;
 }
 
 
@@ -113,6 +120,10 @@ body{
   animation:
     starFloat 8s ease-in-out infinite,
     starTwinkle 5s ease-in-out infinite;
+
+  transition:
+    color .6s ease,
+    text-shadow .6s ease;
 }
 
 
@@ -337,6 +348,10 @@ body{
   z-index:0;
 
   pointer-events:none;
+
+  transition:
+    border-color .6s ease,
+    box-shadow .6s ease;
 }
 
 .magic-circle::before,
@@ -354,6 +369,9 @@ body{
   border-radius:50%;
 
   pointer-events:none;
+
+  transition:
+    border-color .6s ease;
 }
 
 .magic-circle::before{
@@ -397,6 +415,9 @@ body{
   pointer-events:none;
 
   z-index:2;
+
+  transition:
+    border-color .6s ease;
 }
 
 .frame::before,
@@ -408,6 +429,9 @@ body{
 
   width:45px;
   height:45px;
+
+  transition:
+    border-color .6s ease;
 }
 
 .frame::before{
@@ -482,6 +506,9 @@ body{
   color:rgba(225,246,255,.92);
 
   text-decoration:none;
+
+  transition:
+    color .6s ease;
 }
 
 .logo-symbol{
@@ -508,6 +535,10 @@ body{
     0 0 12px rgba(90,200,255,.7);
 
   flex-shrink:0;
+
+  transition:
+    color .6s ease,
+    text-shadow .6s ease;
 }
 
 .logo-text{
@@ -536,6 +567,9 @@ body{
   letter-spacing:3px;
 
   white-space:nowrap;
+
+  transition:
+    color .6s ease;
 }
 
 .logo-en{
@@ -557,6 +591,23 @@ body{
   letter-spacing:3px;
 
   white-space:nowrap;
+
+  transition:
+    color .6s ease;
+}
+
+
+/* =========================
+   HEADER RIGHT
+========================= */
+
+.header-right{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:20px;
 }
 
 
@@ -591,6 +642,80 @@ body{
   text-shadow:
     0 0 10px
     rgba(100,200,245,.35);
+}
+
+
+/* =========================
+   DAY / NIGHT TOGGLE
+========================= */
+
+.theme-toggle{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  height:28px;
+
+  padding:
+    0 11px;
+
+  border:
+    1px solid
+    rgba(111,174,224,.32);
+
+  background:
+    rgba(8,28,49,.35);
+
+  color:
+    rgba(191,220,243,.68);
+
+  font-family:
+    "Cinzel",
+    "Noto Serif SC",
+    serif;
+
+  font-size:8px;
+
+  letter-spacing:2px;
+
+  cursor:pointer;
+
+  border-radius:0;
+
+  white-space:nowrap;
+
+  transition:
+    color .35s ease,
+    border-color .35s ease,
+    background .35s ease,
+    box-shadow .35s ease;
+}
+
+.theme-toggle:hover{
+
+  color:#d9efff;
+
+  border-color:
+    rgba(122,192,235,.62);
+
+  background:
+    rgba(8,31,52,.55);
+
+  box-shadow:
+    0 0 14px
+    rgba(76,151,202,.12);
+}
+
+.theme-icon{
+
+  font-size:12px;
+
+  line-height:1;
+
+  letter-spacing:0;
 }
 
 
@@ -634,6 +759,9 @@ body{
   color:rgba(137,201,239,.55);
 
   margin-bottom:12px;
+
+  transition:
+    color .6s ease;
 }
 
 .heading-main{
@@ -649,6 +777,10 @@ body{
   line-height:1;
 
   color:#dcecff;
+
+  transition:
+    color .6s ease,
+    text-shadow .6s ease;
 }
 
 .heading-cn{
@@ -660,6 +792,9 @@ body{
   letter-spacing:5px;
 
   color:rgba(170,210,230,.48);
+
+  transition:
+    color .6s ease;
 }
 
 
@@ -698,6 +833,11 @@ body{
   box-shadow:
     0 20px 60px
     rgba(0,0,0,.15);
+
+  transition:
+    background .6s ease,
+    border-color .6s ease,
+    box-shadow .6s ease;
 }
 
 
@@ -732,6 +872,10 @@ body{
     rgba(6,20,38,.4);
 
   overflow:hidden;
+
+  transition:
+    background .6s ease,
+    border-color .6s ease;
 }
 
 .character-image::before{
@@ -747,6 +891,9 @@ body{
     rgba(140,210,245,.07);
 
   pointer-events:none;
+
+  transition:
+    border-color .6s ease;
 }
 
 .character-image::after{
@@ -765,6 +912,10 @@ body{
   text-shadow:
     0 0 10px
     rgba(90,190,240,.25);
+
+  transition:
+    color .6s ease,
+    text-shadow .6s ease;
 }
 
 
@@ -783,6 +934,9 @@ body{
   letter-spacing:4px;
 
   font-size:10px;
+
+  transition:
+    color .6s ease;
 }
 
 .image-placeholder-symbol{
@@ -798,6 +952,9 @@ body{
   font-size:34px;
 
   color:rgba(130,205,240,.25);
+
+  transition:
+    color .6s ease;
 }
 
 .image-placeholder-cn{
@@ -815,6 +972,9 @@ body{
   letter-spacing:3px;
 
   color:rgba(160,205,225,.28);
+
+  transition:
+    color .6s ease;
 }
 
 
@@ -845,6 +1005,9 @@ body{
   color:rgba(120,195,235,.45);
 
   margin-bottom:22px;
+
+  transition:
+    color .6s ease;
 }
 
 
@@ -863,6 +1026,9 @@ body{
   line-height:1;
 
   color:rgba(225,245,255,.92);
+
+  transition:
+    color .6s ease;
 }
 
 .character-name-cn{
@@ -874,6 +1040,9 @@ body{
   letter-spacing:7px;
 
   color:rgba(195,230,245,.7);
+
+  transition:
+    color .6s ease;
 }
 
 .character-role{
@@ -887,6 +1056,9 @@ body{
   letter-spacing:4px;
 
   color:rgba(130,200,235,.55);
+
+  transition:
+    color .6s ease;
 }
 
 
@@ -910,6 +1082,9 @@ body{
       rgba(120,195,235,.06),
       transparent
     );
+
+  transition:
+    background .6s ease;
 }
 
 
@@ -945,6 +1120,9 @@ body{
   letter-spacing:3px;
 
   color:rgba(125,190,220,.42);
+
+  transition:
+    color .6s ease;
 }
 
 .info-value{
@@ -956,6 +1134,9 @@ body{
   color:rgba(205,232,244,.68);
 
   min-height:14px;
+
+  transition:
+    color .6s ease;
 }
 
 
@@ -974,6 +1155,9 @@ body{
   color:rgba(130,200,235,.5);
 
   margin-bottom:13px;
+
+  transition:
+    color .6s ease;
 }
 
 .description{
@@ -987,6 +1171,9 @@ body{
   color:rgba(190,220,235,.58);
 
   min-height:20px;
+
+  transition:
+    color .6s ease;
 }
 
 
@@ -1008,6 +1195,9 @@ body{
   letter-spacing:3px;
 
   color:rgba(137,201,239,.28);
+
+  transition:
+    color .6s ease;
 }
 
 
@@ -1022,6 +1212,21 @@ body{
     left:35px;
     right:35px;
     top:30px;
+  }
+
+  .header-right{
+
+    gap:14px;
+  }
+
+  .theme-toggle{
+
+    height:27px;
+
+    padding:
+      0 9px;
+
+    font-size:7px;
   }
 
   .character-panel{
@@ -1121,7 +1326,31 @@ body{
     letter-spacing:2px;
   }
 
+  .header-right{
+
+    gap:8px;
+  }
+
   .back{
+
+    font-size:10px;
+  }
+
+  .theme-toggle{
+
+    height:25px;
+
+    padding:
+      0 7px;
+
+    gap:5px;
+
+    font-size:6px;
+
+    letter-spacing:1px;
+  }
+
+  .theme-icon{
 
     font-size:10px;
   }
@@ -1266,6 +1495,413 @@ body{
 
     font-size:27px;
   }
+
+  .header-right{
+
+    gap:5px;
+  }
+
+  .back{
+
+    font-size:9px;
+  }
+
+  .theme-toggle{
+
+    padding:
+      0 6px;
+
+    font-size:6px;
+  }
+}
+
+
+/* =========================================================
+   ★ DAY MODE
+   ★ 与首页 / 档案目录统一
+========================================================= */
+
+body.day-mode{
+
+  background:#f4f9fd;
+
+  color:#2e5069;
+}
+
+
+/* 页面背景 */
+
+body.day-mode .page{
+
+  background:
+
+    radial-gradient(
+      circle at 50% 42%,
+      rgba(165,211,238,.11),
+      transparent 38%
+    ),
+
+    radial-gradient(
+      circle at 50% 52%,
+      rgba(255,255,255,.82),
+      transparent 72%
+    ),
+
+    #f4f9fd;
+}
+
+
+/* =========================
+   DAY · STARS
+========================= */
+
+body.day-mode .stars span{
+
+  color:
+    rgba(76,145,190,.38);
+
+  text-shadow:none;
+}
+
+
+/* =========================
+   DAY · MAGIC CIRCLE
+========================= */
+
+body.day-mode .magic-circle{
+
+  border-color:
+    rgba(79,148,196,.13);
+
+  box-shadow:
+
+    0 0 50px
+    rgba(70,142,196,.055),
+
+    inset
+    0 0 60px
+    rgba(78,151,204,.035);
+}
+
+body.day-mode .magic-circle::before{
+
+  border-color:
+    rgba(79,148,196,.10);
+}
+
+body.day-mode .magic-circle::after{
+
+  border-color:
+    rgba(101,168,207,.11);
+}
+
+
+/* =========================
+   DAY · FRAME
+========================= */
+
+body.day-mode .frame{
+
+  border-color:
+    rgba(91,145,184,.34);
+}
+
+body.day-mode .frame::before{
+
+  border-left-color:
+    rgba(79,151,200,.48);
+
+  border-top-color:
+    rgba(79,151,200,.48);
+}
+
+body.day-mode .frame::after{
+
+  border-right-color:
+    rgba(79,151,200,.48);
+
+  border-bottom-color:
+    rgba(79,151,200,.48);
+}
+
+
+/* =========================
+   DAY · LOGO
+========================= */
+
+body.day-mode .logo{
+
+  color:#2e526c;
+}
+
+body.day-mode .logo-symbol{
+
+  color:
+    rgba(79,151,201,.84);
+
+  text-shadow:none;
+}
+
+body.day-mode .logo-cn{
+
+  color:
+    rgba(46,82,108,.92);
+}
+
+body.day-mode .logo-en{
+
+  color:
+    rgba(81,137,173,.62);
+}
+
+
+/* =========================
+   DAY · BACK
+========================= */
+
+body.day-mode .back{
+
+  color:
+    rgba(62,99,127,.70);
+}
+
+body.day-mode .back:hover{
+
+  color:#28536f;
+
+  text-shadow:
+    0 0 8px
+    rgba(76,151,202,.14);
+}
+
+
+/* =========================
+   DAY · BUTTON
+========================= */
+
+body.day-mode .theme-toggle{
+
+  border-color:
+    rgba(91,145,184,.34);
+
+  background:
+    rgba(248,252,255,.78);
+
+  color:
+    rgba(61,98,125,.76);
+}
+
+body.day-mode .theme-toggle:hover{
+
+  border-color:
+    rgba(79,151,200,.62);
+
+  background:
+    rgba(248,252,255,.90);
+
+  color:#28536f;
+
+  box-shadow:
+    0 0 14px
+    rgba(76,151,202,.11);
+}
+
+
+/* =========================
+   DAY · HEADING
+========================= */
+
+body.day-mode .heading-small{
+
+  color:
+    rgba(81,137,173,.68);
+}
+
+body.day-mode .heading-main{
+
+  color:#2b506a;
+
+  text-shadow:
+    0 0 18px
+    rgba(80,151,201,.065);
+}
+
+body.day-mode .heading-cn{
+
+  color:
+    rgba(45,82,106,.80);
+}
+
+
+/* =========================
+   DAY · CHARACTER PANEL
+========================= */
+
+body.day-mode .character-panel{
+
+  border-color:
+    rgba(82,151,198,.24);
+
+  background:
+
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.58),
+      rgba(239,247,251,.40)
+    );
+
+  box-shadow:
+    0 20px 60px
+    rgba(70,110,130,.08);
+}
+
+
+/* =========================
+   DAY · CHARACTER IMAGE
+========================= */
+
+body.day-mode .character-image{
+
+  border-color:
+    rgba(82,151,198,.24);
+
+  background:
+
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(165,211,238,.15),
+      transparent 58%
+    ),
+
+    rgba(248,252,255,.42);
+}
+
+body.day-mode .character-image::before{
+
+  border-color:
+    rgba(82,151,198,.14);
+}
+
+body.day-mode .character-image::after{
+
+  color:
+    rgba(70,135,165,.38);
+
+  text-shadow:none;
+}
+
+
+/* =========================
+   DAY · PLACEHOLDER
+========================= */
+
+body.day-mode .image-placeholder{
+
+  color:
+    rgba(80,113,128,.50);
+}
+
+body.day-mode .image-placeholder-symbol{
+
+  color:
+    rgba(70,145,185,.38);
+}
+
+body.day-mode .image-placeholder-cn{
+
+  color:
+    rgba(80,113,128,.52);
+}
+
+
+/* =========================
+   DAY · CHARACTER INFO
+========================= */
+
+body.day-mode .character-number{
+
+  color:
+    rgba(65,130,160,.65);
+}
+
+body.day-mode .character-name-en{
+
+  color:
+    rgba(48,80,94,.92);
+}
+
+body.day-mode .character-name-cn{
+
+  color:
+    rgba(67,101,118,.78);
+}
+
+body.day-mode .character-role{
+
+  color:
+    rgba(70,135,165,.60);
+}
+
+
+/* =========================
+   DAY · DIVIDER
+========================= */
+
+body.day-mode .divider{
+
+  background:
+
+    linear-gradient(
+      90deg,
+      rgba(81,151,198,.34),
+      rgba(81,151,198,.08),
+      transparent
+    );
+}
+
+
+/* =========================
+   DAY · BASIC INFO
+========================= */
+
+body.day-mode .info-label{
+
+  color:
+    rgba(65,130,160,.65);
+}
+
+body.day-mode .info-value{
+
+  color:
+    rgba(60,92,108,.78);
+}
+
+
+/* =========================
+   DAY · PROFILE
+========================= */
+
+body.day-mode .description-title{
+
+  color:
+    rgba(70,135,165,.68);
+}
+
+body.day-mode .description{
+
+  color:
+    rgba(65,98,113,.72);
+}
+
+
+/* =========================
+   DAY · ARCHIVE MARK
+========================= */
+
+body.day-mode .archive-mark{
+
+  color:
+    rgba(70,125,155,.45);
 }
 
 
@@ -1278,6 +1914,38 @@ body{
   .stars span{
 
     animation:none;
+  }
+
+  body,
+  .theme-toggle,
+  .magic-circle,
+  .frame,
+  .logo,
+  .logo-symbol,
+  .logo-cn,
+  .logo-en,
+  .heading-small,
+  .heading-main,
+  .heading-cn,
+  .character-panel,
+  .character-image,
+  .character-image::before,
+  .character-image::after,
+  .image-placeholder,
+  .image-placeholder-symbol,
+  .image-placeholder-cn,
+  .character-number,
+  .character-name-en,
+  .character-name-cn,
+  .character-role,
+  .divider,
+  .info-label,
+  .info-value,
+  .description-title,
+  .description,
+  .archive-mark{
+
+    transition:none;
   }
 }
 
@@ -1364,9 +2032,34 @@ body{
     </a>
 
 
-    <a href="archive.html" class="back">
-      ← 返回档案目录
-    </a>
+    <div class="header-right">
+
+      <a href="archive.html" class="back">
+        ← 返回档案目录
+      </a>
+
+
+      <button
+        class="theme-toggle"
+        id="themeToggle"
+        type="button"
+        aria-label="切换昼夜模式"
+      >
+
+        <span
+          class="theme-icon"
+          id="themeIcon"
+        >
+          ☾
+        </span>
+
+        <span id="themeText">
+          NIGHT
+        </span>
+
+      </button>
+
+    </div>
 
   </header>
 
@@ -1429,7 +2122,7 @@ body{
 
       <!-- =====================
            CHARACTER INFORMATION
-      ====================== -->
+      ===================== -->
 
       <div class="character-info">
 
@@ -1559,6 +2252,104 @@ body{
   </main>
 
 </div>
+
+
+<script>
+
+/* =========================================================
+   昼夜模式
+   与首页 / 档案目录共用：seyami-theme
+========================================================= */
+
+const themeToggle =
+  document.getElementById(
+    "themeToggle"
+  );
+
+const themeIcon =
+  document.getElementById(
+    "themeIcon"
+  );
+
+const themeText =
+  document.getElementById(
+    "themeText"
+  );
+
+
+function applyTheme(theme){
+
+  if(theme === "day"){
+
+    document.body.classList.add(
+      "day-mode"
+    );
+
+    themeIcon.textContent = "☀";
+
+    themeText.textContent = "DAY";
+
+  }else{
+
+    document.body.classList.remove(
+      "day-mode"
+    );
+
+    themeIcon.textContent = "☾";
+
+    themeText.textContent = "NIGHT";
+
+  }
+
+}
+
+
+/* 读取首页 / 档案目录保存的模式 */
+
+const savedTheme =
+  localStorage.getItem(
+    "seyami-theme"
+  );
+
+
+/* 默认夜间 */
+
+applyTheme(
+  savedTheme === "day"
+    ? "day"
+    : "night"
+);
+
+
+/* 点击切换 */
+
+themeToggle.addEventListener(
+  "click",
+  () => {
+
+    const isDay =
+      document.body.classList.contains(
+        "day-mode"
+      );
+
+    const nextTheme =
+      isDay
+        ? "night"
+        : "day";
+
+    localStorage.setItem(
+      "seyami-theme",
+      nextTheme
+    );
+
+    applyTheme(
+      nextTheme
+    );
+
+  }
+);
+
+</script>
 
 
 </body>
