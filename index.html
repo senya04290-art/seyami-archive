@@ -2,389 +2,992 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>塞垭弥大陆档案馆 · Seyami Archive</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@400;500;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.googleapis.com"
+      crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500&display=swap"
+      rel="stylesheet">
 
 <style>
+
+/* =========================================================
+   基础
+========================================================= */
+
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
 }
 
-html,body{
+html,
+body{
     width:100%;
-    height:100%;
+    min-height:100%;
 }
 
 body{
-    overflow:hidden;
     background:#061426;
-    color:#dceeff;
-    font-family:"Cormorant Garamond","Noto Serif SC",serif;
+    color:#dcecff;
+    overflow-x:hidden;
+
+    font-family:
+        "Cormorant Garamond",
+        "Noto Serif SC",
+        serif;
+
+    transition:
+        background 1s ease,
+        color 1s ease;
 }
+
+
+/* =========================================================
+   页面
+========================================================= */
 
 .page{
     position:relative;
+
     width:100%;
-    height:100vh;
+    min-height:100vh;
+
     overflow:hidden;
 
     background:
-        radial-gradient(circle at 50% 42%,rgba(38,91,137,.18),transparent 38%),
-        radial-gradient(circle at 50% 52%,rgba(11,45,75,.45),transparent 72%),
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(38,91,137,.18),
+            transparent 38%
+        ),
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(11,45,75,.45),
+            transparent 70%
+        ),
         #061426;
+
+    transition:
+        background 1s ease;
 }
 
-/* =========================
-   背景星尘
-========================= */
+
+/* =========================================================
+   背景星空
+========================================================= */
 
 .stars{
     position:absolute;
     inset:0;
+
     pointer-events:none;
+    overflow:hidden;
 }
 
 .stars::before,
 .stars::after{
     content:"";
+
     position:absolute;
-    inset:0;
+    inset:-20%;
 
     background-image:
-        radial-gradient(circle,rgba(182,220,255,.7) 0 1px,transparent 1.5px),
-        radial-gradient(circle,rgba(130,191,239,.45) 0 1px,transparent 1.5px),
-        radial-gradient(circle,rgba(220,240,255,.35) 0 1px,transparent 1.5px);
+        radial-gradient(
+            circle,
+            rgba(182,220,255,.7) 0 1px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(130,191,239,.45) 0 1px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(220,240,255,.35) 0 1px,
+            transparent 1.5px
+        );
 
     background-size:
-        170px 170px,
+        180px 180px,
         240px 240px,
         310px 310px;
 
     background-position:
         20px 30px,
-        90px 120px,
-        140px 60px;
+        80px 120px,
+        150px 70px;
 
-    opacity:.55;
+    opacity:.45;
+
+    animation:
+        starMove
+        35s
+        linear
+        infinite;
+
+    transition:
+        opacity 1s ease;
 }
 
 .stars::after{
-    transform:rotate(17deg) scale(1.15);
-    opacity:.28;
+    opacity:.22;
+
+    transform:scale(1.15);
+
+    animation-duration:50s;
 }
 
-/* =========================
+
+@keyframes starMove{
+
+    from{
+        transform:translate3d(0,0,0);
+    }
+
+    to{
+        transform:translate3d(-80px,50px,0);
+    }
+
+}
+
+
+/* =========================================================
    浮动星星
-========================= */
+========================================================= */
 
 .floating-stars{
     position:absolute;
+
     inset:0;
+
     pointer-events:none;
+
+    z-index:2;
 }
 
 .floating-stars span{
     position:absolute;
+
     color:rgba(158,207,247,.62);
-    font-size:10px;
-    animation:floatStar 7s ease-in-out infinite;
+
+    font-family:serif;
+
+    font-size:14px;
+
+    text-shadow:none;
+
+    animation:
+        floatStar
+        6s
+        ease-in-out
+        infinite;
+
+    transition:
+        color 1s ease;
 }
 
-.floating-stars span:nth-child(1){left:8%;top:19%;animation-delay:-1s;}
-.floating-stars span:nth-child(2){left:16%;top:70%;animation-delay:-4s;}
-.floating-stars span:nth-child(3){left:28%;top:14%;animation-delay:-2s;}
-.floating-stars span:nth-child(4){left:37%;top:78%;animation-delay:-5s;}
-.floating-stars span:nth-child(5){left:49%;top:11%;animation-delay:-3s;}
-.floating-stars span:nth-child(6){left:59%;top:83%;animation-delay:-1s;}
-.floating-stars span:nth-child(7){left:68%;top:17%;animation-delay:-5s;}
-.floating-stars span:nth-child(8){left:76%;top:72%;animation-delay:-2s;}
-.floating-stars span:nth-child(9){left:88%;top:23%;animation-delay:-4s;}
-.floating-stars span:nth-child(10){left:93%;top:61%;animation-delay:-3s;}
-.floating-stars span:nth-child(11){left:13%;top:44%;animation-delay:-2s;}
-.floating-stars span:nth-child(12){left:83%;top:46%;animation-delay:-1s;}
-.floating-stars span:nth-child(13){left:23%;top:88%;animation-delay:-4s;}
-.floating-stars span:nth-child(14){left:42%;top:25%;animation-delay:-2s;}
-.floating-stars span:nth-child(15){left:57%;top:30%;animation-delay:-5s;}
-.floating-stars span:nth-child(16){left:71%;top:89%;animation-delay:-3s;}
-.floating-stars span:nth-child(17){left:79%;top:13%;animation-delay:-1s;}
-.floating-stars span:nth-child(18){left:91%;top:82%;animation-delay:-4s;}
-.floating-stars span:nth-child(19){left:5%;top:83%;animation-delay:-3s;}
-.floating-stars span:nth-child(20){left:32%;top:51%;animation-delay:-1s;}
-.floating-stars span:nth-child(21){left:47%;top:91%;animation-delay:-4s;}
-.floating-stars span:nth-child(22){left:64%;top:7%;animation-delay:-2s;}
-.floating-stars span:nth-child(23){left:72%;top:53%;animation-delay:-5s;}
-.floating-stars span:nth-child(24){left:86%;top:37%;animation-delay:-3s;}
-.floating-stars span:nth-child(25){left:18%;top:30%;animation-delay:-1s;}
-.floating-stars span:nth-child(26){left:52%;top:62%;animation-delay:-4s;}
-.floating-stars span:nth-child(27){left:97%;top:33%;animation-delay:-2s;}
-.floating-stars span:nth-child(28){left:3%;top:58%;animation-delay:-5s;}
+
+/* =========================================================
+   原有12颗
+========================================================= */
+
+.floating-stars span:nth-child(1){
+    left:12%;
+    top:24%;
+    animation-delay:0s;
+}
+
+.floating-stars span:nth-child(2){
+    left:20%;
+    top:67%;
+    animation-delay:1.5s;
+}
+
+.floating-stars span:nth-child(3){
+    left:77%;
+    top:22%;
+    animation-delay:2.5s;
+}
+
+.floating-stars span:nth-child(4){
+    left:84%;
+    top:70%;
+    animation-delay:1s;
+}
+
+.floating-stars span:nth-child(5){
+    left:30%;
+    top:17%;
+    animation-delay:3s;
+}
+
+.floating-stars span:nth-child(6){
+    left:71%;
+    top:61%;
+    animation-delay:2s;
+}
+
+.floating-stars span:nth-child(7){
+    left:16%;
+    top:46%;
+    animation-delay:4s;
+}
+
+.floating-stars span:nth-child(8){
+    left:89%;
+    top:43%;
+    animation-delay:1.8s;
+}
+
+.floating-stars span:nth-child(9){
+    left:42%;
+    top:11%;
+    animation-delay:2.2s;
+}
+
+.floating-stars span:nth-child(10){
+    left:57%;
+    top:83%;
+    animation-delay:3.5s;
+}
+
+.floating-stars span:nth-child(11){
+    left:7%;
+    top:78%;
+    animation-delay:1.2s;
+}
+
+.floating-stars span:nth-child(12){
+    left:94%;
+    top:18%;
+    animation-delay:4.2s;
+}
+
+
+/* =========================================================
+   PC新增16颗
+========================================================= */
+
+.floating-stars span:nth-child(13){
+    left:26%;
+    top:31%;
+    animation-delay:2.7s;
+}
+
+.floating-stars span:nth-child(14){
+    left:35%;
+    top:76%;
+    animation-delay:4.5s;
+}
+
+.floating-stars span:nth-child(15){
+    left:63%;
+    top:19%;
+    animation-delay:1.7s;
+}
+
+.floating-stars span:nth-child(16){
+    left:73%;
+    top:36%;
+    animation-delay:3.8s;
+}
+
+.floating-stars span:nth-child(17){
+    left:91%;
+    top:58%;
+    animation-delay:2.4s;
+}
+
+.floating-stars span:nth-child(18){
+    left:11%;
+    top:58%;
+    animation-delay:4.8s;
+}
+
+.floating-stars span:nth-child(19){
+    left:47%;
+    top:24%;
+    animation-delay:1.3s;
+}
+
+.floating-stars span:nth-child(20){
+    left:54%;
+    top:73%;
+    animation-delay:3.1s;
+}
+
+.floating-stars span:nth-child(21){
+    left:82%;
+    top:81%;
+    animation-delay:4.1s;
+}
+
+.floating-stars span:nth-child(22){
+    left:4%;
+    top:34%;
+    animation-delay:2.1s;
+}
+
+.floating-stars span:nth-child(23){
+    left:68%;
+    top:88%;
+    animation-delay:5s;
+}
+
+.floating-stars span:nth-child(24){
+    left:39%;
+    top:91%;
+    animation-delay:3.6s;
+}
+
+.floating-stars span:nth-child(25){
+    left:58%;
+    top:8%;
+    animation-delay:1.9s;
+}
+
+.floating-stars span:nth-child(26){
+    left:96%;
+    top:77%;
+    animation-delay:4.4s;
+}
+
+.floating-stars span:nth-child(27){
+    left:22%;
+    top:88%;
+    animation-delay:2.9s;
+}
+
+.floating-stars span:nth-child(28){
+    left:87%;
+    top:27%;
+    animation-delay:3.3s;
+}
+
 
 @keyframes floatStar{
-    0%,100%{
-        transform:translateY(0) scale(1);
-        opacity:.45;
+
+    0%,
+    100%{
+        opacity:.35;
+
+        transform:
+            translateY(0)
+            rotate(0deg);
     }
+
     50%{
-        transform:translateY(-7px) scale(1.12);
-        opacity:.9;
+        opacity:.85;
+
+        transform:
+            translateY(-8px)
+            rotate(12deg);
     }
+
 }
 
-/* =========================
+
+/* =========================================================
    外框
-========================= */
+========================================================= */
 
 .frame{
     position:absolute;
-    inset:26px;
-    border:1px solid rgba(111,174,224,.32);
+
+    inset:18px;
+
+    border:
+        1px solid
+        rgba(111,174,224,.32);
+
     pointer-events:none;
+
+    z-index:10;
+
+    transition:
+        border-color 1s ease;
 }
 
 .frame::before{
     content:"";
+
     position:absolute;
-    inset:8px;
-    border:1px solid rgba(81,142,193,.08);
+
+    inset:7px;
+
+    border:
+        1px solid
+        rgba(81,142,193,.08);
+
+    transition:
+        border-color 1s ease;
 }
+
+
+/* =========================================================
+   四角六芒星
+========================================================= */
 
 .corner{
     position:absolute;
-    width:30px;
-    height:30px;
+
+    width:68px;
+    height:68px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    pointer-events:none;
 }
 
 .corner::before{
     content:"✡";
-    position:absolute;
-    color:rgba(108,178,230,.88);
-    font-size:21px;
+
+    display:block;
+
+    font-family:
+        "Times New Roman",
+        serif;
+
+    font-size:40px;
+    font-weight:400;
+
     line-height:1;
+
+    color:
+        rgba(108,178,230,.88);
+
+    text-shadow:none;
+
+    transition:
+        color 1s ease;
 }
 
-.corner.tl{top:-13px;left:-13px;}
-.corner.tr{top:-13px;right:-13px;}
-.corner.bl{bottom:-8px;left:-13px;}
-.corner.br{bottom:-8px;right:-13px;}
+.corner.tl{
+    left:-34px;
+    top:-34px;
+}
 
-/* =========================
+.corner.tr{
+    right:-34px;
+    top:-34px;
+}
+
+.corner.bl{
+    left:-34px;
+    bottom:-34px;
+}
+
+.corner.br{
+    right:-34px;
+    bottom:-34px;
+}
+
+
+/* =========================================================
    顶部导航
-========================= */
+========================================================= */
 
 .top-nav{
     position:absolute;
-    top:42px;
-    left:46px;
-    right:46px;
+
+    left:58px;
+    right:58px;
+    top:38px;
 
     display:flex;
+    align-items:flex-start;
     justify-content:space-between;
-    align-items:center;
 
-    z-index:10;
+    z-index:20;
 }
 
 .logo{
     display:flex;
-    align-items:center;
-    gap:9px;
+    align-items:baseline;
+
+    gap:10px;
 
     color:#d9edff;
-    font-family:"Noto Serif SC",serif;
-    font-size:14px;
-    letter-spacing:2px;
+
+    text-decoration:none;
+
+    transition:
+        color 1s ease;
 }
 
 .logo-mark{
-    color:rgba(137,201,239,.9);
-    font-size:18px;
-    text-shadow:0 0 7px rgba(117,193,239,.35);
+    width:auto;
+    height:auto;
+
+    display:block;
+
+    flex-shrink:0;
+
+    font-family:
+        "Times New Roman",
+        serif;
+
+    font-size:21px;
+    font-weight:400;
+
+    line-height:1;
+
+    color:
+        rgba(137,201,239,.9);
+
+    position:relative;
+    top:1px;
+
+    text-shadow:
+        0 0 7px rgba(76,159,216,.5),
+        0 0 15px rgba(49,132,191,.22);
+
+    transition:
+        color 1s ease,
+        text-shadow 1s ease;
+}
+
+.logo-text{
+    display:flex;
+    flex-direction:column;
+
+    line-height:1.05;
+}
+
+.logo-cn{
+    font-family:
+        "Noto Serif SC",
+        serif;
+
+    font-size:15px;
+    font-weight:400;
+
+    letter-spacing:2px;
 }
 
 .logo-en{
-    margin-left:4px;
-    color:rgba(157,204,239,.63);
-    font-family:"Cinzel",serif;
-    font-size:10px;
+    margin-top:5px;
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size:8px;
+
     letter-spacing:3px;
+
+    color:
+        rgba(157,204,239,.63);
+
+    transition:
+        color 1s ease;
 }
 
-.nav-right{
-    display:flex;
-    align-items:center;
-    gap:28px;
-}
+
+/* =========================================================
+   导航
+========================================================= */
 
 .nav-links{
     display:flex;
-    gap:26px;
+    align-items:center;
+
+    gap:31px;
 }
 
 .nav-links a{
     position:relative;
 
-    color:rgba(191,220,243,.68);
+    color:
+        rgba(191,220,243,.68);
+
     text-decoration:none;
 
-    font-family:"Noto Serif SC",serif;
+    font-family:
+        "Noto Serif SC",
+        serif;
+
     font-size:12px;
+
     letter-spacing:2px;
 
-    transition:.3s;
-}
-
-.nav-links a:hover{
-    color:#d9efff;
-    text-shadow:0 0 8px rgba(122,192,235,.18);
+    transition:
+        color .3s ease,
+        text-shadow .3s ease;
 }
 
 .nav-links a::after{
     content:"";
+
     position:absolute;
-    left:0;
-    bottom:-7px;
-    width:100%;
+
+    left:50%;
+    bottom:-8px;
+
+    width:0;
     height:1px;
 
-    background:rgba(122,192,235,.7);
+    background:
+        rgba(122,192,235,.7);
 
-    transform:scaleX(0);
-    transform-origin:center;
+    transform:
+        translateX(-50%);
 
-    transition:.3s;
+    transition:
+        width .3s ease;
+}
+
+.nav-links a:hover{
+    color:#d9efff;
+
+    text-shadow:
+        0 0 8px
+        rgba(102,180,231,.35);
 }
 
 .nav-links a:hover::after{
-    transform:scaleX(1);
+    width:100%;
 }
 
-/* =========================
-   日夜模式按钮
-========================= */
+
+/* =========================================================
+   ☀️ / 🌙 日夜切换按钮
+========================================================= */
 
 .theme-toggle{
-    border:1px solid rgba(111,174,224,.32);
-    background:rgba(7,25,43,.45);
-    color:rgba(191,220,243,.72);
 
-    padding:7px 12px;
+    position:relative;
 
-    font-family:"Cinzel",serif;
-    font-size:9px;
-    letter-spacing:1.5px;
+    margin-left:26px;
+
+    width:92px;
+    height:30px;
+
+    flex-shrink:0;
+
+    border:
+        1px solid
+        rgba(111,174,224,.32);
+
+    background:
+        rgba(7,25,43,.45);
+
+    color:
+        rgba(191,220,243,.72);
 
     cursor:pointer;
 
-    transition:.3s;
+    font-family:
+        "Cinzel",
+        "Noto Serif SC",
+        serif;
+
+    font-size:8px;
+
+    letter-spacing:2px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:7px;
+
+    transition:
+        background .6s ease,
+        border-color .6s ease,
+        color .6s ease,
+        box-shadow .6s ease;
 }
 
 .theme-toggle:hover{
-    border-color:rgba(122,192,235,.6);
-    color:#d9efff;
-    box-shadow:0 0 14px rgba(83,143,167,.15);
+
+    border-color:
+        rgba(126,192,232,.62);
+
+    color:#dcefff;
+
+    box-shadow:
+        0 0 14px
+        rgba(72,153,208,.12);
 }
 
-/* =========================
-   魔法阵
-========================= */
+.theme-icon{
+
+    font-family:serif;
+
+    font-size:12px;
+
+    line-height:1;
+}
+
+
+/* =========================================================
+   主体
+========================================================= */
+
+.main{
+    position:relative;
+
+    width:100%;
+    min-height:100vh;
+
+    display:flex;
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    z-index:5;
+
+    padding:
+        80px
+        20px
+        70px;
+}
+
+
+/* =========================================================
+   魔法圆阵
+========================================================= */
 
 .magic-circle{
     position:absolute;
+
+    width:560px;
+    height:560px;
+
     left:50%;
     top:50%;
 
-    width:620px;
-    height:310px;
+    transform:
+        translate(-50%,-50%);
 
-    transform:translate(-50%,-50%);
-
-    opacity:.75;
+    border-radius:50%;
 
     pointer-events:none;
+
+    opacity:.55;
+
+    transition:
+        opacity 1s ease;
 }
 
 .magic-circle::before{
     content:"";
-    position:absolute;
-    inset:22px 0;
 
-    border:1px solid rgba(73,143,198,.28);
+    position:absolute;
+    inset:0;
+
     border-radius:50%;
 
-    box-shadow:0 0 22px rgba(69,135,163,.07);
+    border:
+        1px solid
+        rgba(73,143,198,.28);
+
+    box-shadow:
+        0 0 22px
+        rgba(47,126,184,.08);
+
+    animation:
+        rotateCircle
+        80s
+        linear
+        infinite;
+
+    transition:
+        border-color 1s ease,
+        box-shadow 1s ease;
 }
 
 .magic-circle::after{
     content:"";
-    position:absolute;
-    inset:44px 58px;
 
-    border:1px solid rgba(91,162,213,.22);
+    position:absolute;
+
+    inset:27px;
+
     border-radius:50%;
 
-    box-shadow:inset 0 0 20px rgba(80,141,166,.035);
+    border:
+        1px solid
+        rgba(91,162,213,.22);
+
+    box-shadow:
+        inset
+        0 0 20px
+        rgba(62,139,194,.04);
+
+    animation:
+        rotateCircleReverse
+        55s
+        linear
+        infinite;
+
+    transition:
+        border-color 1s ease,
+        box-shadow 1s ease;
 }
 
-.magic-circle svg{
+@keyframes rotateCircle{
+
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+@keyframes rotateCircleReverse{
+
+    from{
+        transform:rotate(360deg);
+    }
+
+    to{
+        transform:rotate(0deg);
+    }
+
+}
+
+
+/* =========================================================
+   三重魔法星轨
+========================================================= */
+
+.orbit-system{
     position:absolute;
+
     inset:0;
+
     width:100%;
     height:100%;
+
     overflow:visible;
 }
 
-/* =========================
-   星轨
-========================= */
-
 .orbit-track{
     fill:none;
-    stroke:rgba(69,164,230,.28);
+
+    stroke:
+        rgba(69,164,230,.28);
+
     stroke-width:1;
 
-    filter:drop-shadow(0 0 4px rgba(70,130,155,.08));
-}
-
-#travellingStar{
-    fill:rgba(190,228,255,.95);
+    vector-effect:
+        non-scaling-stroke;
 
     filter:
-        drop-shadow(0 0 3px rgba(112,176,198,.45))
-        drop-shadow(0 0 8px rgba(99,164,188,.25));
+        drop-shadow(
+            0 0 4px
+            rgba(70,155,210,.10)
+        );
+
+    transition:
+        stroke 1s ease,
+        filter 1s ease;
+}
+
+
+/* =========================================================
+   小星辰
+========================================================= */
+
+#travellingStar{
+    font-family:
+        "Times New Roman",
+        serif;
+
+    font-size:15px;
+
+    fill:
+        rgba(190,228,255,.95);
+
+    text-anchor:middle;
+
+    dominant-baseline:middle;
+
+    pointer-events:none;
+
+    filter:
+        drop-shadow(
+            0 0 3px
+            rgba(131,207,250,.9)
+        )
+        drop-shadow(
+            0 0 8px
+            rgba(74,165,224,.55)
+        );
+
+    transition:
+        fill 1s ease,
+        filter 1s ease;
 }
 
 .star-glow{
-    fill:rgba(143,210,246,.08);
+    fill:
+        rgba(143,210,246,.08);
+
+    filter:blur(2px);
+
+    pointer-events:none;
+
+    transition:
+        fill 1s ease;
 }
+
+
+/* =========================================================
+   中央魔法线
+========================================================= */
 
 .magic-line{
     position:absolute;
 
-    background:rgba(92,164,213,.13);
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    background:
+        rgba(92,164,213,.13);
+
+    transition:
+        background 1s ease;
 }
 
 .magic-line.horizontal{
-    width:100%;
+    width:490px;
     height:1px;
-
-    left:0;
-    top:50%;
 }
 
 .magic-line.vertical{
     width:1px;
-    height:100%;
-
-    left:50%;
-    top:0;
+    height:490px;
 }
+
+
+/* =========================================================
+   中央小圆
+========================================================= */
 
 .magic-center{
     position:absolute;
@@ -392,174 +995,375 @@ body{
     left:50%;
     top:50%;
 
-    width:10px;
-    height:10px;
+    width:12px;
+    height:12px;
 
-    transform:translate(-50%,-50%);
+    transform:
+        translate(-50%,-50%);
 
-    border:1px solid rgba(133,202,242,.48);
+    border:
+        1px solid
+        rgba(133,202,242,.48);
+
     border-radius:50%;
 
-    box-shadow:0 0 10px rgba(88,171,224,.25);
+    box-shadow:
+        0 0 10px
+        rgba(88,171,224,.25);
+
+    transition:
+        border-color 1s ease,
+        box-shadow 1s ease;
 }
 
 .magic-center::before{
     content:"";
 
     position:absolute;
+
     left:50%;
     top:50%;
 
     width:3px;
     height:3px;
 
-    transform:translate(-50%,-50%);
+    transform:
+        translate(-50%,-50%);
 
-    background:rgba(174,221,249,.7);
     border-radius:50%;
 
-    box-shadow:0 0 8px rgba(126,203,244,.8);
+    background:
+        rgba(174,221,249,.7);
+
+    box-shadow:
+        0 0 8px
+        rgba(126,203,244,.8);
+
+    transition:
+        background 1s ease,
+        box-shadow 1s ease;
 }
 
-/* =========================
-   标题
-========================= */
+
+/* =========================================================
+   标题区域
+========================================================= */
 
 .title-area{
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    transform:translate(-50%,-50%);
+    position:relative;
 
     text-align:center;
 
-    z-index:5;
+    z-index:8;
+
+    margin-top:-18px;
 }
+
+
+/* =========================================================
+   PC标题
+========================================================= */
 
 .main-title{
-    color:#dceeff;
 
-    font-family:"Cinzel",serif;
+    position:relative;
 
-    font-size:clamp(58px,8vw,108px);
+    width:100%;
+
+    max-width:100%;
+
+    height:87px;
+
+    margin-left:auto;
+    margin-right:auto;
+
+    font-family:
+        "Cinzel",
+        "Cormorant Garamond",
+        serif;
+
     font-weight:400;
 
-    line-height:.82;
+    line-height:1;
+
+    letter-spacing:8px;
+
+    color:#dceeff;
+
+    text-align:center;
+
+    text-shadow:
+        0 0 18px
+        rgba(94,172,222,.08);
+
+    transition:
+        color 1s ease,
+        text-shadow 1s ease;
+}
+
+.main-title .seyami{
+
+    position:absolute;
+
+    right:50%;
+
+    margin-right:20px;
+
+    font-size:clamp(56px, 7.9vw, 87px);
+
+    white-space:nowrap;
+}
+
+.main-title .archive{
+
+    position:absolute;
+
+    left:50%;
+
+    margin-left:20px;
+
+    margin-top:0;
+
+    font-size:clamp(56px, 7.9vw, 87px);
+
     letter-spacing:9px;
 
-    text-shadow:0 0 18px rgba(94,172,222,.08);
+    white-space:nowrap;
 }
 
-.main-title + .main-title{
-    margin-top:8px;
-}
+
+/* =========================================================
+   标题装饰
+========================================================= */
 
 .title-decoration{
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
-    gap:13px;
+    gap:15px;
 
-    margin:18px auto 12px;
+    margin-top:29px;
+
+    opacity:.7;
 }
 
 .title-decoration .line{
+
     width:95px;
     height:1px;
 
-    background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(115,182,224,.62)
-    );
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(115,182,224,.62)
+        );
+
+    transition:
+        background 1s ease;
 }
 
 .title-decoration .line.right{
-    background:linear-gradient(
-        90deg,
-        rgba(115,182,224,.62),
-        transparent
-    );
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(115,182,224,.62),
+            transparent
+        );
 }
 
 .title-decoration .diamond{
+
     width:6px;
     height:6px;
 
-    border:1px solid rgba(143,202,237,.8);
+    border:
+        1px solid
+        rgba(143,202,237,.8);
 
     transform:rotate(45deg);
+
+    transition:
+        border-color 1s ease;
 }
+
+
+/* =========================================================
+   中文标题
+========================================================= */
 
 .chinese-title{
-    color:rgba(207,229,246,.86);
 
-    font-family:"Noto Serif SC",serif;
+    margin-top:24px;
 
-    font-size:15px;
+    font-family:
+        "Noto Serif SC",
+        serif;
+
+    font-size:20px;
+
+    font-weight:300;
+
     letter-spacing:8px;
+
+    color:
+        rgba(207,229,246,.86);
+
+    text-align:center;
+
+    transition:
+        color 1s ease;
 }
+
+
+/* =========================================================
+   描述
+========================================================= */
 
 .description{
-    margin-top:11px;
 
-    color:rgba(177,207,230,.62);
+    margin-top:20px;
 
-    font-family:"Noto Serif SC",serif;
+    display:flex;
 
-    font-size:11px;
-    letter-spacing:3px;
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:7px;
+
+    text-align:center;
+
+    color:
+        rgba(177,207,230,.62);
+
+    font-family:
+        "Noto Serif SC",
+        serif;
+
+    font-size:12px;
+
+    line-height:1.7;
+
+    letter-spacing:2px;
+
+    transition:
+        color 1s ease;
 }
 
-/* =========================
-   进入档案馆
-========================= */
+
+/* =========================================================
+   进入按钮
+========================================================= */
 
 .enter-wrap{
+
     position:relative;
 
-    margin:31px auto 0;
+    width:370px;
+    height:82px;
 
-    width:max-content;
+    margin:42px auto 0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
 }
 
 .enter-wrap::before{
+
     content:"";
 
     position:absolute;
 
-    inset:-7px -13px;
+    inset:0;
 
-    border:1px solid rgba(91,167,218,.38);
+    clip-path:
+        polygon(
+            0 20%,
+            5% 20%,
+            8% 0,
+            92% 0,
+            95% 20%,
+            100% 20%,
+            100% 80%,
+            95% 80%,
+            92% 100%,
+            8% 100%,
+            5% 80%,
+            0 80%
+        );
 
-    background:rgba(8,28,49,.48);
+    border:
+        1px solid
+        rgba(91,167,218,.38);
 
-    box-shadow:0 0 22px rgba(39,120,180,.08);
+    background:
+        rgba(8,28,49,.48);
+
+    box-shadow:
+        0 0 22px
+        rgba(39,120,180,.08);
+
+    pointer-events:none;
+
+    transition:
+        border-color 1s ease,
+        background 1s ease,
+        box-shadow 1s ease;
 }
 
 .enter-wrap::after{
+
     content:"";
 
     position:absolute;
 
-    inset:-3px -8px;
+    left:13px;
+    right:13px;
+    top:13px;
+    bottom:13px;
 
-    border:1px solid rgba(91,164,213,.16);
+    border:
+        1px solid
+        rgba(91,164,213,.16);
 
     pointer-events:none;
+
+    transition:
+        border-color 1s ease;
 }
 
 .enter-button{
+
     position:relative;
 
-    display:block;
+    z-index:2;
 
-    padding:11px 28px;
+    width:300px;
+    height:50px;
+
+    border:none;
+    outline:none;
+
+    cursor:pointer;
 
     color:#d9edff;
+
+    font-family:
+        "Noto Serif SC",
+        serif;
+
+    font-size:13px;
+
+    letter-spacing:4px;
 
     background:
         linear-gradient(
@@ -569,138 +1373,198 @@ body{
             rgba(8,31,52,.88)
         );
 
-    border-top:1px solid rgba(105,180,225,.38);
-    border-bottom:1px solid rgba(105,180,225,.38);
+    border-top:
+        1px solid
+        rgba(105,180,225,.38);
 
-    text-decoration:none;
+    border-bottom:
+        1px solid
+        rgba(105,180,225,.38);
 
-    font-family:"Noto Serif SC",serif;
-
-    font-size:12px;
-    letter-spacing:4px;
-
-    transition:.3s;
+    transition:
+        background .35s ease,
+        box-shadow .35s ease,
+        letter-spacing .35s ease,
+        color 1s ease,
+        border-color 1s ease;
 }
 
 .enter-button:hover{
+
     background:
         linear-gradient(
             90deg,
-            rgba(14,42,66,.96),
-            rgba(24,62,91,.96),
-            rgba(14,42,66,.96)
+            rgba(10,41,67,.95),
+            rgba(23,66,98,.95),
+            rgba(10,41,67,.95)
         );
 
-    box-shadow:0 0 22px rgba(56,143,201,.18);
+    box-shadow:
+        0 0 22px
+        rgba(56,143,201,.18);
+
+    letter-spacing:5px;
+}
+
+.enter-button:active{
+    transform:translateY(1px);
 }
 
 .enter-star{
-    margin-right:7px;
 
-    color:rgba(111,186,229,.75);
+    position:absolute;
 
-    text-shadow:0 0 9px rgba(82,143,167,.28);
+    top:50%;
+
+    transform:
+        translateY(-50%);
+
+    color:
+        rgba(111,186,229,.75);
+
+    font-size:16px;
+
+    text-shadow:
+        0 0 9px
+        rgba(67,158,215,.45);
+
+    z-index:3;
+
+    transition:
+        color 1s ease,
+        text-shadow 1s ease;
+}
+
+.enter-star.left{
+    left:18px;
+}
+
+.enter-star.right{
+    right:18px;
 }
 
 .enter-diamond{
-    position:absolute;
 
-    width:7px;
-    height:7px;
-
-    border:1px solid rgba(105,180,225,.58);
-
-    background:#061426;
-
-    transform:rotate(45deg);
-}
-
-.enter-diamond.tl{
-    top:-4px;
-    left:-4px;
-}
-
-.enter-diamond.tr{
-    top:-4px;
-    right:-4px;
-}
-
-.enter-diamond.bl{
-    bottom:-4px;
-    left:-4px;
-}
-
-.enter-diamond.br{
-    bottom:-4px;
-    right:-4px;
-}
-
-/* =========================
-   页脚
-========================= */
-
-.footer{
     position:absolute;
 
     left:50%;
-    bottom:34px;
 
-    transform:translateX(-50%);
+    width:6px;
+    height:6px;
 
-    color:rgba(133,177,207,.38);
+    transform:
+        translateX(-50%)
+        rotate(45deg);
 
-    font-family:"Cinzel",serif;
+    border:
+        1px solid
+        rgba(116,187,226,.65);
 
-    font-size:9px;
+    background:#061426;
+
+    transition:
+        border-color 1s ease,
+        background 1s ease;
+}
+
+.enter-diamond.top{
+    top:-3px;
+}
+
+.enter-diamond.bottom{
+    bottom:-3px;
+}
+
+
+/* =========================================================
+   Footer
+========================================================= */
+
+.footer{
+
+    position:absolute;
+
+    left:50%;
+    bottom:32px;
+
+    transform:
+        translateX(-50%);
+
+    z-index:15;
+
+    color:
+        rgba(133,177,207,.38);
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size:8px;
+
     letter-spacing:4px;
 
     white-space:nowrap;
+
+    transition:
+        color 1s ease;
 }
 
-/* =====================================================
-   ❄️ DAY MODE — 冰蓝版本
-   ===================================================== */
+
+/* =========================================================
+   ☀️ DAY MODE
+   冷调冰蓝版
+========================================================= */
 
 body.day-mode{
-    background:#eef6fc;
-    color:#304b63;
+
+    background:#edf5fa;
+
+    color:#29465b;
 }
 
 body.day-mode .page{
+
     background:
         radial-gradient(
             circle at 50% 42%,
-            rgba(157,198,226,.26),
+            rgba(130,190,224,.24),
             transparent 38%
         ),
         radial-gradient(
             circle at 50% 52%,
-            rgba(216,231,243,.80),
+            rgba(214,232,243,.78),
             transparent 72%
         ),
-        #eef6fc;
+        #edf5fa;
 }
+
+
+/* =========================================================
+   日间星空
+========================================================= */
 
 body.day-mode .stars::before,
 body.day-mode .stars::after{
+
     background-image:
         radial-gradient(
             circle,
-            rgba(91,137,174,.40) 0 1px,
+            rgba(93,155,194,.46) 0 1px,
             transparent 1.5px
         ),
         radial-gradient(
             circle,
-            rgba(126,165,195,.28) 0 1px,
+            rgba(126,181,214,.30) 0 1px,
             transparent 1.5px
         ),
         radial-gradient(
             circle,
-            rgba(76,122,163,.18) 0 1px,
+            rgba(77,140,180,.22) 0 1px,
             transparent 1.5px
         );
 
-    opacity:.30;
+    opacity:.3;
+
     filter:none;
 }
 
@@ -708,371 +1572,793 @@ body.day-mode .stars::after{
     opacity:.15;
 }
 
+
+/* =========================================================
+   日间浮动星星
+========================================================= */
+
 body.day-mode .floating-stars span{
-    color:rgba(83,132,173,.54);
+
+    color:
+        rgba(78,145,188,.58);
+
     text-shadow:none;
 }
 
+
+/* =========================================================
+   日间外框
+========================================================= */
+
 body.day-mode .frame{
-    border-color:rgba(83,130,169,.34);
+
+    border-color:
+        rgba(78,137,174,.38);
 }
 
 body.day-mode .frame::before{
-    border-color:rgba(87,137,177,.12);
+
+    border-color:
+        rgba(91,150,184,.13);
 }
 
+
+/* =========================================================
+   日间六芒星
+========================================================= */
+
 body.day-mode .corner::before{
-    color:rgba(77,130,174,.72);
+
+    color:
+        rgba(69,132,172,.72);
+
     text-shadow:none;
 }
 
+
+/* =========================================================
+   日间 Logo
+========================================================= */
+
 body.day-mode .logo{
-    color:#304a61;
+
+    color:#2d4d63;
 }
 
 body.day-mode .logo-mark{
-    color:rgba(83,142,190,.84);
-    text-shadow:0 0 7px rgba(91,158,207,.24);
+
+    color:
+        rgba(66,139,181,.86);
+
+    text-shadow:
+        0 0 7px
+        rgba(75,148,190,.22);
 }
 
 body.day-mode .logo-en{
-    color:rgba(79,124,162,.64);
+
+    color:
+        rgba(69,125,158,.66);
 }
 
+
+/* =========================================================
+   日间导航
+========================================================= */
+
 body.day-mode .nav-links a{
-    color:rgba(61,91,119,.74);
+
+    color:
+        rgba(57,91,113,.74);
 }
 
 body.day-mode .nav-links a:hover{
-    color:#294b68;
-    text-shadow:0 0 8px rgba(88,145,190,.18);
+
+    color:#254b65;
+
+    text-shadow:
+        0 0 8px
+        rgba(72,140,180,.16);
 }
 
 body.day-mode .nav-links a::after{
-    background:rgba(83,143,192,.58);
+
+    background:
+        rgba(70,143,183,.58);
 }
 
+
+/* =========================================================
+   日间切换按钮
+========================================================= */
+
 body.day-mode .theme-toggle{
-    border-color:rgba(83,130,169,.34);
 
-    background:rgba(244,249,253,.64);
+    border-color:
+        rgba(78,137,174,.38);
 
-    color:rgba(59,89,116,.80);
+    background:
+        rgba(241,248,252,.62);
+
+    color:
+        rgba(55,91,113,.80);
 }
 
 body.day-mode .theme-toggle:hover{
-    border-color:rgba(79,143,195,.64);
 
-    color:#294b68;
+    border-color:
+        rgba(67,143,184,.65);
 
-    box-shadow:0 0 14px rgba(84,148,198,.14);
+    color:
+        #254b65;
+
+    box-shadow:
+        0 0 14px
+        rgba(65,143,188,.13);
 }
 
+
+/* =========================================================
+   日间魔法阵
+========================================================= */
+
 body.day-mode .magic-circle{
+
     opacity:.52;
 }
 
 body.day-mode .magic-circle::before{
-    border-color:rgba(76,136,181,.25);
+
+    border-color:
+        rgba(67,137,180,.27);
 
     box-shadow:
-        0 0 22px rgba(79,145,194,.07);
+        0 0 22px
+        rgba(60,133,181,.07);
 }
 
 body.day-mode .magic-circle::after{
-    border-color:rgba(99,157,197,.21);
+
+    border-color:
+        rgba(82,151,193,.22);
 
     box-shadow:
-        inset 0 0 20px rgba(91,151,194,.035);
+        inset
+        0 0 20px
+        rgba(70,140,184,.035);
 }
 
+
+/* =========================================================
+   日间星轨
+========================================================= */
+
 body.day-mode .orbit-track{
-    stroke:rgba(70,133,181,.27);
+
+    stroke:
+        rgba(61,139,184,.29);
 
     filter:
         drop-shadow(
-            0 0 4px rgba(74,140,190,.08)
+            0 0 4px
+            rgba(62,139,184,.08)
         );
 }
 
+
+/* =========================================================
+   日间小星辰
+========================================================= */
+
 body.day-mode #travellingStar{
-    fill:rgba(91,151,193,.90);
+
+    fill:
+        rgba(61,137,183,.88);
 
     filter:
         drop-shadow(
-            0 0 3px rgba(135,190,221,.45)
+            0 0 3px
+            rgba(103,180,215,.42)
         )
         drop-shadow(
-            0 0 8px rgba(105,169,207,.24)
+            0 0 8px
+            rgba(76,157,202,.22)
         );
 }
 
 body.day-mode .star-glow{
-    fill:rgba(124,184,216,.08);
+
+    fill:
+        rgba(103,181,216,.07);
 }
+
+
+/* =========================================================
+   日间中央线
+========================================================= */
 
 body.day-mode .magic-line{
-    background:rgba(78,138,183,.13);
+
+    background:
+        rgba(67,139,181,.13);
 }
 
+
+/* =========================================================
+   日间中心圆
+========================================================= */
+
 body.day-mode .magic-center{
-    border-color:rgba(82,145,190,.42);
+
+    border-color:
+        rgba(69,143,185,.43);
 
     box-shadow:
-        0 0 10px rgba(89,153,198,.17);
+        0 0 10px
+        rgba(73,151,193,.17);
 }
 
 body.day-mode .magic-center::before{
-    background:rgba(106,164,204,.64);
+
+    background:
+        rgba(82,157,194,.62);
 
     box-shadow:
-        0 0 8px rgba(99,169,213,.48);
+        0 0 8px
+        rgba(76,160,202,.45);
 }
 
+
+/* =========================================================
+   日间标题
+========================================================= */
+
 body.day-mode .main-title{
-    color:#294b68;
+
+    color:
+        #284c64;
 
     text-shadow:
-        0 0 18px rgba(90,151,198,.08);
+        0 0 18px
+        rgba(72,145,187,.08);
 }
 
 body.day-mode .title-decoration .line{
+
     background:
         linear-gradient(
             90deg,
             transparent,
-            rgba(83,143,190,.52)
+            rgba(70,143,184,.56)
         );
 }
 
 body.day-mode .title-decoration .line.right{
+
     background:
         linear-gradient(
             90deg,
-            rgba(83,143,190,.52),
+            rgba(70,143,184,.56),
             transparent
         );
 }
 
 body.day-mode .title-decoration .diamond{
-    border-color:rgba(91,153,199,.68);
+
+    border-color:
+        rgba(74,149,190,.70);
 }
 
 body.day-mode .chinese-title{
-    color:rgba(48,79,105,.80);
+
+    color:
+        rgba(43,78,99,.82);
 }
 
 body.day-mode .description{
-    color:rgba(68,101,128,.67);
+
+    color:
+        rgba(61,101,126,.67);
 }
 
-body.day-mode .enter-wrap::before{
-    border-color:rgba(83,143,190,.37);
 
-    background:rgba(235,244,250,.62);
+/* =========================================================
+   日间进入按钮
+========================================================= */
+
+body.day-mode .enter-wrap::before{
+
+    border-color:
+        rgba(70,143,184,.38);
+
+    background:
+        rgba(232,243,249,.60);
 
     box-shadow:
-        0 0 22px rgba(77,139,186,.07);
+        0 0 22px
+        rgba(61,137,181,.07);
 }
 
 body.day-mode .enter-wrap::after{
-    border-color:rgba(84,145,191,.16);
+
+    border-color:
+        rgba(73,146,187,.17);
 }
 
 body.day-mode .enter-button{
-    color:#365a76;
+
+    color:
+        #31576f;
 
     background:
         linear-gradient(
             90deg,
-            rgba(222,236,246,.92),
-            rgba(240,248,253,.98),
-            rgba(222,236,246,.92)
+            rgba(222,237,245,.92),
+            rgba(238,247,251,.98),
+            rgba(222,237,245,.92)
         );
 
-    border-top-color:rgba(82,145,194,.40);
-    border-bottom-color:rgba(82,145,194,.40);
+    border-top-color:
+        rgba(69,143,184,.40);
+
+    border-bottom-color:
+        rgba(69,143,184,.40);
 }
 
 body.day-mode .enter-button:hover{
+
     background:
         linear-gradient(
             90deg,
-            rgba(215,232,244,.98),
-            rgba(239,248,253,1),
-            rgba(215,232,244,.98)
+            rgba(216,233,242,.98),
+            rgba(238,248,252,1),
+            rgba(216,233,242,.98)
         );
 
     box-shadow:
-        0 0 22px rgba(81,145,195,.16);
+        0 0 22px
+        rgba(65,143,188,.15);
 }
 
 body.day-mode .enter-star{
-    color:rgba(83,143,191,.72);
+
+    color:
+        rgba(67,143,185,.70);
 
     text-shadow:
-        0 0 9px rgba(91,155,203,.28);
+        0 0 9px
+        rgba(70,150,194,.24);
 }
 
 body.day-mode .enter-diamond{
-    border-color:rgba(83,145,193,.60);
 
-    background:#eef6fc;
+    border-color:
+        rgba(70,145,187,.62);
+
+    background:
+        #edf5fa;
 }
+
+
+/* =========================================================
+   日间 Footer
+========================================================= */
 
 body.day-mode .footer{
-    color:rgba(76,111,139,.42);
+
+    color:
+        rgba(68,108,132,.43);
 }
 
-/* =========================
-   手机 / 平板
-========================= */
 
-@media(max-width:900px){
+/* =========================================================
+   平板
+========================================================= */
 
-    .frame{
-        inset:18px;
-    }
+@media(max-width:800px){
 
     .top-nav{
+
+        left:35px;
+        right:35px;
         top:30px;
-        left:32px;
-        right:32px;
     }
 
     .nav-links{
-        gap:15px;
+        gap:17px;
+    }
+
+    .nav-links a{
+
+        font-size:11px;
+
+        letter-spacing:1px;
+    }
+
+    .theme-toggle{
+
+        width:78px;
+        height:27px;
+
+        margin-left:15px;
+
+        font-size:7px;
+
+        letter-spacing:1.5px;
+
+        gap:5px;
     }
 
     .magic-circle{
-        width:540px;
-        height:270px;
+
+        width:500px;
+        height:500px;
     }
 
     .main-title{
-        font-size:clamp(48px,12vw,82px);
+
+        width:max-content;
+
+        max-width:calc(100vw - 40px);
+
+        margin-left:auto;
+        margin-right:auto;
+
+        flex-direction:row;
+
+        align-items:baseline;
     }
+
+    .chinese-title{
+        font-size:18px;
+    }
+
+    .description{
+        font-size:11px;
+    }
+
 }
 
-@media(max-width:600px){
+
+/* =========================================================
+   ★ 手机端
+========================================================= */
+
+@media(max-width:520px){
+
+    .floating-stars span:nth-child(n+13){
+        display:none;
+    }
 
     .frame{
         inset:12px;
     }
 
-    .frame::before{
-        inset:6px;
-    }
-
     .top-nav{
+
+        left:25px;
+        right:25px;
         top:24px;
-        left:24px;
-        right:24px;
     }
 
     .logo{
-        font-size:11px;
-        gap:6px;
+
+        gap:8px;
+
+        align-items:baseline;
     }
 
     .logo-mark{
-        font-size:15px;
+
+        font-size:18px;
+
+        position:relative;
+
+        top:1px;
     }
 
-    .logo-en{
-        display:none;
-    }
+    .logo-cn{
 
-    .nav-right{
-        gap:10px;
-    }
+        font-size:12px;
 
-    .nav-links{
-        gap:11px;
-    }
-
-    .nav-links a{
-        font-size:10px;
         letter-spacing:1px;
     }
 
+    .logo-en{
+
+        font-size:6px;
+
+        letter-spacing:2px;
+    }
+
+    .nav-links{
+        gap:12px;
+    }
+
+    .nav-links a{
+
+        font-size:9px;
+
+        letter-spacing:0;
+    }
+
     .theme-toggle{
-        padding:6px 8px;
-        font-size:8px;
+
+        width:58px;
+        height:24px;
+
+        margin-left:8px;
+
+        font-size:6px;
+
+        letter-spacing:1px;
+
+        gap:3px;
+    }
+
+    .theme-icon{
+        font-size:9px;
+    }
+
+    .corner{
+
+        width:55px;
+        height:55px;
+    }
+
+    .corner.tl{
+
+        left:-27.5px;
+        top:-27.5px;
+    }
+
+    .corner.tr{
+
+        right:-27.5px;
+        top:-27.5px;
+    }
+
+    .corner.bl{
+
+        left:-27.5px;
+        bottom:-27.5px;
+    }
+
+    .corner.br{
+
+        right:-27.5px;
+        bottom:-27.5px;
+    }
+
+    .corner::before{
+        font-size:32px;
+    }
+
+    .main{
+
+        padding:
+            100px
+            15px
+            70px;
     }
 
     .magic-circle{
-        width:430px;
-        height:215px;
+
+        width:390px;
+        height:390px;
+
+        opacity:.48;
     }
+
+    .magic-line.horizontal{
+        width:350px;
+    }
+
+    .magic-line.vertical{
+        height:350px;
+    }
+
+
+    /* =====================================================
+       手机标题
+    ===================================================== */
 
     .main-title{
-        font-size:clamp(42px,15vw,70px);
-        letter-spacing:6px;
+
+        width:auto;
+
+        max-width:none;
+
+        margin-left:0;
+        margin-right:0;
+
+        flex-direction:column;
+
+        align-items:center;
+
+        justify-content:center;
+
+        letter-spacing:5px;
+
+        line-height:.88;
+
+        height:auto;
     }
 
+    .main-title .seyami{
+
+        position:static;
+
+        margin-right:0;
+
+        font-size:43px;
+
+        white-space:nowrap;
+    }
+
+    .main-title .archive{
+
+        position:static;
+
+        margin-top:3px;
+
+        margin-left:0;
+
+        font-size:53px;
+
+        letter-spacing:6px;
+
+        white-space:nowrap;
+    }
+
+
+    /* =====================================================
+       手机标题装饰
+    ===================================================== */
+
     .title-decoration{
-        margin-top:15px;
+
+        margin-top:23px;
     }
 
     .title-decoration .line{
+
         width:55px;
     }
 
+
+    /* =====================================================
+       手机中文标题
+    ===================================================== */
+
     .chinese-title{
-        font-size:12px;
+
+        margin-top:20px;
+
+        font-size:15px;
+
         letter-spacing:5px;
+    }
+
+
+    /* =====================================================
+       手机描述
+    ===================================================== */
+
+    .description{
+
+        margin-top:16px;
+
+        font-size:10px;
+
+        letter-spacing:1px;
+
+        align-items:center;
+
+        text-align:center;
+    }
+
+
+    /* =====================================================
+       手机按钮
+    ===================================================== */
+
+    .enter-wrap{
+
+        width:285px;
+
+        height:76px;
+
+        margin-top:35px;
+    }
+
+    .enter-button{
+
+        width:230px;
+
+        height:46px;
+
+        font-size:11px;
+
+        letter-spacing:3px;
+    }
+
+    .enter-star.left{
+        left:16px;
+    }
+
+    .enter-star.right{
+        right:16px;
+    }
+
+    .footer{
+
+        bottom:21px;
+
+        font-size:6px;
+
+        letter-spacing:2px;
+    }
+
+}
+
+
+/* =========================================================
+   超小屏
+========================================================= */
+
+@media(max-width:360px){
+
+    .top-nav{
+
+        left:20px;
+        right:20px;
+    }
+
+    .nav-links{
+        gap:8px;
+    }
+
+    .nav-links a{
+        font-size:8px;
+    }
+
+    .theme-toggle{
+
+        width:52px;
+        height:22px;
+
+        margin-left:5px;
+
+        font-size:5.5px;
+
+        letter-spacing:.5px;
+    }
+
+    .main-title .seyami{
+        font-size:39px;
+    }
+
+    .main-title .archive{
+        font-size:48px;
+        margin-top:2px;
+    }
+
+    .title-decoration .line{
+        width:42px;
+    }
+
+    .chinese-title{
+        font-size:14px;
+        letter-spacing:4px;
     }
 
     .description{
         font-size:9px;
-        letter-spacing:2px;
     }
 
-    .enter-wrap{
-        margin-top:25px;
-    }
-
-    .enter-button{
-        padding:10px 20px;
-        font-size:10px;
-        letter-spacing:3px;
-    }
-
-    .footer{
-        bottom:24px;
-        font-size:7px;
-        letter-spacing:3px;
-    }
-
-    .floating-stars span:nth-child(n+13){
-        display:none;
-    }
 }
 
-/* =========================
-   日夜模式过渡
-========================= */
-
-body,
-.page,
-.frame,
-.logo,
-.nav-links a,
-.theme-toggle,
-.main-title,
-.chinese-title,
-.description,
-.enter-button,
-.footer{
-    transition:
-        background .45s ease,
-        background-color .45s ease,
-        color .45s ease,
-        border-color .45s ease,
-        box-shadow .45s ease,
-        text-shadow .45s ease;
-}
 </style>
 </head>
 
@@ -1080,345 +2366,1150 @@ body,
 
 <div class="page">
 
-    <div class="stars"></div>
+<div class="stars"></div>
 
-    <div class="floating-stars">
-        <span>✦</span>
-        <span>✧</span>
-        <span>·</span>
-        <span>✶</span>
-        <span>✦</span>
-        <span>·</span>
-        <span>✧</span>
-        <span>✡</span>
-        <span>✦</span>
-        <span>✶</span>
-        <span>·</span>
-        <span>✧</span>
-        <span>✡</span>
-        <span>✶</span>
-        <span>✦</span>
-        <span>✧</span>
-        <span>✡</span>
-        <span>✦</span>
-        <span>✶</span>
-        <span>·</span>
-        <span>✦</span>
-        <span>✡</span>
-        <span>✧</span>
-        <span>✶</span>
-        <span>✦</span>
-        <span>·</span>
-        <span>✡</span>
-        <span>✶</span>
-    </div>
 
-    <div class="frame">
-        <div class="corner tl"></div>
-        <div class="corner tr"></div>
-        <div class="corner bl"></div>
-        <div class="corner br"></div>
-    </div>
+<div class="floating-stars">
 
-    <header class="top-nav">
+    <span>✦</span>
+    <span>✧</span>
+    <span>·</span>
+    <span>✶</span>
+    <span>✦</span>
+    <span>·</span>
+    <span>✧</span>
+    <span>✡</span>
+    <span>✦</span>
+    <span>✶</span>
+    <span>·</span>
+    <span>✧</span>
 
-        <div class="logo">
-            <span class="logo-mark">✶</span>
-            <span>塞垭弥大陆档案馆</span>
-            <span class="logo-en">SEYAMI ARCHIVE</span>
+    <span>✡</span>
+    <span>✶</span>
+    <span>✦</span>
+    <span>✧</span>
+    <span>✡</span>
+    <span>✦</span>
+    <span>✶</span>
+    <span>·</span>
+    <span>✦</span>
+    <span>✡</span>
+    <span>✧</span>
+    <span>✶</span>
+    <span>✦</span>
+    <span>·</span>
+    <span>✡</span>
+    <span>✶</span>
+
+</div>
+
+
+<div class="frame">
+
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+
+</div>
+
+
+<header class="top-nav">
+
+    <a href="index.html"
+       class="logo">
+
+        <div class="logo-mark">
+            ✶
         </div>
 
-        <div class="nav-right">
+        <div class="logo-text">
 
-            <nav class="nav-links">
-                <a href="#">首页</a>
-                <a href="#">档案目录</a>
-                <a href="#">关于我们</a>
-            </nav>
+            <span class="logo-cn">
+                塞垭弥大陆档案馆
+            </span>
 
-            <button class="theme-toggle" id="themeToggle">
-                ☾ NIGHT
-            </button>
+            <span class="logo-en">
+                SEYAMI ARCHIVE
+            </span>
 
         </div>
 
-    </header>
+    </a>
 
-    <main>
 
-        <div class="magic-circle">
+    <nav class="nav-links">
 
-            <svg viewBox="0 0 620 310">
+        <a href="index.html">
+            首页
+        </a>
+
+        <a href="archive.html">
+            档案目录
+        </a>
+
+        <a href="about.html">
+            关于我们
+        </a>
+
+        <button
+            class="theme-toggle"
+            id="themeToggle"
+            type="button"
+            aria-label="切换日夜模式"
+        >
+
+            <span
+                class="theme-icon"
+                id="themeIcon"
+            >☾</span>
+
+            <span
+                id="themeText"
+            >NIGHT</span>
+
+        </button>
+
+    </nav>
+
+</header>
+
+
+<main class="main">
+
+
+    <div class="magic-circle">
+
+
+        <svg
+            id="orbitSVG"
+            class="orbit-system"
+            viewBox="0 0 560 560"
+            preserveAspectRatio="xMidYMid meet"
+            aria-hidden="true"
+        >
+
+
+            <g id="orbitA">
 
                 <ellipse
-                    id="orbitA"
+                    id="ellipseA"
                     class="orbit-track"
-                    cx="310"
-                    cy="155"
+                    cx="280"
+                    cy="280"
                     rx="250"
                     ry="95"
                 />
 
+            </g>
+
+
+            <g id="orbitB">
+
                 <ellipse
-                    id="orbitB"
+                    id="ellipseB"
                     class="orbit-track"
-                    cx="310"
-                    cy="155"
+                    cx="280"
+                    cy="280"
                     rx="210"
                     ry="72.5"
                 />
 
+            </g>
+
+
+            <g id="orbitC">
+
                 <ellipse
-                    id="orbitC"
+                    id="ellipseC"
                     class="orbit-track"
-                    cx="310"
-                    cy="155"
+                    cx="280"
+                    cy="280"
                     rx="165"
                     ry="52.5"
                 />
 
-                <circle
-                    class="star-glow"
-                    cx="310"
-                    cy="60"
-                    r="12"
-                />
+            </g>
 
-                <text
-                    id="travellingStar"
-                    x="310"
-                    y="60"
-                    text-anchor="middle"
-                    dominant-baseline="middle"
-                >✦</text>
 
-            </svg>
+            <circle
+                id="starGlow"
+                class="star-glow"
+                cx="280"
+                cy="280"
+                r="8"
+            />
 
-            <div class="magic-line horizontal"></div>
-            <div class="magic-line vertical"></div>
 
-            <div class="magic-center"></div>
+            <text
+                id="travellingStar"
+                x="280"
+                y="280"
+            >✦</text>
+
+
+        </svg>
+
+
+        <div class="magic-line horizontal"></div>
+
+        <div class="magic-line vertical"></div>
+
+        <div class="magic-center"></div>
+
+
+    </div>
+
+
+    <section class="title-area">
+
+
+        <h1 class="main-title">
+
+            <span class="seyami">
+                SEYAMI
+            </span>
+
+            <span class="archive">
+                ARCHIVE
+            </span>
+
+        </h1>
+
+
+        <div class="title-decoration">
+
+            <span class="line"></span>
+
+            <span class="diamond"></span>
+
+            <span class="line right"></span>
 
         </div>
 
-        <section class="title-area">
 
-            <div class="main-title">
-                SEYAMI
-            </div>
+        <div class="chinese-title">
+            塞垭弥大陆档案馆
+        </div>
 
-            <div class="main-title">
-                ARCHIVE
-            </div>
 
-            <div class="title-decoration">
-                <span class="line"></span>
-                <span class="diamond"></span>
-                <span class="line right"></span>
-            </div>
+        <div class="description">
 
-            <div class="chinese-title">
-                塞垭弥大陆档案馆
-            </div>
+            <span>
+                记录关于这片大陆的一切。
+            </span>
 
-            <div class="description">
-                RECORDS OF CHARACTERS · WORLDS · STORIES
-            </div>
+            <span>
+                角色、种族、地域、历史，以及那些尚未被发现的故事。
+            </span>
 
-            <div class="enter-wrap">
+        </div>
 
-                <span class="enter-diamond tl"></span>
-                <span class="enter-diamond tr"></span>
-                <span class="enter-diamond bl"></span>
-                <span class="enter-diamond br"></span>
 
-                <a class="enter-button" href="#">
-                    <span class="enter-star">✦</span>
-                    开启塞垭弥档案
-                    <span>→</span>
-                </a>
+        <div class="enter-wrap">
 
-            </div>
+            <span class="enter-star left">
+                ✡
+            </span>
 
-        </section>
 
-    </main>
+            <button
+                class="enter-button"
+                onclick="location.href='archive.html'"
+            >
+                开启塞垭弥档案　→
+            </button>
 
-    <footer class="footer">
-        ✦　THE ARCHIVES OF SEYAMI　✦
-    </footer>
+
+            <span class="enter-star right">
+                ✡
+            </span>
+
+
+            <span class="enter-diamond top"></span>
+
+            <span class="enter-diamond bottom"></span>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<footer class="footer">
+    ✦　THE ARCHIVES OF SEYAMI　✦
+</footer>
 
 </div>
 
+
 <script>
 
-/* =========================
-   日夜模式
-========================= */
+/* =========================================================
+   ☀️ / 🌙 日夜模式
+========================================================= */
 
-const themeToggle =
-    document.getElementById("themeToggle");
+(function(){
 
-const savedTheme =
-    localStorage.getItem("seyami-theme");
+    const toggle =
+        document.getElementById(
+            "themeToggle"
+        );
 
-if(savedTheme === "day"){
-    document.body.classList.add("day-mode");
-    themeToggle.textContent = "☀ DAY";
-}
+    const icon =
+        document.getElementById(
+            "themeIcon"
+        );
 
-themeToggle.addEventListener("click",()=>{
-
-    document.body.classList.toggle("day-mode");
-
-    const isDay =
-        document.body.classList.contains("day-mode");
-
-    themeToggle.textContent =
-        isDay ? "☀ DAY" : "☾ NIGHT";
-
-    localStorage.setItem(
-        "seyami-theme",
-        isDay ? "day" : "night"
-    );
-
-});
+    const text =
+        document.getElementById(
+            "themeText"
+        );
 
 
-/* =========================
-   三层星轨
-========================= */
-
-const tracks = [
-
-    {
-        element:document.getElementById("orbitA"),
-        rotation:0,
-        speed:360/38,
-        direction:1
-    },
-
-    {
-        element:document.getElementById("orbitB"),
-        rotation:55,
-        speed:360/32,
-        direction:-1
-    },
-
-    {
-        element:document.getElementById("orbitC"),
-        rotation:110,
-        speed:360/25,
-        direction:1
+    if(
+        !toggle ||
+        !icon ||
+        !text
+    ){
+        return;
     }
 
-];
 
-let currentTrack = 0;
-let starAngle = 300;
+    function updateButton(){
 
-const STAR_SPEED = 11;
-
-let lastTime = performance.now();
-
-
-function ellipsePoint(
-    rx,
-    ry,
-    angle
-){
-
-    const rad =
-        angle * Math.PI / 180;
-
-    return {
-
-        x:
-            310 +
-            rx * Math.cos(rad),
-
-        y:
-            155 +
-            ry * Math.sin(rad)
-
-    };
-
-}
+        const isDay =
+            document.body.classList.contains(
+                "day-mode"
+            );
 
 
-function updateStar(){
+        if(isDay){
 
-    const track =
-        tracks[currentTrack];
+            icon.textContent = "☀";
+            text.textContent = "DAY";
 
-    const ellipse =
-        track.element;
+        }else{
 
-    const rx =
-        parseFloat(
-            ellipse.getAttribute("rx")
+            icon.textContent = "☾";
+            text.textContent = "NIGHT";
+
+        }
+
+    }
+
+
+    const savedTheme =
+        localStorage.getItem(
+            "seyami-theme"
         );
 
-    const ry =
-        parseFloat(
-            ellipse.getAttribute("ry")
+
+    if(
+        savedTheme === "day"
+    ){
+
+        document.body.classList.add(
+            "day-mode"
         );
 
-    const point =
-        ellipsePoint(
-            rx,
-            ry,
-            starAngle + track.rotation
-        );
+    }
+
+
+    updateButton();
+
+
+    toggle.addEventListener(
+        "click",
+        function(){
+
+            const isDay =
+                document.body.classList.toggle(
+                    "day-mode"
+                );
+
+
+            localStorage.setItem(
+                "seyami-theme",
+                isDay
+                    ? "day"
+                    : "night"
+            );
+
+
+            updateButton();
+
+        }
+    );
+
+})();
+
+
+/* =========================================================
+   星轨 JS
+========================================================= */
+
+(function(){
 
     const star =
         document.getElementById(
             "travellingStar"
         );
 
-    star.setAttribute(
-        "x",
-        point.x
+    const glow =
+        document.getElementById(
+            "starGlow"
+        );
+
+    if(
+        !star ||
+        !glow
+    ){
+        return;
+    }
+
+    const CX = 280;
+    const CY = 280;
+
+    const tracks = [
+
+        {
+            id:"A",
+            rx:250,
+            ry:95,
+            rotation:0,
+            speed:360 / 38,
+            direction:1
+        },
+
+        {
+            id:"B",
+            rx:210,
+            ry:72.5,
+            rotation:55,
+            speed:-360 / 32,
+            direction:-1
+        },
+
+        {
+            id:"C",
+            rx:165,
+            ry:52.5,
+            rotation:110,
+            speed:360 / 25,
+            direction:1
+        }
+
+    ];
+
+    let currentTrack = 0;
+
+    let starAngle = 300;
+
+    let targetAngle = null;
+
+    let switching = false;
+
+    const animationStart =
+        performance.now();
+
+    let lastTime =
+        animationStart;
+
+
+    function degToRad(angle){
+
+        return angle *
+               Math.PI /
+               180;
+
+    }
+
+
+    function radToDeg(angle){
+
+        return angle *
+               180 /
+               Math.PI;
+
+    }
+
+
+    function normalize(angle){
+
+        angle %= 360;
+
+        if(
+            angle < 0
+        ){
+
+            angle += 360;
+
+        }
+
+        return angle;
+
+    }
+
+
+    function getRotation(
+        track,
+        elapsed
+    ){
+
+        return (
+            track.rotation +
+            track.speed *
+            elapsed /
+            1000
+        );
+
+    }
+
+
+    function getPoint(
+        track,
+        angle,
+        elapsed
+    ){
+
+        const rad =
+            degToRad(angle);
+
+        const localX =
+            track.rx *
+            Math.cos(rad);
+
+        const localY =
+            track.ry *
+            Math.sin(rad);
+
+        const rotation =
+            degToRad(
+                getRotation(
+                    track,
+                    elapsed
+                )
+            );
+
+        const cos =
+            Math.cos(rotation);
+
+        const sin =
+            Math.sin(rotation);
+
+        const worldX =
+            localX * cos -
+            localY * sin;
+
+        const worldY =
+            localX * sin +
+            localY * cos;
+
+        return {
+
+            x:
+                CX + worldX,
+
+            y:
+                CY + worldY
+
+        };
+
+    }
+
+
+    function worldToTrackAngle(
+        track,
+        x,
+        y,
+        elapsed
+    ){
+
+        let dx =
+            x - CX;
+
+        let dy =
+            y - CY;
+
+        const rotation =
+            degToRad(
+                getRotation(
+                    track,
+                    elapsed
+                )
+            );
+
+        const cos =
+            Math.cos(
+                -rotation
+            );
+
+        const sin =
+            Math.sin(
+                -rotation
+            );
+
+        const localX =
+            dx * cos -
+            dy * sin;
+
+        const localY =
+            dx * sin +
+            dy * cos;
+
+        const angle =
+            radToDeg(
+                Math.atan2(
+                    localY / track.ry,
+                    localX / track.rx
+                )
+            );
+
+        return normalize(
+            angle
+        );
+
+    }
+
+
+    function findIntersection(
+        trackA,
+        trackB,
+        elapsed,
+        fromAngle
+    ){
+
+        const samples = 720;
+
+        let best = null;
+
+        let bestDistance =
+            Infinity;
+
+        for(
+            let i = 0;
+            i < samples;
+            i++
+        ){
+
+            const angleA =
+                i *
+                360 /
+                samples;
+
+            const pointA =
+                getPoint(
+                    trackA,
+                    angleA,
+                    elapsed
+                );
+
+            const angleB =
+                worldToTrackAngle(
+                    trackB,
+                    pointA.x,
+                    pointA.y,
+                    elapsed
+                );
+
+            const pointB =
+                getPoint(
+                    trackB,
+                    angleB,
+                    elapsed
+                );
+
+            const dx =
+                pointA.x -
+                pointB.x;
+
+            const dy =
+                pointA.y -
+                pointB.y;
+
+            const distance =
+                Math.sqrt(
+                    dx * dx +
+                    dy * dy
+                );
+
+            let travel =
+                normalize(
+                    (
+                        angleA -
+                        fromAngle
+                    ) *
+                    trackA.direction
+                );
+
+            if(
+                travel < 0
+            ){
+
+                travel += 360;
+
+            }
+
+            if(
+                distance <
+                    bestDistance
+                &&
+                travel > 2
+            ){
+
+                bestDistance =
+                    distance;
+
+                best = {
+
+                    angleA,
+
+                    angleB,
+
+                    x:
+                        (
+                            pointA.x +
+                            pointB.x
+                        ) / 2,
+
+                    y:
+                        (
+                            pointA.y +
+                            pointB.y
+                        ) / 2,
+
+                    distance,
+
+                    travel
+
+                };
+
+            }
+
+        }
+
+
+        if(
+            !best ||
+            best.distance > 8
+        ){
+
+            best = null;
+
+            bestDistance =
+                Infinity;
+
+            for(
+                let i = 0;
+                i < samples;
+                i++
+            ){
+
+                const angleA =
+                    i *
+                    360 /
+                    samples;
+
+                const pointA =
+                    getPoint(
+                        trackA,
+                        angleA,
+                        elapsed
+                    );
+
+                const angleB =
+                    worldToTrackAngle(
+                        trackB,
+                        pointA.x,
+                        pointA.y,
+                        elapsed
+                    );
+
+                const pointB =
+                    getPoint(
+                        trackB,
+                        angleB,
+                        elapsed
+                    );
+
+                const dx =
+                    pointA.x -
+                    pointB.x;
+
+                const dy =
+                    pointA.y -
+                    pointB.y;
+
+                const distance =
+                    Math.sqrt(
+                        dx * dx +
+                        dy * dy
+                    );
+
+                if(
+                    distance <
+                    bestDistance
+                ){
+
+                    bestDistance =
+                        distance;
+
+                    best = {
+
+                        angleA,
+
+                        angleB,
+
+                        x:
+                            (
+                                pointA.x +
+                                pointB.x
+                            ) / 2,
+
+                        y:
+                            (
+                                pointA.y +
+                                pointB.y
+                            ) / 2,
+
+                        distance
+
+                    };
+
+                }
+
+            }
+
+        }
+
+        return best;
+
+    }
+
+
+    function setNextTarget(
+        elapsed
+    ){
+
+        const nextTrackIndex =
+            (
+                currentTrack +
+                1
+            ) % 3;
+
+        const current =
+            tracks[
+                currentTrack
+            ];
+
+        const next =
+            tracks[
+                nextTrackIndex
+            ];
+
+        const intersection =
+            findIntersection(
+                current,
+                next,
+                elapsed,
+                starAngle
+            );
+
+        if(!intersection){
+            return;
+        }
+
+        targetAngle =
+            intersection.angleA;
+
+        switching = true;
+
+    }
+
+
+    function updateOrbits(
+        elapsed
+    ){
+
+        const groupA =
+            document.getElementById(
+                "orbitA"
+            );
+
+        const groupB =
+            document.getElementById(
+                "orbitB"
+            );
+
+        const groupC =
+            document.getElementById(
+                "orbitC"
+            );
+
+        if(groupA){
+
+            groupA.setAttribute(
+                "transform",
+
+                `rotate(
+                    ${getRotation(
+                        tracks[0],
+                        elapsed
+                    )}
+                    ${CX}
+                    ${CY}
+                )`
+            );
+
+        }
+
+        if(groupB){
+
+            groupB.setAttribute(
+                "transform",
+
+                `rotate(
+                    ${getRotation(
+                        tracks[1],
+                        elapsed
+                    )}
+                    ${CX}
+                    ${CY}
+                )`
+            );
+
+        }
+
+        if(groupC){
+
+            groupC.setAttribute(
+                "transform",
+
+                `rotate(
+                    ${getRotation(
+                        tracks[2],
+                        elapsed
+                    )}
+                    ${CX}
+                    ${CY}
+                )`
+            );
+
+        }
+
+    }
+
+
+    function updateStar(
+        elapsed
+    ){
+
+        const track =
+            tracks[
+                currentTrack
+            ];
+
+        const point =
+            getPoint(
+                track,
+                starAngle,
+                elapsed
+            );
+
+        star.setAttribute(
+            "x",
+            point.x.toFixed(3)
+        );
+
+        star.setAttribute(
+            "y",
+            point.y.toFixed(3)
+        );
+
+        glow.setAttribute(
+            "cx",
+            point.x.toFixed(3)
+        );
+
+        glow.setAttribute(
+            "cy",
+            point.y.toFixed(3)
+        );
+
+    }
+
+
+    const STAR_SPEED = 11;
+
+
+    function animate(now){
+
+        const elapsed =
+            now -
+            animationStart;
+
+        const delta =
+            Math.min(
+                0.05,
+                (
+                    now -
+                    lastTime
+                ) / 1000
+            );
+
+        updateOrbits(
+            elapsed
+        );
+
+        if(!switching){
+
+            setNextTarget(
+                elapsed
+            );
+
+        }
+
+        if(
+            switching &&
+            targetAngle !== null
+        ){
+
+            const track =
+                tracks[
+                    currentTrack
+                ];
+
+            const direction =
+                track.direction;
+
+            let distance =
+                normalize(
+                    (
+                        targetAngle -
+                        starAngle
+                    ) *
+                    direction
+                );
+
+            let speed =
+                STAR_SPEED;
+
+            if(
+                distance < 25
+            ){
+
+                speed *=
+                    Math.max(
+                        0.25,
+                        distance / 25
+                    );
+
+            }
+
+            starAngle +=
+                speed *
+                direction *
+                delta;
+
+            starAngle =
+                normalize(
+                    starAngle
+                );
+
+            distance =
+                normalize(
+                    (
+                        targetAngle -
+                        starAngle
+                    ) *
+                    direction
+                );
+
+            if(
+                distance < 1
+            ){
+
+                const intersection =
+                    getPoint(
+                        track,
+                        targetAngle,
+                        elapsed
+                    );
+
+                const nextTrackIndex =
+                    (
+                        currentTrack +
+                        1
+                    ) % 3;
+
+                const nextTrack =
+                    tracks[
+                        nextTrackIndex
+                    ];
+
+                const nextAngle =
+                    worldToTrackAngle(
+                        nextTrack,
+                        intersection.x,
+                        intersection.y,
+                        elapsed
+                    );
+
+                currentTrack =
+                    nextTrackIndex;
+
+                starAngle =
+                    nextAngle;
+
+                targetAngle =
+                    null;
+
+                switching =
+                    false;
+
+                starAngle =
+                    normalize(
+                        starAngle +
+                        tracks[
+                            currentTrack
+                        ].direction *
+                        0.8
+                    );
+
+            }
+
+        }
+
+        updateStar(
+            elapsed
+        );
+
+        lastTime =
+            now;
+
+        requestAnimationFrame(
+            animate
+        );
+
+    }
+
+
+    starAngle = 300;
+
+    updateOrbits(0);
+
+    updateStar(0);
+
+    requestAnimationFrame(
+        animate
     );
 
-    star.setAttribute(
-        "y",
-        point.y
-    );
 
-}
-
-
-function animate(time){
-
-    const delta =
-        (time - lastTime) / 1000;
-
-    lastTime = time;
-
-    const track =
-        tracks[currentTrack];
-
-    starAngle +=
-        STAR_SPEED *
-        track.direction *
-        delta;
-
-    if(starAngle > 360)
-        starAngle -= 360;
-
-    if(starAngle < 0)
-        starAngle += 360;
-
-    updateStar();
-
-    requestAnimationFrame(animate);
-
-}
-
-updateStar();
-
-requestAnimationFrame(animate);
+})();
 
 </script>
 
