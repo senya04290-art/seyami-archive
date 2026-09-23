@@ -26,20 +26,10 @@ body{
 }
 
 body{
-  background:
-    radial-gradient(
-      circle at 50% 42%,
-      rgba(35,83,120,.18),
-      transparent 42%
-    ),
-    linear-gradient(
-      180deg,
-      #071523 0%,
-      #06111f 48%,
-      #040c17 100%
-    );
 
-  color:#dcefff;
+  background:#061426;
+
+  color:#dcecff;
 
   font-family:
     "Noto Serif SC",
@@ -55,9 +45,34 @@ body{
 
 .page{
   position:relative;
+
   min-height:100vh;
-  padding:30px clamp(24px,6vw,90px) 70px;
+
+  padding:
+    30px
+    clamp(24px,6vw,90px)
+    70px;
+
   overflow:hidden;
+
+  background:
+
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(38,91,137,.18),
+      transparent 38%
+    ),
+
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(11,45,75,.45),
+      transparent 70%
+    ),
+
+    #061426;
+
+  transition:
+    background .6s ease;
 }
 
 
@@ -67,14 +82,19 @@ body{
 
 .stars{
   position:absolute;
+
   inset:0;
+
   z-index:0;
+
   pointer-events:none;
+
   overflow:hidden;
 }
 
 .stars::before,
 .stars::after{
+
   content:"";
 
   position:absolute;
@@ -84,9 +104,11 @@ body{
 
   border-radius:50%;
 
-  background:rgba(170,220,255,.55);
+  background:
+    rgba(182,220,255,.7);
 
   box-shadow:
+
     8vw 12vh rgba(150,210,250,.25),
     17vw 28vh rgba(160,220,255,.2),
     26vw 9vh rgba(170,220,255,.28),
@@ -114,10 +136,12 @@ body{
 }
 
 .stars::after{
+
   width:1px;
   height:1px;
 
   box-shadow:
+
     5vw 19vh rgba(180,225,255,.3),
     15vw 44vh rgba(180,225,255,.25),
     31vw 17vh rgba(180,225,255,.2),
@@ -142,7 +166,9 @@ body{
 ========================================================= */
 
 .arcane-stars{
+
   position:absolute;
+
   inset:0;
 
   z-index:1;
@@ -151,15 +177,18 @@ body{
 
   overflow:hidden;
 
-  transition:opacity .6s ease;
+  transition:
+    opacity .6s ease;
 }
 
 .arcane-star{
+
   position:absolute;
 
   display:block;
 
-  color:rgba(145,215,250,.42);
+  color:
+    rgba(158,207,247,.62);
 
   font-family:
     "Times New Roman",
@@ -173,14 +202,27 @@ body{
   user-select:none;
 
   text-shadow:
-    0 0 5px rgba(90,190,240,.25),
-    0 0 14px rgba(60,160,220,.12);
+
+    0 0 5px
+    rgba(96,177,242,.35),
+
+    0 0 14px
+    rgba(49,132,191,.16);
 
   animation:
-    arcaneFloat var(--float-time) ease-in-out infinite,
-    arcaneTwinkle var(--twinkle-time) ease-in-out infinite;
+
+    arcaneFloat
+    var(--float-time)
+    ease-in-out
+    infinite,
+
+    arcaneTwinkle
+    var(--twinkle-time)
+    ease-in-out
+    infinite;
 
   animation-delay:
+
     var(--float-delay),
     var(--twinkle-delay);
 
@@ -511,6 +553,7 @@ body{
 ========================================================= */
 
 .magic-circle{
+
   position:absolute;
 
   width:min(72vw,760px);
@@ -519,16 +562,23 @@ body{
   left:50%;
   top:47%;
 
-  transform:translate(-50%,-50%);
+  transform:
+    translate(-50%,-50%);
 
   border-radius:50%;
 
   border:
-    1px solid rgba(104,190,235,.07);
+    1px solid
+    rgba(73,143,198,.12);
 
   box-shadow:
-    0 0 50px rgba(70,150,210,.035),
-    inset 0 0 60px rgba(70,150,210,.025);
+
+    0 0 50px
+    rgba(47,126,184,.05),
+
+    inset
+    0 0 60px
+    rgba(62,139,194,.025);
 
   z-index:0;
 
@@ -541,6 +591,7 @@ body{
 
 .magic-circle::before,
 .magic-circle::after{
+
   content:"";
 
   position:absolute;
@@ -548,7 +599,8 @@ body{
   left:50%;
   top:50%;
 
-  transform:translate(-50%,-50%);
+  transform:
+    translate(-50%,-50%);
 
   border-radius:50%;
 
@@ -560,25 +612,31 @@ body{
 }
 
 .magic-circle::before{
+
   width:82%;
   height:82%;
 
   border:
-    1px solid rgba(120,205,245,.055);
+    1px solid
+    rgba(91,162,213,.10);
 
   box-shadow:
-    0 0 25px rgba(80,170,220,.025);
+    0 0 25px
+    rgba(80,170,220,.035);
 }
 
 .magic-circle::after{
+
   width:61%;
   height:61%;
 
   border:
-    1px solid rgba(130,215,250,.06);
+    1px solid
+    rgba(108,178,230,.10);
 
   box-shadow:
-    0 0 18px rgba(90,180,230,.025);
+    0 0 18px
+    rgba(90,180,230,.035);
 }
 
 
@@ -587,6 +645,7 @@ body{
 ========================================================= */
 
 .frame{
+
   position:absolute;
 
   top:20px;
@@ -595,7 +654,8 @@ body{
   bottom:20px;
 
   border:
-    1px solid rgba(130,200,235,.12);
+    1px solid
+    rgba(111,174,224,.32);
 
   pointer-events:none;
 
@@ -607,6 +667,7 @@ body{
 
 .frame::before,
 .frame::after{
+
   content:"";
 
   position:absolute;
@@ -619,25 +680,31 @@ body{
 }
 
 .frame::before{
+
   left:-1px;
   top:-1px;
 
   border-left:
-    1px solid rgba(160,220,250,.45);
+    1px solid
+    rgba(137,201,239,.45);
 
   border-top:
-    1px solid rgba(160,220,250,.45);
+    1px solid
+    rgba(137,201,239,.45);
 }
 
 .frame::after{
+
   right:-1px;
   bottom:-1px;
 
   border-right:
-    1px solid rgba(160,220,250,.45);
+    1px solid
+    rgba(137,201,239,.45);
 
   border-bottom:
-    1px solid rgba(160,220,250,.45);
+    1px solid
+    rgba(137,201,239,.45);
 }
 
 
@@ -646,6 +713,7 @@ body{
 ========================================================= */
 
 .header{
+
   position:absolute;
 
   left:58px;
@@ -671,13 +739,15 @@ body{
 /* Logo */
 
 .logo{
+
   display:flex;
 
   align-items:flex-start;
 
   gap:12px;
 
-  color:rgba(225,246,255,.92);
+  color:
+    rgba(225,246,255,.92);
 
   text-decoration:none;
 
@@ -686,7 +756,9 @@ body{
 }
 
 .logo-symbol{
-  color:#9edcff;
+
+  color:
+    rgba(137,201,239,.9);
 
   width:17px;
   height:13px;
@@ -703,7 +775,12 @@ body{
   padding:0;
 
   text-shadow:
-    0 0 12px rgba(90,200,255,.7);
+
+    0 0 7px
+    rgba(76,159,216,.5),
+
+    0 0 15px
+    rgba(49,132,191,.22);
 
   flex-shrink:0;
 
@@ -713,21 +790,25 @@ body{
 }
 
 .logo-text{
+
   display:flex;
 
   flex-direction:column;
+
   align-items:flex-start;
 
   line-height:1;
 }
 
 .logo-cn{
+
   display:block;
 
   height:13px;
   line-height:13px;
 
-  color:rgba(225,246,255,.92);
+  color:
+    rgba(225,246,255,.92);
 
   font-size:13px;
 
@@ -740,11 +821,13 @@ body{
 }
 
 .logo-en{
+
   display:block;
 
   margin-top:5px;
 
-  color:rgba(200,230,245,.45);
+  color:
+    rgba(157,204,239,.63);
 
   font-family:
     "Times New Roman",
@@ -767,6 +850,7 @@ body{
 ========================================================= */
 
 .header-right{
+
   display:flex;
 
   align-items:center;
@@ -775,7 +859,9 @@ body{
 }
 
 .back{
-  color:rgba(190,225,245,.58);
+
+  color:
+    rgba(191,220,243,.68);
 
   text-decoration:none;
 
@@ -794,10 +880,12 @@ body{
 }
 
 .back:hover{
-  color:rgba(220,245,255,.95);
+
+  color:#d9efff;
 
   text-shadow:
-    0 0 10px rgba(100,200,245,.35);
+    0 0 8px
+    rgba(102,180,231,.35);
 }
 
 
@@ -806,6 +894,7 @@ body{
 ========================================================= */
 
 .theme-toggle{
+
   display:flex;
 
   align-items:center;
@@ -814,15 +903,18 @@ body{
 
   height:28px;
 
-  padding:0 11px;
+  padding:
+    0 11px;
 
   border:
-    1px solid rgba(130,200,235,.22);
+    1px solid
+    rgba(111,174,224,.32);
 
   background:
-    rgba(8,24,40,.35);
+    rgba(8,28,49,.35);
 
-  color:rgba(185,225,245,.62);
+  color:
+    rgba(191,220,243,.68);
 
   font-family:
     "Cinzel",
@@ -847,19 +939,22 @@ body{
 }
 
 .theme-toggle:hover{
-  color:rgba(225,247,255,.95);
+
+  color:#d9efff;
 
   border-color:
-    rgba(130,215,250,.48);
+    rgba(122,192,235,.62);
 
   background:
-    rgba(12,37,59,.55);
+    rgba(8,31,52,.55);
 
   box-shadow:
-    0 0 18px rgba(70,170,220,.06);
+    0 0 14px
+    rgba(76,151,202,.12);
 }
 
 .theme-icon{
+
   font-size:12px;
 
   line-height:1;
@@ -873,13 +968,16 @@ body{
 ========================================================= */
 
 .content{
+
   position:relative;
 
   z-index:5;
 
-  width:min(1080px,100%);
+  width:
+    min(1080px,100%);
 
-  margin:0 auto;
+  margin:
+    0 auto;
 
   padding-top:150px;
 }
@@ -888,12 +986,14 @@ body{
 /* 标题 */
 
 .heading{
+
   text-align:center;
 
   margin-bottom:55px;
 }
 
 .heading-small{
+
   font-family:
     "Cinzel",
     serif;
@@ -902,7 +1002,8 @@ body{
 
   letter-spacing:6px;
 
-  color:rgba(145,205,235,.55);
+  color:
+    rgba(157,204,239,.63);
 
   margin-bottom:12px;
 
@@ -911,17 +1012,24 @@ body{
 }
 
 .heading-main{
+
   font-family:
     "Cinzel",
     serif;
 
-  font-size:clamp(34px,5vw,58px);
+  font-size:
+    clamp(
+      34px,
+      5vw,
+      58px
+    );
 
   font-weight:400;
 
   letter-spacing:8px;
 
-  color:rgba(225,245,255,.9);
+  color:
+    rgba(220,238,255,.92);
 
   line-height:1;
 
@@ -931,13 +1039,15 @@ body{
 }
 
 .heading-cn{
+
   margin-top:15px;
 
   font-size:13px;
 
   letter-spacing:5px;
 
-  color:rgba(170,210,230,.48);
+  color:
+    rgba(177,207,230,.62);
 
   transition:
     color .6s ease;
@@ -949,6 +1059,7 @@ body{
 ========================================================= */
 
 .archive-grid{
+
   display:grid;
 
   grid-template-columns:
@@ -960,20 +1071,24 @@ body{
 }
 
 .archive-card{
+
   position:relative;
 
   min-height:190px;
 
-  padding:30px 26px;
+  padding:
+    30px 26px;
 
   border:
-    1px solid rgba(110,180,220,.16);
+    1px solid
+    rgba(111,174,224,.20);
 
   background:
+
     linear-gradient(
       145deg,
-      rgba(18,48,72,.35),
-      rgba(6,19,32,.38)
+      rgba(18,48,72,.38),
+      rgba(6,19,32,.42)
     );
 
   overflow:hidden;
@@ -990,6 +1105,7 @@ body{
 }
 
 .archive-card::before{
+
   content:"";
 
   position:absolute;
@@ -1001,6 +1117,7 @@ body{
   height:1px;
 
   background:
+
     linear-gradient(
       90deg,
       transparent,
@@ -1015,6 +1132,7 @@ body{
 }
 
 .archive-card::after{
+
   content:"";
 
   position:absolute;
@@ -1028,31 +1146,40 @@ body{
   border-radius:50%;
 
   border:
-    1px solid rgba(120,200,240,.08);
+    1px solid
+    rgba(120,200,240,.10);
 
   transition:
     border-color .6s ease;
 }
 
 .archive-card:hover{
-  transform:translateY(-4px);
+
+  transform:
+    translateY(-4px);
 
   border-color:
-    rgba(125,210,250,.32);
+    rgba(122,192,235,.40);
 
   background:
+
     linear-gradient(
       145deg,
       rgba(22,59,86,.48),
-      rgba(7,22,37,.5)
+      rgba(7,22,37,.52)
     );
 
   box-shadow:
-    0 10px 35px rgba(0,0,0,.2),
-    0 0 25px rgba(70,160,215,.04);
+
+    0 10px 35px
+    rgba(0,0,0,.2),
+
+    0 0 25px
+    rgba(70,160,215,.06);
 }
 
 .card-number{
+
   font-family:
     "Cinzel",
     serif;
@@ -1061,7 +1188,8 @@ body{
 
   letter-spacing:3px;
 
-  color:rgba(120,195,235,.48);
+  color:
+    rgba(120,195,235,.52);
 
   margin-bottom:26px;
 
@@ -1070,6 +1198,7 @@ body{
 }
 
 .card-title{
+
   font-family:
     "Cinzel",
     serif;
@@ -1080,7 +1209,8 @@ body{
 
   letter-spacing:4px;
 
-  color:rgba(220,242,252,.86);
+  color:
+    rgba(220,242,252,.90);
 
   margin-bottom:9px;
 
@@ -1090,23 +1220,27 @@ body{
 }
 
 .card-cn{
+
   font-size:12px;
 
   letter-spacing:3px;
 
-  color:rgba(175,215,235,.48);
+  color:
+    rgba(177,207,230,.62);
 
   transition:
     color .6s ease;
 }
 
 .card-symbol{
+
   position:absolute;
 
   right:24px;
   top:25px;
 
-  color:rgba(120,200,240,.25);
+  color:
+    rgba(137,201,239,.32);
 
   font-family:
     "Times New Roman",
@@ -1115,7 +1249,9 @@ body{
   font-size:19px;
 
   text-shadow:
-    0 0 12px rgba(80,180,230,.25);
+
+    0 0 8px
+    rgba(76,159,216,.30);
 
   transition:
     color .6s ease,
@@ -1128,6 +1264,7 @@ body{
 ========================================================= */
 
 .footer{
+
   position:relative;
 
   z-index:5;
@@ -1144,7 +1281,8 @@ body{
 
   letter-spacing:4px;
 
-  color:rgba(145,190,215,.3);
+  color:
+    rgba(133,177,207,.38);
 
   transition:
     color .6s ease;
@@ -1158,22 +1296,29 @@ body{
 @media (max-width:800px){
 
   .header{
+
     left:35px;
     right:35px;
     top:30px;
   }
 
   .header-right{
+
     gap:14px;
   }
 
   .theme-toggle{
+
     height:27px;
-    padding:0 9px;
+
+    padding:
+      0 9px;
+
     font-size:7px;
   }
 
   .archive-grid{
+
     grid-template-columns:
       repeat(2,1fr);
   }
@@ -1188,6 +1333,7 @@ body{
 @media (max-width:600px){
 
   .page{
+
     padding:
       22px
       20px
@@ -1195,6 +1341,7 @@ body{
   }
 
   .frame{
+
     top:14px;
     left:14px;
     right:14px;
@@ -1202,6 +1349,7 @@ body{
   }
 
   .header{
+
     left:25px;
     right:25px;
     top:24px;
@@ -1216,11 +1364,14 @@ body{
   }
 
   .logo{
+
     align-items:flex-start;
+
     gap:10px;
   }
 
   .logo-symbol{
+
     width:15px;
     height:11px;
 
@@ -1236,14 +1387,17 @@ body{
   }
 
   .logo-cn{
+
     height:11px;
     line-height:11px;
 
     font-size:11px;
+
     letter-spacing:2px;
   }
 
   .logo-en{
+
     display:block;
 
     margin-top:4px;
@@ -1255,14 +1409,17 @@ body{
   }
 
   .header-right{
+
     gap:8px;
   }
 
   .back{
+
     font-size:10px;
   }
 
   .theme-toggle{
+
     height:25px;
 
     padding:
@@ -1276,51 +1433,68 @@ body{
   }
 
   .theme-icon{
+
     font-size:10px;
   }
 
   .content{
+
     padding-top:120px;
   }
 
   .heading{
+
     margin-bottom:35px;
   }
 
   .heading-small{
+
     font-size:8px;
+
     letter-spacing:4px;
   }
 
   .heading-main{
+
     font-size:31px;
+
     letter-spacing:5px;
   }
 
   .heading-cn{
+
     font-size:10px;
+
     letter-spacing:3px;
   }
 
   .archive-grid{
+
     grid-template-columns:1fr;
+
     gap:14px;
   }
 
   .archive-card{
+
     min-height:160px;
-    padding:25px 22px;
+
+    padding:
+      25px 22px;
   }
 
   .card-number{
+
     margin-bottom:20px;
   }
 
   .card-title{
+
     font-size:19px;
   }
 
   .magic-circle{
+
     width:125vw;
     height:125vw;
   }
@@ -1360,25 +1534,32 @@ body{
 @media (max-width:360px){
 
   .header{
+
     left:20px;
     right:20px;
     top:24px;
   }
 
   .heading-main{
+
     font-size:27px;
   }
 
   .header-right{
+
     gap:5px;
   }
 
   .back{
+
     font-size:9px;
   }
 
   .theme-toggle{
-    padding:0 6px;
+
+    padding:
+      0 6px;
+
     font-size:6px;
   }
 
@@ -1386,25 +1567,34 @@ body{
 
 
 /* =========================================================
-   日间模式
+   ★ 日间模式
+   ★ 与首页 #f4f9fd 统一
 ========================================================= */
 
 body.day-mode{
 
+  background:#f4f9fd;
+
+  color:#2e5069;
+}
+
+body.day-mode .page{
+
   background:
+
     radial-gradient(
       circle at 50% 42%,
-      rgba(130,190,220,.22),
-      transparent 44%
+      rgba(165,211,238,.20),
+      transparent 38%
     ),
-    linear-gradient(
-      180deg,
-      #eaf6fb 0%,
-      #dceef5 48%,
-      #cddfe8 100%
-    );
 
-  color:#294456;
+    radial-gradient(
+      circle at 50% 52%,
+      rgba(226,240,249,.68),
+      transparent 72%
+    ),
+
+    #f4f9fd;
 }
 
 
@@ -1413,9 +1603,11 @@ body.day-mode{
 body.day-mode .stars::before,
 body.day-mode .stars::after{
 
-  background:rgba(75,130,160,.28);
+  background:
+    rgba(103,166,207,.42);
 
   box-shadow:
+
     8vw 12vh rgba(70,130,160,.17),
     17vw 28vh rgba(80,140,170,.14),
     26vw 9vh rgba(75,135,165,.16),
@@ -1440,6 +1632,7 @@ body.day-mode .stars::after{
 body.day-mode .stars::after{
 
   box-shadow:
+
     5vw 19vh rgba(70,135,165,.18),
     15vw 44vh rgba(80,145,175,.16),
     31vw 17vh rgba(70,135,165,.14),
@@ -1463,11 +1656,16 @@ body.day-mode .stars::after{
 
 body.day-mode .arcane-star{
 
-  color:rgba(65,125,155,.48);
+  color:
+    rgba(76,145,190,.48);
 
   text-shadow:
-    0 0 5px rgba(80,150,180,.13),
-    0 0 14px rgba(80,150,180,.06);
+
+    0 0 5px
+    rgba(105,174,210,.18),
+
+    0 0 14px
+    rgba(80,150,180,.06);
 }
 
 
@@ -1476,29 +1674,36 @@ body.day-mode .arcane-star{
 body.day-mode .magic-circle{
 
   border-color:
-    rgba(70,140,175,.13);
+    rgba(79,148,196,.13);
 
   box-shadow:
-    0 0 50px rgba(70,145,180,.055),
-    inset 0 0 60px rgba(70,145,180,.035);
+
+    0 0 50px
+    rgba(70,142,196,.055),
+
+    inset
+    0 0 60px
+    rgba(78,151,204,.035);
 }
 
 body.day-mode .magic-circle::before{
 
   border-color:
-    rgba(75,150,180,.10);
+    rgba(79,148,196,.10);
 
   box-shadow:
-    0 0 25px rgba(70,145,180,.035);
+    0 0 25px
+    rgba(70,145,180,.035);
 }
 
 body.day-mode .magic-circle::after{
 
   border-color:
-    rgba(80,160,190,.11);
+    rgba(101,168,207,.11);
 
   box-shadow:
-    0 0 18px rgba(75,150,180,.035);
+    0 0 18px
+    rgba(75,150,180,.035);
 }
 
 
@@ -1507,25 +1712,25 @@ body.day-mode .magic-circle::after{
 body.day-mode .frame{
 
   border-color:
-    rgba(70,125,155,.20);
+    rgba(91,145,184,.34);
 }
 
 body.day-mode .frame::before{
 
   border-left-color:
-    rgba(75,140,170,.48);
+    rgba(79,151,200,.48);
 
   border-top-color:
-    rgba(75,140,170,.48);
+    rgba(79,151,200,.48);
 }
 
 body.day-mode .frame::after{
 
   border-right-color:
-    rgba(75,140,170,.48);
+    rgba(79,151,200,.48);
 
   border-bottom-color:
-    rgba(75,140,170,.48);
+    rgba(79,151,200,.48);
 }
 
 
@@ -1533,28 +1738,29 @@ body.day-mode .frame::after{
 
 body.day-mode .logo{
 
-  color:
-    rgba(38,67,82,.92);
+  color:#2e526c;
 }
 
 body.day-mode .logo-symbol{
 
-  color:#5b9fbe;
+  color:
+    rgba(79,151,201,.84);
 
   text-shadow:
-    0 0 10px rgba(85,160,190,.28);
+    0 0 7px
+    rgba(86,158,208,.20);
 }
 
 body.day-mode .logo-cn{
 
   color:
-    rgba(38,67,82,.92);
+    rgba(46,82,108,.92);
 }
 
 body.day-mode .logo-en{
 
   color:
-    rgba(55,88,104,.55);
+    rgba(81,137,173,.62);
 }
 
 
@@ -1563,16 +1769,16 @@ body.day-mode .logo-en{
 body.day-mode .back{
 
   color:
-    rgba(55,88,104,.68);
+    rgba(62,99,127,.70);
 }
 
 body.day-mode .back:hover{
 
-  color:
-    rgba(40,75,92,.96);
+  color:#28536f;
 
   text-shadow:
-    0 0 10px rgba(70,140,170,.20);
+    0 0 8px
+    rgba(76,151,202,.14);
 }
 
 
@@ -1581,28 +1787,28 @@ body.day-mode .back:hover{
 body.day-mode .theme-toggle{
 
   border-color:
-    rgba(75,135,165,.30);
+    rgba(91,145,184,.34);
 
   background:
-    rgba(225,243,248,.55);
+    rgba(248,252,255,.78);
 
   color:
-    rgba(45,82,98,.72);
+    rgba(61,98,125,.76);
 }
 
 body.day-mode .theme-toggle:hover{
 
   border-color:
-    rgba(75,145,175,.50);
+    rgba(79,151,200,.62);
 
   background:
-    rgba(235,247,250,.78);
+    rgba(248,252,255,.90);
 
-  color:
-    rgba(35,70,86,.95);
+  color:#28536f;
 
   box-shadow:
-    0 0 18px rgba(70,145,175,.08);
+    0 0 14px
+    rgba(76,151,202,.11);
 }
 
 
@@ -1611,22 +1817,22 @@ body.day-mode .theme-toggle:hover{
 body.day-mode .heading-small{
 
   color:
-    rgba(65,120,145,.68);
+    rgba(81,137,173,.68);
 }
 
 body.day-mode .heading-main{
 
-  color:
-    rgba(43,73,88,.92);
+  color:#2b506a;
 
   text-shadow:
-    none;
+    0 0 18px
+    rgba(80,151,201,.065);
 }
 
 body.day-mode .heading-cn{
 
   color:
-    rgba(73,111,126,.66);
+    rgba(45,82,106,.80);
 }
 
 
@@ -1635,26 +1841,29 @@ body.day-mode .heading-cn{
 body.day-mode .archive-card{
 
   border-color:
-    rgba(75,135,165,.24);
+    rgba(82,151,198,.24);
 
   background:
+
     linear-gradient(
       145deg,
-      rgba(232,246,250,.68),
-      rgba(205,226,235,.48)
+      rgba(242,249,253,.76),
+      rgba(226,240,249,.58)
     );
 
   box-shadow:
-    0 5px 20px rgba(70,110,130,.04);
+    0 5px 20px
+    rgba(70,110,130,.04);
 }
 
 body.day-mode .archive-card::before{
 
   background:
+
     linear-gradient(
       90deg,
       transparent,
-      rgba(80,150,180,.42),
+      rgba(81,151,198,.54),
       transparent
     );
 }
@@ -1662,24 +1871,29 @@ body.day-mode .archive-card::before{
 body.day-mode .archive-card::after{
 
   border-color:
-    rgba(75,140,170,.12);
+    rgba(82,155,203,.12);
 }
 
 body.day-mode .archive-card:hover{
 
   border-color:
-    rgba(70,140,175,.42);
+    rgba(79,151,200,.42);
 
   background:
+
     linear-gradient(
       145deg,
-      rgba(238,249,252,.82),
-      rgba(211,231,239,.62)
+      rgba(249,252,254,.90),
+      rgba(230,241,248,.72)
     );
 
   box-shadow:
-    0 10px 35px rgba(55,95,115,.10),
-    0 0 25px rgba(70,145,175,.06);
+
+    0 10px 35px
+    rgba(55,95,115,.10),
+
+    0 0 25px
+    rgba(76,151,202,.06);
 }
 
 body.day-mode .card-number{
@@ -1708,7 +1922,8 @@ body.day-mode .card-symbol{
     rgba(70,135,165,.38);
 
   text-shadow:
-    0 0 10px rgba(80,150,180,.16);
+    0 0 10px
+    rgba(80,150,180,.16);
 }
 
 
@@ -1717,7 +1932,7 @@ body.day-mode .card-symbol{
 body.day-mode .footer{
 
   color:
-    rgba(75,110,125,.46);
+    rgba(73,115,143,.40);
 }
 
 
@@ -1728,10 +1943,12 @@ body.day-mode .footer{
 @media (prefers-reduced-motion:reduce){
 
   .arcane-star{
+
     animation:none;
   }
 
   .archive-card{
+
     transition:none;
   }
 
@@ -1750,6 +1967,7 @@ body.day-mode .footer{
   .card-cn,
   .card-symbol,
   .footer{
+
     transition:none;
   }
 
@@ -1837,8 +2055,18 @@ body.day-mode .footer{
         type="button"
         aria-label="切换昼夜模式"
       >
-        <span class="theme-icon" id="themeIcon">☾</span>
-        <span id="themeText">NIGHT</span>
+
+        <span
+          class="theme-icon"
+          id="themeIcon"
+        >
+          ☾
+        </span>
+
+        <span id="themeText">
+          NIGHT
+        </span>
+
       </button>
 
     </div>
@@ -2023,25 +2251,42 @@ body.day-mode .footer{
    与首页共用：seyami-theme
 ========================================================= */
 
-const themeToggle = document.getElementById("themeToggle");
-const themeIcon = document.getElementById("themeIcon");
-const themeText = document.getElementById("themeText");
+const themeToggle =
+  document.getElementById(
+    "themeToggle"
+  );
+
+const themeIcon =
+  document.getElementById(
+    "themeIcon"
+  );
+
+const themeText =
+  document.getElementById(
+    "themeText"
+  );
 
 
 function applyTheme(theme){
 
   if(theme === "day"){
 
-    document.body.classList.add("day-mode");
+    document.body.classList.add(
+      "day-mode"
+    );
 
     themeIcon.textContent = "☀";
+
     themeText.textContent = "DAY";
 
   }else{
 
-    document.body.classList.remove("day-mode");
+    document.body.classList.remove(
+      "day-mode"
+    );
 
     themeIcon.textContent = "☾";
+
     themeText.textContent = "NIGHT";
 
   }
@@ -2052,7 +2297,9 @@ function applyTheme(theme){
 /* 读取首页 / 其他页面保存的模式 */
 
 const savedTheme =
-  localStorage.getItem("seyami-theme");
+  localStorage.getItem(
+    "seyami-theme"
+  );
 
 
 /* 默认夜间 */
@@ -2066,24 +2313,31 @@ applyTheme(
 
 /* 点击切换 */
 
-themeToggle.addEventListener("click", () => {
+themeToggle.addEventListener(
+  "click",
+  () => {
 
-  const isDay =
-    document.body.classList.contains("day-mode");
+    const isDay =
+      document.body.classList.contains(
+        "day-mode"
+      );
 
-  const nextTheme =
-    isDay
-      ? "night"
-      : "day";
+    const nextTheme =
+      isDay
+        ? "night"
+        : "day";
 
-  localStorage.setItem(
-    "seyami-theme",
-    nextTheme
-  );
+    localStorage.setItem(
+      "seyami-theme",
+      nextTheme
+    );
 
-  applyTheme(nextTheme);
+    applyTheme(
+      nextTheme
+    );
 
-});
+  }
+);
 
 </script>
 
