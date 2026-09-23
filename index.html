@@ -39,6 +39,7 @@ body{
     background:#061426;
     color:#dcecff;
     overflow-x:hidden;
+
     font-family:
         "Cormorant Garamond",
         "Noto Serif SC",
@@ -263,6 +264,296 @@ body{
         transform:
             translateY(-8px)
             rotate(12deg);
+    }
+
+}
+
+
+/* =========================================================
+   ✶✡ 手机 / 平板专属星尘
+   PC端完全隐藏
+========================================================= */
+
+.mobile-stardust{
+
+    display:none;
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    overflow:hidden;
+
+    z-index:3;
+}
+
+
+/* =========================================================
+   平板 + 手机开启
+========================================================= */
+
+@media(max-width:800px){
+
+    .mobile-stardust{
+
+        display:block;
+
+    }
+
+    .mobile-stardust span{
+
+        position:absolute;
+
+        display:block;
+
+        color:
+            rgba(151,207,244,.52);
+
+        font-family:
+            "Times New Roman",
+            serif;
+
+        font-size:11px;
+
+        line-height:1;
+
+        text-shadow:
+            0 0 7px
+            rgba(86,170,224,.38);
+
+        opacity:.28;
+
+        animation:
+            mobileStarFloat
+            7s
+            ease-in-out
+            infinite;
+
+    }
+
+
+    /* -------------------------
+       ✶ / ✡ / 小星点位置
+    ------------------------- */
+
+    .mobile-stardust span:nth-child(1){
+        left:8%;
+        top:31%;
+        font-size:13px;
+        animation-delay:0s;
+    }
+
+    .mobile-stardust span:nth-child(2){
+        left:91%;
+        top:29%;
+        font-size:12px;
+        animation-delay:1.8s;
+    }
+
+    .mobile-stardust span:nth-child(3){
+        left:14%;
+        top:56%;
+        font-size:8px;
+        animation-delay:3s;
+    }
+
+    .mobile-stardust span:nth-child(4){
+        left:87%;
+        top:53%;
+        font-size:10px;
+        animation-delay:1.2s;
+    }
+
+    .mobile-stardust span:nth-child(5){
+        left:7%;
+        top:73%;
+        font-size:12px;
+        animation-delay:4s;
+    }
+
+    .mobile-stardust span:nth-child(6){
+        left:94%;
+        top:68%;
+        font-size:7px;
+        animation-delay:2.4s;
+    }
+
+    .mobile-stardust span:nth-child(7){
+        left:82%;
+        top:18%;
+        font-size:11px;
+        animation-delay:3.5s;
+    }
+
+    .mobile-stardust span:nth-child(8){
+        left:18%;
+        top:20%;
+        font-size:10px;
+        animation-delay:2s;
+    }
+
+    .mobile-stardust span:nth-child(9){
+        left:27%;
+        top:82%;
+        font-size:7px;
+        animation-delay:1s;
+    }
+
+    .mobile-stardust span:nth-child(10){
+        left:73%;
+        top:81%;
+        font-size:13px;
+        animation-delay:4.5s;
+    }
+
+    .mobile-stardust span:nth-child(11){
+        left:4%;
+        top:43%;
+        font-size:9px;
+        animation-delay:2.8s;
+    }
+
+    .mobile-stardust span:nth-child(12){
+        left:96%;
+        top:43%;
+        font-size:7px;
+        animation-delay:3.8s;
+    }
+
+    .mobile-stardust span:nth-child(13){
+        left:11%;
+        top:87%;
+        font-size:10px;
+        animation-delay:5s;
+    }
+
+    .mobile-stardust span:nth-child(14){
+        left:89%;
+        top:88%;
+        font-size:12px;
+        animation-delay:1.5s;
+    }
+
+    .mobile-stardust span:nth-child(15){
+        left:35%;
+        top:12%;
+        font-size:6px;
+        animation-delay:2.2s;
+    }
+
+    .mobile-stardust span:nth-child(16){
+        left:66%;
+        top:14%;
+        font-size:9px;
+        animation-delay:3.2s;
+    }
+
+    .mobile-stardust span:nth-child(17){
+        left:38%;
+        top:90%;
+        font-size:8px;
+        animation-delay:4.2s;
+    }
+
+    .mobile-stardust span:nth-child(18){
+        left:62%;
+        top:89%;
+        font-size:6px;
+        animation-delay:1.7s;
+    }
+
+
+    @keyframes mobileStarFloat{
+
+        0%,
+        100%{
+
+            opacity:.22;
+
+            transform:
+                translate3d(0,0,0)
+                rotate(0deg)
+                scale(.9);
+
+        }
+
+        50%{
+
+            opacity:.72;
+
+            transform:
+                translate3d(
+                    0,
+                    -5px,
+                    0
+                )
+                rotate(12deg)
+                scale(1.08);
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   手机端稍微收敛星尘
+========================================================= */
+
+@media(max-width:520px){
+
+    .mobile-stardust span{
+
+        font-size:9px;
+
+        opacity:.24;
+
+    }
+
+    .mobile-stardust span:nth-child(1),
+    .mobile-stardust span:nth-child(5),
+    .mobile-stardust span:nth-child(10),
+    .mobile-stardust span:nth-child(14){
+
+        font-size:11px;
+
+    }
+
+    .mobile-stardust span:nth-child(2),
+    .mobile-stardust span:nth-child(7),
+    .mobile-stardust span:nth-child(16){
+
+        font-size:10px;
+
+    }
+
+}
+
+
+/* =========================================================
+   超小屏进一步减少视觉干扰
+========================================================= */
+
+@media(max-width:360px){
+
+    .mobile-stardust span{
+
+        opacity:.20;
+
+    }
+
+    .mobile-stardust span:nth-child(3),
+    .mobile-stardust span:nth-child(6),
+    .mobile-stardust span:nth-child(9),
+    .mobile-stardust span:nth-child(12),
+    .mobile-stardust span:nth-child(15),
+    .mobile-stardust span:nth-child(18){
+
+        display:none;
+
     }
 
 }
@@ -510,7 +801,6 @@ body{
 
 /* =========================================================
    ★ 日间 / 夜间模式按钮
-   放在「关于我们」后面
 ========================================================= */
 
 .theme-toggle{
@@ -1744,7 +2034,6 @@ body{
 
 /* =========================================================
    ★ 日间模式
-   冷淡冰蓝色，不改变原本布局
 ========================================================= */
 
 body.day-mode{
@@ -2013,6 +2302,22 @@ body.day-mode .footer{
 
 
 /* =========================================================
+   ✶✡ 手机 / 平板星尘 · 日间模式
+========================================================= */
+
+body.day-mode .mobile-stardust span{
+
+    color:
+        rgba(76,145,190,.48);
+
+    text-shadow:
+        0 0 6px
+        rgba(105,174,210,.18);
+
+}
+
+
+/* =========================================================
    星轨 JS
 ========================================================= */
 
@@ -2040,6 +2345,34 @@ body.day-mode .footer{
     <span>✶</span>
     <span>·</span>
     <span>✧</span>
+
+</div>
+
+
+<!-- =========================================================
+     手机 / 平板专属星尘
+========================================================= -->
+
+<div class="mobile-stardust">
+
+    <span>✶</span>
+    <span>✡</span>
+    <span>·</span>
+    <span>✧</span>
+    <span>✶</span>
+    <span>·</span>
+    <span>✡</span>
+    <span>✦</span>
+    <span>·</span>
+    <span>✶</span>
+    <span>✧</span>
+    <span>·</span>
+    <span>✡</span>
+    <span>✶</span>
+    <span>·</span>
+    <span>✦</span>
+    <span>✧</span>
+    <span>·</span>
 
 </div>
 
@@ -2092,13 +2425,14 @@ body.day-mode .footer{
             关于我们
         </a>
 
-        <!-- ★ 日间 / 夜间切换 -->
+
         <button
             class="theme-toggle"
             id="themeToggle"
             type="button"
             aria-label="切换昼夜模式"
         >
+
             <span
                 class="theme-icon"
                 id="themeIcon"
@@ -2107,6 +2441,7 @@ body.day-mode .footer{
             <span id="themeText">
                 NIGHT
             </span>
+
         </button>
 
     </nav>
