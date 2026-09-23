@@ -502,71 +502,6 @@ body{
 
 
 /* =========================================================
-   ☼ 日间模式按钮
-========================================================= */
-
-.theme-toggle{
-
-    position:relative;
-
-    margin-left:4px;
-
-    width:25px;
-    height:25px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    padding:0;
-
-    border:
-        1px solid
-        rgba(145,196,228,.28);
-
-    border-radius:50%;
-
-    background:
-        rgba(8,28,49,.32);
-
-    color:
-        rgba(190,222,244,.72);
-
-    font-family:serif;
-
-    font-size:13px;
-
-    line-height:1;
-
-    cursor:pointer;
-
-    transition:
-        color .35s ease,
-        background .35s ease,
-        border-color .35s ease,
-        box-shadow .35s ease,
-        transform .35s ease;
-}
-
-.theme-toggle:hover{
-
-    color:#e4f5ff;
-
-    background:
-        rgba(31,75,108,.45);
-
-    border-color:
-        rgba(119,190,230,.55);
-
-    box-shadow:
-        0 0 12px
-        rgba(88,169,220,.22);
-
-    transform:rotate(18deg);
-}
-
-
-/* =========================================================
    主体
 ========================================================= */
 
@@ -859,6 +794,7 @@ body{
 
 /* =========================================================
    ★ PC标题
+   中间空格严格对准页面中心
 ========================================================= */
 
 .main-title{
@@ -929,6 +865,10 @@ body{
 
 /* =========================================================
    ★ PC窄窗口标题自适应
+   801px ～ 521px
+
+   根据窗口宽度连续缩小，
+   保持 SEYAMI ARCHIVE 一行
 ========================================================= */
 
 @media (min-width:521px) and (max-width:800px){
@@ -1419,16 +1359,6 @@ body{
         letter-spacing:0;
     }
 
-    .theme-toggle{
-
-        width:22px;
-        height:22px;
-
-        margin-left:1px;
-
-        font-size:11px;
-    }
-
     .corner{
 
         width:55px;
@@ -1490,6 +1420,7 @@ body{
 
     /* =====================================================
        手机标题
+       两行，但缩小上下间距
     ===================================================== */
 
     .main-title{
@@ -1652,14 +1583,6 @@ body{
         font-size:8px;
     }
 
-    .theme-toggle{
-
-        width:20px;
-        height:20px;
-
-        font-size:10px;
-    }
-
     .main-title .seyami{
         font-size:39px;
     }
@@ -1686,429 +1609,8 @@ body{
 
 
 /* =========================================================
-   ★ 日间模式
-   只增加，不改变原夜间模式
+   星轨 JS
 ========================================================= */
-
-body.day-mode{
-
-    background:#dce8ef;
-
-    color:#243b4d;
-}
-
-body.day-mode .page{
-
-    background:
-        radial-gradient(
-            circle at 50% 45%,
-            rgba(255,255,255,.72),
-            transparent 38%
-        ),
-        radial-gradient(
-            circle at 50% 50%,
-            rgba(171,202,220,.42),
-            transparent 70%
-        ),
-        #dce8ef;
-}
-
-
-/* 日间星空 */
-
-body.day-mode .stars::before,
-body.day-mode .stars::after{
-
-    opacity:.16;
-
-    filter:
-        sepia(.08)
-        saturate(.65);
-}
-
-body.day-mode .floating-stars span{
-
-    color:
-        rgba(67,119,151,.42);
-
-    text-shadow:
-        0 0 8px
-        rgba(112,163,190,.25);
-}
-
-
-/* 日间外框 */
-
-body.day-mode .frame{
-
-    border-color:
-        rgba(75,125,151,.32);
-}
-
-body.day-mode .frame::before{
-
-    border-color:
-        rgba(86,137,161,.12);
-}
-
-
-/* 日间四角六芒星 */
-
-body.day-mode .corner::before{
-
-    color:
-        rgba(69,122,150,.68);
-
-    text-shadow:
-        0 0 5px
-        rgba(81,145,174,.25),
-        0 0 13px
-        rgba(92,157,184,.12);
-}
-
-
-/* 日间 Logo */
-
-body.day-mode .logo{
-
-    color:#29485d;
-}
-
-body.day-mode .logo-mark{
-
-    color:
-        rgba(70,126,155,.78);
-
-    text-shadow:
-        0 0 7px
-        rgba(86,151,181,.25);
-}
-
-body.day-mode .logo-en{
-
-    color:
-        rgba(65,108,133,.62);
-}
-
-
-/* 日间导航 */
-
-body.day-mode .nav-links a{
-
-    color:
-        rgba(53,83,101,.72);
-}
-
-body.day-mode .nav-links a:hover{
-
-    color:
-        #29485d;
-
-    text-shadow:
-        0 0 8px
-        rgba(74,137,167,.22);
-}
-
-body.day-mode .nav-links a::after{
-
-    background:
-        rgba(75,143,175,.55);
-}
-
-
-/* 日间按钮 */
-
-body.day-mode .theme-toggle{
-
-    border-color:
-        rgba(71,121,147,.35);
-
-    background:
-        rgba(255,255,255,.28);
-
-    color:
-        rgba(62,105,128,.78);
-}
-
-body.day-mode .theme-toggle:hover{
-
-    color:
-        #315d73;
-
-    background:
-        rgba(255,255,255,.55);
-
-    border-color:
-        rgba(72,137,168,.55);
-
-    box-shadow:
-        0 0 12px
-        rgba(80,144,174,.18);
-}
-
-
-/* 日间魔法圆阵 */
-
-body.day-mode .magic-circle{
-
-    opacity:.62;
-}
-
-body.day-mode .magic-circle::before{
-
-    border-color:
-        rgba(71,132,161,.25);
-
-    box-shadow:
-        0 0 22px
-        rgba(69,130,158,.08);
-}
-
-body.day-mode .magic-circle::after{
-
-    border-color:
-        rgba(82,143,170,.20);
-
-    box-shadow:
-        inset 0 0 20px
-        rgba(72,137,164,.04);
-}
-
-
-/* 日间星轨 */
-
-body.day-mode .orbit-track{
-
-    stroke:
-        rgba(65,133,164,.28);
-
-    filter:
-        drop-shadow(
-            0 0 4px
-            rgba(70,140,169,.08)
-        );
-}
-
-body.day-mode #travellingStar{
-
-    fill:
-        rgba(69,126,153,.82);
-
-    filter:
-        drop-shadow(
-            0 0 3px
-            rgba(91,157,184,.45)
-        )
-        drop-shadow(
-            0 0 8px
-            rgba(87,151,180,.22)
-        );
-}
-
-body.day-mode .star-glow{
-
-    fill:
-        rgba(95,160,185,.06);
-}
-
-
-/* 日间中央线 */
-
-body.day-mode .magic-line{
-
-    background:
-        rgba(67,128,157,.12);
-}
-
-body.day-mode .magic-center{
-
-    border-color:
-        rgba(72,137,165,.40);
-
-    box-shadow:
-        0 0 10px
-        rgba(78,145,172,.18);
-}
-
-body.day-mode .magic-center::before{
-
-    background:
-        rgba(74,143,171,.58);
-
-    box-shadow:
-        0 0 8px
-        rgba(87,157,184,.45);
-}
-
-
-/* 日间标题 */
-
-body.day-mode .main-title{
-
-    color:
-        #294354;
-
-    text-shadow:
-        0 0 18px
-        rgba(93,147,172,.10);
-}
-
-body.day-mode .title-decoration{
-
-    opacity:.72;
-}
-
-body.day-mode .title-decoration .line{
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(78,140,167,.48)
-        );
-}
-
-body.day-mode .title-decoration .line.right{
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(78,140,167,.48),
-            transparent
-        );
-}
-
-body.day-mode .title-decoration .diamond{
-
-    border-color:
-        rgba(74,137,165,.62);
-}
-
-
-/* 日间中文标题 */
-
-body.day-mode .chinese-title{
-
-    color:
-        rgba(48,76,91,.82);
-}
-
-
-/* 日间描述 */
-
-body.day-mode .description{
-
-    color:
-        rgba(65,94,109,.62);
-}
-
-
-/* 日间进入按钮 */
-
-body.day-mode .enter-wrap::before{
-
-    border-color:
-        rgba(73,133,160,.35);
-
-    background:
-        rgba(239,247,250,.48);
-
-    box-shadow:
-        0 0 22px
-        rgba(72,135,163,.08);
-}
-
-body.day-mode .enter-wrap::after{
-
-    border-color:
-        rgba(78,139,165,.16);
-}
-
-body.day-mode .enter-button{
-
-    color:
-        #345568;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(222,235,241,.88),
-            rgba(239,247,250,.94),
-            rgba(222,235,241,.88)
-        );
-
-    border-top-color:
-        rgba(76,139,166,.35);
-
-    border-bottom-color:
-        rgba(76,139,166,.35);
-}
-
-body.day-mode .enter-button:hover{
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(214,231,239,.95),
-            rgba(246,251,253,.98),
-            rgba(214,231,239,.95)
-        );
-
-    box-shadow:
-        0 0 22px
-        rgba(70,137,166,.15);
-}
-
-body.day-mode .enter-star{
-
-    color:
-        rgba(67,130,158,.65);
-
-    text-shadow:
-        0 0 9px
-        rgba(74,145,173,.25);
-}
-
-body.day-mode .enter-diamond{
-
-    border-color:
-        rgba(76,139,166,.55);
-
-    background:#dce8ef;
-}
-
-
-/* 日间 Footer */
-
-body.day-mode .footer{
-
-    color:
-        rgba(72,110,127,.40);
-}
-
-
-/* =========================================================
-   日夜模式过渡
-========================================================= */
-
-body,
-.page,
-.frame,
-.main-title,
-.chinese-title,
-.description,
-.enter-button,
-.enter-wrap::before,
-.enter-wrap::after,
-.theme-toggle{
-
-    transition:
-        background .6s ease,
-        color .6s ease,
-        border-color .6s ease,
-        box-shadow .6s ease,
-        text-shadow .6s ease;
-}
 
 </style>
 </head>
@@ -2185,13 +1687,6 @@ body,
         <a href="about.html">
             关于我们
         </a>
-
-        <button
-            class="theme-toggle"
-            id="themeToggle"
-            aria-label="切换日间模式"
-            title="切换日间模式"
-        >☼</button>
 
     </nav>
 
@@ -2368,12 +1863,7 @@ body,
 
 </div>
 
-
 <script>
-
-/* =========================================================
-   三重星轨 + 小星辰
-========================================================= */
 
 (function(){
 
@@ -3132,106 +2622,7 @@ body,
 
 })();
 
-
-/* =========================================================
-   日间 / 夜间模式
-========================================================= */
-
-const themeToggle =
-    document.getElementById(
-        "themeToggle"
-    );
-
-const savedTheme =
-    localStorage.getItem(
-        "seyami-theme"
-    );
-
-
-/* 读取上一次选择 */
-
-if(savedTheme === "day"){
-
-    document.body.classList.add(
-        "day-mode"
-    );
-
-    if(themeToggle){
-
-        themeToggle.textContent =
-            "☾";
-
-        themeToggle.setAttribute(
-            "aria-label",
-            "切换夜间模式"
-        );
-
-        themeToggle.setAttribute(
-            "title",
-            "切换夜间模式"
-        );
-
-    }
-
-}
-
-
-/* 点击切换 */
-
-if(themeToggle){
-
-    themeToggle.addEventListener(
-        "click",
-        function(){
-
-            document.body.classList.toggle(
-                "day-mode"
-            );
-
-            const isDay =
-                document.body.classList.contains(
-                    "day-mode"
-                );
-
-
-            /* 保存选择 */
-
-            localStorage.setItem(
-                "seyami-theme",
-                isDay
-                    ? "day"
-                    : "night"
-            );
-
-
-            /* 更换图标 */
-
-            themeToggle.textContent =
-                isDay
-                    ? "☾"
-                    : "☼";
-
-
-            themeToggle.setAttribute(
-                "aria-label",
-                isDay
-                    ? "切换夜间模式"
-                    : "切换日间模式"
-            );
-
-            themeToggle.setAttribute(
-                "title",
-                isDay
-                    ? "切换夜间模式"
-                    : "切换日间模式"
-            );
-
-        }
-    );
-
-}
-
 </script>
 
 </body>
-</html>
+      </html>
