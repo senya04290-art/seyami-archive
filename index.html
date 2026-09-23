@@ -1953,7 +1953,7 @@ body.day-mode .footer{
 
 
 /* =========================================================
-   平板
+   平板 / 窄窗口 PC
 ========================================================= */
 
 @media(max-width:800px){
@@ -1998,16 +1998,52 @@ body.day-mode .footer{
 
     .main-title{
 
-        width:max-content;
+        width:auto;
 
-        max-width:calc(100vw - 40px);
+        max-width:none;
 
-        margin-left:auto;
-        margin-right:auto;
+        margin-left:0;
+        margin-right:0;
 
-        flex-direction:row;
+        display:flex;
 
-        align-items:baseline;
+        flex-direction:column;
+
+        align-items:center;
+
+        justify-content:center;
+
+        letter-spacing:5px;
+
+        line-height:.88;
+
+        height:auto;
+    }
+
+    .main-title .seyami{
+
+        position:static;
+
+        margin-right:0;
+
+        font-size:56px;
+
+        white-space:nowrap;
+    }
+
+    .main-title .archive{
+
+        position:static;
+
+        margin-top:3px;
+
+        margin-left:0;
+
+        font-size:66px;
+
+        letter-spacing:7px;
+
+        white-space:nowrap;
     }
 
     .chinese-title{
