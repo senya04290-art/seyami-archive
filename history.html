@@ -130,14 +130,12 @@ body{
 
     font-family:"Cinzel",serif;
 
-    /*
-       增强夜间模式下的可见度
-    */
-    color:rgba(155,210,240,.42);
+    color:rgba(175,220,245,.58);
 
     text-shadow:
-        0 0 14px rgba(90,175,225,.30),
-        0 0 30px rgba(90,175,225,.14);
+        0 0 8px rgba(120,195,235,.42),
+        0 0 18px rgba(90,175,225,.30),
+        0 0 34px rgba(90,175,225,.16);
 
     user-select:none;
 
@@ -199,11 +197,11 @@ body{
             translate3d(0,0,0)
             rotate(0deg);
 
-        opacity:.18;
+        opacity:.32;
     }
 
     25%{
-        opacity:.36;
+        opacity:.58;
     }
 
     50%{
@@ -215,11 +213,11 @@ body{
             )
             rotate(8deg);
 
-        opacity:.46;
+        opacity:.68;
     }
 
     75%{
-        opacity:.30;
+        opacity:.48;
     }
 
     100%{
@@ -231,7 +229,7 @@ body{
             )
             rotate(-6deg);
 
-        opacity:.18;
+        opacity:.32;
     }
 
 }
@@ -860,10 +858,11 @@ body.day .micro-stars{
 }
 
 body.day .floating-symbol{
-    color:rgba(65,120,150,.13);
+    color:rgba(55,105,135,.28);
 
     text-shadow:
-        0 0 12px rgba(70,135,170,.08);
+        0 0 8px rgba(70,135,170,.18),
+        0 0 18px rgba(70,135,170,.10);
 }
 
 body.day .frame{
