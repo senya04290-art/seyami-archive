@@ -340,37 +340,49 @@ body{
 
 /* =========================================================
    魔法阵
-   PC端改为「档案目录」星环
+   ★ 完整复制「档案目录」星环
 ========================================================= */
 
 .magic-circle{
+
     position:absolute;
 
-    width:510px;
-    height:510px;
+    width:min(72vw,760px);
+    height:min(72vw,760px);
 
     left:50%;
-    top:48%;
+    top:47%;
 
-    transform:translate(-50%,-50%) rotate(-8deg);
+    transform:
+        translate(-50%,-50%);
 
     border-radius:50%;
 
-    opacity:.5;
+    border:
+        1px solid
+        rgba(73,143,198,.28);
 
-    filter:
-        drop-shadow(
-            0 0 14px
-            rgba(45,120,215,.38)
-        );
+    box-shadow:
+
+        0 0 50px
+        rgba(47,126,184,.08),
+
+        inset
+        0 0 60px
+        rgba(62,139,194,.04);
+
+    z-index:0;
 
     pointer-events:none;
 
-    z-index:1;
+    transition:
+        border-color .6s ease,
+        box-shadow .6s ease;
 }
 
 .magic-circle::before,
 .magic-circle::after{
+
     content:"";
 
     position:absolute;
@@ -378,33 +390,44 @@ body{
     left:50%;
     top:50%;
 
-    width:210px;
-    height:182px;
-
-    border:1px solid rgba(99,174,248,.45);
-
     transform:
-        translate(-50%,-50%)
-        rotate(30deg);
+        translate(-50%,-50%);
 
-    clip-path:polygon(
-        25% 0%,
-        75% 0%,
-        100% 50%,
-        75% 100%,
-        25% 100%,
-        0% 50%
-    );
+    border-radius:50%;
 
     pointer-events:none;
+
+    transition:
+        border-color .6s ease,
+        box-shadow .6s ease;
+}
+
+.magic-circle::before{
+
+    width:82%;
+    height:82%;
+
+    border:
+        1px solid
+        rgba(91,162,213,.22);
+
+    box-shadow:
+        0 0 25px
+        rgba(47,126,184,.08);
 }
 
 .magic-circle::after{
-    transform:
-        translate(-50%,-50%)
-        rotate(90deg);
 
-    opacity:.65;
+    width:61%;
+    height:61%;
+
+    border:
+        1px solid
+        rgba(91,162,213,.22);
+
+    box-shadow:
+        0 0 18px
+        rgba(62,139,194,.04);
 }
 
 
@@ -1188,21 +1211,44 @@ body.day .arcane-stars span{
 }
 
 
-/* 魔法阵 */
+/* =========================================================
+   日间模式 · 星环
+   ★ 完整复制「档案目录」
+========================================================= */
 
 body.day .magic-circle{
-    border-color:rgba(99,174,248,.45);
 
-    filter:
-        drop-shadow(
-            0 0 10px
-            rgba(45,120,215,.20)
-        );
+    border-color:
+        rgba(79,148,196,.26);
+
+    box-shadow:
+
+        0 0 50px
+        rgba(70,142,196,.055),
+
+        inset
+        0 0 60px
+        rgba(78,151,204,.028);
 }
 
-body.day .magic-circle::before,
+body.day .magic-circle::before{
+
+    border-color:
+        rgba(79,148,196,.26);
+
+    box-shadow:
+        0 0 25px
+        rgba(70,142,196,.055);
+}
+
 body.day .magic-circle::after{
-    border-color:rgba(79,148,196,.28);
+
+    border-color:
+        rgba(101,168,207,.20);
+
+    box-shadow:
+        0 0 18px
+        rgba(76,151,202,.065);
 }
 
 
@@ -1585,10 +1631,18 @@ body.day .footer{
         letter-spacing:1.5px;
     }
 
+
+    /* =====================================================
+       ★ 手机星环
+       完整复制「档案目录」
+    ====================================================== */
+
     .magic-circle{
-        width:360px;
-        height:360px;
+
+        width:105vw;
+        height:105vw;
     }
+
 
     .footer{
         padding-top:35px;
