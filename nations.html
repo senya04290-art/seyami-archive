@@ -278,9 +278,21 @@ body{
     animation:arcaneTwinkle 6s ease-in-out infinite;
 }
 
-.arcane-stars span::before{
-    content:"✦✶";
+
+/* =========================================================
+   ✦ ✶ 浮动魔法星
+   奇数 = ✦
+   偶数 = ✶
+========================================================= */
+
+.arcane-stars span:nth-child(odd)::before{
+    content:"✦";
 }
+
+.arcane-stars span:nth-child(even)::before{
+    content:"✶";
+}
+
 
 @keyframes arcaneTwinkle{
 
