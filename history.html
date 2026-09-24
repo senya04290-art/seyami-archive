@@ -112,11 +112,8 @@ body{
 .floating-symbols{
     position:fixed;
     inset:0;
-
     pointer-events:none;
-
     overflow:hidden;
-
     z-index:3;
 }
 
@@ -371,7 +368,7 @@ body{
 
 /* ================================
    顶部
-   与档案目录保持一致
+   与档案目录完全统一
 ================================ */
 
 .header{
@@ -390,7 +387,6 @@ body{
     justify-content:space-between;
 
     width:auto;
-
     max-width:none;
 
     margin:0;
@@ -400,6 +396,7 @@ body{
 
 /* ================================
    Logo
+   与档案目录完全统一
 ================================ */
 
 .logo{
@@ -480,9 +477,7 @@ body{
 
     color:rgba(157,204,239,.63);
 
-    font-family:
-        "Times New Roman",
-        serif;
+    font-family:"Times New Roman",serif;
 
     font-size:8px;
     line-height:8px;
@@ -498,6 +493,7 @@ body{
 
 /* ================================
    右侧控制
+   与档案目录完全统一
 ================================ */
 
 .header-right{
@@ -923,7 +919,6 @@ body{
 
 /* ================================
    日间模式
-   蓝色体系与档案目录统一
 ================================ */
 
 body.day{
@@ -1184,10 +1179,30 @@ body.day .footer{
 
 
 /* ================================
-   手机端
+   800px
+   与档案目录统一
 ================================ */
 
-@media(max-width:700px){
+@media(max-width:800px){
+
+    .header{
+        left:35px;
+        right:35px;
+        top:30px;
+    }
+
+    .header-right{
+        gap:14px;
+    }
+}
+
+
+/* ================================
+   600px
+   与档案目录统一
+================================ */
+
+@media(max-width:600px){
 
     .page{
         padding:
@@ -1220,7 +1235,6 @@ body.day .footer{
 
     .back{
         font-size:10px;
-
         letter-spacing:1px;
     }
 
@@ -1243,31 +1257,26 @@ body.day .footer{
 
     .hero-en{
         font-size:9px;
-
         letter-spacing:4px;
     }
 
     .hero-title{
         font-size:30px;
-
         letter-spacing:5px;
     }
 
     .hero-cn{
         font-size:12px;
-
         letter-spacing:4px;
     }
 
     .history{
         width:100%;
-
         margin-top:60px;
     }
 
     .timeline{
         left:10px;
-
         transform:none;
     }
 
@@ -1277,9 +1286,7 @@ body.day .footer{
 
     .history-item{
         display:block;
-
         padding-left:30px;
-
         position:relative;
     }
 
@@ -1300,7 +1307,6 @@ body.day .footer{
 
     .history-content{
         padding:20px 20px;
-
         min-height:auto;
     }
 
@@ -1314,7 +1320,6 @@ body.day .footer{
 
     .history-description{
         font-size:10px;
-
         line-height:1.9;
     }
 
@@ -1329,7 +1334,25 @@ body.day .footer{
     .floating-symbol{
         transform:scale(.75);
     }
+}
 
+
+/* ================================
+   360px
+   与档案目录统一
+================================ */
+
+@media(max-width:360px){
+
+    .header{
+        left:20px;
+        right:20px;
+        top:24px;
+    }
+
+    .header-right{
+        gap:5px;
+    }
 }
 
 </style>
@@ -1338,7 +1361,6 @@ body.day .footer{
 
 <body>
 
-<!-- 星点 -->
 <div class="stars"></div>
 <div class="micro-stars"></div>
 
@@ -1352,63 +1374,48 @@ body.day .footer{
     <span
         class="floating-symbol symbol-1"
         style="left:8%; top:18%; --duration:12s; --delay:-3s;"
-    >
-        ✡
-    </span>
+    >✡</span>
 
     <span
         class="floating-symbol symbol-2"
         style="left:23%; top:38%; --duration:15s; --delay:-8s;"
-    >
-        ✶
-    </span>
+    >✶</span>
 
     <span
         class="floating-symbol symbol-3"
         style="left:82%; top:20%; --duration:17s; --delay:-5s;"
-    >
-        ✡
-    </span>
+    >✡</span>
 
     <span
         class="floating-symbol symbol-4"
         style="left:91%; top:48%; --duration:13s; --delay:-9s;"
-    >
-        ✶
-    </span>
+    >✶</span>
 
     <span
         class="floating-symbol symbol-5"
         style="left:14%; top:72%; --duration:16s; --delay:-12s;"
-    >
-        ✶
-    </span>
+    >✶</span>
 
     <span
         class="floating-symbol symbol-6"
         style="left:76%; top:76%; --duration:19s; --delay:-7s;"
-    >
-        ✡
-    </span>
+    >✡</span>
 
     <span
         class="floating-symbol symbol-5"
         style="left:48%; top:13%; --duration:14s; --delay:-4s;"
-    >
-        ✶
-    </span>
+    >✶</span>
 
     <span
         class="floating-symbol symbol-2"
         style="left:56%; top:88%; --duration:18s; --delay:-11s;"
-    >
-        ✡
-    </span>
+    >✡</span>
 
 </div>
 
 
 <!-- 魔法阵 -->
+
 <div class="magic-circle">
 
     <div class="magic-line"></div>
@@ -1419,10 +1426,12 @@ body.day .footer{
 
 
 <!-- 页面边框 -->
+
 <div class="frame"></div>
 
 
 <div class="page">
+
 
     <!-- ================================
          顶部
@@ -1512,7 +1521,6 @@ body.day .footer{
     <main class="history">
 
         <div class="timeline"></div>
-
 
         <div
             class="history-list"
@@ -1672,7 +1680,6 @@ renderHistory();
 
 /* =========================================
    日间 / 夜间模式
-   与档案目录共用 seyami-theme
 ========================================= */
 
 const themeToggle =
