@@ -131,14 +131,13 @@ body{
     font-family:"Cinzel",serif;
 
     /*
-       比原来的 .22 更明显，
-       但仍然保持半透明。
+       增强夜间模式下的可见度
     */
-    color:rgba(145,200,235,.34);
+    color:rgba(155,210,240,.42);
 
     text-shadow:
-        0 0 14px rgba(90,175,225,.24),
-        0 0 30px rgba(90,175,225,.10);
+        0 0 14px rgba(90,175,225,.30),
+        0 0 30px rgba(90,175,225,.14);
 
     user-select:none;
 
@@ -200,11 +199,11 @@ body{
             translate3d(0,0,0)
             rotate(0deg);
 
-        opacity:.14;
+        opacity:.18;
     }
 
     25%{
-        opacity:.28;
+        opacity:.36;
     }
 
     50%{
@@ -216,11 +215,11 @@ body{
             )
             rotate(8deg);
 
-        opacity:.36;
+        opacity:.46;
     }
 
     75%{
-        opacity:.24;
+        opacity:.30;
     }
 
     100%{
@@ -232,7 +231,7 @@ body{
             )
             rotate(-6deg);
 
-        opacity:.14;
+        opacity:.18;
     }
 
 }
