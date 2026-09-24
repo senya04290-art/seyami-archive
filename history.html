@@ -1,362 +1,78 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>塞垭弥大陆档案馆 · 历史记录</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+>
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Noto+Serif+SC:wght@300;400;500&display=swap"
+    rel="stylesheet"
+>
+
 
 <style>
 
-/* ================================
+/* =========================================================
    基础
-================================ */
+========================================================= */
 
 *{
     box-sizing:border-box;
-    margin:0;
-    padding:0;
 }
 
-html{
+html,
+body{
+    margin:0;
+    padding:0;
+    width:100%;
     min-height:100%;
 }
 
 body{
-    min-height:100vh;
+
     overflow-x:hidden;
 
-    background:
-        radial-gradient(
-            circle at 50% 45%,
-            rgba(38,91,137,.18),
-            transparent 38%
-        ),
-        radial-gradient(
-            circle at 50% 50%,
-            rgba(11,45,75,.45),
-            transparent 70%
-        ),
-        #061426;
+    background:#071522;
 
-    color:#dcecff;
+    color:#d9edff;
 
-    font-family:"Noto Serif SC",serif;
+    font-family:
+        "Cinzel",
+        "Noto Serif SC",
+        serif;
 
     transition:
-        background .5s ease,
-        color .5s ease;
+        background .6s ease,
+        color .6s ease;
 }
 
 
-/* ================================
-   星点
-================================ */
-
-.stars{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:0;
-
-    background-image:
-        radial-gradient(circle,rgba(182,220,255,.7) 1px,transparent 1.5px),
-        radial-gradient(circle,rgba(130,191,239,.45) 1px,transparent 1.5px),
-        radial-gradient(circle,rgba(220,240,255,.35) 1px,transparent 1.5px);
-
-    background-size:
-        180px 180px,
-        240px 240px,
-        310px 310px;
-
-    background-position:
-        20px 30px,
-        80px 120px,
-        150px 70px;
-
-    opacity:.35;
-}
-
-
-/* ================================
-   微小星点
-================================ */
-
-.micro-stars{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:0;
-
-    background-image:
-        radial-gradient(
-            circle,
-            rgba(180,220,255,.45) .7px,
-            transparent .8px
-        );
-
-    background-size:95px 95px;
-
-    opacity:.25;
-}
-
-
-/* ================================
-   ✡ ✶ 浮动魔法符文
-================================ */
-
-.floating-symbols{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    overflow:hidden;
-    z-index:3;
-}
-
-.floating-symbol{
-    position:absolute;
-
-    font-family:"Cinzel",serif;
-
-    color:rgba(175,220,245,.58);
-
-    text-shadow:
-        0 0 8px rgba(120,195,235,.42),
-        0 0 18px rgba(90,175,225,.30),
-        0 0 34px rgba(90,175,225,.16);
-
-    user-select:none;
-
-    animation:
-        symbolFloat
-        var(--duration)
-        ease-in-out
-        infinite;
-
-    animation-delay:var(--delay);
-
-    will-change:
-        transform,
-        opacity;
-}
-
-
-/* ================================
-   不同大小
-================================ */
-
-.symbol-1{
-    font-size:24px;
-}
-
-.symbol-2{
-    font-size:17px;
-}
-
-.symbol-3{
-    font-size:29px;
-}
-
-.symbol-4{
-    font-size:20px;
-}
-
-.symbol-5{
-    font-size:14px;
-    opacity:.8;
-}
-
-.symbol-6{
-    font-size:26px;
-    opacity:.72;
-}
-
-
-/* ================================
-   浮动动画
-================================ */
-
-@keyframes symbolFloat{
-
-    0%{
-        transform:
-            translate3d(0,0,0)
-            rotate(0deg);
-
-        opacity:.32;
-    }
-
-    25%{
-        opacity:.58;
-    }
-
-    50%{
-        transform:
-            translate3d(
-                12px,
-                -24px,
-                0
-            )
-            rotate(8deg);
-
-        opacity:.68;
-    }
-
-    75%{
-        opacity:.48;
-    }
-
-    100%{
-        transform:
-            translate3d(
-                -10px,
-                -48px,
-                0
-            )
-            rotate(-6deg);
-
-        opacity:.32;
-    }
-
-}
-
-
-/* ================================
-   四角边框
-================================ */
-
-.frame{
-    position:fixed;
-    inset:18px;
-
-    border:1px solid rgba(111,174,224,.24);
-
-    pointer-events:none;
-
-    z-index:10;
-}
-
-.frame::before,
-.frame::after{
-    content:"";
-
-    position:absolute;
-
-    width:75px;
-    height:75px;
-
-    border-color:rgba(135,195,235,.38);
-    border-style:solid;
-}
-
-.frame::before{
-    left:-1px;
-    top:-1px;
-
-    border-width:1px 0 0 1px;
-}
-
-.frame::after{
-    right:-1px;
-    bottom:-1px;
-
-    border-width:0 1px 1px 0;
-}
-
-
-/* ================================
-   魔法阵
-================================ */
-
-.magic-circle{
-    position:fixed;
-
-    width:480px;
-    height:480px;
-
-    left:50%;
-    top:48%;
-
-    transform:translate(-50%,-50%);
-
-    border:1px solid rgba(92,155,200,.11);
-
-    border-radius:50%;
-
-    pointer-events:none;
-
-    z-index:0;
-}
-
-.magic-circle::before{
-    content:"";
-
-    position:absolute;
-
-    inset:38px;
-
-    border:1px solid rgba(110,175,220,.08);
-
-    border-radius:50%;
-}
-
-.magic-circle::after{
-    content:"";
-
-    position:absolute;
-
-    inset:110px;
-
-    border:1px solid rgba(110,175,220,.065);
-
-    border-radius:50%;
-}
-
-
-/* ================================
-   魔法阵装饰线
-================================ */
-
-.magic-line{
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    width:100%;
-    height:1px;
-
-    background:rgba(115,180,220,.06);
-
-    transform:translate(-50%,-50%);
-}
-
-.magic-line:nth-child(2){
-    transform:
-        translate(-50%,-50%)
-        rotate(60deg);
-}
-
-.magic-line:nth-child(3){
-    transform:
-        translate(-50%,-50%)
-        rotate(-60deg);
-}
-
-
-/* ================================
-   页面主体
-================================ */
+/* =========================================================
+   页面
+========================================================= */
 
 .page{
-    position:relative;
 
-    z-index:2;
+    position:relative;
 
     min-height:100vh;
 
@@ -364,12 +80,50 @@ body{
         30px
         70px
         80px;
+
+    overflow:hidden;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 42%,
+            rgba(37,91,128,.18),
+            transparent 38%
+        ),
+
+        radial-gradient(
+            circle at 50% 52%,
+            rgba(13,47,72,.48),
+            transparent 72%
+        ),
+
+        #071522;
 }
 
 
 /* =========================================================
-   顶部 Header
-   直接采用档案目录页
+   边框
+========================================================= */
+
+.frame{
+
+    position:fixed;
+
+    inset:18px;
+
+    border:
+        1px solid
+        rgba(111,174,224,.16);
+
+    pointer-events:none;
+
+    z-index:10;
+}
+
+
+/* =========================================================
+   顶部 HEADER
+   —— 与国家档案 archive.html 保持一致
 ========================================================= */
 
 .header{
@@ -378,6 +132,7 @@ body{
 
     left:58px;
     right:58px;
+
     top:38px;
 
     z-index:20;
@@ -396,7 +151,7 @@ body{
 }
 
 
-/* Logo */
+/* ---------- LOGO ---------- */
 
 .logo{
 
@@ -406,8 +161,7 @@ body{
 
     gap:12px;
 
-    color:
-        #d9edff;
+    color:#d9edff;
 
     text-decoration:none;
 
@@ -415,10 +169,10 @@ body{
         color .6s ease;
 }
 
+
 .logo-symbol{
 
-    color:
-        rgba(137,201,239,.9);
+    color:rgba(137,201,239,.9);
 
     width:17px;
     height:13px;
@@ -426,24 +180,33 @@ body{
     display:flex;
 
     align-items:flex-start;
+
     justify-content:center;
 
     font-size:17px;
+
     line-height:13px;
 
     margin:0;
     padding:0;
 
     text-shadow:
-        0 0 7px rgba(76,159,216,.5),
-        0 0 15px rgba(49,132,191,.22);
+
+        0 0 7px
+        rgba(76,159,216,.5),
+
+        0 0 15px
+        rgba(49,132,191,.22);
 
     flex-shrink:0;
 
     transition:
+
         color .6s ease,
+
         text-shadow .6s ease;
 }
+
 
 .logo-text{
 
@@ -456,15 +219,16 @@ body{
     line-height:1;
 }
 
+
 .logo-cn{
 
     display:block;
 
     height:13px;
+
     line-height:13px;
 
-    color:
-        #d9edff;
+    color:#d9edff;
 
     font-size:13px;
 
@@ -476,20 +240,21 @@ body{
         color .6s ease;
 }
 
+
 .logo-en{
 
     display:block;
 
     margin-top:5px;
 
-    color:
-        rgba(157,204,239,.63);
+    color:rgba(157,204,239,.63);
 
     font-family:
         "Times New Roman",
         serif;
 
     font-size:8px;
+
     line-height:8px;
 
     letter-spacing:3px;
@@ -501,10 +266,7 @@ body{
 }
 
 
-/* =========================================================
-   返回
-   直接采用档案目录页
-========================================================= */
+/* ---------- HEADER RIGHT ---------- */
 
 .header-right{
 
@@ -515,10 +277,12 @@ body{
     gap:20px;
 }
 
+
+/* ---------- 返回 ---------- */
+
 .back{
 
-    color:
-        rgba(191,220,243,.68);
+    color:rgba(191,220,243,.68);
 
     text-decoration:none;
 
@@ -532,24 +296,25 @@ body{
     letter-spacing:1px;
 
     transition:
+
         color .3s ease,
+
         text-shadow .3s ease;
 }
+
 
 .back:hover{
 
     color:#d9efff;
 
     text-shadow:
+
         0 0 8px
         rgba(102,180,231,.35);
 }
 
 
-/* =========================================================
-   昼夜切换
-   直接采用档案目录页
-========================================================= */
+/* ---------- DAY / NIGHT ---------- */
 
 .theme-toggle{
 
@@ -561,8 +326,7 @@ body{
 
     height:28px;
 
-    padding:
-        0 11px;
+    padding:0 11px;
 
     border:
         1px solid
@@ -590,11 +354,16 @@ body{
     white-space:nowrap;
 
     transition:
+
         color .35s ease,
+
         border-color .35s ease,
+
         background .35s ease,
+
         box-shadow .35s ease;
 }
+
 
 .theme-toggle:hover{
 
@@ -607,9 +376,11 @@ body{
         rgba(8,31,52,.55);
 
     box-shadow:
+
         0 0 14px
         rgba(76,151,202,.12);
 }
+
 
 .theme-icon{
 
@@ -621,75 +392,380 @@ body{
 }
 
 
-/* ================================
-   Hero
-================================ */
+/* =========================================================
+   星星背景
+========================================================= */
 
-.hero{
-    text-align:center;
+.stars{
 
-    margin-top:72px;
+    position:fixed;
 
-    position:relative;
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:0;
+
+    background-image:
+
+        radial-gradient(
+            1px 1px at 10% 18%,
+            rgba(180,220,255,.65),
+            transparent
+        ),
+
+        radial-gradient(
+            1px 1px at 22% 72%,
+            rgba(180,220,255,.45),
+            transparent
+        ),
+
+        radial-gradient(
+            1px 1px at 35% 25%,
+            rgba(180,220,255,.55),
+            transparent
+        ),
+
+        radial-gradient(
+            1px 1px at 48% 83%,
+            rgba(180,220,255,.45),
+            transparent
+        ),
+
+        radial-gradient(
+            1px 1px at 63% 17%,
+            rgba(180,220,255,.55),
+            transparent
+        ),
+
+        radial-gradient(
+            1px 1px at 77% 65%,
+            rgba(180,220,255,.45),
+            transparent
+        ),
+
+        radial-gradient(
+            1px 1px at 89% 30%,
+            rgba(180,220,255,.6),
+            transparent
+        ),
+
+        radial-gradient(
+            1px 1px at 92% 84%,
+            rgba(180,220,255,.4),
+            transparent
+        );
 }
 
-.hero-en{
-    font-family:"Cinzel",serif;
 
-    font-size:12px;
+/* =========================================================
+   微小星点
+========================================================= */
+
+.micro-stars{
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:1;
+
+    opacity:.7;
+
+    background-image:
+
+        radial-gradient(
+            1px 1px at 7% 42%,
+            rgba(173,215,244,.45),
+            transparent
+        ),
+
+        radial-gradient(
+            1px 1px at 17% 14%,
+            rgba(173,215,244,.38),
+            transparent
+        ),
+
+        radial-gradient(
+            1px 1px at 31% 62%,
+            rgba(173,215,244,.38),
+            transparent
+        ),
+
+        radial-gradient(
+            1px 1px at 44% 11%,
+            rgba(173,215,244,.4),
+            transparent
+        ),
+
+        radial-gradient(
+            1px 1px at 56% 71%,
+            rgba(173,215,244,.4),
+            transparent
+        ),
+
+        radial-gradient(
+            1px 1px at 69% 37%,
+            rgba(173,215,244,.38),
+            transparent
+        ),
+
+        radial-gradient(
+            1px 1px at 82% 12%,
+            rgba(173,215,244,.45),
+            transparent
+        ),
+
+        radial-gradient(
+            1px 1px at 95% 55%,
+            rgba(173,215,244,.4),
+            transparent
+        );
+}
+
+
+/* =========================================================
+   漂浮符号
+========================================================= */
+
+.symbol{
+
+    position:fixed;
+
+    pointer-events:none;
+
+    z-index:2;
+
+    color:
+        rgba(115,180,222,.13);
+
+    font-family:
+        "Times New Roman",
+        serif;
+
+    text-shadow:
+        0 0 12px
+        rgba(68,145,198,.18);
+
+    animation:
+        floatSymbol 9s ease-in-out infinite;
+}
+
+
+.symbol-one{
+
+    left:8%;
+
+    top:29%;
+
+    font-size:25px;
+
+    animation-delay:-2s;
+}
+
+
+.symbol-two{
+
+    right:9%;
+
+    top:55%;
+
+    font-size:21px;
+
+    animation-delay:-5s;
+}
+
+
+@keyframes floatSymbol{
+
+    0%,
+    100%{
+        transform:translateY(0) rotate(0deg);
+        opacity:.1;
+    }
+
+    50%{
+        transform:translateY(-12px) rotate(8deg);
+        opacity:.18;
+    }
+}
+
+
+/* =========================================================
+   魔法阵
+========================================================= */
+
+.magic-circle{
+
+    position:fixed;
+
+    left:50%;
+
+    top:48%;
+
+    width:480px;
+
+    height:480px;
+
+    transform:
+        translate(-50%,-50%);
+
+    border:
+        1px solid
+        rgba(92,163,209,.09);
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+    z-index:1;
+
+    box-shadow:
+
+        0 0 0 16px
+        rgba(80,147,194,.018),
+
+        0 0 0 34px
+        rgba(80,147,194,.014),
+
+        0 0 80px
+        rgba(43,113,159,.04);
+}
+
+
+.magic-circle::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:35px;
+
+    border:
+        1px solid
+        rgba(92,163,209,.07);
+
+    border-radius:50%;
+}
+
+
+.magic-circle::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:78px;
+
+    border:
+        1px dashed
+        rgba(92,163,209,.06);
+
+    border-radius:50%;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+
+    position:relative;
+
+    z-index:5;
+
+    text-align:center;
+
+    padding-top:150px;
+
+    margin-bottom:100px;
+}
+
+
+.hero-en{
+
+    color:
+        rgba(154,204,239,.72);
+
+    font-size:10px;
 
     letter-spacing:7px;
 
-    color:rgba(165,205,232,.55);
-
-    margin-bottom:13px;
+    margin-bottom:14px;
 }
 
-.hero-title{
-    font-family:"Cinzel",serif;
 
-    font-size:46px;
+.hero-title{
+
+    margin:0;
+
+    color:#dcefff;
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size:42px;
 
     font-weight:400;
 
-    letter-spacing:9px;
+    letter-spacing:8px;
 
-    color:#dceeff;
+    line-height:1.1;
 
     text-shadow:
-        0 0 20px rgba(94,172,222,.12);
+
+        0 0 16px
+        rgba(73,150,204,.14);
 }
 
+
 .hero-cn{
-    margin-top:14px;
+
+    margin-top:18px;
+
+    color:
+        rgba(181,218,242,.78);
+
+    font-family:
+        "Noto Serif SC",
+        serif;
 
     font-size:14px;
 
-    letter-spacing:7px;
-
-    color:rgba(188,214,232,.64);
+    letter-spacing:8px;
 }
 
 
-/* ================================
-   时间轴区域
-================================ */
+/* =========================================================
+   历史记录
+========================================================= */
 
 .history{
-    width:min(900px,92%);
-
-    margin:82px auto 0;
 
     position:relative;
+
+    z-index:5;
+
+    width:min(900px,92%);
+
+    margin:0 auto;
+
+    padding-bottom:80px;
 }
 
 
-/* 中央时间轴 */
+.history::before{
 
-.timeline{
+    content:"";
+
     position:absolute;
 
     top:0;
+
     bottom:0;
 
     left:50%;
@@ -702,509 +778,395 @@ body{
         linear-gradient(
             to bottom,
             transparent,
-            rgba(110,170,210,.40) 8%,
-            rgba(110,170,210,.40) 92%,
+            rgba(102,173,218,.2) 8%,
+            rgba(102,173,218,.2) 92%,
             transparent
         );
 }
 
 
-/* ================================
-   历史记录
-================================ */
+/* =========================================================
+   历史卡片
+========================================================= */
 
-.history-list{
-    display:flex;
-
-    flex-direction:column;
-
-    gap:68px;
+.history-item{
 
     position:relative;
 
-    z-index:2;
-}
+    width:50%;
 
-.history-item{
-    width:100%;
-
-    display:grid;
-
-    grid-template-columns:
-        1fr
-        42px
-        1fr;
-
-    align-items:center;
+    padding:0 40px 55px;
 }
 
 
-/* 左右内容 */
+.history-item:nth-child(odd){
 
-.history-content{
-    padding:24px 34px;
-
-    border:1px solid rgba(110,170,210,.15);
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(17,42,61,.34),
-            rgba(8,28,49,.24)
-        );
-
-    min-height:145px;
-
-    transition:
-        border-color .35s ease,
-        background .35s ease,
-        transform .35s ease;
-}
-
-.history-content:hover{
-    border-color:rgba(130,190,225,.30);
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(25,54,76,.40),
-            rgba(10,32,50,.30)
-        );
-
-    transform:translateY(-2px);
-}
-
-
-/* 左侧 */
-
-.history-item:nth-child(odd) .history-content{
-    grid-column:1;
+    left:0;
 
     text-align:right;
 }
 
 
-/* 右侧 */
+.history-item:nth-child(even){
 
-.history-item:nth-child(even) .history-content{
-    grid-column:3;
+    left:50%;
 
     text-align:left;
 }
 
 
-/* ================================
-   时间点
-================================ */
+.history-item::before{
 
-.timeline-point{
-    grid-column:2;
+    content:"";
 
-    grid-row:1;
+    position:absolute;
 
-    width:13px;
-    height:13px;
+    top:4px;
 
-    margin:auto;
+    width:7px;
+
+    height:7px;
+
+    border:
+        1px solid
+        rgba(128,194,231,.6);
 
     border-radius:50%;
 
-    border:1px solid rgba(150,205,235,.60);
-
-    background:#061426;
+    background:#071522;
 
     box-shadow:
-        0 0 0 4px rgba(95,165,210,.055),
-        0 0 14px rgba(90,175,225,.20);
 
-    position:relative;
-
-    z-index:3;
+        0 0 8px
+        rgba(88,169,217,.3);
 }
 
 
-/* ================================
-   历史文字
-================================ */
+.history-item:nth-child(odd)::before{
 
-.history-era{
-    font-family:"Cinzel",serif;
+    right:-4px;
+}
+
+
+.history-item:nth-child(even)::before{
+
+    left:-4px;
+}
+
+
+.history-date{
+
+    color:
+        rgba(122,184,220,.62);
+
+    font-family:
+        "Cinzel",
+        serif;
 
     font-size:9px;
 
     letter-spacing:3px;
 
-    color:rgba(140,190,220,.58);
-
-    margin-bottom:8px;
+    margin-bottom:10px;
 }
 
-.history-date{
-    font-family:"Cinzel",serif;
-
-    font-size:10px;
-
-    letter-spacing:2px;
-
-    color:rgba(180,215,235,.48);
-
-    margin-bottom:16px;
-}
 
 .history-title{
-    font-family:"Cinzel",serif;
 
-    font-size:19px;
+    margin:0 0 8px;
+
+    color:
+        rgba(211,235,251,.9);
+
+    font-size:16px;
 
     font-weight:400;
 
     letter-spacing:2px;
-
-    color:#d2e5f2;
-
-    margin-bottom:7px;
 }
 
-.history-cn{
-    font-size:12px;
-
-    letter-spacing:3px;
-
-    color:rgba(190,216,232,.65);
-
-    margin-bottom:15px;
-}
 
 .history-description{
+
+    margin:0;
+
+    color:
+        rgba(161,199,223,.58);
+
+    font-family:
+        "Noto Serif SC",
+        serif;
+
     font-size:11px;
 
     line-height:2;
 
     letter-spacing:1px;
-
-    color:rgba(175,202,220,.50);
 }
 
 
-/* ================================
-   空白提示
-================================ */
+/* =========================================================
+   空状态
+========================================================= */
 
-.empty-history{
+.empty-state{
+
+    position:relative;
+
+    z-index:5;
+
     text-align:center;
 
-    padding:45px 20px;
-
-    border:1px solid rgba(110,170,210,.12);
-
-    background:rgba(10,30,48,.22);
-
-    color:rgba(170,200,220,.42);
-
-    font-size:11px;
-
-    letter-spacing:2px;
+    padding:30px 20px 100px;
 }
 
-.empty-history-en{
-    display:block;
 
-    font-family:"Cinzel",serif;
+.empty-en{
+
+    color:
+        rgba(125,184,220,.42);
+
+    font-family:
+        "Cinzel",
+        serif;
 
     font-size:9px;
 
-    letter-spacing:3px;
+    letter-spacing:5px;
 
-    margin-bottom:9px;
-
-    color:rgba(145,190,220,.45);
+    margin-bottom:13px;
 }
 
 
-/* ================================
-   页脚
-================================ */
+.empty-cn{
+
+    color:
+        rgba(174,210,233,.5);
+
+    font-family:
+        "Noto Serif SC",
+        serif;
+
+    font-size:13px;
+
+    letter-spacing:4px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
 
 .footer{
+
+    position:relative;
+
+    z-index:5;
+
     text-align:center;
 
-    margin-top:100px;
+    padding-top:20px;
 
-    font-family:"Cinzel",serif;
+    color:
+        rgba(120,177,211,.38);
+
+    font-family:
+        "Times New Roman",
+        serif;
 
     font-size:8px;
 
-    letter-spacing:4px;
-
-    color:rgba(150,190,215,.28);
+    letter-spacing:3px;
 }
 
 
-/* ================================
-   日间模式
-================================ */
+/* =========================================================
+   DAY MODE
+========================================================= */
 
 body.day{
+
+    background:#f4f9fd;
+
+    color:#2e5069;
+}
+
+
+body.day .page{
+
     background:
+
         radial-gradient(
-            circle at 50% 45%,
+            circle at 50% 42%,
             rgba(165,211,238,.20),
             transparent 38%
         ),
+
         radial-gradient(
             circle at 50% 52%,
             rgba(226,240,249,.68),
             transparent 72%
         ),
+
         #f4f9fd;
-
-    color:#2e5069;
 }
 
-body.day .stars{
-    opacity:.8;
-}
-
-body.day .micro-stars{
-    opacity:.65;
-}
-
-body.day .floating-symbol{
-    color:rgba(87,151,199,.50);
-
-    text-shadow:none;
-}
 
 body.day .frame{
+
     border-color:
-        rgba(91,145,184,.34);
+        rgba(85,145,181,.18);
 }
 
-body.day .frame::before,
-body.day .frame::after{
-    border-color:
-        rgba(79,141,190,.68);
-}
 
 body.day .logo{
-    color:#2e526c;
+
+    color:#315a75;
 }
 
-body.day .logo-symbol{
-    color:
-        rgba(79,151,201,.84);
-
-    text-shadow:
-        0 0 7px
-        rgba(86,158,208,.20);
-}
 
 body.day .logo-cn{
-    color:#2e526c;
+
+    color:#315a75;
 }
+
 
 body.day .logo-en{
+
     color:
-        rgba(81,137,173,.62);
+        rgba(68,116,145,.62);
 }
+
+
+body.day .logo-symbol{
+
+    color:
+        rgba(72,145,187,.8);
+}
+
 
 body.day .back{
+
     color:
-        rgba(62,99,127,.70);
+        rgba(64,110,137,.72);
 }
 
-body.day .back:hover{
-    color:#28536f;
-
-    text-shadow:
-        0 0 8px
-        rgba(76,151,202,.14);
-}
 
 body.day .theme-toggle{
-    border-color:
-        rgba(91,145,184,.34);
 
     background:
-        rgba(248,252,255,.78);
+        rgba(255,255,255,.42);
+
+    border-color:
+        rgba(85,145,181,.3);
 
     color:
-        rgba(61,98,125,.76);
+        rgba(64,110,137,.75);
 }
+
 
 body.day .theme-toggle:hover{
-    border-color:
-        rgba(79,151,200,.62);
 
     background:
-        rgba(248,252,255,.90);
+        rgba(255,255,255,.7);
 
-    color:#28536f;
-
-    box-shadow:
-        0 0 14px
-        rgba(76,151,202,.11);
+    border-color:
+        rgba(85,145,181,.55);
 }
+
 
 body.day .hero-en{
+
     color:
-        rgba(81,137,173,.68);
+        rgba(72,129,160,.72);
 }
+
 
 body.day .hero-title{
-    color:#2b506a;
+
+    color:#315a75;
 
     text-shadow:
-        0 0 18px
-        rgba(80,151,201,.065);
+        0 0 16px
+        rgba(83,145,182,.12);
 }
+
 
 body.day .hero-cn{
+
     color:
-        rgba(45,82,106,.80);
+        rgba(64,108,133,.72);
 }
 
-body.day .magic-circle{
-    border-color:
-        rgba(79,148,196,.26);
 
-    box-shadow:
-        0 0 50px
-        rgba(70,142,196,.055),
+body.day .history::before{
 
-        inset
-        0 0 60px
-        rgba(78,151,204,.028);
-}
-
-body.day .magic-circle::before{
-    border-color:
-        rgba(79,148,196,.26);
-
-    box-shadow:
-        0 0 25px
-        rgba(70,142,196,.055);
-}
-
-body.day .magic-circle::after{
-    border-color:
-        rgba(101,168,207,.20);
-
-    box-shadow:
-        0 0 18px
-        rgba(76,151,202,.065);
-}
-
-body.day .timeline{
     background:
         linear-gradient(
             to bottom,
             transparent,
-            rgba(82,151,198,.32) 8%,
-            rgba(82,151,198,.32) 92%,
+            rgba(80,139,174,.22) 8%,
+            rgba(80,139,174,.22) 92%,
             transparent
         );
 }
 
-body.day .timeline-point{
+
+body.day .history-item::before{
+
     background:#f4f9fd;
 
     border-color:
-        rgba(79,141,190,.55);
-
-    box-shadow:
-        0 0 0 4px
-        rgba(76,151,202,.05),
-
-        0 0 14px
-        rgba(76,151,202,.12);
+        rgba(78,139,174,.55);
 }
 
-body.day .history-content{
-    border-color:
-        rgba(82,151,198,.36);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(242,249,253,.76),
-            rgba(226,240,249,.68)
-        );
-}
-
-body.day .history-content:hover{
-    border-color:
-        rgba(79,151,200,.62);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(225,238,247,1),
-            rgba(250,253,255,1)
-        );
-
-    box-shadow:
-        0 10px 35px
-        rgba(55,95,115,.10),
-
-        0 0 25px
-        rgba(76,151,202,.13);
-}
-
-body.day .history-era{
-    color:
-        rgba(81,137,173,.68);
-}
 
 body.day .history-date{
+
     color:
-        rgba(65,106,133,.64);
+        rgba(67,126,158,.65);
 }
+
 
 body.day .history-title{
-    color:#2b506a;
+
+    color:
+        rgba(49,91,115,.9);
 }
 
-body.day .history-cn{
-    color:
-        rgba(65,106,133,.64);
-}
 
 body.day .history-description{
-    color:
-        rgba(65,106,133,.64);
-}
-
-body.day .empty-history{
-    border-color:
-        rgba(82,151,198,.36);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(242,249,253,.76),
-            rgba(226,240,249,.68)
-        );
 
     color:
-        rgba(65,106,133,.64);
+        rgba(77,116,138,.68);
 }
 
-body.day .empty-history-en{
+
+body.day .empty-en{
+
     color:
-        rgba(81,137,173,.68);
+        rgba(75,128,157,.48);
 }
+
+
+body.day .empty-cn{
+
+    color:
+        rgba(73,111,132,.58);
+}
+
 
 body.day .footer{
+
     color:
-        rgba(73,115,143,.40);
+        rgba(75,128,157,.42);
 }
 
 
-/* ================================
-   800px
-   完全采用档案目录
-================================ */
+/* =========================================================
+   响应式
+   —— 与国家档案顶部保持一致
+========================================================= */
 
 @media(max-width:800px){
 
@@ -1212,6 +1174,7 @@ body.day .footer{
 
         left:35px;
         right:35px;
+
         top:30px;
     }
 
@@ -1220,13 +1183,37 @@ body.day .footer{
         gap:14px;
     }
 
+    .theme-toggle{
+
+        height:27px;
+
+        padding:0 9px;
+
+        font-size:7px;
+    }
+
+
+    .hero{
+
+        padding-top:135px;
+    }
+
+
+    .hero-title{
+
+        font-size:34px;
+
+        letter-spacing:6px;
+    }
+
+
+    .history{
+
+        width:94%;
+    }
+
 }
 
-
-/* ================================
-   600px
-   完全采用档案目录
-================================ */
 
 @media(max-width:600px){
 
@@ -1238,15 +1225,18 @@ body.day .footer{
             55px;
     }
 
+
     .frame{
 
         inset:12px;
     }
 
+
     .header{
 
         left:25px;
         right:25px;
+
         top:24px;
 
         width:auto;
@@ -1258,12 +1248,14 @@ body.day .footer{
         align-items:flex-start;
     }
 
+
     .logo{
 
         align-items:flex-start;
 
         gap:10px;
     }
+
 
     .logo-symbol{
 
@@ -1273,23 +1265,28 @@ body.day .footer{
         display:flex;
 
         align-items:flex-start;
+
         justify-content:center;
 
         font-size:15px;
+
         line-height:11px;
 
         margin-top:2px;
     }
 
+
     .logo-cn{
 
         height:11px;
+
         line-height:11px;
 
         font-size:11px;
 
         letter-spacing:2px;
     }
+
 
     .logo-en{
 
@@ -1298,27 +1295,30 @@ body.day .footer{
         margin-top:4px;
 
         font-size:7px;
+
         line-height:7px;
 
         letter-spacing:2px;
     }
+
 
     .header-right{
 
         gap:8px;
     }
 
+
     .back{
 
         font-size:10px;
     }
 
+
     .theme-toggle{
 
         height:25px;
 
-        padding:
-            0 7px;
+        padding:0 7px;
 
         gap:5px;
 
@@ -1327,101 +1327,112 @@ body.day .footer{
         letter-spacing:1px;
     }
 
+
     .theme-icon{
 
         font-size:10px;
     }
 
+
     .hero{
-        margin-top:72px;
+
+        padding-top:120px;
+
+        margin-bottom:70px;
     }
+
 
     .hero-en{
-        font-size:9px;
-        letter-spacing:4px;
-    }
 
-    .hero-title{
-        font-size:30px;
+        font-size:8px;
+
         letter-spacing:5px;
     }
 
-    .hero-cn{
-        font-size:12px;
+
+    .hero-title{
+
+        font-size:27px;
+
         letter-spacing:4px;
     }
 
-    .history{
-        width:100%;
-        margin-top:60px;
+
+    .hero-cn{
+
+        font-size:12px;
+
+        letter-spacing:5px;
     }
 
-    .timeline{
-        left:10px;
+
+    .history{
+
+        width:92%;
+    }
+
+
+    .history::before{
+
+        left:8px;
+
         transform:none;
     }
 
-    .history-list{
-        gap:38px;
-    }
 
-    .history-item{
-        display:block;
-        padding-left:30px;
-        position:relative;
-    }
+    .history-item,
+    .history-item:nth-child(odd),
+    .history-item:nth-child(even){
 
-    .timeline-point{
-        position:absolute;
+        left:0;
 
-        left:4px;
-        top:25px;
+        width:100%;
 
-        width:13px;
-        height:13px;
-    }
+        padding:
+            0
+            0
+            45px
+            30px;
 
-    .history-item:nth-child(odd) .history-content,
-    .history-item:nth-child(even) .history-content{
         text-align:left;
     }
 
-    .history-content{
-        padding:20px 20px;
-        min-height:auto;
+
+    .history-item::before,
+    .history-item:nth-child(odd)::before,
+    .history-item:nth-child(even)::before{
+
+        left:4px;
+
+        right:auto;
     }
 
-    .history-title{
-        font-size:17px;
+
+    .magic-circle{
+
+        width:330px;
+
+        height:330px;
     }
 
-    .history-cn{
-        font-size:11px;
+
+    .symbol-one{
+
+        left:5%;
+
+        top:31%;
     }
 
-    .history-description{
-        font-size:10px;
-        line-height:1.9;
+
+    .symbol-two{
+
+        right:5%;
+
+        top:58%;
     }
 
-    .empty-history{
-        padding:35px 15px;
-    }
-
-    .footer{
-        margin-top:70px;
-    }
-
-    .floating-symbol{
-        transform:scale(.75);
-    }
 }
 
-
-/* ================================
-   360px
-   完全采用档案目录
-================================ */
 
 @media(max-width:360px){
 
@@ -1429,111 +1440,84 @@ body.day .footer{
 
         left:20px;
         right:20px;
+
         top:24px;
     }
+
 
     .header-right{
 
         gap:5px;
     }
 
+
     .back{
 
         font-size:9px;
     }
 
+
     .theme-toggle{
 
-        padding:
-            0 6px;
+        padding:0 6px;
 
         font-size:6px;
+    }
+
+
+    .hero-title{
+
+        font-size:24px;
+
+        letter-spacing:3px;
     }
 
 }
 
 </style>
+
 </head>
 
 
 <body>
 
-<div class="stars"></div>
-<div class="micro-stars"></div>
 
-
-<!-- ================================
-     ✡ ✶ 浮动符文
-================================= -->
-
-<div class="floating-symbols">
-
-    <span
-        class="floating-symbol symbol-1"
-        style="left:8%; top:18%; --duration:12s; --delay:-3s;"
-    >✡</span>
-
-    <span
-        class="floating-symbol symbol-2"
-        style="left:23%; top:38%; --duration:15s; --delay:-8s;"
-    >✶</span>
-
-    <span
-        class="floating-symbol symbol-3"
-        style="left:82%; top:20%; --duration:17s; --delay:-5s;"
-    >✡</span>
-
-    <span
-        class="floating-symbol symbol-4"
-        style="left:91%; top:48%; --duration:13s; --delay:-9s;"
-    >✶</span>
-
-    <span
-        class="floating-symbol symbol-5"
-        style="left:14%; top:72%; --duration:16s; --delay:-12s;"
-    >✶</span>
-
-    <span
-        class="floating-symbol symbol-6"
-        style="left:76%; top:76%; --duration:19s; --delay:-7s;"
-    >✡</span>
-
-    <span
-        class="floating-symbol symbol-5"
-        style="left:48%; top:13%; --duration:14s; --delay:-4s;"
-    >✶</span>
-
-    <span
-        class="floating-symbol symbol-2"
-        style="left:56%; top:88%; --duration:18s; --delay:-11s;"
-    >✡</span>
-
-</div>
-
-
-<!-- 魔法阵 -->
-
-<div class="magic-circle">
-
-    <div class="magic-line"></div>
-    <div class="magic-line"></div>
-    <div class="magic-line"></div>
-
-</div>
-
-
-<!-- 页面边框 -->
-
-<div class="frame"></div>
-
+<!-- =====================================================
+     背景
+===================================================== -->
 
 <div class="page">
 
+    <div class="stars"></div>
 
-    <!-- ================================
-         顶部
-         结构与档案目录页一致
-    ================================= -->
+    <div class="micro-stars"></div>
+
+
+    <!-- 漂浮符号 -->
+
+    <div class="symbol symbol-one">
+        ✡
+    </div>
+
+    <div class="symbol symbol-two">
+        ✶
+    </div>
+
+
+    <!-- 魔法阵 -->
+
+    <div class="magic-circle"></div>
+
+
+    <!-- 页面边框 -->
+
+    <div class="frame"></div>
+
+
+    <!-- =================================================
+         HEADER
+         国家档案页顶部标准版
+    ================================================== -->
 
     <header class="header">
 
@@ -1570,6 +1554,7 @@ body.day .footer{
                 ← 返回档案目录
             </a>
 
+
             <button
                 class="theme-toggle"
                 id="themeToggle"
@@ -1595,9 +1580,9 @@ body.day .footer{
     </header>
 
 
-    <!-- ================================
-         标题
-    ================================= -->
+    <!-- =================================================
+         HERO
+    ================================================== -->
 
     <section class="hero">
 
@@ -1605,9 +1590,9 @@ body.day .footer{
             HISTORY RECORD
         </div>
 
-        <div class="hero-title">
+        <h1 class="hero-title">
             HISTORY
-        </div>
+        </h1>
 
         <div class="hero-cn">
             历史记录
@@ -1616,174 +1601,76 @@ body.day .footer{
     </section>
 
 
-    <!-- ================================
-         历史时间轴
-    ================================= -->
+    <!-- =================================================
+         历史记录
+    ================================================== -->
 
-    <main class="history">
+    <section class="history" id="historyList">
 
-        <div class="timeline"></div>
+        <!--
+        历史记录以后可以直接在这里增加。
 
-        <div
-            class="history-list"
-            id="historyList"
-        ></div>
+        示例：
 
-    </main>
+        <article class="history-item">
+
+            <div class="history-date">
+                2026 · 09 · 20
+            </div>
+
+            <h2 class="history-title">
+                塞垭弥大陆档案馆建立
+            </h2>
+
+            <p class="history-description">
+                塞垭弥大陆档案馆正式建立。
+            </p>
+
+        </article>
+        -->
+
+    </section>
 
 
-    <!-- ================================
-         页脚
-    ================================= -->
+    <!-- =================================================
+         空状态
+    ================================================== -->
+
+    <section
+        class="empty-state"
+        id="emptyState"
+    >
+
+        <div class="empty-en">
+            ARCHIVE EMPTY
+        </div>
+
+        <div class="empty-cn">
+            暂无历史记录
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         FOOTER
+    ================================================== -->
 
     <footer class="footer">
 
-        SEYAMI CONTINENT · HISTORY RECORD
+        SEYAMI ARCHIVE · HISTORY RECORD
 
     </footer>
+
 
 </div>
 
 
 <script>
 
-/* =========================================
-   历史资料
-========================================= */
-
-const historyRecords = [
-
-    /*
-    {
-        era: "",
-        date: "",
-        title: "",
-        cn: "",
-        description: ""
-    }
-    */
-
-];
-
-
-/* =========================================
-   生成历史记录
-========================================= */
-
-const historyList =
-    document.getElementById("historyList");
-
-
-function renderHistory(){
-
-    historyList.innerHTML = "";
-
-
-    if(historyRecords.length === 0){
-
-        historyList.innerHTML = `
-
-            <div class="empty-history">
-
-                <span class="empty-history-en">
-                    ARCHIVE EMPTY
-                </span>
-
-                暂无历史记录
-
-            </div>
-
-        `;
-
-        return;
-    }
-
-
-    historyRecords.forEach((record,index)=>{
-
-        const item =
-            document.createElement("div");
-
-        item.className =
-            "history-item";
-
-
-        item.innerHTML = `
-
-            <div class="history-content">
-
-                ${
-                    record.era
-                    ?
-                    `<div class="history-era">
-                        ${record.era}
-                    </div>`
-                    :
-                    ""
-                }
-
-                ${
-                    record.date
-                    ?
-                    `<div class="history-date">
-                        ${record.date}
-                    </div>`
-                    :
-                    ""
-                }
-
-                ${
-                    record.title
-                    ?
-                    `<div class="history-title">
-                        ${record.title}
-                    </div>`
-                    :
-                    ""
-                }
-
-                ${
-                    record.cn
-                    ?
-                    `<div class="history-cn">
-                        ${record.cn}
-                    </div>`
-                    :
-                    ""
-                }
-
-                ${
-                    record.description
-                    ?
-                    `<div class="history-description">
-                        ${record.description}
-                    </div>`
-                    :
-                    ""
-                }
-
-            </div>
-
-
-            <div class="timeline-point"></div>
-
-        `;
-
-
-        historyList.appendChild(item);
-
-    });
-
-}
-
-
-renderHistory();
-
-
-/* =========================================
-   日间 / 夜间模式
-   与档案目录共用 seyami-theme
-========================================= */
+/* =========================================================
+   昼夜模式
+========================================================= */
 
 const themeToggle =
     document.getElementById("themeToggle");
@@ -1801,26 +1688,22 @@ function applyTheme(theme){
 
         document.body.classList.add("day");
 
-        themeIcon.textContent =
-            "☀";
+        themeIcon.textContent = "☀";
 
-        themeText.textContent =
-            "DAY";
+        themeText.textContent = "DAY";
 
     }else{
 
         document.body.classList.remove("day");
 
-        themeIcon.textContent =
-            "☾";
+        themeIcon.textContent = "☾";
 
-        themeText.textContent =
-            "NIGHT";
-
+        themeText.textContent = "NIGHT";
     }
-
 }
 
+
+/* 读取全站统一主题 */
 
 const savedTheme =
     localStorage.getItem("seyami-theme");
@@ -1832,6 +1715,8 @@ applyTheme(
         : "night"
 );
 
+
+/* 切换 */
 
 themeToggle.addEventListener(
     "click",
@@ -1850,14 +1735,85 @@ themeToggle.addEventListener(
             nextTheme
         );
 
-        applyTheme(
-            nextTheme
-        );
+        applyTheme(nextTheme);
 
     }
 );
 
+
+/* =========================================================
+   历史记录
+========================================================= */
+
+const historyRecords = [
+
+    /*
+    以后新增历史记录可以写在这里。
+
+    {
+        date:"2026 · 09 · 20",
+        title:"塞垭弥大陆档案馆建立",
+        description:"塞垭弥大陆档案馆正式建立。"
+    }
+
+    */
+
+];
+
+
+const historyList =
+    document.getElementById("historyList");
+
+const emptyState =
+    document.getElementById("emptyState");
+
+
+/* =========================================================
+   如果有记录则显示
+========================================================= */
+
+if(historyRecords.length > 0){
+
+    emptyState.style.display = "none";
+
+
+    historyRecords.forEach(
+        record => {
+
+            const item =
+                document.createElement("article");
+
+            item.className =
+                "history-item";
+
+
+            item.innerHTML = `
+
+                <div class="history-date">
+                    ${record.date}
+                </div>
+
+                <h2 class="history-title">
+                    ${record.title}
+                </h2>
+
+                <p class="history-description">
+                    ${record.description}
+                </p>
+
+            `;
+
+
+            historyList.appendChild(item);
+
+        }
+    );
+
+}
+
 </script>
 
+
 </body>
+
 </html>
