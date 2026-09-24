@@ -74,7 +74,7 @@ body{
 
 
 /* =========================================================
-   星星
+   星星背景
 ========================================================= */
 
 .stars,
@@ -88,6 +88,9 @@ body{
 .stars{
     inset:0;
     z-index:0;
+
+    animation:
+        starDrift 28s ease-in-out infinite alternate;
 }
 
 .stars::before{
@@ -176,7 +179,31 @@ body{
 
 
 /* =========================================================
-   微星
+   星星缓慢漂移
+========================================================= */
+
+@keyframes starDrift{
+
+    0%{
+        transform:translate3d(0,0,0);
+        opacity:.82;
+    }
+
+    50%{
+        transform:translate3d(-4px,2px,0);
+        opacity:1;
+    }
+
+    100%{
+        transform:translate3d(4px,-3px,0);
+        opacity:.86;
+    }
+
+}
+
+
+/* =========================================================
+   微小星点
 ========================================================= */
 
 .micro-stars{
@@ -198,7 +225,8 @@ body{
 
     opacity:.45;
 
-    animation:microTwinkle 5s ease-in-out infinite;
+    animation:
+        microTwinkle 5s ease-in-out infinite;
 }
 
 .micro-stars span:nth-child(1){left:9%;top:12%;animation-delay:0s;}
@@ -264,36 +292,54 @@ body{
 
     box-shadow:
         0 0 7px rgba(113,177,220,.28);
+
+    animation:
+        arcaneTwinkle 6s ease-in-out infinite;
 }
 
-.star-a{left:7%;top:19%;}
-.star-b{left:15%;top:8%;}
-.star-c{left:24%;top:31%;}
-.star-d{left:34%;top:12%;}
-.star-e{left:43%;top:24%;}
-.star-f{left:54%;top:10%;}
-.star-g{left:64%;top:31%;}
-.star-h{left:74%;top:17%;}
-.star-i{left:84%;top:28%;}
-.star-j{left:93%;top:13%;}
+.star-a{left:7%;top:19%;animation-delay:0s;}
+.star-b{left:15%;top:8%;animation-delay:.6s;}
+.star-c{left:24%;top:31%;animation-delay:1.2s;}
+.star-d{left:34%;top:12%;animation-delay:1.8s;}
+.star-e{left:43%;top:24%;animation-delay:2.4s;}
+.star-f{left:54%;top:10%;animation-delay:3s;}
+.star-g{left:64%;top:31%;animation-delay:3.6s;}
+.star-h{left:74%;top:17%;animation-delay:4.2s;}
+.star-i{left:84%;top:28%;animation-delay:4.8s;}
+.star-j{left:93%;top:13%;animation-delay:5.4s;}
 
-.star-k{left:5%;top:67%;}
-.star-l{left:16%;top:77%;}
-.star-m{left:27%;top:64%;}
-.star-n{left:38%;top:75%;}
-.star-o{left:49%;top:67%;}
-.star-p{left:61%;top:78%;}
-.star-q{left:72%;top:65%;}
-.star-r{left:83%;top:76%;}
-.star-s{left:94%;top:68%;}
-.star-t{left:57%;top:90%;}
+.star-k{left:5%;top:67%;animation-delay:1s;}
+.star-l{left:16%;top:77%;animation-delay:1.7s;}
+.star-m{left:27%;top:64%;animation-delay:2.4s;}
+.star-n{left:38%;top:75%;animation-delay:3.1s;}
+.star-o{left:49%;top:67%;animation-delay:3.8s;}
+.star-p{left:61%;top:78%;animation-delay:4.5s;}
+.star-q{left:72%;top:65%;animation-delay:5.2s;}
+.star-r{left:83%;top:76%;animation-delay:5.9s;}
+.star-s{left:94%;top:68%;animation-delay:2.8s;}
+.star-t{left:57%;top:90%;animation-delay:4.7s;}
 
-.extra-u{left:12%;top:42%;}
-.extra-v{left:30%;top:54%;}
-.extra-w{left:46%;top:42%;}
-.extra-x{left:66%;top:49%;}
-.extra-y{left:86%;top:44%;}
-.extra-z{left:97%;top:55%;}
+.extra-u{left:12%;top:42%;animation-delay:1.4s;}
+.extra-v{left:30%;top:54%;animation-delay:2.1s;}
+.extra-w{left:46%;top:42%;animation-delay:2.8s;}
+.extra-x{left:66%;top:49%;animation-delay:3.5s;}
+.extra-y{left:86%;top:44%;animation-delay:4.2s;}
+.extra-z{left:97%;top:55%;animation-delay:5s;}
+
+
+@keyframes arcaneTwinkle{
+
+    0%,100%{
+        opacity:.38;
+        transform:rotate(45deg) scale(.85);
+    }
+
+    50%{
+        opacity:.72;
+        transform:rotate(45deg) scale(1.15);
+    }
+
+}
 
 
 /* =========================================================
@@ -595,9 +641,6 @@ body{
     perspective:1800px;
 }
 
-
-/* 中间书脊 */
-
 .book::before{
     content:"";
 
@@ -656,9 +699,6 @@ body{
         border-color .5s ease;
 }
 
-
-/* 左页 */
-
 .left-page{
     border-right:none;
 
@@ -666,9 +706,6 @@ body{
 
     border-radius:4px 0 0 4px;
 }
-
-
-/* 右页 */
 
 .right-page{
     border-left:none;
@@ -1051,7 +1088,9 @@ body.day .page{
 }
 
 
-/* 星星 */
+/* =========================================================
+   日间星星
+========================================================= */
 
 body.day .stars::before{
     background:rgba(103,166,207,.42);
@@ -1066,22 +1105,45 @@ body.day .stars::before{
         63vw 7vh rgba(103,166,207,.38),
         74vw 16vh rgba(103,166,207,.25),
         86vw 8vh rgba(103,166,207,.40),
-        94vw 20vh rgba(103,166,207,.28);
+        94vw 20vh rgba(103,166,207,.28),
+
+        8vw 31vh rgba(103,166,207,.25),
+        18vw 39vh rgba(103,166,207,.36),
+        29vw 27vh rgba(103,166,207,.25),
+        39vw 34vh rgba(103,166,207,.34),
+        49vw 26vh rgba(103,166,207,.27),
+        61vw 38vh rgba(103,166,207,.35),
+        72vw 29vh rgba(103,166,207,.25),
+        83vw 36vh rgba(103,166,207,.38),
+        92vw 28vh rgba(103,166,207,.27),
+
+        4vw 55vh rgba(103,166,207,.34),
+        15vw 63vh rgba(103,166,207,.25),
+        25vw 52vh rgba(103,166,207,.40),
+        36vw 61vh rgba(103,166,207,.24),
+        47vw 54vh rgba(103,166,207,.34),
+        58vw 67vh rgba(103,166,207,.28),
+        69vw 55vh rgba(103,166,207,.38),
+        80vw 64vh rgba(103,166,207,.25),
+        91vw 53vh rgba(103,166,207,.34),
+
+        9vw 81vh rgba(103,166,207,.25),
+        20vw 91vh rgba(103,166,207,.36),
+        33vw 82vh rgba(103,166,207,.27),
+        45vw 94vh rgba(103,166,207,.32),
+        57vw 84vh rgba(103,166,207,.24),
+        68vw 92vh rgba(103,166,207,.36),
+        79vw 82vh rgba(103,166,207,.27),
+        89vw 90vh rgba(103,166,207,.33);
 }
 
 body.day .stars::after{
     background:rgba(103,166,207,.30);
 }
 
-
-/* 微星 */
-
 body.day .micro-stars span{
     background:rgba(87,151,199,.50);
 }
-
-
-/* 魔法星 */
 
 body.day .arcane-stars span{
     background:rgba(87,151,199,.50);
@@ -1091,7 +1153,9 @@ body.day .arcane-stars span{
 }
 
 
-/* 魔法阵 */
+/* =========================================================
+   日间魔法阵
+========================================================= */
 
 body.day .magic-circle{
     border-color:rgba(79,148,196,.26);
@@ -1106,7 +1170,9 @@ body.day .magic-circle::after{
 }
 
 
-/* 外框 */
+/* =========================================================
+   日间外框
+========================================================= */
 
 body.day .frame{
     border-color:rgba(91,145,184,.34);
@@ -1123,7 +1189,9 @@ body.day .frame::after{
 }
 
 
-/* Logo */
+/* =========================================================
+   日间 Header
+========================================================= */
 
 body.day .logo{
     color:#2e526c;
@@ -1133,9 +1201,6 @@ body.day .logo-symbol{
     color:rgba(79,151,201,.84);
 }
 
-
-/* 返回 */
-
 body.day .back{
     color:rgba(62,99,127,.70);
 }
@@ -1143,9 +1208,6 @@ body.day .back{
 body.day .back:hover{
     color:#28536f;
 }
-
-
-/* 按钮 */
 
 body.day .theme-toggle{
     border-color:rgba(91,145,184,.34);
@@ -1162,7 +1224,9 @@ body.day .theme-toggle:hover{
 }
 
 
-/* 标题 */
+/* =========================================================
+   日间标题
+========================================================= */
 
 body.day .hero-main{
     color:#2b506a;
@@ -1175,7 +1239,7 @@ body.day .hero-cn{
 
 
 /* =========================================================
-   日间模式 · 书本
+   日间书本
 ========================================================= */
 
 body.day .book-page{
@@ -1342,6 +1406,7 @@ body.day .footer{
 
     .logo{
         font-size:11px;
+
         letter-spacing:2px;
     }
 
@@ -1351,6 +1416,7 @@ body.day .footer{
 
     .back{
         font-size:9px;
+
         letter-spacing:1px;
     }
 
@@ -1384,7 +1450,7 @@ body.day .footer{
     }
 
 
-    /* 手机变成单页 */
+    /* 手机单页 */
 
     .book{
         height:540px;
@@ -1550,6 +1616,7 @@ body.day .footer{
     .book{
         height:570px;
     }
+
 }
 
 </style>
@@ -1560,14 +1627,17 @@ body.day .footer{
 
 <div class="page">
 
+
     <!-- =====================================================
-         背景
+         背景星星
     ====================================================== -->
 
     <div class="stars"></div>
 
 
-    <!-- 微小星点 -->
+    <!-- =====================================================
+         微小星点
+    ====================================================== -->
 
     <div class="micro-stars">
 
@@ -1595,7 +1665,9 @@ body.day .footer{
     </div>
 
 
-    <!-- 魔法星 -->
+    <!-- =====================================================
+         魔法星
+    ====================================================== -->
 
     <div class="arcane-stars">
 
@@ -1631,19 +1703,23 @@ body.day .footer{
     </div>
 
 
-    <!-- 魔法阵 -->
+    <!-- =====================================================
+         魔法阵
+    ====================================================== -->
 
     <div class="magic-circle"></div>
 
 
     <!-- =====================================================
-         外框
+         主框
     ====================================================== -->
 
     <main class="frame">
 
 
-        <!-- ================= HEADER ================= -->
+        <!-- =================================================
+             HEADER
+        ================================================== -->
 
         <header class="header">
 
@@ -1683,7 +1759,9 @@ body.day .footer{
         </header>
 
 
-        <!-- ================= TITLE ================= -->
+        <!-- =================================================
+             标题
+        ================================================== -->
 
         <section class="hero">
 
@@ -1708,15 +1786,16 @@ body.day .footer{
 
         <section class="book-area">
 
+
             <div
                 class="book"
                 id="book"
             >
 
 
-                <!-- =========================================
+                <!-- =================================================
                      左页
-                ========================================== -->
+                ================================================== -->
 
                 <article
                     class="book-page left-page"
@@ -1808,10 +1887,9 @@ body.day .footer{
                 </article>
 
 
-
-                <!-- =========================================
+                <!-- =================================================
                      右页
-                ========================================== -->
+                ================================================== -->
 
                 <article
                     class="book-page right-page"
@@ -1956,10 +2034,13 @@ body.day .footer{
                 · ARCHIVE RECORDS AWAITING ·
             </div>
 
+
         </section>
 
 
-        <!-- ================= FOOTER ================= -->
+        <!-- =================================================
+             Footer
+        ================================================== -->
 
         <footer class="footer">
             SEYAMI CONTINENT · NATION ARCHIVE
@@ -1975,18 +2056,6 @@ body.day .footer{
 
 /* =========================================================
    国家资料
-   =========================================================
-   以后只需要修改这里。
-
-   name  = 英文国家名
-   cn    = 中文国家名
-   capital = 首都
-   region  = 地理位置
-   race    = 主要种族
-   terrain = 地形
-   description = 国家介绍
-
-   目前全部留空，不预设你的世界观。
 ========================================================= */
 
 const nations = [
@@ -2025,7 +2094,7 @@ const nations = [
 
 
 /* =========================================================
-   当前页
+   当前页面
 ========================================================= */
 
 let currentPage = 0;
@@ -2038,45 +2107,68 @@ const totalPages = nations.length;
 ========================================================= */
 
 const leftPage =
-    document.getElementById("leftPage");
+    document.getElementById(
+        "leftPage"
+    );
 
 const rightPage =
-    document.getElementById("rightPage");
+    document.getElementById(
+        "rightPage"
+    );
 
 const leftTitle =
-    document.getElementById("leftTitle");
+    document.getElementById(
+        "leftTitle"
+    );
 
 const leftCn =
-    document.getElementById("leftCn");
+    document.getElementById(
+        "leftCn"
+    );
 
 const leftInfo =
-    document.getElementById("leftInfo");
+    document.getElementById(
+        "leftInfo"
+    );
 
 const rightTitle =
-    document.getElementById("rightTitle");
+    document.getElementById(
+        "rightTitle"
+    );
 
 const rightCn =
-    document.getElementById("rightCn");
+    document.getElementById(
+        "rightCn"
+    );
 
 const rightDescription =
-    document.getElementById("rightDescription");
+    document.getElementById(
+        "rightDescription"
+    );
 
 const rightInfo =
-    document.getElementById("rightInfo");
+    document.getElementById(
+        "rightInfo"
+    );
 
 const pageCount =
-    document.getElementById("pageCount");
+    document.getElementById(
+        "pageCount"
+    );
 
 const prevButton =
-    document.getElementById("prevButton");
+    document.getElementById(
+        "prevButton"
+    );
 
 const nextButton =
-    document.getElementById("nextButton");
-
+    document.getElementById(
+        "nextButton"
+    );
 
 
 /* =========================================================
-   更新单个页面
+   设置页面
 ========================================================= */
 
 function setPage(
@@ -2108,15 +2200,22 @@ function setPage(
 
 
     const values = [
+
         nation.capital,
+
         nation.region,
+
         nation.race,
+
         nation.terrain
+
     ];
 
 
     const valueElements =
-        info.querySelectorAll(".info-value");
+        info.querySelectorAll(
+            ".info-value"
+        );
 
 
     valueElements.forEach(
@@ -2140,21 +2239,14 @@ function setPage(
 
 
 /* =========================================================
-   手机 / 桌面页面更新
+   渲染页面
 ========================================================= */
 
 function render(){
 
-    /*
-       桌面：
-       左右两页显示相邻国家。
-
-       手机：
-       只显示右页。
-    */
-
     const leftNation =
-        nations[currentPage] || nations[0];
+        nations[currentPage] ||
+        nations[0];
 
     const rightNation =
         nations[currentPage + 1] ||
@@ -2174,9 +2266,15 @@ function render(){
 
 
     pageCount.textContent =
-        String(currentPage + 1).padStart(2,"0")
-        + " / "
-        + String(totalPages).padStart(2,"0");
+        String(
+            currentPage + 1
+        ).padStart(2,"0")
+        +
+        " / "
+        +
+        String(
+            totalPages
+        ).padStart(2,"0");
 
 
     prevButton.disabled =
@@ -2212,6 +2310,7 @@ function animatePage(direction){
 
 
     void leftPage.offsetWidth;
+
     void rightPage.offsetWidth;
 
 
@@ -2250,7 +2349,10 @@ nextButton.addEventListener(
     "click",
     function(){
 
-        if(currentPage >= totalPages - 1){
+        if(
+            currentPage >=
+            totalPages - 1
+        ){
             return;
         }
 
@@ -2278,7 +2380,9 @@ prevButton.addEventListener(
     "click",
     function(){
 
-        if(currentPage <= 0){
+        if(
+            currentPage <= 0
+        ){
             return;
         }
 
@@ -2339,7 +2443,9 @@ function applyTheme(theme){
 }
 
 
-/* 读取保存的模式 */
+/* =========================================================
+   读取保存的主题
+========================================================= */
 
 applyTheme(
     savedTheme === "day"
@@ -2348,7 +2454,9 @@ applyTheme(
 );
 
 
-/* 点击切换 */
+/* =========================================================
+   切换主题
+========================================================= */
 
 themeToggle.addEventListener(
     "click",
