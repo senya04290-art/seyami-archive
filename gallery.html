@@ -102,7 +102,9 @@ body{
     inset:0;
     pointer-events:none;
     overflow:hidden;
-    z-index:1;
+
+    /* 提高层级，让符号真正显示出来 */
+    z-index:3;
 }
 
 .floating-symbol{
@@ -110,10 +112,12 @@ body{
 
     font-family:"Cinzel",serif;
 
-    color:rgba(145,200,235,.18);
+    /* 提高可见度 */
+    color:rgba(145,200,235,.34);
 
     text-shadow:
-        0 0 12px rgba(90,175,225,.12);
+        0 0 14px rgba(90,175,225,.24),
+        0 0 28px rgba(90,175,225,.10);
 
     user-select:none;
 
@@ -133,11 +137,11 @@ body{
             translate3d(0,0,0)
             rotate(0deg);
 
-        opacity:.08;
+        opacity:.12;
     }
 
     25%{
-        opacity:.18;
+        opacity:.28;
     }
 
     50%{
@@ -145,11 +149,11 @@ body{
             translate3d(12px,-24px,0)
             rotate(8deg);
 
-        opacity:.22;
+        opacity:.34;
     }
 
     75%{
-        opacity:.14;
+        opacity:.22;
     }
 
     100%{
@@ -157,7 +161,7 @@ body{
             translate3d(-10px,-48px,0)
             rotate(-6deg);
 
-        opacity:.08;
+        opacity:.12;
     }
 }
 
