@@ -1361,134 +1361,6 @@ body{
 
 
 /* =========================================================
-   国家档案
-========================================================= */
-
-.nations-section{
-
-  margin-top:55px;
-}
-
-.section-title{
-
-  text-align:center;
-
-  margin-bottom:28px;
-}
-
-.section-title-en{
-
-  font-family:
-    "Cinzel",
-    serif;
-
-  font-size:10px;
-
-  letter-spacing:5px;
-
-  color:
-    rgba(157,204,239,.63);
-}
-
-.section-title-cn{
-
-  margin-top:9px;
-
-  font-size:12px;
-
-  letter-spacing:4px;
-
-  color:
-    rgba(177,207,230,.62);
-}
-
-.nation-grid{
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:16px;
-}
-
-.nation-card{
-
-  position:relative;
-
-  min-height:145px;
-
-  padding:24px;
-
-  border:
-    1px solid
-    rgba(111,174,224,.28);
-
-  background:
-    rgba(11,45,75,.28);
-
-  transition:
-    border-color .35s ease,
-    background .35s ease,
-    transform .35s ease;
-}
-
-.nation-card:hover{
-
-  transform:
-    translateY(-3px);
-
-  border-color:
-    rgba(122,192,235,.55);
-
-  background:
-    rgba(38,91,137,.20);
-}
-
-.nation-number{
-
-  font-family:
-    "Cinzel",
-    serif;
-
-  font-size:9px;
-
-  letter-spacing:2px;
-
-  color:
-    rgba(137,201,239,.55);
-
-  margin-bottom:17px;
-}
-
-.nation-name{
-
-  font-family:
-    "Cinzel",
-    serif;
-
-  font-size:17px;
-
-  letter-spacing:3px;
-
-  color:
-    rgba(220,238,255,.88);
-
-  margin-bottom:7px;
-}
-
-.nation-cn{
-
-  font-size:11px;
-
-  letter-spacing:2px;
-
-  color:
-    rgba(177,207,230,.55);
-}
-
-
-/* =========================================================
    Footer
 ========================================================= */
 
@@ -1541,12 +1413,6 @@ body{
       0 9px;
 
     font-size:7px;
-  }
-
-  .nation-grid{
-
-    grid-template-columns:
-      repeat(2,1fr);
   }
 
 }
@@ -1702,25 +1568,6 @@ body{
     font-size:11px;
 
     line-height:1.9;
-  }
-
-  .nations-section{
-
-    margin-top:40px;
-  }
-
-  .nation-grid{
-
-    grid-template-columns:1fr;
-
-    gap:12px;
-  }
-
-  .nation-card{
-
-    min-height:125px;
-
-    padding:22px;
   }
 
   .magic-circle{
@@ -2157,60 +2004,6 @@ body.day-mode .world-text{
 }
 
 
-/* 小标题 */
-
-body.day-mode .section-title-en{
-
-  color:
-    rgba(81,137,173,.68);
-}
-
-body.day-mode .section-title-cn{
-
-  color:
-    rgba(45,82,106,.80);
-}
-
-
-/* 国家卡片 */
-
-body.day-mode .nation-card{
-
-  border-color:
-    rgba(82,151,198,.32);
-
-  background:
-    rgba(242,249,253,.60);
-}
-
-body.day-mode .nation-card:hover{
-
-  border-color:
-    rgba(79,151,200,.62);
-
-  background:
-    rgba(235,246,252,.85);
-}
-
-body.day-mode .nation-number{
-
-  color:
-    rgba(81,137,173,.60);
-}
-
-body.day-mode .nation-name{
-
-  color:
-    #2b506a;
-}
-
-body.day-mode .nation-cn{
-
-  color:
-    rgba(65,106,133,.64);
-}
-
-
 /* Footer */
 
 body.day-mode .footer{
@@ -2232,8 +2025,7 @@ body.day-mode .footer{
     animation:none;
   }
 
-  .world-card,
-  .nation-card{
+  .world-card{
 
     transition:none;
   }
@@ -2252,9 +2044,6 @@ body.day-mode .footer{
   .world-title,
   .world-cn,
   .world-text,
-  .nation-number,
-  .nation-name,
-  .nation-cn,
   .footer{
 
     transition:none;
@@ -2484,36 +2273,12 @@ body.day-mode .footer{
       </article>
 
 
-      <!-- 国家 -->
-
-      <article class="world-card">
-
-        <div class="world-number">
-          02 · NATIONS
-        </div>
-
-        <div class="world-title">
-          NATIONS
-        </div>
-
-        <div class="world-cn">
-          国家
-        </div>
-
-        <div class="world-text">
-          记录塞垭弥大陆上的主要国家、
-          政治结构、文化、王室与重要势力。
-        </div>
-
-      </article>
-
-
       <!-- 地理 -->
 
       <article class="world-card">
 
         <div class="world-number">
-          03 · GEOGRAPHY
+          02 · GEOGRAPHY
         </div>
 
         <div class="world-title">
@@ -2537,7 +2302,7 @@ body.day-mode .footer{
       <article class="world-card">
 
         <div class="world-number">
-          04 · RACES
+          03 · RACES
         </div>
 
         <div class="world-title">
@@ -2555,148 +2320,6 @@ body.day-mode .footer{
 
       </article>
 
-
-    </section>
-
-
-    <!-- =====================================================
-         国家档案
-    ====================================================== -->
-
-    <section class="nations-section">
-
-
-      <div class="section-title">
-
-        <div class="section-title-en">
-          NATION ARCHIVE
-        </div>
-
-        <div class="section-title-cn">
-          国家档案
-        </div>
-
-      </div>
-
-
-      <div class="nation-grid">
-
-
-        <!-- 国家 01 -->
-
-        <article class="nation-card">
-
-          <div class="nation-number">
-            NATION · 01
-          </div>
-
-          <div class="nation-name">
-            UNKNOWN
-          </div>
-
-          <div class="nation-cn">
-            未设定
-          </div>
-
-        </article>
-
-
-        <!-- 国家 02 -->
-
-        <article class="nation-card">
-
-          <div class="nation-number">
-            NATION · 02
-          </div>
-
-          <div class="nation-name">
-            UNKNOWN
-          </div>
-
-          <div class="nation-cn">
-            未设定
-          </div>
-
-        </article>
-
-
-        <!-- 国家 03 -->
-
-        <article class="nation-card">
-
-          <div class="nation-number">
-            NATION · 03
-          </div>
-
-          <div class="nation-name">
-            UNKNOWN
-          </div>
-
-          <div class="nation-cn">
-            未设定
-          </div>
-
-        </article>
-
-
-        <!-- 国家 04 -->
-
-        <article class="nation-card">
-
-          <div class="nation-number">
-            NATION · 04
-          </div>
-
-          <div class="nation-name">
-            UNKNOWN
-          </div>
-
-          <div class="nation-cn">
-            未设定
-          </div>
-
-        </article>
-
-
-        <!-- 国家 05 -->
-
-        <article class="nation-card">
-
-          <div class="nation-number">
-            NATION · 05
-          </div>
-
-          <div class="nation-name">
-            UNKNOWN
-          </div>
-
-          <div class="nation-cn">
-            未设定
-          </div>
-
-        </article>
-
-
-        <!-- 国家 06 -->
-
-        <article class="nation-card">
-
-          <div class="nation-number">
-            NATION · 06
-          </div>
-
-          <div class="nation-name">
-            UNKNOWN
-          </div>
-
-          <div class="nation-cn">
-            未设定
-          </div>
-
-        </article>
-
-
-      </div>
 
     </section>
 
