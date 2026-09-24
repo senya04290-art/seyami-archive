@@ -117,11 +117,6 @@ body{
 
     overflow:hidden;
 
-    /*
-       放在内容层上方，
-       但因为 pointer-events:none，
-       不会影响按钮、链接和图片点击。
-    */
     z-index:3;
 }
 
@@ -175,13 +170,11 @@ body{
 
 .symbol-5{
     font-size:14px;
-
     opacity:.8;
 }
 
 .symbol-6{
     font-size:26px;
-
     opacity:.72;
 }
 
@@ -370,7 +363,7 @@ body{
     min-height:100vh;
 
     padding:
-        20px
+        30px
         70px
         80px;
 }
@@ -378,19 +371,30 @@ body{
 
 /* ================================
    顶部
+   与档案目录保持一致
 ================================ */
 
 .header{
-    display:flex;
+    position:absolute;
 
-    align-items:center;
-    justify-content:space-between;
-
-    width:100%;
-
-    position:relative;
+    left:58px;
+    right:58px;
+    top:38px;
 
     z-index:20;
+
+    display:flex;
+
+    align-items:flex-start;
+
+    justify-content:space-between;
+
+    width:auto;
+
+    max-width:none;
+
+    margin:0;
+    padding:0;
 }
 
 
@@ -401,21 +405,44 @@ body{
 .logo{
     display:flex;
 
-    align-items:center;
+    align-items:flex-start;
 
-    gap:10px;
+    gap:12px;
 
     color:#d9edff;
 
     text-decoration:none;
+
+    transition:
+        color .6s ease;
 }
 
 .logo-symbol{
-    font-size:14px;
+    color:rgba(137,201,239,.9);
 
-    color:#9bcdf0;
+    width:17px;
+    height:13px;
 
-    opacity:.9;
+    display:flex;
+
+    align-items:flex-start;
+    justify-content:center;
+
+    font-size:17px;
+    line-height:13px;
+
+    margin:0;
+    padding:0;
+
+    text-shadow:
+        0 0 7px rgba(76,159,216,.5),
+        0 0 15px rgba(49,132,191,.22);
+
+    flex-shrink:0;
+
+    transition:
+        color .6s ease,
+        text-shadow .6s ease;
 }
 
 .logo > span:last-child{
@@ -423,33 +450,49 @@ body{
 
     flex-direction:column;
 
-    justify-content:center;
+    align-items:flex-start;
 
-    line-height:1.15;
+    line-height:1;
 }
 
 .logo-cn{
-    font-family:"Noto Serif SC",serif;
+    display:block;
 
-    font-size:12px;
+    height:13px;
+    line-height:13px;
 
-    font-weight:400;
+    color:#d9edff;
 
-    letter-spacing:2px;
+    font-size:13px;
 
-    color:inherit;
+    letter-spacing:3px;
+
+    white-space:nowrap;
+
+    transition:
+        color .6s ease;
 }
 
 .logo-en{
-    margin-top:3px;
+    display:block;
 
-    font-family:"Cinzel",serif;
+    margin-top:5px;
+
+    color:rgba(157,204,239,.63);
+
+    font-family:
+        "Times New Roman",
+        serif;
 
     font-size:8px;
+    line-height:8px;
 
-    letter-spacing:2.5px;
+    letter-spacing:3px;
 
-    color:rgba(191,220,243,.63);
+    white-space:nowrap;
+
+    transition:
+        color .6s ease;
 }
 
 
@@ -462,55 +505,100 @@ body{
 
     align-items:center;
 
-    gap:24px;
+    gap:20px;
 }
 
 .back{
-    color:rgba(190,220,243,.64);
+    color:rgba(191,220,243,.68);
 
     text-decoration:none;
 
-    font-family:"Cinzel","Noto Serif SC",serif;
+    font-family:
+        "Cinzel",
+        "Noto Serif SC",
+        serif;
 
-    font-size:10px;
+    font-size:11px;
 
-    letter-spacing:1.5px;
+    letter-spacing:1px;
 
-    transition:.3s;
+    transition:
+        color .3s ease,
+        text-shadow .3s ease;
 }
 
 .back:hover{
     color:#d9efff;
+
+    text-shadow:
+        0 0 8px
+        rgba(102,180,231,.35);
 }
 
 .theme-toggle{
-    border:1px solid rgba(111,174,224,.32);
+    display:flex;
 
-    background:rgba(8,28,49,.35);
+    align-items:center;
 
-    color:rgba(200,225,242,.76);
+    gap:7px;
 
-    padding:7px 12px;
+    height:28px;
 
-    font-family:"Noto Serif SC",serif;
+    padding:
+        0 11px;
 
-    font-size:10px;
+    border:
+        1px solid
+        rgba(111,174,224,.32);
 
-    letter-spacing:1px;
+    background:
+        rgba(8,28,49,.35);
+
+    color:
+        rgba(191,220,243,.68);
+
+    font-family:
+        "Cinzel",
+        "Noto Serif SC",
+        serif;
+
+    font-size:8px;
+
+    letter-spacing:2px;
 
     cursor:pointer;
 
-    transition:.3s;
+    border-radius:0;
 
-    border-radius:2px;
+    white-space:nowrap;
+
+    transition:
+        color .35s ease,
+        border-color .35s ease,
+        background .35s ease,
+        box-shadow .35s ease;
 }
 
 .theme-toggle:hover{
-    border-color:rgba(122,192,235,.62);
-
-    background:rgba(17,51,78,.38);
-
     color:#d9efff;
+
+    border-color:
+        rgba(122,192,235,.62);
+
+    background:
+        rgba(8,31,52,.55);
+
+    box-shadow:
+        0 0 14px
+        rgba(76,151,202,.12);
+}
+
+.theme-icon{
+    font-size:12px;
+
+    line-height:1;
+
+    letter-spacing:0;
 }
 
 
@@ -835,102 +923,158 @@ body{
 
 /* ================================
    日间模式
+   蓝色体系与档案目录统一
 ================================ */
 
 body.day{
     background:
         radial-gradient(
             circle at 50% 45%,
-            rgba(125,175,205,.12),
-            transparent 45%
+            rgba(165,211,238,.20),
+            transparent 38%
         ),
-        #eef3f6;
+        radial-gradient(
+            circle at 50% 52%,
+            rgba(226,240,249,.68),
+            transparent 72%
+        ),
+        #f4f9fd;
 
-    color:#29455b;
+    color:#2e5069;
 }
 
 body.day .stars{
-    opacity:.18;
+    opacity:.8;
 }
 
 body.day .micro-stars{
-    opacity:.12;
+    opacity:.65;
 }
 
 body.day .floating-symbol{
-    color:rgba(55,105,135,.28);
+    color:rgba(87,151,199,.50);
 
-    text-shadow:
-        0 0 8px rgba(70,135,170,.18),
-        0 0 18px rgba(70,135,170,.10);
+    text-shadow:none;
 }
 
 body.day .frame{
-    border-color:rgba(65,105,130,.16);
+    border-color:
+        rgba(91,145,184,.34);
 }
 
 body.day .frame::before,
 body.day .frame::after{
-    border-color:rgba(65,110,140,.28);
+    border-color:
+        rgba(79,141,190,.68);
 }
 
 body.day .logo{
-    color:#29485e;
-}
-
-body.day .logo-en{
-    color:rgba(61,98,125,.58);
+    color:#2e526c;
 }
 
 body.day .logo-symbol{
-    color:#557f9a;
+    color:
+        rgba(79,151,201,.84);
+
+    text-shadow:
+        0 0 7px
+        rgba(86,158,208,.20);
+}
+
+body.day .logo-cn{
+    color:#2e526c;
+}
+
+body.day .logo-en{
+    color:
+        rgba(81,137,173,.62);
 }
 
 body.day .back{
-    color:rgba(55,88,108,.65);
+    color:
+        rgba(62,99,127,.70);
 }
 
 body.day .back:hover{
-    color:#29485e;
+    color:#28536f;
+
+    text-shadow:
+        0 0 8px
+        rgba(76,151,202,.14);
 }
 
 body.day .theme-toggle{
-    border-color:rgba(70,110,135,.25);
+    border-color:
+        rgba(91,145,184,.34);
 
-    background:rgba(255,255,255,.42);
+    background:
+        rgba(248,252,255,.78);
 
-    color:rgba(45,80,102,.75);
+    color:
+        rgba(61,98,125,.76);
 }
 
 body.day .theme-toggle:hover{
-    background:rgba(255,255,255,.7);
+    border-color:
+        rgba(79,151,200,.62);
 
-    border-color:rgba(65,105,130,.4);
+    background:
+        rgba(248,252,255,.90);
+
+    color:#28536f;
+
+    box-shadow:
+        0 0 14px
+        rgba(76,151,202,.11);
 }
 
 body.day .hero-en{
-    color:rgba(65,105,130,.48);
+    color:
+        rgba(81,137,173,.68);
 }
 
 body.day .hero-title{
-    color:#29485e;
+    color:#2b506a;
+
+    text-shadow:
+        0 0 18px
+        rgba(80,151,201,.065);
 }
 
 body.day .hero-cn{
-    color:rgba(55,88,108,.62);
+    color:
+        rgba(45,82,106,.80);
 }
 
 body.day .magic-circle{
-    border-color:rgba(65,115,145,.07);
+    border-color:
+        rgba(79,148,196,.26);
+
+    box-shadow:
+        0 0 50px
+        rgba(70,142,196,.055),
+
+        inset
+        0 0 60px
+        rgba(78,151,204,.028);
 }
 
-body.day .magic-circle::before,
+body.day .magic-circle::before{
+    border-color:
+        rgba(79,148,196,.26);
+
+    box-shadow:
+        0 0 25px
+        rgba(70,142,196,.055);
+}
+
 body.day .magic-circle::after{
-    border-color:rgba(65,115,145,.055);
-}
+    border-color:
+        rgba(101,168,207,.20);
 
-body.day .magic-line{
-    background:rgba(65,115,145,.05);
+    box-shadow:
+        0 0 18px
+        rgba(76,151,202,.065);
 }
 
 body.day .timeline{
@@ -938,78 +1082,104 @@ body.day .timeline{
         linear-gradient(
             to bottom,
             transparent,
-            rgba(70,120,150,.28) 8%,
-            rgba(70,120,150,.28) 92%,
+            rgba(82,151,198,.32) 8%,
+            rgba(82,151,198,.32) 92%,
             transparent
         );
 }
 
 body.day .timeline-point{
-    background:#eef3f6;
+    background:#f4f9fd;
 
-    border-color:rgba(65,115,145,.45);
+    border-color:
+        rgba(79,141,190,.55);
 
     box-shadow:
-        0 0 0 4px rgba(70,125,155,.04),
-        0 0 14px rgba(70,125,155,.1);
+        0 0 0 4px
+        rgba(76,151,202,.05),
+
+        0 0 14px
+        rgba(76,151,202,.12);
 }
 
 body.day .history-content{
-    border-color:rgba(65,110,140,.14);
+    border-color:
+        rgba(82,151,198,.36);
 
     background:
         linear-gradient(
-            135deg,
-            rgba(255,255,255,.5),
-            rgba(235,243,247,.38)
+            145deg,
+            rgba(242,249,253,.76),
+            rgba(226,240,249,.68)
         );
 }
 
 body.day .history-content:hover{
-    border-color:rgba(65,110,140,.25);
+    border-color:
+        rgba(79,151,200,.62);
 
     background:
         linear-gradient(
-            135deg,
-            rgba(255,255,255,.75),
-            rgba(235,243,247,.55)
+            145deg,
+            rgba(225,238,247,1),
+            rgba(250,253,255,1)
         );
+
+    box-shadow:
+        0 10px 35px
+        rgba(55,95,115,.10),
+
+        0 0 25px
+        rgba(76,151,202,.13);
 }
 
 body.day .history-era{
-    color:rgba(65,105,130,.55);
+    color:
+        rgba(81,137,173,.68);
 }
 
 body.day .history-date{
-    color:rgba(65,100,125,.48);
+    color:
+        rgba(65,106,133,.64);
 }
 
 body.day .history-title{
-    color:#29485e;
+    color:#2b506a;
 }
 
 body.day .history-cn{
-    color:rgba(55,88,108,.65);
+    color:
+        rgba(65,106,133,.64);
 }
 
 body.day .history-description{
-    color:rgba(55,88,108,.55);
+    color:
+        rgba(65,106,133,.64);
 }
 
 body.day .empty-history{
-    border-color:rgba(65,110,140,.13);
+    border-color:
+        rgba(82,151,198,.36);
 
-    background:rgba(255,255,255,.35);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(242,249,253,.76),
+            rgba(226,240,249,.68)
+        );
 
-    color:rgba(55,88,108,.48);
+    color:
+        rgba(65,106,133,.64);
 }
 
 body.day .empty-history-en{
-    color:rgba(65,105,130,.45);
+    color:
+        rgba(81,137,173,.68);
 }
 
 body.day .footer{
-    color:rgba(65,105,130,.3);
+    color:
+        rgba(73,115,143,.40);
 }
 
 
@@ -1021,7 +1191,7 @@ body.day .footer{
 
     .page{
         padding:
-            20px
+            30px
             28px
             60px;
     }
@@ -1030,19 +1200,41 @@ body.day .footer{
         inset:12px;
     }
 
+    .header{
+        left:25px;
+        right:25px;
+        top:24px;
+
+        width:auto;
+        max-width:none;
+
+        margin:0;
+        padding:0;
+
+        align-items:flex-start;
+    }
+
     .header-right{
-        gap:10px;
+        gap:8px;
     }
 
     .back{
-        font-size:9px;
+        font-size:10px;
+
         letter-spacing:1px;
     }
 
     .theme-toggle{
-        padding:6px 8px;
+        height:25px;
 
-        font-size:9px;
+        padding:
+            0 7px;
+
+        gap:5px;
+
+        font-size:6px;
+
+        letter-spacing:1px;
     }
 
     .hero{
@@ -1271,8 +1463,20 @@ body.day .footer{
             <button
                 class="theme-toggle"
                 id="themeToggle"
+                type="button"
             >
-                ☼ 日间
+
+                <span
+                    class="theme-icon"
+                    id="themeIcon"
+                >
+                    ☾
+                </span>
+
+                <span id="themeText">
+                    NIGHT
+                </span>
+
             </button>
 
         </div>
@@ -1335,20 +1539,6 @@ body.day .footer{
 
 /* =========================================
    历史资料
-   =========================================
-
-   以后只需要在这里增加内容。
-
-   示例格式：
-
-   {
-       era: "AGE I",
-       date: "YEAR 001",
-       title: "The First Dawn",
-       cn: "初始之日",
-       description: "这里填写历史事件描述。"
-   }
-
 ========================================= */
 
 const historyRecords = [
@@ -1379,8 +1569,6 @@ function renderHistory(){
     historyList.innerHTML = "";
 
 
-    /* 没有历史记录 */
-
     if(historyRecords.length === 0){
 
         historyList.innerHTML = `
@@ -1400,8 +1588,6 @@ function renderHistory(){
         return;
     }
 
-
-    /* 有历史记录 */
 
     historyRecords.forEach((record,index)=>{
 
@@ -1486,47 +1672,77 @@ renderHistory();
 
 /* =========================================
    日间 / 夜间模式
+   与档案目录共用 seyami-theme
 ========================================= */
 
 const themeToggle =
     document.getElementById("themeToggle");
+
+const themeIcon =
+    document.getElementById("themeIcon");
+
+const themeText =
+    document.getElementById("themeText");
+
+
+function applyTheme(theme){
+
+    if(theme === "day"){
+
+        document.body.classList.add("day");
+
+        themeIcon.textContent =
+            "☀";
+
+        themeText.textContent =
+            "DAY";
+
+    }else{
+
+        document.body.classList.remove("day");
+
+        themeIcon.textContent =
+            "☾";
+
+        themeText.textContent =
+            "NIGHT";
+
+    }
+
+}
 
 
 const savedTheme =
     localStorage.getItem("seyami-theme");
 
 
-if(savedTheme === "day"){
-
-    document.body.classList.add("day");
-
-    themeToggle.textContent =
-        "☾ 夜间";
-
-}
+applyTheme(
+    savedTheme === "day"
+        ? "day"
+        : "night"
+);
 
 
 themeToggle.addEventListener(
     "click",
     ()=>{
 
-        document.body.classList.toggle("day");
-
-
         const isDay =
             document.body.classList.contains("day");
 
+        const nextTheme =
+            isDay
+                ? "night"
+                : "day";
 
         localStorage.setItem(
             "seyami-theme",
-            isDay ? "day" : "night"
+            nextTheme
         );
 
-
-        themeToggle.textContent =
-            isDay
-            ? "☾ 夜间"
-            : "☼ 日间";
+        applyTheme(
+            nextTheme
+        );
 
     }
 );
