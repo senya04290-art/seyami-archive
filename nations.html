@@ -485,6 +485,39 @@ body{
     font-size:13px;
 }
 
+/* 与前面页面一致的两行 Logo */
+
+.logo > span:last-child{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    line-height:1.15;
+}
+
+.logo-cn{
+    font-family:"Noto Serif SC",serif;
+
+    font-size:12px;
+
+    font-weight:400;
+
+    letter-spacing:2px;
+
+    color:inherit;
+}
+
+.logo-en{
+    margin-top:3px;
+
+    font-family:"Cinzel",serif;
+
+    font-size:8px;
+
+    letter-spacing:2.5px;
+
+    color:rgba(191,220,243,.55);
+}
+
 .header-right{
     display:flex;
 
@@ -1179,6 +1212,10 @@ body.day .logo-symbol{
     color:rgba(79,151,201,.84);
 }
 
+body.day .logo-en{
+    color:rgba(61,98,125,.58);
+}
+
 
 /* 返回 */
 
@@ -1700,7 +1737,13 @@ body.day .footer{
                 </span>
 
                 <span>
-                    SEYAMI ARCHIVE
+                    <span class="logo-cn">
+                        塞垭弥大陆档案馆
+                    </span>
+
+                    <span class="logo-en">
+                        SEYAMI ARCHIVE
+                    </span>
                 </span>
 
             </div>
@@ -1712,7 +1755,7 @@ body.day .footer{
                     href="archive.html"
                     class="back"
                 >
-                    ← ARCHIVE
+                    ← 返回档案目录
                 </a>
 
 
@@ -2118,7 +2161,6 @@ const prevButton =
 
 const nextButton =
     document.getElementById("nextButton");
-
 
 
 /* =========================================================
