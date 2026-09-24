@@ -8,7 +8,8 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
 
@@ -366,12 +367,13 @@ body{
 }
 
 
-/* ================================
-   顶部
-   与档案目录完全统一
-================================ */
+/* =========================================================
+   顶部 Header
+   直接采用档案目录页
+========================================================= */
 
 .header{
+
     position:absolute;
 
     left:58px;
@@ -394,19 +396,18 @@ body{
 }
 
 
-/* ================================
-   Logo
-   与档案目录完全统一
-================================ */
+/* Logo */
 
 .logo{
+
     display:flex;
 
     align-items:flex-start;
 
     gap:12px;
 
-    color:#d9edff;
+    color:
+        #d9edff;
 
     text-decoration:none;
 
@@ -415,7 +416,9 @@ body{
 }
 
 .logo-symbol{
-    color:rgba(137,201,239,.9);
+
+    color:
+        rgba(137,201,239,.9);
 
     width:17px;
     height:13px;
@@ -442,7 +445,8 @@ body{
         text-shadow .6s ease;
 }
 
-.logo > span:last-child{
+.logo-text{
+
     display:flex;
 
     flex-direction:column;
@@ -453,12 +457,14 @@ body{
 }
 
 .logo-cn{
+
     display:block;
 
     height:13px;
     line-height:13px;
 
-    color:#d9edff;
+    color:
+        #d9edff;
 
     font-size:13px;
 
@@ -471,13 +477,17 @@ body{
 }
 
 .logo-en{
+
     display:block;
 
     margin-top:5px;
 
-    color:rgba(157,204,239,.63);
+    color:
+        rgba(157,204,239,.63);
 
-    font-family:"Times New Roman",serif;
+    font-family:
+        "Times New Roman",
+        serif;
 
     font-size:8px;
     line-height:8px;
@@ -491,12 +501,13 @@ body{
 }
 
 
-/* ================================
-   右侧控制
-   与档案目录完全统一
-================================ */
+/* =========================================================
+   返回
+   直接采用档案目录页
+========================================================= */
 
 .header-right{
+
     display:flex;
 
     align-items:center;
@@ -505,7 +516,9 @@ body{
 }
 
 .back{
-    color:rgba(191,220,243,.68);
+
+    color:
+        rgba(191,220,243,.68);
 
     text-decoration:none;
 
@@ -524,6 +537,7 @@ body{
 }
 
 .back:hover{
+
     color:#d9efff;
 
     text-shadow:
@@ -531,7 +545,14 @@ body{
         rgba(102,180,231,.35);
 }
 
+
+/* =========================================================
+   昼夜切换
+   直接采用档案目录页
+========================================================= */
+
 .theme-toggle{
+
     display:flex;
 
     align-items:center;
@@ -576,6 +597,7 @@ body{
 }
 
 .theme-toggle:hover{
+
     color:#d9efff;
 
     border-color:
@@ -590,6 +612,7 @@ body{
 }
 
 .theme-icon{
+
     font-size:12px;
 
     line-height:1;
@@ -1180,42 +1203,48 @@ body.day .footer{
 
 /* ================================
    800px
-   与档案目录统一
+   完全采用档案目录
 ================================ */
 
 @media(max-width:800px){
 
     .header{
+
         left:35px;
         right:35px;
         top:30px;
     }
 
     .header-right{
+
         gap:14px;
     }
+
 }
 
 
 /* ================================
    600px
-   与档案目录统一
+   完全采用档案目录
 ================================ */
 
 @media(max-width:600px){
 
     .page{
+
         padding:
-            30px
-            28px
-            60px;
+            22px
+            20px
+            55px;
     }
 
     .frame{
+
         inset:12px;
     }
 
     .header{
+
         left:25px;
         right:25px;
         top:24px;
@@ -1229,16 +1258,63 @@ body.day .footer{
         align-items:flex-start;
     }
 
+    .logo{
+
+        align-items:flex-start;
+
+        gap:10px;
+    }
+
+    .logo-symbol{
+
+        width:15px;
+        height:11px;
+
+        display:flex;
+
+        align-items:flex-start;
+        justify-content:center;
+
+        font-size:15px;
+        line-height:11px;
+
+        margin-top:2px;
+    }
+
+    .logo-cn{
+
+        height:11px;
+        line-height:11px;
+
+        font-size:11px;
+
+        letter-spacing:2px;
+    }
+
+    .logo-en{
+
+        display:block;
+
+        margin-top:4px;
+
+        font-size:7px;
+        line-height:7px;
+
+        letter-spacing:2px;
+    }
+
     .header-right{
+
         gap:8px;
     }
 
     .back{
+
         font-size:10px;
-        letter-spacing:1px;
     }
 
     .theme-toggle{
+
         height:25px;
 
         padding:
@@ -1249,6 +1325,11 @@ body.day .footer{
         font-size:6px;
 
         letter-spacing:1px;
+    }
+
+    .theme-icon{
+
+        font-size:10px;
     }
 
     .hero{
@@ -1339,20 +1420,36 @@ body.day .footer{
 
 /* ================================
    360px
-   与档案目录统一
+   完全采用档案目录
 ================================ */
 
 @media(max-width:360px){
 
     .header{
+
         left:20px;
         right:20px;
         top:24px;
     }
 
     .header-right{
+
         gap:5px;
     }
+
+    .back{
+
+        font-size:9px;
+    }
+
+    .theme-toggle{
+
+        padding:
+            0 6px;
+
+        font-size:6px;
+    }
+
 }
 
 </style>
@@ -1435,17 +1532,21 @@ body.day .footer{
 
     <!-- ================================
          顶部
+         结构与档案目录页一致
     ================================= -->
 
     <header class="header">
 
-        <div class="logo">
+        <a
+            href="index.html"
+            class="logo"
+        >
 
             <span class="logo-symbol">
                 ✦
             </span>
 
-            <span>
+            <span class="logo-text">
 
                 <span class="logo-cn">
                     塞垭弥大陆档案馆
@@ -1457,7 +1558,7 @@ body.day .footer{
 
             </span>
 
-        </div>
+        </a>
 
 
         <div class="header-right">
@@ -1473,6 +1574,7 @@ body.day .footer{
                 class="theme-toggle"
                 id="themeToggle"
                 type="button"
+                aria-label="切换昼夜模式"
             >
 
                 <span
@@ -1680,6 +1782,7 @@ renderHistory();
 
 /* =========================================
    日间 / 夜间模式
+   与档案目录共用 seyami-theme
 ========================================= */
 
 const themeToggle =
