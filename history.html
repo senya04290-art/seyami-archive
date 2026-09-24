@@ -94,6 +94,121 @@ body{
 
 
 /* ================================
+   ✡ ✶ 浮动魔法符文
+================================ */
+
+.floating-symbols{
+    position:fixed;
+    inset:0;
+
+    pointer-events:none;
+
+    overflow:hidden;
+
+    z-index:1;
+}
+
+.floating-symbol{
+    position:absolute;
+
+    font-family:"Cinzel",serif;
+
+    color:rgba(145,200,235,.18);
+
+    text-shadow:
+        0 0 12px rgba(90,175,225,.12);
+
+    user-select:none;
+
+    animation:
+        symbolFloat
+        var(--duration)
+        ease-in-out
+        infinite;
+
+    animation-delay:var(--delay);
+}
+
+
+/* 不同大小 */
+
+.symbol-1{
+    font-size:24px;
+}
+
+.symbol-2{
+    font-size:17px;
+}
+
+.symbol-3{
+    font-size:29px;
+}
+
+.symbol-4{
+    font-size:20px;
+}
+
+.symbol-5{
+    font-size:14px;
+
+    opacity:.65;
+}
+
+.symbol-6{
+    font-size:26px;
+
+    opacity:.55;
+}
+
+
+/* 浮动动画 */
+
+@keyframes symbolFloat{
+
+    0%{
+        transform:
+            translate3d(0,0,0)
+            rotate(0deg);
+
+        opacity:.08;
+    }
+
+    25%{
+        opacity:.18;
+    }
+
+    50%{
+        transform:
+            translate3d(
+                12px,
+                -24px,
+                0
+            )
+            rotate(8deg);
+
+        opacity:.22;
+    }
+
+    75%{
+        opacity:.14;
+    }
+
+    100%{
+        transform:
+            translate3d(
+                -10px,
+                -48px,
+                0
+            )
+            rotate(-6deg);
+
+        opacity:.08;
+    }
+
+}
+
+
+/* ================================
    四角边框
 ================================ */
 
@@ -713,6 +828,13 @@ body.day .micro-stars{
     opacity:.12;
 }
 
+body.day .floating-symbol{
+    color:rgba(65,120,150,.13);
+
+    text-shadow:
+        0 0 12px rgba(70,135,170,.08);
+}
+
 body.day .frame{
     border-color:rgba(65,105,130,.16);
 }
@@ -982,6 +1104,10 @@ body.day .footer{
         margin-top:70px;
     }
 
+    .floating-symbol{
+        transform:scale(.75);
+    }
+
 }
 
 </style>
@@ -993,6 +1119,71 @@ body.day .footer{
 <!-- 星点 -->
 <div class="stars"></div>
 <div class="micro-stars"></div>
+
+
+<!-- ================================
+     ✡ ✶ 浮动符文
+================================= -->
+
+<div class="floating-symbols">
+
+    <span
+        class="floating-symbol symbol-1"
+        style="left:8%; top:18%; --duration:12s; --delay:-3s;"
+    >
+        ✡
+    </span>
+
+    <span
+        class="floating-symbol symbol-2"
+        style="left:23%; top:38%; --duration:15s; --delay:-8s;"
+    >
+        ✶
+    </span>
+
+    <span
+        class="floating-symbol symbol-3"
+        style="left:82%; top:20%; --duration:17s; --delay:-5s;"
+    >
+        ✡
+    </span>
+
+    <span
+        class="floating-symbol symbol-4"
+        style="left:91%; top:48%; --duration:13s; --delay:-9s;"
+    >
+        ✶
+    </span>
+
+    <span
+        class="floating-symbol symbol-5"
+        style="left:14%; top:72%; --duration:16s; --delay:-12s;"
+    >
+        ✶
+    </span>
+
+    <span
+        class="floating-symbol symbol-6"
+        style="left:76%; top:76%; --duration:19s; --delay:-7s;"
+    >
+        ✡
+    </span>
+
+    <span
+        class="floating-symbol symbol-5"
+        style="left:48%; top:13%; --duration:14s; --delay:-4s;"
+    >
+        ✶
+    </span>
+
+    <span
+        class="floating-symbol symbol-2"
+        style="left:56%; top:88%; --duration:18s; --delay:-11s;"
+    >
+        ✡
+    </span>
+
+</div>
 
 
 <!-- 魔法阵 -->
