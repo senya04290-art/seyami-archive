@@ -1,1 +1,1667 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>塞垭弥大陆档案馆 · 国家档案</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   基础
+========================================================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    min-height:100%;
+}
+
+body{
+    min-height:100vh;
+    background:#061426;
+    color:#dcecff;
+    font-family:"Noto Serif SC",serif;
+    overflow-x:hidden;
+    transition:
+        background .5s ease,
+        color .5s ease;
+}
+
+
+/* =========================================================
+   页面背景
+========================================================= */
+
+.page{
+    position:relative;
+    min-height:100vh;
+    padding:34px 28px 42px;
+
+    background:
+        radial-gradient(
+            circle at 50% 42%,
+            rgba(38,91,137,.18),
+            transparent 38%
+        ),
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(11,45,75,.45),
+            transparent 70%
+        ),
+        #061426;
+
+    transition:background .5s ease;
+
+    overflow:hidden;
+}
+
+
+/* =========================================================
+   星星背景
+========================================================= */
+
+.stars,
+.stars::before,
+.stars::after{
+    position:absolute;
+    content:"";
+    pointer-events:none;
+}
+
+.stars{
+    inset:0;
+    z-index:0;
+}
+
+.stars::before{
+    width:2px;
+    height:2px;
+    background:rgba(182,220,255,.55);
+
+    box-shadow:
+        5vw 8vh rgba(182,220,255,.55),
+        13vw 18vh rgba(182,220,255,.40),
+        22vw 7vh rgba(182,220,255,.55),
+        31vw 14vh rgba(182,220,255,.32),
+        41vw 5vh rgba(182,220,255,.50),
+        52vw 12vh rgba(182,220,255,.38),
+        63vw 7vh rgba(182,220,255,.48),
+        74vw 16vh rgba(182,220,255,.32),
+        86vw 8vh rgba(182,220,255,.52),
+        94vw 20vh rgba(182,220,255,.38),
+
+        8vw 31vh rgba(182,220,255,.34),
+        18vw 39vh rgba(182,220,255,.48),
+        29vw 27vh rgba(182,220,255,.32),
+        39vw 34vh rgba(182,220,255,.44),
+        49vw 26vh rgba(182,220,255,.36),
+        61vw 38vh rgba(182,220,255,.46),
+        72vw 29vh rgba(182,220,255,.34),
+        83vw 36vh rgba(182,220,255,.50),
+        92vw 28vh rgba(182,220,255,.36),
+
+        4vw 55vh rgba(182,220,255,.46),
+        15vw 63vh rgba(182,220,255,.34),
+        25vw 52vh rgba(182,220,255,.52),
+        36vw 61vh rgba(182,220,255,.32),
+        47vw 54vh rgba(182,220,255,.44),
+        58vw 67vh rgba(182,220,255,.38),
+        69vw 55vh rgba(182,220,255,.50),
+        80vw 64vh rgba(182,220,255,.34),
+        91vw 53vh rgba(182,220,255,.46),
+
+        9vw 81vh rgba(182,220,255,.34),
+        20vw 91vh rgba(182,220,255,.48),
+        33vw 82vh rgba(182,220,255,.36),
+        45vw 94vh rgba(182,220,255,.42),
+        57vw 84vh rgba(182,220,255,.32),
+        68vw 92vh rgba(182,220,255,.48),
+        79vw 82vh rgba(182,220,255,.36),
+        89vw 90vh rgba(182,220,255,.44);
+}
+
+.stars::after{
+    width:1px;
+    height:1px;
+    background:rgba(182,220,255,.38);
+
+    box-shadow:
+        2vw 14vh rgba(182,220,255,.35),
+        17vw 5vh rgba(182,220,255,.28),
+        27vw 20vh rgba(182,220,255,.35),
+        37vw 8vh rgba(182,220,255,.28),
+        47vw 18vh rgba(182,220,255,.35),
+        58vw 5vh rgba(182,220,255,.28),
+        69vw 22vh rgba(182,220,255,.35),
+        79vw 9vh rgba(182,220,255,.28),
+        90vw 15vh rgba(182,220,255,.35),
+
+        11vw 45vh rgba(182,220,255,.28),
+        22vw 34vh rgba(182,220,255,.35),
+        34vw 47vh rgba(182,220,255,.28),
+        44vw 39vh rgba(182,220,255,.35),
+        55vw 47vh rgba(182,220,255,.28),
+        66vw 42vh rgba(182,220,255,.35),
+        77vw 48vh rgba(182,220,255,.28),
+        88vw 40vh rgba(182,220,255,.35),
+
+        6vw 72vh rgba(182,220,255,.35),
+        17vw 78vh rgba(182,220,255,.28),
+        29vw 70vh rgba(182,220,255,.35),
+        41vw 77vh rgba(182,220,255,.28),
+        53vw 72vh rgba(182,220,255,.35),
+        64vw 79vh rgba(182,220,255,.28),
+        76vw 71vh rgba(182,220,255,.35),
+        87vw 78vh rgba(182,220,255,.28);
+}
+
+
+/* =========================================================
+   微小星点
+========================================================= */
+
+.micro-stars{
+    position:absolute;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+}
+
+.micro-stars span{
+    position:absolute;
+    width:2px;
+    height:2px;
+    border-radius:50%;
+    background:rgba(158,207,247,.62);
+    opacity:.45;
+    animation:microTwinkle 5s ease-in-out infinite;
+}
+
+.micro-stars span:nth-child(1){left:9%;top:12%;animation-delay:0s;}
+.micro-stars span:nth-child(2){left:18%;top:25%;animation-delay:1s;}
+.micro-stars span:nth-child(3){left:28%;top:11%;animation-delay:2s;}
+.micro-stars span:nth-child(4){left:37%;top:21%;animation-delay:3s;}
+.micro-stars span:nth-child(5){left:48%;top:9%;animation-delay:1.5s;}
+.micro-stars span:nth-child(6){left:58%;top:27%;animation-delay:2.5s;}
+.micro-stars span:nth-child(7){left:69%;top:14%;animation-delay:4s;}
+.micro-stars span:nth-child(8){left:78%;top:24%;animation-delay:.5s;}
+.micro-stars span:nth-child(9){left:88%;top:11%;animation-delay:3.5s;}
+.micro-stars span:nth-child(10){left:94%;top:31%;animation-delay:1.2s;}
+
+.micro-stars span:nth-child(11){left:7%;top:48%;animation-delay:2.2s;}
+.micro-stars span:nth-child(12){left:20%;top:58%;animation-delay:4.2s;}
+.micro-stars span:nth-child(13){left:31%;top:46%;animation-delay:1.8s;}
+.micro-stars span:nth-child(14){left:44%;top:57%;animation-delay:.8s;}
+.micro-stars span:nth-child(15){left:56%;top:48%;animation-delay:3.2s;}
+.micro-stars span:nth-child(16){left:68%;top:59%;animation-delay:1.4s;}
+.micro-stars span:nth-child(17){left:80%;top:47%;animation-delay:2.8s;}
+.micro-stars span:nth-child(18){left:91%;top:57%;animation-delay:4.5s;}
+.micro-stars span:nth-child(19){left:13%;top:84%;animation-delay:3.8s;}
+
+@keyframes microTwinkle{
+    0%,100%{
+        opacity:.25;
+        transform:scale(.8);
+    }
+
+    50%{
+        opacity:.9;
+        transform:scale(1.5);
+    }
+}
+
+
+/* =========================================================
+   魔法星
+========================================================= */
+
+.arcane-stars{
+    position:absolute;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+}
+
+.arcane-stars span{
+    position:absolute;
+    width:4px;
+    height:4px;
+    background:rgba(158,207,247,.62);
+    transform:rotate(45deg);
+    opacity:.52;
+    box-shadow:0 0 7px rgba(113,177,220,.28);
+}
+
+.star-a{left:7%;top:19%;}
+.star-b{left:15%;top:8%;}
+.star-c{left:24%;top:31%;}
+.star-d{left:34%;top:12%;}
+.star-e{left:43%;top:24%;}
+.star-f{left:54%;top:10%;}
+.star-g{left:64%;top:31%;}
+.star-h{left:74%;top:17%;}
+.star-i{left:84%;top:28%;}
+.star-j{left:93%;top:13%;}
+
+.star-k{left:5%;top:67%;}
+.star-l{left:16%;top:77%;}
+.star-m{left:27%;top:64%;}
+.star-n{left:38%;top:75%;}
+.star-o{left:49%;top:67%;}
+.star-p{left:61%;top:78%;}
+.star-q{left:72%;top:65%;}
+.star-r{left:83%;top:76%;}
+.star-s{left:94%;top:68%;}
+.star-t{left:57%;top:90%;}
+
+.extra-u{left:12%;top:42%;}
+.extra-v{left:30%;top:54%;}
+.extra-w{left:46%;top:42%;}
+.extra-x{left:66%;top:49%;}
+.extra-y{left:86%;top:44%;}
+.extra-z{left:97%;top:55%;}
+
+
+/* =========================================================
+   魔法阵
+========================================================= */
+
+.magic-circle{
+    position:absolute;
+    width:680px;
+    height:680px;
+    left:50%;
+    top:49%;
+    transform:translate(-50%,-50%);
+    border:1px solid rgba(73,143,198,.28);
+    border-radius:50%;
+    z-index:1;
+    pointer-events:none;
+}
+
+.magic-circle::before{
+    content:"";
+    position:absolute;
+    inset:34px;
+    border:1px solid rgba(91,162,213,.22);
+    border-radius:50%;
+}
+
+.magic-circle::after{
+    content:"✦";
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    font-size:18px;
+    color:rgba(117,181,220,.25);
+}
+
+
+/* =========================================================
+   外框
+========================================================= */
+
+.frame{
+    position:relative;
+    z-index:5;
+
+    max-width:1280px;
+    min-height:calc(100vh - 76px);
+
+    margin:0 auto;
+
+    border:1px solid rgba(111,174,224,.32);
+
+    padding:28px 34px 32px;
+
+    display:flex;
+    flex-direction:column;
+}
+
+
+/* 四角装饰 */
+
+.frame::before,
+.frame::after{
+    content:"";
+    position:absolute;
+    width:42px;
+    height:42px;
+    pointer-events:none;
+}
+
+.frame::before{
+    left:-1px;
+    top:-1px;
+
+    border-left:1px solid rgba(108,178,230,.88);
+    border-top:1px solid rgba(108,178,230,.88);
+}
+
+.frame::after{
+    right:-1px;
+    bottom:-1px;
+
+    border-right:1px solid rgba(108,178,230,.88);
+    border-bottom:1px solid rgba(108,178,230,.88);
+}
+
+
+/* =========================================================
+   Header
+========================================================= */
+
+.header{
+    position:relative;
+    z-index:10;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:20px;
+
+    min-height:44px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    color:#d9edff;
+
+    font-family:"Cinzel",serif;
+    font-size:14px;
+    letter-spacing:3px;
+    white-space:nowrap;
+}
+
+.logo-symbol{
+    color:rgba(137,201,239,.9);
+    font-size:13px;
+}
+
+
+/* =========================================================
+   Header 右侧
+========================================================= */
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.back{
+    text-decoration:none;
+
+    color:rgba(191,220,243,.68);
+
+    font-family:"Cinzel","Noto Serif SC",serif;
+    font-size:11px;
+    letter-spacing:1.8px;
+
+    transition:color .3s ease;
+}
+
+.back:hover{
+    color:#d9efff;
+}
+
+
+/* =========================================================
+   日夜切换
+========================================================= */
+
+.theme-toggle{
+    border:1px solid rgba(111,174,224,.32);
+
+    background:rgba(8,28,49,.35);
+
+    color:rgba(191,220,243,.68);
+
+    padding:7px 11px;
+
+    font-family:"Noto Serif SC",serif;
+    font-size:11px;
+
+    letter-spacing:1px;
+
+    cursor:pointer;
+
+    transition:
+        color .3s ease,
+        border-color .3s ease,
+        background .3s ease;
+}
+
+.theme-toggle:hover{
+    color:#d9efff;
+    border-color:rgba(111,174,224,.58);
+}
+
+
+/* =========================================================
+   主标题
+========================================================= */
+
+.hero{
+    position:relative;
+    z-index:5;
+
+    text-align:center;
+
+    padding:70px 10px 55px;
+}
+
+.hero-main{
+    font-family:"Cinzel",serif;
+
+    font-size:clamp(30px,5vw,58px);
+
+    font-weight:400;
+
+    letter-spacing:8px;
+
+    line-height:1.15;
+
+    color:#dceeff;
+
+    text-shadow:
+        0 0 18px rgba(106,172,220,.08);
+}
+
+.hero-sub{
+    margin-top:16px;
+
+    font-family:"Cinzel",serif;
+
+    font-size:13px;
+
+    letter-spacing:5px;
+
+    color:rgba(177,207,230,.62);
+}
+
+.hero-cn{
+    margin-top:10px;
+
+    font-size:13px;
+
+    letter-spacing:4px;
+
+    color:rgba(177,207,230,.62);
+}
+
+
+/* =========================================================
+   国家档案区域
+========================================================= */
+
+.nation-list{
+    position:relative;
+    z-index:5;
+
+    width:100%;
+    max-width:1080px;
+
+    margin:0 auto;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:22px;
+}
+
+
+/* =========================================================
+   国家卡片
+========================================================= */
+
+.nation-card{
+    position:relative;
+
+    min-height:230px;
+
+    padding:28px 30px 30px;
+
+    border:1px solid rgba(111,174,224,.30);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(12,39,64,.30),
+            rgba(7,25,45,.16)
+        );
+
+    backdrop-filter:blur(3px);
+
+    overflow:hidden;
+
+    transition:
+        border-color .35s ease,
+        background .35s ease,
+        transform .35s ease;
+}
+
+.nation-card:hover{
+    border-color:rgba(111,174,224,.52);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(16,48,76,.38),
+            rgba(7,28,49,.20)
+        );
+
+    transform:translateY(-2px);
+}
+
+
+/* 卡片顶部细线 */
+
+.nation-card::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(111,174,224,.52),
+            transparent
+        );
+}
+
+
+/* 左上编号 */
+
+.nation-number{
+    position:absolute;
+
+    top:18px;
+    left:22px;
+
+    font-family:"Cinzel",serif;
+
+    font-size:11px;
+
+    letter-spacing:2px;
+
+    color:rgba(111,174,224,.48);
+}
+
+
+/* 星形装饰 */
+
+.nation-symbol{
+    position:absolute;
+
+    right:25px;
+    top:20px;
+
+    color:rgba(137,201,239,.55);
+
+    font-size:14px;
+}
+
+
+/* 国家标题 */
+
+.nation-title{
+    margin-top:18px;
+
+    font-family:"Cinzel",serif;
+
+    font-size:25px;
+
+    letter-spacing:4px;
+
+    color:#dceeff;
+}
+
+.nation-cn{
+    margin-top:7px;
+
+    font-size:13px;
+
+    letter-spacing:3px;
+
+    color:rgba(177,207,230,.62);
+}
+
+
+/* =========================================================
+   国家信息
+========================================================= */
+
+.nation-info{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:15px;
+
+    margin-top:28px;
+
+    padding-top:20px;
+
+    border-top:1px solid rgba(111,174,224,.16);
+}
+
+.info-item{
+    min-width:0;
+}
+
+.info-label{
+    font-family:"Cinzel",serif;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    color:rgba(137,190,220,.52);
+
+    margin-bottom:7px;
+}
+
+.info-value{
+    min-height:18px;
+
+    font-size:11px;
+
+    letter-spacing:1px;
+
+    color:rgba(205,228,244,.48);
+}
+
+
+/* =========================================================
+   国家简介
+========================================================= */
+
+.nation-description{
+    margin-top:22px;
+
+    min-height:35px;
+
+    color:rgba(191,220,243,.42);
+
+    font-size:11px;
+
+    line-height:2;
+
+    letter-spacing:1px;
+}
+
+
+/* =========================================================
+   空白提示
+========================================================= */
+
+.empty-note{
+    position:relative;
+    z-index:5;
+
+    text-align:center;
+
+    margin-top:15px;
+
+    font-family:"Cinzel","Noto Serif SC",serif;
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    color:rgba(133,177,207,.38);
+}
+
+
+/* =========================================================
+   Footer
+========================================================= */
+
+.footer{
+    position:relative;
+    z-index:5;
+
+    margin-top:auto;
+
+    padding-top:50px;
+
+    text-align:center;
+
+    font-family:"Cinzel",serif;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    color:rgba(133,177,207,.38);
+}
+
+
+/* =========================================================
+   日间模式
+========================================================= */
+
+body.day{
+    background:#f4f9fd;
+    color:#2e5069;
+}
+
+body.day .page{
+    background:
+        radial-gradient(
+            circle at 50% 42%,
+            rgba(165,211,238,.20),
+            transparent 38%
+        ),
+        radial-gradient(
+            circle at 50% 52%,
+            rgba(226,240,249,.68),
+            transparent 72%
+        ),
+        #f4f9fd;
+}
+
+
+/* 背景星星 */
+
+body.day .stars::before{
+    background:rgba(103,166,207,.42);
+
+    box-shadow:
+        5vw 8vh rgba(103,166,207,.42),
+        13vw 18vh rgba(103,166,207,.30),
+        22vw 7vh rgba(103,166,207,.42),
+        31vw 14vh rgba(103,166,207,.25),
+        41vw 5vh rgba(103,166,207,.38),
+        52vw 12vh rgba(103,166,207,.28),
+        63vw 7vh rgba(103,166,207,.38),
+        74vw 16vh rgba(103,166,207,.25),
+        86vw 8vh rgba(103,166,207,.40),
+        94vw 20vh rgba(103,166,207,.28),
+
+        8vw 31vh rgba(103,166,207,.25),
+        18vw 39vh rgba(103,166,207,.36),
+        29vw 27vh rgba(103,166,207,.25),
+        39vw 34vh rgba(103,166,207,.34),
+        49vw 26vh rgba(103,166,207,.27),
+        61vw 38vh rgba(103,166,207,.35),
+        72vw 29vh rgba(103,166,207,.25),
+        83vw 36vh rgba(103,166,207,.38),
+        92vw 28vh rgba(103,166,207,.27),
+
+        4vw 55vh rgba(103,166,207,.34),
+        15vw 63vh rgba(103,166,207,.25),
+        25vw 52vh rgba(103,166,207,.40),
+        36vw 61vh rgba(103,166,207,.24),
+        47vw 54vh rgba(103,166,207,.34),
+        58vw 67vh rgba(103,166,207,.28),
+        69vw 55vh rgba(103,166,207,.38),
+        80vw 64vh rgba(103,166,207,.25),
+        91vw 53vh rgba(103,166,207,.34),
+
+        9vw 81vh rgba(103,166,207,.25),
+        20vw 91vh rgba(103,166,207,.36),
+        33vw 82vh rgba(103,166,207,.27),
+        45vw 94vh rgba(103,166,207,.32),
+        57vw 84vh rgba(103,166,207,.24),
+        68vw 92vh rgba(103,166,207,.36),
+        79vw 82vh rgba(103,166,207,.27),
+        89vw 90vh rgba(103,166,207,.33);
+}
+
+body.day .stars::after{
+    background:rgba(103,166,207,.30);
+}
+
+
+/* 微星 */
+
+body.day .micro-stars span{
+    background:rgba(87,151,199,.50);
+}
+
+
+/* 魔法星 */
+
+body.day .arcane-stars span{
+    background:rgba(87,151,199,.50);
+
+    box-shadow:
+        0 0 7px rgba(87,151,199,.18);
+}
+
+
+/* 魔法阵 */
+
+body.day .magic-circle{
+    border-color:rgba(79,148,196,.26);
+}
+
+body.day .magic-circle::before{
+    border-color:rgba(101,168,207,.20);
+}
+
+body.day .magic-circle::after{
+    color:rgba(79,148,196,.24);
+}
+
+
+/* 外框 */
+
+body.day .frame{
+    border-color:rgba(91,145,184,.34);
+}
+
+body.day .frame::before{
+    border-left-color:rgba(79,141,190,.68);
+    border-top-color:rgba(79,141,190,.68);
+}
+
+body.day .frame::after{
+    border-right-color:rgba(79,141,190,.68);
+    border-bottom-color:rgba(79,141,190,.68);
+}
+
+
+/* Logo */
+
+body.day .logo{
+    color:#2e526c;
+}
+
+body.day .logo-symbol{
+    color:rgba(79,151,201,.84);
+}
+
+
+/* 返回 */
+
+body.day .back{
+    color:rgba(62,99,127,.70);
+}
+
+body.day .back:hover{
+    color:#28536f;
+}
+
+
+/* 切换按钮 */
+
+body.day .theme-toggle{
+    border-color:rgba(91,145,184,.34);
+    background:rgba(248,252,255,.78);
+    color:rgba(61,98,125,.76);
+}
+
+body.day .theme-toggle:hover{
+    color:#28536f;
+    border-color:rgba(91,145,184,.58);
+}
+
+
+/* 标题 */
+
+body.day .hero-main{
+    color:#2b506a;
+}
+
+body.day .hero-sub,
+body.day .hero-cn{
+    color:rgba(45,82,106,.80);
+}
+
+
+/* 国家卡片 */
+
+body.day .nation-card{
+    border-color:rgba(82,151,198,.36);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(242,249,253,.76),
+            rgba(226,240,249,.68)
+        );
+}
+
+body.day .nation-card:hover{
+    border-color:rgba(82,151,198,.55);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(248,252,255,.88),
+            rgba(226,240,249,.76)
+        );
+}
+
+body.day .nation-card::before{
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(82,151,198,.48),
+            transparent
+        );
+}
+
+body.day .nation-number{
+    color:rgba(82,151,198,.48);
+}
+
+body.day .nation-symbol{
+    color:rgba(79,151,201,.68);
+}
+
+body.day .nation-title{
+    color:#2b506a;
+}
+
+body.day .nation-cn{
+    color:rgba(45,82,106,.72);
+}
+
+body.day .nation-info{
+    border-top-color:rgba(82,151,198,.18);
+}
+
+body.day .info-label{
+    color:rgba(73,115,143,.58);
+}
+
+body.day .info-value{
+    color:rgba(61,98,125,.52);
+}
+
+body.day .nation-description{
+    color:rgba(61,98,125,.48);
+}
+
+body.day .empty-note{
+    color:rgba(73,115,143,.40);
+}
+
+body.day .footer{
+    color:rgba(73,115,143,.40);
+}
+
+
+/* =========================================================
+   平板
+========================================================= */
+
+@media (max-width:800px){
+
+    .page{
+        padding:24px 18px 30px;
+    }
+
+    .frame{
+        padding:24px 24px 28px;
+    }
+
+    .hero{
+        padding:60px 5px 42px;
+    }
+
+    .hero-main{
+        letter-spacing:6px;
+    }
+
+    .nation-info{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .magic-circle{
+        width:560px;
+        height:560px;
+    }
+}
+
+
+/* =========================================================
+   手机
+========================================================= */
+
+@media (max-width:600px){
+
+    .page{
+        padding:16px 12px 22px;
+    }
+
+    .frame{
+        min-height:calc(100vh - 38px);
+
+        padding:18px 16px 24px;
+    }
+
+    .header{
+        align-items:flex-start;
+    }
+
+    .logo{
+        font-size:11px;
+        letter-spacing:2px;
+    }
+
+    .header-right{
+        gap:8px;
+    }
+
+    .back{
+        font-size:9px;
+        letter-spacing:1px;
+    }
+
+    .theme-toggle{
+        padding:6px 8px;
+        font-size:9px;
+    }
+
+    .hero{
+        padding:52px 0 34px;
+    }
+
+    .hero-main{
+        font-size:27px;
+        letter-spacing:4px;
+    }
+
+    .hero-sub{
+        font-size:10px;
+        letter-spacing:3px;
+    }
+
+    .hero-cn{
+        font-size:11px;
+        letter-spacing:3px;
+    }
+
+    .nation-list{
+        gap:16px;
+    }
+
+    .nation-card{
+        min-height:0;
+        padding:26px 20px 24px;
+    }
+
+    .nation-title{
+        font-size:21px;
+        letter-spacing:3px;
+    }
+
+    .nation-cn{
+        font-size:11px;
+        letter-spacing:2px;
+    }
+
+    .nation-info{
+        grid-template-columns:1fr 1fr;
+        gap:16px 12px;
+        margin-top:23px;
+    }
+
+    .nation-description{
+        font-size:10px;
+        line-height:1.9;
+    }
+
+    .magic-circle{
+        width:430px;
+        height:430px;
+    }
+
+    .footer{
+        padding-top:38px;
+        font-size:8px;
+        letter-spacing:2px;
+    }
+}
+
+
+/* =========================================================
+   超小屏
+========================================================= */
+
+@media (max-width:360px){
+
+    .frame{
+        padding-left:12px;
+        padding-right:12px;
+    }
+
+    .logo{
+        font-size:9px;
+    }
+
+    .back{
+        font-size:8px;
+    }
+
+    .theme-toggle{
+        font-size:8px;
+        padding:5px 7px;
+    }
+
+    .hero-main{
+        font-size:23px;
+        letter-spacing:3px;
+    }
+
+    .hero-sub{
+        font-size:9px;
+    }
+
+    .nation-card{
+        padding-left:16px;
+        padding-right:16px;
+    }
+
+    .nation-info{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="page">
+
+    <!-- 背景星星 -->
+    <div class="stars"></div>
+
+    <!-- 微小星点 -->
+    <div class="micro-stars">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+
+    <!-- 魔法星 -->
+    <div class="arcane-stars">
+
+        <span class="star-a"></span>
+        <span class="star-b"></span>
+        <span class="star-c"></span>
+        <span class="star-d"></span>
+        <span class="star-e"></span>
+        <span class="star-f"></span>
+        <span class="star-g"></span>
+        <span class="star-h"></span>
+        <span class="star-i"></span>
+        <span class="star-j"></span>
+
+        <span class="star-k"></span>
+        <span class="star-l"></span>
+        <span class="star-m"></span>
+        <span class="star-n"></span>
+        <span class="star-o"></span>
+        <span class="star-p"></span>
+        <span class="star-q"></span>
+        <span class="star-r"></span>
+        <span class="star-s"></span>
+        <span class="star-t"></span>
+
+        <span class="extra-u"></span>
+        <span class="extra-v"></span>
+        <span class="extra-w"></span>
+        <span class="extra-x"></span>
+        <span class="extra-y"></span>
+        <span class="extra-z"></span>
+
+    </div>
+
+
+    <!-- 魔法阵 -->
+    <div class="magic-circle"></div>
+
+
+    <!-- 页面框 -->
+    <main class="frame">
+
+
+        <!-- ================= HEADER ================= -->
+
+        <header class="header">
+
+            <div class="logo">
+                <span class="logo-symbol">✦</span>
+                <span>SEYAMI ARCHIVE</span>
+            </div>
+
+
+            <div class="header-right">
+
+                <a href="archive.html" class="back">
+                    ← ARCHIVE
+                </a>
+
+                <button
+                    class="theme-toggle"
+                    id="themeToggle"
+                    type="button"
+                >
+                    ☼ 日间
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= TITLE ================= -->
+
+        <section class="hero">
+
+            <div class="hero-main">
+                NATION ARCHIVE
+            </div>
+
+            <div class="hero-sub">
+                NATIONS
+            </div>
+
+            <div class="hero-cn">
+                国家档案
+            </div>
+
+        </section>
+
+
+        <!-- ================= 国家档案 ================= -->
+
+        <section class="nation-list">
+
+
+            <!-- =========================================
+                 国家 01
+                 以后直接在这里填写
+            ========================================== -->
+
+            <article class="nation-card">
+
+                <div class="nation-number">
+                    01
+                </div>
+
+                <div class="nation-symbol">
+                    ✡
+                </div>
+
+
+                <div class="nation-title">
+                    —
+                </div>
+
+                <div class="nation-cn">
+                    —
+                </div>
+
+
+                <div class="nation-info">
+
+                    <div class="info-item">
+
+                        <div class="info-label">
+                            CAPITAL
+                        </div>
+
+                        <div class="info-value">
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <div class="info-label">
+                            REGION
+                        </div>
+
+                        <div class="info-value">
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <div class="info-label">
+                            RACE
+                        </div>
+
+                        <div class="info-value">
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <div class="info-label">
+                            TERRAIN
+                        </div>
+
+                        <div class="info-value">
+                            —
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="nation-description">
+                    —
+                </div>
+
+            </article>
+
+
+
+            <!-- =========================================
+                 国家 02
+            ========================================== -->
+
+            <article class="nation-card">
+
+                <div class="nation-number">
+                    02
+                </div>
+
+                <div class="nation-symbol">
+                    ✡
+                </div>
+
+
+                <div class="nation-title">
+                    —
+                </div>
+
+                <div class="nation-cn">
+                    —
+                </div>
+
+
+                <div class="nation-info">
+
+                    <div class="info-item">
+
+                        <div class="info-label">
+                            CAPITAL
+                        </div>
+
+                        <div class="info-value">
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <div class="info-label">
+                            REGION
+                        </div>
+
+                        <div class="info-value">
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <div class="info-label">
+                            RACE
+                        </div>
+
+                        <div class="info-value">
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <div class="info-label">
+                            TERRAIN
+                        </div>
+
+                        <div class="info-value">
+                            —
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="nation-description">
+                    —
+                </div>
+
+            </article>
+
+
+
+            <!-- =========================================
+                 国家 03
+            ========================================== -->
+
+            <article class="nation-card">
+
+                <div class="nation-number">
+                    03
+                </div>
+
+                <div class="nation-symbol">
+                    ✡
+                </div>
+
+
+                <div class="nation-title">
+                    —
+                </div>
+
+                <div class="nation-cn">
+                    —
+                </div>
+
+
+                <div class="nation-info">
+
+                    <div class="info-item">
+
+                        <div class="info-label">
+                            CAPITAL
+                        </div>
+
+                        <div class="info-value">
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <div class="info-label">
+                            REGION
+                        </div>
+
+                        <div class="info-value">
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <div class="info-label">
+                            RACE
+                        </div>
+
+                        <div class="info-value">
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <div class="info-label">
+                            TERRAIN
+                        </div>
+
+                        <div class="info-value">
+                            —
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="nation-description">
+                    —
+                </div>
+
+            </article>
+
+
+        </section>
+
+
+        <div class="empty-note">
+            · ARCHIVE RECORDS AWAITING ·
+        </div>
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <footer class="footer">
+            SEYAMI CONTINENT · NATION ARCHIVE
+        </footer>
+
+
+    </main>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   日夜模式
+========================================================= */
+
+const themeToggle =
+    document.getElementById("themeToggle");
+
+const savedTheme =
+    localStorage.getItem("seyami-theme");
+
+
+function applyTheme(theme){
+
+    if(theme === "day"){
+
+        document.body.classList.add("day");
+
+        themeToggle.textContent = "☾ 夜间";
+
+    }else{
+
+        document.body.classList.remove("day");
+
+        themeToggle.textContent = "☼ 日间";
+
+    }
+
+}
+
+
+/* 读取之前保存的模式 */
+
+applyTheme(savedTheme === "day" ? "day" : "night");
+
+
+/* 切换 */
+
+themeToggle.addEventListener("click",function(){
+
+    const isDay =
+        document.body.classList.contains("day");
+
+    const newTheme =
+        isDay ? "night" : "day";
+
+    localStorage.setItem(
+        "seyami-theme",
+        newTheme
+    );
+
+    applyTheme(newTheme);
+
+});
+
+</script>
+
+</body>
+</html>
