@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>塞垭弥大陆档案馆 · 历史记录</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* ================================
+   基础
+================================ */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    min-height:100%;
+}
+
+body{
+    min-height:100vh;
+    overflow-x:hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(40,90,135,.12),
+            transparent 45%
+        ),
+        #07111d;
+
+    color:#c9dbea;
+
+    font-family:"Noto Serif SC",serif;
+
+    transition:
+        background .5s ease,
+        color .5s ease;
+}
+
+
+/* ================================
+   星点
+================================ */
+
+.stars{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+
+    background-image:
+        radial-gradient(circle,rgba(255,255,255,.55) 1px,transparent 1px),
+        radial-gradient(circle,rgba(145,195,235,.35) 1px,transparent 1px);
+
+    background-size:
+        180px 180px,
+        260px 260px;
+
+    background-position:
+        20px 30px,
+        90px 120px;
+
+    opacity:.35;
+}
+
+
+/* ================================
+   微小星点
+================================ */
+
+.micro-stars{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+
+    background-image:
+        radial-gradient(circle,rgba(180,220,255,.45) .7px,transparent .8px);
+
+    background-size:95px 95px;
+
+    opacity:.25;
+}
+
+
+/* ================================
+   四角边框
+================================ */
+
+.frame{
+    position:fixed;
+    inset:18px;
+
+    border:1px solid rgba(115,170,210,.16);
+
+    pointer-events:none;
+
+    z-index:10;
+}
+
+.frame::before,
+.frame::after{
+    content:"";
+
+    position:absolute;
+
+    width:75px;
+    height:75px;
+
+    border-color:rgba(135,195,235,.38);
+    border-style:solid;
+}
+
+.frame::before{
+    left:-1px;
+    top:-1px;
+
+    border-width:1px 0 0 1px;
+}
+
+.frame::after{
+    right:-1px;
+    bottom:-1px;
+
+    border-width:0 1px 1px 0;
+}
+
+
+/* ================================
+   魔法阵
+================================ */
+
+.magic-circle{
+    position:fixed;
+
+    width:620px;
+    height:620px;
+
+    left:50%;
+    top:48%;
+
+    transform:translate(-50%,-50%);
+
+    border:1px solid rgba(92,155,200,.07);
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+    z-index:0;
+}
+
+.magic-circle::before{
+    content:"";
+
+    position:absolute;
+
+    inset:38px;
+
+    border:1px solid rgba(110,175,220,.055);
+
+    border-radius:50%;
+}
+
+.magic-circle::after{
+    content:"";
+
+    position:absolute;
+
+    inset:110px;
+
+    border:1px solid rgba(110,175,220,.045);
+
+    border-radius:50%;
+}
+
+
+/* ================================
+   魔法阵装饰线
+================================ */
+
+.magic-line{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:100%;
+    height:1px;
+
+    background:rgba(115,180,220,.045);
+
+    transform:translate(-50%,-50%);
+}
+
+.magic-line:nth-child(2){
+    transform:
+        translate(-50%,-50%)
+        rotate(60deg);
+}
+
+.magic-line:nth-child(3){
+    transform:
+        translate(-50%,-50%)
+        rotate(-60deg);
+}
+
+
+/* ================================
+   页面主体
+================================ */
+
+.page{
+    position:relative;
+
+    z-index:2;
+
+    min-height:100vh;
+
+    padding:
+        42px
+        70px
+        80px;
+}
+
+
+/* ================================
+   顶部
+================================ */
+
+.header{
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    width:100%;
+
+    position:relative;
+
+    z-index:20;
+}
+
+
+/* ================================
+   Logo
+================================ */
+
+.logo{
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:#d4e7f6;
+
+    text-decoration:none;
+}
+
+.logo-symbol{
+    font-size:14px;
+
+    color:#9bc7e5;
+
+    opacity:.8;
+}
+
+.logo > span:last-child{
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    line-height:1.15;
+}
+
+.logo-cn{
+    font-family:"Noto Serif SC",serif;
+
+    font-size:12px;
+
+    font-weight:400;
+
+    letter-spacing:2px;
+
+    color:inherit;
+}
+
+.logo-en{
+    margin-top:3px;
+
+    font-family:"Cinzel",serif;
+
+    font-size:8px;
+
+    letter-spacing:2.5px;
+
+    color:rgba(191,220,243,.55);
+}
+
+
+/* ================================
+   右侧控制
+================================ */
+
+.header-right{
+    display:flex;
+
+    align-items:center;
+
+    gap:24px;
+}
+
+.back{
+    color:rgba(190,215,235,.58);
+
+    text-decoration:none;
+
+    font-family:"Cinzel","Noto Serif SC",serif;
+
+    font-size:10px;
+
+    letter-spacing:1.5px;
+
+    transition:.3s;
+}
+
+.back:hover{
+    color:#d7ecfa;
+}
+
+.theme-toggle{
+    border:1px solid rgba(145,190,220,.25);
+
+    background:rgba(20,45,65,.22);
+
+    color:rgba(200,225,242,.72);
+
+    padding:7px 12px;
+
+    font-family:"Noto Serif SC",serif;
+
+    font-size:10px;
+
+    letter-spacing:1px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    border-radius:2px;
+}
+
+.theme-toggle:hover{
+    border-color:rgba(160,205,235,.45);
+
+    background:rgba(35,65,90,.3);
+}
+
+
+/* ================================
+   Hero
+================================ */
+
+.hero{
+    text-align:center;
+
+    margin-top:92px;
+
+    position:relative;
+}
+
+.hero-en{
+    font-family:"Cinzel",serif;
+
+    font-size:12px;
+
+    letter-spacing:7px;
+
+    color:rgba(165,205,232,.48);
+
+    margin-bottom:13px;
+}
+
+.hero-title{
+    font-family:"Cinzel",serif;
+
+    font-size:46px;
+
+    font-weight:400;
+
+    letter-spacing:9px;
+
+    color:#d9eaf6;
+
+    text-shadow:
+        0 0 20px rgba(95,170,220,.12);
+}
+
+.hero-cn{
+    margin-top:14px;
+
+    font-size:14px;
+
+    letter-spacing:7px;
+
+    color:rgba(188,214,232,.58);
+}
+
+
+/* ================================
+   时间轴区域
+================================ */
+
+.history{
+    width:min(900px,92%);
+
+    margin:82px auto 0;
+
+    position:relative;
+}
+
+
+/* 中央时间轴 */
+
+.timeline{
+    position:absolute;
+
+    top:0;
+    bottom:0;
+
+    left:50%;
+
+    width:1px;
+
+    transform:translateX(-50%);
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent,
+            rgba(110,170,210,.35) 8%,
+            rgba(110,170,210,.35) 92%,
+            transparent
+        );
+}
+
+
+/* ================================
+   历史记录
+================================ */
+
+.history-list{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:68px;
+
+    position:relative;
+
+    z-index:2;
+}
+
+.history-item{
+    width:100%;
+
+    display:grid;
+
+    grid-template-columns:
+        1fr
+        42px
+        1fr;
+
+    align-items:center;
+}
+
+
+/* 左右内容 */
+
+.history-content{
+    padding:24px 34px;
+
+    border:1px solid rgba(110,170,210,.13);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(17,42,61,.28),
+            rgba(8,22,35,.18)
+        );
+
+    min-height:145px;
+
+    transition:
+        border-color .35s ease,
+        background .35s ease,
+        transform .35s ease;
+}
+
+.history-content:hover{
+    border-color:rgba(130,190,225,.28);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(25,54,76,.35),
+            rgba(10,27,42,.25)
+        );
+
+    transform:translateY(-2px);
+}
+
+
+/* 左侧 */
+
+.history-item:nth-child(odd) .history-content{
+    grid-column:1;
+
+    text-align:right;
+}
+
+
+/* 右侧 */
+
+.history-item:nth-child(even) .history-content{
+    grid-column:3;
+
+    text-align:left;
+}
+
+
+/* ================================
+   时间点
+================================ */
+
+.timeline-point{
+    grid-column:2;
+
+    grid-row:1;
+
+    width:13px;
+    height:13px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    border:1px solid rgba(150,205,235,.55);
+
+    background:#07111d;
+
+    box-shadow:
+        0 0 0 4px rgba(95,165,210,.045),
+        0 0 14px rgba(90,175,225,.16);
+
+    position:relative;
+
+    z-index:3;
+}
+
+
+/* ================================
+   历史文字
+================================ */
+
+.history-era{
+    font-family:"Cinzel",serif;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    color:rgba(140,190,220,.52);
+
+    margin-bottom:8px;
+}
+
+.history-date{
+    font-family:"Cinzel",serif;
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    color:rgba(180,215,235,.42);
+
+    margin-bottom:16px;
+}
+
+.history-title{
+    font-family:"Cinzel",serif;
+
+    font-size:19px;
+
+    font-weight:400;
+
+    letter-spacing:2px;
+
+    color:#d2e5f2;
+
+    margin-bottom:7px;
+}
+
+.history-cn{
+    font-size:12px;
+
+    letter-spacing:3px;
+
+    color:rgba(190,216,232,.6);
+
+    margin-bottom:15px;
+}
+
+.history-description{
+    font-size:11px;
+
+    line-height:2;
+
+    letter-spacing:1px;
+
+    color:rgba(175,202,220,.45);
+}
+
+
+/* ================================
+   空白提示
+================================ */
+
+.empty-history{
+    text-align:center;
+
+    padding:45px 20px;
+
+    border:1px solid rgba(110,170,210,.10);
+
+    background:rgba(10,27,42,.16);
+
+    color:rgba(170,200,220,.38);
+
+    font-size:11px;
+
+    letter-spacing:2px;
+}
+
+.empty-history-en{
+    display:block;
+
+    font-family:"Cinzel",serif;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    margin-bottom:9px;
+
+    color:rgba(145,190,220,.4);
+}
+
+
+/* ================================
+   页脚
+================================ */
+
+.footer{
+    text-align:center;
+
+    margin-top:100px;
+
+    font-family:"Cinzel",serif;
+
+    font-size:8px;
+
+    letter-spacing:4px;
+
+    color:rgba(150,190,215,.25);
+}
+
+
+/* ================================
+   日间模式
+================================ */
+
+body.day{
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(125,175,205,.12),
+            transparent 45%
+        ),
+        #eef3f6;
+
+    color:#29455b;
+}
+
+body.day .stars{
+    opacity:.18;
+}
+
+body.day .micro-stars{
+    opacity:.12;
+}
+
+body.day .frame{
+    border-color:rgba(65,105,130,.16);
+}
+
+body.day .frame::before,
+body.day .frame::after{
+    border-color:rgba(65,110,140,.28);
+}
+
+body.day .logo{
+    color:#29485e;
+}
+
+body.day .logo-en{
+    color:rgba(61,98,125,.58);
+}
+
+body.day .logo-symbol{
+    color:#557f9a;
+}
+
+body.day .back{
+    color:rgba(55,88,108,.65);
+}
+
+body.day .back:hover{
+    color:#29485e;
+}
+
+body.day .theme-toggle{
+    border-color:rgba(70,110,135,.25);
+
+    background:rgba(255,255,255,.42);
+
+    color:rgba(45,80,102,.75);
+}
+
+body.day .theme-toggle:hover{
+    background:rgba(255,255,255,.7);
+
+    border-color:rgba(65,105,130,.4);
+}
+
+body.day .hero-en{
+    color:rgba(65,105,130,.48);
+}
+
+body.day .hero-title{
+    color:#29485e;
+}
+
+body.day .hero-cn{
+    color:rgba(55,88,108,.62);
+}
+
+body.day .magic-circle{
+    border-color:rgba(65,115,145,.07);
+}
+
+body.day .magic-circle::before,
+body.day .magic-circle::after{
+    border-color:rgba(65,115,145,.055);
+}
+
+body.day .magic-line{
+    background:rgba(65,115,145,.05);
+}
+
+body.day .timeline{
+    background:
+        linear-gradient(
+            to bottom,
+            transparent,
+            rgba(70,120,150,.28) 8%,
+            rgba(70,120,150,.28) 92%,
+            transparent
+        );
+}
+
+body.day .timeline-point{
+    background:#eef3f6;
+
+    border-color:rgba(65,115,145,.45);
+
+    box-shadow:
+        0 0 0 4px rgba(70,125,155,.04),
+        0 0 14px rgba(70,125,155,.1);
+}
+
+body.day .history-content{
+    border-color:rgba(65,110,140,.14);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.5),
+            rgba(235,243,247,.38)
+        );
+}
+
+body.day .history-content:hover{
+    border-color:rgba(65,110,140,.25);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.75),
+            rgba(235,243,247,.55)
+        );
+}
+
+body.day .history-era{
+    color:rgba(65,105,130,.55);
+}
+
+body.day .history-date{
+    color:rgba(65,100,125,.48);
+}
+
+body.day .history-title{
+    color:#29485e;
+}
+
+body.day .history-cn{
+    color:rgba(55,88,108,.65);
+}
+
+body.day .history-description{
+    color:rgba(55,88,108,.55);
+}
+
+body.day .empty-history{
+    border-color:rgba(65,110,140,.13);
+
+    background:rgba(255,255,255,.35);
+
+    color:rgba(55,88,108,.48);
+}
+
+body.day .empty-history-en{
+    color:rgba(65,105,130,.45);
+}
+
+body.day .footer{
+    color:rgba(65,105,130,.3);
+}
+
+
+/* ================================
+   手机端
+================================ */
+
+@media(max-width:700px){
+
+    .page{
+        padding:
+            30px
+            28px
+            60px;
+    }
+
+    .frame{
+        inset:12px;
+    }
+
+    .header-right{
+        gap:10px;
+    }
+
+    .back{
+        font-size:9px;
+        letter-spacing:1px;
+    }
+
+    .theme-toggle{
+        padding:6px 8px;
+
+        font-size:9px;
+    }
+
+    .hero{
+        margin-top:72px;
+    }
+
+    .hero-en{
+        font-size:9px;
+
+        letter-spacing:4px;
+    }
+
+    .hero-title{
+        font-size:30px;
+
+        letter-spacing:5px;
+    }
+
+    .hero-cn{
+        font-size:12px;
+
+        letter-spacing:4px;
+    }
+
+    .history{
+        width:100%;
+
+        margin-top:60px;
+    }
+
+    .timeline{
+        left:10px;
+
+        transform:none;
+    }
+
+    .history-list{
+        gap:38px;
+    }
+
+    .history-item{
+        display:block;
+
+        padding-left:30px;
+
+        position:relative;
+    }
+
+    .timeline-point{
+        position:absolute;
+
+        left:4px;
+        top:25px;
+
+        width:13px;
+        height:13px;
+    }
+
+    .history-item:nth-child(odd) .history-content,
+    .history-item:nth-child(even) .history-content{
+        text-align:left;
+    }
+
+    .history-content{
+        padding:20px 20px;
+
+        min-height:auto;
+    }
+
+    .history-title{
+        font-size:17px;
+    }
+
+    .history-cn{
+        font-size:11px;
+    }
+
+    .history-description{
+        font-size:10px;
+
+        line-height:1.9;
+    }
+
+    .empty-history{
+        padding:35px 15px;
+    }
+
+    .footer{
+        margin-top:70px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<!-- 星点 -->
+<div class="stars"></div>
+<div class="micro-stars"></div>
+
+
+<!-- 魔法阵 -->
+<div class="magic-circle">
+
+    <div class="magic-line"></div>
+    <div class="magic-line"></div>
+    <div class="magic-line"></div>
+
+</div>
+
+
+<!-- 页面边框 -->
+<div class="frame"></div>
+
+
+<div class="page">
+
+    <!-- ================================
+         顶部
+    ================================= -->
+
+    <header class="header">
+
+        <div class="logo">
+
+            <span class="logo-symbol">
+                ✦
+            </span>
+
+            <span>
+
+                <span class="logo-cn">
+                    塞垭弥大陆档案馆
+                </span>
+
+                <span class="logo-en">
+                    SEYAMI ARCHIVE
+                </span>
+
+            </span>
+
+        </div>
+
+
+        <div class="header-right">
+
+            <a
+                href="archive.html"
+                class="back"
+            >
+                ← 返回档案目录
+            </a>
+
+            <button
+                class="theme-toggle"
+                id="themeToggle"
+            >
+                ☼ 日间
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================================
+         标题
+    ================================= -->
+
+    <section class="hero">
+
+        <div class="hero-en">
+            HISTORY RECORD
+        </div>
+
+        <div class="hero-title">
+            HISTORY
+        </div>
+
+        <div class="hero-cn">
+            历史记录
+        </div>
+
+    </section>
+
+
+    <!-- ================================
+         历史时间轴
+    ================================= -->
+
+    <main class="history">
+
+        <div class="timeline"></div>
+
+
+        <div
+            class="history-list"
+            id="historyList"
+        ></div>
+
+    </main>
+
+
+    <!-- ================================
+         页脚
+    ================================= -->
+
+    <footer class="footer">
+
+        SEYAMI CONTINENT · HISTORY RECORD
+
+    </footer>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   历史资料
+   =========================================
+
+   以后只需要在这里增加内容。
+
+   示例格式：
+
+   {
+       era: "AGE I",
+       date: "YEAR 001",
+       title: "The First Dawn",
+       cn: "初始之日",
+       description: "这里填写历史事件描述。"
+   }
+
+========================================= */
+
+const historyRecords = [
+
+    /*
+    {
+        era: "",
+        date: "",
+        title: "",
+        cn: "",
+        description: ""
+    }
+    */
+
+];
+
+
+/* =========================================
+   生成历史记录
+========================================= */
+
+const historyList =
+    document.getElementById("historyList");
+
+
+function renderHistory(){
+
+    historyList.innerHTML = "";
+
+
+    /* 没有历史记录 */
+
+    if(historyRecords.length === 0){
+
+        historyList.innerHTML = `
+
+            <div class="empty-history">
+
+                <span class="empty-history-en">
+                    ARCHIVE EMPTY
+                </span>
+
+                暂无历史记录
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    /* 有历史记录 */
+
+    historyRecords.forEach((record,index)=>{
+
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "history-item";
+
+
+        item.innerHTML = `
+
+            <div class="history-content">
+
+                ${
+                    record.era
+                    ?
+                    `<div class="history-era">
+                        ${record.era}
+                    </div>`
+                    :
+                    ""
+                }
+
+                ${
+                    record.date
+                    ?
+                    `<div class="history-date">
+                        ${record.date}
+                    </div>`
+                    :
+                    ""
+                }
+
+                ${
+                    record.title
+                    ?
+                    `<div class="history-title">
+                        ${record.title}
+                    </div>`
+                    :
+                    ""
+                }
+
+                ${
+                    record.cn
+                    ?
+                    `<div class="history-cn">
+                        ${record.cn}
+                    </div>`
+                    :
+                    ""
+                }
+
+                ${
+                    record.description
+                    ?
+                    `<div class="history-description">
+                        ${record.description}
+                    </div>`
+                    :
+                    ""
+                }
+
+            </div>
+
+
+            <div class="timeline-point"></div>
+
+        `;
+
+
+        historyList.appendChild(item);
+
+    });
+
+}
+
+
+renderHistory();
+
+
+/* =========================================
+   日间 / 夜间模式
+========================================= */
+
+const themeToggle =
+    document.getElementById("themeToggle");
+
+
+const savedTheme =
+    localStorage.getItem("seyami-theme");
+
+
+if(savedTheme === "day"){
+
+    document.body.classList.add("day");
+
+    themeToggle.textContent =
+        "☾ 夜间";
+
+}
+
+
+themeToggle.addEventListener(
+    "click",
+    ()=>{
+
+        document.body.classList.toggle("day");
+
+
+        const isDay =
+            document.body.classList.contains("day");
+
+
+        localStorage.setItem(
+            "seyami-theme",
+            isDay ? "day" : "night"
+        );
+
+
+        themeToggle.textContent =
+            isDay
+            ? "☾ 夜间"
+            : "☼ 日间";
+
+    }
+);
+
+</script>
+
+</body>
+</html>
