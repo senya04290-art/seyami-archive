@@ -144,14 +144,18 @@ body{
     justify-content:space-between;
 
     width:auto;
+
     max-width:none;
 
     margin:0;
+
     padding:0;
 }
 
 
-/* ---------- LOGO ---------- */
+/* =========================================================
+   LOGO
+========================================================= */
 
 .logo{
 
@@ -175,6 +179,7 @@ body{
     color:rgba(137,201,239,.9);
 
     width:17px;
+
     height:13px;
 
     display:flex;
@@ -188,6 +193,7 @@ body{
     line-height:13px;
 
     margin:0;
+
     padding:0;
 
     text-shadow:
@@ -266,7 +272,9 @@ body{
 }
 
 
-/* ---------- HEADER RIGHT ---------- */
+/* =========================================================
+   HEADER RIGHT
+========================================================= */
 
 .header-right{
 
@@ -278,7 +286,9 @@ body{
 }
 
 
-/* ---------- 返回 ---------- */
+/* =========================================================
+   返回档案目录
+========================================================= */
 
 .back{
 
@@ -314,7 +324,9 @@ body{
 }
 
 
-/* ---------- DAY / NIGHT ---------- */
+/* =========================================================
+   DAY / NIGHT
+========================================================= */
 
 .theme-toggle{
 
@@ -539,13 +551,14 @@ body{
     z-index:2;
 
     color:
-        rgba(115,180,222,.13);
+        rgba(115,180,222,.28);
 
     font-family:
         "Times New Roman",
         serif;
 
     text-shadow:
+
         0 0 12px
         rgba(68,145,198,.18);
 
@@ -582,12 +595,20 @@ body{
 
     0%,
     100%{
-        transform:translateY(0) rotate(0deg);
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+
         opacity:.1;
     }
 
     50%{
-        transform:translateY(-12px) rotate(8deg);
+
+        transform:
+            translateY(-12px)
+            rotate(8deg);
+
         opacity:.18;
     }
 }
@@ -772,9 +793,11 @@ body{
 
     width:1px;
 
-    transform:translateX(-50%);
+    transform:
+        translateX(-50%);
 
     background:
+
         linear-gradient(
             to bottom,
             transparent,
@@ -795,7 +818,10 @@ body{
 
     width:50%;
 
-    padding:0 40px 55px;
+    padding:
+        0
+        40px
+        55px;
 }
 
 
@@ -873,7 +899,10 @@ body{
 
 .history-title{
 
-    margin:0 0 8px;
+    margin:
+        0
+        0
+        8px;
 
     color:
         rgba(211,235,251,.9);
@@ -917,7 +946,10 @@ body{
 
     text-align:center;
 
-    padding:30px 20px 100px;
+    padding:
+        30px
+        20px
+        100px;
 }
 
 
@@ -1102,6 +1134,7 @@ body.day .hero-cn{
 body.day .history::before{
 
     background:
+
         linear-gradient(
             to bottom,
             transparent,
@@ -1164,8 +1197,18 @@ body.day .footer{
 
 
 /* =========================================================
+   日间模式 · 浮动星星取消发光
+   只影响 ✡ / ✶
+========================================================= */
+
+body.day .symbol{
+
+    text-shadow:none;
+}
+
+
+/* =========================================================
    响应式
-   —— 与国家档案顶部保持一致
 ========================================================= */
 
 @media(max-width:800px){
@@ -1173,15 +1216,18 @@ body.day .footer{
     .header{
 
         left:35px;
+
         right:35px;
 
         top:30px;
     }
 
+
     .header-right{
 
         gap:14px;
     }
+
 
     .theme-toggle{
 
@@ -1232,17 +1278,22 @@ body.day .footer{
     }
 
 
+    /* 国家档案顶部标准版 */
+
     .header{
 
         left:25px;
+
         right:25px;
 
         top:24px;
 
         width:auto;
+
         max-width:none;
 
         margin:0;
+
         padding:0;
 
         align-items:flex-start;
@@ -1260,6 +1311,7 @@ body.day .footer{
     .logo-symbol{
 
         width:15px;
+
         height:11px;
 
         display:flex;
@@ -1334,6 +1386,8 @@ body.day .footer{
     }
 
 
+    /* HERO */
+
     .hero{
 
         padding-top:120px;
@@ -1366,17 +1420,22 @@ body.day .footer{
     }
 
 
+    /* 历史区域 */
+
     .history{
 
         width:92%;
     }
 
 
+    /*
+       手机端不显示历史时间轴竖线。
+       这样空白历史页面不会出现左侧奇怪的竖线。
+    */
+
     .history::before{
 
-        left:8px;
-
-        transform:none;
+        display:none;
     }
 
 
@@ -1408,6 +1467,8 @@ body.day .footer{
     }
 
 
+    /* 魔法阵 */
+
     .magic-circle{
 
         width:330px;
@@ -1415,6 +1476,8 @@ body.day .footer{
         height:330px;
     }
 
+
+    /* 浮动符号 */
 
     .symbol-one{
 
@@ -1439,6 +1502,7 @@ body.day .footer{
     .header{
 
         left:20px;
+
         right:20px;
 
         top:24px;
@@ -1482,18 +1546,21 @@ body.day .footer{
 <body>
 
 
-<!-- =====================================================
-     背景
-===================================================== -->
-
 <div class="page">
+
+
+    <!-- =================================================
+         背景星点
+    ================================================== -->
 
     <div class="stars"></div>
 
     <div class="micro-stars"></div>
 
 
-    <!-- 漂浮符号 -->
+    <!-- =================================================
+         漂浮符号
+    ================================================== -->
 
     <div class="symbol symbol-one">
         ✡
@@ -1504,22 +1571,27 @@ body.day .footer{
     </div>
 
 
-    <!-- 魔法阵 -->
+    <!-- =================================================
+         魔法阵
+    ================================================== -->
 
     <div class="magic-circle"></div>
 
 
-    <!-- 页面边框 -->
+    <!-- =================================================
+         边框
+    ================================================== -->
 
     <div class="frame"></div>
 
 
     <!-- =================================================
          HEADER
-         国家档案页顶部标准版
+         与国家档案 archive.html 顶部保持一致
     ================================================== -->
 
     <header class="header">
+
 
         <a
             href="index.html"
@@ -1530,11 +1602,13 @@ body.day .footer{
                 ✦
             </span>
 
+
             <span class="logo-text">
 
                 <span class="logo-cn">
                     塞垭弥大陆档案馆
                 </span>
+
 
                 <span class="logo-en">
                     SEYAMI ARCHIVE
@@ -1546,6 +1620,7 @@ body.day .footer{
 
 
         <div class="header-right">
+
 
             <a
                 href="archive.html"
@@ -1569,11 +1644,13 @@ body.day .footer{
                     ☾
                 </span>
 
+
                 <span id="themeText">
                     NIGHT
                 </span>
 
             </button>
+
 
         </div>
 
@@ -1586,17 +1663,21 @@ body.day .footer{
 
     <section class="hero">
 
+
         <div class="hero-en">
             HISTORY RECORD
         </div>
+
 
         <h1 class="hero-title">
             HISTORY
         </h1>
 
+
         <div class="hero-cn">
             历史记录
         </div>
+
 
     </section>
 
@@ -1605,10 +1686,14 @@ body.day .footer{
          历史记录
     ================================================== -->
 
-    <section class="history" id="historyList">
+    <section
+        class="history"
+        id="historyList"
+    >
 
         <!--
-        历史记录以后可以直接在这里增加。
+
+        以后新增历史记录可以写在这里。
 
         示例：
 
@@ -1627,6 +1712,7 @@ body.day .footer{
             </p>
 
         </article>
+
         -->
 
     </section>
@@ -1644,6 +1730,7 @@ body.day .footer{
         <div class="empty-en">
             ARCHIVE EMPTY
         </div>
+
 
         <div class="empty-cn">
             暂无历史记录
@@ -1699,11 +1786,15 @@ function applyTheme(theme){
         themeIcon.textContent = "☾";
 
         themeText.textContent = "NIGHT";
+
     }
+
 }
 
 
-/* 读取全站统一主题 */
+/* =========================================================
+   读取全站统一主题
+========================================================= */
 
 const savedTheme =
     localStorage.getItem("seyami-theme");
@@ -1716,7 +1807,9 @@ applyTheme(
 );
 
 
-/* 切换 */
+/* =========================================================
+   切换主题
+========================================================= */
 
 themeToggle.addEventListener(
     "click",
@@ -1730,10 +1823,12 @@ themeToggle.addEventListener(
                 ? "night"
                 : "day";
 
+
         localStorage.setItem(
             "seyami-theme",
             nextTheme
         );
+
 
         applyTheme(nextTheme);
 
@@ -1748,6 +1843,7 @@ themeToggle.addEventListener(
 const historyRecords = [
 
     /*
+    
     以后新增历史记录可以写在这里。
 
     {
@@ -1764,12 +1860,13 @@ const historyRecords = [
 const historyList =
     document.getElementById("historyList");
 
+
 const emptyState =
     document.getElementById("emptyState");
 
 
 /* =========================================================
-   如果有记录则显示
+   如果有历史记录则显示
 ========================================================= */
 
 if(historyRecords.length > 0){
@@ -1782,6 +1879,7 @@ if(historyRecords.length > 0){
 
             const item =
                 document.createElement("article");
+
 
             item.className =
                 "history-item";
