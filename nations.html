@@ -340,53 +340,71 @@ body{
 
 /* =========================================================
    魔法阵
+   PC端改为「档案目录」星环
 ========================================================= */
 
 .magic-circle{
     position:absolute;
 
-    width:680px;
-    height:680px;
+    width:510px;
+    height:510px;
 
     left:50%;
-    top:49%;
+    top:48%;
 
-    transform:translate(-50%,-50%);
-
-    border:1px solid rgba(73,143,198,.28);
+    transform:translate(-50%,-50%) rotate(-8deg);
 
     border-radius:50%;
 
-    z-index:1;
+    opacity:.5;
+
+    filter:
+        drop-shadow(
+            0 0 14px
+            rgba(45,120,215,.38)
+        );
 
     pointer-events:none;
+
+    z-index:1;
 }
 
-.magic-circle::before{
-    content:"";
-
-    position:absolute;
-
-    inset:34px;
-
-    border:1px solid rgba(91,162,213,.22);
-
-    border-radius:50%;
-}
-
+.magic-circle::before,
 .magic-circle::after{
-    content:"✦";
+    content:"";
 
     position:absolute;
 
     left:50%;
     top:50%;
 
-    transform:translate(-50%,-50%);
+    width:210px;
+    height:182px;
 
-    font-size:18px;
+    border:1px solid rgba(99,174,248,.45);
 
-    color:rgba(117,181,220,.25);
+    transform:
+        translate(-50%,-50%)
+        rotate(30deg);
+
+    clip-path:polygon(
+        25% 0%,
+        75% 0%,
+        100% 50%,
+        75% 100%,
+        25% 100%,
+        0% 50%
+    );
+
+    pointer-events:none;
+}
+
+.magic-circle::after{
+    transform:
+        translate(-50%,-50%)
+        rotate(90deg);
+
+    opacity:.65;
 }
 
 
@@ -1173,15 +1191,18 @@ body.day .arcane-stars span{
 /* 魔法阵 */
 
 body.day .magic-circle{
-    border-color:rgba(79,148,196,.26);
+    border-color:rgba(99,174,248,.45);
+
+    filter:
+        drop-shadow(
+            0 0 10px
+            rgba(45,120,215,.20)
+        );
 }
 
-body.day .magic-circle::before{
-    border-color:rgba(101,168,207,.20);
-}
-
+body.day .magic-circle::before,
 body.day .magic-circle::after{
-    color:rgba(79,148,196,.24);
+    border-color:rgba(79,148,196,.28);
 }
 
 
