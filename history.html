@@ -811,29 +811,32 @@ body{
 
 /* =========================================================
    魔法阵
-   与国家档案统一
+   与国家档案完全一致
 ========================================================= */
 
 .magic-circle{
 
     position:fixed;
 
+    width:510px;
+    height:510px;
+
     left:50%;
-
-    top:49%;
-
-    width:680px;
-
-    height:680px;
+    top:48%;
 
     transform:
-        translate(-50%,-50%);
-
-    border:
-        1px solid
-        rgba(73,143,198,.28);
+        translate(-50%,-50%)
+        rotate(-8deg);
 
     border-radius:50%;
+
+    opacity:.5;
+
+    filter:
+        drop-shadow(
+            0 0 14px
+            rgba(45,120,215,.38)
+        );
 
     pointer-events:none;
 
@@ -841,35 +844,47 @@ body{
 }
 
 
-.magic-circle::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:35px;
-
-    border:
-        1px solid
-        rgba(73,143,198,.20);
-
-    border-radius:50%;
-}
-
-
+.magic-circle::before,
 .magic-circle::after{
 
     content:"";
 
     position:absolute;
 
-    inset:78px;
+    left:50%;
+    top:50%;
+
+    width:210px;
+    height:182px;
 
     border:
-        1px dashed
-        rgba(73,143,198,.16);
+        1px solid
+        rgba(99,174,248,.45);
 
-    border-radius:50%;
+    transform:
+        translate(-50%,-50%)
+        rotate(30deg);
+
+    clip-path:polygon(
+        25% 0%,
+        75% 0%,
+        100% 50%,
+        75% 100%,
+        25% 100%,
+        0% 50%
+    );
+
+    pointer-events:none;
+}
+
+
+.magic-circle::after{
+
+    transform:
+        translate(-50%,-50%)
+        rotate(90deg);
+
+    opacity:.65;
 }
 
 
@@ -1397,6 +1412,32 @@ body.day .footer{
 
     color:
         rgba(75,128,157,.42);
+}
+
+
+/* =========================================================
+   日间模式魔法阵
+   与国家档案统一
+========================================================= */
+
+body.day .magic-circle{
+
+    border-color:
+        rgba(99,174,248,.45);
+
+    filter:
+        drop-shadow(
+            0 0 10px
+            rgba(45,120,215,.20)
+        );
+}
+
+
+body.day .magic-circle::before,
+body.day .magic-circle::after{
+
+    border-color:
+        rgba(79,148,196,.28);
 }
 
 
