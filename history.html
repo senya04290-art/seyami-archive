@@ -523,7 +523,9 @@ body{
 
 
 /* =========================================================
-   漂浮符号 ✡ ✶
+   漂浮魔法符号
+   共10个
+   全部取消发光
 ========================================================= */
 
 .symbol{
@@ -549,18 +551,17 @@ body{
 
     opacity:.75;
 
-    text-shadow:
-
-        0 0 6px
-        rgba(68,145,198,.35),
-
-        0 0 14px
-        rgba(68,145,198,.18);
+    /* 完全取消发光 */
+    text-shadow:none;
 
     animation:
         floatSymbol 9s ease-in-out infinite;
 }
 
+
+/* -------------------------
+   ① 左上
+------------------------- */
 
 .symbol-one{
 
@@ -574,6 +575,10 @@ body{
 }
 
 
+/* -------------------------
+   ② 右侧
+------------------------- */
+
 .symbol-two{
 
     right:9%;
@@ -586,6 +591,150 @@ body{
 }
 
 
+/* -------------------------
+   ③ 左上偏中
+------------------------- */
+
+.symbol-three{
+
+    left:22%;
+
+    top:17%;
+
+    font-size:17px;
+
+    animation-duration:11s;
+
+    animation-delay:-4s;
+}
+
+
+/* -------------------------
+   ④ 右上偏中
+------------------------- */
+
+.symbol-four{
+
+    right:23%;
+
+    top:28%;
+
+    font-size:15px;
+
+    animation-duration:10s;
+
+    animation-delay:-7s;
+}
+
+
+/* -------------------------
+   ⑤ 左下
+------------------------- */
+
+.symbol-five{
+
+    left:13%;
+
+    top:68%;
+
+    font-size:14px;
+
+    animation-duration:12s;
+
+    animation-delay:-1s;
+}
+
+
+/* -------------------------
+   ⑥ 右下
+------------------------- */
+
+.symbol-six{
+
+    right:17%;
+
+    top:78%;
+
+    font-size:18px;
+
+    animation-duration:10s;
+
+    animation-delay:-6s;
+}
+
+
+/* -------------------------
+   ⑦ 左侧中部
+------------------------- */
+
+.symbol-seven{
+
+    left:28%;
+
+    top:48%;
+
+    font-size:12px;
+
+    animation-duration:13s;
+
+    animation-delay:-9s;
+}
+
+
+/* -------------------------
+   ⑧ 右侧中部
+------------------------- */
+
+.symbol-eight{
+
+    right:29%;
+
+    top:70%;
+
+    font-size:13px;
+
+    animation-duration:11s;
+
+    animation-delay:-3s;
+}
+
+
+/* -------------------------
+   ⑨ 左下偏中
+------------------------- */
+
+.symbol-nine{
+
+    left:35%;
+
+    top:82%;
+
+    font-size:16px;
+
+    animation-duration:14s;
+
+    animation-delay:-8s;
+}
+
+
+/* -------------------------
+   ⑩ 右上
+------------------------- */
+
+.symbol-ten{
+
+    right:12%;
+
+    top:16%;
+
+    font-size:12px;
+
+    animation-duration:12s;
+
+    animation-delay:-10s;
+}
+
+
 @keyframes floatSymbol{
 
     0%,
@@ -595,7 +744,7 @@ body{
             translateY(0)
             rotate(0deg);
 
-        opacity:.65;
+        opacity:.58;
     }
 
     50%{
@@ -604,7 +753,7 @@ body{
             translateY(-12px)
             rotate(8deg);
 
-        opacity:.9;
+        opacity:.82;
     }
 }
 
@@ -1188,8 +1337,8 @@ body.day .footer{
 
 
 /* =========================================================
-   日间模式
-   ✡ / ✶ 保留，但完全取消发光
+   日间模式浮动星星
+   同样完全取消发光
 ========================================================= */
 
 body.day .symbol{
@@ -1477,8 +1626,7 @@ body.day .symbol{
 
 
     /* =====================================================
-       手机端 ✡ / ✶
-       明确固定位置与显示层级
+       手机端浮动符号
     ===================================================== */
 
     .symbol{
@@ -1487,7 +1635,7 @@ body.day .symbol{
 
         display:block;
 
-        opacity:.75;
+        opacity:.72;
     }
 
 
@@ -1508,6 +1656,86 @@ body.day .symbol{
         top:58%;
 
         font-size:21px;
+    }
+
+
+    .symbol-three{
+
+        left:17%;
+
+        top:19%;
+
+        font-size:15px;
+    }
+
+
+    .symbol-four{
+
+        right:18%;
+
+        top:27%;
+
+        font-size:14px;
+    }
+
+
+    .symbol-five{
+
+        left:8%;
+
+        top:68%;
+
+        font-size:13px;
+    }
+
+
+    .symbol-six{
+
+        right:11%;
+
+        top:77%;
+
+        font-size:16px;
+    }
+
+
+    .symbol-seven{
+
+        left:25%;
+
+        top:46%;
+
+        font-size:11px;
+    }
+
+
+    .symbol-eight{
+
+        right:23%;
+
+        top:70%;
+
+        font-size:12px;
+    }
+
+
+    .symbol-nine{
+
+        left:34%;
+
+        top:82%;
+
+        font-size:14px;
+    }
+
+
+    .symbol-ten{
+
+        right:9%;
+
+        top:15%;
+
+        font-size:11px;
     }
 
 }
@@ -1572,6 +1800,86 @@ body.day .symbol{
         font-size:20px;
     }
 
+
+    .symbol-three{
+
+        left:14%;
+
+        top:19%;
+
+        font-size:14px;
+    }
+
+
+    .symbol-four{
+
+        right:15%;
+
+        top:27%;
+
+        font-size:13px;
+    }
+
+
+    .symbol-five{
+
+        left:6%;
+
+        top:68%;
+
+        font-size:12px;
+    }
+
+
+    .symbol-six{
+
+        right:8%;
+
+        top:77%;
+
+        font-size:15px;
+    }
+
+
+    .symbol-seven{
+
+        left:23%;
+
+        top:46%;
+
+        font-size:10px;
+    }
+
+
+    .symbol-eight{
+
+        right:20%;
+
+        top:70%;
+
+        font-size:11px;
+    }
+
+
+    .symbol-nine{
+
+        left:32%;
+
+        top:82%;
+
+        font-size:13px;
+    }
+
+
+    .symbol-ten{
+
+        right:7%;
+
+        top:15%;
+
+        font-size:10px;
+    }
+
 }
 
 </style>
@@ -1594,6 +1902,7 @@ body.day .symbol{
 
     <!-- =================================================
          漂浮魔法符号
+         共10个
     ================================================== -->
 
     <div class="symbol symbol-one">
@@ -1603,6 +1912,46 @@ body.day .symbol{
 
     <div class="symbol symbol-two">
         ✶
+    </div>
+
+
+    <div class="symbol symbol-three">
+        ✦
+    </div>
+
+
+    <div class="symbol symbol-four">
+        ✧
+    </div>
+
+
+    <div class="symbol symbol-five">
+        ⋆
+    </div>
+
+
+    <div class="symbol symbol-six">
+        ✦
+    </div>
+
+
+    <div class="symbol symbol-seven">
+        ✧
+    </div>
+
+
+    <div class="symbol symbol-eight">
+        ⋆
+    </div>
+
+
+    <div class="symbol symbol-nine">
+        ✶
+    </div>
+
+
+    <div class="symbol symbol-ten">
+        ✧
     </div>
 
 
