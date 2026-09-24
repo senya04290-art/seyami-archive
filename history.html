@@ -117,7 +117,11 @@ body{
 
     overflow:hidden;
 
-    /* 原本是1，会被 .page 的2盖住 */
+    /*
+       放在内容层上方，
+       但因为 pointer-events:none，
+       不会影响按钮、链接和图片点击。
+    */
     z-index:3;
 }
 
@@ -126,10 +130,15 @@ body{
 
     font-family:"Cinzel",serif;
 
-    color:rgba(145,200,235,.22);
+    /*
+       比原来的 .22 更明显，
+       但仍然保持半透明。
+    */
+    color:rgba(145,200,235,.34);
 
     text-shadow:
-        0 0 12px rgba(90,175,225,.16);
+        0 0 14px rgba(90,175,225,.24),
+        0 0 30px rgba(90,175,225,.10);
 
     user-select:none;
 
@@ -140,10 +149,16 @@ body{
         infinite;
 
     animation-delay:var(--delay);
+
+    will-change:
+        transform,
+        opacity;
 }
 
 
-/* 不同大小 */
+/* ================================
+   不同大小
+================================ */
 
 .symbol-1{
     font-size:24px;
@@ -164,17 +179,19 @@ body{
 .symbol-5{
     font-size:14px;
 
-    opacity:.65;
+    opacity:.8;
 }
 
 .symbol-6{
     font-size:26px;
 
-    opacity:.55;
+    opacity:.72;
 }
 
 
-/* 浮动动画 */
+/* ================================
+   浮动动画
+================================ */
 
 @keyframes symbolFloat{
 
@@ -183,11 +200,11 @@ body{
             translate3d(0,0,0)
             rotate(0deg);
 
-        opacity:.08;
+        opacity:.14;
     }
 
     25%{
-        opacity:.18;
+        opacity:.28;
     }
 
     50%{
@@ -199,11 +216,11 @@ body{
             )
             rotate(8deg);
 
-        opacity:.22;
+        opacity:.36;
     }
 
     75%{
-        opacity:.14;
+        opacity:.24;
     }
 
     100%{
@@ -215,7 +232,7 @@ body{
             )
             rotate(-6deg);
 
-        opacity:.08;
+        opacity:.14;
     }
 
 }
