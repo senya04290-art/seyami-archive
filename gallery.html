@@ -19,7 +19,7 @@
 
 <link
     rel="preconnect"
-    href="https://fonts.gstatic.com"
+    href="https://fonts.googleapis.com"
     crossorigin
 >
 
@@ -119,7 +119,7 @@ body{
 
     border:
         1px solid
-        rgba(111,174,224,.32);
+        rgba(99,174,248,.32);
 
     pointer-events:none;
 
@@ -152,11 +152,11 @@ body{
 
     border-left:
         1px solid
-        rgba(108,178,230,.88);
+        rgba(99,174,248,.88);
 
     border-top:
         1px solid
-        rgba(108,178,230,.88);
+        rgba(99,174,248,.88);
 }
 
 
@@ -167,11 +167,11 @@ body{
 
     border-right:
         1px solid
-        rgba(108,178,230,.88);
+        rgba(99,174,248,.88);
 
     border-bottom:
         1px solid
-        rgba(108,178,230,.88);
+        rgba(99,174,248,.88);
 }
 
 
@@ -336,7 +336,7 @@ body{
         serif;
 
     color:
-        rgba(115,180,222,.72);
+        rgba(99,174,248,.72);
 
     text-shadow:none;
 
@@ -396,7 +396,7 @@ body{
 
 /* =========================================================
    魔法阵
-   与国家档案 / 历史记录统一
+   与目录蓝色统一
 ========================================================= */
 
 .magic-circle{
@@ -416,13 +416,19 @@ body{
 
     border:
         1px solid
-        rgba(73,143,198,.28);
+        rgba(99,174,248,.45);
 
     border-radius:50%;
 
     pointer-events:none;
 
     z-index:1;
+
+    filter:
+        drop-shadow(
+            0 0 14px
+            rgba(45,120,215,.38)
+        );
 }
 
 
@@ -436,7 +442,7 @@ body{
 
     border:
         1px solid
-        rgba(73,143,198,.20);
+        rgba(99,174,248,.45);
 
     border-radius:50%;
 }
@@ -452,7 +458,7 @@ body{
 
     border:
         1px dashed
-        rgba(73,143,198,.16);
+        rgba(99,174,248,.30);
 
     border-radius:50%;
 }
@@ -475,7 +481,7 @@ body{
     height:1px;
 
     background:
-        rgba(115,180,220,.045);
+        rgba(99,174,248,.045);
 
     transform:
         translate(-50%,-50%);
@@ -545,7 +551,7 @@ body{
 .logo-symbol{
 
     color:
-        rgba(137,201,239,.9);
+        rgba(99,174,248,.9);
 
     width:17px;
 
@@ -568,10 +574,10 @@ body{
     text-shadow:
 
         0 0 7px
-        rgba(76,159,216,.5),
+        rgba(45,120,215,.5),
 
         0 0 15px
-        rgba(49,132,191,.22);
+        rgba(45,120,215,.22);
 
     flex-shrink:0;
 
@@ -678,7 +684,7 @@ body{
 
     text-shadow:
         0 0 8px
-        rgba(102,180,231,.35);
+        rgba(99,174,248,.35);
 }
 
 
@@ -697,7 +703,7 @@ body{
 
     border:
         1px solid
-        rgba(111,174,224,.32);
+        rgba(99,174,248,.32);
 
     background:
         rgba(8,28,49,.35);
@@ -737,14 +743,14 @@ body{
     color:#d9efff;
 
     border-color:
-        rgba(122,192,235,.62);
+        rgba(99,174,248,.62);
 
     background:
         rgba(8,31,52,.55);
 
     box-shadow:
         0 0 14px
-        rgba(76,151,202,.12);
+        rgba(45,120,215,.12);
 }
 
 
@@ -811,7 +817,7 @@ body{
 
     text-shadow:
         0 0 16px
-        rgba(73,150,204,.14);
+        rgba(45,120,215,.14);
 }
 
 
@@ -871,7 +877,7 @@ body{
 
     border:
         1px solid
-        rgba(110,170,210,.13);
+        rgba(99,174,248,.13);
 
     background:
         linear-gradient(
@@ -895,7 +901,7 @@ body{
 .gallery-item:hover{
 
     border-color:
-        rgba(130,190,225,.30);
+        rgba(99,174,248,.30);
 
     background:
         linear-gradient(
@@ -934,7 +940,7 @@ body{
 
     border:
         1px solid
-        rgba(110,170,210,.08);
+        rgba(99,174,248,.08);
 
     min-height:180px;
 }
@@ -978,7 +984,7 @@ body{
     letter-spacing:3px;
 
     color:
-        rgba(140,190,220,.52);
+        rgba(99,174,248,.52);
 
     margin-bottom:8px;
 }
@@ -1042,7 +1048,7 @@ body{
 
     border:
         1px solid
-        rgba(110,170,210,.10);
+        rgba(99,174,248,.10);
 
     background:
         rgba(10,27,42,.16);
@@ -1071,7 +1077,7 @@ body{
     margin-bottom:9px;
 
     color:
-        rgba(145,190,220,.4);
+        rgba(99,174,248,.4);
 }
 
 
@@ -1122,11 +1128,11 @@ body{
 
     box-shadow:
         0 0 40px
-        rgba(50,120,170,.18);
+        rgba(45,120,215,.18);
 
     border:
         1px solid
-        rgba(130,190,225,.25);
+        rgba(99,174,248,.25);
 }
 
 
@@ -1186,7 +1192,7 @@ body{
     letter-spacing:4px;
 
     color:
-        rgba(133,177,207,.38);
+        rgba(99,174,248,.38);
 }
 
 
@@ -1237,27 +1243,27 @@ body.day .micro-stars{
 body.day .frame{
 
     border-color:
-        rgba(91,145,184,.34);
+        rgba(79,148,196,.34);
 }
 
 
 body.day .frame::before{
 
     border-left-color:
-        rgba(79,141,190,.68);
+        rgba(79,148,196,.68);
 
     border-top-color:
-        rgba(79,141,190,.68);
+        rgba(79,148,196,.68);
 }
 
 
 body.day .frame::after{
 
     border-right-color:
-        rgba(79,141,190,.68);
+        rgba(79,148,196,.68);
 
     border-bottom-color:
-        rgba(79,141,190,.68);
+        rgba(79,148,196,.68);
 }
 
 
@@ -1283,7 +1289,7 @@ body.day .logo-en{
 body.day .logo-symbol{
 
     color:
-        rgba(72,145,187,.8);
+        rgba(79,148,196,.8);
 
     text-shadow:none;
 }
@@ -1302,14 +1308,14 @@ body.day .back:hover{
 
     text-shadow:
         0 0 8px
-        rgba(76,151,202,.14);
+        rgba(45,120,215,.14);
 }
 
 
 body.day .theme-toggle{
 
     border-color:
-        rgba(91,145,184,.34);
+        rgba(79,148,196,.34);
 
     background:
         rgba(248,252,255,.78);
@@ -1322,7 +1328,7 @@ body.day .theme-toggle{
 body.day .theme-toggle:hover{
 
     border-color:
-        rgba(79,151,200,.62);
+        rgba(79,148,196,.62);
 
     background:
         rgba(248,252,255,.90);
@@ -1331,7 +1337,7 @@ body.day .theme-toggle:hover{
 
     box-shadow:
         0 0 14px
-        rgba(76,151,202,.11);
+        rgba(45,120,215,.11);
 }
 
 
@@ -1348,7 +1354,7 @@ body.day .hero-title{
 
     text-shadow:
         0 0 18px
-        rgba(80,151,201,.065);
+        rgba(79,148,196,.065);
 }
 
 
@@ -1359,40 +1365,35 @@ body.day .hero-cn{
 }
 
 
+/* =========================================================
+   日间模式魔法阵
+========================================================= */
+
 body.day .magic-circle{
 
     border-color:
-        rgba(79,148,196,.26);
+        rgba(79,148,196,.28);
 
-    box-shadow:
-
-        0 0 50px
-        rgba(70,142,196,.055),
-
-        inset
-        0 0 60px
-        rgba(78,151,204,.028);
+    filter:
+        drop-shadow(
+            0 0 10px
+            rgba(45,120,215,.20)
+        );
 }
 
 
-body.day .magic-circle::before{
-
-    border-color:
-        rgba(79,148,196,.26);
-}
-
-
+body.day .magic-circle::before,
 body.day .magic-circle::after{
 
     border-color:
-        rgba(101,168,207,.20);
+        rgba(79,148,196,.28);
 }
 
 
 body.day .magic-line{
 
     background:
-        rgba(76,151,202,.05);
+        rgba(45,120,215,.05);
 }
 
 
@@ -1403,7 +1404,7 @@ body.day .magic-line{
 body.day .gallery-item{
 
     border-color:
-        rgba(65,110,140,.14);
+        rgba(79,148,196,.14);
 
     background:
         linear-gradient(
@@ -1417,7 +1418,7 @@ body.day .gallery-item{
 body.day .gallery-item:hover{
 
     border-color:
-        rgba(65,110,140,.25);
+        rgba(79,148,196,.25);
 
     background:
         linear-gradient(
@@ -1434,7 +1435,7 @@ body.day .gallery-image-wrap{
         rgba(235,243,247,.4);
 
     border-color:
-        rgba(65,110,140,.10);
+        rgba(79,148,196,.10);
 }
 
 
@@ -1468,7 +1469,7 @@ body.day .gallery-description{
 body.day .empty-gallery{
 
     border-color:
-        rgba(65,110,140,.13);
+        rgba(79,148,196,.13);
 
     background:
         rgba(255,255,255,.35);
