@@ -48,6 +48,7 @@ body{
 
 body{
     overflow-x:hidden;
+
     background:#061426;
     color:#dcecff;
 
@@ -68,6 +69,7 @@ body{
 
 .page{
     position:relative;
+
     min-height:100vh;
 
     padding:
@@ -78,7 +80,6 @@ body{
     overflow:hidden;
 
     background:
-
         radial-gradient(
             circle at 50% 42%,
             rgba(38,91,137,.18),
@@ -166,256 +167,374 @@ body{
 
 
 /* =========================================================
-   星星背景
+   ★ 从「国家档案」完整复制的星星
 ========================================================= */
 
-.stars{
-    position:fixed;
-
-    inset:0;
-
+.stars,
+.stars::before,
+.stars::after{
+    position:absolute;
+    content:"";
     pointer-events:none;
-
-    z-index:0;
-
-    background-image:
-
-        radial-gradient(
-            1px 1px at 10% 18%,
-            rgba(182,220,255,.7),
-            transparent
-        ),
-
-        radial-gradient(
-            1px 1px at 22% 72%,
-            rgba(182,220,255,.25),
-            transparent
-        ),
-
-        radial-gradient(
-            1px 1px at 35% 25%,
-            rgba(182,220,255,.28),
-            transparent
-        ),
-
-        radial-gradient(
-            1px 1px at 48% 83%,
-            rgba(182,220,255,.25),
-            transparent
-        ),
-
-        radial-gradient(
-            1px 1px at 63% 17%,
-            rgba(182,220,255,.30),
-            transparent
-        ),
-
-        radial-gradient(
-            1px 1px at 77% 65%,
-            rgba(182,220,255,.23),
-            transparent
-        ),
-
-        radial-gradient(
-            1px 1px at 89% 30%,
-            rgba(182,220,255,.28),
-            transparent
-        ),
-
-        radial-gradient(
-            1px 1px at 92% 84%,
-            rgba(182,220,255,.20),
-            transparent
-        );
 }
 
-
-.micro-stars{
-    position:fixed;
-
+.stars{
     inset:0;
+    z-index:0;
+}
 
-    pointer-events:none;
+.stars::before{
+    width:2px;
+    height:2px;
 
-    z-index:1;
+    background:rgba(182,220,255,.55);
 
-    opacity:.7;
+    box-shadow:
+        5vw 8vh rgba(182,220,255,.55),
+        13vw 18vh rgba(182,220,255,.40),
+        22vw 7vh rgba(182,220,255,.55),
+        31vw 14vh rgba(182,220,255,.32),
+        41vw 5vh rgba(182,220,255,.50),
+        52vw 12vh rgba(182,220,255,.38),
+        63vw 7vh rgba(182,220,255,.48),
+        74vw 16vh rgba(182,220,255,.32),
+        86vw 8vh rgba(182,220,255,.52),
+        94vw 20vh rgba(182,220,255,.38),
 
-    background-image:
+        8vw 31vh rgba(182,220,255,.34),
+        18vw 39vh rgba(182,220,255,.48),
+        29vw 27vh rgba(182,220,255,.32),
+        39vw 34vh rgba(182,220,255,.44),
+        49vw 26vh rgba(182,220,255,.36),
+        61vw 38vh rgba(182,220,255,.46),
+        72vw 29vh rgba(182,220,255,.34),
+        83vw 36vh rgba(182,220,255,.50),
+        92vw 28vh rgba(182,220,255,.36),
 
-        radial-gradient(
-            1px 1px at 7% 42%,
-            rgba(194,225,248,.30),
-            transparent
-        ),
+        4vw 55vh rgba(182,220,255,.46),
+        15vw 63vh rgba(182,220,255,.34),
+        25vw 52vh rgba(182,220,255,.52),
+        36vw 61vh rgba(182,220,255,.32),
+        47vw 54vh rgba(182,220,255,.44),
+        58vw 67vh rgba(182,220,255,.38),
+        69vw 55vh rgba(182,220,255,.50),
+        80vw 64vh rgba(182,220,255,.34),
+        91vw 53vh rgba(182,220,255,.46),
 
-        radial-gradient(
-            1px 1px at 17% 14%,
-            rgba(194,225,248,.25),
-            transparent
-        ),
+        9vw 81vh rgba(182,220,255,.34),
+        20vw 91vh rgba(182,220,255,.48),
+        33vw 82vh rgba(182,220,255,.36),
+        45vw 94vh rgba(182,220,255,.42),
+        57vw 84vh rgba(182,220,255,.32),
+        68vw 92vh rgba(182,220,255,.48),
+        79vw 82vh rgba(182,220,255,.36),
+        89vw 90vh rgba(182,220,255,.44);
+}
 
-        radial-gradient(
-            1px 1px at 31% 62%,
-            rgba(194,225,248,.20),
-            transparent
-        ),
+.stars::after{
+    width:1px;
+    height:1px;
 
-        radial-gradient(
-            1px 1px at 44% 11%,
-            rgba(194,225,248,.25),
-            transparent
-        ),
+    background:rgba(182,220,255,.38);
 
-        radial-gradient(
-            1px 1px at 56% 71%,
-            rgba(194,225,248,.25),
-            transparent
-        ),
+    box-shadow:
+        2vw 14vh rgba(182,220,255,.35),
+        17vw 5vh rgba(182,220,255,.28),
+        27vw 20vh rgba(182,220,255,.35),
+        37vw 8vh rgba(182,220,255,.28),
+        47vw 18vh rgba(182,220,255,.35),
+        58vw 5vh rgba(182,220,255,.28),
+        69vw 22vh rgba(182,220,255,.35),
+        79vw 9vh rgba(182,220,255,.28),
+        90vw 15vh rgba(182,220,255,.35),
 
-        radial-gradient(
-            1px 1px at 69% 37%,
-            rgba(194,225,248,.20),
-            transparent
-        ),
+        11vw 45vh rgba(182,220,255,.28),
+        22vw 34vh rgba(182,220,255,.35),
+        34vw 47vh rgba(182,220,255,.28),
+        44vw 39vh rgba(182,220,255,.35),
+        55vw 47vh rgba(182,220,255,.28),
+        66vw 42vh rgba(182,220,255,.35),
+        77vw 48vh rgba(182,220,255,.28),
+        88vw 40vh rgba(182,220,255,.35),
 
-        radial-gradient(
-            1px 1px at 82% 12%,
-            rgba(194,225,248,.30),
-            transparent
-        ),
-
-        radial-gradient(
-            1px 1px at 95% 55%,
-            rgba(194,225,248,.25),
-            transparent
-        );
+        6vw 72vh rgba(182,220,255,.35),
+        17vw 78vh rgba(182,220,255,.28),
+        29vw 70vh rgba(182,220,255,.35),
+        41vw 77vh rgba(182,220,255,.28),
+        53vw 72vh rgba(182,220,255,.35),
+        64vw 79vh rgba(182,220,255,.28),
+        76vw 71vh rgba(182,220,255,.35),
+        87vw 78vh rgba(182,220,255,.28);
 }
 
 
 /* =========================================================
-   ✶ ✡ 漂浮魔法星屑
-   共 20 个
+   ★ 从「国家档案」完整复制的微星
 ========================================================= */
 
-.floating-symbols{
-    position:fixed;
-
+.micro-stars{
+    position:absolute;
     inset:0;
-
+    z-index:1;
     pointer-events:none;
-
-    overflow:hidden;
-
-    z-index:3;
 }
 
-
-.floating-symbol{
+.micro-stars span{
     position:absolute;
 
-    font-family:
-        "Times New Roman",
-        serif;
+    width:2px;
+    height:2px;
 
-    color:
-        rgba(211,239,255,.98);
+    border-radius:50%;
 
-    user-select:none;
+    background:rgba(158,207,247,.62);
 
-    font-size:
-        var(--size);
+    opacity:.45;
 
     animation:
-        symbolFloat
-        var(--duration)
+        microTwinkle
+        5s
         ease-in-out
         infinite;
+}
 
-    animation-delay:
-        var(--delay);
+.micro-stars span:nth-child(1){
+    left:9%;
+    top:12%;
+    animation-delay:0s;
+}
 
-    opacity:
-        var(--opacity);
+.micro-stars span:nth-child(2){
+    left:18%;
+    top:25%;
+    animation-delay:1s;
+}
 
-    filter:
-        drop-shadow(
-            0 0 5px
-            rgba(132,215,255,.92)
-        )
-        drop-shadow(
-            0 0 13px
-            rgba(76,181,239,.65)
-        )
-        drop-shadow(
-            0 0 25px
-            rgba(56,143,201,.35)
-        );
+.micro-stars span:nth-child(3){
+    left:28%;
+    top:11%;
+    animation-delay:2s;
+}
 
-    transition:
-        color .6s ease,
-        filter .6s ease;
+.micro-stars span:nth-child(4){
+    left:37%;
+    top:21%;
+    animation-delay:3s;
+}
+
+.micro-stars span:nth-child(5){
+    left:48%;
+    top:9%;
+    animation-delay:1.5s;
+}
+
+.micro-stars span:nth-child(6){
+    left:58%;
+    top:27%;
+    animation-delay:2.5s;
+}
+
+.micro-stars span:nth-child(7){
+    left:69%;
+    top:14%;
+    animation-delay:4s;
+}
+
+.micro-stars span:nth-child(8){
+    left:78%;
+    top:24%;
+    animation-delay:.5s;
+}
+
+.micro-stars span:nth-child(9){
+    left:88%;
+    top:11%;
+    animation-delay:3.5s;
+}
+
+.micro-stars span:nth-child(10){
+    left:94%;
+    top:31%;
+    animation-delay:1.2s;
+}
+
+.micro-stars span:nth-child(11){
+    left:7%;
+    top:48%;
+    animation-delay:2.2s;
+}
+
+.micro-stars span:nth-child(12){
+    left:20%;
+    top:58%;
+    animation-delay:4.2s;
+}
+
+.micro-stars span:nth-child(13){
+    left:31%;
+    top:46%;
+    animation-delay:1.8s;
+}
+
+.micro-stars span:nth-child(14){
+    left:44%;
+    top:57%;
+    animation-delay:.8s;
+}
+
+.micro-stars span:nth-child(15){
+    left:56%;
+    top:48%;
+    animation-delay:3.2s;
+}
+
+.micro-stars span:nth-child(16){
+    left:68%;
+    top:59%;
+    animation-delay:1.4s;
+}
+
+.micro-stars span:nth-child(17){
+    left:80%;
+    top:47%;
+    animation-delay:2.8s;
+}
+
+.micro-stars span:nth-child(18){
+    left:91%;
+    top:57%;
+    animation-delay:4.5s;
+}
+
+.micro-stars span:nth-child(19){
+    left:13%;
+    top:84%;
+    animation-delay:3.8s;
 }
 
 
-@keyframes symbolFloat{
+@keyframes microTwinkle{
 
-    0%{
-        transform:
-            translate3d(0,0,0)
-            rotate(0deg)
-            scale(.96);
-
-        opacity:
-            calc(var(--opacity) * .72);
-    }
-
-    25%{
-        opacity:
-            calc(var(--opacity) * 1.12);
+    0%,100%{
+        opacity:.25;
+        transform:scale(.8);
     }
 
     50%{
-        transform:
-            translate3d(
-                var(--move-x),
-                var(--move-y),
-                0
-            )
-            rotate(
-                var(--rotate)
-            )
-            scale(1.08);
-
-        opacity:
-            calc(var(--opacity) * 1.35);
+        opacity:.9;
+        transform:scale(1.5);
     }
 
-    75%{
-        opacity:
-            calc(var(--opacity) * 1.05);
-    }
-
-    100%{
-        transform:
-            translate3d(
-                calc(var(--move-x) * -0.7),
-                calc(var(--move-y) * -1),
-                0
-            )
-            rotate(
-                calc(var(--rotate) * -0.7)
-            )
-            scale(.96);
-
-        opacity:
-            calc(var(--opacity) * .72);
-    }
 }
+
+
+/* =========================================================
+   ★ 从「国家档案」完整复制的魔法星
+========================================================= */
+
+.arcane-stars{
+    position:absolute;
+    inset:0;
+
+    z-index:1;
+
+    pointer-events:none;
+}
+
+.arcane-stars span{
+    position:absolute;
+
+    width:auto;
+    height:auto;
+
+    background:none;
+
+    transform:none;
+
+    opacity:.52;
+
+    color:rgba(158,207,247,.62);
+
+    font-family:"Cinzel",serif;
+
+    font-size:10px;
+
+    line-height:1;
+
+    letter-spacing:0;
+
+    text-shadow:
+        0 0 7px rgba(113,177,220,.28);
+
+    animation:
+        arcaneTwinkle
+        6s
+        ease-in-out
+        infinite;
+}
+
+
+/* =========================================================
+   ✦ ✶ 浮动魔法星
+========================================================= */
+
+.arcane-stars span:nth-child(odd)::before{
+    content:"✦";
+}
+
+.arcane-stars span:nth-child(even)::before{
+    content:"✶";
+}
+
+
+@keyframes arcaneTwinkle{
+
+    0%,100%{
+        opacity:.38;
+        transform:scale(.85);
+    }
+
+    50%{
+        opacity:.72;
+        transform:scale(1.15);
+    }
+
+}
+
+
+.star-a{left:7%;top:19%;}
+.star-b{left:15%;top:8%;}
+.star-c{left:24%;top:31%;}
+.star-d{left:34%;top:12%;}
+.star-e{left:43%;top:24%;}
+.star-f{left:54%;top:10%;}
+.star-g{left:64%;top:31%;}
+.star-h{left:74%;top:17%;}
+.star-i{left:84%;top:28%;}
+.star-j{left:93%;top:13%;}
+
+.star-k{left:5%;top:67%;}
+.star-l{left:16%;top:77%;}
+.star-m{left:27%;top:64%;}
+.star-n{left:38%;top:75%;}
+.star-o{left:49%;top:67%;}
+.star-p{left:61%;top:78%;}
+.star-q{left:72%;top:65%;}
+.star-r{left:83%;top:76%;}
+.star-s{left:94%;top:68%;}
+.star-t{left:57%;top:90%;}
+
+.extra-u{left:12%;top:42%;}
+.extra-v{left:30%;top:54%;}
+.extra-w{left:46%;top:42%;}
+.extra-x{left:66%;top:49%;}
+.extra-y{left:86%;top:44%;}
+.extra-z{left:97%;top:55%;}
 
 
 /* =========================================================
    ★ 魔法星环
+   保持画廊原来的三层圆环，不加入国家档案的其他结构
 ========================================================= */
 
 .magic-circle{
@@ -437,7 +556,6 @@ body{
         rgba(73,143,198,.28);
 
     box-shadow:
-
         0 0 50px
         rgba(47,126,184,.08),
 
@@ -1172,38 +1290,114 @@ body.day .page{
 }
 
 
-body.day .stars{
-    opacity:.18;
+/* =========================================================
+   日间模式 · 星星
+========================================================= */
+
+body.day .stars::before{
+    background:
+        rgba(103,166,207,.42);
+
+    box-shadow:
+        5vw 8vh rgba(103,166,207,.42),
+        13vw 18vh rgba(103,166,207,.30),
+        22vw 7vh rgba(103,166,207,.42),
+        31vw 14vh rgba(103,166,207,.25),
+        41vw 5vh rgba(103,166,207,.38),
+        52vw 12vh rgba(103,166,207,.28),
+        63vw 7vh rgba(103,166,207,.38),
+        74vw 16vh rgba(103,166,207,.25),
+        86vw 8vh rgba(103,166,207,.40),
+        94vw 20vh rgba(103,166,207,.28);
 }
 
 
-body.day .micro-stars{
-    opacity:.12;
+body.day .stars::after{
+    background:
+        rgba(103,166,207,.30);
+}
 
 
 /* =========================================================
-   ✶ ✡ 日间模式
+   日间模式 · 微星
+========================================================= */
+
+body.day .micro-stars span{
+    background:
+        rgba(87,151,199,.50);
+}
+
+
+/* =========================================================
+   日间模式 · 魔法星
+========================================================= */
+
+body.day .arcane-stars span{
+    background:none;
+
+    color:
+        rgba(87,151,199,.50);
+
+    box-shadow:none;
+
+    text-shadow:
+        0 0 7px
+        rgba(87,151,199,.18);
+}
+
+
+/* =========================================================
+   日间模式 · 浮动星
 ========================================================= */
 
 body.day .floating-symbol{
     color:
-        rgba(48,113,155,.88);
-
-    filter:
-        drop-shadow(
-            0 0 5px
-            rgba(79,173,216,.68)
-        )
-        drop-shadow(
-            0 0 13px
-            rgba(70,151,202,.42)
-        )
-        drop-shadow(
-            0 0 22px
-            rgba(76,151,202,.20)
-        );
+        rgba(54,112,151,.82);
 }
 
+
+/* =========================================================
+   魔法星环 · 日间
+========================================================= */
+
+body.day .magic-circle{
+    border-color:
+        rgba(79,148,196,.26);
+
+    box-shadow:
+
+        0 0 50px
+        rgba(70,142,196,.055),
+
+        inset
+        0 0 60px
+        rgba(78,151,204,.028);
+}
+
+
+body.day .magic-circle::before{
+    border-color:
+        rgba(79,148,196,.26);
+
+    box-shadow:
+        0 0 25px
+        rgba(70,142,196,.055);
+}
+
+
+body.day .magic-circle::after{
+    border-color:
+        rgba(101,168,207,.20);
+
+    box-shadow:
+        0 0 18px
+        rgba(76,151,202,.065);
+}
+
+
+/* =========================================================
+   日间模式 · 其他画廊元素
+========================================================= */
 
 body.day .frame{
     border-color:
@@ -1317,49 +1511,6 @@ body.day .hero-cn{
         rgba(45,82,106,.80);
 }
 
-
-/* =========================================================
-   魔法星环 · 日间模式
-========================================================= */
-
-body.day .magic-circle{
-    border-color:
-        rgba(79,148,196,.26);
-
-    box-shadow:
-
-        0 0 50px
-        rgba(70,142,196,.055),
-
-        inset
-        0 0 60px
-        rgba(78,151,204,.028);
-}
-
-
-body.day .magic-circle::before{
-    border-color:
-        rgba(79,148,196,.26);
-
-    box-shadow:
-        0 0 25px
-        rgba(70,142,196,.055);
-}
-
-
-body.day .magic-circle::after{
-    border-color:
-        rgba(101,168,207,.20);
-
-    box-shadow:
-        0 0 18px
-        rgba(76,151,202,.065);
-}
-
-
-/* =========================================================
-   画廊日间模式
-========================================================= */
 
 body.day .gallery-item{
     border-color:
@@ -1687,332 +1838,82 @@ body.day .footer{
 <body>
 
 
-<div class="stars"></div>
-
-<div class="micro-stars"></div>
-
-
-<!-- =========================================================
-     ✶ ✡ 漂浮魔法星屑 · 20个
-========================================================= -->
-
-<div class="floating-symbols">
-
-
-    <span
-        class="floating-symbol"
-        style="
-            left:7%;
-            top:17%;
-            --size:14px;
-            --duration:13s;
-            --delay:-4s;
-            --move-x:10px;
-            --move-y:-22px;
-            --rotate:8deg;
-            --opacity:.68;
-        "
-    >✶</span>
-
-
-    <span
-        class="floating-symbol"
-        style="
-            left:18%;
-            top:30%;
-            --size:10px;
-            --duration:17s;
-            --delay:-9s;
-            --move-x:-8px;
-            --move-y:-28px;
-            --rotate:-12deg;
-            --opacity:.58;
-        "
-    >✡</span>
-
-
-    <span
-        class="floating-symbol"
-        style="
-            left:29%;
-            top:13%;
-            --size:8px;
-            --duration:15s;
-            --delay:-2s;
-            --move-x:7px;
-            --move-y:-20px;
-            --rotate:14deg;
-            --opacity:.55;
-        "
-    >✶</span>
-
-
-    <span
-        class="floating-symbol"
-        style="
-            left:9%;
-            top:52%;
-            --size:11px;
-            --duration:18s;
-            --delay:-11s;
-            --move-x:-11px;
-            --move-y:-25px;
-            --rotate:-10deg;
-            --opacity:.62;
-        "
-    >✡</span>
-
-
-    <span
-        class="floating-symbol"
-        style="
-            left:16%;
-            top:76%;
-            --size:15px;
-            --duration:16s;
-            --delay:-6s;
-            --move-x:12px;
-            --move-y:-31px;
-            --rotate:10deg;
-            --opacity:.66;
-        "
-    >✶</span>
-
-
-    <span
-        class="floating-symbol"
-        style="
-            left:31%;
-            top:68%;
-            --size:9px;
-            --duration:20s;
-            --delay:-13s;
-            --move-x:-9px;
-            --move-y:-23px;
-            --rotate:-8deg;
-            --opacity:.55;
-        "
-    >✡</span>
-
-
-    <span
-        class="floating-symbol"
-        style="
-            left:46%;
-            top:11%;
-            --size:12px;
-            --duration:14s;
-            --delay:-5s;
-            --move-x:9px;
-            --move-y:-19px;
-            --rotate:12deg;
-            --opacity:.61;
-        "
-    >✶</span>
-
-
-    <span
-        class="floating-symbol"
-        style="
-            left:57%;
-            top:20%;
-            --size:8px;
-            --duration:19s;
-            --delay:-10s;
-            --move-x:-7px;
-            --move-y:-26px;
-            --rotate:-14deg;
-            --opacity:.55;
-        "
-    >✡</span>
-
-
-    <span
-        class="floating-symbol"
-        style="
-            left:72%;
-            top:13%;
-            --size:15px;
-            --duration:17s;
-            --delay:-7s;
-            --move-x:11px;
-            --move-y:-24px;
-            --rotate:9deg;
-            --opacity:.66;
-        "
-    >✡</span>
-
-
-    <span
-        class="floating-symbol"
-        style="
-            left:84%;
-            top:25%;
-            --size:9px;
-            --duration:15s;
-            --delay:-3s;
-            --move-x:-10px;
-            --move-y:-30px;
-            --rotate:-11deg;
-            --opacity:.58;
-        "
-    >✶</span>
-
-
-    <span
-        class="floating-symbol"
-        style="
-            left:93%;
-            top:43%;
-            --size:12px;
-            --duration:21s;
-            --delay:-15s;
-            --move-x:8px;
-            --move-y:-21px;
-            --rotate:13deg;
-            --opacity:.61;
-        "
-    >✡</span>
-
-
-    <span
-        class="floating-symbol"
-        style="
-            left:79%;
-            top:55%;
-            --size:10px;
-            --duration:18s;
-            --delay:-8s;
-            --move-x:-12px;
-            --move-y:-27px;
-            --rotate:-9deg;
-            --opacity:.57;
-        "
-    >✶</span>
-
-
-    <span
-        class="floating-symbol"
-        style="
-            left:89%;
-            top:72%;
-            --size:15px;
-            --duration:16s;
-            --delay:-12s;
-            --move-x:9px;
-            --move-y:-29px;
-            --rotate:11deg;
-            --opacity:.65;
-        "
-    >✡</span>
-
-
-    <span
-        class="floating-symbol"
-        style="
-            left:48%;
-            top:84%;
-            --size:10px;
-            --duration:19s;
-            --delay:-6s;
-            --move-x:-8px;
-            --move-y:-24px;
-            --rotate:-13deg;
-            --opacity:.55;
-        "
-    >✶</span>
-
-
-    <span
-        class="floating-symbol"
-        style="
-            left:63%;
-            top:77%;
-            --size:13px;
-            --duration:14s;
-            --delay:-9s;
-            --move-x:10px;
-            --move-y:-28px;
-            --rotate:8deg;
-            --opacity:.61;
-        "
-    >✡</span>
-
-
-    <span
-        class="floating-symbol"
-        style="
-            left:38%;
-            top:43%;
-            --size:11px;
-            --duration:18s;
-            --delay:-7s;
-            --move-x:9px;
-            --move-y:-25px;
-            --rotate:10deg;
-            --opacity:.59;
-        "
-    >✡</span>
-
-
-    <span
-        class="floating-symbol"
-        style="
-            left:67%;
-            top:46%;
-            --size:9px;
-            --duration:16s;
-            --delay:-12s;
-            --move-x:-10px;
-            --move-y:-22px;
-            --rotate:-12deg;
-            --opacity:.55;
-        "
-    >✶</span>
-
-
-    <span
-        class="floating-symbol"
-        style="
-            left:40%;
-            top:72%;
-            --size:13px;
-            --duration:20s;
-            --delay:-4s;
-            --move-x:-8px;
-            --move-y:-29px;
-            --rotate:9deg;
-            --opacity:.61;
-        "
-    >✶</span>
-
-
-    <span
-        class="floating-symbol"
-        style="
-            left:73%;
-            top:83%;
-            --size:10px;
-            --duration:17s;
-            --delay:-10s;
-            --move-x:11px;
-            --move-y:-26px;
-            --rotate:-10deg;
-            --opacity:.57;
-        "
-    >✡</span>
-
-
-</div>
-
-
-<div class="frame"></div>
-
-
 <div class="page">
 
 
-    <!-- ★ 魔法星环 -->
+    <!-- =====================================================
+         ★ 完整复制的背景星星系统
+    ====================================================== -->
+
+
+    <div class="stars"></div>
+
+
+    <!-- 微小星点 -->
+
+    <div class="micro-stars">
+
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </div>
+
+
+    <!-- 魔法星 -->
+
+    <div class="arcane-stars">
+
+        <span class="star-a"></span>
+        <span class="star-b"></span>
+        <span class="star-c"></span>
+        <span class="star-d"></span>
+        <span class="star-e"></span>
+        <span class="star-f"></span>
+        <span class="star-g"></span>
+        <span class="star-h"></span>
+        <span class="star-i"></span>
+        <span class="star-j"></span>
+
+        <span class="star-k"></span>
+        <span class="star-l"></span>
+        <span class="star-m"></span>
+        <span class="star-n"></span>
+        <span class="star-o"></span>
+        <span class="star-p"></span>
+        <span class="star-q"></span>
+        <span class="star-r"></span>
+        <span class="star-s"></span>
+        <span class="star-t"></span>
+
+        <span class="extra-u"></span>
+        <span class="extra-v"></span>
+        <span class="extra-w"></span>
+        <span class="extra-x"></span>
+        <span class="extra-y"></span>
+        <span class="extra-z"></span>
+
+    </div>
+
+
+    <!-- ★ 原画廊三层星环，保持不动 -->
 
     <div class="magic-circle"></div>
 
