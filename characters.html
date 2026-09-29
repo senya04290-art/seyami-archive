@@ -14,6 +14,9 @@
 href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Noto+Serif+SC:wght@400;500&display=swap"
 rel="stylesheet">
 
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 
 /* =========================
@@ -918,6 +921,25 @@ body{
   transition:
     color .6s ease,
     text-shadow .6s ease;
+}
+
+
+/* =========================
+   IMAGE
+========================= */
+
+.character-image img{
+
+  display:block;
+
+  width:100%;
+  height:100%;
+
+  object-fit:contain;
+
+  position:relative;
+
+  z-index:1;
 }
 
 
@@ -2107,7 +2129,17 @@ body.day-mode .archive-mark{
 
       <div class="character-image">
 
-        <div class="image-placeholder">
+        <img
+          id="characterImage"
+          src=""
+          alt=""
+          style="display:none;"
+        >
+
+        <div
+          class="image-placeholder"
+          id="imagePlaceholder"
+        >
 
           <span class="image-placeholder-symbol">
             ✦
@@ -2126,7 +2158,7 @@ body.day-mode .archive-mark{
 
       <!-- =====================
            CHARACTER INFORMATION
-      ===================== -->
+      ====================== -->
 
       <div class="character-info">
 
@@ -2138,19 +2170,19 @@ body.day-mode .archive-mark{
         </div>
 
 
-        <!-- EMPTY ENGLISH NAME -->
+        <!-- ENGLISH NAME -->
 
         <div class="character-name-en">
         </div>
 
 
-        <!-- EMPTY CHINESE NAME -->
+        <!-- CHINESE NAME -->
 
         <div class="character-name-cn">
         </div>
 
 
-        <!-- EMPTY ROLE TITLE -->
+        <!-- ROLE TITLE -->
 
         <div class="character-role">
         </div>
@@ -2261,6 +2293,266 @@ body.day-mode .archive-mark{
 <script>
 
 /* =========================================================
+   SUPABASE
+   Seyami Archive · Character Database
+========================================================= */
+
+const SUPABASE_URL =
+  "https://rqqkdpzehxzwqzytpxgh.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_T_gNdlgkOaXnzjSvdmI1Pw_HQOVTEWG";
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+/* =========================================================
+   CHARACTER ELEMENTS
+========================================================= */
+
+const characterNumber =
+  document.querySelector(
+    ".character-number"
+  );
+
+const characterNameEn =
+  document.querySelector(
+    ".character-name-en"
+  );
+
+const characterNameCn =
+  document.querySelector(
+    ".character-name-cn"
+  );
+
+const characterRole =
+  document.querySelector(
+    ".character-role"
+  );
+
+const infoValues =
+  document.querySelectorAll(
+    ".info-value"
+  );
+
+const characterImage =
+  document.getElementById(
+    "characterImage"
+  );
+
+const imagePlaceholder =
+  document.getElementById(
+    "imagePlaceholder"
+  );
+
+
+/* =========================================================
+   LOAD CHARACTER
+========================================================= */
+
+async function loadCharacter(){
+
+  try{
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("characters")
+        .select("*")
+        .order("id", {
+          ascending:true
+        })
+        .limit(1);
+
+
+    if(error){
+
+      console.error(
+        "Supabase 读取失败：",
+        error
+      );
+
+      return;
+    }
+
+
+    if(!data || data.length === 0){
+
+      console.warn(
+        "characters 表中没有角色数据。"
+      );
+
+      return;
+    }
+
+
+    const character =
+      data[0];
+
+
+    /* =====================================================
+       NAME
+
+       数据库：
+       Evelina•Nieve 伊莉娜·妳芙
+
+       页面：
+       Evelina•Nieve
+       伊莉娜·妳芙
+    ===================================================== */
+
+    const fullName =
+      character.name || "";
+
+    const nameParts =
+      fullName
+        .trim()
+        .split(/\s+/);
+
+
+    if(nameParts.length >= 2){
+
+      characterNameEn.textContent =
+        nameParts[0];
+
+      characterNameCn.textContent =
+        nameParts
+          .slice(1)
+          .join(" ");
+
+    }else{
+
+      characterNameEn.textContent =
+        fullName;
+
+      characterNameCn.textContent =
+        "";
+
+    }
+
+
+    /* =====================================================
+       ROLE
+    ===================================================== */
+
+    characterRole.textContent =
+      character.role || "";
+
+
+    /* =====================================================
+       BASIC INFO
+
+       0 = RACE
+       1 = REGION
+       2 = STATUS
+       3 = ROLE
+    ===================================================== */
+
+    if(infoValues.length >= 4){
+
+      infoValues[0].textContent =
+        character.race || "";
+
+      infoValues[1].textContent =
+        character.region || "";
+
+
+      let status = "";
+
+
+      if(character.gender){
+
+        status +=
+          character.gender;
+
+      }
+
+
+      if(
+        character.age !== null &&
+        character.age !== undefined &&
+        character.age !== ""
+      ){
+
+        if(status){
+
+          status += " · ";
+
+        }
+
+        status +=
+          character.age + "岁";
+
+      }
+
+
+      infoValues[2].textContent =
+        status;
+
+
+      infoValues[3].textContent =
+        character.role || "";
+
+    }
+
+
+    /* =====================================================
+       IMAGE
+    ===================================================== */
+
+    if(character.image_url){
+
+      characterImage.src =
+        character.image_url;
+
+      characterImage.alt =
+        fullName;
+
+      characterImage.style.display =
+        "block";
+
+      imagePlaceholder.style.display =
+        "none";
+
+
+      characterImage.onerror =
+        function(){
+
+          characterImage.style.display =
+            "none";
+
+          imagePlaceholder.style.display =
+            "block";
+
+          console.error(
+            "角色图片加载失败：",
+            character.image_url
+          );
+
+        };
+
+    }
+
+
+  }catch(error){
+
+    console.error(
+      "角色档案加载失败：",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================================
    昼夜模式
    与首页 / 档案目录共用：seyami-theme
 ========================================================= */
@@ -2289,9 +2581,11 @@ function applyTheme(theme){
       "day-mode"
     );
 
-    themeIcon.textContent = "☀";
+    themeIcon.textContent =
+      "☀";
 
-    themeText.textContent = "DAY";
+    themeText.textContent =
+      "DAY";
 
   }else{
 
@@ -2299,16 +2593,20 @@ function applyTheme(theme){
       "day-mode"
     );
 
-    themeIcon.textContent = "☾";
+    themeIcon.textContent =
+      "☾";
 
-    themeText.textContent = "NIGHT";
+    themeText.textContent =
+      "NIGHT";
 
   }
 
 }
 
 
-/* 读取首页 / 档案目录保存的模式 */
+/* =========================================================
+   读取首页 / 档案目录保存的模式
+========================================================= */
 
 const savedTheme =
   localStorage.getItem(
@@ -2325,7 +2623,9 @@ applyTheme(
 );
 
 
-/* 点击切换 */
+/* =========================================================
+   点击切换
+========================================================= */
 
 themeToggle.addEventListener(
   "click",
@@ -2341,10 +2641,12 @@ themeToggle.addEventListener(
         ? "night"
         : "day";
 
+
     localStorage.setItem(
       "seyami-theme",
       nextTheme
     );
+
 
     applyTheme(
       nextTheme
@@ -2352,6 +2654,13 @@ themeToggle.addEventListener(
 
   }
 );
+
+
+/* =========================================================
+   启动角色读取
+========================================================= */
+
+loadCharacter();
 
 </script>
 
