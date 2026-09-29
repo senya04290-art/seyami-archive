@@ -258,9 +258,6 @@ main {
         0 25px 70px rgba(0, 0, 0, 0.28);
 }
 
-
-/* 四角装饰 */
-
 .panel::before,
 .panel::after {
     content: "";
@@ -352,12 +349,6 @@ select {
     letter-spacing: 0.04em;
 
     transition: 0.3s;
-}
-
-textarea {
-    min-height: 120px;
-
-    resize: vertical;
 }
 
 input:focus,
@@ -489,8 +480,6 @@ textarea::placeholder {
 }
 
 .submit-button {
-    position: relative;
-
     min-width: 210px;
 
     padding: 15px 30px;
@@ -1003,7 +992,7 @@ const SUPABASE_URL =
     "https://rqqkdpzehxzwqzytpxgh.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_T_gNdlgkOaXnzjSvdmI1Pw_HQOVTEWG";
+    "sb_publishable_T_gnDlgkOaXnzjSvdmI1Pw_HQOVTEWG";
 
 
 const supabaseClient =
@@ -1132,9 +1121,9 @@ form.addEventListener(
             imageFile.files[0];
 
 
-        /* -------------------------
+        /* =========================
            基础检查
-        ------------------------- */
+        ========================= */
 
         if (!name) {
 
@@ -1171,35 +1160,76 @@ form.addEventListener(
 
 
             /* =========================
-               1. 上传图片
+               1. 检查文件类型
             ========================= */
 
-            const extension =
-                file.name
-                    .split(".")
-                    .pop()
-                    .toLowerCase();
+            const allowedTypes = [
+                "image/png",
+                "image/jpeg",
+                "image/webp"
+            ];
 
 
-            const safeName =
-                name
-                    .replace(/[^\w\u4e00-\u9fff.-]+/g, "-")
-                    .replace(/-+/g, "-")
-                    .replace(/^-|-$/g, "")
-                    .toLowerCase();
+            if (
+                !allowedTypes.includes(
+                    file.type
+                )
+            ) {
+
+                throw new Error(
+                    "只支持 PNG、JPG、JPEG 或 WEBP 图片。"
+                );
+
+            }
 
 
-            const uniqueName =
-                safeName +
-                "-" +
+            /* =========================
+               2. 获取扩展名
+            ========================= */
+
+            let extension = "png";
+
+
+            if (file.type === "image/jpeg") {
+                extension = "jpg";
+            }
+
+            if (file.type === "image/webp") {
+                extension = "webp";
+            }
+
+            if (file.type === "image/png") {
+                extension = "png";
+            }
+
+
+            /* =========================
+               3. 生成纯英文文件名
+               
+               重要：
+               这里绝对不使用角色名称。
+               
+               所以：
+               伊莉娜·妳芙
+               Evelina•Nieve
+               中文、特殊符号
+               都不会进入 Storage key。
+            ========================= */
+
+            const filePath =
+                "character-" +
                 Date.now() +
+                "-" +
+                Math.random()
+                    .toString(36)
+                    .substring(2, 8) +
                 "." +
                 extension;
 
 
-            const filePath =
-                uniqueName;
-
+            /* =========================
+               4. 上传图片
+            ========================= */
 
             showMessage(
                 "正在上传立绘……"
@@ -1228,14 +1258,16 @@ form.addEventListener(
 
 
             /* =========================
-               2. 获取图片 URL
+               5. 获取公开图片地址
             ========================= */
 
             const publicURLResult =
                 supabaseClient
                     .storage
                     .from("character-images")
-                    .getPublicUrl(filePath);
+                    .getPublicUrl(
+                        filePath
+                    );
 
 
             const imageURL =
@@ -1244,8 +1276,17 @@ form.addEventListener(
                     .publicUrl;
 
 
+            if (!imageURL) {
+
+                throw new Error(
+                    "图片上传成功，但没有获取到图片地址。"
+                );
+
+            }
+
+
             /* =========================
-               3. 写入 characters
+               6. 写入 characters
             ========================= */
 
             showMessage(
@@ -1258,7 +1299,8 @@ form.addEventListener(
                     .from("characters")
                     .insert({
 
-                        name: name,
+                        name:
+                            name,
 
                         race:
                             race || null,
@@ -1285,13 +1327,11 @@ form.addEventListener(
 
             if (insertResult.error) {
 
-                /*
 
-                   如果资料写入失败，
-                   尝试删除刚刚上传的图片，
-                   避免 Storage 留下一张孤儿图片。
-
-                */
+                /* =========================
+                   如果数据库写入失败，
+                   删除刚上传的图片
+                ========================= */
 
                 await supabaseClient
                     .storage
@@ -1307,7 +1347,7 @@ form.addEventListener(
 
 
             /* =========================
-               4. 成功
+               7. 完成
             ========================= */
 
             showMessage(
@@ -1327,6 +1367,10 @@ form.addEventListener(
                 "none";
 
 
+            previewImage.src =
+                "";
+
+
         } catch (error) {
 
             console.error(
@@ -1337,9 +1381,13 @@ form.addEventListener(
 
             showMessage(
                 "保存失败：" +
-                (error.message || "未知错误"),
+                (
+                    error.message ||
+                    "未知错误"
+                ),
                 "error"
             );
+
 
         } finally {
 
@@ -1362,7 +1410,9 @@ const savedTheme =
     );
 
 
-if (savedTheme === "day") {
+if (
+    savedTheme === "day"
+) {
 
     document.body.classList.add(
         "day-mode"
