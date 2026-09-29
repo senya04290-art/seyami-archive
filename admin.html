@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1.0"
 >
 
-<title>角色管理 · Seyami Archive</title>
+<title>角色档案 · Seyami Archive</title>
 
 <link
     rel="preconnect"
@@ -19,7 +19,7 @@
 
 <link
     rel="preconnect"
-    href="https://fonts.gstatic.com"
+    href="https://fonts.googleapis.com"
     crossorigin
 >
 
@@ -30,7 +30,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
 <style>
+
+/* =========================================================
+   基础
+========================================================= */
 
 * {
     box-sizing: border-box;
@@ -44,31 +49,36 @@ body {
 }
 
 body {
+
     background:
         radial-gradient(
-            circle at 50% 30%,
-            rgba(20, 55, 95, 0.16),
-            transparent 45%
+            circle at 50% 45%,
+            rgba(19, 51, 87, 0.20),
+            transparent 48%
         ),
         #061426;
 
-    color: #dbe8f5;
+    color: #dce9f5;
 
     font-family:
         "Noto Serif SC",
         serif;
+
+    overflow-x: hidden;
 
     transition:
         background 0.5s ease,
         color 0.5s ease;
 }
 
-/* =========================
-   背景星点
-========================= */
+
+/* =========================================================
+   星点
+========================================================= */
 
 .stars {
     position: fixed;
+
     inset: 0;
 
     pointer-events: none;
@@ -86,40 +96,119 @@ body {
 
     border-radius: 50%;
 
-    background: rgba(190, 220, 245, 0.65);
+    background:
+        rgba(190, 220, 245, 0.65);
 
-    opacity: 0.5;
+    opacity: 0.45;
 }
 
-/* =========================
+
+/* =========================================================
+   魔法星环
+========================================================= */
+
+.magic-circle {
+
+    position: fixed;
+
+    width: min(72vw, 760px);
+
+    height: min(72vw, 760px);
+
+    left: 50%;
+    top: 48%;
+
+    transform:
+        translate(-50%, -50%);
+
+    border:
+        1px solid
+        rgba(140, 190, 230, 0.075);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+.magic-circle::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 82%;
+    height: 82%;
+
+    left: 9%;
+    top: 9%;
+
+    border:
+        1px solid
+        rgba(140, 190, 230, 0.055);
+
+    border-radius: 50%;
+}
+
+.magic-circle::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 61%;
+    height: 61%;
+
+    left: 19.5%;
+    top: 19.5%;
+
+    border:
+        1px solid
+        rgba(140, 190, 230, 0.045);
+
+    border-radius: 50%;
+}
+
+
+/* =========================================================
    页面框架
-========================= */
+========================================================= */
 
 .page {
+
     position: relative;
 
     min-height: 100vh;
 
-    padding: 38px 58px 70px;
+    padding:
+        38px 58px 70px;
 
     z-index: 1;
 }
 
-/* =========================
+
+/* =========================================================
    顶部
-========================= */
+========================================================= */
 
 .header {
+
     display: flex;
 
-    justify-content: space-between;
+    justify-content:
+        space-between;
 
-    align-items: flex-start;
+    align-items:
+        flex-start;
 
-    width: 100%;
+    position: relative;
+
+    z-index: 5;
 }
 
 .logo {
+
     display: flex;
 
     flex-direction: column;
@@ -128,24 +217,31 @@ body {
 }
 
 .logo-cn {
+
     font-size: 16px;
 
-    letter-spacing: 0.16em;
+    letter-spacing:
+        0.16em;
 
     font-weight: 400;
 }
 
 .logo-en {
-    font-family: "Cinzel", serif;
+
+    font-family:
+        "Cinzel",
+        serif;
 
     font-size: 9px;
 
-    letter-spacing: 0.3em;
+    letter-spacing:
+        0.3em;
 
     opacity: 0.55;
 }
 
 .header-right {
+
     display: flex;
 
     align-items: center;
@@ -154,19 +250,24 @@ body {
 }
 
 .back {
+
     color: inherit;
 
     text-decoration: none;
 
-    font-family: "Cinzel", serif;
+    font-family:
+        "Cinzel",
+        serif;
 
-    font-size: 10px;
+    font-size: 9px;
 
-    letter-spacing: 0.22em;
+    letter-spacing:
+        0.22em;
 
-    opacity: 0.65;
+    opacity: 0.6;
 
-    transition: opacity 0.3s ease;
+    transition:
+        opacity 0.3s ease;
 }
 
 .back:hover {
@@ -174,12 +275,16 @@ body {
 }
 
 .theme-toggle {
+
     width: 38px;
     height: 38px;
 
-    border: 1px solid rgba(190, 215, 240, 0.25);
+    border:
+        1px solid
+        rgba(190, 215, 240, 0.25);
 
-    background: transparent;
+    background:
+        transparent;
 
     color: inherit;
 
@@ -199,215 +304,203 @@ body {
 }
 
 .theme-toggle:hover {
-    background: rgba(180, 210, 240, 0.06);
+
+    background:
+        rgba(180, 210, 240, 0.06);
 
     border-color:
         rgba(190, 215, 240, 0.45);
 }
 
-/* =========================
+
+/* =========================================================
    标题
-========================= */
+========================================================= */
 
 .title-area {
+
     text-align: center;
 
-    margin-top: 70px;
+    margin-top: 75px;
 
-    margin-bottom: 55px;
+    margin-bottom: 45px;
+
+    position: relative;
+
+    z-index: 2;
 }
 
-.title-en {
-    font-family: "Cinzel", serif;
+.title-small {
 
-    font-size: clamp(30px, 5vw, 58px);
-
-    font-weight: 300;
-
-    letter-spacing: 0.22em;
-
-    margin-left: 0.22em;
-
-    line-height: 1.2;
-}
-
-.title-sub {
-    margin-top: 12px;
-
-    font-family: "Cinzel", serif;
+    font-family:
+        "Cinzel",
+        serif;
 
     font-size: 10px;
 
-    letter-spacing: 0.42em;
+    letter-spacing:
+        0.42em;
 
-    opacity: 0.45;
+    margin-left:
+        0.42em;
 
-    margin-left: 0.42em;
+    opacity: 0.48;
+
+    margin-bottom: 14px;
+}
+
+.title-main {
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size:
+        clamp(32px, 5vw, 60px);
+
+    font-weight: 300;
+
+    letter-spacing:
+        0.18em;
+
+    margin-left:
+        0.18em;
+
+    line-height: 1.15;
 }
 
 .title-cn {
-    margin-top: 18px;
+
+    margin-top: 16px;
 
     font-size: 14px;
 
-    letter-spacing: 0.25em;
+    letter-spacing:
+        0.25em;
 
-    opacity: 0.65;
+    opacity: 0.62;
 }
 
-/* =========================
-   表单区域
-========================= */
 
-.admin-container {
-    width: min(820px, 100%);
+/* =========================================================
+   角色区域
+========================================================= */
 
-    margin: 0 auto;
+.character-panel {
 
-    border: 1px solid
-        rgba(180, 210, 240, 0.18);
+    width:
+        min(1120px, 100%);
 
-    background:
-        rgba(4, 17, 32, 0.42);
+    margin:
+        0 auto;
 
-    padding: 42px;
+    min-height: 580px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(300px, 0.95fr)
+        minmax(360px, 1.05fr);
+
+    gap: 55px;
 
     position: relative;
+
+    z-index: 2;
 }
 
-/* 四角装饰 */
 
-.admin-container::before,
-.admin-container::after {
+/* =========================================================
+   图片区域
+========================================================= */
+
+.character-art {
+
+    position: relative;
+
+    min-height: 540px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border:
+        1px solid
+        rgba(180, 210, 240, 0.12);
+
+    background:
+        rgba(4, 17, 32, 0.28);
+
+    overflow: hidden;
+}
+
+.character-art::before {
+
     content: "";
 
     position: absolute;
 
-    width: 18px;
-    height: 18px;
+    inset: 18px;
 
-    border-color:
-        rgba(180, 210, 240, 0.45);
+    border:
+        1px solid
+        rgba(180, 210, 240, 0.07);
 
     pointer-events: none;
 }
 
-.admin-container::before {
-    top: -1px;
-    left: -1px;
+.character-art::after {
 
-    border-top: 1px solid;
-    border-left: 1px solid;
-}
+    content: "SEYAMI";
 
-.admin-container::after {
-    right: -1px;
-    bottom: -1px;
+    position: absolute;
 
-    border-right: 1px solid;
-    border-bottom: 1px solid;
-}
-
-.section-title {
-    font-family: "Cinzel", serif;
-
-    font-size: 13px;
-
-    letter-spacing: 0.3em;
-
-    margin-bottom: 30px;
-
-    opacity: 0.8;
-}
-
-/* =========================
-   表单
-========================= */
-
-.form-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
-    gap: 24px 28px;
-}
-
-.field {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 9px;
-}
-
-.field.full {
-    grid-column: 1 / -1;
-}
-
-label {
-    font-family: "Cinzel", serif;
-
-    font-size: 9px;
-
-    letter-spacing: 0.25em;
-
-    opacity: 0.6;
-}
-
-input,
-select {
-    width: 100%;
-
-    height: 46px;
-
-    border: 1px solid
-        rgba(180, 210, 240, 0.2);
-
-    outline: none;
-
-    background:
-        rgba(3, 15, 29, 0.75);
-
-    color: #dbe8f5;
-
-    padding: 0 14px;
+    bottom: 16px;
+    right: 20px;
 
     font-family:
-        "Noto Serif SC",
+        "Cinzel",
         serif;
 
-    font-size: 13px;
+    font-size: 8px;
 
-    transition:
-        border-color 0.3s ease,
-        background 0.3s ease;
+    letter-spacing:
+        0.3em;
+
+    opacity: 0.22;
 }
 
-input:focus,
-select:focus {
-    border-color:
-        rgba(180, 210, 240, 0.55);
+#characterImage {
 
-    background:
-        rgba(5, 20, 38, 0.9);
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 92%;
+
+    max-height: 510px;
+
+    width: auto;
+
+    height: auto;
+
+    object-fit: contain;
+
+    display: none;
 }
 
-input::placeholder {
-    color: rgba(210, 225, 240, 0.28);
-}
 
-/* =========================
-   图片上传
-========================= */
+/* =========================================================
+   空白图片状态
+========================================================= */
 
-.upload-box {
-    width: 100%;
+.image-placeholder {
 
-    min-height: 220px;
+    position: absolute;
 
-    border: 1px dashed
-        rgba(180, 210, 240, 0.25);
+    inset: 0;
 
     display: flex;
 
@@ -417,340 +510,541 @@ input::placeholder {
 
     flex-direction: column;
 
-    position: relative;
+    gap: 13px;
 
-    overflow: hidden;
-
-    cursor: pointer;
-
-    transition:
-        border-color 0.3s ease,
-        background 0.3s ease;
+    opacity: 0.38;
 }
 
-.upload-box:hover {
-    border-color:
-        rgba(180, 210, 240, 0.55);
+.placeholder-symbol {
 
-    background:
-        rgba(180, 210, 240, 0.025);
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 28px;
 }
 
-.upload-box input[type="file"] {
-    position: absolute;
+.placeholder-text {
 
-    inset: 0;
+    font-family:
+        "Cinzel",
+        serif;
 
-    width: 100%;
-    height: 100%;
+    font-size: 9px;
 
-    opacity: 0;
-
-    cursor: pointer;
-
-    padding: 0;
+    letter-spacing:
+        0.25em;
 }
 
-.upload-placeholder {
+
+/* =========================================================
+   信息区域
+========================================================= */
+
+.character-info {
+
+    padding:
+        28px 8px 20px 0;
+
     display: flex;
 
     flex-direction: column;
 
-    align-items: center;
-
-    gap: 12px;
-
-    pointer-events: none;
+    justify-content: center;
 }
 
-.upload-symbol {
-    font-size: 26px;
 
-    opacity: 0.55;
+/* =========================================================
+   编号
+========================================================= */
 
-    font-family: serif;
+.character-number {
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 9px;
+
+    letter-spacing:
+        0.3em;
+
+    opacity: 0.38;
+
+    margin-bottom: 25px;
 }
 
-.upload-text {
-    font-family: "Cinzel", serif;
 
-    font-size: 10px;
+/* =========================================================
+   名字
+========================================================= */
 
-    letter-spacing: 0.22em;
+.character-name-en {
 
-    opacity: 0.6;
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size:
+        clamp(27px, 4vw, 48px);
+
+    font-weight: 300;
+
+    letter-spacing:
+        0.08em;
+
+    line-height: 1.15;
+
+    min-height: 55px;
 }
 
-.upload-hint {
-    font-size: 10px;
+.character-name-cn {
+
+    margin-top: 13px;
+
+    font-size: 17px;
+
+    letter-spacing:
+        0.22em;
+
+    opacity: 0.7;
+
+    min-height: 28px;
+}
+
+.character-role {
+
+    margin-top: 18px;
+
+    font-size: 11px;
+
+    letter-spacing:
+        0.2em;
+
+    opacity: 0.45;
+
+    min-height: 20px;
+}
+
+
+/* =========================================================
+   分割线
+========================================================= */
+
+.divider {
+
+    width: 100%;
+
+    height: 1px;
+
+    background:
+        rgba(180, 210, 240, 0.12);
+
+    margin:
+        34px 0 30px;
+}
+
+
+/* =========================================================
+   BASIC INFO
+========================================================= */
+
+.info-title {
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 9px;
+
+    letter-spacing:
+        0.32em;
+
+    opacity: 0.45;
+
+    margin-bottom: 22px;
+}
+
+.info-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap:
+        23px 35px;
+}
+
+.info-item {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.info-label {
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 8px;
+
+    letter-spacing:
+        0.25em;
 
     opacity: 0.35;
 }
 
-.preview {
-    position: absolute;
+.info-value {
+
+    font-size: 12px;
+
+    min-height: 18px;
+
+    opacity: 0.78;
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile-title {
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 9px;
+
+    letter-spacing:
+        0.32em;
+
+    opacity: 0.45;
+
+    margin-bottom: 15px;
+}
+
+.profile {
+
+    font-size: 12px;
+
+    line-height: 2;
+
+    letter-spacing:
+        0.05em;
+
+    opacity: 0.58;
+
+    min-height: 24px;
+}
+
+
+/* =========================================================
+   档案标记
+========================================================= */
+
+.archive-mark {
+
+    margin-top: 40px;
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 8px;
+
+    letter-spacing:
+        0.3em;
+
+    opacity: 0.22;
+}
+
+
+/* =========================================================
+   Loading
+========================================================= */
+
+.loading {
+
+    position: fixed;
 
     inset: 0;
 
-    width: 100%;
-    height: 100%;
+    z-index: 20;
 
-    object-fit: contain;
+    display: flex;
 
-    padding: 15px;
+    align-items: center;
 
-    display: none;
+    justify-content: center;
+
+    background:
+        #061426;
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 10px;
+
+    letter-spacing:
+        0.3em;
+
+    opacity: 1;
+
+    transition:
+        opacity 0.5s ease;
+}
+
+.loading.hide {
+
+    opacity: 0;
 
     pointer-events: none;
 }
 
-/* =========================
-   保存按钮
-========================= */
 
-.save-area {
-    margin-top: 38px;
+/* =========================================================
+   Error
+========================================================= */
 
-    display: flex;
+.load-error {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 19;
+
+    display: none;
+
+    align-items: center;
 
     justify-content: center;
-}
 
-.save-button {
-    min-width: 230px;
+    flex-direction: column;
 
-    height: 48px;
-
-    border: 1px solid
-        rgba(190, 220, 245, 0.4);
+    gap: 15px;
 
     background:
-        rgba(10, 32, 55, 0.5);
+        #061426;
 
-    color: #dbe8f5;
-
-    font-family: "Cinzel", serif;
-
-    font-size: 10px;
-
-    letter-spacing: 0.3em;
-
-    cursor: pointer;
-
-    transition:
-        background 0.3s ease,
-        border-color 0.3s ease,
-        transform 0.2s ease;
-}
-
-.save-button:hover {
-    background:
-        rgba(30, 65, 95, 0.5);
-
-    border-color:
-        rgba(210, 230, 245, 0.65);
-}
-
-.save-button:active {
-    transform: scale(0.98);
-}
-
-.save-button:disabled {
-    opacity: 0.45;
-
-    cursor: wait;
-}
-
-/* =========================
-   状态提示
-========================= */
-
-.message {
     text-align: center;
-
-    margin-top: 22px;
-
-    min-height: 20px;
-
-    font-size: 12px;
-
-    letter-spacing: 0.08em;
-
-    opacity: 0.8;
 }
 
-.message.success {
-    color: #b8d8c8;
+.load-error.show {
+    display: flex;
 }
 
-.message.error {
-    color: #e0b8b8;
+.error-title {
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 16px;
+
+    letter-spacing:
+        0.25em;
 }
 
-/* =========================
-   底部
-========================= */
+.error-text {
 
-.footer {
-    text-align: center;
+    font-size: 11px;
 
-    margin-top: 55px;
+    opacity: 0.5;
 
-    font-family: "Cinzel", serif;
-
-    font-size: 8px;
-
-    letter-spacing: 0.35em;
-
-    opacity: 0.25;
+    padding: 0 25px;
 }
 
-/* =========================
+
+/* =========================================================
    日间模式
-========================= */
+========================================================= */
 
 body.day-mode {
+
     background:
         radial-gradient(
-            circle at 50% 30%,
-            rgba(210, 225, 238, 0.35),
+            circle at 50% 45%,
+            rgba(215, 225, 235, 0.38),
             transparent 50%
         ),
         #e9eef3;
 
-    color: #24384c;
+    color:
+        #24384c;
 }
 
-body.day-mode .admin-container {
-    background:
-        rgba(255, 255, 255, 0.52);
+body.day-mode .magic-circle {
 
     border-color:
-        rgba(40, 70, 100, 0.18);
+        rgba(70, 100, 125, 0.09);
 }
 
-body.day-mode input,
-body.day-mode select {
-    background:
-        rgba(255, 255, 255, 0.65);
-
-    color: #24384c;
+body.day-mode .magic-circle::before {
 
     border-color:
-        rgba(40, 70, 100, 0.2);
+        rgba(70, 100, 125, 0.065);
 }
 
-body.day-mode input:focus,
-body.day-mode select:focus {
-    background:
-        rgba(255, 255, 255, 0.9);
+body.day-mode .magic-circle::after {
 
     border-color:
-        rgba(40, 70, 100, 0.45);
+        rgba(70, 100, 125, 0.055);
 }
 
-body.day-mode .upload-box {
-    border-color:
-        rgba(40, 70, 100, 0.25);
-}
-
-body.day-mode .save-button {
-    color: #24384c;
+body.day-mode .character-art {
 
     background:
-        rgba(255, 255, 255, 0.5);
+        rgba(255, 255, 255, 0.35);
 
     border-color:
-        rgba(40, 70, 100, 0.35);
+        rgba(50, 80, 105, 0.15);
 }
 
-body.day-mode .theme-toggle {
+body.day-mode .character-art::before {
+
     border-color:
-        rgba(40, 70, 100, 0.25);
+        rgba(50, 80, 105, 0.08);
 }
 
-/* =========================
+body.day-mode .divider {
+
+    background:
+        rgba(50, 80, 105, 0.14);
+}
+
+body.day-mode .loading {
+
+    background:
+        #e9eef3;
+}
+
+
+/* =========================================================
    手机
-========================= */
+========================================================= */
 
-@media (max-width: 700px) {
+@media (max-width: 760px) {
 
     .page {
-        padding:
-            25px 20px 50px;
-    }
 
-    .header {
-        align-items: center;
+        padding:
+            25px 20px 55px;
     }
 
     .logo-cn {
+
         font-size: 13px;
     }
 
     .logo-en {
+
         font-size: 7px;
     }
 
     .header-right {
-        gap: 10px;
+
+        gap: 9px;
     }
 
     .back {
-        font-size: 8px;
+
+        font-size: 7px;
+
+        letter-spacing:
+            0.14em;
     }
 
     .theme-toggle {
+
         width: 34px;
         height: 34px;
     }
 
     .title-area {
+
         margin-top: 55px;
 
-        margin-bottom: 40px;
+        margin-bottom: 35px;
     }
 
-    .title-en {
-        font-size: 29px;
+    .title-main {
 
-        letter-spacing: 0.14em;
+        font-size: 30px;
 
-        margin-left: 0.14em;
+        letter-spacing:
+            0.12em;
+
+        margin-left:
+            0.12em;
     }
 
-    .title-sub {
+    .title-small {
+
         font-size: 8px;
 
-        letter-spacing: 0.3em;
+        letter-spacing:
+            0.3em;
 
-        margin-left: 0.3em;
+        margin-left:
+            0.3em;
     }
 
     .title-cn {
+
         font-size: 12px;
     }
 
-    .admin-container {
-        padding: 28px 20px;
+    .character-panel {
+
+        grid-template-columns:
+            1fr;
+
+        gap: 35px;
     }
 
-    .form-grid {
-        grid-template-columns: 1fr;
+    .character-art {
 
-        gap: 22px;
+        min-height: 430px;
     }
 
-    .field.full {
-        grid-column: auto;
+    #characterImage {
+
+        max-height: 410px;
+
+        max-width: 90%;
     }
 
-    .upload-box {
-        min-height: 200px;
+    .character-info {
+
+        padding:
+            0 5px 20px;
     }
 
-    .save-button {
-        width: 100%;
+    .character-name-en {
+
+        font-size: 30px;
+    }
+
+    .character-name-cn {
+
+        font-size: 15px;
+    }
+
+    .magic-circle {
+
+        width: 105vw;
+
+        height: 105vw;
+
+        top: 48%;
     }
 }
 
@@ -758,41 +1052,82 @@ body.day-mode .theme-toggle {
 
 </head>
 
+
 <body>
 
-<!-- =========================
-     背景星点
-========================= -->
 
-<div class="stars">
+<!-- =====================================================
+     Loading
+===================================================== -->
 
-    <span class="star" style="left:8%;top:14%;"></span>
-    <span class="star" style="left:18%;top:31%;"></span>
-    <span class="star" style="left:27%;top:9%;"></span>
-    <span class="star" style="left:36%;top:23%;"></span>
-    <span class="star" style="left:46%;top:12%;"></span>
-    <span class="star" style="left:58%;top:28%;"></span>
-    <span class="star" style="left:67%;top:8%;"></span>
-    <span class="star" style="left:78%;top:20%;"></span>
-    <span class="star" style="left:91%;top:12%;"></span>
+<div
+    class="loading"
+    id="loading"
+>
+    LOADING ARCHIVE
+</div>
 
-    <span class="star" style="left:13%;top:57%;"></span>
-    <span class="star" style="left:23%;top:76%;"></span>
-    <span class="star" style="left:34%;top:64%;"></span>
-    <span class="star" style="left:49%;top:82%;"></span>
-    <span class="star" style="left:61%;top:69%;"></span>
-    <span class="star" style="left:73%;top:88%;"></span>
-    <span class="star" style="left:86%;top:61%;"></span>
-    <span class="star" style="left:94%;top:78%;"></span>
+
+<!-- =====================================================
+     Error
+===================================================== -->
+
+<div
+    class="load-error"
+    id="loadError"
+>
+
+    <div class="error-title">
+        ARCHIVE NOT FOUND
+    </div>
+
+    <div
+        class="error-text"
+        id="errorText"
+    >
+        无法找到该角色档案。
+    </div>
 
 </div>
 
 
+<!-- =====================================================
+     背景
+===================================================== -->
+
+<div class="stars">
+
+    <span class="star" style="left:8%;top:12%;"></span>
+    <span class="star" style="left:17%;top:28%;"></span>
+    <span class="star" style="left:27%;top:9%;"></span>
+    <span class="star" style="left:38%;top:21%;"></span>
+    <span class="star" style="left:48%;top:12%;"></span>
+    <span class="star" style="left:59%;top:29%;"></span>
+    <span class="star" style="left:70%;top:8%;"></span>
+    <span class="star" style="left:81%;top:22%;"></span>
+    <span class="star" style="left:92%;top:13%;"></span>
+
+    <span class="star" style="left:12%;top:55%;"></span>
+    <span class="star" style="left:23%;top:74%;"></span>
+    <span class="star" style="left:34%;top:66%;"></span>
+    <span class="star" style="left:47%;top:84%;"></span>
+    <span class="star" style="left:61%;top:70%;"></span>
+    <span class="star" style="left:74%;top:88%;"></span>
+    <span class="star" style="left:86%;top:62%;"></span>
+    <span class="star" style="left:95%;top:77%;"></span>
+
+</div>
+
+
+<div class="magic-circle"></div>
+
+
 <div class="page">
 
-    <!-- =========================
-         顶部
-    ========================= -->
+
+    <!-- =================================================
+         Header
+    ================================================= -->
 
     <header class="header">
 
@@ -818,10 +1153,11 @@ body.day-mode .theme-toggle {
                 RETURN TO ARCHIVE
             </a>
 
+
             <button
+                type="button"
                 class="theme-toggle"
                 id="themeToggle"
-                type="button"
             >
                 ☾
             </button>
@@ -831,242 +1167,200 @@ body.day-mode .theme-toggle {
     </header>
 
 
-    <!-- =========================
-         标题
-    ========================= -->
+    <!-- =================================================
+         Title
+    ================================================= -->
 
     <section class="title-area">
 
-        <div class="title-en">
-            CHARACTER
+        <div class="title-small">
+            CHARACTER RECORD
         </div>
 
-        <div class="title-sub">
-            ARCHIVE ADMINISTRATION
+        <div class="title-main">
+            ARCHIVE
         </div>
 
         <div class="title-cn">
-            角色档案管理
+            角色档案
         </div>
 
     </section>
 
 
-    <!-- =========================
-         管理表单
-    ========================= -->
+    <!-- =================================================
+         Character
+    ================================================= -->
 
-    <main class="admin-container">
-
-        <div class="section-title">
-            CREATE CHARACTER RECORD
-        </div>
+    <main class="character-panel">
 
 
-        <form id="characterForm">
+        <!-- ===============================
+             Artwork
+        ================================ -->
 
-            <div class="form-grid">
+        <section class="character-art">
 
+            <div
+                class="image-placeholder"
+                id="imagePlaceholder"
+            >
 
-                <!-- 名字 -->
-
-                <div class="field full">
-
-                    <label for="name">
-                        CHARACTER NAME
-                    </label>
-
-                    <input
-                        id="name"
-                        type="text"
-                        placeholder="例如：Evelina•Nieve 伊莉娜·妳芙"
-                        required
-                    >
-
+                <div class="placeholder-symbol">
+                    ✦
                 </div>
 
+                <div class="placeholder-text">
+                    NO ARTWORK
+                </div>
 
-                <!-- 种族 -->
+            </div>
 
-                <div class="field">
 
-                    <label for="race">
+            <img
+                id="characterImage"
+                src=""
+                alt=""
+            >
+
+        </section>
+
+
+        <!-- ===============================
+             Information
+        ================================ -->
+
+        <section class="character-info">
+
+
+            <div
+                class="character-number"
+                id="characterNumber"
+            >
+                CHARACTER · ARCHIVE
+            </div>
+
+
+            <div
+                class="character-name-en"
+                id="characterNameEn"
+            >
+            </div>
+
+
+            <div
+                class="character-name-cn"
+                id="characterNameCn"
+            >
+            </div>
+
+
+            <div
+                class="character-role"
+                id="characterRole"
+            >
+            </div>
+
+
+            <div class="divider"></div>
+
+
+            <div class="info-title">
+                BASIC INFO
+            </div>
+
+
+            <div class="info-grid">
+
+
+                <div class="info-item">
+
+                    <div class="info-label">
                         RACE
-                    </label>
+                    </div>
 
-                    <input
-                        id="race"
-                        type="text"
-                        placeholder="例如：雪山神"
+                    <div
+                        class="info-value"
+                        id="infoRace"
                     >
-
-                </div>
-
-
-                <!-- 地区 -->
-
-                <div class="field">
-
-                    <label for="region">
-                        REGION
-                    </label>
-
-                    <input
-                        id="region"
-                        type="text"
-                        placeholder="例如：雪山"
-                    >
-
-                </div>
-
-
-                <!-- 身份 -->
-
-                <div class="field">
-
-                    <label for="role">
-                        ROLE
-                    </label>
-
-                    <input
-                        id="role"
-                        type="text"
-                        placeholder="例如：雪山女神"
-                    >
-
-                </div>
-
-
-                <!-- 年龄 -->
-
-                <div class="field">
-
-                    <label for="age">
-                        AGE
-                    </label>
-
-                    <input
-                        id="age"
-                        type="number"
-                        min="0"
-                        placeholder="例如：1000"
-                    >
-
-                </div>
-
-
-                <!-- 性别 -->
-
-                <div class="field full">
-
-                    <label for="gender">
-                        GENDER
-                    </label>
-
-                    <select id="gender">
-
-                        <option value="">
-                            请选择
-                        </option>
-
-                        <option value="女性">
-                            女性
-                        </option>
-
-                        <option value="男性">
-                            男性
-                        </option>
-
-                        <option value="其他">
-                            其他
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <!-- 图片 -->
-
-                <div class="field full">
-
-                    <label>
-                        CHARACTER ARTWORK
-                    </label>
-
-
-                    <div class="upload-box">
-
-                        <input
-                            id="image"
-                            type="file"
-                            accept="image/png,image/jpeg,image/webp"
-                        >
-
-
-                        <div
-                            class="upload-placeholder"
-                            id="uploadPlaceholder"
-                        >
-
-                            <div class="upload-symbol">
-                                ✦
-                            </div>
-
-                            <div class="upload-text">
-                                SELECT ARTWORK
-                            </div>
-
-                            <div class="upload-hint">
-                                PNG / JPG / WEBP
-                            </div>
-
-                        </div>
-
-
-                        <img
-                            id="preview"
-                            class="preview"
-                            alt="预览"
-                        >
-
                     </div>
 
                 </div>
 
 
+                <div class="info-item">
+
+                    <div class="info-label">
+                        REGION
+                    </div>
+
+                    <div
+                        class="info-value"
+                        id="infoRegion"
+                    >
+                    </div>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <div class="info-label">
+                        STATUS
+                    </div>
+
+                    <div
+                        class="info-value"
+                        id="infoStatus"
+                    >
+                    </div>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <div class="info-label">
+                        ROLE
+                    </div>
+
+                    <div
+                        class="info-value"
+                        id="infoRole"
+                    >
+                    </div>
+
+                </div>
+
             </div>
 
 
-            <!-- 保存 -->
+            <div class="divider"></div>
 
-            <div class="save-area">
 
-                <button
-                    class="save-button"
-                    id="saveButton"
-                    type="submit"
-                >
-                    SAVE CHARACTER
-                </button>
-
+            <div class="profile-title">
+                PROFILE
             </div>
 
 
             <div
-                class="message"
-                id="message"
-            ></div>
+                class="profile"
+                id="profile"
+            >
+            </div>
 
 
-        </form>
+            <div
+                class="archive-mark"
+                id="archiveMark"
+            >
+                SEYAMI · CHARACTER ARCHIVE
+            </div>
+
+
+        </section>
 
     </main>
-
-
-    <footer class="footer">
-        SEYAMI · CHARACTER ARCHIVE
-    </footer>
 
 </div>
 
@@ -1080,15 +1374,8 @@ body.day-mode .theme-toggle {
 const SUPABASE_URL =
     "https://rqqkdpzehxzwqzytpxgh.supabase.co";
 
-
-/*
- * 注意：
- * 这里必须是正确大小写的 Publishable Key
- */
-
 const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_T_gNdlgkOaXnzjSvdmI1Pw_HQOVTEWG";
-
 
 const supabaseClient =
     window.supabase.createClient(
@@ -1101,403 +1388,486 @@ const supabaseClient =
    DOM
 ========================================================= */
 
-const form =
-    document.getElementById("characterForm");
+const loading =
+    document.getElementById(
+        "loading"
+    );
 
-const nameInput =
-    document.getElementById("name");
+const loadError =
+    document.getElementById(
+        "loadError"
+    );
 
-const raceInput =
-    document.getElementById("race");
+const errorText =
+    document.getElementById(
+        "errorText"
+    );
 
-const regionInput =
-    document.getElementById("region");
+const characterImage =
+    document.getElementById(
+        "characterImage"
+    );
 
-const roleInput =
-    document.getElementById("role");
+const imagePlaceholder =
+    document.getElementById(
+        "imagePlaceholder"
+    );
 
-const ageInput =
-    document.getElementById("age");
+const characterNumber =
+    document.getElementById(
+        "characterNumber"
+    );
 
-const genderInput =
-    document.getElementById("gender");
+const characterNameEn =
+    document.getElementById(
+        "characterNameEn"
+    );
 
-const imageInput =
-    document.getElementById("image");
+const characterNameCn =
+    document.getElementById(
+        "characterNameCn"
+    );
 
-const preview =
-    document.getElementById("preview");
+const characterRole =
+    document.getElementById(
+        "characterRole"
+    );
 
-const uploadPlaceholder =
-    document.getElementById("uploadPlaceholder");
+const infoRace =
+    document.getElementById(
+        "infoRace"
+    );
 
-const saveButton =
-    document.getElementById("saveButton");
+const infoRegion =
+    document.getElementById(
+        "infoRegion"
+    );
 
-const message =
-    document.getElementById("message");
+const infoStatus =
+    document.getElementById(
+        "infoStatus"
+    );
 
+const infoRole =
+    document.getElementById(
+        "infoRole"
+    );
 
-/* =========================================================
-   图片预览
-========================================================= */
+const profile =
+    document.getElementById(
+        "profile"
+    );
 
-imageInput.addEventListener(
-    "change",
-    function () {
-
-        const file =
-            this.files[0];
-
-        if (!file) {
-
-            preview.style.display =
-                "none";
-
-            uploadPlaceholder.style.display =
-                "flex";
-
-            return;
-        }
-
-
-        const reader =
-            new FileReader();
-
-
-        reader.onload =
-            function (event) {
-
-                preview.src =
-                    event.target.result;
-
-                preview.style.display =
-                    "block";
-
-                uploadPlaceholder.style.display =
-                    "none";
-
-            };
-
-
-        reader.readAsDataURL(file);
-
-    }
-);
+const archiveMark =
+    document.getElementById(
+        "archiveMark"
+    );
 
 
 /* =========================================================
-   显示消息
+   辅助函数
 ========================================================= */
 
-function showMessage(
-    text,
-    type = ""
+function setText(
+    element,
+    value
 ) {
 
-    message.textContent =
-        text;
-
-    message.className =
-        "message " + type;
+    element.textContent =
+        value || "";
 
 }
 
 
 /* =========================================================
-   保存角色
+   解析角色名字
 ========================================================= */
 
-form.addEventListener(
-    "submit",
-    async function (event) {
+function parseCharacterName(
+    fullName
+) {
 
-        event.preventDefault();
+    if (!fullName) {
 
+        return {
+            english: "",
+            chinese: ""
+        };
 
-        const name =
-            nameInput.value.trim();
-
-        const race =
-            raceInput.value.trim();
-
-        const region =
-            regionInput.value.trim();
-
-        const role =
-            roleInput.value.trim();
-
-        const age =
-            ageInput.value.trim();
-
-        const gender =
-            genderInput.value.trim();
-
-        const imageFile =
-            imageInput.files[0];
+    }
 
 
-        /* -------------------------
-           基础检查
-        ------------------------- */
-
-        if (!name) {
-
-            showMessage(
-                "请先填写角色名字。",
-                "error"
-            );
-
-            return;
-        }
+    const parts =
+        fullName
+            .trim()
+            .split(/\s+/);
 
 
-        if (!imageFile) {
+    if (parts.length === 1) {
 
-            showMessage(
-                "请先选择角色立绘。",
-                "error"
-            );
+        return {
+            english: parts[0],
+            chinese: ""
+        };
 
-            return;
-        }
+    }
 
 
-        /* -------------------------
-           防止重复点击
-        ------------------------- */
+    return {
 
-        saveButton.disabled =
-            true;
+        english:
+            parts
+                .slice(0, -1)
+                .join(" "),
 
-        saveButton.textContent =
-            "UPLOADING...";
+        chinese:
+            parts[parts.length - 1]
 
-        showMessage(
-            "正在上传角色档案……"
+    };
+
+}
+
+
+/* =========================================================
+   获取 URL 中的角色 ID
+========================================================= */
+
+function getCharacterId() {
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    return params.get("id");
+
+}
+
+
+/* =========================================================
+   显示错误
+========================================================= */
+
+function showError(
+    message
+) {
+
+    errorText.textContent =
+        message;
+
+    loadError.classList.add(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   显示角色
+========================================================= */
+
+function renderCharacter(
+    character
+) {
+
+    const names =
+        parseCharacterName(
+            character.name
         );
 
 
-        try {
-
-
-            /* =================================================
-               1. 生成安全的文件名
-            ================================================= */
-
-            const originalName =
-                imageFile.name;
-
-            const extension =
-                originalName
-                    .split(".")
-                    .pop()
-                    .toLowerCase();
+    /* -------------------------
+       名字
+    ------------------------- */
 
+    setText(
+        characterNameEn,
+        names.english
+    );
 
-            /*
-             * 不使用角色名字作为文件名。
-             *
-             * 例如：
-             *
-             * character-1790672837262-x7k2ab.png
-             *
-             * 这样不会因为中文、特殊符号而导致
-             * Supabase Storage Invalid key。
-             */
+    setText(
+        characterNameCn,
+        names.chinese
+    );
 
-            const filePath =
-                "character-" +
-                Date.now() +
-                "-" +
-                Math.random()
-                    .toString(36)
-                    .substring(2, 8) +
-                "." +
-                extension;
 
+    /* -------------------------
+       编号
+    ------------------------- */
 
-            /* =================================================
-               2. 上传到 Storage
-            ================================================= */
+    setText(
+        characterNumber,
+        "CHARACTER · " +
+        String(character.id || "")
+    );
 
-            showMessage(
-                "正在上传立绘……"
-            );
 
+    /* -------------------------
+       Role
+    ------------------------- */
 
-            const {
-                error: uploadError
-            } = await supabaseClient
-                .storage
-                .from("character-images")
-                .upload(
-                    filePath,
-                    imageFile,
-                    {
-                        cacheControl: "3600",
-                        upsert: false
-                    }
-                );
+    setText(
+        characterRole,
+        character.role
+    );
 
 
-            if (uploadError) {
+    /* -------------------------
+       Basic info
+    ------------------------- */
 
-                throw uploadError;
-            }
+    setText(
+        infoRace,
+        character.race
+    );
 
+    setText(
+        infoRegion,
+        character.region
+    );
 
-            /* =================================================
-               3. 获取图片公开 URL
-            ================================================= */
+    setText(
+        infoRole,
+        character.role
+    );
 
-            const {
-                data: publicURLData
-            } =
-                supabaseClient
-                    .storage
-                    .from("character-images")
-                    .getPublicUrl(
-                        filePath
-                    );
 
+    let status = "";
 
-            const imageURL =
-                publicURLData.publicUrl;
 
+    if (character.gender) {
 
-            /* =================================================
-               4. 写入 characters 表
-            ================================================= */
+        status +=
+            character.gender;
 
-            showMessage(
-                "立绘上传完成，正在建立角色档案……"
-            );
+    }
 
 
-            const {
-                error: insertError
-            } =
-                await supabaseClient
-                    .from("characters")
-                    .insert({
+    if (
+        character.age !== null &&
+        character.age !== undefined &&
+        character.age !== ""
+    ) {
 
-                        name:
-                            name,
+        if (status) {
 
-                        race:
-                            race || null,
-
-                        role:
-                            role || null,
-
-                        age:
-                            age === ""
-                                ? null
-                                : Number(age),
-
-                        gender:
-                            gender || null,
-
-                        region:
-                            region || null,
-
-                        image_url:
-                            imageURL
-
-                    });
-
-
-            if (insertError) {
-
-                throw insertError;
-            }
-
-
-            /* =================================================
-               5. 完成
-            ================================================= */
-
-            showMessage(
-                "角色档案保存成功！",
-                "success"
-            );
-
-
-            saveButton.textContent =
-                "SAVED";
-
-
-            /*
-             * 清空表单
-             */
-
-            form.reset();
-
-
-            preview.src =
-                "";
-
-            preview.style.display =
-                "none";
-
-            uploadPlaceholder.style.display =
-                "flex";
-
-
-            /*
-             * 两秒以后恢复按钮
-             */
-
-            setTimeout(
-                function () {
-
-                    saveButton.disabled =
-                        false;
-
-                    saveButton.textContent =
-                        "SAVE CHARACTER";
-
-                },
-                2000
-            );
-
-
-        } catch (error) {
-
-
-            console.error(
-                "Character save error:",
-                error
-            );
-
-
-            /*
-             * 如果 Storage 上传成功，
-             * 但是 characters 插入失败，
-             * 这里会直接把 Supabase 的真实错误显示出来。
-             */
-
-            showMessage(
-                "保存失败：" +
-                (
-                    error.message ||
-                    "未知错误"
-                ),
-                "error"
-            );
-
-
-            saveButton.disabled =
-                false;
-
-            saveButton.textContent =
-                "SAVE CHARACTER";
+            status += " · ";
 
         }
 
+        status +=
+            character.age +
+            " 岁";
+
     }
-);
+
+
+    setText(
+        infoStatus,
+        status
+    );
+
+
+    /* -------------------------
+       Profile
+    ------------------------- */
+
+    /*
+     * 目前数据库没有单独的 profile
+     * 字段，所以这里暂时保持空白。
+     *
+     * 以后如果增加 profile 字段，
+     * 可以直接接上。
+     */
+
+    setText(
+        profile,
+        character.profile
+    );
+
+
+    /* -------------------------
+       图片
+    ------------------------- */
+
+    if (character.image_url) {
+
+        characterImage.src =
+            character.image_url;
+
+        characterImage.alt =
+            character.name || "Character";
+
+        characterImage.style.display =
+            "block";
+
+        imagePlaceholder.style.display =
+            "none";
+
+
+        characterImage.onerror =
+            function () {
+
+                characterImage.style.display =
+                    "none";
+
+                imagePlaceholder.style.display =
+                    "flex";
+
+            };
+
+    } else {
+
+        characterImage.style.display =
+            "none";
+
+        imagePlaceholder.style.display =
+            "flex";
+
+    }
+
+
+    /* -------------------------
+       页脚
+    ------------------------- */
+
+    archiveMark.textContent =
+        "SEYAMI · CHARACTER ARCHIVE · " +
+        character.id;
+
+}
+
+
+/* =========================================================
+   读取角色
+========================================================= */
+
+async function loadCharacter() {
+
+    try {
+
+        const characterId =
+            getCharacterId();
+
+
+        let query =
+            supabaseClient
+                .from("characters")
+                .select("*");
+
+
+        /*
+         * 如果 URL 有 id：
+         *
+         * characters.html?id=xxxxx
+         *
+         * 就读取指定角色。
+         */
+
+        if (characterId) {
+
+            query =
+                query.eq(
+                    "id",
+                    characterId
+                );
+
+        } else {
+
+            /*
+             * 如果没有 id，
+             * 暂时读取第一条。
+             *
+             * 这样直接打开 characters.html
+             * 也不会出现空白。
+             */
+
+            query =
+                query
+                    .order(
+                        "id",
+                        {
+                            ascending: true
+                        }
+                    )
+                    .limit(1);
+
+        }
+
+
+        const {
+            data,
+            error
+        } =
+            await query;
+
+
+        if (error) {
+
+            throw error;
+
+        }
+
+
+        if (
+            !data ||
+            data.length === 0
+        ) {
+
+            showError(
+                characterId
+                    ? "没有找到 ID 为 " +
+                      characterId +
+                      " 的角色档案。"
+                    : "目前没有角色档案。"
+            );
+
+            return;
+
+        }
+
+
+        const character =
+            data[0];
+
+
+        renderCharacter(
+            character
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Character loading error:",
+            error
+        );
+
+
+        showError(
+            "读取角色档案失败：" +
+            (
+                error.message ||
+                "未知错误"
+            )
+        );
+
+    } finally {
+
+        setTimeout(
+            function () {
+
+                loading.classList.add(
+                    "hide"
+                );
+
+            },
+            200
+        );
+
+    }
+
+}
 
 
 /* =========================================================
@@ -1505,7 +1875,9 @@ form.addEventListener(
 ========================================================= */
 
 const themeToggle =
-    document.getElementById("themeToggle");
+    document.getElementById(
+        "themeToggle"
+    );
 
 
 function applyTheme(
@@ -1574,6 +1946,13 @@ themeToggle.addEventListener(
 
     }
 );
+
+
+/* =========================================================
+   启动
+========================================================= */
+
+loadCharacter();
 
 </script>
 
