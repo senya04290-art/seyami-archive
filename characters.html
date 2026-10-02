@@ -2,2969 +2,2401 @@
 <html lang="zh-CN">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>角色档案 · Seyami Archive</title>
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<title>塞垭弥大陆档案馆 · 角色档案</title>
 
 <link
-href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Noto+Serif+SC:wght@400;500&display=swap"
-rel="stylesheet">
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+>
 
-<!-- Supabase -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500&display=swap"
+    rel="stylesheet"
+>
+
 
 <style>
 
 /* =========================
-   BASE
+   基础
 ========================= */
 
 *{
-  box-sizing:border-box;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 html,
 body{
-  margin:0;
-  min-height:100%;
+    width:100%;
+    min-height:100%;
 }
 
 body{
 
-  background:
-    radial-gradient(
-      circle at 50% 45%,
-      rgba(38,91,137,.18),
-      transparent 38%
-    ),
-    radial-gradient(
-      circle at 50% 50%,
-      rgba(11,45,75,.45),
-      transparent 70%
-    ),
-    #061426;
+    background:#061426;
 
-  color:#dcecff;
+    color:#dcecff;
 
-  font-family:
-    "Noto Serif SC",
-    "Times New Roman",
-    serif;
+    font-family:
+        "Noto Serif SC",
+        serif;
 
-  overflow-x:hidden;
+    overflow-x:hidden;
 
-  transition:
-    background .6s ease,
-    color .6s ease;
+    transition:
+        background .5s ease,
+        color .5s ease;
 }
 
 
 /* =========================
-   PAGE
+   主体
 ========================= */
 
 .page{
 
-  position:relative;
+    min-height:100vh;
 
-  min-height:100vh;
+    position:relative;
 
-  padding:
-    30px
-    clamp(24px,6vw,90px)
-    70px;
+    display:flex;
 
-  overflow:hidden;
+    align-items:center;
 
-  transition:
-    background .6s ease;
+    justify-content:center;
+
+    padding:
+        120px
+        60px
+        100px;
 }
 
 
 /* =========================
-   FLOATING STARS
-========================= */
-
-.stars{
-
-  position:absolute;
-
-  inset:0;
-
-  z-index:1;
-
-  pointer-events:none;
-
-  overflow:hidden;
-}
-
-.stars span{
-
-  position:absolute;
-
-  display:block;
-
-  color:rgba(158,207,247,.62);
-
-  font-family:
-    "Times New Roman",
-    serif;
-
-  line-height:1;
-
-  text-shadow:
-    0 0 8px rgba(96,177,242,.5);
-
-  animation:
-    starFloat 8s ease-in-out infinite,
-    starTwinkle 5s ease-in-out infinite;
-
-  transition:
-    color .6s ease,
-    text-shadow .6s ease;
-}
-
-
-/* star positions */
-
-.stars span:nth-child(1){
-  left:8%;
-  top:15%;
-  font-size:15px;
-  animation-delay:-2s,-1s;
-  opacity:.55;
-}
-
-.stars span:nth-child(2){
-  left:19%;
-  top:32%;
-  font-size:10px;
-  animation-delay:-4s,-2s;
-  opacity:.32;
-}
-
-.stars span:nth-child(3){
-  left:31%;
-  top:12%;
-  font-size:12px;
-  animation-delay:-6s,-1s;
-  opacity:.38;
-}
-
-.stars span:nth-child(4){
-  right:17%;
-  top:18%;
-  font-size:18px;
-  animation-delay:-3s,-2s;
-  opacity:.42;
-}
-
-.stars span:nth-child(5){
-  right:8%;
-  top:38%;
-  font-size:10px;
-  animation-delay:-5s,-3s;
-  opacity:.32;
-}
-
-.stars span:nth-child(6){
-  left:10%;
-  top:57%;
-  font-size:13px;
-  animation-delay:-4s,-1s;
-  opacity:.35;
-}
-
-.stars span:nth-child(7){
-  left:27%;
-  top:69%;
-  font-size:9px;
-  animation-delay:-7s,-2s;
-  opacity:.28;
-}
-
-.stars span:nth-child(8){
-  right:25%;
-  top:58%;
-  font-size:15px;
-  animation-delay:-3s,-1s;
-  opacity:.30;
-}
-
-.stars span:nth-child(9){
-  right:9%;
-  top:73%;
-  font-size:18px;
-  animation-delay:-6s,-3s;
-  opacity:.26;
-}
-
-.stars span:nth-child(10){
-  left:43%;
-  top:78%;
-  font-size:11px;
-  animation-delay:-2s,-2s;
-  opacity:.30;
-}
-
-.stars span:nth-child(11){
-  left:4%;
-  top:30%;
-  font-size:9px;
-  animation-delay:-1s,-2s;
-  opacity:.32;
-}
-
-.stars span:nth-child(12){
-  left:38%;
-  top:8%;
-  font-size:12px;
-  animation-delay:-4s,-1s;
-  opacity:.38;
-}
-
-.stars span:nth-child(13){
-  right:5%;
-  top:31%;
-  font-size:15px;
-  animation-delay:-6s,-3s;
-  opacity:.30;
-}
-
-.stars span:nth-child(14){
-  left:24%;
-  top:53%;
-  font-size:8px;
-  animation-delay:-3s,-1s;
-  opacity:.28;
-}
-
-.stars span:nth-child(15){
-  right:24%;
-  top:53%;
-  font-size:14px;
-  animation-delay:-7s,-2s;
-  opacity:.24;
-}
-
-.stars span:nth-child(16){
-  left:6%;
-  top:72%;
-  font-size:12px;
-  animation-delay:-5s,-3s;
-  opacity:.34;
-}
-
-.stars span:nth-child(17){
-  right:7%;
-  top:70%;
-  font-size:18px;
-  animation-delay:-8s,-4s;
-  opacity:.25;
-}
-
-.stars span:nth-child(18){
-  left:34%;
-  bottom:9%;
-  font-size:10px;
-  animation-delay:-2s,-2s;
-  opacity:.30;
-}
-
-.stars span:nth-child(19){
-  right:36%;
-  bottom:8%;
-  font-size:11px;
-  animation-delay:-5s,-1s;
-  opacity:.34;
-}
-
-.stars span:nth-child(20){
-  left:46%;
-  top:8%;
-  font-size:13px;
-  animation-delay:-9s,-4s;
-  opacity:.20;
-}
-
-
-/* =========================
-   STAR ANIMATION
-========================= */
-
-@keyframes starFloat{
-
-  0%,
-  100%{
-    transform:translate3d(0,0,0);
-  }
-
-  50%{
-    transform:translate3d(0,-8px,0);
-  }
-}
-
-@keyframes starTwinkle{
-
-  0%,
-  100%{
-    opacity:.18;
-  }
-
-  50%{
-    opacity:.65;
-  }
-}
-
-
-/* =========================
-   MAGIC CIRCLE
-========================= */
-
-.magic-circle{
-
-  position:absolute;
-
-  width:min(72vw,760px);
-  height:min(72vw,760px);
-
-  left:50%;
-  top:47%;
-
-  transform:translate(-50%,-50%);
-
-  border:
-    1px solid
-    rgba(73,143,198,.28);
-
-  border-radius:50%;
-
-  box-shadow:
-    0 0 50px rgba(47,126,184,.08),
-    inset 0 0 60px rgba(62,139,194,.04);
-
-  z-index:0;
-
-  pointer-events:none;
-
-  opacity:.55;
-
-  transition:
-    border-color .6s ease,
-    box-shadow .6s ease;
-}
-
-.magic-circle::before,
-.magic-circle::after{
-
-  content:"";
-
-  position:absolute;
-
-  left:50%;
-  top:50%;
-
-  transform:translate(-50%,-50%);
-
-  border-radius:50%;
-
-  pointer-events:none;
-
-  transition:
-    border-color .6s ease;
-}
-
-.magic-circle::before{
-
-  width:82%;
-  height:82%;
-
-  border:
-    1px solid
-    rgba(73,143,198,.22);
-}
-
-.magic-circle::after{
-
-  width:61%;
-  height:61%;
-
-  border:
-    1px solid
-    rgba(91,162,213,.22);
-}
-
-
-/* =========================
-   OUTER FRAME
+   外框
 ========================= */
 
 .frame{
 
-  position:absolute;
+    width:min(1200px, 100%);
 
-  top:20px;
-  left:20px;
-  right:20px;
-  bottom:20px;
+    min-height:720px;
 
-  border:
-    1px solid
-    rgba(111,174,224,.32);
+    position:relative;
 
-  pointer-events:none;
+    border:
+        1px solid
+        rgba(180,215,255,.32);
 
-  z-index:2;
+    padding:70px;
 
-  transition:
-    border-color .6s ease;
-}
+    background:
+        rgba(4,16,32,.42);
 
-.frame::before,
-.frame::after{
+    box-shadow:
+        inset 0 0 80px
+        rgba(30,100,180,.05);
 
-  content:"";
-
-  position:absolute;
-
-  width:45px;
-  height:45px;
-
-  transition:
-    border-color .6s ease;
-}
-
-.frame::before{
-
-  left:-1px;
-  top:-1px;
-
-  border-left:
-    1px solid
-    rgba(108,178,230,.88);
-
-  border-top:
-    1px solid
-    rgba(108,178,230,.88);
-}
-
-.frame::after{
-
-  right:-1px;
-  bottom:-1px;
-
-  border-right:
-    1px solid
-    rgba(108,178,230,.88);
-
-  border-bottom:
-    1px solid
-    rgba(108,178,230,.88);
 }
 
 
 /* =========================
-   HEADER
+   四角装饰
 ========================= */
 
-.header{
+.corner{
 
-  position:absolute;
+    position:absolute;
 
-  left:58px;
-  right:58px;
-  top:38px;
+    width:36px;
 
-  z-index:20;
+    height:36px;
 
-  display:flex;
+    color:#dcecff;
 
-  align-items:flex-start;
+    font-size:18px;
 
-  justify-content:space-between;
+    opacity:.7;
 
-  width:auto;
-  max-width:none;
+}
 
-  margin:0;
-  padding:0;
+.corner::before{
+
+    content:"✡";
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+}
+
+.corner.tl{
+
+    top:-18px;
+    left:-18px;
+
+}
+
+.corner.tr{
+
+    top:-18px;
+    right:-18px;
+
+}
+
+.corner.bl{
+
+    bottom:-18px;
+    left:-18px;
+
+}
+
+.corner.br{
+
+    bottom:-18px;
+    right:-18px;
+
 }
 
 
 /* =========================
-   LOGO
+   左上角 Logo
 ========================= */
 
-.logo{
+.site-logo{
 
-  display:flex;
+    position:fixed;
 
-  align-items:flex-start;
+    left:58px;
 
-  gap:12px;
+    top:38px;
 
-  color:#d9edff;
+    z-index:20;
 
-  text-decoration:none;
+    color:#dcecff;
 
-  transition:
-    color .6s ease;
+    text-decoration:none;
+
+    line-height:1.35;
+
 }
 
-.logo-symbol{
+.site-logo .cn{
 
-  color:rgba(137,201,239,.9);
+    font-family:
+        "Noto Serif SC",
+        serif;
 
-  width:17px;
-  height:13px;
+    font-size:16px;
 
-  display:flex;
+    letter-spacing:3px;
 
-  align-items:flex-start;
+    font-weight:400;
 
-  justify-content:center;
-
-  font-size:17px;
-
-  line-height:13px;
-
-  margin:0;
-  padding:0;
-
-  text-shadow:
-    0 0 7px rgba(76,159,216,.5),
-    0 0 15px rgba(49,132,191,.22);
-
-  flex-shrink:0;
-
-  transition:
-    color .6s ease,
-    text-shadow .6s ease;
 }
 
-.logo-text{
+.site-logo .en{
 
-  display:flex;
+    margin-top:5px;
 
-  flex-direction:column;
-
-  align-items:flex-start;
-
-  line-height:1;
-}
-
-.logo-cn{
-
-  display:block;
-
-  height:13px;
-
-  line-height:13px;
-
-  color:#d9edff;
-
-  font-size:13px;
-
-  letter-spacing:3px;
-
-  white-space:nowrap;
-
-  transition:
-    color .6s ease;
-}
-
-.logo-en{
-
-  display:block;
-
-  margin-top:5px;
-
-  color:rgba(157,204,239,.63);
-
-  font-family:
-    "Times New Roman",
-    serif;
-
-  font-size:8px;
-
-  line-height:8px;
-
-  letter-spacing:3px;
-
-  white-space:nowrap;
-
-  transition:
-    color .6s ease;
-}
-
-
-/* =========================
-   HEADER RIGHT
-========================= */
-
-.header-right{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:20px;
-}
-
-
-/* =========================
-   BACK
-========================= */
-
-.back{
-
-  color:rgba(191,220,243,.68);
-
-  text-decoration:none;
-
-  font-family:
-    "Cinzel",
-    "Noto Serif SC",
-    serif;
-
-  font-size:11px;
-
-  letter-spacing:1px;
-
-  transition:
-    color .3s ease,
-    text-shadow .3s ease;
-}
-
-.back:hover{
-
-  color:#d9efff;
-
-  text-shadow:
-    0 0 10px
-    rgba(102,180,231,.35);
-}
-
-
-/* =========================
-   DAY / NIGHT TOGGLE
-========================= */
-
-.theme-toggle{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:7px;
-
-  height:28px;
-
-  padding:
-    0 11px;
-
-  border:
-    1px solid
-    rgba(111,174,224,.32);
-
-  background:
-    rgba(8,28,49,.35);
-
-  color:
-    rgba(191,220,243,.68);
-
-  font-family:
-    "Cinzel",
-    "Noto Serif SC",
-    serif;
-
-  font-size:8px;
-
-  letter-spacing:2px;
-
-  cursor:pointer;
-
-  border-radius:0;
-
-  white-space:nowrap;
-
-  transition:
-    color .35s ease,
-    border-color .35s ease,
-    background .35s ease,
-    box-shadow .35s ease;
-}
-
-.theme-toggle:hover{
-
-  color:#d9efff;
-
-  border-color:
-    rgba(122,192,235,.62);
-
-  background:
-    rgba(8,31,52,.55);
-
-  box-shadow:
-    0 0 14px
-    rgba(76,151,202,.12);
-}
-
-.theme-icon{
-
-  font-size:12px;
-
-  line-height:1;
-
-  letter-spacing:0;
-}
-
-
-/* =========================
-   CONTENT
-========================= */
-
-.content{
-
-  position:relative;
-
-  z-index:5;
-
-  width:min(1100px,100%);
-
-  margin:0 auto;
-
-  padding-top:145px;
-}
-
-
-/* =========================
-   HEADING
-========================= */
-
-.heading{
-
-  text-align:center;
-
-  margin-bottom:48px;
-}
-
-.heading-small{
-
-  font-family:"Cinzel",serif;
-
-  font-size:10px;
-
-  letter-spacing:6px;
-
-  color:rgba(115,182,224,.62);
-
-  margin-bottom:12px;
-
-  transition:
-    color .6s ease;
-}
-
-.heading-main{
-
-  font-family:"Cinzel",serif;
-
-  font-size:clamp(34px,5vw,56px);
-
-  font-weight:400;
-
-  letter-spacing:8px;
-
-  line-height:1;
-
-  color:#dceeff;
-
-  transition:
-    color .6s ease,
-    text-shadow .6s ease;
-}
-
-.heading-cn{
-
-  margin-top:14px;
-
-  font-size:13px;
-
-  letter-spacing:5px;
-
-  color:rgba(207,229,246,.86);
-
-  transition:
-    color .6s ease;
-}
-
-
-/* =========================
-   CHARACTER PANEL
-========================= */
-
-.character-panel{
-
-  position:relative;
-
-  display:grid;
-
-  grid-template-columns:
-    minmax(300px,430px)
-    1fr;
-
-  gap:55px;
-
-  width:100%;
-
-  padding:38px;
-
-  border:
-    1px solid
-    rgba(111,174,224,.32);
-
-  background:
-
-    linear-gradient(
-      145deg,
-      rgba(38,91,137,.13),
-      rgba(11,45,75,.10)
-    );
-
-  box-shadow:
-    0 20px 60px
-    rgba(0,0,0,.15);
-
-  transition:
-    background .6s ease,
-    border-color .6s ease,
-    box-shadow .6s ease;
-}
-
-
-/* =========================
-   CHARACTER IMAGE
-========================= */
-
-.character-image{
-
-  position:relative;
-
-  min-height:540px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  border:
-    1px solid
-    rgba(111,174,224,.25);
-
-  background:
-
-    radial-gradient(
-      circle at 50% 45%,
-      rgba(38,91,137,.14),
-      transparent 58%
-    ),
-
-    rgba(6,20,38,.4);
-
-  overflow:hidden;
-
-  transition:
-    background .6s ease,
-    border-color .6s ease;
-}
-
-.character-image::before{
-
-  content:"";
-
-  position:absolute;
-
-  inset:18px;
-
-  border:
-    1px solid
-    rgba(140,210,245,.07);
-
-  pointer-events:none;
-
-  transition:
-    border-color .6s ease;
-}
-
-.character-image::after{
-
-  content:"✦";
-
-  position:absolute;
-
-  right:24px;
-  top:20px;
-
-  color:rgba(143,202,237,.8);
-
-  font-size:16px;
-
-  text-shadow:
-    0 0 10px
-    rgba(90,190,240,.25);
-
-  transition:
-    color .6s ease,
-    text-shadow .6s ease;
-}
-
-
-/* =========================
-   IMAGE
-========================= */
-
-.character-image img{
-
-  display:block;
-
-  width:100%;
-  height:100%;
-
-  object-fit:contain;
-
-  position:relative;
-
-  z-index:1;
-}
-
-
-/* =========================
-   IMAGE PLACEHOLDER
-========================= */
-
-.image-placeholder{
-
-  text-align:center;
-
-  color:rgba(177,207,230,.62);
-
-  font-family:"Cinzel",serif;
-
-  letter-spacing:4px;
-
-  font-size:10px;
-
-  transition:
-    color .6s ease;
-}
-
-.image-placeholder-symbol{
-
-  display:block;
-
-  margin-bottom:15px;
-
-  font-family:
-    "Times New Roman",
-    serif;
-
-  font-size:34px;
-
-  color:rgba(143,210,246,.08);
-
-  transition:
-    color .6s ease;
-}
-
-.image-placeholder-cn{
-
-  display:block;
-
-  margin-top:10px;
-
-  font-family:
-    "Noto Serif SC",
-    serif;
-
-  font-size:10px;
-
-  letter-spacing:3px;
-
-  color:rgba(177,207,230,.62);
-
-  transition:
-    color .6s ease;
-}
-
-
-/* =========================
-   CHARACTER INFO
-========================= */
-
-.character-info{
-
-  display:flex;
-
-  flex-direction:column;
-
-  justify-content:center;
-}
-
-
-/* CHARACTER NUMBER */
-
-.character-number{
-
-  font-family:"Cinzel",serif;
-
-  font-size:9px;
-
-  letter-spacing:4px;
-
-  color:rgba(115,182,224,.62);
-
-  margin-bottom:22px;
-
-  transition:
-    color .6s ease;
-}
-
-
-/* CHARACTER NAME */
-
-.character-name-en{
-
-  font-family:"Cinzel",serif;
-
-  font-size:clamp(32px,4vw,52px);
-
-  font-weight:400;
-
-  letter-spacing:5px;
-
-  line-height:1;
-
-  color:#d9edff;
-
-  transition:
-    color .6s ease;
-}
-
-.character-name-cn{
-
-  margin-top:13px;
-
-  font-size:18px;
-
-  letter-spacing:7px;
-
-  color:rgba(207,229,246,.86);
-
-  transition:
-    color .6s ease;
-}
-
-.character-role{
-
-  margin-top:18px;
-
-  font-family:"Cinzel",serif;
-
-  font-size:10px;
-
-  letter-spacing:4px;
-
-  color:rgba(115,182,224,.62);
-
-  transition:
-    color .6s ease;
-}
-
-
-/* =========================
-   DIVIDER
-========================= */
-
-.divider{
-
-  width:100%;
-
-  height:1px;
-
-  margin:30px 0;
-
-  background:
-
-    linear-gradient(
-      90deg,
-      rgba(120,195,235,.3),
-      rgba(120,195,235,.06),
-      transparent
-    );
-
-  transition:
-    background .6s ease;
-}
-
-
-/* =========================
-   BASIC INFO
-========================= */
-
-.basic-info{
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(2,1fr);
-
-  gap:22px 35px;
-}
-
-.info-item{
-
-  display:flex;
-
-  flex-direction:column;
-
-  gap:7px;
-}
-
-.info-label{
-
-  font-family:"Cinzel",serif;
-
-  font-size:8px;
-
-  letter-spacing:3px;
-
-  color:rgba(115,182,224,.62);
-
-  transition:
-    color .6s ease;
-}
-
-.info-value{
-
-  font-size:12px;
-
-  letter-spacing:2px;
-
-  color:rgba(207,229,246,.86);
-
-  min-height:14px;
-
-  transition:
-    color .6s ease;
-}
-
-
-/* =========================
-   PROFILE
-========================= */
-
-.description-title{
-
-  font-family:"Cinzel",serif;
-
-  font-size:9px;
-
-  letter-spacing:4px;
-
-  color:rgba(115,182,224,.62);
-
-  margin-bottom:13px;
-
-  transition:
-    color .6s ease;
-}
-
-.description{
-
-  font-size:13px;
-
-  line-height:2;
-
-  letter-spacing:1px;
-
-  color:rgba(177,207,230,.62);
-
-  min-height:20px;
-
-  transition:
-    color .6s ease;
-}
-
-
-/* =========================
-   ARCHIVE MARK
-========================= */
-
-.archive-mark{
-
-  position:absolute;
-
-  right:25px;
-  bottom:20px;
-
-  font-family:"Cinzel",serif;
-
-  font-size:8px;
-
-  letter-spacing:3px;
-
-  color:rgba(137,201,239,.28);
-
-  transition:
-    color .6s ease;
-}
-
-
-/* =========================
-   TABLET
-========================= */
-
-@media(max-width:800px){
-
-  .header{
-
-    left:35px;
-    right:35px;
-    top:30px;
-  }
-
-  .header-right{
-
-    gap:14px;
-  }
-
-  .theme-toggle{
-
-    height:27px;
-
-    padding:
-      0 9px;
-
-    font-size:7px;
-  }
-
-  .character-panel{
-
-    grid-template-columns:1fr;
-
-    gap:40px;
-
-    padding:30px;
-  }
-
-  .character-image{
-
-    min-height:500px;
-  }
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:600px){
-
-  .page{
-
-    padding:
-      22px
-      20px
-      55px;
-  }
-
-  .header{
-
-    left:25px;
-    right:25px;
-    top:24px;
-
-    width:auto;
-    max-width:none;
-
-    margin:0;
-    padding:0;
-
-    align-items:flex-start;
-  }
-
-  .frame{
-
-    top:14px;
-    left:14px;
-    right:14px;
-    bottom:14px;
-  }
-
-
-  /* logo */
-
-  .logo{
-
-    align-items:flex-start;
-
-    gap:10px;
-  }
-
-  .logo-symbol{
-
-    width:15px;
-    height:11px;
-
-    font-size:15px;
-
-    line-height:11px;
-
-    margin-top:2px;
-  }
-
-  .logo-cn{
-
-    height:11px;
-
-    line-height:11px;
-
-    font-size:11px;
-
-    letter-spacing:2px;
-  }
-
-  .logo-en{
-
-    margin-top:4px;
-
-    font-size:7px;
-
-    line-height:7px;
-
-    letter-spacing:2px;
-  }
-
-  .header-right{
-
-    gap:8px;
-  }
-
-  .back{
-
-    font-size:10px;
-  }
-
-  .theme-toggle{
-
-    height:25px;
-
-    padding:
-      0 7px;
-
-    gap:5px;
-
-    font-size:6px;
-
-    letter-spacing:1px;
-  }
-
-  .theme-icon{
-
-    font-size:10px;
-  }
-
-
-  /* content */
-
-  .content{
-
-    padding-top:120px;
-  }
-
-  .heading{
-
-    margin-bottom:30px;
-  }
-
-  .heading-small{
-
-    font-size:8px;
-
-    letter-spacing:4px;
-  }
-
-  .heading-main{
-
-    font-size:30px;
-
-    letter-spacing:5px;
-  }
-
-  .heading-cn{
+    font-family:
+        "Cinzel",
+        serif;
 
     font-size:10px;
 
     letter-spacing:3px;
-  }
+
+    opacity:.7;
+
+}
 
 
-  /* panel */
+/* =========================
+   右上角
+========================= */
 
-  .character-panel{
+.top-right{
 
-    padding:20px;
+    position:fixed;
 
-    gap:30px;
-  }
+    right:58px;
 
-  .character-image{
+    top:38px;
 
-    min-height:430px;
-  }
+    z-index:20;
 
-  .character-image::before{
+    display:flex;
 
-    inset:12px;
-  }
+    align-items:center;
 
+    gap:22px;
 
-  /* name */
+}
 
-  .character-name-en{
+.back-link{
 
-    font-size:32px;
+    color:#dcecff;
 
-    letter-spacing:4px;
-  }
+    text-decoration:none;
 
-  .character-name-cn{
+    font-family:"Cinzel",serif;
 
-    font-size:15px;
-
-    letter-spacing:5px;
-  }
-
-
-  /* info */
-
-  .basic-info{
-
-    grid-template-columns:1fr;
-
-    gap:17px;
-  }
-
-  .description{
-
-    font-size:12px;
-
-    line-height:1.9;
-  }
-
-
-  /* magic circle */
-
-  .magic-circle{
-
-    width:105vw;
-
-    height:105vw;
-  }
-
-
-  /* archive mark */
-
-  .archive-mark{
-
-    position:relative;
-
-    right:auto;
-    bottom:auto;
-
-    margin-top:24px;
-
-    text-align:right;
-
-    font-size:7px;
+    font-size:10px;
 
     letter-spacing:2px;
 
-    line-height:1.4;
+    opacity:.72;
 
-    white-space:nowrap;
-  }
+    transition:.3s;
+
+}
+
+.back-link:hover{
+
+    opacity:1;
+
 }
 
 
 /* =========================
-   VERY SMALL
+   日夜模式
 ========================= */
 
-@media(max-width:360px){
+.theme-toggle{
 
-  .header{
+    width:38px;
 
-    left:20px;
-    right:20px;
-    top:24px;
-  }
+    height:20px;
 
-  .heading-main{
+    border:
+        1px solid
+        rgba(190,220,255,.35);
 
-    font-size:27px;
-  }
+    border-radius:20px;
 
-  .header-right{
+    position:relative;
 
-    gap:5px;
-  }
+    cursor:pointer;
 
-  .back{
+    background:
+        rgba(255,255,255,.03);
+
+}
+
+.theme-toggle::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:12px;
+
+    height:12px;
+
+    border-radius:50%;
+
+    left:3px;
+
+    top:3px;
+
+    background:#dcecff;
+
+    transition:.35s;
+
+}
+
+body.day .theme-toggle::before{
+
+    transform:
+        translateX(18px);
+
+}
+
+
+/* =========================
+   标题
+========================= */
+
+.archive-label{
+
+    text-align:center;
+
+    font-family:"Cinzel",serif;
+
+    font-size:11px;
+
+    letter-spacing:5px;
+
+    opacity:.55;
+
+    margin-bottom:16px;
+
+}
+
+.main-title{
+
+    text-align:center;
+
+    font-family:"Cinzel",serif;
+
+    font-size:
+        clamp(30px,5vw,54px);
+
+    font-weight:300;
+
+    letter-spacing:7px;
+
+    margin-bottom:55px;
+
+}
+
+.main-title .cn{
+
+    display:block;
+
+    font-family:
+        "Noto Serif SC",
+        serif;
+
+    font-size:
+        clamp(18px,2.5vw,25px);
+
+    letter-spacing:8px;
+
+    margin-top:13px;
+
+    opacity:.85;
+
+}
+
+
+/* =========================
+   角色主体
+========================= */
+
+.character-panel{
+
+    display:grid;
+
+    grid-template-columns:
+        minmax(300px, .85fr)
+        minmax(320px, 1fr);
+
+    gap:75px;
+
+    align-items:center;
+
+}
+
+
+/* =========================
+   立绘区域
+========================= */
+
+.character-image-wrap{
+
+    position:relative;
+
+    min-height:500px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+.character-image-wrap::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:390px;
+
+    height:390px;
+
+    max-width:80vw;
+
+    max-height:80vw;
+
+    border:
+        1px solid
+        rgba(170,215,255,.22);
+
+    border-radius:50%;
+
+}
+
+.character-image-wrap::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:300px;
+
+    height:300px;
+
+    max-width:65vw;
+
+    max-height:65vw;
+
+    border:
+        1px solid
+        rgba(170,215,255,.13);
+
+    border-radius:50%;
+
+}
+
+
+.character-image{
+
+    position:relative;
+
+    z-index:3;
+
+    max-width:100%;
+
+    max-height:500px;
+
+    object-fit:contain;
+
+    display:none;
+
+}
+
+
+/* =========================
+   魔法阵
+========================= */
+
+.magic-circle{
+
+    position:absolute;
+
+    width:430px;
+
+    height:430px;
+
+    max-width:90vw;
+
+    max-height:90vw;
+
+    border:
+        1px solid
+        rgba(150,205,255,.15);
+
+    border-radius:50%;
+
+    z-index:1;
+
+}
+
+.magic-circle::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:78%;
+
+    height:78%;
+
+    left:11%;
+
+    top:11%;
+
+    border:
+        1px solid
+        rgba(150,205,255,.11);
+
+    border-radius:50%;
+
+}
+
+.magic-circle::after{
+
+    content:"✦";
+
+    position:absolute;
+
+    left:50%;
+
+    top:-9px;
+
+    transform:
+        translateX(-50%);
+
+    font-size:13px;
+
+    color:#dcecff;
+
+    opacity:.65;
+
+}
+
+
+/* =========================
+   立绘占位
+========================= */
+
+.image-placeholder{
+
+    position:relative;
+
+    z-index:2;
+
+    width:230px;
+
+    height:320px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border:
+        1px solid
+        rgba(180,215,255,.2);
+
+    color:
+        rgba(220,236,255,.35);
+
+    font-family:"Cinzel",serif;
+
+    font-size:10px;
+
+    letter-spacing:3px;
+
+    text-align:center;
+
+}
+
+
+/* =========================
+   角色信息
+========================= */
+
+.character-info{
+
+    position:relative;
+
+    z-index:5;
+
+}
+
+.character-number{
+
+    font-family:"Cinzel",serif;
+
+    font-size:10px;
+
+    letter-spacing:4px;
+
+    opacity:.45;
+
+    margin-bottom:18px;
+
+}
+
+.character-name{
+
+    font-family:"Cinzel",serif;
+
+    font-weight:300;
+
+    font-size:
+        clamp(30px,4vw,48px);
+
+    letter-spacing:3px;
+
+    line-height:1.15;
+
+}
+
+.character-name .cn-name{
+
+    display:block;
+
+    font-family:
+        "Noto Serif SC",
+        serif;
+
+    font-size:
+        clamp(18px,2.4vw,25px);
+
+    letter-spacing:5px;
+
+    margin-top:12px;
+
+    opacity:.8;
+
+}
+
+.info-line{
+
+    width:100%;
+
+    height:1px;
+
+    background:
+        rgba(180,215,255,.18);
+
+    margin:
+        30px 0;
+
+}
+
+.meta-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:
+        20px 30px;
+
+    margin-bottom:36px;
+
+}
+
+.meta-item{
+
+    min-width:0;
+
+}
+
+.meta-label{
+
+    font-family:"Cinzel",serif;
 
     font-size:9px;
-  }
 
-  .theme-toggle{
+    letter-spacing:2px;
 
-    padding:
-      0 6px;
+    opacity:.42;
 
-    font-size:6px;
-  }
+    margin-bottom:7px;
+
 }
 
+.meta-value{
 
-/* =========================================================
-   ★ DAY MODE
-   ★ 与首页 / 档案目录统一
-========================================================= */
+    font-family:
+        "Noto Serif SC",
+        serif;
 
-body.day-mode{
+    font-size:14px;
 
-  background:#f4f9fd;
+    letter-spacing:2px;
 
-  color:#2e5069;
+    min-height:20px;
+
 }
 
+.profile-title{
 
-/* 页面背景 */
+    font-family:"Cinzel",serif;
 
-body.day-mode .page{
+    font-size:10px;
 
-  background:
+    letter-spacing:4px;
 
-    radial-gradient(
-      circle at 50% 42%,
-      rgba(165,211,238,.20),
-      transparent 38%
-    ),
+    opacity:.55;
 
-    radial-gradient(
-      circle at 50% 52%,
-      rgba(226,240,249,.68),
-      transparent 72%
-    ),
+    margin-bottom:14px;
 
-    #f4f9fd;
 }
 
+.profile{
 
-/* =========================
-   DAY · STARS
-========================= */
+    font-family:
+        "Noto Serif SC",
+        serif;
 
-body.day-mode .stars span{
+    font-size:14px;
 
-  color:
-    rgba(87,151,199,.50);
+    line-height:2;
 
-  text-shadow:none;
-}
+    letter-spacing:1.5px;
 
+    opacity:.78;
 
-/* =========================
-   DAY · MAGIC CIRCLE
-========================= */
+    white-space:pre-line;
 
-body.day-mode .magic-circle{
+    min-height:70px;
 
-  border-color:
-    rgba(79,148,196,.26);
-
-  box-shadow:
-
-    0 0 50px
-    rgba(70,142,196,.055),
-
-    inset
-    0 0 60px
-    rgba(78,151,204,.028);
-}
-
-body.day-mode .magic-circle::before{
-
-  border-color:
-    rgba(79,148,196,.26);
-}
-
-body.day-mode .magic-circle::after{
-
-  border-color:
-    rgba(101,168,207,.20);
 }
 
 
 /* =========================
-   DAY · FRAME
+   档案标记
 ========================= */
 
-body.day-mode .frame{
+.archive-mark{
 
-  border-color:
-    rgba(91,145,184,.34);
-}
+    margin-top:35px;
 
-body.day-mode .frame::before{
+    font-family:"Cinzel",serif;
 
-  border-left-color:
-    rgba(79,141,190,.68);
+    font-size:9px;
 
-  border-top-color:
-    rgba(79,141,190,.68);
-}
+    letter-spacing:4px;
 
-body.day-mode .frame::after{
+    opacity:.35;
 
-  border-right-color:
-    rgba(79,141,190,.68);
-
-  border-bottom-color:
-    rgba(79,141,190,.68);
 }
 
 
 /* =========================
-   DAY · LOGO
+   翻页
 ========================= */
 
-body.day-mode .logo{
+.character-navigation{
 
-  color:#2e526c;
+    margin-top:70px;
+
+    padding-top:30px;
+
+    border-top:
+        1px solid
+        rgba(180,215,255,.15);
+
+    display:grid;
+
+    grid-template-columns:
+        1fr
+        auto
+        1fr;
+
+    align-items:center;
+
+    gap:30px;
+
 }
 
-body.day-mode .logo-symbol{
+.nav-button{
 
-  color:
-    rgba(79,151,201,.84);
+    color:#dcecff;
 
-  text-shadow:
-    0 0 7px
-    rgba(86,158,208,.20);
+    text-decoration:none;
+
+    font-family:"Cinzel",serif;
+
+    font-size:10px;
+
+    letter-spacing:3px;
+
+    opacity:.65;
+
+    transition:
+        opacity .3s ease,
+        transform .3s ease;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:14px;
+
 }
 
-body.day-mode .logo-cn{
+.nav-button:hover{
 
-  color:
-    rgba(46,82,108,.92);
+    opacity:1;
+
 }
 
-body.day-mode .logo-en{
+.nav-prev{
 
-  color:
-    rgba(81,137,173,.62);
+    justify-self:start;
+
+}
+
+.nav-next{
+
+    justify-self:end;
+
+}
+
+.nav-arrow{
+
+    font-size:18px;
+
+    line-height:1;
+
+}
+
+.nav-current{
+
+    font-family:"Cinzel",serif;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    opacity:.38;
+
+    white-space:nowrap;
+
 }
 
 
 /* =========================
-   DAY · BACK
+   星点
 ========================= */
 
-body.day-mode .back{
+.star{
 
-  color:
-    rgba(62,99,127,.70);
+    position:fixed;
+
+    color:#dcecff;
+
+    pointer-events:none;
+
+    opacity:.35;
+
+    font-size:10px;
+
 }
 
-body.day-mode .back:hover{
+.star.s1{
 
-  color:#28536f;
+    left:12%;
 
-  text-shadow:
-    0 0 8px
-    rgba(76,151,202,.14);
+    top:25%;
+
+}
+
+.star.s2{
+
+    right:15%;
+
+    top:22%;
+
+}
+
+.star.s3{
+
+    left:20%;
+
+    bottom:20%;
+
+}
+
+.star.s4{
+
+    right:11%;
+
+    bottom:26%;
+
+}
+
+.star.s5{
+
+    left:7%;
+
+    top:58%;
+
+}
+
+.star.s6{
+
+    right:7%;
+
+    top:67%;
+
 }
 
 
 /* =========================
-   DAY · BUTTON
+   日间模式
+   只改变明亮区域
 ========================= */
 
-body.day-mode .theme-toggle{
+body.day{
 
-  border-color:
-    rgba(91,145,184,.34);
+    background:#edf4fb;
 
-  background:
-    rgba(248,252,255,.78);
+    color:#18283b;
 
-  color:
-    rgba(61,98,125,.76);
 }
 
-body.day-mode .theme-toggle:hover{
+body.day .frame{
 
-  border-color:
-    rgba(79,151,200,.62);
+    background:
+        rgba(255,255,255,.62);
 
-  background:
-    rgba(248,252,255,.90);
+    border-color:
+        rgba(50,85,120,.25);
 
-  color:#28536f;
+}
 
-  box-shadow:
-    0 0 14px
-    rgba(76,151,202,.11);
+body.day .site-logo,
+body.day .back-link,
+body.day .theme-toggle,
+body.day .corner,
+body.day .nav-button{
+
+    color:#18283b;
+
+}
+
+body.day .theme-toggle{
+
+    border-color:
+        rgba(40,70,100,.3);
+
+    background:
+        rgba(255,255,255,.6);
+
+}
+
+body.day .theme-toggle::before{
+
+    background:#18283b;
+
+}
+
+body.day .character-image-wrap::before{
+
+    border-color:
+        rgba(50,90,130,.18);
+
+}
+
+body.day .character-image-wrap::after{
+
+    border-color:
+        rgba(50,90,130,.12);
+
+}
+
+body.day .magic-circle{
+
+    border-color:
+        rgba(50,90,130,.14);
+
+}
+
+body.day .magic-circle::before{
+
+    border-color:
+        rgba(50,90,130,.1);
+
+}
+
+body.day .info-line,
+body.day .character-navigation{
+
+    border-color:
+        rgba(50,80,110,.16);
+
+}
+
+body.day .image-placeholder{
+
+    border-color:
+        rgba(50,80,110,.2);
+
+    color:
+        rgba(30,55,80,.38);
+
+}
+
+body.day .star{
+
+    color:#18283b;
+
 }
 
 
 /* =========================
-   DAY · HEADING
+   手机
 ========================= */
 
-body.day-mode .heading-small{
+@media(max-width:800px){
 
-  color:
-    rgba(81,151,198,.54);
-}
+    .page{
 
-body.day-mode .heading-main{
+        padding:
+            105px
+            20px
+            70px;
 
-  color:#2b506a;
+    }
 
-  text-shadow:
-    0 0 18px
-    rgba(80,151,201,.065);
-}
+    .site-logo{
 
-body.day-mode .heading-cn{
+        left:22px;
 
-  color:
-    rgba(45,82,106,.80);
+        top:25px;
+
+    }
+
+    .top-right{
+
+        right:22px;
+
+        top:27px;
+
+    }
+
+    .site-logo .cn{
+
+        font-size:13px;
+
+        letter-spacing:2px;
+
+    }
+
+    .site-logo .en{
+
+        font-size:8px;
+
+        letter-spacing:2px;
+
+    }
+
+    .back-link{
+
+        display:none;
+
+    }
+
+    .frame{
+
+        padding:
+            50px
+            25px
+            45px;
+
+        min-height:0;
+
+    }
+
+    .main-title{
+
+        margin-bottom:35px;
+
+        letter-spacing:4px;
+
+    }
+
+    .character-panel{
+
+        grid-template-columns:1fr;
+
+        gap:30px;
+
+    }
+
+    .character-image-wrap{
+
+        min-height:390px;
+
+    }
+
+    .character-image{
+
+        max-height:390px;
+
+    }
+
+    .magic-circle{
+
+        width:340px;
+
+        height:340px;
+
+    }
+
+    .character-info{
+
+        text-align:center;
+
+    }
+
+    .meta-grid{
+
+        text-align:left;
+
+    }
+
+    .info-line{
+
+        margin:
+            24px 0;
+
+    }
+
+    .archive-mark{
+
+        margin-top:25px;
+
+    }
+
+    .character-navigation{
+
+        margin-top:50px;
+
+        grid-template-columns:
+            1fr
+            auto
+            1fr;
+
+        gap:10px;
+
+    }
+
+    .nav-button{
+
+        font-size:8px;
+
+        letter-spacing:2px;
+
+        gap:7px;
+
+    }
+
+    .nav-arrow{
+
+        font-size:15px;
+
+    }
+
+    .nav-current{
+
+        font-size:7px;
+
+        letter-spacing:2px;
+
+    }
+
 }
 
 
 /* =========================
-   DAY · CHARACTER PANEL
+   超小屏
 ========================= */
 
-body.day-mode .character-panel{
+@media(max-width:430px){
 
-  border-color:
-    rgba(82,151,198,.36);
+    .frame{
 
-  background:
+        padding:
+            45px
+            18px
+            35px;
 
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.58),
-      rgba(239,247,251,.40)
-    );
+    }
 
-  box-shadow:
-    0 20px 60px
-    rgba(70,110,130,.08);
+    .character-image-wrap{
+
+        min-height:340px;
+
+    }
+
+    .character-image{
+
+        max-height:340px;
+
+    }
+
+    .magic-circle{
+
+        width:290px;
+
+        height:290px;
+
+    }
+
+    .image-placeholder{
+
+        width:190px;
+
+        height:270px;
+
+    }
+
+    .meta-grid{
+
+        gap:
+            18px
+            15px;
+
+    }
+
+    .nav-current{
+
+        display:none;
+
+    }
+
 }
 
 
 /* =========================
-   DAY · CHARACTER IMAGE
+   防止隐藏元素占位
 ========================= */
 
-body.day-mode .character-image{
+[hidden]{
 
-  border-color:
-    rgba(82,151,198,.36);
+    display:none !important;
 
-  background:
-
-    radial-gradient(
-      circle at 50% 45%,
-      rgba(165,211,238,.20),
-      transparent 58%
-    ),
-
-    rgba(248,252,255,.42);
-}
-
-body.day-mode .character-image::before{
-
-  border-color:
-    rgba(82,151,198,.14);
-}
-
-body.day-mode .character-image::after{
-
-  color:
-    rgba(76,151,201,.50);
-
-  text-shadow:none;
-}
-
-
-/* =========================
-   DAY · PLACEHOLDER
-========================= */
-
-body.day-mode .image-placeholder{
-
-  color:
-    rgba(65,106,133,.64);
-}
-
-body.day-mode .image-placeholder-symbol{
-
-  color:
-    rgba(112,188,224,.055);
-}
-
-body.day-mode .image-placeholder-cn{
-
-  color:
-    rgba(65,106,133,.64);
-}
-
-
-/* =========================
-   DAY · CHARACTER INFO
-========================= */
-
-body.day-mode .character-number{
-
-  color:
-    rgba(81,151,198,.54);
-}
-
-body.day-mode .character-name-en{
-
-  color:
-    rgba(46,82,108,.92);
-}
-
-body.day-mode .character-name-cn{
-
-  color:
-    rgba(45,82,106,.80);
-}
-
-body.day-mode .character-role{
-
-  color:
-    rgba(70,135,165,.60);
-}
-
-
-/* =========================
-   DAY · DIVIDER
-========================= */
-
-body.day-mode .divider{
-
-  background:
-
-    linear-gradient(
-      90deg,
-      rgba(81,151,198,.34),
-      rgba(81,151,198,.08),
-      transparent
-    );
-}
-
-
-/* =========================
-   DAY · BASIC INFO
-========================= */
-
-body.day-mode .info-label{
-
-  color:
-    rgba(70,135,165,.68);
-}
-
-body.day-mode .info-value{
-
-  color:
-    rgba(65,106,133,.64);
-}
-
-
-/* =========================
-   DAY · PROFILE
-========================= */
-
-body.day-mode .description-title{
-
-  color:
-    rgba(70,135,165,.68);
-}
-
-body.day-mode .description{
-
-  color:
-    rgba(65,106,133,.64);
-}
-
-
-/* =========================
-   DAY · ARCHIVE MARK
-========================= */
-
-body.day-mode .archive-mark{
-
-  color:
-    rgba(73,115,143,.40);
-}
-
-
-/* =========================
-   REDUCED MOTION
-========================= */
-
-@media(prefers-reduced-motion:reduce){
-
-  .stars span{
-
-    animation:none;
-  }
-
-  body,
-  .theme-toggle,
-  .magic-circle,
-  .frame,
-  .logo,
-  .logo-symbol,
-  .logo-cn,
-  .logo-en,
-  .heading-small,
-  .heading-main,
-  .heading-cn,
-  .character-panel,
-  .character-image,
-  .character-image::before,
-  .character-image::after,
-  .image-placeholder,
-  .image-placeholder-symbol,
-  .image-placeholder-cn,
-  .character-number,
-  .character-name-en,
-  .character-name-cn,
-  .character-role,
-  .divider,
-  .info-label,
-  .info-value,
-  .description-title,
-  .description,
-  .archive-mark{
-
-    transition:none;
-  }
 }
 
 </style>
+
 </head>
 
 
 <body>
 
-<div class="page">
 
+<!-- =========================
+     左上角 Logo
+========================= -->
 
-  <!-- =====================
-       FLOATING STARS
-  ====================== -->
+<a
+    class="site-logo"
+    href="index.html"
+>
 
-  <div class="stars">
-
-    <span>✦</span>
-    <span>✦</span>
-    <span>✡</span>
-    <span>✶</span>
-    <span>✦</span>
-
-    <span>✶</span>
-    <span>✦</span>
-    <span>✡</span>
-    <span>✶</span>
-    <span>✦</span>
-
-    <span>✦</span>
-    <span>✦</span>
-    <span>✶</span>
-    <span>✦</span>
-    <span>✡</span>
-
-    <span>✦</span>
-    <span>✶</span>
-    <span>✦</span>
-    <span>✦</span>
-    <span>✡</span>
-
-  </div>
-
-
-  <!-- =====================
-       MAGIC CIRCLE
-  ====================== -->
-
-  <div class="magic-circle"></div>
-
-
-  <!-- =====================
-       OUTER FRAME
-  ====================== -->
-
-  <div class="frame"></div>
-
-
-  <!-- =====================
-       HEADER
-  ====================== -->
-
-  <header class="header">
-
-    <a href="archive.html" class="logo">
-
-      <span class="logo-symbol">
-        ✦
-      </span>
-
-      <span class="logo-text">
-
-        <span class="logo-cn">
-          塞垭弥大陆档案馆
-        </span>
-
-        <span class="logo-en">
-          SEYAMI ARCHIVE
-        </span>
-
-      </span>
-
-    </a>
-
-
-    <div class="header-right">
-
-      <a href="archive.html" class="back">
-        ← 返回档案目录
-      </a>
-
-
-      <button
-        class="theme-toggle"
-        id="themeToggle"
-        type="button"
-        aria-label="切换昼夜模式"
-      >
-
-        <span
-          class="theme-icon"
-          id="themeIcon"
-        >
-          ☾
-        </span>
-
-        <span id="themeText">
-          NIGHT
-        </span>
-
-      </button>
-
+    <div class="cn">
+        塞垭弥大陆档案馆
     </div>
 
-  </header>
-
-
-  <!-- =====================
-       MAIN CONTENT
-  ====================== -->
-
-  <main class="content">
-
-
-    <!-- TITLE -->
-
-    <section class="heading">
-
-      <div class="heading-small">
-        CHARACTER RECORD
-      </div>
-
-      <div class="heading-main">
-        ARCHIVE
-      </div>
-
-      <div class="heading-cn">
-        角色档案
-      </div>
-
-    </section>
-
-
-    <!-- =====================
-         CHARACTER PANEL
-    ====================== -->
-
-    <section class="character-panel">
-
-
-      <!-- =====================
-           IMAGE
-      ====================== -->
-
-      <div class="character-image">
-
-        <img
-          id="characterImage"
-          src=""
-          alt=""
-          style="display:none;"
-        >
-
-        <div
-          class="image-placeholder"
-          id="imagePlaceholder"
-        >
-
-          <span class="image-placeholder-symbol">
-            ✦
-          </span>
-
-          CHARACTER PORTRAIT
-
-          <span class="image-placeholder-cn">
-            角色立绘
-          </span>
-
-        </div>
-
-      </div>
-
-
-      <!-- =====================
-           CHARACTER INFORMATION
-      ====================== -->
-
-      <div class="character-info">
-
-
-        <!-- CHARACTER NUMBER -->
-
-        <div class="character-number">
-          CHARACTER · 001
-        </div>
-
-
-        <!-- ENGLISH NAME -->
-
-        <div class="character-name-en">
-        </div>
-
-
-        <!-- CHINESE NAME -->
-
-        <div class="character-name-cn">
-        </div>
-
-
-        <!-- ROLE TITLE -->
-
-        <div class="character-role">
-        </div>
-
-
-        <!-- DIVIDER -->
-
-        <div class="divider"></div>
-
-
-        <!-- BASIC INFORMATION -->
-
-        <div class="basic-info">
-
-
-          <!-- RACE -->
-
-          <div class="info-item">
-
-            <div class="info-label">
-              RACE
-            </div>
-
-            <div class="info-value">
-            </div>
-
-          </div>
-
-
-          <!-- REGION -->
-
-          <div class="info-item">
-
-            <div class="info-label">
-              REGION
-            </div>
-
-            <div class="info-value">
-            </div>
-
-          </div>
-
-
-          <!-- STATUS -->
-
-          <div class="info-item">
-
-            <div class="info-label">
-              STATUS
-            </div>
-
-            <div class="info-value">
-            </div>
-
-          </div>
-
-
-          <!-- ROLE -->
-
-          <div class="info-item">
-
-            <div class="info-label">
-              ROLE
-            </div>
-
-            <div class="info-value">
-            </div>
-
-          </div>
-
-
-        </div>
-
-
-        <!-- DIVIDER -->
-
-        <div class="divider"></div>
-
-
-        <!-- PROFILE -->
-
-        <div class="description-title">
-          PROFILE
-        </div>
-
-        <div class="description">
-        </div>
-
-
-      </div>
-
-
-      <!-- ARCHIVE MARK -->
-
-      <div class="archive-mark">
-        SEYAMI · CHARACTER ARCHIVE · 001
-      </div>
-
-
-    </section>
-
-
-  </main>
+    <div class="en">
+        SEYAMI ARCHIVE
+    </div>
+
+</a>
+
+
+<!-- =========================
+     右上角
+========================= -->
+
+<div class="top-right">
+
+    <a
+        class="back-link"
+        href="archive.html"
+    >
+        ← ARCHIVE
+    </a>
+
+    <div
+        class="theme-toggle"
+        id="themeToggle"
+        title="切换日夜模式"
+    ></div>
 
 </div>
 
 
+<!-- =========================
+     装饰星点
+========================= -->
+
+<div class="star s1">✦</div>
+<div class="star s2">✶</div>
+<div class="star s3">✦</div>
+<div class="star s4">✶</div>
+<div class="star s5">✡</div>
+<div class="star s6">✦</div>
+
+
+<!-- =========================
+     页面
+========================= -->
+
+<main class="page">
+
+<div class="frame">
+
+
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+
+
+    <!-- 标题 -->
+
+    <div class="archive-label">
+        CHARACTER RECORD
+    </div>
+
+    <h1 class="main-title">
+
+        ARCHIVE
+
+        <span class="cn">
+            角色档案
+        </span>
+
+    </h1>
+
+
+    <!-- =========================
+         角色主体
+    ========================= -->
+
+    <section class="character-panel">
+
+
+        <!-- 立绘 -->
+
+        <div class="character-image-wrap">
+
+            <div class="magic-circle"></div>
+
+            <div
+                class="image-placeholder"
+                id="imagePlaceholder"
+            >
+                CHARACTER PORTRAIT
+                <br>
+                角色立绘
+            </div>
+
+            <img
+                id="characterImage"
+                class="character-image"
+                alt="角色立绘"
+            >
+
+        </div>
+
+
+        <!-- 角色资料 -->
+
+        <div class="character-info">
+
+
+            <div
+                class="character-number"
+                id="characterNumber"
+            >
+                CHARACTER · 001
+            </div>
+
+
+            <div
+                class="character-name"
+                id="characterName"
+            >
+                <span class="en-name">
+                    CHARACTER
+                </span>
+
+                <span class="cn-name">
+                    角色
+                </span>
+            </div>
+
+
+            <div class="info-line"></div>
+
+
+            <div class="meta-grid">
+
+
+                <div class="meta-item">
+
+                    <div class="meta-label">
+                        RACE
+                    </div>
+
+                    <div
+                        class="meta-value"
+                        id="characterRace"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+
+                <div class="meta-item">
+
+                    <div class="meta-label">
+                        REGION
+                    </div>
+
+                    <div
+                        class="meta-value"
+                        id="characterRegion"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+
+                <div class="meta-item">
+
+                    <div class="meta-label">
+                        AGE
+                    </div>
+
+                    <div
+                        class="meta-value"
+                        id="characterAge"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+
+                <div class="meta-item">
+
+                    <div class="meta-label">
+                        GENDER
+                    </div>
+
+                    <div
+                        class="meta-value"
+                        id="characterGender"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+
+                <div class="meta-item">
+
+                    <div class="meta-label">
+                        STATUS
+                    </div>
+
+                    <div
+                        class="meta-value"
+                        id="characterStatus"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+
+                <div class="meta-item">
+
+                    <div class="meta-label">
+                        ROLE
+                    </div>
+
+                    <div
+                        class="meta-value"
+                        id="characterRole"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="profile-title">
+                PROFILE
+            </div>
+
+
+            <div
+                class="profile"
+                id="characterProfile"
+            >
+                —
+            </div>
+
+
+            <div
+                class="archive-mark"
+                id="archiveMark"
+            >
+                SEYAMI ARCHIVE
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =========================
+         翻页
+    ========================= -->
+
+    <nav
+        class="character-navigation"
+        id="characterNavigation"
+        aria-label="角色翻页"
+    >
+
+
+        <a
+            href="#"
+            class="nav-button nav-prev"
+            id="prevCharacter"
+        >
+
+            <span class="nav-arrow">
+                ←
+            </span>
+
+            <span>
+                PREVIOUS
+            </span>
+
+        </a>
+
+
+        <div
+            class="nav-current"
+            id="navCurrent"
+        >
+            CHARACTER · 001
+        </div>
+
+
+        <a
+            href="#"
+            class="nav-button nav-next"
+            id="nextCharacter"
+        >
+
+            <span>
+                NEXT
+            </span>
+
+            <span class="nav-arrow">
+                →
+            </span>
+
+        </a>
+
+
+    </nav>
+
+
+</div>
+
+</main>
+
+
+<!-- =========================
+     Supabase
+========================= -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+></script>
+
+
 <script>
 
-/* =========================================================
-   SUPABASE
-   Seyami Archive · Character Database
-========================================================= */
+/* =====================================================
+   Supabase
+===================================================== */
 
 const SUPABASE_URL =
-  "https://rqqkdpzehxzwqzytpxgh.supabase.co";
+    "https://rqqkdpzehxzwqzytpxgh.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY =
-  "sb_publishable_T_gNdlgkOaXnzjSvdmI1Pw_HQOVTEWG";
+    "sb_publishable_T_gNdlgkOaXnzjSvdmI1Pw_HQOVTEWG";
 
 const supabaseClient =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-  );
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
 
 
-/* =========================================================
-   CHARACTER ELEMENTS
-========================================================= */
+/* =====================================================
+   页面元素
+===================================================== */
 
 const characterNumber =
-  document.querySelector(
-    ".character-number"
-  );
+    document.getElementById(
+        "characterNumber"
+    );
 
-const characterNameEn =
-  document.querySelector(
-    ".character-name-en"
-  );
+const characterName =
+    document.getElementById(
+        "characterName"
+    );
 
-const characterNameCn =
-  document.querySelector(
-    ".character-name-cn"
-  );
+const characterRace =
+    document.getElementById(
+        "characterRace"
+    );
+
+const characterRegion =
+    document.getElementById(
+        "characterRegion"
+    );
+
+const characterAge =
+    document.getElementById(
+        "characterAge"
+    );
+
+const characterGender =
+    document.getElementById(
+        "characterGender"
+    );
+
+const characterStatus =
+    document.getElementById(
+        "characterStatus"
+    );
 
 const characterRole =
-  document.querySelector(
-    ".character-role"
-  );
+    document.getElementById(
+        "characterRole"
+    );
 
-const infoValues =
-  document.querySelectorAll(
-    ".info-value"
-  );
-
-const characterImage =
-  document.getElementById(
-    "characterImage"
-  );
-
-const imagePlaceholder =
-  document.getElementById(
-    "imagePlaceholder"
-  );
-
-const description =
-  document.querySelector(
-    ".description"
-  );
+const characterProfile =
+    document.getElementById(
+        "characterProfile"
+    );
 
 const archiveMark =
-  document.querySelector(
-    ".archive-mark"
-  );
+    document.getElementById(
+        "archiveMark"
+    );
+
+const characterImage =
+    document.getElementById(
+        "characterImage"
+    );
+
+const imagePlaceholder =
+    document.getElementById(
+        "imagePlaceholder"
+    );
+
+const prevCharacter =
+    document.getElementById(
+        "prevCharacter"
+    );
+
+const nextCharacter =
+    document.getElementById(
+        "nextCharacter"
+    );
+
+const navCurrent =
+    document.getElementById(
+        "navCurrent"
+    );
 
 
-/* =========================================================
-   GET CHARACTER ID FROM URL
-========================================================= */
+/* =====================================================
+   获取 URL 中的角色 ID
+===================================================== */
 
 function getCharacterId(){
 
-  const params =
-    new URLSearchParams(
-      window.location.search
-    );
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
 
-  return params.get("id");
+    return params.get("id");
 
 }
 
 
-/* =========================================================
-   LOAD CHARACTER
-========================================================= */
+/* =====================================================
+   名字处理
+   例如：
+   Evelina•Nieve 伊莉娜·妳芙
 
-async function loadCharacter(){
+   自动分成：
 
-  try{
+   Evelina•Nieve
+   伊莉娜·妳芙
+===================================================== */
 
-    const characterId =
-      getCharacterId();
+function splitCharacterName(fullName){
 
+    if(!fullName){
 
-    /*
-      明确读取数据库目前已经存在的字段。
+        return {
+            english:"CHARACTER",
+            chinese:"角色"
+        };
 
-      characters：
-
-      id
-      name
-      race
-      role
-      age
-      gender
-      region
-      personality
-      backstory
-      image_url
-    */
-
-    let query =
-      supabaseClient
-        .from("characters")
-        .select(`
-          id,
-          name,
-          race,
-          role,
-          age,
-          gender,
-          region,
-          personality,
-          backstory,
-          image_url
-        `);
+    }
 
 
-    /* =====================================================
-       指定角色
-       
-       例如：
+    const text =
+        String(fullName).trim();
 
-       characters.html?id=2
-    ===================================================== */
 
-    if(characterId){
-
-      query =
-        query.eq(
-          "id",
-          characterId
+    const chineseMatch =
+        text.match(
+            /[\u3400-\u9FFF]/
         );
 
-    }else{
 
-      /*
-        没有指定 ID 时：
+    if(!chineseMatch){
 
-        自动读取最新添加的角色。
-        
-        之前是 ascending:true，
-        会永远优先读取最早的一条。
-
-        现在改成 false。
-      */
-
-      query =
-        query
-          .order(
-            "id",
-            {
-              ascending:false
-            }
-          )
-          .limit(1);
+        return {
+            english:text,
+            chinese:""
+        };
 
     }
 
 
-    const {
-      data,
-      error
-    } =
-      await query;
+    const index =
+        chineseMatch.index;
 
 
-    /* =====================================================
-       DATABASE ERROR
-    ===================================================== */
+    return {
 
-    if(error){
+        english:
+            text
+                .slice(0,index)
+                .trim(),
 
-      console.error(
-        "Supabase 读取失败：",
-        error
-      );
+        chinese:
+            text
+                .slice(index)
+                .trim()
 
-      characterNameEn.textContent =
-        "ARCHIVE ERROR";
+    };
 
-      characterNameCn.textContent =
-        "档案读取失败";
+}
 
-      description.textContent =
-        "DATABASE CONNECTION ERROR";
 
-      return;
+/* =====================================================
+   显示角色
+===================================================== */
+
+function renderCharacter(
+    character,
+    currentIndex,
+    totalCount
+){
+
+    if(!character){
+
+        return;
+
     }
 
 
-    /* =====================================================
-       NO DATA
-    ===================================================== */
+    /* -------------------------
+       编号
+    ------------------------- */
 
-    if(
-      !data ||
-      data.length === 0
-    ){
+    const displayNumber =
+        String(
+            currentIndex + 1
+        ).padStart(3,"0");
 
-      console.warn(
-        "没有找到对应角色。",
-        characterId
-      );
-
-      characterNameEn.textContent =
-        "ARCHIVE NOT FOUND";
-
-      characterNameCn.textContent =
-        "无法找到该角色档案";
-
-      description.textContent =
-        "";
-
-      return;
-    }
-
-
-    /* =====================================================
-       CURRENT CHARACTER
-    ===================================================== */
-
-    const character =
-      data[0];
-
-
-    console.log(
-      "成功读取角色：",
-      character
-    );
-
-
-    /* =====================================================
-       CHARACTER NUMBER
-    ===================================================== */
 
     characterNumber.textContent =
-      "CHARACTER · " +
-      character.id;
+        "CHARACTER · " +
+        displayNumber;
 
 
-    archiveMark.textContent =
-      "SEYAMI · CHARACTER ARCHIVE · " +
-      character.id;
+    navCurrent.textContent =
+        "CHARACTER · " +
+        displayNumber;
 
 
-    /* =====================================================
-       NAME
-       
-       数据库：
+    /* -------------------------
+       名字
+    ------------------------- */
 
-       Evelina•Nieve 伊莉娜·妳芙
-
-       页面：
-
-       Evelina•Nieve
-       伊莉娜·妳芙
-    ===================================================== */
-
-    const fullName =
-      (character.name || "").trim();
+    const names =
+        splitCharacterName(
+            character.name
+        );
 
 
-    /*
-      找到第一个中文字符。
+    characterName.innerHTML = `
 
-      这样即使以后名字格式不是：
+        <span class="en-name">
+            ${escapeHTML(names.english)}
+        </span>
 
-      English 中文
+        <span class="cn-name">
+            ${escapeHTML(names.chinese)}
+        </span>
 
-      也不会因为空格问题导致显示异常。
-    */
-
-    const chineseIndex =
-      fullName.search(
-        /[\u4e00-\u9fff]/
-      );
+    `;
 
 
-    if(chineseIndex > -1){
+    /* -------------------------
+       基础资料
+    ------------------------- */
 
-      characterNameEn.textContent =
-        fullName
-          .substring(
-            0,
-            chineseIndex
-          )
-          .trim();
+    characterRace.textContent =
+        character.race || "—";
 
-      characterNameCn.textContent =
-        fullName
-          .substring(
-            chineseIndex
-          )
-          .trim();
+    characterRegion.textContent =
+        character.region || "—";
 
-    }else{
-
-      characterNameEn.textContent =
-        fullName;
-
-      characterNameCn.textContent =
-        "";
-
-    }
-
-
-    /* =====================================================
-       ROLE
-    ===================================================== */
-
-    characterRole.textContent =
-      character.role || "";
-
-
-    /* =====================================================
-       BASIC INFORMATION
-
-       0 = RACE
-       1 = REGION
-       2 = STATUS
-       3 = ROLE
-    ===================================================== */
-
-    if(infoValues.length >= 4){
-
-      /* RACE */
-
-      infoValues[0].textContent =
-        character.race || "";
-
-
-      /* REGION */
-
-      infoValues[1].textContent =
-        character.region || "";
-
-
-      /* STATUS */
-
-      let status = "";
-
-
-      if(character.gender){
-
-        status =
-          character.gender;
-
-      }
-
-
-      if(
+    characterAge.textContent =
         character.age !== null &&
         character.age !== undefined &&
         character.age !== ""
-      ){
+            ? character.age
+            : "—";
 
-        if(status){
+    characterGender.textContent =
+        character.gender || "—";
 
-          status += " · ";
-
-        }
-
-        status +=
-          character.age + "岁";
-
-      }
+    characterRole.textContent =
+        character.role || "—";
 
 
-      infoValues[2].textContent =
-        status;
+    /*
+       STATUS
+
+       当前数据库没有 status 字段，
+       所以这里暂时使用固定档案状态。
+    */
+
+    characterStatus.textContent =
+        "ARCHIVED";
 
 
-      /* ROLE */
-
-      infoValues[3].textContent =
-        character.role || "";
-
-    }
-
-
-    /* =====================================================
+    /* -------------------------
        PROFILE
+    ------------------------- */
 
-       数据库现在使用：
-
-       personality
-       backstory
-
-       而不是 profile。
-    ===================================================== */
-
-    let profileText = "";
+    const profileParts = [];
 
 
-    /* 性格 */
+    if(character.personality){
 
-    if(
-      character.personality !== null &&
-      character.personality !== undefined &&
-      String(character.personality).trim() !== ""
-    ){
-
-      profileText +=
-        "性格： " +
-        String(
-          character.personality
-        ).trim();
+        profileParts.push(
+            "性格：" +
+            character.personality
+        );
 
     }
 
 
-    /* 背景 */
+    if(character.backstory){
 
-    if(
-      character.backstory !== null &&
-      character.backstory !== undefined &&
-      String(character.backstory).trim() !== ""
-    ){
-
-      if(profileText){
-
-        profileText +=
-          "\n\n";
-
-      }
-
-      profileText +=
-        "背景： " +
-        String(
-          character.backstory
-        ).trim();
+        profileParts.push(
+            character.backstory
+        );
 
     }
 
 
-    description.style.whiteSpace =
-      "pre-line";
+    if(profileParts.length){
 
-    description.textContent =
-      profileText;
-
-
-    /* =====================================================
-       IMAGE
-    ===================================================== */
-
-    const imageURL =
-      (character.image_url || "").trim();
-
-
-    console.log(
-      "角色图片地址：",
-      imageURL
-    );
-
-
-    if(imageURL){
-
-      /*
-        先设置地址。
-      */
-
-      characterImage.src =
-        imageURL;
-
-      characterImage.alt =
-        fullName;
-
-
-      /*
-        图片真正加载成功后，
-        才隐藏占位图。
-      */
-
-      characterImage.onload =
-        function(){
-
-          characterImage.style.display =
-            "block";
-
-          imagePlaceholder.style.display =
-            "none";
-
-          console.log(
-            "角色立绘加载成功"
-          );
-
-        };
-
-
-      /*
-        如果图片加载失败，
-        恢复占位图。
-      */
-
-      characterImage.onerror =
-        function(){
-
-          characterImage.style.display =
-            "none";
-
-          imagePlaceholder.style.display =
-            "block";
-
-          console.error(
-            "角色图片加载失败：",
-            imageURL
-          );
-
-        };
-
+        characterProfile.textContent =
+            profileParts.join("\n\n");
 
     }else{
 
-      characterImage.style.display =
-        "none";
-
-      imagePlaceholder.style.display =
-        "block";
-
-      console.warn(
-        "这个角色没有 image_url"
-      );
+        characterProfile.textContent =
+            "暂无档案记录。";
 
     }
 
 
-  }catch(error){
+    /* -------------------------
+       Archive Mark
+    ------------------------- */
 
-    console.error(
-      "角色档案加载失败：",
-      error
+    archiveMark.textContent =
+        "SEYAMI ARCHIVE · " +
+        displayNumber;
+
+
+    /* -------------------------
+       图片
+    ------------------------- */
+
+    characterImage.style.display =
+        "none";
+
+    imagePlaceholder.style.display =
+        "flex";
+
+    characterImage.removeAttribute(
+        "src"
     );
 
-    characterNameEn.textContent =
-      "ARCHIVE ERROR";
 
-    characterNameCn.textContent =
-      "档案读取失败";
+    if(character.image_url){
 
-    description.textContent =
-      "DATABASE CONNECTION ERROR";
+        characterImage.onload =
+            function(){
 
-  }
+                imagePlaceholder.style.display =
+                    "none";
+
+                characterImage.style.display =
+                    "block";
+
+            };
+
+
+        characterImage.onerror =
+            function(){
+
+                characterImage.style.display =
+                    "none";
+
+                imagePlaceholder.style.display =
+                    "flex";
+
+                console.error(
+                    "角色立绘加载失败：",
+                    character.image_url
+                );
+
+            };
+
+
+        characterImage.src =
+            character.image_url;
+
+    }
+
+
+    /* -------------------------
+       上一个
+    ------------------------- */
+
+    if(currentIndex > 0){
+
+        const previousCharacter =
+            window.allCharacters[
+                currentIndex - 1
+            ];
+
+        prevCharacter.href =
+            "characters.html?id=" +
+            encodeURIComponent(
+                previousCharacter.id
+            );
+
+        prevCharacter.style.visibility =
+            "visible";
+
+    }else{
+
+        prevCharacter.removeAttribute(
+            "href"
+        );
+
+        prevCharacter.style.visibility =
+            "hidden";
+
+    }
+
+
+    /* -------------------------
+       下一个
+    ------------------------- */
+
+    if(
+        currentIndex <
+        totalCount - 1
+    ){
+
+        const nextCharacterData =
+            window.allCharacters[
+                currentIndex + 1
+            ];
+
+        nextCharacter.href =
+            "characters.html?id=" +
+            encodeURIComponent(
+                nextCharacterData.id
+            );
+
+        nextCharacter.style.visibility =
+            "visible";
+
+    }else{
+
+        nextCharacter.removeAttribute(
+            "href"
+        );
+
+        nextCharacter.style.visibility =
+            "hidden";
+
+    }
 
 }
 
 
-/* =========================================================
-   昼夜模式
-   与首页 / 档案目录共用：seyami-theme
-========================================================= */
+/* =====================================================
+   防止角色名称里的特殊字符破坏 HTML
+===================================================== */
+
+function escapeHTML(value){
+
+    return String(value || "")
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =====================================================
+   读取角色
+===================================================== */
+
+async function loadCharacters(){
+
+    try{
+
+        /*
+         * 读取所有角色
+         *
+         * 按 id 从小到大排列
+         *
+         * 以后新增角色，
+         * 会自动进入翻页系统。
+         */
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from("characters")
+                .select(`
+                    id,
+                    created_at,
+                    name,
+                    race,
+                    role,
+                    age,
+                    gender,
+                    region,
+                    personality,
+                    backstory,
+                    image_url
+                `)
+                .order(
+                    "id",
+                    {
+                        ascending:true
+                    }
+                );
+
+
+        if(error){
+
+            console.error(
+                "读取角色失败：",
+                error
+            );
+
+            characterProfile.textContent =
+                "无法读取角色档案。";
+
+            return;
+
+        }
+
+
+        if(
+            !data ||
+            data.length === 0
+        ){
+
+            characterNumber.textContent =
+                "CHARACTER · 000";
+
+            characterName.innerHTML = `
+
+                <span class="en-name">
+                    NO RECORD
+                </span>
+
+                <span class="cn-name">
+                    暂无角色档案
+                </span>
+
+            `;
+
+            characterProfile.textContent =
+                "当前档案馆中暂无角色记录。";
+
+            characterImage.style.display =
+                "none";
+
+            imagePlaceholder.style.display =
+                "flex";
+
+            prevCharacter.style.visibility =
+                "hidden";
+
+            nextCharacter.style.visibility =
+                "hidden";
+
+            navCurrent.textContent =
+                "NO RECORD";
+
+            return;
+
+        }
+
+
+        /*
+         * 保存全部角色
+         * 翻页时直接使用
+         */
+
+        window.allCharacters =
+            data;
+
+
+        const urlCharacterId =
+            getCharacterId();
+
+
+        let currentIndex = 0;
+
+
+        /*
+         * 如果 URL 有 id，
+         * 找到对应角色
+         */
+
+        if(urlCharacterId){
+
+            const foundIndex =
+                data.findIndex(
+                    character =>
+                        String(character.id) ===
+                        String(urlCharacterId)
+                );
+
+
+            if(foundIndex !== -1){
+
+                currentIndex =
+                    foundIndex;
+
+            }
+
+        }
+
+
+        renderCharacter(
+            data[currentIndex],
+            currentIndex,
+            data.length
+        );
+
+
+        console.log(
+            "角色总数：",
+            data.length
+        );
+
+        console.log(
+            "当前角色：",
+            data[currentIndex]
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "角色页面发生错误：",
+            error
+        );
+
+        characterProfile.textContent =
+            "档案读取出现错误。";
+
+    }
+
+}
+
+
+/* =====================================================
+   翻页点击
+===================================================== */
+
+prevCharacter.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            !this.href ||
+            this.style.visibility ===
+            "hidden"
+        ){
+
+            event.preventDefault();
+
+        }
+
+    }
+);
+
+
+nextCharacter.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            !this.href ||
+            this.style.visibility ===
+            "hidden"
+        ){
+
+            event.preventDefault();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   日夜模式
+===================================================== */
 
 const themeToggle =
-  document.getElementById(
-    "themeToggle"
-  );
-
-const themeIcon =
-  document.getElementById(
-    "themeIcon"
-  );
-
-const themeText =
-  document.getElementById(
-    "themeText"
-  );
+    document.getElementById(
+        "themeToggle"
+    );
 
 
 function applyTheme(theme){
 
-  if(theme === "day"){
+    if(theme === "day"){
 
-    document.body.classList.add(
-      "day-mode"
-    );
+        document.body.classList.add(
+            "day"
+        );
 
-    themeIcon.textContent =
-      "☀";
+    }else{
 
-    themeText.textContent =
-      "DAY";
+        document.body.classList.remove(
+            "day"
+        );
 
-  }else{
-
-    document.body.classList.remove(
-      "day-mode"
-    );
-
-    themeIcon.textContent =
-      "☾";
-
-    themeText.textContent =
-      "NIGHT";
-
-  }
+    }
 
 }
 
 
-/* =========================================================
-   读取首页 / 档案目录保存的模式
-========================================================= */
-
 const savedTheme =
-  localStorage.getItem(
-    "seyami-theme"
-  );
+    localStorage.getItem(
+        "seyami-theme"
+    );
 
 
-/* 默认夜间 */
+if(savedTheme){
 
-applyTheme(
-  savedTheme === "day"
-    ? "day"
-    : "night"
-);
+    applyTheme(savedTheme);
 
+}else{
 
-/* =========================================================
-   点击切换
-========================================================= */
+    applyTheme("night");
+
+}
+
 
 themeToggle.addEventListener(
-  "click",
-  () => {
+    "click",
+    function(){
 
-    const isDay =
-      document.body.classList.contains(
-        "day-mode"
-      );
+        const isDay =
+            document.body.classList.contains(
+                "day"
+            );
 
-    const nextTheme =
-      isDay
-        ? "night"
-        : "day";
+        const newTheme =
+            isDay
+                ? "night"
+                : "day";
 
+        applyTheme(newTheme);
 
-    localStorage.setItem(
-      "seyami-theme",
-      nextTheme
-    );
+        localStorage.setItem(
+            "seyami-theme",
+            newTheme
+        );
 
-
-    applyTheme(
-      nextTheme
-    );
-
-  }
+    }
 );
 
 
-/* =========================================================
-   启动角色读取
-========================================================= */
+/* =====================================================
+   开始读取
+===================================================== */
 
-loadCharacter();
+loadCharacters();
 
 </script>
 
 
 </body>
+
    </html>
