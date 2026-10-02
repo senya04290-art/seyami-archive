@@ -2145,8 +2145,7 @@ body.day-mode .archive-mark{
 
 
     <!-- =====================================================
-         ★ 新增：角色翻页
-         只有这里是新增的视觉结构
+         ★ 角色翻页
     ====================================================== -->
 
     <nav
@@ -2190,7 +2189,7 @@ body.day-mode .archive-mark{
 
 /* =========================================================
    ★ CHARACTER PAGINATION
-   ★ 只负责新增翻页，不修改原有美化
+   ★ 只负责翻页，不修改原有美化
 ========================================================= */
 
 .character-pagination{
@@ -2517,11 +2516,6 @@ function updatePagination(){
     displayNumber;
 
 
-  /*
-    浏览器标题也跟着角色变化，
-    方便以后同时开多个角色页面。
-  */
-
   document.title =
     "角色档案 · " +
     (
@@ -2615,7 +2609,7 @@ function renderCharacter(character){
 
   /* -------------------------
      BASIC INFO
-
+     
      0 RACE
      1 REGION
      2 STATUS
@@ -2737,6 +2731,13 @@ function renderCharacter(character){
     "block";
 
 
+  characterImage.onload =
+    null;
+
+  characterImage.onerror =
+    null;
+
+
   if(imageURL){
 
     characterImage.onload =
@@ -2774,6 +2775,12 @@ function renderCharacter(character){
     characterImage.alt =
       fullName;
 
+  }else{
+
+    characterImage.removeAttribute(
+      "src"
+    );
+
   }
 
 
@@ -2794,6 +2801,12 @@ async function loadCharacters(){
 
   try{
 
+    /*
+      ★ 这里故意不读取 created_at。
+      当前角色页面只读取实际需要的字段，
+      避免数据库字段名造成整个查询失败。
+    */
+
     const {
       data,
       error
@@ -2802,7 +2815,6 @@ async function loadCharacters(){
         .from("characters")
         .select(`
           id,
-          created_at,
           name,
           race,
           role,
@@ -2908,6 +2920,11 @@ async function loadCharacters(){
 
       }else{
 
+        /*
+          URL 中的 id 不存在时，
+          回到第一条实际存在的角色。
+        */
+
         currentIndex =
           0;
 
@@ -2916,7 +2933,8 @@ async function loadCharacters(){
     }else{
 
       /*
-        没有 id 时显示第一位。
+        没有 id 时，
+        默认显示第一位角色。
       */
 
       currentIndex =
@@ -3033,11 +3051,6 @@ nextCharacter.addEventListener(
 document.addEventListener(
   "keydown",
   function(event){
-
-    /*
-      如果用户正在输入文字，
-      不触发翻页。
-    */
 
     const tag =
       document.activeElement?.tagName;
