@@ -2,2401 +2,3198 @@
 <html lang="zh-CN">
 
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<title>角色档案 · Seyami Archive</title>
 
-<title>塞垭弥大陆档案馆 · 角色档案</title>
-
-<link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
->
+href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Noto+Serif+SC:wght@400;500&display=swap"
+rel="stylesheet">
 
-<link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500&display=swap"
-    rel="stylesheet"
->
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 
 /* =========================
-   基础
+   BASE
 ========================= */
 
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+  box-sizing:border-box;
 }
 
 html,
 body{
-    width:100%;
-    min-height:100%;
+  margin:0;
+  min-height:100%;
 }
 
 body{
 
-    background:#061426;
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(38,91,137,.18),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(11,45,75,.45),
+      transparent 70%
+    ),
+    #061426;
 
-    color:#dcecff;
+  color:#dcecff;
 
-    font-family:
-        "Noto Serif SC",
-        serif;
+  font-family:
+    "Noto Serif SC",
+    "Times New Roman",
+    serif;
 
-    overflow-x:hidden;
+  overflow-x:hidden;
 
-    transition:
-        background .5s ease,
-        color .5s ease;
+  transition:
+    background .6s ease,
+    color .6s ease;
 }
 
 
 /* =========================
-   主体
+   PAGE
 ========================= */
 
 .page{
 
-    min-height:100vh;
+  position:relative;
 
-    position:relative;
+  min-height:100vh;
 
-    display:flex;
+  padding:
+    30px
+    clamp(24px,6vw,90px)
+    70px;
 
-    align-items:center;
+  overflow:hidden;
 
-    justify-content:center;
-
-    padding:
-        120px
-        60px
-        100px;
+  transition:
+    background .6s ease;
 }
 
 
 /* =========================
-   外框
+   FLOATING STARS
 ========================= */
 
-.frame{
+.stars{
 
-    width:min(1200px, 100%);
+  position:absolute;
 
-    min-height:720px;
+  inset:0;
 
-    position:relative;
+  z-index:1;
 
-    border:
-        1px solid
-        rgba(180,215,255,.32);
+  pointer-events:none;
 
-    padding:70px;
+  overflow:hidden;
+}
 
-    background:
-        rgba(4,16,32,.42);
+.stars span{
 
-    box-shadow:
-        inset 0 0 80px
-        rgba(30,100,180,.05);
+  position:absolute;
 
+  display:block;
+
+  color:rgba(158,207,247,.62);
+
+  font-family:
+    "Times New Roman",
+    serif;
+
+  line-height:1;
+
+  text-shadow:
+    0 0 8px rgba(96,177,242,.5);
+
+  animation:
+    starFloat 8s ease-in-out infinite,
+    starTwinkle 5s ease-in-out infinite;
+
+  transition:
+    color .6s ease,
+    text-shadow .6s ease;
+}
+
+
+/* star positions */
+
+.stars span:nth-child(1){
+  left:8%;
+  top:15%;
+  font-size:15px;
+  animation-delay:-2s,-1s;
+  opacity:.55;
+}
+
+.stars span:nth-child(2){
+  left:19%;
+  top:32%;
+  font-size:10px;
+  animation-delay:-4s,-2s;
+  opacity:.32;
+}
+
+.stars span:nth-child(3){
+  left:31%;
+  top:12%;
+  font-size:12px;
+  animation-delay:-6s,-1s;
+  opacity:.38;
+}
+
+.stars span:nth-child(4){
+  right:17%;
+  top:18%;
+  font-size:18px;
+  animation-delay:-3s,-2s;
+  opacity:.42;
+}
+
+.stars span:nth-child(5){
+  right:8%;
+  top:38%;
+  font-size:10px;
+  animation-delay:-5s,-3s;
+  opacity:.32;
+}
+
+.stars span:nth-child(6){
+  left:10%;
+  top:57%;
+  font-size:13px;
+  animation-delay:-4s,-1s;
+  opacity:.35;
+}
+
+.stars span:nth-child(7){
+  left:27%;
+  top:69%;
+  font-size:9px;
+  animation-delay:-7s,-2s;
+  opacity:.28;
+}
+
+.stars span:nth-child(8){
+  right:25%;
+  top:58%;
+  font-size:15px;
+  animation-delay:-3s,-1s;
+  opacity:.30;
+}
+
+.stars span:nth-child(9){
+  right:9%;
+  top:73%;
+  font-size:18px;
+  animation-delay:-6s,-3s;
+  opacity:.26;
+}
+
+.stars span:nth-child(10){
+  left:43%;
+  top:78%;
+  font-size:11px;
+  animation-delay:-2s,-2s;
+  opacity:.30;
+}
+
+.stars span:nth-child(11){
+  left:4%;
+  top:30%;
+  font-size:9px;
+  animation-delay:-1s,-2s;
+  opacity:.32;
+}
+
+.stars span:nth-child(12){
+  left:38%;
+  top:8%;
+  font-size:12px;
+  animation-delay:-4s,-1s;
+  opacity:.38;
+}
+
+.stars span:nth-child(13){
+  right:5%;
+  top:31%;
+  font-size:15px;
+  animation-delay:-6s,-3s;
+  opacity:.30;
+}
+
+.stars span:nth-child(14){
+  left:24%;
+  top:53%;
+  font-size:8px;
+  animation-delay:-3s,-1s;
+  opacity:.28;
+}
+
+.stars span:nth-child(15){
+  right:24%;
+  top:53%;
+  font-size:14px;
+  animation-delay:-7s,-2s;
+  opacity:.24;
+}
+
+.stars span:nth-child(16){
+  left:6%;
+  top:72%;
+  font-size:12px;
+  animation-delay:-5s,-3s;
+  opacity:.34;
+}
+
+.stars span:nth-child(17){
+  right:7%;
+  top:70%;
+  font-size:18px;
+  animation-delay:-8s,-4s;
+  opacity:.25;
+}
+
+.stars span:nth-child(18){
+  left:34%;
+  bottom:9%;
+  font-size:10px;
+  animation-delay:-2s,-2s;
+  opacity:.30;
+}
+
+.stars span:nth-child(19){
+  right:36%;
+  bottom:8%;
+  font-size:11px;
+  animation-delay:-5s,-1s;
+  opacity:.34;
+}
+
+.stars span:nth-child(20){
+  left:46%;
+  top:8%;
+  font-size:13px;
+  animation-delay:-9s,-4s;
+  opacity:.20;
 }
 
 
 /* =========================
-   四角装饰
+   STAR ANIMATION
 ========================= */
 
-.corner{
+@keyframes starFloat{
 
-    position:absolute;
+  0%,
+  100%{
+    transform:translate3d(0,0,0);
+  }
 
-    width:36px;
-
-    height:36px;
-
-    color:#dcecff;
-
-    font-size:18px;
-
-    opacity:.7;
-
+  50%{
+    transform:translate3d(0,-8px,0);
+  }
 }
 
-.corner::before{
+@keyframes starTwinkle{
 
-    content:"✡";
+  0%,
+  100%{
+    opacity:.18;
+  }
 
-    position:absolute;
-
-    left:50%;
-
-    top:50%;
-
-    transform:
-        translate(-50%,-50%);
-
-}
-
-.corner.tl{
-
-    top:-18px;
-    left:-18px;
-
-}
-
-.corner.tr{
-
-    top:-18px;
-    right:-18px;
-
-}
-
-.corner.bl{
-
-    bottom:-18px;
-    left:-18px;
-
-}
-
-.corner.br{
-
-    bottom:-18px;
-    right:-18px;
-
+  50%{
+    opacity:.65;
+  }
 }
 
 
 /* =========================
-   左上角 Logo
-========================= */
-
-.site-logo{
-
-    position:fixed;
-
-    left:58px;
-
-    top:38px;
-
-    z-index:20;
-
-    color:#dcecff;
-
-    text-decoration:none;
-
-    line-height:1.35;
-
-}
-
-.site-logo .cn{
-
-    font-family:
-        "Noto Serif SC",
-        serif;
-
-    font-size:16px;
-
-    letter-spacing:3px;
-
-    font-weight:400;
-
-}
-
-.site-logo .en{
-
-    margin-top:5px;
-
-    font-family:
-        "Cinzel",
-        serif;
-
-    font-size:10px;
-
-    letter-spacing:3px;
-
-    opacity:.7;
-
-}
-
-
-/* =========================
-   右上角
-========================= */
-
-.top-right{
-
-    position:fixed;
-
-    right:58px;
-
-    top:38px;
-
-    z-index:20;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:22px;
-
-}
-
-.back-link{
-
-    color:#dcecff;
-
-    text-decoration:none;
-
-    font-family:"Cinzel",serif;
-
-    font-size:10px;
-
-    letter-spacing:2px;
-
-    opacity:.72;
-
-    transition:.3s;
-
-}
-
-.back-link:hover{
-
-    opacity:1;
-
-}
-
-
-/* =========================
-   日夜模式
-========================= */
-
-.theme-toggle{
-
-    width:38px;
-
-    height:20px;
-
-    border:
-        1px solid
-        rgba(190,220,255,.35);
-
-    border-radius:20px;
-
-    position:relative;
-
-    cursor:pointer;
-
-    background:
-        rgba(255,255,255,.03);
-
-}
-
-.theme-toggle::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:12px;
-
-    height:12px;
-
-    border-radius:50%;
-
-    left:3px;
-
-    top:3px;
-
-    background:#dcecff;
-
-    transition:.35s;
-
-}
-
-body.day .theme-toggle::before{
-
-    transform:
-        translateX(18px);
-
-}
-
-
-/* =========================
-   标题
-========================= */
-
-.archive-label{
-
-    text-align:center;
-
-    font-family:"Cinzel",serif;
-
-    font-size:11px;
-
-    letter-spacing:5px;
-
-    opacity:.55;
-
-    margin-bottom:16px;
-
-}
-
-.main-title{
-
-    text-align:center;
-
-    font-family:"Cinzel",serif;
-
-    font-size:
-        clamp(30px,5vw,54px);
-
-    font-weight:300;
-
-    letter-spacing:7px;
-
-    margin-bottom:55px;
-
-}
-
-.main-title .cn{
-
-    display:block;
-
-    font-family:
-        "Noto Serif SC",
-        serif;
-
-    font-size:
-        clamp(18px,2.5vw,25px);
-
-    letter-spacing:8px;
-
-    margin-top:13px;
-
-    opacity:.85;
-
-}
-
-
-/* =========================
-   角色主体
-========================= */
-
-.character-panel{
-
-    display:grid;
-
-    grid-template-columns:
-        minmax(300px, .85fr)
-        minmax(320px, 1fr);
-
-    gap:75px;
-
-    align-items:center;
-
-}
-
-
-/* =========================
-   立绘区域
-========================= */
-
-.character-image-wrap{
-
-    position:relative;
-
-    min-height:500px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-}
-
-.character-image-wrap::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:390px;
-
-    height:390px;
-
-    max-width:80vw;
-
-    max-height:80vw;
-
-    border:
-        1px solid
-        rgba(170,215,255,.22);
-
-    border-radius:50%;
-
-}
-
-.character-image-wrap::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:300px;
-
-    height:300px;
-
-    max-width:65vw;
-
-    max-height:65vw;
-
-    border:
-        1px solid
-        rgba(170,215,255,.13);
-
-    border-radius:50%;
-
-}
-
-
-.character-image{
-
-    position:relative;
-
-    z-index:3;
-
-    max-width:100%;
-
-    max-height:500px;
-
-    object-fit:contain;
-
-    display:none;
-
-}
-
-
-/* =========================
-   魔法阵
+   MAGIC CIRCLE
 ========================= */
 
 .magic-circle{
 
-    position:absolute;
+  position:absolute;
 
-    width:430px;
+  width:min(72vw,760px);
+  height:min(72vw,760px);
 
-    height:430px;
+  left:50%;
+  top:47%;
 
-    max-width:90vw;
+  transform:translate(-50%,-50%);
 
-    max-height:90vw;
+  border:
+    1px solid
+    rgba(73,143,198,.28);
 
-    border:
-        1px solid
-        rgba(150,205,255,.15);
+  border-radius:50%;
 
-    border-radius:50%;
+  box-shadow:
+    0 0 50px rgba(47,126,184,.08),
+    inset 0 0 60px rgba(62,139,194,.04);
 
-    z-index:1;
+  z-index:0;
 
+  pointer-events:none;
+
+  opacity:.55;
+
+  transition:
+    border-color .6s ease,
+    box-shadow .6s ease;
+}
+
+.magic-circle::before,
+.magic-circle::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  transform:translate(-50%,-50%);
+
+  border-radius:50%;
+
+  pointer-events:none;
+
+  transition:
+    border-color .6s ease;
 }
 
 .magic-circle::before{
 
-    content:"";
+  width:82%;
+  height:82%;
 
-    position:absolute;
-
-    width:78%;
-
-    height:78%;
-
-    left:11%;
-
-    top:11%;
-
-    border:
-        1px solid
-        rgba(150,205,255,.11);
-
-    border-radius:50%;
-
+  border:
+    1px solid
+    rgba(73,143,198,.22);
 }
 
 .magic-circle::after{
 
-    content:"✦";
+  width:61%;
+  height:61%;
 
-    position:absolute;
-
-    left:50%;
-
-    top:-9px;
-
-    transform:
-        translateX(-50%);
-
-    font-size:13px;
-
-    color:#dcecff;
-
-    opacity:.65;
-
+  border:
+    1px solid
+    rgba(91,162,213,.22);
 }
 
 
 /* =========================
-   立绘占位
+   OUTER FRAME
+========================= */
+
+.frame{
+
+  position:absolute;
+
+  top:20px;
+  left:20px;
+  right:20px;
+  bottom:20px;
+
+  border:
+    1px solid
+    rgba(111,174,224,.32);
+
+  pointer-events:none;
+
+  z-index:2;
+
+  transition:
+    border-color .6s ease;
+}
+
+.frame::before,
+.frame::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:45px;
+  height:45px;
+
+  transition:
+    border-color .6s ease;
+}
+
+.frame::before{
+
+  left:-1px;
+  top:-1px;
+
+  border-left:
+    1px solid
+    rgba(108,178,230,.88);
+
+  border-top:
+    1px solid
+    rgba(108,178,230,.88);
+}
+
+.frame::after{
+
+  right:-1px;
+  bottom:-1px;
+
+  border-right:
+    1px solid
+    rgba(108,178,230,.88);
+
+  border-bottom:
+    1px solid
+    rgba(108,178,230,.88);
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+
+  position:absolute;
+
+  left:58px;
+  right:58px;
+  top:38px;
+
+  z-index:20;
+
+  display:flex;
+
+  align-items:flex-start;
+
+  justify-content:space-between;
+
+  width:auto;
+  max-width:none;
+
+  margin:0;
+  padding:0;
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.logo{
+
+  display:flex;
+
+  align-items:flex-start;
+
+  gap:12px;
+
+  color:#d9edff;
+
+  text-decoration:none;
+
+  transition:
+    color .6s ease;
+}
+
+.logo-symbol{
+
+  color:rgba(137,201,239,.9);
+
+  width:17px;
+  height:13px;
+
+  display:flex;
+
+  align-items:flex-start;
+
+  justify-content:center;
+
+  font-size:17px;
+
+  line-height:13px;
+
+  margin:0;
+  padding:0;
+
+  text-shadow:
+    0 0 7px rgba(76,159,216,.5),
+    0 0 15px rgba(49,132,191,.22);
+
+  flex-shrink:0;
+
+  transition:
+    color .6s ease,
+    text-shadow .6s ease;
+}
+
+.logo-text{
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:flex-start;
+
+  line-height:1;
+}
+
+.logo-cn{
+
+  display:block;
+
+  height:13px;
+
+  line-height:13px;
+
+  color:#d9edff;
+
+  font-size:13px;
+
+  letter-spacing:3px;
+
+  white-space:nowrap;
+
+  transition:
+    color .6s ease;
+}
+
+.logo-en{
+
+  display:block;
+
+  margin-top:5px;
+
+  color:rgba(157,204,239,.63);
+
+  font-family:
+    "Times New Roman",
+    serif;
+
+  font-size:8px;
+
+  line-height:8px;
+
+  letter-spacing:3px;
+
+  white-space:nowrap;
+
+  transition:
+    color .6s ease;
+}
+
+
+/* =========================
+   HEADER RIGHT
+========================= */
+
+.header-right{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:20px;
+}
+
+
+/* =========================
+   BACK
+========================= */
+
+.back{
+
+  color:rgba(191,220,243,.68);
+
+  text-decoration:none;
+
+  font-family:
+    "Cinzel",
+    "Noto Serif SC",
+    serif;
+
+  font-size:11px;
+
+  letter-spacing:1px;
+
+  transition:
+    color .3s ease,
+    text-shadow .3s ease;
+}
+
+.back:hover{
+
+  color:#d9efff;
+
+  text-shadow:
+    0 0 10px
+    rgba(102,180,231,.35);
+}
+
+
+/* =========================
+   DAY / NIGHT TOGGLE
+========================= */
+
+.theme-toggle{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  height:28px;
+
+  padding:
+    0 11px;
+
+  border:
+    1px solid
+    rgba(111,174,224,.32);
+
+  background:
+    rgba(8,28,49,.35);
+
+  color:
+    rgba(191,220,243,.68);
+
+  font-family:
+    "Cinzel",
+    "Noto Serif SC",
+    serif;
+
+  font-size:8px;
+
+  letter-spacing:2px;
+
+  cursor:pointer;
+
+  border-radius:0;
+
+  white-space:nowrap;
+
+  transition:
+    color .35s ease,
+    border-color .35s ease,
+    background .35s ease,
+    box-shadow .35s ease;
+}
+
+.theme-toggle:hover{
+
+  color:#d9efff;
+
+  border-color:
+    rgba(122,192,235,.62);
+
+  background:
+    rgba(8,31,52,.55);
+
+  box-shadow:
+    0 0 14px
+    rgba(76,151,202,.12);
+}
+
+.theme-icon{
+
+  font-size:12px;
+
+  line-height:1;
+
+  letter-spacing:0;
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.content{
+
+  position:relative;
+
+  z-index:5;
+
+  width:min(1100px,100%);
+
+  margin:0 auto;
+
+  padding-top:145px;
+}
+
+
+/* =========================
+   HEADING
+========================= */
+
+.heading{
+
+  text-align:center;
+
+  margin-bottom:48px;
+}
+
+.heading-small{
+
+  font-family:"Cinzel",serif;
+
+  font-size:10px;
+
+  letter-spacing:6px;
+
+  color:rgba(115,182,224,.62);
+
+  margin-bottom:12px;
+
+  transition:
+    color .6s ease;
+}
+
+.heading-main{
+
+  font-family:"Cinzel",serif;
+
+  font-size:clamp(34px,5vw,56px);
+
+  font-weight:400;
+
+  letter-spacing:8px;
+
+  line-height:1;
+
+  color:#dceeff;
+
+  transition:
+    color .6s ease,
+    text-shadow .6s ease;
+}
+
+.heading-cn{
+
+  margin-top:14px;
+
+  font-size:13px;
+
+  letter-spacing:5px;
+
+  color:rgba(207,229,246,.86);
+
+  transition:
+    color .6s ease;
+}
+
+
+/* =========================
+   CHARACTER PANEL
+========================= */
+
+.character-panel{
+
+  position:relative;
+
+  display:grid;
+
+  grid-template-columns:
+    minmax(300px,430px)
+    1fr;
+
+  gap:55px;
+
+  width:100%;
+
+  padding:38px;
+
+  border:
+    1px solid
+    rgba(111,174,224,.32);
+
+  background:
+
+    linear-gradient(
+      145deg,
+      rgba(38,91,137,.13),
+      rgba(11,45,75,.10)
+    );
+
+  box-shadow:
+    0 20px 60px
+    rgba(0,0,0,.15);
+
+  transition:
+    background .6s ease,
+    border-color .6s ease,
+    box-shadow .6s ease;
+}
+
+
+/* =========================
+   CHARACTER IMAGE
+========================= */
+
+.character-image{
+
+  position:relative;
+
+  min-height:540px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  border:
+    1px solid
+    rgba(111,174,224,.25);
+
+  background:
+
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(38,91,137,.14),
+      transparent 58%
+    ),
+
+    rgba(6,20,38,.4);
+
+  overflow:hidden;
+
+  transition:
+    background .6s ease,
+    border-color .6s ease;
+}
+
+.character-image::before{
+
+  content:"";
+
+  position:absolute;
+
+  inset:18px;
+
+  border:
+    1px solid
+    rgba(140,210,245,.07);
+
+  pointer-events:none;
+
+  transition:
+    border-color .6s ease;
+}
+
+.character-image::after{
+
+  content:"✦";
+
+  position:absolute;
+
+  right:24px;
+  top:20px;
+
+  color:rgba(143,202,237,.8);
+
+  font-size:16px;
+
+  text-shadow:
+    0 0 10px
+    rgba(90,190,240,.25);
+
+  transition:
+    color .6s ease,
+    text-shadow .6s ease;
+}
+
+
+/* =========================
+   IMAGE
+========================= */
+
+.character-image img{
+
+  display:block;
+
+  width:100%;
+  height:100%;
+
+  object-fit:contain;
+
+  position:relative;
+
+  z-index:1;
+}
+
+
+/* =========================
+   IMAGE PLACEHOLDER
 ========================= */
 
 .image-placeholder{
 
-    position:relative;
+  text-align:center;
 
-    z-index:2;
+  color:rgba(177,207,230,.62);
 
-    width:230px;
+  font-family:"Cinzel",serif;
 
-    height:320px;
+  letter-spacing:4px;
 
-    display:flex;
+  font-size:10px;
 
-    align-items:center;
+  transition:
+    color .6s ease;
+}
 
-    justify-content:center;
+.image-placeholder-symbol{
 
-    border:
-        1px solid
-        rgba(180,215,255,.2);
+  display:block;
 
-    color:
-        rgba(220,236,255,.35);
+  margin-bottom:15px;
 
-    font-family:"Cinzel",serif;
+  font-family:
+    "Times New Roman",
+    serif;
 
-    font-size:10px;
+  font-size:34px;
 
-    letter-spacing:3px;
+  color:rgba(143,210,246,.08);
 
-    text-align:center;
+  transition:
+    color .6s ease;
+}
 
+.image-placeholder-cn{
+
+  display:block;
+
+  margin-top:10px;
+
+  font-family:
+    "Noto Serif SC",
+    serif;
+
+  font-size:10px;
+
+  letter-spacing:3px;
+
+  color:rgba(177,207,230,.62);
+
+  transition:
+    color .6s ease;
 }
 
 
 /* =========================
-   角色信息
+   CHARACTER INFO
 ========================= */
 
 .character-info{
 
-    position:relative;
+  display:flex;
 
-    z-index:5;
+  flex-direction:column;
 
+  justify-content:center;
 }
+
+
+/* CHARACTER NUMBER */
 
 .character-number{
 
-    font-family:"Cinzel",serif;
+  font-family:"Cinzel",serif;
 
-    font-size:10px;
+  font-size:9px;
 
-    letter-spacing:4px;
+  letter-spacing:4px;
 
-    opacity:.45;
+  color:rgba(115,182,224,.62);
 
-    margin-bottom:18px;
+  margin-bottom:22px;
 
+  transition:
+    color .6s ease;
 }
 
-.character-name{
 
-    font-family:"Cinzel",serif;
+/* CHARACTER NAME */
 
-    font-weight:300;
+.character-name-en{
 
-    font-size:
-        clamp(30px,4vw,48px);
+  font-family:"Cinzel",serif;
 
-    letter-spacing:3px;
+  font-size:clamp(32px,4vw,52px);
 
-    line-height:1.15;
+  font-weight:400;
 
+  letter-spacing:5px;
+
+  line-height:1;
+
+  color:#d9edff;
+
+  transition:
+    color .6s ease;
 }
 
-.character-name .cn-name{
+.character-name-cn{
 
-    display:block;
+  margin-top:13px;
 
-    font-family:
-        "Noto Serif SC",
-        serif;
+  font-size:18px;
 
-    font-size:
-        clamp(18px,2.4vw,25px);
+  letter-spacing:7px;
 
-    letter-spacing:5px;
+  color:rgba(207,229,246,.86);
 
-    margin-top:12px;
-
-    opacity:.8;
-
+  transition:
+    color .6s ease;
 }
 
-.info-line{
+.character-role{
 
-    width:100%;
+  margin-top:18px;
 
-    height:1px;
+  font-family:"Cinzel",serif;
 
-    background:
-        rgba(180,215,255,.18);
+  font-size:10px;
 
-    margin:
-        30px 0;
+  letter-spacing:4px;
 
-}
+  color:rgba(115,182,224,.62);
 
-.meta-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap:
-        20px 30px;
-
-    margin-bottom:36px;
-
-}
-
-.meta-item{
-
-    min-width:0;
-
-}
-
-.meta-label{
-
-    font-family:"Cinzel",serif;
-
-    font-size:9px;
-
-    letter-spacing:2px;
-
-    opacity:.42;
-
-    margin-bottom:7px;
-
-}
-
-.meta-value{
-
-    font-family:
-        "Noto Serif SC",
-        serif;
-
-    font-size:14px;
-
-    letter-spacing:2px;
-
-    min-height:20px;
-
-}
-
-.profile-title{
-
-    font-family:"Cinzel",serif;
-
-    font-size:10px;
-
-    letter-spacing:4px;
-
-    opacity:.55;
-
-    margin-bottom:14px;
-
-}
-
-.profile{
-
-    font-family:
-        "Noto Serif SC",
-        serif;
-
-    font-size:14px;
-
-    line-height:2;
-
-    letter-spacing:1.5px;
-
-    opacity:.78;
-
-    white-space:pre-line;
-
-    min-height:70px;
-
+  transition:
+    color .6s ease;
 }
 
 
 /* =========================
-   档案标记
+   DIVIDER
+========================= */
+
+.divider{
+
+  width:100%;
+
+  height:1px;
+
+  margin:30px 0;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      rgba(120,195,235,.3),
+      rgba(120,195,235,.06),
+      transparent
+    );
+
+  transition:
+    background .6s ease;
+}
+
+
+/* =========================
+   BASIC INFO
+========================= */
+
+.basic-info{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:22px 35px;
+}
+
+.info-item{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:7px;
+}
+
+.info-label{
+
+  font-family:"Cinzel",serif;
+
+  font-size:8px;
+
+  letter-spacing:3px;
+
+  color:rgba(115,182,224,.62);
+
+  transition:
+    color .6s ease;
+}
+
+.info-value{
+
+  font-size:12px;
+
+  letter-spacing:2px;
+
+  color:rgba(207,229,246,.86);
+
+  min-height:14px;
+
+  transition:
+    color .6s ease;
+}
+
+
+/* =========================
+   PROFILE
+========================= */
+
+.description-title{
+
+  font-family:"Cinzel",serif;
+
+  font-size:9px;
+
+  letter-spacing:4px;
+
+  color:rgba(115,182,224,.62);
+
+  margin-bottom:13px;
+
+  transition:
+    color .6s ease;
+}
+
+.description{
+
+  font-size:13px;
+
+  line-height:2;
+
+  letter-spacing:1px;
+
+  color:rgba(177,207,230,.62);
+
+  min-height:20px;
+
+  transition:
+    color .6s ease;
+}
+
+
+/* =========================
+   ARCHIVE MARK
 ========================= */
 
 .archive-mark{
 
-    margin-top:35px;
+  position:absolute;
 
-    font-family:"Cinzel",serif;
+  right:25px;
+  bottom:20px;
 
-    font-size:9px;
+  font-family:"Cinzel",serif;
 
-    letter-spacing:4px;
+  font-size:8px;
 
-    opacity:.35;
+  letter-spacing:3px;
 
+  color:rgba(137,201,239,.28);
+
+  transition:
+    color .6s ease;
 }
 
 
 /* =========================
-   翻页
-========================= */
-
-.character-navigation{
-
-    margin-top:70px;
-
-    padding-top:30px;
-
-    border-top:
-        1px solid
-        rgba(180,215,255,.15);
-
-    display:grid;
-
-    grid-template-columns:
-        1fr
-        auto
-        1fr;
-
-    align-items:center;
-
-    gap:30px;
-
-}
-
-.nav-button{
-
-    color:#dcecff;
-
-    text-decoration:none;
-
-    font-family:"Cinzel",serif;
-
-    font-size:10px;
-
-    letter-spacing:3px;
-
-    opacity:.65;
-
-    transition:
-        opacity .3s ease,
-        transform .3s ease;
-
-    display:inline-flex;
-
-    align-items:center;
-
-    gap:14px;
-
-}
-
-.nav-button:hover{
-
-    opacity:1;
-
-}
-
-.nav-prev{
-
-    justify-self:start;
-
-}
-
-.nav-next{
-
-    justify-self:end;
-
-}
-
-.nav-arrow{
-
-    font-size:18px;
-
-    line-height:1;
-
-}
-
-.nav-current{
-
-    font-family:"Cinzel",serif;
-
-    font-size:9px;
-
-    letter-spacing:3px;
-
-    opacity:.38;
-
-    white-space:nowrap;
-
-}
-
-
-/* =========================
-   星点
-========================= */
-
-.star{
-
-    position:fixed;
-
-    color:#dcecff;
-
-    pointer-events:none;
-
-    opacity:.35;
-
-    font-size:10px;
-
-}
-
-.star.s1{
-
-    left:12%;
-
-    top:25%;
-
-}
-
-.star.s2{
-
-    right:15%;
-
-    top:22%;
-
-}
-
-.star.s3{
-
-    left:20%;
-
-    bottom:20%;
-
-}
-
-.star.s4{
-
-    right:11%;
-
-    bottom:26%;
-
-}
-
-.star.s5{
-
-    left:7%;
-
-    top:58%;
-
-}
-
-.star.s6{
-
-    right:7%;
-
-    top:67%;
-
-}
-
-
-/* =========================
-   日间模式
-   只改变明亮区域
-========================= */
-
-body.day{
-
-    background:#edf4fb;
-
-    color:#18283b;
-
-}
-
-body.day .frame{
-
-    background:
-        rgba(255,255,255,.62);
-
-    border-color:
-        rgba(50,85,120,.25);
-
-}
-
-body.day .site-logo,
-body.day .back-link,
-body.day .theme-toggle,
-body.day .corner,
-body.day .nav-button{
-
-    color:#18283b;
-
-}
-
-body.day .theme-toggle{
-
-    border-color:
-        rgba(40,70,100,.3);
-
-    background:
-        rgba(255,255,255,.6);
-
-}
-
-body.day .theme-toggle::before{
-
-    background:#18283b;
-
-}
-
-body.day .character-image-wrap::before{
-
-    border-color:
-        rgba(50,90,130,.18);
-
-}
-
-body.day .character-image-wrap::after{
-
-    border-color:
-        rgba(50,90,130,.12);
-
-}
-
-body.day .magic-circle{
-
-    border-color:
-        rgba(50,90,130,.14);
-
-}
-
-body.day .magic-circle::before{
-
-    border-color:
-        rgba(50,90,130,.1);
-
-}
-
-body.day .info-line,
-body.day .character-navigation{
-
-    border-color:
-        rgba(50,80,110,.16);
-
-}
-
-body.day .image-placeholder{
-
-    border-color:
-        rgba(50,80,110,.2);
-
-    color:
-        rgba(30,55,80,.38);
-
-}
-
-body.day .star{
-
-    color:#18283b;
-
-}
-
-
-/* =========================
-   手机
+   TABLET
 ========================= */
 
 @media(max-width:800px){
 
-    .page{
+  .header{
 
-        padding:
-            105px
-            20px
-            70px;
+    left:35px;
+    right:35px;
+    top:30px;
+  }
 
-    }
+  .header-right{
 
-    .site-logo{
+    gap:14px;
+  }
 
-        left:22px;
+  .theme-toggle{
 
-        top:25px;
+    height:27px;
 
-    }
+    padding:
+      0 9px;
 
-    .top-right{
+    font-size:7px;
+  }
 
-        right:22px;
+  .character-panel{
 
-        top:27px;
+    grid-template-columns:1fr;
 
-    }
+    gap:40px;
 
-    .site-logo .cn{
+    padding:30px;
+  }
 
-        font-size:13px;
+  .character-image{
 
-        letter-spacing:2px;
-
-    }
-
-    .site-logo .en{
-
-        font-size:8px;
-
-        letter-spacing:2px;
-
-    }
-
-    .back-link{
-
-        display:none;
-
-    }
-
-    .frame{
-
-        padding:
-            50px
-            25px
-            45px;
-
-        min-height:0;
-
-    }
-
-    .main-title{
-
-        margin-bottom:35px;
-
-        letter-spacing:4px;
-
-    }
-
-    .character-panel{
-
-        grid-template-columns:1fr;
-
-        gap:30px;
-
-    }
-
-    .character-image-wrap{
-
-        min-height:390px;
-
-    }
-
-    .character-image{
-
-        max-height:390px;
-
-    }
-
-    .magic-circle{
-
-        width:340px;
-
-        height:340px;
-
-    }
-
-    .character-info{
-
-        text-align:center;
-
-    }
-
-    .meta-grid{
-
-        text-align:left;
-
-    }
-
-    .info-line{
-
-        margin:
-            24px 0;
-
-    }
-
-    .archive-mark{
-
-        margin-top:25px;
-
-    }
-
-    .character-navigation{
-
-        margin-top:50px;
-
-        grid-template-columns:
-            1fr
-            auto
-            1fr;
-
-        gap:10px;
-
-    }
-
-    .nav-button{
-
-        font-size:8px;
-
-        letter-spacing:2px;
-
-        gap:7px;
-
-    }
-
-    .nav-arrow{
-
-        font-size:15px;
-
-    }
-
-    .nav-current{
-
-        font-size:7px;
-
-        letter-spacing:2px;
-
-    }
-
+    min-height:500px;
+  }
 }
 
 
 /* =========================
-   超小屏
+   MOBILE
 ========================= */
 
-@media(max-width:430px){
+@media(max-width:600px){
 
-    .frame{
+  .page{
 
-        padding:
-            45px
-            18px
-            35px;
+    padding:
+      22px
+      20px
+      55px;
+  }
 
-    }
+  .header{
 
-    .character-image-wrap{
+    left:25px;
+    right:25px;
+    top:24px;
 
-        min-height:340px;
+    width:auto;
+    max-width:none;
 
-    }
+    margin:0;
+    padding:0;
 
-    .character-image{
+    align-items:flex-start;
+  }
 
-        max-height:340px;
+  .frame{
 
-    }
+    top:14px;
+    left:14px;
+    right:14px;
+    bottom:14px;
+  }
 
-    .magic-circle{
 
-        width:290px;
+  .logo{
 
-        height:290px;
+    align-items:flex-start;
 
-    }
+    gap:10px;
+  }
 
-    .image-placeholder{
+  .logo-symbol{
 
-        width:190px;
+    width:15px;
+    height:11px;
 
-        height:270px;
+    font-size:15px;
 
-    }
+    line-height:11px;
 
-    .meta-grid{
+    margin-top:2px;
+  }
 
-        gap:
-            18px
-            15px;
+  .logo-cn{
 
-    }
+    height:11px;
 
-    .nav-current{
+    line-height:11px;
 
-        display:none;
+    font-size:11px;
 
-    }
+    letter-spacing:2px;
+  }
 
+  .logo-en{
+
+    margin-top:4px;
+
+    font-size:7px;
+
+    line-height:7px;
+
+    letter-spacing:2px;
+  }
+
+  .header-right{
+
+    gap:8px;
+  }
+
+  .back{
+
+    font-size:10px;
+  }
+
+  .theme-toggle{
+
+    height:25px;
+
+    padding:
+      0 7px;
+
+    gap:5px;
+
+    font-size:6px;
+
+    letter-spacing:1px;
+  }
+
+  .theme-icon{
+
+    font-size:10px;
+  }
+
+
+  .content{
+
+    padding-top:120px;
+  }
+
+  .heading{
+
+    margin-bottom:30px;
+  }
+
+  .heading-small{
+
+    font-size:8px;
+
+    letter-spacing:4px;
+  }
+
+  .heading-main{
+
+    font-size:30px;
+
+    letter-spacing:5px;
+  }
+
+  .heading-cn{
+
+    font-size:10px;
+
+    letter-spacing:3px;
+  }
+
+
+  .character-panel{
+
+    padding:20px;
+
+    gap:30px;
+  }
+
+  .character-image{
+
+    min-height:430px;
+  }
+
+  .character-image::before{
+
+    inset:12px;
+  }
+
+
+  .character-name-en{
+
+    font-size:32px;
+
+    letter-spacing:4px;
+  }
+
+  .character-name-cn{
+
+    font-size:15px;
+
+    letter-spacing:5px;
+  }
+
+
+  .basic-info{
+
+    grid-template-columns:1fr;
+
+    gap:17px;
+  }
+
+  .description{
+
+    font-size:12px;
+
+    line-height:1.9;
+  }
+
+
+  .magic-circle{
+
+    width:105vw;
+
+    height:105vw;
+  }
+
+
+  .archive-mark{
+
+    position:relative;
+
+    right:auto;
+    bottom:auto;
+
+    margin-top:24px;
+
+    text-align:right;
+
+    font-size:7px;
+
+    letter-spacing:2px;
+
+    line-height:1.4;
+
+    white-space:nowrap;
+  }
 }
 
 
 /* =========================
-   防止隐藏元素占位
+   VERY SMALL
 ========================= */
 
-[hidden]{
+@media(max-width:360px){
 
-    display:none !important;
+  .header{
 
+    left:20px;
+    right:20px;
+    top:24px;
+  }
+
+  .heading-main{
+
+    font-size:27px;
+  }
+
+  .header-right{
+
+    gap:5px;
+  }
+
+  .back{
+
+    font-size:9px;
+  }
+
+  .theme-toggle{
+
+    padding:
+      0 6px;
+
+    font-size:6px;
+  }
+}
+
+
+/* =========================================================
+   ★ DAY MODE
+   ★ 与首页 / 档案目录统一
+========================================================= */
+
+body.day-mode{
+
+  background:#f4f9fd;
+
+  color:#2e5069;
+}
+
+
+body.day-mode .page{
+
+  background:
+
+    radial-gradient(
+      circle at 50% 42%,
+      rgba(165,211,238,.20),
+      transparent 38%
+    ),
+
+    radial-gradient(
+      circle at 50% 52%,
+      rgba(226,240,249,.68),
+      transparent 72%
+    ),
+
+    #f4f9fd;
+}
+
+
+body.day-mode .stars span{
+
+  color:
+    rgba(87,151,199,.50);
+
+  text-shadow:none;
+}
+
+
+body.day-mode .magic-circle{
+
+  border-color:
+    rgba(79,148,196,.26);
+
+  box-shadow:
+
+    0 0 50px
+    rgba(70,142,196,.055),
+
+    inset
+    0 0 60px
+    rgba(78,151,204,.028);
+}
+
+body.day-mode .magic-circle::before{
+
+  border-color:
+    rgba(79,148,196,.26);
+}
+
+body.day-mode .magic-circle::after{
+
+  border-color:
+    rgba(101,168,207,.20);
+}
+
+
+body.day-mode .frame{
+
+  border-color:
+    rgba(91,145,184,.34);
+}
+
+body.day-mode .frame::before{
+
+  border-left-color:
+    rgba(79,141,190,.68);
+
+  border-top-color:
+    rgba(79,141,190,.68);
+}
+
+body.day-mode .frame::after{
+
+  border-right-color:
+    rgba(79,141,190,.68);
+
+  border-bottom-color:
+    rgba(79,141,190,.68);
+}
+
+
+body.day-mode .logo{
+
+  color:#2e526c;
+}
+
+body.day-mode .logo-symbol{
+
+  color:
+    rgba(79,151,201,.84);
+
+  text-shadow:
+    0 0 7px
+    rgba(86,158,208,.20);
+}
+
+body.day-mode .logo-cn{
+
+  color:
+    rgba(46,82,108,.92);
+}
+
+body.day-mode .logo-en{
+
+  color:
+    rgba(81,137,173,.62);
+}
+
+
+body.day-mode .back{
+
+  color:
+    rgba(62,99,127,.70);
+}
+
+body.day-mode .back:hover{
+
+  color:#28536f;
+
+  text-shadow:
+    0 0 8px
+    rgba(76,151,202,.14);
+}
+
+
+body.day-mode .theme-toggle{
+
+  border-color:
+    rgba(91,145,184,.34);
+
+  background:
+    rgba(248,252,255,.78);
+
+  color:
+    rgba(61,98,125,.76);
+}
+
+body.day-mode .theme-toggle:hover{
+
+  border-color:
+    rgba(79,151,200,.62);
+
+  background:
+    rgba(248,252,255,.90);
+
+  color:#28536f;
+
+  box-shadow:
+    0 0 14px
+    rgba(76,151,202,.11);
+}
+
+
+body.day-mode .heading-small{
+
+  color:
+    rgba(81,151,198,.54);
+}
+
+body.day-mode .heading-main{
+
+  color:#2b506a;
+
+  text-shadow:
+    0 0 18px
+    rgba(80,151,201,.065);
+}
+
+body.day-mode .heading-cn{
+
+  color:
+    rgba(45,82,106,.80);
+}
+
+
+body.day-mode .character-panel{
+
+  border-color:
+    rgba(82,151,198,.36);
+
+  background:
+
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.58),
+      rgba(239,247,251,.40)
+    );
+
+  box-shadow:
+    0 20px 60px
+    rgba(70,110,130,.08);
+}
+
+
+body.day-mode .character-image{
+
+  border-color:
+    rgba(82,151,198,.36);
+
+  background:
+
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(165,211,238,.20),
+      transparent 58%
+    ),
+
+    rgba(248,252,255,.42);
+}
+
+body.day-mode .character-image::before{
+
+  border-color:
+    rgba(82,151,198,.14);
+}
+
+body.day-mode .character-image::after{
+
+  color:
+    rgba(76,151,201,.50);
+
+  text-shadow:none;
+}
+
+
+body.day-mode .image-placeholder{
+
+  color:
+    rgba(65,106,133,.64);
+}
+
+body.day-mode .image-placeholder-symbol{
+
+  color:
+    rgba(112,188,224,.055);
+}
+
+body.day-mode .image-placeholder-cn{
+
+  color:
+    rgba(65,106,133,.64);
+}
+
+
+body.day-mode .character-number{
+
+  color:
+    rgba(81,151,198,.54);
+}
+
+body.day-mode .character-name-en{
+
+  color:
+    rgba(46,82,108,.92);
+}
+
+body.day-mode .character-name-cn{
+
+  color:
+    rgba(45,82,106,.80);
+}
+
+body.day-mode .character-role{
+
+  color:
+    rgba(70,135,165,.60);
+}
+
+
+body.day-mode .divider{
+
+  background:
+
+    linear-gradient(
+      90deg,
+      rgba(81,151,198,.34),
+      rgba(81,151,198,.08),
+      transparent
+    );
+}
+
+
+body.day-mode .info-label{
+
+  color:
+    rgba(70,135,165,.68);
+}
+
+body.day-mode .info-value{
+
+  color:
+    rgba(65,106,133,.64);
+}
+
+
+body.day-mode .description-title{
+
+  color:
+    rgba(70,135,165,.68);
+}
+
+body.day-mode .description{
+
+  color:
+    rgba(65,106,133,.64);
+}
+
+
+body.day-mode .archive-mark{
+
+  color:
+    rgba(73,115,143,.40);
+}
+
+
+@media(prefers-reduced-motion:reduce){
+
+  .stars span{
+
+    animation:none;
+  }
+
+  body,
+  .theme-toggle,
+  .magic-circle,
+  .frame,
+  .logo,
+  .logo-symbol,
+  .logo-cn,
+  .logo-en,
+  .heading-small,
+  .heading-main,
+  .heading-cn,
+  .character-panel,
+  .character-image,
+  .character-image::before,
+  .character-image::after,
+  .image-placeholder,
+  .image-placeholder-symbol,
+  .image-placeholder-cn,
+  .character-number,
+  .character-name-en,
+  .character-name-cn,
+  .character-role,
+  .divider,
+  .info-label,
+  .info-value,
+  .description-title,
+  .description,
+  .archive-mark{
+
+    transition:none;
+  }
 }
 
 </style>
-
 </head>
 
 
 <body>
 
-
-<!-- =========================
-     左上角 Logo
-========================= -->
-
-<a
-    class="site-logo"
-    href="index.html"
->
-
-    <div class="cn">
-        塞垭弥大陆档案馆
-    </div>
-
-    <div class="en">
-        SEYAMI ARCHIVE
-    </div>
-
-</a>
+<div class="page">
 
 
-<!-- =========================
-     右上角
-========================= -->
+  <div class="stars">
 
-<div class="top-right">
+    <span>✦</span>
+    <span>✦</span>
+    <span>✡</span>
+    <span>✶</span>
+    <span>✦</span>
 
-    <a
-        class="back-link"
-        href="archive.html"
-    >
-        ← ARCHIVE
-    </a>
+    <span>✶</span>
+    <span>✦</span>
+    <span>✡</span>
+    <span>✶</span>
+    <span>✦</span>
 
-    <div
-        class="theme-toggle"
-        id="themeToggle"
-        title="切换日夜模式"
-    ></div>
+    <span>✦</span>
+    <span>✦</span>
+    <span>✶</span>
+    <span>✦</span>
+    <span>✡</span>
 
-</div>
+    <span>✦</span>
+    <span>✶</span>
+    <span>✦</span>
+    <span>✦</span>
+    <span>✡</span>
 
-
-<!-- =========================
-     装饰星点
-========================= -->
-
-<div class="star s1">✦</div>
-<div class="star s2">✶</div>
-<div class="star s3">✦</div>
-<div class="star s4">✶</div>
-<div class="star s5">✡</div>
-<div class="star s6">✦</div>
+  </div>
 
 
-<!-- =========================
-     页面
-========================= -->
-
-<main class="page">
-
-<div class="frame">
+  <div class="magic-circle"></div>
 
 
-    <div class="corner tl"></div>
-    <div class="corner tr"></div>
-    <div class="corner bl"></div>
-    <div class="corner br"></div>
+  <div class="frame"></div>
 
 
-    <!-- 标题 -->
+  <header class="header">
 
-    <div class="archive-label">
-        CHARACTER RECORD
-    </div>
+    <a href="archive.html" class="logo">
 
-    <h1 class="main-title">
+      <span class="logo-symbol">
+        ✦
+      </span>
 
-        ARCHIVE
+      <span class="logo-text">
 
-        <span class="cn">
-            角色档案
+        <span class="logo-cn">
+          塞垭弥大陆档案馆
         </span>
 
-    </h1>
+        <span class="logo-en">
+          SEYAMI ARCHIVE
+        </span>
+
+      </span>
+
+    </a>
 
 
-    <!-- =========================
-         角色主体
-    ========================= -->
+    <div class="header-right">
+
+      <a href="archive.html" class="back">
+        ← 返回档案目录
+      </a>
+
+
+      <button
+        class="theme-toggle"
+        id="themeToggle"
+        type="button"
+        aria-label="切换昼夜模式"
+      >
+
+        <span
+          class="theme-icon"
+          id="themeIcon"
+        >
+          ☾
+        </span>
+
+        <span id="themeText">
+          NIGHT
+        </span>
+
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <main class="content">
+
+
+    <section class="heading">
+
+      <div class="heading-small">
+        CHARACTER RECORD
+      </div>
+
+      <div class="heading-main">
+        ARCHIVE
+      </div>
+
+      <div class="heading-cn">
+        角色档案
+      </div>
+
+    </section>
+
 
     <section class="character-panel">
 
 
-        <!-- 立绘 -->
+      <div class="character-image">
 
-        <div class="character-image-wrap">
+        <img
+          id="characterImage"
+          src=""
+          alt=""
+          style="display:none;"
+        >
 
-            <div class="magic-circle"></div>
+        <div
+          class="image-placeholder"
+          id="imagePlaceholder"
+        >
 
-            <div
-                class="image-placeholder"
-                id="imagePlaceholder"
-            >
-                CHARACTER PORTRAIT
-                <br>
-                角色立绘
+          <span class="image-placeholder-symbol">
+            ✦
+          </span>
+
+          CHARACTER PORTRAIT
+
+          <span class="image-placeholder-cn">
+            角色立绘
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="character-info">
+
+
+        <div class="character-number">
+          CHARACTER · 001
+        </div>
+
+
+        <div class="character-name-en">
+        </div>
+
+
+        <div class="character-name-cn">
+        </div>
+
+
+        <div class="character-role">
+        </div>
+
+
+        <div class="divider"></div>
+
+
+        <div class="basic-info">
+
+
+          <div class="info-item">
+
+            <div class="info-label">
+              RACE
             </div>
 
-            <img
-                id="characterImage"
-                class="character-image"
-                alt="角色立绘"
-            >
+            <div class="info-value">
+            </div>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <div class="info-label">
+              REGION
+            </div>
+
+            <div class="info-value">
+            </div>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <div class="info-label">
+              STATUS
+            </div>
+
+            <div class="info-value">
+            </div>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <div class="info-label">
+              ROLE
+            </div>
+
+            <div class="info-value">
+            </div>
+
+          </div>
+
 
         </div>
 
 
-        <!-- 角色资料 -->
-
-        <div class="character-info">
+        <div class="divider"></div>
 
 
-            <div
-                class="character-number"
-                id="characterNumber"
-            >
-                CHARACTER · 001
-            </div>
-
-
-            <div
-                class="character-name"
-                id="characterName"
-            >
-                <span class="en-name">
-                    CHARACTER
-                </span>
-
-                <span class="cn-name">
-                    角色
-                </span>
-            </div>
-
-
-            <div class="info-line"></div>
-
-
-            <div class="meta-grid">
-
-
-                <div class="meta-item">
-
-                    <div class="meta-label">
-                        RACE
-                    </div>
-
-                    <div
-                        class="meta-value"
-                        id="characterRace"
-                    >
-                        —
-                    </div>
-
-                </div>
-
-
-                <div class="meta-item">
-
-                    <div class="meta-label">
-                        REGION
-                    </div>
-
-                    <div
-                        class="meta-value"
-                        id="characterRegion"
-                    >
-                        —
-                    </div>
-
-                </div>
-
-
-                <div class="meta-item">
-
-                    <div class="meta-label">
-                        AGE
-                    </div>
-
-                    <div
-                        class="meta-value"
-                        id="characterAge"
-                    >
-                        —
-                    </div>
-
-                </div>
-
-
-                <div class="meta-item">
-
-                    <div class="meta-label">
-                        GENDER
-                    </div>
-
-                    <div
-                        class="meta-value"
-                        id="characterGender"
-                    >
-                        —
-                    </div>
-
-                </div>
-
-
-                <div class="meta-item">
-
-                    <div class="meta-label">
-                        STATUS
-                    </div>
-
-                    <div
-                        class="meta-value"
-                        id="characterStatus"
-                    >
-                        —
-                    </div>
-
-                </div>
-
-
-                <div class="meta-item">
-
-                    <div class="meta-label">
-                        ROLE
-                    </div>
-
-                    <div
-                        class="meta-value"
-                        id="characterRole"
-                    >
-                        —
-                    </div>
-
-                </div>
-
-
-            </div>
-
-
-            <div class="profile-title">
-                PROFILE
-            </div>
-
-
-            <div
-                class="profile"
-                id="characterProfile"
-            >
-                —
-            </div>
-
-
-            <div
-                class="archive-mark"
-                id="archiveMark"
-            >
-                SEYAMI ARCHIVE
-            </div>
-
-
+        <div class="description-title">
+          PROFILE
         </div>
+
+        <div class="description">
+        </div>
+
+
+      </div>
+
+
+      <div class="archive-mark">
+        SEYAMI · CHARACTER ARCHIVE · 001
+      </div>
 
 
     </section>
 
 
-    <!-- =========================
-         翻页
-    ========================= -->
+    <!-- =====================================================
+         ★ 新增：角色翻页
+         只有这里是新增的视觉结构
+    ====================================================== -->
 
     <nav
-        class="character-navigation"
-        id="characterNavigation"
-        aria-label="角色翻页"
+      class="character-pagination"
+      id="characterPagination"
+      aria-label="角色翻页"
     >
 
+      <button
+        type="button"
+        id="prevCharacter"
+        class="pagination-button"
+      >
+        ← PREVIOUS
+      </button>
 
-        <a
-            href="#"
-            class="nav-button nav-prev"
-            id="prevCharacter"
-        >
+      <div
+        id="paginationStatus"
+        class="pagination-status"
+      >
+        CHARACTER · 001
+      </div>
 
-            <span class="nav-arrow">
-                ←
-            </span>
-
-            <span>
-                PREVIOUS
-            </span>
-
-        </a>
-
-
-        <div
-            class="nav-current"
-            id="navCurrent"
-        >
-            CHARACTER · 001
-        </div>
-
-
-        <a
-            href="#"
-            class="nav-button nav-next"
-            id="nextCharacter"
-        >
-
-            <span>
-                NEXT
-            </span>
-
-            <span class="nav-arrow">
-                →
-            </span>
-
-        </a>
-
+      <button
+        type="button"
+        id="nextCharacter"
+        class="pagination-button"
+      >
+        NEXT →
+      </button>
 
     </nav>
 
 
+  </main>
+
 </div>
 
-</main>
+
+<style>
+
+/* =========================================================
+   ★ CHARACTER PAGINATION
+   ★ 只负责新增翻页，不修改原有美化
+========================================================= */
+
+.character-pagination{
+
+  width:min(1100px,100%);
+
+  margin:28px auto 0;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  position:relative;
+
+  z-index:10;
+
+}
+
+.pagination-button{
+
+  appearance:none;
+
+  border:0;
+
+  background:transparent;
+
+  padding:8px 4px;
+
+  color:rgba(191,220,243,.68);
+
+  font-family:
+    "Cinzel",
+    "Noto Serif SC",
+    serif;
+
+  font-size:9px;
+
+  letter-spacing:3px;
+
+  cursor:pointer;
+
+  transition:
+    color .3s ease,
+    opacity .3s ease,
+    text-shadow .3s ease;
+
+}
+
+.pagination-button:hover:not(:disabled){
+
+  color:#d9efff;
+
+  text-shadow:
+    0 0 10px
+    rgba(102,180,231,.35);
+
+}
+
+.pagination-button:disabled{
+
+  opacity:.18;
+
+  cursor:default;
+
+}
+
+.pagination-status{
+
+  color:rgba(115,182,224,.48);
+
+  font-family:"Cinzel",serif;
+
+  font-size:8px;
+
+  letter-spacing:3px;
+
+}
+
+body.day-mode .pagination-button{
+
+  color:
+    rgba(62,99,127,.70);
+
+}
+
+body.day-mode .pagination-button:hover:not(:disabled){
+
+  color:#28536f;
+
+  text-shadow:
+    0 0 8px
+    rgba(76,151,202,.14);
+
+}
+
+body.day-mode .pagination-status{
+
+  color:
+    rgba(70,135,165,.55);
+
+}
 
 
-<!-- =========================
-     Supabase
-========================= -->
+@media(max-width:600px){
 
-<script
-    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
-></script>
+  .character-pagination{
+
+    margin-top:22px;
+
+    padding:
+      0 5px;
+
+  }
+
+  .pagination-button{
+
+    font-size:8px;
+
+    letter-spacing:2px;
+
+  }
+
+  .pagination-status{
+
+    font-size:7px;
+
+    letter-spacing:2px;
+
+  }
+
+}
+
+@media(max-width:360px){
+
+  .pagination-button{
+
+    font-size:7px;
+
+    letter-spacing:1px;
+
+  }
+
+  .pagination-status{
+
+    font-size:6px;
+
+    letter-spacing:1px;
+
+  }
+
+}
+
+</style>
 
 
 <script>
 
-/* =====================================================
-   Supabase
-===================================================== */
+/* =========================================================
+   SUPABASE
+========================================================= */
 
 const SUPABASE_URL =
-    "https://rqqkdpzehxzwqzytpxgh.supabase.co";
+  "https://rqqkdpzehxzwqzytpxgh.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_T_gNdlgkOaXnzjSvdmI1Pw_HQOVTEWG";
+  "sb_publishable_T_gNdlgkOaXnzjSvdmI1Pw_HQOVTEWG";
 
 const supabaseClient =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
-    );
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
 
 
-/* =====================================================
-   页面元素
-===================================================== */
+/* =========================================================
+   CHARACTER ELEMENTS
+========================================================= */
 
 const characterNumber =
-    document.getElementById(
-        "characterNumber"
-    );
+  document.querySelector(
+    ".character-number"
+  );
 
-const characterName =
-    document.getElementById(
-        "characterName"
-    );
+const characterNameEn =
+  document.querySelector(
+    ".character-name-en"
+  );
 
-const characterRace =
-    document.getElementById(
-        "characterRace"
-    );
-
-const characterRegion =
-    document.getElementById(
-        "characterRegion"
-    );
-
-const characterAge =
-    document.getElementById(
-        "characterAge"
-    );
-
-const characterGender =
-    document.getElementById(
-        "characterGender"
-    );
-
-const characterStatus =
-    document.getElementById(
-        "characterStatus"
-    );
+const characterNameCn =
+  document.querySelector(
+    ".character-name-cn"
+  );
 
 const characterRole =
-    document.getElementById(
-        "characterRole"
-    );
+  document.querySelector(
+    ".character-role"
+  );
 
-const characterProfile =
-    document.getElementById(
-        "characterProfile"
-    );
-
-const archiveMark =
-    document.getElementById(
-        "archiveMark"
-    );
+const infoValues =
+  document.querySelectorAll(
+    ".info-value"
+  );
 
 const characterImage =
-    document.getElementById(
-        "characterImage"
-    );
+  document.getElementById(
+    "characterImage"
+  );
 
 const imagePlaceholder =
-    document.getElementById(
-        "imagePlaceholder"
-    );
+  document.getElementById(
+    "imagePlaceholder"
+  );
+
+const description =
+  document.querySelector(
+    ".description"
+  );
+
+const archiveMark =
+  document.querySelector(
+    ".archive-mark"
+  );
 
 const prevCharacter =
-    document.getElementById(
-        "prevCharacter"
-    );
+  document.getElementById(
+    "prevCharacter"
+  );
 
 const nextCharacter =
-    document.getElementById(
-        "nextCharacter"
-    );
+  document.getElementById(
+    "nextCharacter"
+  );
 
-const navCurrent =
-    document.getElementById(
-        "navCurrent"
-    );
+const paginationStatus =
+  document.getElementById(
+    "paginationStatus"
+  );
 
 
-/* =====================================================
-   获取 URL 中的角色 ID
-===================================================== */
+/* =========================================================
+   全部角色
+========================================================= */
+
+let allCharacters = [];
+
+let currentIndex = 0;
+
+
+/* =========================================================
+   GET CHARACTER ID
+========================================================= */
 
 function getCharacterId(){
 
-    const params =
-        new URLSearchParams(
-            window.location.search
-        );
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
 
-    return params.get("id");
-
-}
-
-
-/* =====================================================
-   名字处理
-   例如：
-   Evelina•Nieve 伊莉娜·妳芙
-
-   自动分成：
-
-   Evelina•Nieve
-   伊莉娜·妳芙
-===================================================== */
-
-function splitCharacterName(fullName){
-
-    if(!fullName){
-
-        return {
-            english:"CHARACTER",
-            chinese:"角色"
-        };
-
-    }
-
-
-    const text =
-        String(fullName).trim();
-
-
-    const chineseMatch =
-        text.match(
-            /[\u3400-\u9FFF]/
-        );
-
-
-    if(!chineseMatch){
-
-        return {
-            english:text,
-            chinese:""
-        };
-
-    }
-
-
-    const index =
-        chineseMatch.index;
-
-
-    return {
-
-        english:
-            text
-                .slice(0,index)
-                .trim(),
-
-        chinese:
-            text
-                .slice(index)
-                .trim()
-
-    };
+  return params.get("id");
 
 }
 
 
-/* =====================================================
-   显示角色
-===================================================== */
+/* =========================================================
+   更新 URL
+========================================================= */
 
-function renderCharacter(
-    character,
-    currentIndex,
-    totalCount
-){
+function goToCharacter(character){
 
-    if(!character){
+  if(!character){
+    return;
+  }
 
-        return;
+  const url =
+    "characters.html?id=" +
+    encodeURIComponent(
+      character.id
+    );
 
-    }
+  window.location.href =
+    url;
 
-
-    /* -------------------------
-       编号
-    ------------------------- */
-
-    const displayNumber =
-        String(
-            currentIndex + 1
-        ).padStart(3,"0");
+}
 
 
-    characterNumber.textContent =
-        "CHARACTER · " +
-        displayNumber;
+/* =========================================================
+   更新翻页按钮
+========================================================= */
+
+function updatePagination(){
+
+  const total =
+    allCharacters.length;
 
 
-    navCurrent.textContent =
-        "CHARACTER · " +
-        displayNumber;
+  if(total <= 1){
+
+    prevCharacter.disabled = true;
+
+    nextCharacter.disabled = true;
+
+  }else{
+
+    prevCharacter.disabled =
+      currentIndex <= 0;
+
+    nextCharacter.disabled =
+      currentIndex >= total - 1;
+
+  }
 
 
-    /* -------------------------
-       名字
-    ------------------------- */
-
-    const names =
-        splitCharacterName(
-            character.name
-        );
+  const displayNumber =
+    String(
+      currentIndex + 1
+    ).padStart(3,"0");
 
 
-    characterName.innerHTML = `
-
-        <span class="en-name">
-            ${escapeHTML(names.english)}
-        </span>
-
-        <span class="cn-name">
-            ${escapeHTML(names.chinese)}
-        </span>
-
-    `;
+  paginationStatus.textContent =
+    "CHARACTER · " +
+    displayNumber;
 
 
-    /* -------------------------
-       基础资料
-    ------------------------- */
+  /*
+    浏览器标题也跟着角色变化，
+    方便以后同时开多个角色页面。
+  */
 
-    characterRace.textContent =
-        character.race || "—";
+  document.title =
+    "角色档案 · " +
+    (
+      allCharacters[currentIndex]?.name ||
+      "Seyami Archive"
+    );
 
-    characterRegion.textContent =
-        character.region || "—";
-
-    characterAge.textContent =
-        character.age !== null &&
-        character.age !== undefined &&
-        character.age !== ""
-            ? character.age
-            : "—";
-
-    characterGender.textContent =
-        character.gender || "—";
-
-    characterRole.textContent =
-        character.role || "—";
+}
 
 
-    /*
-       STATUS
+/* =========================================================
+   显示当前角色
+========================================================= */
 
-       当前数据库没有 status 字段，
-       所以这里暂时使用固定档案状态。
-    */
+function renderCharacter(character){
 
-    characterStatus.textContent =
-        "ARCHIVED";
-
-
-    /* -------------------------
-       PROFILE
-    ------------------------- */
-
-    const profileParts = [];
+  if(!character){
+    return;
+  }
 
 
-    if(character.personality){
+  /* -------------------------
+     NUMBER
+  ------------------------- */
 
-        profileParts.push(
-            "性格：" +
-            character.personality
-        );
-
-    }
-
-
-    if(character.backstory){
-
-        profileParts.push(
-            character.backstory
-        );
-
-    }
+  const displayNumber =
+    String(
+      currentIndex + 1
+    ).padStart(3,"0");
 
 
-    if(profileParts.length){
-
-        characterProfile.textContent =
-            profileParts.join("\n\n");
-
-    }else{
-
-        characterProfile.textContent =
-            "暂无档案记录。";
-
-    }
+  characterNumber.textContent =
+    "CHARACTER · " +
+    displayNumber;
 
 
-    /* -------------------------
-       Archive Mark
-    ------------------------- */
-
-    archiveMark.textContent =
-        "SEYAMI ARCHIVE · " +
-        displayNumber;
+  archiveMark.textContent =
+    "SEYAMI · CHARACTER ARCHIVE · " +
+    displayNumber;
 
 
-    /* -------------------------
-       图片
-    ------------------------- */
+  /* -------------------------
+     NAME
+  ------------------------- */
 
-    characterImage.style.display =
-        "none";
+  const fullName =
+    (character.name || "").trim();
 
-    imagePlaceholder.style.display =
-        "flex";
 
-    characterImage.removeAttribute(
-        "src"
+  const chineseIndex =
+    fullName.search(
+      /[\u4e00-\u9fff]/
     );
 
 
-    if(character.image_url){
+  if(chineseIndex > -1){
 
-        characterImage.onload =
-            function(){
+    characterNameEn.textContent =
+      fullName
+        .substring(
+          0,
+          chineseIndex
+        )
+        .trim();
 
-                imagePlaceholder.style.display =
-                    "none";
+    characterNameCn.textContent =
+      fullName
+        .substring(
+          chineseIndex
+        )
+        .trim();
 
-                characterImage.style.display =
-                    "block";
+  }else{
 
-            };
+    characterNameEn.textContent =
+      fullName;
 
+    characterNameCn.textContent =
+      "";
 
-        characterImage.onerror =
-            function(){
-
-                characterImage.style.display =
-                    "none";
-
-                imagePlaceholder.style.display =
-                    "flex";
-
-                console.error(
-                    "角色立绘加载失败：",
-                    character.image_url
-                );
-
-            };
+  }
 
 
-        characterImage.src =
-            character.image_url;
+  /* -------------------------
+     ROLE
+  ------------------------- */
 
-    }
+  characterRole.textContent =
+    character.role || "";
 
 
-    /* -------------------------
-       上一个
-    ------------------------- */
+  /* -------------------------
+     BASIC INFO
 
-    if(currentIndex > 0){
+     0 RACE
+     1 REGION
+     2 STATUS
+     3 ROLE
+  ------------------------- */
 
-        const previousCharacter =
-            window.allCharacters[
-                currentIndex - 1
-            ];
+  if(infoValues.length >= 4){
 
-        prevCharacter.href =
-            "characters.html?id=" +
-            encodeURIComponent(
-                previousCharacter.id
-            );
+    infoValues[0].textContent =
+      character.race || "";
 
-        prevCharacter.style.visibility =
-            "visible";
 
-    }else{
+    infoValues[1].textContent =
+      character.region || "";
 
-        prevCharacter.removeAttribute(
-            "href"
-        );
 
-        prevCharacter.style.visibility =
-            "hidden";
+    let status = "";
+
+
+    if(character.gender){
+
+      status =
+        character.gender;
 
     }
 
-
-    /* -------------------------
-       下一个
-    ------------------------- */
 
     if(
-        currentIndex <
-        totalCount - 1
+      character.age !== null &&
+      character.age !== undefined &&
+      character.age !== ""
     ){
 
-        const nextCharacterData =
-            window.allCharacters[
-                currentIndex + 1
-            ];
+      if(status){
 
-        nextCharacter.href =
-            "characters.html?id=" +
-            encodeURIComponent(
-                nextCharacterData.id
-            );
+        status += " · ";
 
-        nextCharacter.style.visibility =
-            "visible";
+      }
 
-    }else{
-
-        nextCharacter.removeAttribute(
-            "href"
-        );
-
-        nextCharacter.style.visibility =
-            "hidden";
+      status +=
+        character.age + "岁";
 
     }
 
-}
+
+    infoValues[2].textContent =
+      status;
 
 
-/* =====================================================
-   防止角色名称里的特殊字符破坏 HTML
-===================================================== */
+    infoValues[3].textContent =
+      character.role || "";
 
-function escapeHTML(value){
+  }
 
-    return String(value || "")
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
+
+  /* -------------------------
+     PROFILE
+  ------------------------- */
+
+  let profileText = "";
+
+
+  if(
+    character.personality !== null &&
+    character.personality !== undefined &&
+    String(character.personality).trim() !== ""
+  ){
+
+    profileText +=
+      "性格： " +
+      String(
+        character.personality
+      ).trim();
+
+  }
+
+
+  if(
+    character.backstory !== null &&
+    character.backstory !== undefined &&
+    String(character.backstory).trim() !== ""
+  ){
+
+    if(profileText){
+
+      profileText +=
+        "\n\n";
+
+    }
+
+    profileText +=
+      "背景： " +
+      String(
+        character.backstory
+      ).trim();
+
+  }
+
+
+  description.style.whiteSpace =
+    "pre-line";
+
+  description.textContent =
+    profileText;
+
+
+  /* -------------------------
+     IMAGE
+  ------------------------- */
+
+  const imageURL =
+    (character.image_url || "").trim();
+
+
+  characterImage.style.display =
+    "none";
+
+  imagePlaceholder.style.display =
+    "block";
+
+
+  if(imageURL){
+
+    characterImage.onload =
+      function(){
+
+        characterImage.style.display =
+          "block";
+
+        imagePlaceholder.style.display =
+          "none";
+
+      };
+
+
+    characterImage.onerror =
+      function(){
+
+        characterImage.style.display =
+          "none";
+
+        imagePlaceholder.style.display =
+          "block";
+
+        console.error(
+          "角色图片加载失败：",
+          imageURL
         );
 
+      };
+
+
+    characterImage.src =
+      imageURL;
+
+    characterImage.alt =
+      fullName;
+
+  }
+
+
+  /* -------------------------
+     翻页状态
+  ------------------------- */
+
+  updatePagination();
+
 }
 
 
-/* =====================================================
-   读取角色
-===================================================== */
+/* =========================================================
+   LOAD ALL CHARACTERS
+========================================================= */
 
 async function loadCharacters(){
 
-    try{
+  try{
 
-        /*
-         * 读取所有角色
-         *
-         * 按 id 从小到大排列
-         *
-         * 以后新增角色，
-         * 会自动进入翻页系统。
-         */
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient
-                .from("characters")
-                .select(`
-                    id,
-                    created_at,
-                    name,
-                    race,
-                    role,
-                    age,
-                    gender,
-                    region,
-                    personality,
-                    backstory,
-                    image_url
-                `)
-                .order(
-                    "id",
-                    {
-                        ascending:true
-                    }
-                );
-
-
-        if(error){
-
-            console.error(
-                "读取角色失败：",
-                error
-            );
-
-            characterProfile.textContent =
-                "无法读取角色档案。";
-
-            return;
-
-        }
-
-
-        if(
-            !data ||
-            data.length === 0
-        ){
-
-            characterNumber.textContent =
-                "CHARACTER · 000";
-
-            characterName.innerHTML = `
-
-                <span class="en-name">
-                    NO RECORD
-                </span>
-
-                <span class="cn-name">
-                    暂无角色档案
-                </span>
-
-            `;
-
-            characterProfile.textContent =
-                "当前档案馆中暂无角色记录。";
-
-            characterImage.style.display =
-                "none";
-
-            imagePlaceholder.style.display =
-                "flex";
-
-            prevCharacter.style.visibility =
-                "hidden";
-
-            nextCharacter.style.visibility =
-                "hidden";
-
-            navCurrent.textContent =
-                "NO RECORD";
-
-            return;
-
-        }
-
-
-        /*
-         * 保存全部角色
-         * 翻页时直接使用
-         */
-
-        window.allCharacters =
-            data;
-
-
-        const urlCharacterId =
-            getCharacterId();
-
-
-        let currentIndex = 0;
-
-
-        /*
-         * 如果 URL 有 id，
-         * 找到对应角色
-         */
-
-        if(urlCharacterId){
-
-            const foundIndex =
-                data.findIndex(
-                    character =>
-                        String(character.id) ===
-                        String(urlCharacterId)
-                );
-
-
-            if(foundIndex !== -1){
-
-                currentIndex =
-                    foundIndex;
-
-            }
-
-        }
-
-
-        renderCharacter(
-            data[currentIndex],
-            currentIndex,
-            data.length
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("characters")
+        .select(`
+          id,
+          created_at,
+          name,
+          race,
+          role,
+          age,
+          gender,
+          region,
+          personality,
+          backstory,
+          image_url
+        `)
+        .order(
+          "id",
+          {
+            ascending:true
+          }
         );
 
 
-        console.log(
-            "角色总数：",
-            data.length
-        );
+    /* -------------------------
+       ERROR
+    ------------------------- */
 
-        console.log(
-            "当前角色：",
-            data[currentIndex]
-        );
+    if(error){
 
+      console.error(
+        "Supabase 读取失败：",
+        error
+      );
 
-    }catch(error){
+      characterNameEn.textContent =
+        "ARCHIVE ERROR";
 
-        console.error(
-            "角色页面发生错误：",
-            error
-        );
+      characterNameCn.textContent =
+        "档案读取失败";
 
-        characterProfile.textContent =
-            "档案读取出现错误。";
+      description.textContent =
+        "DATABASE CONNECTION ERROR";
+
+      return;
 
     }
+
+
+    /* -------------------------
+       EMPTY
+    ------------------------- */
+
+    if(
+      !data ||
+      data.length === 0
+    ){
+
+      characterNameEn.textContent =
+        "ARCHIVE NOT FOUND";
+
+      characterNameCn.textContent =
+        "暂无角色档案";
+
+      description.textContent =
+        "";
+
+      prevCharacter.disabled =
+        true;
+
+      nextCharacter.disabled =
+        true;
+
+      return;
+
+    }
+
+
+    /* -------------------------
+       保存全部角色
+    ------------------------- */
+
+    allCharacters =
+      data;
+
+
+    /* -------------------------
+       根据 URL id 找当前角色
+    ------------------------- */
+
+    const characterId =
+      getCharacterId();
+
+
+    if(characterId){
+
+      const foundIndex =
+        allCharacters.findIndex(
+          character =>
+            String(character.id) ===
+            String(characterId)
+        );
+
+
+      if(foundIndex >= 0){
+
+        currentIndex =
+          foundIndex;
+
+      }else{
+
+        currentIndex =
+          0;
+
+      }
+
+    }else{
+
+      /*
+        没有 id 时显示第一位。
+      */
+
+      currentIndex =
+        0;
+
+    }
+
+
+    /* -------------------------
+       显示
+    ------------------------- */
+
+    renderCharacter(
+      allCharacters[currentIndex]
+    );
+
+
+    console.log(
+      "角色数量：",
+      allCharacters.length
+    );
+
+    console.log(
+      "当前角色：",
+      allCharacters[currentIndex]
+    );
+
+  }catch(error){
+
+    console.error(
+      "角色档案加载失败：",
+      error
+    );
+
+    characterNameEn.textContent =
+      "ARCHIVE ERROR";
+
+    characterNameCn.textContent =
+      "档案读取失败";
+
+    description.textContent =
+      "DATABASE CONNECTION ERROR";
+
+  }
 
 }
 
 
-/* =====================================================
-   翻页点击
-===================================================== */
+/* =========================================================
+   PREVIOUS
+========================================================= */
 
 prevCharacter.addEventListener(
-    "click",
-    function(event){
+  "click",
+  function(){
 
-        if(
-            !this.href ||
-            this.style.visibility ===
-            "hidden"
-        ){
-
-            event.preventDefault();
-
-        }
-
+    if(
+      currentIndex <= 0
+    ){
+      return;
     }
+
+
+    const previous =
+      allCharacters[
+        currentIndex - 1
+      ];
+
+
+    goToCharacter(
+      previous
+    );
+
+  }
 );
 
+
+/* =========================================================
+   NEXT
+========================================================= */
 
 nextCharacter.addEventListener(
-    "click",
-    function(event){
+  "click",
+  function(){
 
-        if(
-            !this.href ||
-            this.style.visibility ===
-            "hidden"
-        ){
-
-            event.preventDefault();
-
-        }
-
+    if(
+      currentIndex >=
+      allCharacters.length - 1
+    ){
+      return;
     }
+
+
+    const next =
+      allCharacters[
+        currentIndex + 1
+      ];
+
+
+    goToCharacter(
+      next
+    );
+
+  }
 );
 
 
-/* =====================================================
-   日夜模式
-===================================================== */
+/* =========================================================
+   KEYBOARD
+   ← / →
+   也可以翻页
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  function(event){
+
+    /*
+      如果用户正在输入文字，
+      不触发翻页。
+    */
+
+    const tag =
+      document.activeElement?.tagName;
+
+
+    if(
+      tag === "INPUT" ||
+      tag === "TEXTAREA"
+    ){
+      return;
+    }
+
+
+    if(
+      event.key === "ArrowLeft"
+    ){
+
+      if(
+        currentIndex > 0
+      ){
+
+        goToCharacter(
+          allCharacters[
+            currentIndex - 1
+          ]
+        );
+
+      }
+
+    }
+
+
+    if(
+      event.key === "ArrowRight"
+    ){
+
+      if(
+        currentIndex <
+        allCharacters.length - 1
+      ){
+
+        goToCharacter(
+          allCharacters[
+            currentIndex + 1
+          ]
+        );
+
+      }
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   DAY / NIGHT
+========================================================= */
 
 const themeToggle =
-    document.getElementById(
-        "themeToggle"
-    );
+  document.getElementById(
+    "themeToggle"
+  );
+
+const themeIcon =
+  document.getElementById(
+    "themeIcon"
+  );
+
+const themeText =
+  document.getElementById(
+    "themeText"
+  );
 
 
 function applyTheme(theme){
 
-    if(theme === "day"){
+  if(theme === "day"){
 
-        document.body.classList.add(
-            "day"
-        );
+    document.body.classList.add(
+      "day-mode"
+    );
 
-    }else{
+    themeIcon.textContent =
+      "☀";
 
-        document.body.classList.remove(
-            "day"
-        );
+    themeText.textContent =
+      "DAY";
 
-    }
+  }else{
+
+    document.body.classList.remove(
+      "day-mode"
+    );
+
+    themeIcon.textContent =
+      "☾";
+
+    themeText.textContent =
+      "NIGHT";
+
+  }
 
 }
 
 
 const savedTheme =
-    localStorage.getItem(
-        "seyami-theme"
-    );
+  localStorage.getItem(
+    "seyami-theme"
+  );
 
 
-if(savedTheme){
-
-    applyTheme(savedTheme);
-
-}else{
-
-    applyTheme("night");
-
-}
-
-
-themeToggle.addEventListener(
-    "click",
-    function(){
-
-        const isDay =
-            document.body.classList.contains(
-                "day"
-            );
-
-        const newTheme =
-            isDay
-                ? "night"
-                : "day";
-
-        applyTheme(newTheme);
-
-        localStorage.setItem(
-            "seyami-theme",
-            newTheme
-        );
-
-    }
+applyTheme(
+  savedTheme === "day"
+    ? "day"
+    : "night"
 );
 
 
-/* =====================================================
-   开始读取
-===================================================== */
+themeToggle.addEventListener(
+  "click",
+  () => {
+
+    const isDay =
+      document.body.classList.contains(
+        "day-mode"
+      );
+
+
+    const nextTheme =
+      isDay
+        ? "night"
+        : "day";
+
+
+    localStorage.setItem(
+      "seyami-theme",
+      nextTheme
+    );
+
+
+    applyTheme(
+      nextTheme
+    );
+
+  }
+);
+
+
+/* =========================================================
+   START
+========================================================= */
 
 loadCharacters();
 
 </script>
 
-
 </body>
-
-   </html>
+</html>
