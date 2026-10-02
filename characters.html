@@ -2388,25 +2388,47 @@ async function loadCharacter(){
       getCharacterId();
 
 
+    /*
+      明确读取数据库目前已经存在的字段。
+
+      characters：
+
+      id
+      name
+      race
+      role
+      age
+      gender
+      region
+      personality
+      backstory
+      image_url
+    */
+
     let query =
       supabaseClient
         .from("characters")
-        .select("*");
+        .select(`
+          id,
+          name,
+          race,
+          role,
+          age,
+          gender,
+          region,
+          personality,
+          backstory,
+          image_url
+        `);
 
 
-    /*
-      如果网址是：
+    /* =====================================================
+       指定角色
+       
+       例如：
 
-      characters.html?id=2
-
-      就读取 ID = 2 的角色。
-
-      如果没有 id：
-
-      characters.html
-
-      就读取第一条角色。
-    */
+       characters.html?id=2
+    ===================================================== */
 
     if(characterId){
 
@@ -2418,11 +2440,25 @@ async function loadCharacter(){
 
     }else{
 
+      /*
+        没有指定 ID 时：
+
+        自动读取最新添加的角色。
+        
+        之前是 ascending:true，
+        会永远优先读取最早的一条。
+
+        现在改成 false。
+      */
+
       query =
         query
-          .order("id", {
-            ascending:true
-          })
+          .order(
+            "id",
+            {
+              ascending:false
+            }
+          )
           .limit(1);
 
     }
@@ -2434,6 +2470,10 @@ async function loadCharacter(){
     } =
       await query;
 
+
+    /* =====================================================
+       DATABASE ERROR
+    ===================================================== */
 
     if(error){
 
@@ -2448,11 +2488,21 @@ async function loadCharacter(){
       characterNameCn.textContent =
         "档案读取失败";
 
+      description.textContent =
+        "DATABASE CONNECTION ERROR";
+
       return;
     }
 
 
-    if(!data || data.length === 0){
+    /* =====================================================
+       NO DATA
+    ===================================================== */
+
+    if(
+      !data ||
+      data.length === 0
+    ){
 
       console.warn(
         "没有找到对应角色。",
@@ -2465,12 +2515,25 @@ async function loadCharacter(){
       characterNameCn.textContent =
         "无法找到该角色档案";
 
+      description.textContent =
+        "";
+
       return;
     }
 
 
+    /* =====================================================
+       CURRENT CHARACTER
+    ===================================================== */
+
     const character =
       data[0];
+
+
+    console.log(
+      "成功读取角色：",
+      character
+    );
 
 
     /* =====================================================
@@ -2489,7 +2552,7 @@ async function loadCharacter(){
 
     /* =====================================================
        NAME
-
+       
        数据库：
 
        Evelina•Nieve 伊莉娜·妳芙
@@ -2497,29 +2560,45 @@ async function loadCharacter(){
        页面：
 
        Evelina•Nieve
-
        伊莉娜·妳芙
     ===================================================== */
 
     const fullName =
-      character.name || "";
+      (character.name || "").trim();
 
 
-    const nameParts =
-      fullName
-        .trim()
-        .split(/\s+/);
+    /*
+      找到第一个中文字符。
+
+      这样即使以后名字格式不是：
+
+      English 中文
+
+      也不会因为空格问题导致显示异常。
+    */
+
+    const chineseIndex =
+      fullName.search(
+        /[\u4e00-\u9fff]/
+      );
 
 
-    if(nameParts.length >= 2){
+    if(chineseIndex > -1){
 
       characterNameEn.textContent =
-        nameParts[0];
+        fullName
+          .substring(
+            0,
+            chineseIndex
+          )
+          .trim();
 
       characterNameCn.textContent =
-        nameParts
-          .slice(1)
-          .join(" ");
+        fullName
+          .substring(
+            chineseIndex
+          )
+          .trim();
 
     }else{
 
@@ -2541,7 +2620,7 @@ async function loadCharacter(){
 
 
     /* =====================================================
-       BASIC INFO
+       BASIC INFORMATION
 
        0 = RACE
        1 = REGION
@@ -2551,19 +2630,26 @@ async function loadCharacter(){
 
     if(infoValues.length >= 4){
 
+      /* RACE */
+
       infoValues[0].textContent =
         character.race || "";
+
+
+      /* REGION */
 
       infoValues[1].textContent =
         character.region || "";
 
+
+      /* STATUS */
 
       let status = "";
 
 
       if(character.gender){
 
-        status +=
+        status =
           character.gender;
 
       }
@@ -2591,6 +2677,8 @@ async function loadCharacter(){
         status;
 
 
+      /* ROLE */
+
       infoValues[3].textContent =
         character.role || "";
 
@@ -2599,39 +2687,118 @@ async function loadCharacter(){
 
     /* =====================================================
        PROFILE
+
+       数据库现在使用：
+
+       personality
+       backstory
+
+       而不是 profile。
     ===================================================== */
 
-    if(character.profile){
+    let profileText = "";
 
-      description.textContent =
-        character.profile;
 
-    }else{
+    /* 性格 */
 
-      description.textContent =
-        "";
+    if(
+      character.personality !== null &&
+      character.personality !== undefined &&
+      String(character.personality).trim() !== ""
+    ){
+
+      profileText +=
+        "性格： " +
+        String(
+          character.personality
+        ).trim();
 
     }
+
+
+    /* 背景 */
+
+    if(
+      character.backstory !== null &&
+      character.backstory !== undefined &&
+      String(character.backstory).trim() !== ""
+    ){
+
+      if(profileText){
+
+        profileText +=
+          "\n\n";
+
+      }
+
+      profileText +=
+        "背景： " +
+        String(
+          character.backstory
+        ).trim();
+
+    }
+
+
+    description.style.whiteSpace =
+      "pre-line";
+
+    description.textContent =
+      profileText;
 
 
     /* =====================================================
        IMAGE
     ===================================================== */
 
-    if(character.image_url){
+    const imageURL =
+      (character.image_url || "").trim();
+
+
+    console.log(
+      "角色图片地址：",
+      imageURL
+    );
+
+
+    if(imageURL){
+
+      /*
+        先设置地址。
+      */
 
       characterImage.src =
-        character.image_url;
+        imageURL;
 
       characterImage.alt =
         fullName;
 
-      characterImage.style.display =
-        "block";
 
-      imagePlaceholder.style.display =
-        "none";
+      /*
+        图片真正加载成功后，
+        才隐藏占位图。
+      */
 
+      characterImage.onload =
+        function(){
+
+          characterImage.style.display =
+            "block";
+
+          imagePlaceholder.style.display =
+            "none";
+
+          console.log(
+            "角色立绘加载成功"
+          );
+
+        };
+
+
+      /*
+        如果图片加载失败，
+        恢复占位图。
+      */
 
       characterImage.onerror =
         function(){
@@ -2644,10 +2811,11 @@ async function loadCharacter(){
 
           console.error(
             "角色图片加载失败：",
-            character.image_url
+            imageURL
           );
 
         };
+
 
     }else{
 
@@ -2656,6 +2824,10 @@ async function loadCharacter(){
 
       imagePlaceholder.style.display =
         "block";
+
+      console.warn(
+        "这个角色没有 image_url"
+      );
 
     }
 
@@ -2672,6 +2844,9 @@ async function loadCharacter(){
 
     characterNameCn.textContent =
       "档案读取失败";
+
+    description.textContent =
+      "DATABASE CONNECTION ERROR";
 
   }
 
@@ -2792,4 +2967,4 @@ loadCharacter();
 
 
 </body>
-</html>
+   </html>
