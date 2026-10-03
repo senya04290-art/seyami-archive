@@ -11,6 +11,8 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 
 *{
@@ -887,9 +889,6 @@ body{
   justify-content:space-between;
 }
 
-
-/* Logo */
-
 .logo{
 
   display:flex;
@@ -980,9 +979,6 @@ body{
 
   white-space:nowrap;
 }
-
-
-/* 返回 */
 
 .header-right{
 
@@ -1187,24 +1183,23 @@ body{
 
 .world-grid{
 
-  display:grid;
-
-  grid-template-columns:
-    repeat(2,1fr);
-
-  gap:18px;
+  display:block;
 
   width:100%;
+
+  max-width:900px;
+
+  margin:0 auto;
 }
 
 .world-card{
 
   position:relative;
 
-  min-height:220px;
+  min-height:360px;
 
   padding:
-    30px 28px;
+    42px 48px;
 
   border:
     1px solid
@@ -1257,11 +1252,11 @@ body{
 
   position:absolute;
 
-  width:120px;
-  height:120px;
+  width:180px;
+  height:180px;
 
-  right:-55px;
-  bottom:-55px;
+  right:-85px;
+  bottom:-85px;
 
   border-radius:50%;
 
@@ -1270,31 +1265,6 @@ body{
     rgba(91,162,213,.22);
 
   pointer-events:none;
-}
-
-.world-card:hover{
-
-  transform:
-    translateY(-4px);
-
-  border-color:
-    rgba(122,192,235,.62);
-
-  background:
-
-    linear-gradient(
-      145deg,
-      rgba(38,91,137,.26),
-      rgba(11,45,75,.55)
-    );
-
-  box-shadow:
-
-    0 10px 35px
-    rgba(0,0,0,.2),
-
-    0 0 25px
-    rgba(56,143,201,.18);
 }
 
 .world-number{
@@ -1312,7 +1282,7 @@ body{
   color:
     rgba(137,201,239,.62);
 
-  margin-bottom:22px;
+  margin-bottom:25px;
 }
 
 .world-title{
@@ -1321,7 +1291,7 @@ body{
     "Cinzel",
     serif;
 
-  font-size:22px;
+  font-size:28px;
 
   font-weight:400;
 
@@ -1330,7 +1300,7 @@ body{
   color:
     rgba(220,238,255,.92);
 
-  margin-bottom:8px;
+  margin-bottom:10px;
 }
 
 .world-cn{
@@ -1342,21 +1312,91 @@ body{
   color:
     rgba(177,207,230,.62);
 
-  margin-bottom:24px;
+  margin-bottom:30px;
 }
 
 .world-text{
 
-  font-size:12px;
+  font-size:13px;
 
-  line-height:2;
+  line-height:2.2;
 
   letter-spacing:1px;
 
   color:
-    rgba(177,207,230,.55);
+    rgba(177,207,230,.68);
 
-  max-width:90%;
+  width:100%;
+
+  white-space:pre-line;
+
+  min-height:150px;
+}
+
+
+/* =========================================================
+   编辑按钮
+========================================================= */
+
+.edit-world-wrap{
+
+  display:flex;
+
+  justify-content:center;
+
+  margin-top:28px;
+}
+
+.edit-world-button{
+
+  appearance:none;
+
+  border:
+    1px solid
+    rgba(111,174,224,.32);
+
+  background:
+    rgba(8,28,49,.35);
+
+  color:
+    rgba(191,220,243,.68);
+
+  padding:
+    10px 18px;
+
+  font-family:
+    "Cinzel",
+    "Noto Serif SC",
+    serif;
+
+  font-size:8px;
+
+  letter-spacing:2px;
+
+  cursor:pointer;
+
+  border-radius:0;
+
+  transition:
+    color .35s ease,
+    border-color .35s ease,
+    background .35s ease,
+    box-shadow .35s ease;
+}
+
+.edit-world-button:hover{
+
+  color:#d9efff;
+
+  border-color:
+    rgba(122,192,235,.62);
+
+  background:
+    rgba(8,31,52,.55);
+
+  box-shadow:
+    0 0 14px
+    rgba(76,151,202,.12);
 }
 
 
@@ -1546,21 +1586,19 @@ body{
   .world-grid{
 
     grid-template-columns:1fr;
-
-    gap:14px;
   }
 
   .world-card{
 
-    min-height:190px;
+    min-height:320px;
 
     padding:
-      25px 22px;
+      28px 22px;
   }
 
   .world-title{
 
-    font-size:19px;
+    font-size:20px;
   }
 
   .world-text{
@@ -1607,6 +1645,14 @@ body{
   .arcane-star.extra-x{font-size:7px;}
   .arcane-star.extra-y{font-size:5px;}
   .arcane-star.extra-z{font-size:6px;}
+
+  .edit-world-button{
+
+    font-size:7px;
+
+    padding:
+      9px 14px;
+  }
 
 }
 
@@ -1680,9 +1726,6 @@ body.day-mode .page{
     #f4f9fd;
 }
 
-
-/* 星尘 */
-
 body.day-mode .stars::before,
 body.day-mode .stars::after{
 
@@ -1732,17 +1775,11 @@ body.day-mode .stars::after{
     86vw 91vh rgba(103,166,207,.14);
 }
 
-
-/* 微型星点 */
-
 body.day-mode .micro-star{
 
   background:
     rgba(87,151,199,.40);
 }
-
-
-/* 魔法星辰 */
 
 body.day-mode .arcane-star{
 
@@ -1751,9 +1788,6 @@ body.day-mode .arcane-star{
 
   text-shadow:none;
 }
-
-
-/* 魔法阵 */
 
 body.day-mode .magic-circle{
 
@@ -1790,9 +1824,6 @@ body.day-mode .magic-circle::after{
     rgba(76,151,202,.065);
 }
 
-
-/* 四角框线 */
-
 body.day-mode .frame{
 
   border-color:
@@ -1816,9 +1847,6 @@ body.day-mode .frame::after{
   border-bottom-color:
     rgba(79,141,190,.68);
 }
-
-
-/* Logo */
 
 body.day-mode .logo{
 
@@ -1846,9 +1874,6 @@ body.day-mode .logo-en{
     rgba(81,137,173,.62);
 }
 
-
-/* 返回 */
-
 body.day-mode .back{
 
   color:
@@ -1863,9 +1888,6 @@ body.day-mode .back:hover{
     0 0 8px
     rgba(76,151,202,.14);
 }
-
-
-/* 日夜按钮 */
 
 body.day-mode .theme-toggle{
 
@@ -1894,9 +1916,6 @@ body.day-mode .theme-toggle:hover{
     rgba(76,151,202,.11);
 }
 
-
-/* 标题 */
-
 body.day-mode .heading-small{
 
   color:
@@ -1917,9 +1936,6 @@ body.day-mode .heading-cn{
   color:
     rgba(45,82,106,.80);
 }
-
-
-/* 世界卡片 */
 
 body.day-mode .world-card{
 
@@ -2003,8 +2019,32 @@ body.day-mode .world-text{
     rgba(65,106,133,.64);
 }
 
+body.day-mode .edit-world-button{
 
-/* Footer */
+  border-color:
+    rgba(91,145,184,.34);
+
+  background:
+    rgba(248,252,255,.78);
+
+  color:
+    rgba(61,98,125,.76);
+}
+
+body.day-mode .edit-world-button:hover{
+
+  border-color:
+    rgba(79,151,200,.62);
+
+  background:
+    rgba(248,252,255,.90);
+
+  color:#28536f;
+
+  box-shadow:
+    0 0 14px
+    rgba(76,151,202,.11);
+}
 
 body.day-mode .footer{
 
@@ -2059,11 +2099,9 @@ body.day-mode .footer{
 
 <div class="page">
 
-  <!-- 背景星尘 -->
   <div class="stars"></div>
 
 
-  <!-- 微型星点 -->
   <div class="micro-stars">
 
     <span class="micro-star tiny"
@@ -2126,7 +2164,6 @@ body.day-mode .footer{
   </div>
 
 
-  <!-- 魔法星辰 -->
   <div class="arcane-stars">
 
     <span class="arcane-star star-a">✦</span>
@@ -2161,15 +2198,11 @@ body.day-mode .footer{
   </div>
 
 
-  <!-- 魔法阵 -->
   <div class="magic-circle"></div>
 
-
-  <!-- 四角框线 -->
   <div class="frame"></div>
 
 
-  <!-- 顶部 -->
   <header class="header">
 
     <a href="index.html" class="logo">
@@ -2222,7 +2255,6 @@ body.day-mode .footer{
   </header>
 
 
-  <!-- 主内容 -->
   <main class="content">
 
 
@@ -2243,85 +2275,54 @@ body.day-mode .footer{
     </section>
 
 
-    <!-- 世界基础设定 -->
-
     <section class="world-grid">
 
-
-      <!-- 世界概览 -->
-
       <article class="world-card">
 
-        <div class="world-number">
-          01 · OVERVIEW
+        <div
+          class="world-number"
+          id="worldNumber"
+        >
+          WORLD RECORD
         </div>
 
-        <div class="world-title">
-          WORLD OVERVIEW
+        <div
+          class="world-title"
+          id="worldTitle"
+        >
+          LOADING...
         </div>
 
-        <div class="world-cn">
-          世界概览
+        <div
+          class="world-cn"
+          id="worldCn"
+        >
+          世界设定
         </div>
 
-        <div class="world-text">
-          塞垭弥大陆的整体世界观、文明结构、
-          人类与非人种族之间的关系，
-          以及大陆整体的基本设定。
+        <div
+          class="world-text"
+          id="worldText"
+        >
+          正在读取世界设定……
         </div>
 
       </article>
-
-
-      <!-- 地理 -->
-
-      <article class="world-card">
-
-        <div class="world-number">
-          02 · GEOGRAPHY
-        </div>
-
-        <div class="world-title">
-          GEOGRAPHY
-        </div>
-
-        <div class="world-cn">
-          地理
-        </div>
-
-        <div class="world-text">
-          记录大陆、山脉、森林、海域、
-          城市与其他重要地理区域。
-        </div>
-
-      </article>
-
-
-      <!-- 种族 -->
-
-      <article class="world-card">
-
-        <div class="world-number">
-          03 · RACES
-        </div>
-
-        <div class="world-title">
-          RACES
-        </div>
-
-        <div class="world-cn">
-          种族
-        </div>
-
-        <div class="world-text">
-          记录大陆上存在的不同种族、
-          生存区域、文化特征以及彼此之间的关系。
-        </div>
-
-      </article>
-
 
     </section>
+
+
+    <div class="edit-world-wrap">
+
+      <button
+        type="button"
+        class="edit-world-button"
+        id="editWorldButton"
+      >
+        EDIT WORLD SETTING
+      </button>
+
+    </div>
 
 
     <footer class="footer">
@@ -2337,8 +2338,164 @@ body.day-mode .footer{
 <script>
 
 /* =========================================================
+   Supabase
+========================================================= */
+
+const SUPABASE_URL =
+  "https://rqqkdpzehxzwqzytpxgh.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_T_gNdlgkOaXnzjSvdmI1Pw_HQOVTEWG";
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+/* =========================================================
+   世界设定
+========================================================= */
+
+const worldNumber =
+  document.getElementById(
+    "worldNumber"
+  );
+
+const worldTitle =
+  document.getElementById(
+    "worldTitle"
+  );
+
+const worldCn =
+  document.getElementById(
+    "worldCn"
+  );
+
+const worldText =
+  document.getElementById(
+    "worldText"
+  );
+
+const editWorldButton =
+  document.getElementById(
+    "editWorldButton"
+  );
+
+
+async function loadWorldSetting(){
+
+  worldNumber.textContent =
+    "WORLD RECORD";
+
+  worldTitle.textContent =
+    "LOADING...";
+
+  worldCn.textContent =
+    "世界设定";
+
+  worldText.textContent =
+    "正在读取世界设定……";
+
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("world_settings")
+      .select(
+        "id,title,content,updated_at"
+      )
+      .order(
+        "id",
+        {
+          ascending:true
+        }
+      )
+      .limit(1);
+
+
+  if(error){
+
+    console.error(
+      "读取世界设定失败：",
+      error
+    );
+
+    worldTitle.textContent =
+      "READ ERROR";
+
+    worldCn.textContent =
+      "读取失败";
+
+    worldText.textContent =
+      "暂时无法读取世界设定，请检查 Supabase 设置。";
+
+    editWorldButton.style.display =
+      "none";
+
+    return;
+  }
+
+
+  if(!data || data.length === 0){
+
+    worldTitle.textContent =
+      "NO RECORD";
+
+    worldCn.textContent =
+      "暂无世界设定";
+
+    worldText.textContent =
+      "目前还没有建立世界设定内容。";
+
+    editWorldButton.style.display =
+      "none";
+
+    return;
+  }
+
+
+  const world =
+    data[0];
+
+
+  worldNumber.textContent =
+    "WORLD RECORD";
+
+  worldTitle.textContent =
+    world.title ||
+    "SEYAMI CONTINENT";
+
+  worldCn.textContent =
+    "世界设定";
+
+  worldText.textContent =
+    world.content ||
+    "暂无世界设定内容。";
+
+
+  editWorldButton.style.display =
+    "inline-block";
+
+  editWorldButton.onclick =
+    function(){
+
+      window.location.href =
+        "world-edit.html?id=" +
+        encodeURIComponent(
+          world.id
+        );
+
+    };
+
+}
+
+
+/* =========================================================
    昼夜模式
-   与其他页面共用：seyami-theme
 ========================================================= */
 
 const themeToggle =
@@ -2365,9 +2522,11 @@ function applyTheme(theme){
       "day-mode"
     );
 
-    themeIcon.textContent = "☀";
+    themeIcon.textContent =
+      "☀";
 
-    themeText.textContent = "DAY";
+    themeText.textContent =
+      "DAY";
 
   }else{
 
@@ -2375,9 +2534,11 @@ function applyTheme(theme){
       "day-mode"
     );
 
-    themeIcon.textContent = "☾";
+    themeIcon.textContent =
+      "☾";
 
-    themeText.textContent = "NIGHT";
+    themeText.textContent =
+      "NIGHT";
 
   }
 
@@ -2422,6 +2583,13 @@ themeToggle.addEventListener(
 
   }
 );
+
+
+/* =========================================================
+   启动
+========================================================= */
+
+loadWorldSetting();
 
 </script>
 
