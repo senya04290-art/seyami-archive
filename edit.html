@@ -2,37 +2,26 @@
 <html lang="zh-CN">
 
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<title>编辑角色档案 · Seyami Archive</title>
 
-<title>编辑角色 · Seyami Archive</title>
-
-<link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
->
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Noto+Serif+SC:wght@300;400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500&display=swap"
     rel="stylesheet"
 >
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 
-/* =========================
+/* =========================================================
    基础
-========================= */
+========================================================= */
 
 *{
     box-sizing:border-box;
@@ -46,28 +35,15 @@ body{
 }
 
 body{
-
-    background:
-        radial-gradient(
-            circle at 50% 20%,
-            rgba(45,92,145,.10),
-            transparent 38%
-        ),
-        #061426;
-
+    background:#061426;
     color:#dcecff;
-
     font-family:
         "Noto Serif SC",
+        "Cinzel",
         serif;
 
     font-weight:300;
-
-    letter-spacing:.04em;
-
-    min-height:100vh;
-
-    overflow-x:hidden;
+    letter-spacing:1px;
 
     transition:
         background .5s ease,
@@ -75,193 +51,178 @@ body{
 }
 
 
-/* =========================
-   星点
-========================= */
+/* =========================================================
+   星空
+========================================================= */
+
+.stars{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:0;
+}
 
 .star{
-    position:fixed;
-
-    color:#dcecff;
-
-    pointer-events:none;
-
-    opacity:.55;
-
+    position:absolute;
+    color:rgba(220,236,255,.45);
     font-family:serif;
-
-    z-index:0;
-
+    font-size:13px;
     animation:
-        starFloat 6s ease-in-out infinite;
+        starFloat 8s ease-in-out infinite;
 }
 
-.star:nth-child(1){
-    top:10%;
-    left:8%;
-    font-size:10px;
-    animation-delay:-1s;
-}
-
-.star:nth-child(2){
-    top:18%;
-    right:14%;
-    font-size:8px;
-    animation-delay:-3s;
-}
-
-.star:nth-child(3){
-    top:42%;
-    left:4%;
-    font-size:7px;
-    animation-delay:-2s;
-}
-
-.star:nth-child(4){
-    top:65%;
-    right:7%;
-    font-size:11px;
-    animation-delay:-4s;
-}
-
-.star:nth-child(5){
-    bottom:13%;
-    left:14%;
-    font-size:7px;
-    animation-delay:-1.5s;
-}
-
-.star:nth-child(6){
-    bottom:25%;
-    right:22%;
-    font-size:8px;
-    animation-delay:-2.5s;
-}
+.star:nth-child(1){left:7%;top:18%;animation-delay:-1s;}
+.star:nth-child(2){left:15%;top:72%;animation-delay:-4s;}
+.star:nth-child(3){left:24%;top:35%;animation-delay:-2s;}
+.star:nth-child(4){left:32%;top:82%;animation-delay:-6s;}
+.star:nth-child(5){left:43%;top:14%;animation-delay:-3s;}
+.star:nth-child(6){left:51%;top:66%;animation-delay:-5s;}
+.star:nth-child(7){left:62%;top:27%;animation-delay:-1.5s;}
+.star:nth-child(8){left:71%;top:79%;animation-delay:-7s;}
+.star:nth-child(9){left:82%;top:21%;animation-delay:-2.5s;}
+.star:nth-child(10){left:91%;top:59%;animation-delay:-5.5s;}
+.star:nth-child(11){left:5%;top:47%;animation-delay:-3.5s;}
+.star:nth-child(12){left:18%;top:9%;animation-delay:-6.5s;}
+.star:nth-child(13){left:28%;top:58%;animation-delay:-4.5s;}
+.star:nth-child(14){left:39%;top:91%;animation-delay:-1.8s;}
+.star:nth-child(15){left:57%;top:9%;animation-delay:-3.8s;}
+.star:nth-child(16){left:68%;top:48%;animation-delay:-6.2s;}
+.star:nth-child(17){left:77%;top:11%;animation-delay:-2.2s;}
+.star:nth-child(18){left:88%;top:87%;animation-delay:-4.2s;}
+.star:nth-child(19){left:94%;top:33%;animation-delay:-7.2s;}
+.star:nth-child(20){left:11%;top:91%;animation-delay:-5.2s;}
 
 @keyframes starFloat{
 
     0%,
     100%{
+        opacity:.25;
         transform:translateY(0);
-        opacity:.35;
     }
 
     50%{
+        opacity:.75;
         transform:translateY(-5px);
-        opacity:.8;
     }
-
 }
 
 
-/* =========================
-   页面容器
-========================= */
+/* =========================================================
+   外框
+========================================================= */
 
-.page{
-
+.page-frame{
     position:relative;
+    z-index:2;
 
-    z-index:1;
+    width:
+        min(
+            calc(100% - 76px),
+            1100px
+        );
 
-    width:100%;
+    min-height:
+        calc(100vh - 76px);
 
-    min-height:100vh;
+    margin:38px auto;
+
+    border:1px solid rgba(190,215,238,.22);
 
     padding:
-        38px
-        58px
-        70px;
+        0
+        68px
+        60px;
+
+    overflow:hidden;
+}
+
+.page-frame::before,
+.page-frame::after{
+    content:"";
+    position:absolute;
+    width:24px;
+    height:24px;
+    pointer-events:none;
+}
+
+.page-frame::before{
+    top:-1px;
+    left:-1px;
+
+    border-top:1px solid rgba(220,236,255,.65);
+    border-left:1px solid rgba(220,236,255,.65);
+}
+
+.page-frame::after{
+    right:-1px;
+    bottom:-1px;
+
+    border-right:1px solid rgba(220,236,255,.65);
+    border-bottom:1px solid rgba(220,236,255,.65);
 }
 
 
-/* =========================
-   顶部
-========================= */
+/* =========================================================
+   Header
+========================================================= */
 
-header{
-
-    width:100%;
+.header{
+    position:relative;
+    z-index:5;
 
     display:flex;
-
     align-items:flex-start;
-
     justify-content:space-between;
 
-    margin-bottom:70px;
+    padding-top:36px;
 }
 
-
-/* 左侧 LOGO */
-
-.logo{
+.archive-logo{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
 
     text-decoration:none;
-
-    color:#dcecff;
-
-    display:flex;
-
-    flex-direction:column;
-
-    line-height:1.2;
-
-    transition:opacity .3s ease;
+    color:inherit;
 }
 
-.logo:hover{
-    opacity:.75;
+.archive-logo-cn{
+    font-family:
+        "Noto Serif SC",
+        serif;
+
+    font-size:17px;
+    letter-spacing:3px;
 }
 
-.logo-cn{
+.archive-logo-en{
+    font-family:
+        "Cinzel",
+        serif;
 
-    font-size:18px;
+    font-size:9px;
+    letter-spacing:4px;
 
-    letter-spacing:.16em;
+    opacity:.58;
 }
-
-.logo-en{
-
-    margin-top:5px;
-
-    font-family:"Cinzel",serif;
-
-    font-size:10px;
-
-    letter-spacing:.30em;
-
-    opacity:.68;
-}
-
-
-/* 右侧 */
 
 .header-right{
-
     display:flex;
-
     align-items:center;
-
-    gap:28px;
+    gap:24px;
 }
 
-
-/* 返回 */
-
 .back-link{
-
-    color:#dcecff;
-
+    color:inherit;
     text-decoration:none;
 
-    font-family:"Cinzel",serif;
+    font-family:"Cinzel","Noto Serif SC",serif;
 
-    font-size:11px;
+    font-size:9px;
+    letter-spacing:2px;
 
-    letter-spacing:.16em;
-
-    opacity:.72;
+    opacity:.65;
 
     transition:
         opacity .3s ease,
@@ -269,225 +230,285 @@ header{
 }
 
 .back-link:hover{
-
     opacity:1;
-
     transform:translateX(-3px);
 }
 
 
-/* 日夜按钮 */
+/* =========================================================
+   日夜切换
+========================================================= */
 
 .theme-toggle{
+    width:42px;
+    height:22px;
 
-    width:38px;
+    padding:0;
 
-    height:38px;
+    border:1px solid rgba(190,215,238,.32);
+    border-radius:20px;
 
-    border:1px solid rgba(220,236,255,.25);
-
-    border-radius:50%;
-
-    background:transparent;
-
-    color:#dcecff;
+    background:rgba(255,255,255,.03);
 
     cursor:pointer;
 
-    font-size:15px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
+    position:relative;
 
     transition:
-        background .3s ease,
-        border-color .3s ease,
-        transform .3s ease;
+        background .4s ease,
+        border-color .4s ease;
 }
 
-.theme-toggle:hover{
-
-    background:rgba(220,236,255,.08);
-
-    border-color:rgba(220,236,255,.5);
-
-    transform:rotate(15deg);
-}
-
-
-/* =========================
-   标题
-========================= */
-
-.page-title{
-
-    text-align:center;
-
-    margin-bottom:48px;
-}
-
-.page-title-en{
-
-    font-family:"Cinzel",serif;
-
-    font-size:30px;
-
-    font-weight:400;
-
-    letter-spacing:.22em;
-
-    margin-left:.22em;
-}
-
-.page-title-cn{
-
-    margin-top:12px;
-
-    font-size:13px;
-
-    letter-spacing:.32em;
-
-    opacity:.65;
-}
-
-
-/* =========================
-   编辑框
-========================= */
-
-.admin-container{
-
-    width:min(820px,100%);
-
-    margin:0 auto;
-
-    padding:42px 46px 48px;
-
-    border:1px solid rgba(180,210,240,.18);
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.025),
-            rgba(255,255,255,.008)
-        );
-
-    position:relative;
-}
-
-
-/* 四角装饰 */
-
-.admin-container::before,
-.admin-container::after{
-
+.theme-toggle::before{
     content:"";
 
     position:absolute;
 
-    width:12px;
+    width:14px;
+    height:14px;
 
-    height:12px;
+    left:3px;
+    top:3px;
 
-    border-color:rgba(220,236,255,.65);
+    border-radius:50%;
 
-    border-style:solid;
+    background:rgba(220,236,255,.78);
 
+    transition:
+        transform .4s ease,
+        background .4s ease;
 }
 
-.admin-container::before{
-
-    left:-1px;
-    top:-1px;
-
-    border-width:1px 0 0 1px;
-}
-
-.admin-container::after{
-
-    right:-1px;
-    bottom:-1px;
-
-    border-width:0 1px 1px 0;
+body.day-mode .theme-toggle::before{
+    transform:translateX(20px);
+    background:#ffffff;
 }
 
 
-/* 编辑提示 */
+/* =========================================================
+   页面标题
+========================================================= */
 
-.edit-id{
+.page-title{
+    position:relative;
+    z-index:2;
 
     text-align:center;
 
+    margin:
+        90px
+        0
+        55px;
+}
+
+.page-title-en{
     font-family:"Cinzel",serif;
 
-    font-size:10px;
+    font-size:
+        clamp(
+            25px,
+            4vw,
+            42px
+        );
 
-    letter-spacing:.2em;
+    font-weight:300;
 
-    opacity:.42;
+    letter-spacing:9px;
+}
 
-    margin-bottom:35px;
+.page-title-cn{
+    margin-top:14px;
+
+    font-family:"Noto Serif SC",serif;
+
+    font-size:13px;
+
+    letter-spacing:5px;
+
+    opacity:.62;
 }
 
 
-/* =========================
+/* =========================================================
+   编辑区域
+========================================================= */
+
+.edit-container{
+    position:relative;
+    z-index:3;
+
+    width:
+        min(
+            100%,
+            820px
+        );
+
+    margin:0 auto;
+}
+
+
+/* =========================================================
+   图片区域
+========================================================= */
+
+.image-section{
+    position:relative;
+
+    width:100%;
+
+    margin-bottom:42px;
+}
+
+.image-preview{
+    width:100%;
+
+    min-height:420px;
+
+    border:1px dashed rgba(190,215,238,.30);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+
+    background:rgba(255,255,255,.015);
+
+    transition:
+        border-color .4s ease,
+        background .4s ease;
+}
+
+.image-preview img{
+    display:block;
+
+    width:auto;
+    max-width:100%;
+
+    max-height:570px;
+
+    object-fit:contain;
+}
+
+.image-placeholder{
+    font-family:"Cinzel","Noto Serif SC",serif;
+
+    font-size:11px;
+
+    letter-spacing:3px;
+
+    opacity:.38;
+
+    text-align:center;
+}
+
+
+/* =========================================================
+   文件选择
+========================================================= */
+
+.file-input-wrap{
+    position:relative;
+
+    display:flex;
+    align-items:center;
+
+    width:100%;
+
+    margin-top:28px;
+
+    border:1px solid rgba(190,215,238,.20);
+
+    background:rgba(255,255,255,.015);
+}
+
+.file-input-wrap input[type="file"]{
+    width:100%;
+
+    padding:17px 20px;
+
+    color:inherit;
+
+    font-family:
+        "Noto Serif SC",
+        serif;
+
+    font-size:12px;
+
+    letter-spacing:1px;
+
+    cursor:pointer;
+}
+
+.file-input-wrap input[type="file"]::file-selector-button{
+    margin-right:22px;
+
+    padding:10px 22px;
+
+    border:1px solid rgba(190,215,238,.18);
+
+    background:transparent;
+
+    color:inherit;
+
+    font-family:
+        "Noto Serif SC",
+        serif;
+
+    font-size:12px;
+
+    cursor:pointer;
+}
+
+
+/* =========================================================
    表单
-========================= */
+========================================================= */
 
 .form-grid{
-
     display:grid;
 
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
 
     gap:25px 30px;
 }
 
-.form-group{
-
+.form-item{
     display:flex;
-
     flex-direction:column;
 }
 
-.form-group.full{
-
+.form-item.full{
     grid-column:1 / -1;
 }
 
-label{
-
-    font-family:"Cinzel",serif;
-
-    font-size:10px;
-
-    letter-spacing:.18em;
-
+.form-label{
     margin-bottom:10px;
 
-    opacity:.68;
+    font-family:
+        "Cinzel",
+        "Noto Serif SC",
+        serif;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    opacity:.58;
 }
 
-input,
-textarea{
-
+.form-input,
+.form-textarea{
     width:100%;
 
-    border:1px solid rgba(220,236,255,.17);
-
-    background:
-        rgba(0,10,25,.28);
-
-    color:#dcecff;
+    border:1px solid rgba(190,215,238,.22);
 
     outline:none;
 
-    padding:
-        12px
-        13px;
+    background:rgba(255,255,255,.015);
+
+    color:inherit;
 
     font-family:
         "Noto Serif SC",
@@ -497,791 +518,706 @@ textarea{
 
     font-weight:300;
 
-    letter-spacing:.05em;
+    letter-spacing:1px;
+
+    padding:14px 16px;
 
     transition:
         border-color .3s ease,
         background .3s ease;
 }
 
-input{
-
-    height:44px;
+.form-input{
+    height:48px;
 }
 
-textarea{
-
-    min-height:125px;
+.form-textarea{
+    min-height:130px;
 
     resize:vertical;
 
-    line-height:1.8;
+    line-height:1.9;
 }
 
-input:focus,
-textarea:focus{
+.form-input:focus,
+.form-textarea:focus{
+    border-color:rgba(190,215,238,.55);
 
-    border-color:
-        rgba(220,236,255,.5);
-
-    background:
-        rgba(20,40,65,.35);
+    background:rgba(255,255,255,.025);
 }
 
-input::placeholder,
-textarea::placeholder{
-
-    color:#dcecff;
-
+.form-input::placeholder,
+.form-textarea::placeholder{
+    color:inherit;
     opacity:.25;
 }
 
 
-/* =========================
-   图片区域
-========================= */
-
-.image-section{
-
-    margin-top:32px;
-
-    padding-top:30px;
-
-    border-top:
-        1px solid
-        rgba(220,236,255,.10);
-}
-
-.image-preview{
-
-    width:100%;
-
-    min-height:190px;
-
-    border:
-        1px dashed
-        rgba(220,236,255,.22);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    position:relative;
-
-    overflow:hidden;
-
-    background:
-        rgba(0,8,20,.25);
-
-    margin-bottom:15px;
-}
-
-.image-preview img{
-
-    display:block;
-
-    max-width:100%;
-
-    max-height:300px;
-
-    object-fit:contain;
-}
-
-.image-empty{
-
-    font-family:"Cinzel",serif;
-
-    font-size:10px;
-
-    letter-spacing:.18em;
-
-    opacity:.35;
-
-    text-align:center;
-}
-
-input[type="file"]{
-
-    border:0;
-
-    padding:8px 0;
-
-    background:transparent;
-
-    font-size:11px;
-
-    cursor:pointer;
-}
-
-input[type="file"]::file-selector-button{
-
-    background:transparent;
-
-    color:#dcecff;
-
-    border:
-        1px solid
-        rgba(220,236,255,.25);
-
-    padding:8px 13px;
-
-    margin-right:12px;
-
-    font-family:"Noto Serif SC",serif;
-
-    cursor:pointer;
-}
-
-
-/* =========================
+/* =========================================================
    按钮
-========================= */
+========================================================= */
 
-.button-area{
-
-    margin-top:38px;
-
+.action-area{
     display:flex;
 
-    justify-content:center;
+    gap:28px;
 
-    gap:15px;
+    margin-top:48px;
 }
 
-.button{
+.action-button{
+    flex:1;
 
-    min-width:150px;
+    height:70px;
 
-    height:46px;
+    border:1px solid rgba(190,215,238,.30);
 
-    border:
-        1px solid
-        rgba(220,236,255,.3);
+    background:rgba(255,255,255,.015);
 
-    background:transparent;
+    color:inherit;
 
-    color:#dcecff;
+    font-family:
+        "Noto Serif SC",
+        "Cinzel",
+        serif;
 
-    font-family:"Cinzel",serif;
+    font-size:13px;
 
-    font-size:10px;
+    font-weight:300;
 
-    letter-spacing:.18em;
+    letter-spacing:4px;
 
     cursor:pointer;
 
     transition:
-        background .3s ease,
-        border-color .3s ease,
-        transform .3s ease;
+        background .35s ease,
+        border-color .35s ease,
+        opacity .35s ease;
 }
 
-.button:hover{
+.action-button:hover{
+    background:rgba(255,255,255,.045);
 
-    background:
-        rgba(220,236,255,.08);
-
-    border-color:
-        rgba(220,236,255,.55);
-
-    transform:translateY(-2px);
+    border-color:rgba(210,230,250,.55);
 }
 
-.button.secondary{
+.action-button:disabled{
+    opacity:.45;
 
-    opacity:.65;
-}
-
-.button:disabled{
-
-    opacity:.35;
-
-    cursor:wait;
-
-    transform:none;
+    cursor:default;
 }
 
 
-/* =========================
-   消息
-========================= */
+/* =========================================================
+   状态文字
+========================================================= */
 
-.message{
+.status-message{
+    min-height:32px;
 
-    min-height:25px;
-
-    margin-top:22px;
+    margin-top:36px;
 
     text-align:center;
+
+    font-family:
+        "Noto Serif SC",
+        serif;
 
     font-size:12px;
 
-    letter-spacing:.08em;
+    letter-spacing:2px;
 
-    opacity:.8;
+    line-height:1.8;
+
+    opacity:.78;
 }
 
-.message.success{
-
-    color:#dcecff;
+.status-message.error{
+    color:#e9bcbc;
 }
 
-.message.error{
-
-    color:#d8bcbc;
+.status-message.success{
+    color:#b9dccb;
 }
 
 
-/* =========================
+/* =========================================================
    底部
-========================= */
+========================================================= */
 
-.footer{
-
-    margin-top:55px;
+.archive-mark{
+    margin-top:85px;
 
     text-align:center;
 
-    font-family:"Cinzel",serif;
+    font-family:
+        "Noto Serif SC",
+        serif;
 
-    font-size:9px;
+    font-size:11px;
 
-    letter-spacing:.22em;
+    letter-spacing:5px;
 
-    opacity:.25;
+    opacity:.35;
 }
 
 
-/* =========================
+/* =========================================================
    日间模式
-========================= */
+   只改变明暗，不改变整体设计
+========================================================= */
 
-body.day{
+body.day-mode{
+    background:#edf4fa;
 
-    background:
-        radial-gradient(
-            circle at 50% 20%,
-            rgba(120,160,200,.08),
-            transparent 38%
-        ),
-        #edf3f8;
-
-    color:#26384c;
+    color:#34404d;
 }
 
-body.day .logo,
-body.day .back-link,
-body.day .theme-toggle,
-body.day .button,
-body.day input,
-body.day textarea,
-body.day input::placeholder,
-body.day input[type="file"]::file-selector-button{
-
-    color:#26384c;
+body.day-mode .page-frame{
+    border-color:rgba(72,101,126,.22);
 }
 
-body.day .star{
-
-    color:#26384c;
+body.day-mode .page-frame::before,
+body.day-mode .page-frame::after{
+    border-color:rgba(72,101,126,.55);
 }
 
-body.day .theme-toggle{
-
-    border-color:
-        rgba(38,56,76,.22);
+body.day-mode .star{
+    color:rgba(72,101,126,.38);
 }
 
-body.day .theme-toggle:hover{
-
-    background:
-        rgba(38,56,76,.06);
-
-    border-color:
-        rgba(38,56,76,.4);
+body.day-mode .theme-toggle{
+    border-color:rgba(72,101,126,.30);
+    background:rgba(255,255,255,.30);
 }
 
-body.day .admin-container{
+body.day-mode .image-preview,
+body.day-mode .file-input-wrap,
+body.day-mode .form-input,
+body.day-mode .form-textarea,
+body.day-mode .action-button{
+    background:rgba(255,255,255,.38);
 
-    border-color:
-        rgba(38,56,76,.18);
-
-    background:
-        rgba(255,255,255,.42);
+    border-color:rgba(72,101,126,.20);
 }
 
-body.day .admin-container::before,
-body.day .admin-container::after{
-
-    border-color:
-        rgba(38,56,76,.55);
+body.day-mode .image-preview{
+    border-color:rgba(72,101,126,.25);
 }
 
-body.day input,
-body.day textarea{
+body.day-mode .form-input:focus,
+body.day-mode .form-textarea:focus{
+    border-color:rgba(72,101,126,.48);
 
-    background:
-        rgba(255,255,255,.45);
-
-    border-color:
-        rgba(38,56,76,.16);
+    background:rgba(255,255,255,.58);
 }
 
-body.day input:focus,
-body.day textarea:focus{
+body.day-mode .action-button:hover{
+    background:rgba(255,255,255,.58);
 
-    border-color:
-        rgba(38,56,76,.4);
-
-    background:
-        rgba(255,255,255,.7);
+    border-color:rgba(72,101,126,.40);
 }
 
-body.day .image-preview{
-
-    border-color:
-        rgba(38,56,76,.2);
-
-    background:
-        rgba(255,255,255,.3);
+body.day-mode .status-message.error{
+    color:#b98282;
 }
 
-body.day .image-section{
-
-    border-color:
-        rgba(38,56,76,.10);
-}
-
-body.day .button{
-
-    border-color:
-        rgba(38,56,76,.25);
-}
-
-body.day .button:hover{
-
-    background:
-        rgba(38,56,76,.06);
-
-    border-color:
-        rgba(38,56,76,.45);
+body.day-mode .status-message.success{
+    color:#668f7c;
 }
 
 
-/* =========================
+/* =========================================================
    手机
-========================= */
+========================================================= */
 
 @media(max-width:700px){
 
-    .page{
+    .page-frame{
+        width:
+            calc(100% - 36px);
+
+        min-height:
+            calc(100vh - 36px);
+
+        margin:18px auto;
 
         padding:
-            25px
-            20px
-            45px;
+            0
+            22px
+            40px;
     }
 
-    header{
-
-        margin-bottom:55px;
+    .header{
+        padding-top:25px;
     }
 
-    .logo-cn{
-
-        font-size:15px;
+    .archive-logo-cn{
+        font-size:13px;
+        letter-spacing:2px;
     }
 
-    .logo-en{
-
-        font-size:8px;
+    .archive-logo-en{
+        font-size:7px;
+        letter-spacing:3px;
     }
 
     .header-right{
-
-        gap:14px;
+        gap:13px;
     }
 
     .back-link{
-
-        font-size:9px;
+        font-size:7px;
+        letter-spacing:1px;
     }
 
-    .theme-toggle{
-
-        width:34px;
-        height:34px;
+    .page-title{
+        margin:
+            62px
+            0
+            38px;
     }
 
     .page-title-en{
-
         font-size:23px;
-
-        letter-spacing:.16em;
+        letter-spacing:5px;
     }
 
     .page-title-cn{
-
         font-size:11px;
+        letter-spacing:3px;
     }
 
-    .admin-container{
+    .image-preview{
+        min-height:300px;
+    }
 
-        padding:
-            30px
-            20px
-            35px;
+    .image-preview img{
+        max-height:430px;
     }
 
     .form-grid{
-
         grid-template-columns:1fr;
 
         gap:22px;
     }
 
-    .form-group.full{
-
+    .form-item.full{
         grid-column:auto;
     }
 
-    .button-area{
-
+    .action-area{
         flex-direction:column;
+
+        gap:16px;
+
+        margin-top:35px;
     }
 
-    .button{
-
-        width:100%;
+    .action-button{
+        height:64px;
     }
 
+    .archive-mark{
+        margin-top:60px;
+    }
+}
+
+
+@media(max-width:430px){
+
+    .page-frame{
+        width:
+            calc(100% - 24px);
+
+        margin:12px auto;
+
+        padding-left:16px;
+        padding-right:16px;
+    }
+
+    .archive-logo-cn{
+        font-size:11px;
+    }
+
+    .header-right{
+        gap:8px;
+    }
+
+    .page-title-en{
+        font-size:20px;
+    }
+
+    .image-preview{
+        min-height:250px;
+    }
+
+    .image-preview img{
+        max-height:350px;
+    }
+
+    .file-input-wrap input[type="file"]{
+        padding:13px 10px;
+        font-size:10px;
+    }
+
+    .file-input-wrap input[type="file"]::file-selector-button{
+        margin-right:8px;
+
+        padding:8px 10px;
+
+        font-size:10px;
+    }
+
+    .form-input,
+    .form-textarea{
+        font-size:12px;
+    }
+}
+
+
+/* =========================================================
+   减少动画
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        transition-duration:.01ms !important;
+    }
 }
 
 </style>
-
 </head>
 
 
 <body>
 
-<!-- 浮动星点 -->
+<!-- 星空 -->
+<div class="stars">
 
-<div class="star">✦</div>
-<div class="star">✶</div>
-<div class="star">✡</div>
-<div class="star">✦</div>
-<div class="star">✶</div>
-<div class="star">✡</div>
+    <span class="star">✦</span>
+    <span class="star">✶</span>
+    <span class="star">✧</span>
+    <span class="star">✦</span>
+    <span class="star">✧</span>
+    <span class="star">✶</span>
+    <span class="star">✦</span>
+    <span class="star">✧</span>
+    <span class="star">✶</span>
+    <span class="star">✦</span>
 
+    <span class="star">✧</span>
+    <span class="star">✦</span>
+    <span class="star">✶</span>
+    <span class="star">✧</span>
+    <span class="star">✦</span>
+    <span class="star">✶</span>
+    <span class="star">✧</span>
+    <span class="star">✦</span>
+    <span class="star">✶</span>
+    <span class="star">✧</span>
 
-<div class="page">
-
-
-<header>
-
-    <a
-        href="index.html"
-        class="logo"
-    >
-
-        <span class="logo-cn">
-            塞垭弥大陆档案馆
-        </span>
-
-        <span class="logo-en">
-            SEYAMI ARCHIVE
-        </span>
-
-    </a>
+</div>
 
 
-    <div class="header-right">
+<div class="page-frame">
 
-        <a
-            href="admin.html"
-            class="back-link"
-        >
-            新增角色
-        </a>
+    <!-- Header -->
+    <header class="header">
 
         <a
-            href="characters.html"
-            class="back-link"
+            href="archive.html"
+            class="archive-logo"
         >
-            返回档案
+            <span class="archive-logo-cn">
+                塞垭弥大陆档案馆
+            </span>
+
+            <span class="archive-logo-en">
+                SEYAMI ARCHIVE
+            </span>
         </a>
 
-        <button
-            class="theme-toggle"
-            id="themeToggle"
-            type="button"
-            aria-label="切换日夜模式"
-        >
-            ☾
-        </button>
 
-    </div>
-
-</header>
-
-
-
-<section class="page-title">
-
-    <div class="page-title-en">
-        EDIT CHARACTER
-    </div>
-
-    <div class="page-title-cn">
-        编辑角色档案
-    </div>
-
-</section>
-
-
-
-<main class="admin-container">
-
-    <div
-        class="edit-id"
-        id="editId"
-    >
-        LOADING CHARACTER
-    </div>
-
-
-    <form id="editForm">
-
-
-        <div class="form-grid">
-
-
-            <!-- 姓名 -->
-
-            <div class="form-group full">
-
-                <label for="name">
-                    CHARACTER NAME
-                </label>
-
-                <input
-                    id="name"
-                    type="text"
-                    placeholder="例如：Evelina•Nieve 伊莉娜·妳芙"
-                    required
-                >
-
-            </div>
-
-
-            <!-- 种族 -->
-
-            <div class="form-group">
-
-                <label for="race">
-                    RACE
-                </label>
-
-                <input
-                    id="race"
-                    type="text"
-                    placeholder="例如：雪山神"
-                >
-
-            </div>
-
-
-            <!-- 身份 -->
-
-            <div class="form-group">
-
-                <label for="role">
-                    ROLE
-                </label>
-
-                <input
-                    id="role"
-                    type="text"
-                    placeholder="例如：雪山女神"
-                >
-
-            </div>
-
-
-            <!-- 年龄 -->
-
-            <div class="form-group">
-
-                <label for="age">
-                    AGE
-                </label>
-
-                <input
-                    id="age"
-                    type="number"
-                    min="0"
-                    placeholder="例如：0"
-                >
-
-            </div>
-
-
-            <!-- 性别 -->
-
-            <div class="form-group">
-
-                <label for="gender">
-                    GENDER
-                </label>
-
-                <input
-                    id="gender"
-                    type="text"
-                    placeholder="例如：女性"
-                >
-
-            </div>
-
-
-            <!-- 地区 -->
-
-            <div class="form-group full">
-
-                <label for="region">
-                    REGION
-                </label>
-
-                <input
-                    id="region"
-                    type="text"
-                    placeholder="例如：雪山"
-                >
-
-            </div>
-
-
-            <!-- 性格 -->
-
-            <div class="form-group full">
-
-                <label for="personality">
-                    PERSONALITY
-                </label>
-
-                <textarea
-                    id="personality"
-                    placeholder="填写角色性格……"
-                ></textarea>
-
-            </div>
-
-
-            <!-- 背景 -->
-
-            <div class="form-group full">
-
-                <label for="backstory">
-                    BACKSTORY
-                </label>
-
-                <textarea
-                    id="backstory"
-                    placeholder="填写角色背景故事……"
-                ></textarea>
-
-            </div>
-
+        <div class="header-right">
+
+            <a
+                href="javascript:history.back()"
+                class="back-link"
+            >
+                ← RETURN
+            </a>
+
+            <button
+                type="button"
+                class="theme-toggle"
+                id="themeToggle"
+                aria-label="切换主题"
+            ></button>
 
         </div>
 
+    </header>
 
+
+    <!-- 标题 -->
+    <section class="page-title">
+
+        <div class="page-title-en">
+            EDIT CHARACTER
+        </div>
+
+        <div class="page-title-cn">
+            编辑角色档案
+        </div>
+
+    </section>
+
+
+    <!-- 编辑区域 -->
+    <main class="edit-container">
 
         <!-- 图片 -->
-
-        <div class="image-section">
-
-            <label>
-                CHARACTER IMAGE
-            </label>
-
+        <section class="image-section">
 
             <div
                 class="image-preview"
                 id="imagePreview"
             >
 
-                <div class="image-empty">
-                    NO IMAGE
+                <div
+                    class="image-placeholder"
+                    id="imagePlaceholder"
+                >
+                    CHARACTER IMAGE
                 </div>
+
+                <img
+                    id="previewImage"
+                    alt="角色图片预览"
+                    style="display:none;"
+                >
 
             </div>
 
 
-            <input
-                id="imageFile"
-                type="file"
-                accept="image/*"
-            >
+            <div class="file-input-wrap">
 
-        </div>
+                <input
+                    type="file"
+                    id="imageFile"
+                    accept="image/*"
+                >
 
+            </div>
+
+        </section>
+
+
+        <!-- 表单 -->
+        <section class="form-grid">
+
+            <div class="form-item full">
+
+                <label
+                    class="form-label"
+                    for="name"
+                >
+                    NAME · 名称
+                </label>
+
+                <input
+                    class="form-input"
+                    id="name"
+                    type="text"
+                    placeholder="角色名称"
+                >
+
+            </div>
+
+
+            <div class="form-item">
+
+                <label
+                    class="form-label"
+                    for="race"
+                >
+                    RACE · 种族
+                </label>
+
+                <input
+                    class="form-input"
+                    id="race"
+                    type="text"
+                    placeholder="种族"
+                >
+
+            </div>
+
+
+            <div class="form-item">
+
+                <label
+                    class="form-label"
+                    for="role"
+                >
+                    ROLE · 身份
+                </label>
+
+                <input
+                    class="form-input"
+                    id="role"
+                    type="text"
+                    placeholder="身份 / 职位"
+                >
+
+            </div>
+
+
+            <div class="form-item">
+
+                <label
+                    class="form-label"
+                    for="age"
+                >
+                    AGE · 年龄
+                </label>
+
+                <input
+                    class="form-input"
+                    id="age"
+                    type="text"
+                    placeholder="年龄"
+                >
+
+            </div>
+
+
+            <div class="form-item">
+
+                <label
+                    class="form-label"
+                    for="gender"
+                >
+                    GENDER · 性别
+                </label>
+
+                <input
+                    class="form-input"
+                    id="gender"
+                    type="text"
+                    placeholder="性别"
+                >
+
+            </div>
+
+
+            <div class="form-item full">
+
+                <label
+                    class="form-label"
+                    for="region"
+                >
+                    REGION · 所属地区
+                </label>
+
+                <input
+                    class="form-input"
+                    id="region"
+                    type="text"
+                    placeholder="所属地区"
+                >
+
+            </div>
+
+
+            <div class="form-item full">
+
+                <label
+                    class="form-label"
+                    for="personality"
+                >
+                    PERSONALITY · 性格
+                </label>
+
+                <textarea
+                    class="form-textarea"
+                    id="personality"
+                    placeholder="角色性格……"
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-item full">
+
+                <label
+                    class="form-label"
+                    for="backstory"
+                >
+                    BACKSTORY · 背景
+                </label>
+
+                <textarea
+                    class="form-textarea"
+                    id="backstory"
+                    placeholder="角色背景故事……"
+                ></textarea>
+
+            </div>
+
+        </section>
 
 
         <!-- 按钮 -->
-
-        <div class="button-area">
+        <div class="action-area">
 
             <button
                 type="button"
-                class="button secondary"
+                class="action-button"
                 id="cancelButton"
             >
-                CANCEL
+                取消
             </button>
 
 
             <button
-                type="submit"
-                class="button"
+                type="button"
+                class="action-button"
                 id="saveButton"
             >
-                SAVE CHANGES
+                保存更改
             </button>
 
         </div>
 
 
+        <!-- 状态 -->
         <div
-            class="message"
-            id="message"
+            class="status-message"
+            id="statusMessage"
         ></div>
 
-
-    </form>
-
-</main>
+    </main>
 
 
-
-<div class="footer">
-    SEYAMI ARCHIVE · CHARACTER RECORD
-</div>
-
+    <div class="archive-mark">
+        塞垭弥档案 · 人物记录
+    </div>
 
 </div>
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
 <script>
 
-/* =========================
+/* =========================================================
    Supabase
-========================= */
+========================================================= */
 
 const SUPABASE_URL =
     "https://rqqkdpzehxzwqzytpxgh.supabase.co";
@@ -1290,6 +1226,10 @@ const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_T_gNdlgkOaXnzjSvdm1Pw_HQOVTEWG";
 
 
+/* =========================================================
+   初始化
+========================================================= */
+
 const supabaseClient =
     window.supabase.createClient(
         SUPABASE_URL,
@@ -1297,12 +1237,9 @@ const supabaseClient =
     );
 
 
-/* =========================
+/* =========================================================
    DOM
-========================= */
-
-const editForm =
-    document.getElementById("editForm");
+========================================================= */
 
 const nameInput =
     document.getElementById("name");
@@ -1331,11 +1268,11 @@ const backstoryInput =
 const imageFile =
     document.getElementById("imageFile");
 
-const imagePreview =
-    document.getElementById("imagePreview");
+const previewImage =
+    document.getElementById("previewImage");
 
-const message =
-    document.getElementById("message");
+const imagePlaceholder =
+    document.getElementById("imagePlaceholder");
 
 const saveButton =
     document.getElementById("saveButton");
@@ -1343,16 +1280,16 @@ const saveButton =
 const cancelButton =
     document.getElementById("cancelButton");
 
-const editId =
-    document.getElementById("editId");
+const statusMessage =
+    document.getElementById("statusMessage");
 
 const themeToggle =
     document.getElementById("themeToggle");
 
 
-/* =========================
-   当前角色 ID
-========================= */
+/* =========================================================
+   当前角色
+========================================================= */
 
 const params =
     new URLSearchParams(
@@ -1363,166 +1300,242 @@ const characterId =
     params.get("id");
 
 
-/* =========================
-   消息
-========================= */
+let currentCharacter = null;
 
-function showMessage(
-    text,
+let currentImageUrl = null;
+
+
+/* =========================================================
+   状态
+========================================================= */
+
+function showStatus(
+    message,
     type = ""
 ){
 
-    message.textContent = text;
+    statusMessage.textContent =
+        message;
 
-    message.className =
-        "message " + type;
+    statusMessage.className =
+        "status-message";
+
+    if(type){
+        statusMessage.classList.add(type);
+    }
 }
 
 
-/* =========================
+/* =========================================================
    图片预览
-========================= */
+========================================================= */
 
 function showImage(url){
 
     if(!url){
 
-        imagePreview.innerHTML = `
-            <div class="image-empty">
-                NO IMAGE
-            </div>
-        `;
+        previewImage.style.display =
+            "none";
+
+        imagePlaceholder.style.display =
+            "block";
 
         return;
     }
 
-    imagePreview.innerHTML = `
-        <img
-            src="${url}"
-            alt="角色图片"
-        >
-    `;
+    previewImage.src = url;
+
+    previewImage.style.display =
+        "block";
+
+    imagePlaceholder.style.display =
+        "none";
 }
 
 
-/* =========================
+imageFile.addEventListener(
+    "change",
+    function(){
+
+        const file =
+            this.files &&
+            this.files[0];
+
+        if(!file){
+            return;
+        }
+
+        const objectUrl =
+            URL.createObjectURL(file);
+
+        showImage(objectUrl);
+    }
+);
+
+
+/* =========================================================
    读取角色
-========================= */
+========================================================= */
 
 async function loadCharacter(){
 
     if(!characterId){
 
-        editId.textContent =
-            "NO CHARACTER ID";
-
-        showMessage(
-            "没有找到角色 ID。",
+        showStatus(
+            "缺少角色 ID",
             "error"
         );
 
-        saveButton.disabled = true;
+        saveButton.disabled =
+            true;
 
         return;
     }
 
 
-    editId.textContent =
-        "CHARACTER ID · " +
-        characterId;
-
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-            .from("characters")
-            .select(`
-                id,
-                name,
-                race,
-                role,
-                age,
-                gender,
-                region,
-                personality,
-                backstory,
-                image_url
-            `)
-            .eq(
-                "id",
-                characterId
-            )
-            .single();
-
-
-    if(error){
-
-        console.error(error);
-
-        showMessage(
-            "读取角色失败：" +
-            error.message,
-            "error"
-        );
-
-        saveButton.disabled = true;
-
-        return;
-    }
-
-
-    /* 填充表单 */
-
-    nameInput.value =
-        data.name || "";
-
-    raceInput.value =
-        data.race || "";
-
-    roleInput.value =
-        data.role || "";
-
-    ageInput.value =
-        data.age ?? "";
-
-    genderInput.value =
-        data.gender || "";
-
-    regionInput.value =
-        data.region || "";
-
-    personalityInput.value =
-        data.personality || "";
-
-    backstoryInput.value =
-        data.backstory || "";
-
-
-    /* 图片 */
-
-    showImage(
-        data.image_url || ""
+    showStatus(
+        "正在读取角色档案……"
     );
 
+
+    try{
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from("characters")
+                .select(
+                    `
+                    id,
+                    name,
+                    race,
+                    role,
+                    age,
+                    gender,
+                    region,
+                    personality,
+                    backstory,
+                    image_url
+                    `
+                )
+                .eq(
+                    "id",
+                    characterId
+                )
+                .single();
+
+
+        if(error){
+
+            console.error(
+                "Supabase read error:",
+                error
+            );
+
+            throw error;
+        }
+
+
+        if(!data){
+
+            throw new Error(
+                "没有找到这个角色"
+            );
+        }
+
+
+        currentCharacter =
+            data;
+
+        currentImageUrl =
+            data.image_url || null;
+
+
+        /* 填充表单 */
+
+        nameInput.value =
+            data.name || "";
+
+        raceInput.value =
+            data.race || "";
+
+        roleInput.value =
+            data.role || "";
+
+        ageInput.value =
+            data.age ?? "";
+
+        genderInput.value =
+            data.gender || "";
+
+        regionInput.value =
+            data.region || "";
+
+        personalityInput.value =
+            data.personality || "";
+
+        backstoryInput.value =
+            data.backstory || "";
+
+
+        /* 图片 */
+
+        showImage(
+            currentImageUrl
+        );
+
+
+        showStatus("");
+
+    }catch(error){
+
+        console.error(
+            "读取角色失败:",
+            error
+        );
+
+
+        /*
+         * 不再只显示模糊的
+         * DATABASE ERROR，
+         * 方便以后定位问题。
+         */
+
+        let message =
+            error?.message ||
+            "未知错误";
+
+
+        showStatus(
+            "读取角色失败：" +
+            message,
+            "error"
+        );
+
+        saveButton.disabled =
+            true;
+    }
 }
 
 
-/* =========================
-   图片上传
-========================= */
+/* =========================================================
+   上传新图片
+========================================================= */
 
 async function uploadImage(file){
 
     if(!file){
-
-        return null;
+        return currentImageUrl;
     }
 
 
+    const originalName =
+        file.name || "";
+
     const extension =
-        file.name
+        originalName
             .split(".")
             .pop()
             .toLowerCase();
@@ -1534,26 +1547,35 @@ async function uploadImage(file){
         "-" +
         Math.random()
             .toString(36)
-            .substring(2, 8) +
+            .substring(2,8) +
         "." +
         extension;
 
 
     const {
-        error
+        error: uploadError
     } =
         await supabaseClient
             .storage
             .from("character-images")
             .upload(
                 filePath,
-                file
+                file,
+                {
+                    cacheControl:"3600",
+                    upsert:false
+                }
             );
 
 
-    if(error){
+    if(uploadError){
 
-        throw error;
+        console.error(
+            "Image upload error:",
+            uploadError
+        );
+
+        throw uploadError;
     }
 
 
@@ -1572,323 +1594,271 @@ async function uploadImage(file){
 }
 
 
-/* =========================
+/* =========================================================
    保存修改
-========================= */
+========================================================= */
 
-editForm.addEventListener(
-    "submit",
-    async function(event){
+async function saveCharacter(){
 
-        event.preventDefault();
+    if(!characterId){
+        return;
+    }
 
 
-        if(!characterId){
+    saveButton.disabled =
+        true;
 
-            showMessage(
-                "没有角色 ID。",
-                "error"
+    cancelButton.disabled =
+        true;
+
+
+    showStatus(
+        "正在保存档案……"
+    );
+
+
+    try{
+
+        let imageURL =
+            currentImageUrl;
+
+
+        /*
+         * 如果选择了新图片
+         * 才重新上传
+         */
+
+        const file =
+            imageFile.files &&
+            imageFile.files[0];
+
+
+        if(file){
+
+            showStatus(
+                "正在上传新的角色图片……"
             );
 
-            return;
+            imageURL =
+                await uploadImage(
+                    file
+                );
         }
 
 
-        saveButton.disabled = true;
+        const updateData = {
 
-        saveButton.textContent =
-            "SAVING...";
+            name:
+                nameInput.value.trim(),
 
-        showMessage("");
+            race:
+                raceInput.value.trim() ||
+                null,
 
+            role:
+                roleInput.value.trim() ||
+                null,
 
-        try{
+            age:
+                ageInput.value.trim() ||
+                null,
 
-            let imageURL = null;
+            gender:
+                genderInput.value.trim() ||
+                null,
 
+            region:
+                regionInput.value.trim() ||
+                null,
 
-            /*
-             * 如果重新选择了图片
-             * 才上传新图片。
-             *
-             * 如果没有选择，
-             * 就保留数据库原来的 image_url。
-             */
+            personality:
+                personalityInput.value.trim() ||
+                null,
 
-            if(
-                imageFile.files &&
-                imageFile.files.length > 0
-            ){
+            backstory:
+                backstoryInput.value.trim() ||
+                null,
 
-                imageURL =
-                    await uploadImage(
-                        imageFile.files[0]
-                    );
-
-            }
-
-
-            const updateData = {
-
-                name:
-                    nameInput.value.trim(),
-
-                race:
-                    raceInput.value.trim() ||
-                    null,
-
-                role:
-                    roleInput.value.trim() ||
-                    null,
-
-                age:
-                    ageInput.value === ""
-                        ? null
-                        : Number(ageInput.value),
-
-                gender:
-                    genderInput.value.trim() ||
-                    null,
-
-                region:
-                    regionInput.value.trim() ||
-                    null,
-
-                personality:
-                    personalityInput.value.trim() ||
-                    null,
-
-                backstory:
-                    backstoryInput.value.trim() ||
-                    null
-
-            };
+            image_url:
+                imageURL || null
+        };
 
 
-            /*
-             * 只有上传了新图片
-             * 才修改 image_url。
-             */
+        /*
+         * 更新角色
+         */
 
-            if(imageURL){
+        const {
+            error
+        } =
+            await supabaseClient
+                .from("characters")
+                .update(
+                    updateData
+                )
+                .eq(
+                    "id",
+                    characterId
+                );
 
-                updateData.image_url =
-                    imageURL;
 
-            }
+        if(error){
 
-
-            const {
+            console.error(
+                "Supabase update error:",
                 error
-            } =
-                await supabaseClient
-                    .from("characters")
-                    .update(
-                        updateData
-                    )
-                    .eq(
-                        "id",
+            );
+
+            throw error;
+        }
+
+
+        showStatus(
+            "档案保存成功，即将返回角色页面……",
+            "success"
+        );
+
+
+        setTimeout(
+            function(){
+
+                window.location.href =
+                    "characters.html?id=" +
+                    encodeURIComponent(
                         characterId
                     );
 
-
-            if(error){
-
-                throw error;
-            }
+            },
+            900
+        );
 
 
-            showMessage(
-                "角色档案已成功更新。",
-                "success"
-            );
+    }catch(error){
+
+        console.error(
+            "保存角色失败:",
+            error
+        );
 
 
-            /*
-             * 重新加载预览
-             */
-
-            if(imageURL){
-
-                showImage(
-                    imageURL
-                );
-
-            }
+        showStatus(
+            "保存失败：" +
+            (
+                error?.message ||
+                "未知错误"
+            ),
+            "error"
+        );
 
 
-            /*
-             * 稍微停一下，
-             * 让用户看到保存成功。
-             */
+        saveButton.disabled =
+            false;
 
-            setTimeout(
-                function(){
-
-                    window.location.href =
-                        "characters.html?id=" +
-                        encodeURIComponent(
-                            characterId
-                        );
-
-                },
-                900
-            );
-
-
-        }catch(error){
-
-            console.error(error);
-
-            showMessage(
-                "保存失败：" +
-                error.message,
-                "error"
-            );
-
-            saveButton.disabled = false;
-
-            saveButton.textContent =
-                "SAVE CHANGES";
-
-        }
-
+        cancelButton.disabled =
+            false;
     }
+}
+
+
+/* =========================================================
+   保存按钮
+========================================================= */
+
+saveButton.addEventListener(
+    "click",
+    saveCharacter
 );
 
 
-/* =========================
+/* =========================================================
    取消
-========================= */
+========================================================= */
 
 cancelButton.addEventListener(
     "click",
     function(){
 
-        if(characterId){
-
-            window.location.href =
-                "characters.html?id=" +
-                encodeURIComponent(
-                    characterId
-                );
-
-        }else{
-
-            window.location.href =
-                "characters.html";
-
-        }
-
+        window.location.href =
+            "characters.html?id=" +
+            encodeURIComponent(
+                characterId
+            );
     }
 );
 
 
-/* =========================
-   选择新图片时预览
-========================= */
+/* =========================================================
+   日夜模式
+========================================================= */
 
-imageFile.addEventListener(
-    "change",
-    function(){
+function applyTheme(){
 
-        const file =
-            imageFile.files[0];
-
-        if(!file){
-
-            return;
-        }
-
-
-        const objectURL =
-            URL.createObjectURL(
-                file
-            );
-
-
-        showImage(
-            objectURL
+    const theme =
+        localStorage.getItem(
+            "seyami-theme"
         );
 
-    }
-);
-
-
-/* =========================
-   日夜模式
-========================= */
-
-function applyTheme(theme){
 
     if(theme === "day"){
 
         document.body.classList.add(
-            "day"
+            "day-mode"
         );
-
-        themeToggle.textContent =
-            "☀";
 
     }else{
 
         document.body.classList.remove(
-            "day"
+            "day-mode"
         );
-
-        themeToggle.textContent =
-            "☾";
-
     }
-
 }
-
-
-const savedTheme =
-    localStorage.getItem(
-        "seyami-theme"
-    ) || "night";
-
-
-applyTheme(
-    savedTheme
-);
 
 
 themeToggle.addEventListener(
     "click",
     function(){
 
-        const nextTheme =
+        const isDay =
             document.body.classList.contains(
+                "day-mode"
+            );
+
+
+        if(isDay){
+
+            document.body.classList.remove(
+                "day-mode"
+            );
+
+            localStorage.setItem(
+                "seyami-theme",
+                "night"
+            );
+
+        }else{
+
+            document.body.classList.add(
+                "day-mode"
+            );
+
+            localStorage.setItem(
+                "seyami-theme",
                 "day"
-            )
-                ? "night"
-                : "day";
-
-
-        localStorage.setItem(
-            "seyami-theme",
-            nextTheme
-        );
-
-
-        applyTheme(
-            nextTheme
-        );
-
+            );
+        }
     }
 );
 
 
-/* =========================
+/* =========================================================
    启动
-========================= */
+========================================================= */
+
+applyTheme();
 
 loadCharacter();
 
 </script>
 
 </body>
-
 </html>
