@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1.0"
 >
 
-<title>编辑角色档案 · Seyami Archive</title>
+<title>编辑档案 · Seyami Archive</title>
 
 <link
     rel="preconnect"
@@ -1214,11 +1214,17 @@ body.day-mode .status-message.success{
 
     <section class="page-title">
 
-        <div class="page-title-en">
+        <div
+            class="page-title-en"
+            id="pageTitleEn"
+        >
             EDIT CHARACTER
         </div>
 
-        <div class="page-title-cn">
+        <div
+            class="page-title-cn"
+            id="pageTitleCn"
+        >
             编辑角色档案
         </div>
 
@@ -1230,9 +1236,14 @@ body.day-mode .status-message.success{
     <main class="edit-container">
 
 
-        <!-- 图片 -->
+        <!-- =================================================
+             角色图片
+        ================================================= -->
 
-        <section class="image-section">
+        <section
+            class="image-section"
+            id="characterImageSection"
+        >
 
             <div
                 class="image-preview"
@@ -1269,16 +1280,24 @@ body.day-mode .status-message.success{
         </section>
 
 
-        <!-- 表单 -->
+        <!-- =================================================
+             表单
+        ================================================= -->
 
         <section class="form-grid">
 
 
-            <div class="form-item full">
+            <!-- 角色名称 -->
+
+            <div
+                class="form-item full"
+                id="characterNameItem"
+            >
 
                 <label
                     class="form-label"
                     for="name"
+                    id="nameLabel"
                 >
                     NAME · 名称
                 </label>
@@ -1293,7 +1312,12 @@ body.day-mode .status-message.success{
             </div>
 
 
-            <div class="form-item">
+            <!-- 种族 -->
+
+            <div
+                class="form-item"
+                id="raceItem"
+            >
 
                 <label
                     class="form-label"
@@ -1312,7 +1336,12 @@ body.day-mode .status-message.success{
             </div>
 
 
-            <div class="form-item">
+            <!-- 身份 -->
+
+            <div
+                class="form-item"
+                id="roleItem"
+            >
 
                 <label
                     class="form-label"
@@ -1331,7 +1360,12 @@ body.day-mode .status-message.success{
             </div>
 
 
-            <div class="form-item">
+            <!-- 年龄 -->
+
+            <div
+                class="form-item"
+                id="ageItem"
+            >
 
                 <label
                     class="form-label"
@@ -1350,7 +1384,12 @@ body.day-mode .status-message.success{
             </div>
 
 
-            <div class="form-item">
+            <!-- 性别 -->
+
+            <div
+                class="form-item"
+                id="genderItem"
+            >
 
                 <label
                     class="form-label"
@@ -1369,7 +1408,12 @@ body.day-mode .status-message.success{
             </div>
 
 
-            <div class="form-item full">
+            <!-- 地区 -->
+
+            <div
+                class="form-item full"
+                id="regionItem"
+            >
 
                 <label
                     class="form-label"
@@ -1388,7 +1432,12 @@ body.day-mode .status-message.success{
             </div>
 
 
-            <div class="form-item full">
+            <!-- 性格 -->
+
+            <div
+                class="form-item full"
+                id="personalityItem"
+            >
 
                 <label
                     class="form-label"
@@ -1406,7 +1455,12 @@ body.day-mode .status-message.success{
             </div>
 
 
-            <div class="form-item full">
+            <!-- 背景 -->
+
+            <div
+                class="form-item full"
+                id="backstoryItem"
+            >
 
                 <label
                     class="form-label"
@@ -1419,6 +1473,33 @@ body.day-mode .status-message.success{
                     class="form-textarea"
                     id="backstory"
                     placeholder="角色背景故事……"
+                ></textarea>
+
+            </div>
+
+
+            <!-- =================================================
+                 世界设定
+            ================================================= -->
+
+            <div
+                class="form-item full"
+                id="worldContentItem"
+                style="display:none;"
+            >
+
+                <label
+                    class="form-label"
+                    for="worldContent"
+                >
+                    WORLD SETTING · 世界设定
+                </label>
+
+                <textarea
+                    class="form-textarea"
+                    id="worldContent"
+                    placeholder="在这里填写塞垭弥大陆的世界设定……"
+                    style="min-height:420px;"
                 ></textarea>
 
             </div>
@@ -1462,7 +1543,10 @@ body.day-mode .status-message.success{
     </main>
 
 
-    <div class="archive-mark">
+    <div
+        class="archive-mark"
+        id="archiveMark"
+    >
         塞垭弥档案 · 人物记录
     </div>
 
@@ -1480,10 +1564,6 @@ body.day-mode .status-message.success{
 const SUPABASE_URL =
     "https://rqqkdpzehxzwqzytpxgh.supabase.co";
 
-
-/*
-   ★★★ 这是刚刚从 Supabase 后台复制出来的正确 Key ★★★
-*/
 
 const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_T_gNdlgkOaXnzjSvdmI1Pw_HQOVTEWG";
@@ -1504,6 +1584,29 @@ const supabaseClient =
    DOM
 ========================================================= */
 
+const pageTitleEn =
+    document.getElementById(
+        "pageTitleEn"
+    );
+
+const pageTitleCn =
+    document.getElementById(
+        "pageTitleCn"
+    );
+
+const archiveMark =
+    document.getElementById(
+        "archiveMark"
+    );
+
+
+/* 角色 */
+
+const characterImageSection =
+    document.getElementById(
+        "characterImageSection"
+    );
+
 const nameInput =
     document.getElementById("name");
 
@@ -1523,35 +1626,72 @@ const regionInput =
     document.getElementById("region");
 
 const personalityInput =
-    document.getElementById("personality");
+    document.getElementById(
+        "personality"
+    );
 
 const backstoryInput =
-    document.getElementById("backstory");
+    document.getElementById(
+        "backstory"
+    );
+
+
+/* 图片 */
 
 const imageFile =
-    document.getElementById("imageFile");
+    document.getElementById(
+        "imageFile"
+    );
 
 const previewImage =
-    document.getElementById("previewImage");
+    document.getElementById(
+        "previewImage"
+    );
 
 const imagePlaceholder =
-    document.getElementById("imagePlaceholder");
+    document.getElementById(
+        "imagePlaceholder"
+    );
+
+
+/* 世界 */
+
+const worldContentItem =
+    document.getElementById(
+        "worldContentItem"
+    );
+
+const worldContent =
+    document.getElementById(
+        "worldContent"
+    );
+
+
+/* 按钮 */
 
 const saveButton =
-    document.getElementById("saveButton");
+    document.getElementById(
+        "saveButton"
+    );
 
 const cancelButton =
-    document.getElementById("cancelButton");
+    document.getElementById(
+        "cancelButton"
+    );
 
 const statusMessage =
-    document.getElementById("statusMessage");
+    document.getElementById(
+        "statusMessage"
+    );
 
 const themeToggle =
-    document.getElementById("themeToggle");
+    document.getElementById(
+        "themeToggle"
+    );
 
 
 /* =========================================================
-   当前角色
+   URL 参数
 ========================================================= */
 
 const params =
@@ -1559,8 +1699,27 @@ const params =
         window.location.search
     );
 
+
 const characterId =
     params.get("id");
+
+
+const editType =
+    params.get("type");
+
+
+/*
+   当前编辑模式
+
+   type=world
+   → 世界设定
+
+   其他情况
+   → 角色
+*/
+
+const isWorldMode =
+    editType === "world";
 
 
 let currentCharacter = null;
@@ -1590,6 +1749,152 @@ function showStatus(
         );
 
     }
+
+}
+
+
+/* =========================================================
+   切换到角色编辑模式
+========================================================= */
+
+function setupCharacterMode(){
+
+    pageTitleEn.textContent =
+        "EDIT CHARACTER";
+
+    pageTitleCn.textContent =
+        "编辑角色档案";
+
+    archiveMark.textContent =
+        "塞垭弥档案 · 人物记录";
+
+
+    characterImageSection.style.display =
+        "block";
+
+
+    worldContentItem.style.display =
+        "none";
+
+
+    nameInput.closest(
+        ".form-item"
+    ).style.display =
+        "flex";
+
+    raceInput.closest(
+        ".form-item"
+    ).style.display =
+        "flex";
+
+    roleInput.closest(
+        ".form-item"
+    ).style.display =
+        "flex";
+
+    ageInput.closest(
+        ".form-item"
+    ).style.display =
+        "flex";
+
+    genderInput.closest(
+        ".form-item"
+    ).style.display =
+        "flex";
+
+    regionInput.closest(
+        ".form-item"
+    ).style.display =
+        "flex";
+
+    personalityInput.closest(
+        ".form-item"
+    ).style.display =
+        "flex";
+
+    backstoryInput.closest(
+        ".form-item"
+    ).style.display =
+        "flex";
+
+}
+
+
+/* =========================================================
+   切换到世界设定编辑模式
+========================================================= */
+
+function setupWorldMode(){
+
+    pageTitleEn.textContent =
+        "EDIT WORLD";
+
+    pageTitleCn.textContent =
+        "编辑世界设定";
+
+    archiveMark.textContent =
+        "塞垭弥档案 · 世界记录";
+
+
+    /*
+       世界设定不需要图片
+    */
+
+    characterImageSection.style.display =
+        "none";
+
+
+    /*
+       隐藏角色字段
+    */
+
+    nameInput.closest(
+        ".form-item"
+    ).style.display =
+        "none";
+
+    raceInput.closest(
+        ".form-item"
+    ).style.display =
+        "none";
+
+    roleInput.closest(
+        ".form-item"
+    ).style.display =
+        "none";
+
+    ageInput.closest(
+        ".form-item"
+    ).style.display =
+        "none";
+
+    genderInput.closest(
+        ".form-item"
+    ).style.display =
+        "none";
+
+    regionInput.closest(
+        ".form-item"
+    ).style.display =
+        "none";
+
+    personalityInput.closest(
+        ".form-item"
+    ).style.display =
+        "none";
+
+    backstoryInput.closest(
+        ".form-item"
+    ).style.display =
+        "none";
+
+
+    /*
+       显示世界设定正文
+    */
+
+    worldContentItem.style.display =
+        "flex";
 
 }
 
@@ -1737,8 +2042,6 @@ async function loadCharacter(){
             null;
 
 
-        /* 填充资料 */
-
         nameInput.value =
             data.name ||
             "";
@@ -1771,8 +2074,6 @@ async function loadCharacter(){
             data.backstory ||
             "";
 
-
-        /* 显示图片 */
 
         showImage(
             currentImageUrl
@@ -1808,7 +2109,112 @@ async function loadCharacter(){
 
 
 /* =========================================================
-   上传图片
+   读取世界设定
+========================================================= */
+
+async function loadWorld(){
+
+    showStatus(
+        "正在读取世界设定……"
+    );
+
+
+    try{
+
+        /*
+           我们已经确定数据库里的
+           世界设定记录是 id = 1
+        */
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from("world_settings")
+                .select(
+                    `
+                    id,
+                    title,
+                    content,
+                    updated_at
+                    `
+                )
+                .eq(
+                    "id",
+                    1
+                )
+                .single();
+
+
+        if(error){
+
+            console.error(
+                "Supabase world read error:",
+                error
+            );
+
+            throw error;
+        }
+
+
+        if(!data){
+
+            throw new Error(
+                "没有找到世界设定"
+            );
+        }
+
+
+        /*
+           世界设定标题
+           继续使用原来的 name 输入框
+        */
+
+        nameInput.value =
+            data.title ||
+            "";
+
+
+        /*
+           世界设定正文
+        */
+
+        worldContent.value =
+            data.content ||
+            "";
+
+
+        showStatus("");
+
+
+    }catch(error){
+
+        console.error(
+            "读取世界设定失败:",
+            error
+        );
+
+
+        showStatus(
+            "读取世界设定失败：" +
+            (
+                error?.message ||
+                "未知错误"
+            ),
+            "error"
+        );
+
+
+        saveButton.disabled =
+            true;
+    }
+
+}
+
+
+/* =========================================================
+   上传角色图片
 ========================================================= */
 
 async function uploadImage(file){
@@ -1830,11 +2236,6 @@ async function uploadImage(file){
             .pop()
             .toLowerCase();
 
-
-    /*
-       使用安全随机文件名
-       避免中文文件名导致上传问题
-    */
 
     const filePath =
         "character-" +
@@ -1924,11 +2325,6 @@ async function saveCharacter(){
             imageFile.files[0];
 
 
-        /*
-           如果选择了新图片，
-           才上传新图片
-        */
-
         if(file){
 
             showStatus(
@@ -1982,8 +2378,6 @@ async function saveCharacter(){
 
         };
 
-
-        /* 更新数据库 */
 
         const {
             error
@@ -2060,12 +2454,144 @@ async function saveCharacter(){
 
 
 /* =========================================================
+   保存世界设定
+========================================================= */
+
+async function saveWorld(){
+
+    saveButton.disabled =
+        true;
+
+    cancelButton.disabled =
+        true;
+
+
+    showStatus(
+        "正在保存世界设定……"
+    );
+
+
+    try{
+
+        const title =
+            nameInput.value.trim();
+
+        const content =
+            worldContent.value.trim();
+
+
+        if(!title){
+
+            throw new Error(
+                "世界设定标题不能为空"
+            );
+        }
+
+
+        /*
+           更新数据库里的 id = 1
+        */
+
+        const {
+            error
+        } =
+            await supabaseClient
+                .from("world_settings")
+                .update({
+
+                    title:
+                        title,
+
+                    content:
+                        content,
+
+                    updated_at:
+                        new Date()
+                            .toISOString()
+
+                })
+                .eq(
+                    "id",
+                    1
+                );
+
+
+        if(error){
+
+            console.error(
+                "Supabase world update error:",
+                error
+            );
+
+            throw error;
+        }
+
+
+        showStatus(
+            "世界设定保存成功，即将返回世界设定页面……",
+            "success"
+        );
+
+
+        setTimeout(
+            function(){
+
+                window.location.href =
+                    "world.html";
+
+            },
+            900
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "保存世界设定失败:",
+            error
+        );
+
+
+        showStatus(
+            "保存失败：" +
+            (
+                error?.message ||
+                "未知错误"
+            ),
+            "error"
+        );
+
+
+        saveButton.disabled =
+            false;
+
+        cancelButton.disabled =
+            false;
+
+    }
+
+}
+
+
+/* =========================================================
    保存按钮
 ========================================================= */
 
 saveButton.addEventListener(
     "click",
-    saveCharacter
+    function(){
+
+        if(isWorldMode){
+
+            saveWorld();
+
+        }else{
+
+            saveCharacter();
+
+        }
+
+    }
 );
 
 
@@ -2076,6 +2602,15 @@ saveButton.addEventListener(
 cancelButton.addEventListener(
     "click",
     function(){
+
+        if(isWorldMode){
+
+            window.location.href =
+                "world.html";
+
+            return;
+        }
+
 
         window.location.href =
             "characters.html?id=" +
@@ -2160,7 +2695,28 @@ themeToggle.addEventListener(
 
 applyTheme();
 
-loadCharacter();
+
+if(isWorldMode){
+
+    /*
+       世界设定模式
+    */
+
+    setupWorldMode();
+
+    loadWorld();
+
+}else{
+
+    /*
+       角色编辑模式
+    */
+
+    setupCharacterMode();
+
+    loadCharacter();
+
+}
 
 </script>
 
