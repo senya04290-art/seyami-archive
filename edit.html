@@ -1,0 +1,1894 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>编辑角色 · Seyami Archive</title>
+
+<link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+>
+
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Noto+Serif+SC:wght@300;400;500&display=swap"
+    rel="stylesheet"
+>
+
+<style>
+
+/* =========================
+   基础
+========================= */
+
+*{
+    box-sizing:border-box;
+}
+
+html,
+body{
+    margin:0;
+    padding:0;
+    min-height:100%;
+}
+
+body{
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(45,92,145,.10),
+            transparent 38%
+        ),
+        #061426;
+
+    color:#dcecff;
+
+    font-family:
+        "Noto Serif SC",
+        serif;
+
+    font-weight:300;
+
+    letter-spacing:.04em;
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+    transition:
+        background .5s ease,
+        color .5s ease;
+}
+
+
+/* =========================
+   星点
+========================= */
+
+.star{
+    position:fixed;
+
+    color:#dcecff;
+
+    pointer-events:none;
+
+    opacity:.55;
+
+    font-family:serif;
+
+    z-index:0;
+
+    animation:
+        starFloat 6s ease-in-out infinite;
+}
+
+.star:nth-child(1){
+    top:10%;
+    left:8%;
+    font-size:10px;
+    animation-delay:-1s;
+}
+
+.star:nth-child(2){
+    top:18%;
+    right:14%;
+    font-size:8px;
+    animation-delay:-3s;
+}
+
+.star:nth-child(3){
+    top:42%;
+    left:4%;
+    font-size:7px;
+    animation-delay:-2s;
+}
+
+.star:nth-child(4){
+    top:65%;
+    right:7%;
+    font-size:11px;
+    animation-delay:-4s;
+}
+
+.star:nth-child(5){
+    bottom:13%;
+    left:14%;
+    font-size:7px;
+    animation-delay:-1.5s;
+}
+
+.star:nth-child(6){
+    bottom:25%;
+    right:22%;
+    font-size:8px;
+    animation-delay:-2.5s;
+}
+
+@keyframes starFloat{
+
+    0%,
+    100%{
+        transform:translateY(0);
+        opacity:.35;
+    }
+
+    50%{
+        transform:translateY(-5px);
+        opacity:.8;
+    }
+
+}
+
+
+/* =========================
+   页面容器
+========================= */
+
+.page{
+
+    position:relative;
+
+    z-index:1;
+
+    width:100%;
+
+    min-height:100vh;
+
+    padding:
+        38px
+        58px
+        70px;
+}
+
+
+/* =========================
+   顶部
+========================= */
+
+header{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:flex-start;
+
+    justify-content:space-between;
+
+    margin-bottom:70px;
+}
+
+
+/* 左侧 LOGO */
+
+.logo{
+
+    text-decoration:none;
+
+    color:#dcecff;
+
+    display:flex;
+
+    flex-direction:column;
+
+    line-height:1.2;
+
+    transition:opacity .3s ease;
+}
+
+.logo:hover{
+    opacity:.75;
+}
+
+.logo-cn{
+
+    font-size:18px;
+
+    letter-spacing:.16em;
+}
+
+.logo-en{
+
+    margin-top:5px;
+
+    font-family:"Cinzel",serif;
+
+    font-size:10px;
+
+    letter-spacing:.30em;
+
+    opacity:.68;
+}
+
+
+/* 右侧 */
+
+.header-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:28px;
+}
+
+
+/* 返回 */
+
+.back-link{
+
+    color:#dcecff;
+
+    text-decoration:none;
+
+    font-family:"Cinzel",serif;
+
+    font-size:11px;
+
+    letter-spacing:.16em;
+
+    opacity:.72;
+
+    transition:
+        opacity .3s ease,
+        transform .3s ease;
+}
+
+.back-link:hover{
+
+    opacity:1;
+
+    transform:translateX(-3px);
+}
+
+
+/* 日夜按钮 */
+
+.theme-toggle{
+
+    width:38px;
+
+    height:38px;
+
+    border:1px solid rgba(220,236,255,.25);
+
+    border-radius:50%;
+
+    background:transparent;
+
+    color:#dcecff;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    transition:
+        background .3s ease,
+        border-color .3s ease,
+        transform .3s ease;
+}
+
+.theme-toggle:hover{
+
+    background:rgba(220,236,255,.08);
+
+    border-color:rgba(220,236,255,.5);
+
+    transform:rotate(15deg);
+}
+
+
+/* =========================
+   标题
+========================= */
+
+.page-title{
+
+    text-align:center;
+
+    margin-bottom:48px;
+}
+
+.page-title-en{
+
+    font-family:"Cinzel",serif;
+
+    font-size:30px;
+
+    font-weight:400;
+
+    letter-spacing:.22em;
+
+    margin-left:.22em;
+}
+
+.page-title-cn{
+
+    margin-top:12px;
+
+    font-size:13px;
+
+    letter-spacing:.32em;
+
+    opacity:.65;
+}
+
+
+/* =========================
+   编辑框
+========================= */
+
+.admin-container{
+
+    width:min(820px,100%);
+
+    margin:0 auto;
+
+    padding:42px 46px 48px;
+
+    border:1px solid rgba(180,210,240,.18);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.025),
+            rgba(255,255,255,.008)
+        );
+
+    position:relative;
+}
+
+
+/* 四角装饰 */
+
+.admin-container::before,
+.admin-container::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:12px;
+
+    height:12px;
+
+    border-color:rgba(220,236,255,.65);
+
+    border-style:solid;
+
+}
+
+.admin-container::before{
+
+    left:-1px;
+    top:-1px;
+
+    border-width:1px 0 0 1px;
+}
+
+.admin-container::after{
+
+    right:-1px;
+    bottom:-1px;
+
+    border-width:0 1px 1px 0;
+}
+
+
+/* 编辑提示 */
+
+.edit-id{
+
+    text-align:center;
+
+    font-family:"Cinzel",serif;
+
+    font-size:10px;
+
+    letter-spacing:.2em;
+
+    opacity:.42;
+
+    margin-bottom:35px;
+}
+
+
+/* =========================
+   表单
+========================= */
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:25px 30px;
+}
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+}
+
+.form-group.full{
+
+    grid-column:1 / -1;
+}
+
+label{
+
+    font-family:"Cinzel",serif;
+
+    font-size:10px;
+
+    letter-spacing:.18em;
+
+    margin-bottom:10px;
+
+    opacity:.68;
+}
+
+input,
+textarea{
+
+    width:100%;
+
+    border:1px solid rgba(220,236,255,.17);
+
+    background:
+        rgba(0,10,25,.28);
+
+    color:#dcecff;
+
+    outline:none;
+
+    padding:
+        12px
+        13px;
+
+    font-family:
+        "Noto Serif SC",
+        serif;
+
+    font-size:13px;
+
+    font-weight:300;
+
+    letter-spacing:.05em;
+
+    transition:
+        border-color .3s ease,
+        background .3s ease;
+}
+
+input{
+
+    height:44px;
+}
+
+textarea{
+
+    min-height:125px;
+
+    resize:vertical;
+
+    line-height:1.8;
+}
+
+input:focus,
+textarea:focus{
+
+    border-color:
+        rgba(220,236,255,.5);
+
+    background:
+        rgba(20,40,65,.35);
+}
+
+input::placeholder,
+textarea::placeholder{
+
+    color:#dcecff;
+
+    opacity:.25;
+}
+
+
+/* =========================
+   图片区域
+========================= */
+
+.image-section{
+
+    margin-top:32px;
+
+    padding-top:30px;
+
+    border-top:
+        1px solid
+        rgba(220,236,255,.10);
+}
+
+.image-preview{
+
+    width:100%;
+
+    min-height:190px;
+
+    border:
+        1px dashed
+        rgba(220,236,255,.22);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+        rgba(0,8,20,.25);
+
+    margin-bottom:15px;
+}
+
+.image-preview img{
+
+    display:block;
+
+    max-width:100%;
+
+    max-height:300px;
+
+    object-fit:contain;
+}
+
+.image-empty{
+
+    font-family:"Cinzel",serif;
+
+    font-size:10px;
+
+    letter-spacing:.18em;
+
+    opacity:.35;
+
+    text-align:center;
+}
+
+input[type="file"]{
+
+    border:0;
+
+    padding:8px 0;
+
+    background:transparent;
+
+    font-size:11px;
+
+    cursor:pointer;
+}
+
+input[type="file"]::file-selector-button{
+
+    background:transparent;
+
+    color:#dcecff;
+
+    border:
+        1px solid
+        rgba(220,236,255,.25);
+
+    padding:8px 13px;
+
+    margin-right:12px;
+
+    font-family:"Noto Serif SC",serif;
+
+    cursor:pointer;
+}
+
+
+/* =========================
+   按钮
+========================= */
+
+.button-area{
+
+    margin-top:38px;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:15px;
+}
+
+.button{
+
+    min-width:150px;
+
+    height:46px;
+
+    border:
+        1px solid
+        rgba(220,236,255,.3);
+
+    background:transparent;
+
+    color:#dcecff;
+
+    font-family:"Cinzel",serif;
+
+    font-size:10px;
+
+    letter-spacing:.18em;
+
+    cursor:pointer;
+
+    transition:
+        background .3s ease,
+        border-color .3s ease,
+        transform .3s ease;
+}
+
+.button:hover{
+
+    background:
+        rgba(220,236,255,.08);
+
+    border-color:
+        rgba(220,236,255,.55);
+
+    transform:translateY(-2px);
+}
+
+.button.secondary{
+
+    opacity:.65;
+}
+
+.button:disabled{
+
+    opacity:.35;
+
+    cursor:wait;
+
+    transform:none;
+}
+
+
+/* =========================
+   消息
+========================= */
+
+.message{
+
+    min-height:25px;
+
+    margin-top:22px;
+
+    text-align:center;
+
+    font-size:12px;
+
+    letter-spacing:.08em;
+
+    opacity:.8;
+}
+
+.message.success{
+
+    color:#dcecff;
+}
+
+.message.error{
+
+    color:#d8bcbc;
+}
+
+
+/* =========================
+   底部
+========================= */
+
+.footer{
+
+    margin-top:55px;
+
+    text-align:center;
+
+    font-family:"Cinzel",serif;
+
+    font-size:9px;
+
+    letter-spacing:.22em;
+
+    opacity:.25;
+}
+
+
+/* =========================
+   日间模式
+========================= */
+
+body.day{
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(120,160,200,.08),
+            transparent 38%
+        ),
+        #edf3f8;
+
+    color:#26384c;
+}
+
+body.day .logo,
+body.day .back-link,
+body.day .theme-toggle,
+body.day .button,
+body.day input,
+body.day textarea,
+body.day input::placeholder,
+body.day input[type="file"]::file-selector-button{
+
+    color:#26384c;
+}
+
+body.day .star{
+
+    color:#26384c;
+}
+
+body.day .theme-toggle{
+
+    border-color:
+        rgba(38,56,76,.22);
+}
+
+body.day .theme-toggle:hover{
+
+    background:
+        rgba(38,56,76,.06);
+
+    border-color:
+        rgba(38,56,76,.4);
+}
+
+body.day .admin-container{
+
+    border-color:
+        rgba(38,56,76,.18);
+
+    background:
+        rgba(255,255,255,.42);
+}
+
+body.day .admin-container::before,
+body.day .admin-container::after{
+
+    border-color:
+        rgba(38,56,76,.55);
+}
+
+body.day input,
+body.day textarea{
+
+    background:
+        rgba(255,255,255,.45);
+
+    border-color:
+        rgba(38,56,76,.16);
+}
+
+body.day input:focus,
+body.day textarea:focus{
+
+    border-color:
+        rgba(38,56,76,.4);
+
+    background:
+        rgba(255,255,255,.7);
+}
+
+body.day .image-preview{
+
+    border-color:
+        rgba(38,56,76,.2);
+
+    background:
+        rgba(255,255,255,.3);
+}
+
+body.day .image-section{
+
+    border-color:
+        rgba(38,56,76,.10);
+}
+
+body.day .button{
+
+    border-color:
+        rgba(38,56,76,.25);
+}
+
+body.day .button:hover{
+
+    background:
+        rgba(38,56,76,.06);
+
+    border-color:
+        rgba(38,56,76,.45);
+}
+
+
+/* =========================
+   手机
+========================= */
+
+@media(max-width:700px){
+
+    .page{
+
+        padding:
+            25px
+            20px
+            45px;
+    }
+
+    header{
+
+        margin-bottom:55px;
+    }
+
+    .logo-cn{
+
+        font-size:15px;
+    }
+
+    .logo-en{
+
+        font-size:8px;
+    }
+
+    .header-right{
+
+        gap:14px;
+    }
+
+    .back-link{
+
+        font-size:9px;
+    }
+
+    .theme-toggle{
+
+        width:34px;
+        height:34px;
+    }
+
+    .page-title-en{
+
+        font-size:23px;
+
+        letter-spacing:.16em;
+    }
+
+    .page-title-cn{
+
+        font-size:11px;
+    }
+
+    .admin-container{
+
+        padding:
+            30px
+            20px
+            35px;
+    }
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+
+        gap:22px;
+    }
+
+    .form-group.full{
+
+        grid-column:auto;
+    }
+
+    .button-area{
+
+        flex-direction:column;
+    }
+
+    .button{
+
+        width:100%;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<!-- 浮动星点 -->
+
+<div class="star">✦</div>
+<div class="star">✶</div>
+<div class="star">✡</div>
+<div class="star">✦</div>
+<div class="star">✶</div>
+<div class="star">✡</div>
+
+
+<div class="page">
+
+
+<header>
+
+    <a
+        href="index.html"
+        class="logo"
+    >
+
+        <span class="logo-cn">
+            塞垭弥大陆档案馆
+        </span>
+
+        <span class="logo-en">
+            SEYAMI ARCHIVE
+        </span>
+
+    </a>
+
+
+    <div class="header-right">
+
+        <a
+            href="admin.html"
+            class="back-link"
+        >
+            新增角色
+        </a>
+
+        <a
+            href="characters.html"
+            class="back-link"
+        >
+            返回档案
+        </a>
+
+        <button
+            class="theme-toggle"
+            id="themeToggle"
+            type="button"
+            aria-label="切换日夜模式"
+        >
+            ☾
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<section class="page-title">
+
+    <div class="page-title-en">
+        EDIT CHARACTER
+    </div>
+
+    <div class="page-title-cn">
+        编辑角色档案
+    </div>
+
+</section>
+
+
+
+<main class="admin-container">
+
+    <div
+        class="edit-id"
+        id="editId"
+    >
+        LOADING CHARACTER
+    </div>
+
+
+    <form id="editForm">
+
+
+        <div class="form-grid">
+
+
+            <!-- 姓名 -->
+
+            <div class="form-group full">
+
+                <label for="name">
+                    CHARACTER NAME
+                </label>
+
+                <input
+                    id="name"
+                    type="text"
+                    placeholder="例如：Evelina•Nieve 伊莉娜·妳芙"
+                    required
+                >
+
+            </div>
+
+
+            <!-- 种族 -->
+
+            <div class="form-group">
+
+                <label for="race">
+                    RACE
+                </label>
+
+                <input
+                    id="race"
+                    type="text"
+                    placeholder="例如：雪山神"
+                >
+
+            </div>
+
+
+            <!-- 身份 -->
+
+            <div class="form-group">
+
+                <label for="role">
+                    ROLE
+                </label>
+
+                <input
+                    id="role"
+                    type="text"
+                    placeholder="例如：雪山女神"
+                >
+
+            </div>
+
+
+            <!-- 年龄 -->
+
+            <div class="form-group">
+
+                <label for="age">
+                    AGE
+                </label>
+
+                <input
+                    id="age"
+                    type="number"
+                    min="0"
+                    placeholder="例如：0"
+                >
+
+            </div>
+
+
+            <!-- 性别 -->
+
+            <div class="form-group">
+
+                <label for="gender">
+                    GENDER
+                </label>
+
+                <input
+                    id="gender"
+                    type="text"
+                    placeholder="例如：女性"
+                >
+
+            </div>
+
+
+            <!-- 地区 -->
+
+            <div class="form-group full">
+
+                <label for="region">
+                    REGION
+                </label>
+
+                <input
+                    id="region"
+                    type="text"
+                    placeholder="例如：雪山"
+                >
+
+            </div>
+
+
+            <!-- 性格 -->
+
+            <div class="form-group full">
+
+                <label for="personality">
+                    PERSONALITY
+                </label>
+
+                <textarea
+                    id="personality"
+                    placeholder="填写角色性格……"
+                ></textarea>
+
+            </div>
+
+
+            <!-- 背景 -->
+
+            <div class="form-group full">
+
+                <label for="backstory">
+                    BACKSTORY
+                </label>
+
+                <textarea
+                    id="backstory"
+                    placeholder="填写角色背景故事……"
+                ></textarea>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- 图片 -->
+
+        <div class="image-section">
+
+            <label>
+                CHARACTER IMAGE
+            </label>
+
+
+            <div
+                class="image-preview"
+                id="imagePreview"
+            >
+
+                <div class="image-empty">
+                    NO IMAGE
+                </div>
+
+            </div>
+
+
+            <input
+                id="imageFile"
+                type="file"
+                accept="image/*"
+            >
+
+        </div>
+
+
+
+        <!-- 按钮 -->
+
+        <div class="button-area">
+
+            <button
+                type="button"
+                class="button secondary"
+                id="cancelButton"
+            >
+                CANCEL
+            </button>
+
+
+            <button
+                type="submit"
+                class="button"
+                id="saveButton"
+            >
+                SAVE CHANGES
+            </button>
+
+        </div>
+
+
+        <div
+            class="message"
+            id="message"
+        ></div>
+
+
+    </form>
+
+</main>
+
+
+
+<div class="footer">
+    SEYAMI ARCHIVE · CHARACTER RECORD
+</div>
+
+
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script>
+
+/* =========================
+   Supabase
+========================= */
+
+const SUPABASE_URL =
+    "https://rqqkdpzehxzwqzytpxgh.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_T_gNdlgkOaXnzjSvdm1Pw_HQOVTEWG";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+/* =========================
+   DOM
+========================= */
+
+const editForm =
+    document.getElementById("editForm");
+
+const nameInput =
+    document.getElementById("name");
+
+const raceInput =
+    document.getElementById("race");
+
+const roleInput =
+    document.getElementById("role");
+
+const ageInput =
+    document.getElementById("age");
+
+const genderInput =
+    document.getElementById("gender");
+
+const regionInput =
+    document.getElementById("region");
+
+const personalityInput =
+    document.getElementById("personality");
+
+const backstoryInput =
+    document.getElementById("backstory");
+
+const imageFile =
+    document.getElementById("imageFile");
+
+const imagePreview =
+    document.getElementById("imagePreview");
+
+const message =
+    document.getElementById("message");
+
+const saveButton =
+    document.getElementById("saveButton");
+
+const cancelButton =
+    document.getElementById("cancelButton");
+
+const editId =
+    document.getElementById("editId");
+
+const themeToggle =
+    document.getElementById("themeToggle");
+
+
+/* =========================
+   当前角色 ID
+========================= */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const characterId =
+    params.get("id");
+
+
+/* =========================
+   消息
+========================= */
+
+function showMessage(
+    text,
+    type = ""
+){
+
+    message.textContent = text;
+
+    message.className =
+        "message " + type;
+}
+
+
+/* =========================
+   图片预览
+========================= */
+
+function showImage(url){
+
+    if(!url){
+
+        imagePreview.innerHTML = `
+            <div class="image-empty">
+                NO IMAGE
+            </div>
+        `;
+
+        return;
+    }
+
+    imagePreview.innerHTML = `
+        <img
+            src="${url}"
+            alt="角色图片"
+        >
+    `;
+}
+
+
+/* =========================
+   读取角色
+========================= */
+
+async function loadCharacter(){
+
+    if(!characterId){
+
+        editId.textContent =
+            "NO CHARACTER ID";
+
+        showMessage(
+            "没有找到角色 ID。",
+            "error"
+        );
+
+        saveButton.disabled = true;
+
+        return;
+    }
+
+
+    editId.textContent =
+        "CHARACTER ID · " +
+        characterId;
+
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+            .from("characters")
+            .select(`
+                id,
+                name,
+                race,
+                role,
+                age,
+                gender,
+                region,
+                personality,
+                backstory,
+                image_url
+            `)
+            .eq(
+                "id",
+                characterId
+            )
+            .single();
+
+
+    if(error){
+
+        console.error(error);
+
+        showMessage(
+            "读取角色失败：" +
+            error.message,
+            "error"
+        );
+
+        saveButton.disabled = true;
+
+        return;
+    }
+
+
+    /* 填充表单 */
+
+    nameInput.value =
+        data.name || "";
+
+    raceInput.value =
+        data.race || "";
+
+    roleInput.value =
+        data.role || "";
+
+    ageInput.value =
+        data.age ?? "";
+
+    genderInput.value =
+        data.gender || "";
+
+    regionInput.value =
+        data.region || "";
+
+    personalityInput.value =
+        data.personality || "";
+
+    backstoryInput.value =
+        data.backstory || "";
+
+
+    /* 图片 */
+
+    showImage(
+        data.image_url || ""
+    );
+
+}
+
+
+/* =========================
+   图片上传
+========================= */
+
+async function uploadImage(file){
+
+    if(!file){
+
+        return null;
+    }
+
+
+    const extension =
+        file.name
+            .split(".")
+            .pop()
+            .toLowerCase();
+
+
+    const filePath =
+        "character-" +
+        Date.now() +
+        "-" +
+        Math.random()
+            .toString(36)
+            .substring(2, 8) +
+        "." +
+        extension;
+
+
+    const {
+        error
+    } =
+        await supabaseClient
+            .storage
+            .from("character-images")
+            .upload(
+                filePath,
+                file
+            );
+
+
+    if(error){
+
+        throw error;
+    }
+
+
+    const {
+        data
+    } =
+        supabaseClient
+            .storage
+            .from("character-images")
+            .getPublicUrl(
+                filePath
+            );
+
+
+    return data.publicUrl;
+}
+
+
+/* =========================
+   保存修改
+========================= */
+
+editForm.addEventListener(
+    "submit",
+    async function(event){
+
+        event.preventDefault();
+
+
+        if(!characterId){
+
+            showMessage(
+                "没有角色 ID。",
+                "error"
+            );
+
+            return;
+        }
+
+
+        saveButton.disabled = true;
+
+        saveButton.textContent =
+            "SAVING...";
+
+        showMessage("");
+
+
+        try{
+
+            let imageURL = null;
+
+
+            /*
+             * 如果重新选择了图片
+             * 才上传新图片。
+             *
+             * 如果没有选择，
+             * 就保留数据库原来的 image_url。
+             */
+
+            if(
+                imageFile.files &&
+                imageFile.files.length > 0
+            ){
+
+                imageURL =
+                    await uploadImage(
+                        imageFile.files[0]
+                    );
+
+            }
+
+
+            const updateData = {
+
+                name:
+                    nameInput.value.trim(),
+
+                race:
+                    raceInput.value.trim() ||
+                    null,
+
+                role:
+                    roleInput.value.trim() ||
+                    null,
+
+                age:
+                    ageInput.value === ""
+                        ? null
+                        : Number(ageInput.value),
+
+                gender:
+                    genderInput.value.trim() ||
+                    null,
+
+                region:
+                    regionInput.value.trim() ||
+                    null,
+
+                personality:
+                    personalityInput.value.trim() ||
+                    null,
+
+                backstory:
+                    backstoryInput.value.trim() ||
+                    null
+
+            };
+
+
+            /*
+             * 只有上传了新图片
+             * 才修改 image_url。
+             */
+
+            if(imageURL){
+
+                updateData.image_url =
+                    imageURL;
+
+            }
+
+
+            const {
+                error
+            } =
+                await supabaseClient
+                    .from("characters")
+                    .update(
+                        updateData
+                    )
+                    .eq(
+                        "id",
+                        characterId
+                    );
+
+
+            if(error){
+
+                throw error;
+            }
+
+
+            showMessage(
+                "角色档案已成功更新。",
+                "success"
+            );
+
+
+            /*
+             * 重新加载预览
+             */
+
+            if(imageURL){
+
+                showImage(
+                    imageURL
+                );
+
+            }
+
+
+            /*
+             * 稍微停一下，
+             * 让用户看到保存成功。
+             */
+
+            setTimeout(
+                function(){
+
+                    window.location.href =
+                        "characters.html?id=" +
+                        encodeURIComponent(
+                            characterId
+                        );
+
+                },
+                900
+            );
+
+
+        }catch(error){
+
+            console.error(error);
+
+            showMessage(
+                "保存失败：" +
+                error.message,
+                "error"
+            );
+
+            saveButton.disabled = false;
+
+            saveButton.textContent =
+                "SAVE CHANGES";
+
+        }
+
+    }
+);
+
+
+/* =========================
+   取消
+========================= */
+
+cancelButton.addEventListener(
+    "click",
+    function(){
+
+        if(characterId){
+
+            window.location.href =
+                "characters.html?id=" +
+                encodeURIComponent(
+                    characterId
+                );
+
+        }else{
+
+            window.location.href =
+                "characters.html";
+
+        }
+
+    }
+);
+
+
+/* =========================
+   选择新图片时预览
+========================= */
+
+imageFile.addEventListener(
+    "change",
+    function(){
+
+        const file =
+            imageFile.files[0];
+
+        if(!file){
+
+            return;
+        }
+
+
+        const objectURL =
+            URL.createObjectURL(
+                file
+            );
+
+
+        showImage(
+            objectURL
+        );
+
+    }
+);
+
+
+/* =========================
+   日夜模式
+========================= */
+
+function applyTheme(theme){
+
+    if(theme === "day"){
+
+        document.body.classList.add(
+            "day"
+        );
+
+        themeToggle.textContent =
+            "☀";
+
+    }else{
+
+        document.body.classList.remove(
+            "day"
+        );
+
+        themeToggle.textContent =
+            "☾";
+
+    }
+
+}
+
+
+const savedTheme =
+    localStorage.getItem(
+        "seyami-theme"
+    ) || "night";
+
+
+applyTheme(
+    savedTheme
+);
+
+
+themeToggle.addEventListener(
+    "click",
+    function(){
+
+        const nextTheme =
+            document.body.classList.contains(
+                "day"
+            )
+                ? "night"
+                : "day";
+
+
+        localStorage.setItem(
+            "seyami-theme",
+            nextTheme
+        );
+
+
+        applyTheme(
+            nextTheme
+        );
+
+    }
+);
+
+
+/* =========================
+   启动
+========================= */
+
+loadCharacter();
+
+</script>
+
+</body>
+
+</html>
