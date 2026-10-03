@@ -1201,7 +1201,7 @@ body{
 
 
 /* =========================
-   EDIT CHARACTER
+   ★ EDIT CHARACTER
 ========================= */
 
 .edit-character-wrap{
@@ -1528,6 +1528,8 @@ body{
     height:105vw;
   }
 
+
+  /* ★ 编辑按钮手机适配 */
 
   .edit-character-wrap{
 
@@ -1927,6 +1929,8 @@ body.day-mode .description{
 }
 
 
+/* ★ 编辑按钮日间模式 */
+
 body.day-mode .edit-character-button{
 
   color:
@@ -1958,10 +1962,6 @@ body.day-mode .archive-mark{
     rgba(73,115,143,.40);
 }
 
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
 
 @media(prefers-reduced-motion:reduce){
 
@@ -2243,7 +2243,7 @@ body.day-mode .archive-mark{
         </div>
 
 
-        <!-- ★ 编辑档案 -->
+        <!-- ★ 编辑档案按钮 -->
 
         <div class="edit-character-wrap">
 
@@ -2482,7 +2482,7 @@ const SUPABASE_URL =
   "https://rqqkdpzehxzwqzytpxgh.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY =
-  "sb_publishable_T_gNdlgkOaXnzjSvdm1Pw_HQOVTEWG";
+  "sb_publishable_T_gNdlgkOaXnzjSvdmI1Pw_HQOVTEWG";
 
 const supabaseClient =
   window.supabase.createClient(
@@ -2535,15 +2535,19 @@ const description =
     ".description"
   );
 
+const archiveMark =
+  document.querySelector(
+    ".archive-mark"
+  );
+
+
+/* ★ 编辑按钮 */
+
 const editCharacterButton =
   document.getElementById(
     "editCharacterButton"
   );
 
-const archiveMark =
-  document.querySelector(
-    ".archive-mark"
-  );
 
 const prevCharacter =
   document.getElementById(
@@ -2931,12 +2935,6 @@ async function loadCharacters(){
 
   try{
 
-    /*
-      ★ 这里故意不读取 created_at。
-      当前角色页面只读取实际需要的字段，
-      避免数据库字段名造成整个查询失败。
-    */
-
     const {
       data,
       error
@@ -3012,9 +3010,6 @@ async function loadCharacters(){
       nextCharacter.disabled =
         true;
 
-      editCharacterButton.disabled =
-        true;
-
       return;
 
     }
@@ -3053,22 +3048,12 @@ async function loadCharacters(){
 
       }else{
 
-        /*
-          URL 中的 id 不存在时，
-          回到第一条实际存在的角色。
-        */
-
         currentIndex =
           0;
 
       }
 
     }else{
-
-      /*
-        没有 id 时，
-        默认显示第一位角色。
-      */
 
       currentIndex =
         0;
@@ -3178,7 +3163,6 @@ nextCharacter.addEventListener(
 /* =========================================================
    KEYBOARD
    ← / →
-   也可以翻页
 ========================================================= */
 
 document.addEventListener(
@@ -3240,7 +3224,7 @@ document.addEventListener(
 
 
 /* =========================================================
-   EDIT CHARACTER
+   ★ EDIT CHARACTER
 ========================================================= */
 
 editCharacterButton.addEventListener(
