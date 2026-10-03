@@ -1201,6 +1201,70 @@ body{
 
 
 /* =========================
+   EDIT CHARACTER
+========================= */
+
+.edit-character-wrap{
+
+  margin-top:28px;
+
+  display:flex;
+
+  justify-content:flex-start;
+}
+
+.edit-character-button{
+
+  appearance:none;
+
+  border:
+    1px solid
+    rgba(111,174,224,.25);
+
+  background:
+    transparent;
+
+  padding:
+    9px 15px;
+
+  color:
+    rgba(191,220,243,.55);
+
+  font-family:
+    "Cinzel",
+    "Noto Serif SC",
+    serif;
+
+  font-size:8px;
+
+  letter-spacing:2px;
+
+  cursor:pointer;
+
+  transition:
+    color .3s ease,
+    border-color .3s ease,
+    background .3s ease,
+    text-shadow .3s ease;
+}
+
+.edit-character-button:hover{
+
+  color:#d9efff;
+
+  border-color:
+    rgba(122,192,235,.55);
+
+  background:
+    rgba(76,151,202,.06);
+
+  text-shadow:
+    0 0 10px
+    rgba(102,180,231,.25);
+}
+
+
+/* =========================
    ARCHIVE MARK
 ========================= */
 
@@ -1462,6 +1526,22 @@ body{
     width:105vw;
 
     height:105vw;
+  }
+
+
+  .edit-character-wrap{
+
+    margin-top:24px;
+  }
+
+  .edit-character-button{
+
+    font-size:7px;
+
+    letter-spacing:1.5px;
+
+    padding:
+      8px 13px;
   }
 
 
@@ -1847,12 +1927,41 @@ body.day-mode .description{
 }
 
 
+body.day-mode .edit-character-button{
+
+  color:
+    rgba(62,99,127,.68);
+
+  border-color:
+    rgba(91,145,184,.30);
+}
+
+body.day-mode .edit-character-button:hover{
+
+  color:#28536f;
+
+  border-color:
+    rgba(79,151,200,.55);
+
+  background:
+    rgba(76,151,202,.05);
+
+  text-shadow:
+    0 0 8px
+    rgba(76,151,202,.12);
+}
+
+
 body.day-mode .archive-mark{
 
   color:
     rgba(73,115,143,.40);
 }
 
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
 
 @media(prefers-reduced-motion:reduce){
 
@@ -1888,6 +1997,7 @@ body.day-mode .archive-mark{
   .info-value,
   .description-title,
   .description,
+  .edit-character-button,
   .archive-mark{
 
     transition:none;
@@ -2133,6 +2243,21 @@ body.day-mode .archive-mark{
         </div>
 
 
+        <!-- ★ 编辑档案 -->
+
+        <div class="edit-character-wrap">
+
+          <button
+            type="button"
+            id="editCharacterButton"
+            class="edit-character-button"
+          >
+            EDIT CHARACTER
+          </button>
+
+        </div>
+
+
       </div>
 
 
@@ -2357,7 +2482,7 @@ const SUPABASE_URL =
   "https://rqqkdpzehxzwqzytpxgh.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY =
-  "sb_publishable_T_gNdlgkOaXnzjSvdmI1Pw_HQOVTEWG";
+  "sb_publishable_T_gNdlgkOaXnzjSvdm1Pw_HQOVTEWG";
 
 const supabaseClient =
   window.supabase.createClient(
@@ -2408,6 +2533,11 @@ const imagePlaceholder =
 const description =
   document.querySelector(
     ".description"
+  );
+
+const editCharacterButton =
+  document.getElementById(
+    "editCharacterButton"
   );
 
 const archiveMark =
@@ -2609,7 +2739,7 @@ function renderCharacter(character){
 
   /* -------------------------
      BASIC INFO
-     
+
      0 RACE
      1 REGION
      2 STATUS
@@ -2882,6 +3012,9 @@ async function loadCharacters(){
       nextCharacter.disabled =
         true;
 
+      editCharacterButton.disabled =
+        true;
+
       return;
 
     }
@@ -3101,6 +3234,35 @@ document.addEventListener(
       }
 
     }
+
+  }
+);
+
+
+/* =========================================================
+   EDIT CHARACTER
+========================================================= */
+
+editCharacterButton.addEventListener(
+  "click",
+  function(){
+
+    if(
+      !allCharacters[currentIndex]
+    ){
+      return;
+    }
+
+
+    const character =
+      allCharacters[currentIndex];
+
+
+    window.location.href =
+      "edit.html?id=" +
+      encodeURIComponent(
+        character.id
+      );
 
   }
 );
