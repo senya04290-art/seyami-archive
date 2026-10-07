@@ -1959,11 +1959,28 @@ const editType =
    → 角色
 */
 
+
 const isWorldMode =
     editType === "world";
 
+
 const isCountryMode =
     editType === "country";
+
+
+/*
+   国家是否为新建模式
+
+   有 id
+   → 修改已有国家
+
+   没有 id
+   → 新建国家
+*/
+
+const isNewCountry =
+    isCountryMode &&
+    !characterId;
 
 
 let currentCharacter = null;
@@ -2123,10 +2140,6 @@ function setupWorldMode(){
         "flex";
 
 
-    /*
-       世界设定的标题使用 name 输入框
-    */
-
     document.getElementById(
         "nameLabel"
     ).textContent =
@@ -2135,10 +2148,6 @@ function setupWorldMode(){
     nameInput.placeholder =
         "世界设定标题";
 
-
-    /*
-       隐藏角色字段
-    */
 
     raceInput.closest(
         ".form-item"
@@ -2191,11 +2200,28 @@ function setupWorldMode(){
 
 function setupCountryMode(){
 
-    pageTitleEn.textContent =
-        "EDIT NATION";
+    /*
+       新建 / 修改分别显示不同标题
+    */
 
-    pageTitleCn.textContent =
-        "编辑国家档案";
+    if(isNewCountry){
+
+        pageTitleEn.textContent =
+            "NEW NATION";
+
+        pageTitleCn.textContent =
+            "新增国家档案";
+
+    }else{
+
+        pageTitleEn.textContent =
+            "EDIT NATION";
+
+        pageTitleCn.textContent =
+            "编辑国家档案";
+
+    }
+
 
     archiveMark.textContent =
         "塞垭弥档案 · 国家记录";
@@ -2210,13 +2236,14 @@ function setupCountryMode(){
 
 
     /*
-       国家名称继续使用原来的 name 输入框
+       国家名称
     */
 
     nameInput.closest(
         ".form-item"
     ).style.display =
         "flex";
+
 
     document.getElementById(
         "nameLabel"
@@ -2609,6 +2636,57 @@ async function loadWorld(){
 
 async function loadCountry(){
 
+    /*
+       没有 ID
+       → 新建国家
+       → 不读取 Supabase
+       → 表单保持空白
+    */
+
+    if(isNewCountry){
+
+        nameInput.value =
+            "";
+
+        countrySubtitle.value =
+            "";
+
+        countryCapital.value =
+            "";
+
+        countryGovernment.value =
+            "";
+
+        countryRegion.value =
+            "";
+
+        countryDescription.value =
+            "";
+
+        countryHistory.value =
+            "";
+
+        countryCulture.value =
+            "";
+
+
+        saveButton.disabled =
+            false;
+
+
+        showStatus(
+            "可以开始填写新的国家档案。"
+        );
+
+        return;
+    }
+
+
+    /*
+       有 ID
+       → 读取已有国家
+    */
+
     if(!characterId){
 
         showStatus(
@@ -2629,6 +2707,16 @@ async function loadCountry(){
 
 
     try{
+
+        /*
+           使用 maybeSingle()
+
+           如果 ID 不存在，
+           不会再出现：
+
+           Cannot coerce the result
+           to a single JSON object
+        */
 
         const {
             data,
@@ -2654,7 +2742,7 @@ async function loadCountry(){
                     "id",
                     characterId
                 )
-                .single();
+                .maybeSingle();
 
 
         if(error){
@@ -2671,7 +2759,7 @@ async function loadCountry(){
         if(!data){
 
             throw new Error(
-                "没有找到这个国家"
+                "没有找到这个国家档案，请检查国家 ID。"
             );
         }
 
@@ -2746,6 +2834,10 @@ async function loadCountry(){
         countryCulture.value =
             data.culture ||
             "";
+
+
+        saveButton.disabled =
+            false;
 
 
         showStatus("");
@@ -3138,17 +3230,6 @@ async function saveWorld(){
 
 async function saveCountry(){
 
-    if(!characterId){
-
-        showStatus(
-            "缺少国家 ID",
-            "error"
-        );
-
-        return;
-    }
-
-
     saveButton.disabled =
         true;
 
@@ -3175,7 +3256,7 @@ async function saveCountry(){
         }
 
 
-        const updateData = {
+        const countryData = {
 
             name:
                 name,
@@ -3215,13 +3296,91 @@ async function saveCountry(){
         };
 
 
+        /* =================================================
+           新建国家
+        ================================================= */
+
+        if(isNewCountry){
+
+            showStatus(
+                "正在建立新的国家档案……"
+            );
+
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient
+                    .from("countries")
+                    .insert(
+                        countryData
+                    )
+                    .select(
+                        "id"
+                    )
+                    .single();
+
+
+            if(error){
+
+                console.error(
+                    "Supabase country insert error:",
+                    error
+                );
+
+                throw error;
+            }
+
+
+            if(!data){
+
+                throw new Error(
+                    "国家创建成功，但没有取得国家 ID。"
+                );
+            }
+
+
+            showStatus(
+                "国家档案创建成功，即将返回国家档案页面……",
+                "success"
+            );
+
+
+            setTimeout(
+                function(){
+
+                    window.location.href =
+                        "nations.html";
+
+                },
+                900
+            );
+
+
+            return;
+        }
+
+
+        /* =================================================
+           修改已有国家
+        ================================================= */
+
+        if(!characterId){
+
+            throw new Error(
+                "缺少国家 ID"
+            );
+        }
+
+
         const {
             error
         } =
             await supabaseClient
                 .from("countries")
                 .update(
-                    updateData
+                    countryData
                 )
                 .eq(
                     "id",
