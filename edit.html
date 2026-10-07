@@ -19,7 +19,7 @@
 
 <link
     rel="preconnect"
-    href="https://fonts.gstatic.com"
+    href="https://fonts.googleapis.com"
     crossorigin
 >
 
@@ -1287,7 +1287,7 @@ body.day-mode .status-message.success{
         <section class="form-grid">
 
 
-            <!-- 角色名称 -->
+            <!-- 名称 -->
 
             <div
                 class="form-item full"
@@ -1505,6 +1505,171 @@ body.day-mode .status-message.success{
             </div>
 
 
+            <!-- =================================================
+                 国家设定
+            ================================================= -->
+
+            <div
+                class="form-item full"
+                id="countrySubtitleItem"
+                style="display:none;"
+            >
+
+                <label
+                    class="form-label"
+                    for="countrySubtitle"
+                >
+                    SUBTITLE · 副标题
+                </label>
+
+                <input
+                    class="form-input"
+                    id="countrySubtitle"
+                    type="text"
+                    placeholder="国家副标题 / 别称"
+                >
+
+            </div>
+
+
+            <div
+                class="form-item"
+                id="countryCapitalItem"
+                style="display:none;"
+            >
+
+                <label
+                    class="form-label"
+                    for="countryCapital"
+                >
+                    CAPITAL · 首都
+                </label>
+
+                <input
+                    class="form-input"
+                    id="countryCapital"
+                    type="text"
+                    placeholder="首都"
+                >
+
+            </div>
+
+
+            <div
+                class="form-item"
+                id="countryGovernmentItem"
+                style="display:none;"
+            >
+
+                <label
+                    class="form-label"
+                    for="countryGovernment"
+                >
+                    GOVERNMENT · 政体
+                </label>
+
+                <input
+                    class="form-input"
+                    id="countryGovernment"
+                    type="text"
+                    placeholder="政体"
+                >
+
+            </div>
+
+
+            <div
+                class="form-item full"
+                id="countryRegionItem"
+                style="display:none;"
+            >
+
+                <label
+                    class="form-label"
+                    for="countryRegion"
+                >
+                    REGION · 地区
+                </label>
+
+                <input
+                    class="form-input"
+                    id="countryRegion"
+                    type="text"
+                    placeholder="所属地区"
+                >
+
+            </div>
+
+
+            <div
+                class="form-item full"
+                id="countryDescriptionItem"
+                style="display:none;"
+            >
+
+                <label
+                    class="form-label"
+                    for="countryDescription"
+                >
+                    DESCRIPTION · 国家介绍
+                </label>
+
+                <textarea
+                    class="form-textarea"
+                    id="countryDescription"
+                    placeholder="国家介绍……"
+                    style="min-height:220px;"
+                ></textarea>
+
+            </div>
+
+
+            <div
+                class="form-item full"
+                id="countryHistoryItem"
+                style="display:none;"
+            >
+
+                <label
+                    class="form-label"
+                    for="countryHistory"
+                >
+                    HISTORY · 历史
+                </label>
+
+                <textarea
+                    class="form-textarea"
+                    id="countryHistory"
+                    placeholder="国家历史……"
+                    style="min-height:220px;"
+                ></textarea>
+
+            </div>
+
+
+            <div
+                class="form-item full"
+                id="countryCultureItem"
+                style="display:none;"
+            >
+
+                <label
+                    class="form-label"
+                    for="countryCulture"
+                >
+                    CULTURE · 文化
+                </label>
+
+                <textarea
+                    class="form-textarea"
+                    id="countryCulture"
+                    placeholder="国家文化……"
+                    style="min-height:220px;"
+                ></textarea>
+
+            </div>
+
+
         </section>
 
 
@@ -1667,6 +1832,79 @@ const worldContent =
     );
 
 
+/* 国家 */
+
+const countrySubtitleItem =
+    document.getElementById(
+        "countrySubtitleItem"
+    );
+
+const countrySubtitle =
+    document.getElementById(
+        "countrySubtitle"
+    );
+
+const countryCapitalItem =
+    document.getElementById(
+        "countryCapitalItem"
+    );
+
+const countryCapital =
+    document.getElementById(
+        "countryCapital"
+    );
+
+const countryGovernmentItem =
+    document.getElementById(
+        "countryGovernmentItem"
+    );
+
+const countryGovernment =
+    document.getElementById(
+        "countryGovernment"
+    );
+
+const countryRegionItem =
+    document.getElementById(
+        "countryRegionItem"
+    );
+
+const countryRegion =
+    document.getElementById(
+        "countryRegion"
+    );
+
+const countryDescriptionItem =
+    document.getElementById(
+        "countryDescriptionItem"
+    );
+
+const countryDescription =
+    document.getElementById(
+        "countryDescription"
+    );
+
+const countryHistoryItem =
+    document.getElementById(
+        "countryHistoryItem"
+    );
+
+const countryHistory =
+    document.getElementById(
+        "countryHistory"
+    );
+
+const countryCultureItem =
+    document.getElementById(
+        "countryCultureItem"
+    );
+
+const countryCulture =
+    document.getElementById(
+        "countryCulture"
+    );
+
+
 /* 按钮 */
 
 const saveButton =
@@ -1714,12 +1952,18 @@ const editType =
    type=world
    → 世界设定
 
+   type=country
+   → 国家设定
+
    其他情况
    → 角色
 */
 
 const isWorldMode =
     editType === "world";
+
+const isCountryMode =
+    editType === "country";
 
 
 let currentCharacter = null;
@@ -1754,6 +1998,36 @@ function showStatus(
 
 
 /* =========================================================
+   隐藏所有国家字段
+========================================================= */
+
+function hideCountryFields(){
+
+    countrySubtitleItem.style.display =
+        "none";
+
+    countryCapitalItem.style.display =
+        "none";
+
+    countryGovernmentItem.style.display =
+        "none";
+
+    countryRegionItem.style.display =
+        "none";
+
+    countryDescriptionItem.style.display =
+        "none";
+
+    countryHistoryItem.style.display =
+        "none";
+
+    countryCultureItem.style.display =
+        "none";
+
+}
+
+
+/* =========================================================
    切换到角色编辑模式
 ========================================================= */
 
@@ -1775,6 +2049,9 @@ function setupCharacterMode(){
 
     worldContentItem.style.display =
         "none";
+
+
+    hideCountryFields();
 
 
     nameInput.closest(
@@ -1836,8 +2113,96 @@ function setupWorldMode(){
         "塞垭弥档案 · 世界记录";
 
 
+    characterImageSection.style.display =
+        "none";
+
+
+    nameInput.closest(
+        ".form-item"
+    ).style.display =
+        "flex";
+
+
     /*
-       世界设定不需要图片
+       世界设定的标题使用 name 输入框
+    */
+
+    document.getElementById(
+        "nameLabel"
+    ).textContent =
+        "TITLE · 标题";
+
+    nameInput.placeholder =
+        "世界设定标题";
+
+
+    /*
+       隐藏角色字段
+    */
+
+    raceInput.closest(
+        ".form-item"
+    ).style.display =
+        "none";
+
+    roleInput.closest(
+        ".form-item"
+    ).style.display =
+        "none";
+
+    ageInput.closest(
+        ".form-item"
+    ).style.display =
+        "none";
+
+    genderInput.closest(
+        ".form-item"
+    ).style.display =
+        "none";
+
+    regionInput.closest(
+        ".form-item"
+    ).style.display =
+        "none";
+
+    personalityInput.closest(
+        ".form-item"
+    ).style.display =
+        "none";
+
+    backstoryInput.closest(
+        ".form-item"
+    ).style.display =
+        "none";
+
+
+    worldContentItem.style.display =
+        "flex";
+
+
+    hideCountryFields();
+
+}
+
+
+/* =========================================================
+   切换到国家编辑模式
+========================================================= */
+
+function setupCountryMode(){
+
+    pageTitleEn.textContent =
+        "EDIT NATION";
+
+    pageTitleCn.textContent =
+        "编辑国家档案";
+
+    archiveMark.textContent =
+        "塞垭弥档案 · 国家记录";
+
+
+    /*
+       国家不需要角色图片
     */
 
     characterImageSection.style.display =
@@ -1845,13 +2210,26 @@ function setupWorldMode(){
 
 
     /*
-       隐藏角色字段
+       国家名称继续使用原来的 name 输入框
     */
 
     nameInput.closest(
         ".form-item"
     ).style.display =
-        "none";
+        "flex";
+
+    document.getElementById(
+        "nameLabel"
+    ).textContent =
+        "NAME · 国家名称";
+
+    nameInput.placeholder =
+        "国家名称";
+
+
+    /*
+       隐藏角色字段
+    */
 
     raceInput.closest(
         ".form-item"
@@ -1890,10 +2268,36 @@ function setupWorldMode(){
 
 
     /*
-       显示世界设定正文
+       隐藏世界正文
     */
 
     worldContentItem.style.display =
+        "none";
+
+
+    /*
+       显示国家字段
+    */
+
+    countrySubtitleItem.style.display =
+        "flex";
+
+    countryCapitalItem.style.display =
+        "flex";
+
+    countryGovernmentItem.style.display =
+        "flex";
+
+    countryRegionItem.style.display =
+        "flex";
+
+    countryDescriptionItem.style.display =
+        "flex";
+
+    countryHistoryItem.style.display =
+        "flex";
+
+    countryCultureItem.style.display =
         "flex";
 
 }
@@ -2121,11 +2525,6 @@ async function loadWorld(){
 
     try{
 
-        /*
-           我们已经确定数据库里的
-           世界设定记录是 id = 1
-        */
-
         const {
             data,
             error
@@ -2166,19 +2565,10 @@ async function loadWorld(){
         }
 
 
-        /*
-           世界设定标题
-           继续使用原来的 name 输入框
-        */
-
         nameInput.value =
             data.title ||
             "";
 
-
-        /*
-           世界设定正文
-        */
 
         worldContent.value =
             data.content ||
@@ -2198,6 +2588,179 @@ async function loadWorld(){
 
         showStatus(
             "读取世界设定失败：" +
+            (
+                error?.message ||
+                "未知错误"
+            ),
+            "error"
+        );
+
+
+        saveButton.disabled =
+            true;
+    }
+
+}
+
+
+/* =========================================================
+   读取国家
+========================================================= */
+
+async function loadCountry(){
+
+    if(!characterId){
+
+        showStatus(
+            "缺少国家 ID",
+            "error"
+        );
+
+        saveButton.disabled =
+            true;
+
+        return;
+    }
+
+
+    showStatus(
+        "正在读取国家档案……"
+    );
+
+
+    try{
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from("countries")
+                .select(
+                    `
+                    id,
+                    name,
+                    subtitle,
+                    capital,
+                    government,
+                    region,
+                    description,
+                    history,
+                    culture,
+                    updated_at
+                    `
+                )
+                .eq(
+                    "id",
+                    characterId
+                )
+                .single();
+
+
+        if(error){
+
+            console.error(
+                "Supabase country read error:",
+                error
+            );
+
+            throw error;
+        }
+
+
+        if(!data){
+
+            throw new Error(
+                "没有找到这个国家"
+            );
+        }
+
+
+        /*
+           国家名称
+        */
+
+        nameInput.value =
+            data.name ||
+            "";
+
+
+        /*
+           副标题
+        */
+
+        countrySubtitle.value =
+            data.subtitle ||
+            "";
+
+
+        /*
+           首都
+        */
+
+        countryCapital.value =
+            data.capital ||
+            "";
+
+
+        /*
+           政体
+        */
+
+        countryGovernment.value =
+            data.government ||
+            "";
+
+
+        /*
+           地区
+        */
+
+        countryRegion.value =
+            data.region ||
+            "";
+
+
+        /*
+           国家介绍
+        */
+
+        countryDescription.value =
+            data.description ||
+            "";
+
+
+        /*
+           历史
+        */
+
+        countryHistory.value =
+            data.history ||
+            "";
+
+
+        /*
+           文化
+        */
+
+        countryCulture.value =
+            data.culture ||
+            "";
+
+
+        showStatus("");
+
+
+    }catch(error){
+
+        console.error(
+            "读取国家失败:",
+            error
+        );
+
+
+        showStatus(
+            "读取国家失败：" +
             (
                 error?.message ||
                 "未知错误"
@@ -2488,10 +3051,6 @@ async function saveWorld(){
         }
 
 
-        /*
-           更新数据库里的 id = 1
-        */
-
         const {
             error
         } =
@@ -2574,6 +3133,160 @@ async function saveWorld(){
 
 
 /* =========================================================
+   保存国家
+========================================================= */
+
+async function saveCountry(){
+
+    if(!characterId){
+
+        showStatus(
+            "缺少国家 ID",
+            "error"
+        );
+
+        return;
+    }
+
+
+    saveButton.disabled =
+        true;
+
+    cancelButton.disabled =
+        true;
+
+
+    showStatus(
+        "正在保存国家档案……"
+    );
+
+
+    try{
+
+        const name =
+            nameInput.value.trim();
+
+
+        if(!name){
+
+            throw new Error(
+                "国家名称不能为空"
+            );
+        }
+
+
+        const updateData = {
+
+            name:
+                name,
+
+            subtitle:
+                countrySubtitle.value.trim() ||
+                null,
+
+            capital:
+                countryCapital.value.trim() ||
+                null,
+
+            government:
+                countryGovernment.value.trim() ||
+                null,
+
+            region:
+                countryRegion.value.trim() ||
+                null,
+
+            description:
+                countryDescription.value.trim() ||
+                null,
+
+            history:
+                countryHistory.value.trim() ||
+                null,
+
+            culture:
+                countryCulture.value.trim() ||
+                null,
+
+            updated_at:
+                new Date()
+                    .toISOString()
+
+        };
+
+
+        const {
+            error
+        } =
+            await supabaseClient
+                .from("countries")
+                .update(
+                    updateData
+                )
+                .eq(
+                    "id",
+                    characterId
+                );
+
+
+        if(error){
+
+            console.error(
+                "Supabase country update error:",
+                error
+            );
+
+            throw error;
+        }
+
+
+        showStatus(
+            "国家档案保存成功，即将返回国家档案页面……",
+            "success"
+        );
+
+
+        setTimeout(
+            function(){
+
+                window.location.href =
+                    "nations.html";
+
+            },
+            900
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "保存国家失败:",
+            error
+        );
+
+
+        showStatus(
+            "保存失败：" +
+            (
+                error?.message ||
+                "未知错误"
+            ),
+            "error"
+        );
+
+
+        saveButton.disabled =
+            false;
+
+        cancelButton.disabled =
+            false;
+
+    }
+
+}
+
+
+/* =========================================================
    保存按钮
 ========================================================= */
 
@@ -2584,6 +3297,10 @@ saveButton.addEventListener(
         if(isWorldMode){
 
             saveWorld();
+
+        }else if(isCountryMode){
+
+            saveCountry();
 
         }else{
 
@@ -2607,6 +3324,15 @@ cancelButton.addEventListener(
 
             window.location.href =
                 "world.html";
+
+            return;
+        }
+
+
+        if(isCountryMode){
+
+            window.location.href =
+                "nations.html";
 
             return;
         }
@@ -2705,6 +3431,16 @@ if(isWorldMode){
     setupWorldMode();
 
     loadWorld();
+
+}else if(isCountryMode){
+
+    /*
+       国家设定模式
+    */
+
+    setupCountryMode();
+
+    loadCountry();
 
 }else{
 
