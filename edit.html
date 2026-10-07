@@ -1136,8 +1136,6 @@ body.day-mode .status-message.success{
 <body>
 
 
-<!-- 星空 -->
-
 <div class="stars">
 
     <span class="star">✦</span>
@@ -1168,550 +1166,510 @@ body.day-mode .status-message.success{
 <div class="page-frame">
 
 
-    <!-- Header -->
+<header class="header">
 
-    <header class="header">
+    <a
+        href="archive.html"
+        class="archive-logo"
+    >
+
+        <span class="archive-logo-cn">
+            塞垭弥大陆档案馆
+        </span>
+
+        <span class="archive-logo-en">
+            SEYAMI ARCHIVE
+        </span>
+
+    </a>
+
+
+    <div class="header-right">
 
         <a
-            href="archive.html"
-            class="archive-logo"
+            href="javascript:history.back()"
+            class="back-link"
         >
-
-            <span class="archive-logo-cn">
-                塞垭弥大陆档案馆
-            </span>
-
-            <span class="archive-logo-en">
-                SEYAMI ARCHIVE
-            </span>
-
+            ← RETURN
         </a>
 
 
-        <div class="header-right">
+        <button
+            type="button"
+            class="theme-toggle"
+            id="themeToggle"
+            aria-label="切换主题"
+        ></button>
 
-            <a
-                href="javascript:history.back()"
-                class="back-link"
-            >
-                ← RETURN
-            </a>
+    </div>
 
+</header>
 
-            <button
-                type="button"
-                class="theme-toggle"
-                id="themeToggle"
-                aria-label="切换主题"
-            ></button>
 
-        </div>
-
-    </header>
-
-
-    <!-- 页面标题 -->
-
-    <section class="page-title">
-
-        <div
-            class="page-title-en"
-            id="pageTitleEn"
-        >
-            EDIT CHARACTER
-        </div>
-
-        <div
-            class="page-title-cn"
-            id="pageTitleCn"
-        >
-            编辑角色档案
-        </div>
-
-    </section>
-
-
-    <!-- 编辑区域 -->
-
-    <main class="edit-container">
-
-
-        <!-- =================================================
-             角色图片
-        ================================================= -->
-
-        <section
-            class="image-section"
-            id="characterImageSection"
-        >
-
-            <div
-                class="image-preview"
-                id="imagePreview"
-            >
-
-                <div
-                    class="image-placeholder"
-                    id="imagePlaceholder"
-                >
-                    CHARACTER IMAGE
-                </div>
-
-
-                <img
-                    id="previewImage"
-                    alt="角色图片预览"
-                    style="display:none;"
-                >
-
-            </div>
-
-
-            <div class="file-input-wrap">
-
-                <input
-                    type="file"
-                    id="imageFile"
-                    accept="image/*"
-                >
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             表单
-        ================================================= -->
-
-        <section class="form-grid">
-
-
-            <!-- 名称 -->
-
-            <div
-                class="form-item full"
-                id="characterNameItem"
-            >
-
-                <label
-                    class="form-label"
-                    for="name"
-                    id="nameLabel"
-                >
-                    NAME · 名称
-                </label>
-
-                <input
-                    class="form-input"
-                    id="name"
-                    type="text"
-                    placeholder="角色名称"
-                >
-
-            </div>
-
-
-            <!-- 种族 -->
-
-            <div
-                class="form-item"
-                id="raceItem"
-            >
-
-                <label
-                    class="form-label"
-                    for="race"
-                >
-                    RACE · 种族
-                </label>
-
-                <input
-                    class="form-input"
-                    id="race"
-                    type="text"
-                    placeholder="种族"
-                >
-
-            </div>
-
-
-            <!-- 身份 -->
-
-            <div
-                class="form-item"
-                id="roleItem"
-            >
-
-                <label
-                    class="form-label"
-                    for="role"
-                >
-                    ROLE · 身份
-                </label>
-
-                <input
-                    class="form-input"
-                    id="role"
-                    type="text"
-                    placeholder="身份 / 职位"
-                >
-
-            </div>
-
-
-            <!-- 年龄 -->
-
-            <div
-                class="form-item"
-                id="ageItem"
-            >
-
-                <label
-                    class="form-label"
-                    for="age"
-                >
-                    AGE · 年龄
-                </label>
-
-                <input
-                    class="form-input"
-                    id="age"
-                    type="text"
-                    placeholder="年龄"
-                >
-
-            </div>
-
-
-            <!-- 性别 -->
-
-            <div
-                class="form-item"
-                id="genderItem"
-            >
-
-                <label
-                    class="form-label"
-                    for="gender"
-                >
-                    GENDER · 性别
-                </label>
-
-                <input
-                    class="form-input"
-                    id="gender"
-                    type="text"
-                    placeholder="性别"
-                >
-
-            </div>
-
-
-            <!-- 地区 -->
-
-            <div
-                class="form-item full"
-                id="regionItem"
-            >
-
-                <label
-                    class="form-label"
-                    for="region"
-                >
-                    REGION · 所属地区
-                </label>
-
-                <input
-                    class="form-input"
-                    id="region"
-                    type="text"
-                    placeholder="所属地区"
-                >
-
-            </div>
-
-
-            <!-- 性格 -->
-
-            <div
-                class="form-item full"
-                id="personalityItem"
-            >
-
-                <label
-                    class="form-label"
-                    for="personality"
-                >
-                    PERSONALITY · 性格
-                </label>
-
-                <textarea
-                    class="form-textarea"
-                    id="personality"
-                    placeholder="角色性格……"
-                ></textarea>
-
-            </div>
-
-
-            <!-- 背景 -->
-
-            <div
-                class="form-item full"
-                id="backstoryItem"
-            >
-
-                <label
-                    class="form-label"
-                    for="backstory"
-                >
-                    BACKSTORY · 背景
-                </label>
-
-                <textarea
-                    class="form-textarea"
-                    id="backstory"
-                    placeholder="角色背景故事……"
-                ></textarea>
-
-            </div>
-
-
-            <!-- 世界设定 -->
-
-            <div
-                class="form-item full"
-                id="worldContentItem"
-                style="display:none;"
-            >
-
-                <label
-                    class="form-label"
-                    for="worldContent"
-                >
-                    WORLD SETTING · 世界设定
-                </label>
-
-                <textarea
-                    class="form-textarea"
-                    id="worldContent"
-                    placeholder="在这里填写塞垭弥大陆的世界设定……"
-                    style="min-height:420px;"
-                ></textarea>
-
-            </div>
-
-
-            <!-- =================================================
-                 国家设定
-            ================================================= -->
-
-            <div
-                class="form-item full"
-                id="countrySubtitleItem"
-                style="display:none;"
-            >
-
-                <label
-                    class="form-label"
-                    for="countrySubtitle"
-                >
-                    SUBTITLE · 副标题
-                </label>
-
-                <input
-                    class="form-input"
-                    id="countrySubtitle"
-                    type="text"
-                    placeholder="国家副标题 / 别称"
-                >
-
-            </div>
-
-
-            <div
-                class="form-item"
-                id="countryCapitalItem"
-                style="display:none;"
-            >
-
-                <label
-                    class="form-label"
-                    for="countryCapital"
-                >
-                    CAPITAL · 首都
-                </label>
-
-                <input
-                    class="form-input"
-                    id="countryCapital"
-                    type="text"
-                    placeholder="首都"
-                >
-
-            </div>
-
-
-            <div
-                class="form-item"
-                id="countryGovernmentItem"
-                style="display:none;"
-            >
-
-                <label
-                    class="form-label"
-                    for="countryGovernment"
-                >
-                    GOVERNMENT · 政体
-                </label>
-
-                <input
-                    class="form-input"
-                    id="countryGovernment"
-                    type="text"
-                    placeholder="政体"
-                >
-
-            </div>
-
-
-            <div
-                class="form-item full"
-                id="countryRegionItem"
-                style="display:none;"
-            >
-
-                <label
-                    class="form-label"
-                    for="countryRegion"
-                >
-                    REGION · 地区
-                </label>
-
-                <input
-                    class="form-input"
-                    id="countryRegion"
-                    type="text"
-                    placeholder="所属地区"
-                >
-
-            </div>
-
-
-            <div
-                class="form-item full"
-                id="countryDescriptionItem"
-                style="display:none;"
-            >
-
-                <label
-                    class="form-label"
-                    for="countryDescription"
-                >
-                    DESCRIPTION · 国家介绍
-                </label>
-
-                <textarea
-                    class="form-textarea"
-                    id="countryDescription"
-                    placeholder="国家介绍……"
-                    style="min-height:220px;"
-                ></textarea>
-
-            </div>
-
-
-            <div
-                class="form-item full"
-                id="countryHistoryItem"
-                style="display:none;"
-            >
-
-                <label
-                    class="form-label"
-                    for="countryHistory"
-                >
-                    HISTORY · 历史
-                </label>
-
-                <textarea
-                    class="form-textarea"
-                    id="countryHistory"
-                    placeholder="国家历史……"
-                    style="min-height:220px;"
-                ></textarea>
-
-            </div>
-
-
-            <div
-                class="form-item full"
-                id="countryCultureItem"
-                style="display:none;"
-            >
-
-                <label
-                    class="form-label"
-                    for="countryCulture"
-                >
-                    CULTURE · 文化
-                </label>
-
-                <textarea
-                    class="form-textarea"
-                    id="countryCulture"
-                    placeholder="国家文化……"
-                    style="min-height:220px;"
-                ></textarea>
-
-            </div>
-
-
-        </section>
-
-
-        <!-- 按钮 -->
-
-        <div class="action-area">
-
-            <button
-                type="button"
-                class="action-button"
-                id="cancelButton"
-            >
-                取消
-            </button>
-
-
-            <button
-                type="button"
-                class="action-button"
-                id="saveButton"
-            >
-                保存更改
-            </button>
-
-        </div>
-
-
-        <!-- 状态 -->
-
-        <div
-            class="status-message"
-            id="statusMessage"
-        ></div>
-
-
-    </main>
-
+<section class="page-title">
 
     <div
-        class="archive-mark"
-        id="archiveMark"
+        class="page-title-en"
+        id="pageTitleEn"
     >
-        塞垭弥档案 · 人物记录
+        EDIT CHARACTER
     </div>
+
+    <div
+        class="page-title-cn"
+        id="pageTitleCn"
+    >
+        编辑角色档案
+    </div>
+
+</section>
+
+
+<main class="edit-container">
+
+
+<section
+    class="image-section"
+    id="characterImageSection"
+>
+
+    <div
+        class="image-preview"
+        id="imagePreview"
+    >
+
+        <div
+            class="image-placeholder"
+            id="imagePlaceholder"
+        >
+            CHARACTER IMAGE
+        </div>
+
+
+        <img
+            id="previewImage"
+            alt="角色图片预览"
+            style="display:none;"
+        >
+
+    </div>
+
+
+    <div class="file-input-wrap">
+
+        <input
+            type="file"
+            id="imageFile"
+            accept="image/*"
+        >
+
+    </div>
+
+</section>
+
+
+<section class="form-grid">
+
+
+<div
+    class="form-item full"
+    id="characterNameItem"
+>
+
+    <label
+        class="form-label"
+        for="name"
+        id="nameLabel"
+    >
+        NAME · 名称
+    </label>
+
+    <input
+        class="form-input"
+        id="name"
+        type="text"
+        placeholder="角色名称"
+    >
+
+</div>
+
+
+<div
+    class="form-item"
+    id="raceItem"
+>
+
+    <label
+        class="form-label"
+        for="race"
+    >
+        RACE · 种族
+    </label>
+
+    <input
+        class="form-input"
+        id="race"
+        type="text"
+        placeholder="种族"
+    >
+
+</div>
+
+
+<div
+    class="form-item"
+    id="roleItem"
+>
+
+    <label
+        class="form-label"
+        for="role"
+    >
+        ROLE · 身份
+    </label>
+
+    <input
+        class="form-input"
+        id="role"
+        type="text"
+        placeholder="身份 / 职位"
+    >
+
+</div>
+
+
+<div
+    class="form-item"
+    id="ageItem"
+>
+
+    <label
+        class="form-label"
+        for="age"
+    >
+        AGE · 年龄
+    </label>
+
+    <input
+        class="form-input"
+        id="age"
+        type="text"
+        placeholder="年龄"
+    >
+
+</div>
+
+
+<div
+    class="form-item"
+    id="genderItem"
+>
+
+    <label
+        class="form-label"
+        for="gender"
+    >
+        GENDER · 性别
+    </label>
+
+    <input
+        class="form-input"
+        id="gender"
+        type="text"
+        placeholder="性别"
+    >
+
+</div>
+
+
+<div
+    class="form-item full"
+    id="regionItem"
+>
+
+    <label
+        class="form-label"
+        for="region"
+    >
+        REGION · 所属地区
+    </label>
+
+    <input
+        class="form-input"
+        id="region"
+        type="text"
+        placeholder="所属地区"
+    >
+
+</div>
+
+
+<div
+    class="form-item full"
+    id="personalityItem"
+>
+
+    <label
+        class="form-label"
+        for="personality"
+    >
+        PERSONALITY · 性格
+    </label>
+
+    <textarea
+        class="form-textarea"
+        id="personality"
+        placeholder="角色性格……"
+    ></textarea>
+
+</div>
+
+
+<div
+    class="form-item full"
+    id="backstoryItem"
+>
+
+    <label
+        class="form-label"
+        for="backstory"
+    >
+        BACKSTORY · 背景
+    </label>
+
+    <textarea
+        class="form-textarea"
+        id="backstory"
+        placeholder="角色背景故事……"
+    ></textarea>
+
+</div>
+
+
+<div
+    class="form-item full"
+    id="worldContentItem"
+    style="display:none;"
+>
+
+    <label
+        class="form-label"
+        for="worldContent"
+    >
+        WORLD SETTING · 世界设定
+    </label>
+
+    <textarea
+        class="form-textarea"
+        id="worldContent"
+        placeholder="在这里填写塞垭弥大陆的世界设定……"
+        style="min-height:420px;"
+    ></textarea>
+
+</div>
+
+
+<div
+    class="form-item full"
+    id="countrySubtitleItem"
+    style="display:none;"
+>
+
+    <label
+        class="form-label"
+        for="countrySubtitle"
+    >
+        SUBTITLE · 副标题
+    </label>
+
+    <input
+        class="form-input"
+        id="countrySubtitle"
+        type="text"
+        placeholder="国家副标题 / 别称"
+    >
+
+</div>
+
+
+<div
+    class="form-item"
+    id="countryCapitalItem"
+    style="display:none;"
+>
+
+    <label
+        class="form-label"
+        for="countryCapital"
+    >
+        CAPITAL · 首都
+    </label>
+
+    <input
+        class="form-input"
+        id="countryCapital"
+        type="text"
+        placeholder="首都"
+    >
+
+</div>
+
+
+<div
+    class="form-item"
+    id="countryGovernmentItem"
+    style="display:none;"
+>
+
+    <label
+        class="form-label"
+        for="countryGovernment"
+    >
+        GOVERNMENT · 政体
+    </label>
+
+    <input
+        class="form-input"
+        id="countryGovernment"
+        type="text"
+        placeholder="政体"
+    >
+
+</div>
+
+
+<div
+    class="form-item full"
+    id="countryRegionItem"
+    style="display:none;"
+>
+
+    <label
+        class="form-label"
+        for="countryRegion"
+    >
+        REGION · 地区
+    </label>
+
+    <input
+        class="form-input"
+        id="countryRegion"
+        type="text"
+        placeholder="所属地区"
+    >
+
+</div>
+
+
+<div
+    class="form-item full"
+    id="countryDescriptionItem"
+    style="display:none;"
+>
+
+    <label
+        class="form-label"
+        for="countryDescription"
+    >
+        DESCRIPTION · 国家介绍
+    </label>
+
+    <textarea
+        class="form-textarea"
+        id="countryDescription"
+        placeholder="国家介绍……"
+        style="min-height:220px;"
+    ></textarea>
+
+</div>
+
+
+<div
+    class="form-item full"
+    id="countryHistoryItem"
+    style="display:none;"
+>
+
+    <label
+        class="form-label"
+        for="countryHistory"
+    >
+        HISTORY · 历史
+    </label>
+
+    <textarea
+        class="form-textarea"
+        id="countryHistory"
+        placeholder="国家历史……"
+        style="min-height:220px;"
+    ></textarea>
+
+</div>
+
+
+<div
+    class="form-item full"
+    id="countryCultureItem"
+    style="display:none;"
+>
+
+    <label
+        class="form-label"
+        for="countryCulture"
+    >
+        CULTURE · 文化
+    </label>
+
+    <textarea
+        class="form-textarea"
+        id="countryCulture"
+        placeholder="国家文化……"
+        style="min-height:220px;"
+    ></textarea>
+
+</div>
+
+
+</section>
+
+
+<div class="action-area">
+
+    <button
+        type="button"
+        class="action-button"
+        id="cancelButton"
+    >
+        取消
+    </button>
+
+
+    <button
+        type="button"
+        class="action-button"
+        id="saveButton"
+    >
+        保存更改
+    </button>
+
+</div>
+
+
+<div
+    class="status-message"
+    id="statusMessage"
+></div>
+
+
+</main>
+
+
+<div
+    class="archive-mark"
+    id="archiveMark"
+>
+    塞垭弥档案 · 人物记录
+</div>
 
 
 </div>
@@ -1727,8 +1685,10 @@ body.day-mode .status-message.success{
 const SUPABASE_URL =
     "https://rqqkdpzehxzwqzytpxgh.supabase.co";
 
+
 const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_T_gNdlgkOaXnzjSvdmI1Pw_HQOVTEWG";
+
 
 const supabaseClient =
     window.supabase.createClient(
@@ -1750,8 +1710,12 @@ const pageTitleCn =
 const archiveMark =
     document.getElementById("archiveMark");
 
+
 const characterImageSection =
-    document.getElementById("characterImageSection");
+    document.getElementById(
+        "characterImageSection"
+    );
+
 
 const nameInput =
     document.getElementById("name");
@@ -1777,6 +1741,7 @@ const personalityInput =
 const backstoryInput =
     document.getElementById("backstory");
 
+
 const imageFile =
     document.getElementById("imageFile");
 
@@ -1786,53 +1751,84 @@ const previewImage =
 const imagePlaceholder =
     document.getElementById("imagePlaceholder");
 
+
 const worldContentItem =
     document.getElementById("worldContentItem");
 
 const worldContent =
     document.getElementById("worldContent");
 
+
 const countrySubtitleItem =
-    document.getElementById("countrySubtitleItem");
+    document.getElementById(
+        "countrySubtitleItem"
+    );
 
 const countrySubtitle =
-    document.getElementById("countrySubtitle");
+    document.getElementById(
+        "countrySubtitle"
+    );
 
 const countryCapitalItem =
-    document.getElementById("countryCapitalItem");
+    document.getElementById(
+        "countryCapitalItem"
+    );
 
 const countryCapital =
-    document.getElementById("countryCapital");
+    document.getElementById(
+        "countryCapital"
+    );
 
 const countryGovernmentItem =
-    document.getElementById("countryGovernmentItem");
+    document.getElementById(
+        "countryGovernmentItem"
+    );
 
 const countryGovernment =
-    document.getElementById("countryGovernment");
+    document.getElementById(
+        "countryGovernment"
+    );
 
 const countryRegionItem =
-    document.getElementById("countryRegionItem");
+    document.getElementById(
+        "countryRegionItem"
+    );
 
 const countryRegion =
-    document.getElementById("countryRegion");
+    document.getElementById(
+        "countryRegion"
+    );
 
 const countryDescriptionItem =
-    document.getElementById("countryDescriptionItem");
+    document.getElementById(
+        "countryDescriptionItem"
+    );
 
 const countryDescription =
-    document.getElementById("countryDescription");
+    document.getElementById(
+        "countryDescription"
+    );
 
 const countryHistoryItem =
-    document.getElementById("countryHistoryItem");
+    document.getElementById(
+        "countryHistoryItem"
+    );
 
 const countryHistory =
-    document.getElementById("countryHistory");
+    document.getElementById(
+        "countryHistory"
+    );
 
 const countryCultureItem =
-    document.getElementById("countryCultureItem");
+    document.getElementById(
+        "countryCultureItem"
+    );
 
 const countryCulture =
-    document.getElementById("countryCulture");
+    document.getElementById(
+        "countryCulture"
+    );
+
 
 const saveButton =
     document.getElementById("saveButton");
@@ -1856,15 +1852,29 @@ const params =
         window.location.search
     );
 
+
 const recordId =
     params.get("id");
 
 const editType =
     params.get("type");
 
+
+/*
+   没有 id 的 country 模式
+   就视为“新建国家”
+*/
+
 const isNewCountry =
-    editType === "country" &&
-    !recordId;
+    isCountryModeCandidate();
+
+
+function isCountryModeCandidate(){
+
+    return editType === "country";
+
+}
+
 
 const isWorldMode =
     editType === "world";
@@ -1873,15 +1883,16 @@ const isCountryMode =
     editType === "country";
 
 
-/* =========================================================
-   状态
-========================================================= */
+const isCreatingCountry =
+    isCountryMode &&
+    !recordId;
+
 
 let currentImageUrl = null;
 
 
 /* =========================================================
-   状态提示
+   状态
 ========================================================= */
 
 function showStatus(
@@ -1951,37 +1962,49 @@ function setupCharacterMode(){
     archiveMark.textContent =
         "塞垭弥档案 · 人物记录";
 
+
     characterImageSection.style.display =
         "block";
+
 
     worldContentItem.style.display =
         "none";
 
+
     hideCountryFields();
 
-    nameInput.closest(".form-item").style.display =
-        "flex";
 
-    raceInput.closest(".form-item").style.display =
-        "flex";
+    nameInput.closest(
+        ".form-item"
+    ).style.display = "flex";
 
-    roleInput.closest(".form-item").style.display =
-        "flex";
+    raceInput.closest(
+        ".form-item"
+    ).style.display = "flex";
 
-    ageInput.closest(".form-item").style.display =
-        "flex";
+    roleInput.closest(
+        ".form-item"
+    ).style.display = "flex";
 
-    genderInput.closest(".form-item").style.display =
-        "flex";
+    ageInput.closest(
+        ".form-item"
+    ).style.display = "flex";
 
-    regionInput.closest(".form-item").style.display =
-        "flex";
+    genderInput.closest(
+        ".form-item"
+    ).style.display = "flex";
 
-    personalityInput.closest(".form-item").style.display =
-        "flex";
+    regionInput.closest(
+        ".form-item"
+    ).style.display = "flex";
 
-    backstoryInput.closest(".form-item").style.display =
-        "flex";
+    personalityInput.closest(
+        ".form-item"
+    ).style.display = "flex";
+
+    backstoryInput.closest(
+        ".form-item"
+    ).style.display = "flex";
 
 }
 
@@ -2001,41 +2024,57 @@ function setupWorldMode(){
     archiveMark.textContent =
         "塞垭弥档案 · 世界记录";
 
+
     characterImageSection.style.display =
         "none";
 
-    nameInput.closest(".form-item").style.display =
-        "flex";
 
-    document.getElementById("nameLabel").textContent =
+    nameInput.closest(
+        ".form-item"
+    ).style.display = "flex";
+
+
+    document.getElementById(
+        "nameLabel"
+    ).textContent =
         "TITLE · 标题";
 
     nameInput.placeholder =
         "世界设定标题";
 
-    raceInput.closest(".form-item").style.display =
-        "none";
 
-    roleInput.closest(".form-item").style.display =
-        "none";
+    raceInput.closest(
+        ".form-item"
+    ).style.display = "none";
 
-    ageInput.closest(".form-item").style.display =
-        "none";
+    roleInput.closest(
+        ".form-item"
+    ).style.display = "none";
 
-    genderInput.closest(".form-item").style.display =
-        "none";
+    ageInput.closest(
+        ".form-item"
+    ).style.display = "none";
 
-    regionInput.closest(".form-item").style.display =
-        "none";
+    genderInput.closest(
+        ".form-item"
+    ).style.display = "none";
 
-    personalityInput.closest(".form-item").style.display =
-        "none";
+    regionInput.closest(
+        ".form-item"
+    ).style.display = "none";
 
-    backstoryInput.closest(".form-item").style.display =
-        "none";
+    personalityInput.closest(
+        ".form-item"
+    ).style.display = "none";
+
+    backstoryInput.closest(
+        ".form-item"
+    ).style.display = "none";
+
 
     worldContentItem.style.display =
         "flex";
+
 
     hideCountryFields();
 
@@ -2048,13 +2087,19 @@ function setupWorldMode(){
 
 function setupCountryMode(){
 
-    if(isNewCountry){
+    if(isCreatingCountry){
 
         pageTitleEn.textContent =
             "NEW NATION";
 
         pageTitleCn.textContent =
             "建立国家档案";
+
+        archiveMark.textContent =
+            "塞垭弥档案 · 新国家记录";
+
+        saveButton.textContent =
+            "建立档案";
 
     }else{
 
@@ -2064,46 +2109,73 @@ function setupCountryMode(){
         pageTitleCn.textContent =
             "编辑国家档案";
 
+        archiveMark.textContent =
+            "塞垭弥档案 · 国家记录";
+
+        saveButton.textContent =
+            "保存更改";
+
     }
 
-    archiveMark.textContent =
-        "塞垭弥档案 · 国家记录";
 
     characterImageSection.style.display =
         "none";
 
-    nameInput.closest(".form-item").style.display =
+
+    nameInput.closest(
+        ".form-item"
+    ).style.display =
         "flex";
 
-    document.getElementById("nameLabel").textContent =
+
+    document.getElementById(
+        "nameLabel"
+    ).textContent =
         "NAME · 国家名称";
 
     nameInput.placeholder =
         "国家名称";
 
-    raceInput.closest(".form-item").style.display =
+
+    raceInput.closest(
+        ".form-item"
+    ).style.display =
         "none";
 
-    roleInput.closest(".form-item").style.display =
+    roleInput.closest(
+        ".form-item"
+    ).style.display =
         "none";
 
-    ageInput.closest(".form-item").style.display =
+    ageInput.closest(
+        ".form-item"
+    ).style.display =
         "none";
 
-    genderInput.closest(".form-item").style.display =
+    genderInput.closest(
+        ".form-item"
+    ).style.display =
         "none";
 
-    regionInput.closest(".form-item").style.display =
+    regionInput.closest(
+        ".form-item"
+    ).style.display =
         "none";
 
-    personalityInput.closest(".form-item").style.display =
+    personalityInput.closest(
+        ".form-item"
+    ).style.display =
         "none";
 
-    backstoryInput.closest(".form-item").style.display =
+    backstoryInput.closest(
+        ".form-item"
+    ).style.display =
         "none";
+
 
     worldContentItem.style.display =
         "none";
+
 
     countrySubtitleItem.style.display =
         "flex";
@@ -2126,18 +2198,6 @@ function setupCountryMode(){
     countryCultureItem.style.display =
         "flex";
 
-    if(isNewCountry){
-
-        saveButton.textContent =
-            "建立档案";
-
-    }else{
-
-        saveButton.textContent =
-            "保存更改";
-
-    }
-
 }
 
 
@@ -2158,6 +2218,7 @@ function showImage(url){
         return;
     }
 
+
     previewImage.src =
         url;
 
@@ -2177,14 +2238,18 @@ imageFile.addEventListener(
             this.files &&
             this.files[0];
 
+
         if(!file){
 
             return;
-
         }
 
+
         const objectUrl =
-            URL.createObjectURL(file);
+            URL.createObjectURL(
+                file
+            );
+
 
         showImage(
             objectUrl
@@ -2211,12 +2276,13 @@ async function loadCharacter(){
             true;
 
         return;
-
     }
+
 
     showStatus(
         "正在读取角色档案……"
     );
+
 
     try{
 
@@ -2242,63 +2308,60 @@ async function loadCharacter(){
                     "id",
                     recordId
                 )
-                .single();
+                .maybeSingle();
+
 
         if(error){
 
             throw error;
-
         }
+
 
         if(!data){
 
             throw new Error(
                 "没有找到这个角色"
             );
-
         }
+
 
         currentImageUrl =
             data.image_url ||
             null;
 
+
         nameInput.value =
-            data.name ||
-            "";
+            data.name || "";
 
         raceInput.value =
-            data.race ||
-            "";
+            data.race || "";
 
         roleInput.value =
-            data.role ||
-            "";
+            data.role || "";
 
         ageInput.value =
-            data.age ??
-            "";
+            data.age ?? "";
 
         genderInput.value =
-            data.gender ||
-            "";
+            data.gender || "";
 
         regionInput.value =
-            data.region ||
-            "";
+            data.region || "";
 
         personalityInput.value =
-            data.personality ||
-            "";
+            data.personality || "";
 
         backstoryInput.value =
-            data.backstory ||
-            "";
+            data.backstory || "";
+
 
         showImage(
             currentImageUrl
         );
 
+
         showStatus("");
+
 
     }catch(error){
 
@@ -2306,6 +2369,7 @@ async function loadCharacter(){
             "读取角色失败:",
             error
         );
+
 
         showStatus(
             "读取角色失败：" +
@@ -2315,6 +2379,7 @@ async function loadCharacter(){
             ),
             "error"
         );
+
 
         saveButton.disabled =
             true;
@@ -2334,6 +2399,7 @@ async function loadWorld(){
         "正在读取世界设定……"
     );
 
+
     try{
 
         const {
@@ -2352,31 +2418,32 @@ async function loadWorld(){
                     "id",
                     1
                 )
-                .single();
+                .maybeSingle();
+
 
         if(error){
 
             throw error;
-
         }
+
 
         if(!data){
 
             throw new Error(
                 "没有找到世界设定"
             );
-
         }
 
+
         nameInput.value =
-            data.title ||
-            "";
+            data.title || "";
 
         worldContent.value =
-            data.content ||
-            "";
+            data.content || "";
+
 
         showStatus("");
+
 
     }catch(error){
 
@@ -2384,6 +2451,7 @@ async function loadWorld(){
             "读取世界设定失败:",
             error
         );
+
 
         showStatus(
             "读取世界设定失败：" +
@@ -2393,6 +2461,7 @@ async function loadWorld(){
             ),
             "error"
         );
+
 
         saveButton.disabled =
             true;
@@ -2410,18 +2479,33 @@ async function loadCountry(){
 
     /*
        新建国家：
-       不读取 Supabase
-       直接让用户填写
+       不需要读取数据库
     */
 
-    if(isNewCountry){
+    if(isCreatingCountry){
 
-        showStatus("");
+        nameInput.value = "";
 
-        nameInput.focus();
+        countrySubtitle.value = "";
+
+        countryCapital.value = "";
+
+        countryGovernment.value = "";
+
+        countryRegion.value = "";
+
+        countryDescription.value = "";
+
+        countryHistory.value = "";
+
+        countryCulture.value = "";
+
+
+        showStatus(
+            "可以开始建立新的国家档案。"
+        );
 
         return;
-
     }
 
 
@@ -2436,7 +2520,6 @@ async function loadCountry(){
             true;
 
         return;
-
     }
 
 
@@ -2469,58 +2552,54 @@ async function loadCountry(){
                     "id",
                     recordId
                 )
-                .single();
+                .maybeSingle();
 
 
         if(error){
 
             throw error;
-
         }
 
+
+        /*
+           找不到对应国家
+        */
 
         if(!data){
 
             throw new Error(
-                "没有找到这个国家"
+                "没有找到这个国家档案，请检查国家 ID。"
             );
-
         }
 
 
         nameInput.value =
-            data.name ||
-            "";
+            data.name || "";
 
         countrySubtitle.value =
-            data.subtitle ||
-            "";
+            data.subtitle || "";
 
         countryCapital.value =
-            data.capital ||
-            "";
+            data.capital || "";
 
         countryGovernment.value =
-            data.government ||
-            "";
+            data.government || "";
 
         countryRegion.value =
-            data.region ||
-            "";
+            data.region || "";
 
         countryDescription.value =
-            data.description ||
-            "";
+            data.description || "";
 
         countryHistory.value =
-            data.history ||
-            "";
+            data.history || "";
 
         countryCulture.value =
-            data.culture ||
-            "";
+            data.culture || "";
+
 
         showStatus("");
+
 
     }catch(error){
 
@@ -2528,6 +2607,7 @@ async function loadCountry(){
             "读取国家失败:",
             error
         );
+
 
         showStatus(
             "读取国家失败：" +
@@ -2538,10 +2618,83 @@ async function loadCountry(){
             "error"
         );
 
+
         saveButton.disabled =
             true;
 
     }
+
+}
+
+
+/* =========================================================
+   上传角色图片
+========================================================= */
+
+async function uploadImage(file){
+
+    if(!file){
+
+        return currentImageUrl;
+    }
+
+
+    const originalName =
+        file.name || "";
+
+
+    const extension =
+        originalName
+            .split(".")
+            .pop()
+            .toLowerCase();
+
+
+    const filePath =
+        "character-" +
+        Date.now() +
+        "-" +
+        Math.random()
+            .toString(36)
+            .substring(2,8) +
+        "." +
+        extension;
+
+
+    const {
+        error:uploadError
+    } =
+        await supabaseClient
+            .storage
+            .from("character-images")
+            .upload(
+                filePath,
+                file,
+                {
+                    cacheControl:"3600",
+                    upsert:false
+                }
+            );
+
+
+    if(uploadError){
+
+        throw uploadError;
+    }
+
+
+    const {
+        data
+    } =
+        supabaseClient
+            .storage
+            .from("character-images")
+            .getPublicUrl(
+                filePath
+            );
+
+
+    return data.publicUrl;
 
 }
 
@@ -2554,9 +2707,14 @@ async function saveCharacter(){
 
     if(!recordId){
 
-        return;
+        showStatus(
+            "缺少角色 ID",
+            "error"
+        );
 
+        return;
     }
+
 
     saveButton.disabled =
         true;
@@ -2564,11 +2722,37 @@ async function saveCharacter(){
     cancelButton.disabled =
         true;
 
+
     showStatus(
         "正在保存档案……"
     );
 
+
     try{
+
+        let imageURL =
+            currentImageUrl;
+
+
+        const file =
+            imageFile.files &&
+            imageFile.files[0];
+
+
+        if(file){
+
+            showStatus(
+                "正在上传新的角色图片……"
+            );
+
+
+            imageURL =
+                await uploadImage(
+                    file
+                );
+
+        }
+
 
         const updateData = {
 
@@ -2604,7 +2788,7 @@ async function saveCharacter(){
                 null,
 
             image_url:
-                currentImageUrl ||
+                imageURL ||
                 null
 
         };
@@ -2627,7 +2811,6 @@ async function saveCharacter(){
         if(error){
 
             throw error;
-
         }
 
 
@@ -2658,6 +2841,7 @@ async function saveCharacter(){
             error
         );
 
+
         showStatus(
             "保存失败：" +
             (
@@ -2666,6 +2850,7 @@ async function saveCharacter(){
             ),
             "error"
         );
+
 
         saveButton.disabled =
             false;
@@ -2690,9 +2875,11 @@ async function saveWorld(){
     cancelButton.disabled =
         true;
 
+
     showStatus(
         "正在保存世界设定……"
     );
+
 
     try{
 
@@ -2708,7 +2895,6 @@ async function saveWorld(){
             throw new Error(
                 "世界设定标题不能为空"
             );
-
         }
 
 
@@ -2739,7 +2925,6 @@ async function saveWorld(){
         if(error){
 
             throw error;
-
         }
 
 
@@ -2767,6 +2952,7 @@ async function saveWorld(){
             error
         );
 
+
         showStatus(
             "保存失败：" +
             (
@@ -2775,6 +2961,7 @@ async function saveWorld(){
             ),
             "error"
         );
+
 
         saveButton.disabled =
             false;
@@ -2799,8 +2986,9 @@ async function saveCountry(){
     cancelButton.disabled =
         true;
 
+
     showStatus(
-        isNewCountry
+        isCreatingCountry
             ? "正在建立国家档案……"
             : "正在保存国家档案……"
     );
@@ -2817,7 +3005,6 @@ async function saveCountry(){
             throw new Error(
                 "国家名称不能为空"
             );
-
         }
 
 
@@ -2861,11 +3048,14 @@ async function saveCountry(){
         };
 
 
-        /*
-           新建国家
-        */
+        let savedId = recordId;
 
-        if(isNewCountry){
+
+        /* =================================================
+           新建国家
+        ================================================= */
+
+        if(isCreatingCountry){
 
             const {
                 data,
@@ -2883,83 +3073,71 @@ async function saveCountry(){
             if(error){
 
                 throw error;
-
             }
 
 
             if(!data){
 
                 throw new Error(
-                    "国家创建成功，但没有返回国家 ID"
+                    "国家创建成功，但没有返回国家 ID。"
                 );
+            }
 
+
+            savedId =
+                data.id;
+
+
+            showStatus(
+                "国家档案建立成功，即将返回国家档案页面……",
+                "success"
+            );
+
+        }
+
+
+        /* =================================================
+           修改已有国家
+        ================================================= */
+
+        else{
+
+            const {
+                error
+            } =
+                await supabaseClient
+                    .from("countries")
+                    .update(
+                        countryData
+                    )
+                    .eq(
+                        "id",
+                        recordId
+                    );
+
+
+            if(error){
+
+                throw error;
             }
 
 
             showStatus(
-                "国家档案建立成功，即将返回国家档案……",
+                "国家档案保存成功，即将返回国家档案页面……",
                 "success"
             );
 
-
-            setTimeout(
-                function(){
-
-                    window.location.href =
-                        "nations.html";
-
-                },
-                900
-            );
-
-
-            return;
-
         }
-
-
-        /*
-           编辑已有国家
-        */
-
-        if(!recordId){
-
-            throw new Error(
-                "缺少国家 ID"
-            );
-
-        }
-
-
-        const {
-            error
-        } =
-            await supabaseClient
-                .from("countries")
-                .update(
-                    countryData
-                )
-                .eq(
-                    "id",
-                    recordId
-                );
-
-
-        if(error){
-
-            throw error;
-
-        }
-
-
-        showStatus(
-            "国家档案保存成功，即将返回国家档案……",
-            "success"
-        );
 
 
         setTimeout(
             function(){
+
+                /*
+                   返回国家档案页面。
+                   如果之后 nations.html 支持指定 ID，
+                   也可以进一步跳转到刚刚建立的国家。
+                */
 
                 window.location.href =
                     "nations.html";
@@ -3038,7 +3216,6 @@ cancelButton.addEventListener(
                 "world.html";
 
             return;
-
         }
 
 
@@ -3048,7 +3225,6 @@ cancelButton.addEventListener(
                 "nations.html";
 
             return;
-
         }
 
 
