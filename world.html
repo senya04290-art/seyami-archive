@@ -2480,14 +2480,16 @@ async function loadWorldSetting(){
   editWorldButton.style.display =
     "inline-block";
 
+
+  /* =====================================================
+     ★ 修正：统一进入 edit.html 世界设定编辑模式
+  ===================================================== */
+
   editWorldButton.onclick =
     function(){
 
       window.location.href =
-        "world-edit.html?id=" +
-        encodeURIComponent(
-          world.id
-        );
+        "edit.html?type=world";
 
     };
 
@@ -2594,4 +2596,4 @@ loadWorldSetting();
 </script>
 
 </body>
-</html>
+      </html>
