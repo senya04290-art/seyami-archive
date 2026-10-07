@@ -20,6 +20,11 @@
 <link
     rel="preconnect"
     href="https://fonts.gstatic.com"
+>
+
+<link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
     crossorigin
 >
 
@@ -30,7 +35,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
 <style>
+
+/* =========================
+   基础
+========================= */
 
 * {
     box-sizing: border-box;
@@ -44,6 +54,7 @@ body {
 }
 
 body {
+
     background:
         radial-gradient(
             circle at 50% 30%,
@@ -69,7 +80,9 @@ body {
 ========================= */
 
 .stars {
+
     position: fixed;
+
     inset: 0;
 
     pointer-events: none;
@@ -80,9 +93,11 @@ body {
 }
 
 .star {
+
     position: absolute;
 
     width: 2px;
+
     height: 2px;
 
     border-radius: 50%;
@@ -95,10 +110,11 @@ body {
 
 
 /* =========================
-   页面框架
+   页面
 ========================= */
 
 .page {
+
     position: relative;
 
     min-height: 100vh;
@@ -115,6 +131,7 @@ body {
 ========================= */
 
 .header {
+
     display: flex;
 
     justify-content: space-between;
@@ -125,6 +142,7 @@ body {
 }
 
 .logo {
+
     display: flex;
 
     flex-direction: column;
@@ -133,6 +151,7 @@ body {
 }
 
 .logo-cn {
+
     font-size: 16px;
 
     letter-spacing: 0.16em;
@@ -141,6 +160,7 @@ body {
 }
 
 .logo-en {
+
     font-family: "Cinzel", serif;
 
     font-size: 9px;
@@ -151,6 +171,7 @@ body {
 }
 
 .header-right {
+
     display: flex;
 
     align-items: center;
@@ -159,6 +180,7 @@ body {
 }
 
 .back {
+
     color: inherit;
 
     text-decoration: none;
@@ -176,11 +198,19 @@ body {
 }
 
 .back:hover {
+
     opacity: 1;
 }
 
+
+/* =========================
+   日夜按钮
+========================= */
+
 .theme-toggle {
+
     width: 38px;
+
     height: 38px;
 
     border:
@@ -207,6 +237,7 @@ body {
 }
 
 .theme-toggle:hover {
+
     background:
         rgba(180, 210, 240, 0.06);
 
@@ -220,6 +251,7 @@ body {
 ========================= */
 
 .title-area {
+
     text-align: center;
 
     margin-top: 70px;
@@ -228,6 +260,7 @@ body {
 }
 
 .title-en {
+
     font-family: "Cinzel", serif;
 
     font-size:
@@ -243,6 +276,7 @@ body {
 }
 
 .title-sub {
+
     margin-top: 12px;
 
     font-family: "Cinzel", serif;
@@ -257,6 +291,7 @@ body {
 }
 
 .title-cn {
+
     margin-top: 18px;
 
     font-size: 14px;
@@ -268,10 +303,11 @@ body {
 
 
 /* =========================
-   管理类型切换
+   管理类型
 ========================= */
 
 .management-switch {
+
     width: min(820px, 100%);
 
     margin:
@@ -285,6 +321,7 @@ body {
 }
 
 .management-button {
+
     min-width: 170px;
 
     height: 42px;
@@ -316,6 +353,7 @@ body {
 }
 
 .management-button:hover {
+
     border-color:
         rgba(180, 210, 240, 0.45);
 
@@ -324,6 +362,7 @@ body {
 }
 
 .management-button.active {
+
     border-color:
         rgba(190, 220, 245, 0.5);
 
@@ -335,10 +374,11 @@ body {
 
 
 /* =========================
-   表单区域
+   表单容器
 ========================= */
 
 .admin-container {
+
     width: min(820px, 100%);
 
     margin: 0 auto;
@@ -356,15 +396,19 @@ body {
 }
 
 
-/* 四角装饰 */
+/* =========================
+   四角
+========================= */
 
 .admin-container::before,
 .admin-container::after {
+
     content: "";
 
     position: absolute;
 
     width: 18px;
+
     height: 18px;
 
     border-color:
@@ -374,22 +418,34 @@ body {
 }
 
 .admin-container::before {
+
     top: -1px;
+
     left: -1px;
 
     border-top: 1px solid;
+
     border-left: 1px solid;
 }
 
 .admin-container::after {
+
     right: -1px;
+
     bottom: -1px;
 
     border-right: 1px solid;
+
     border-bottom: 1px solid;
 }
 
+
+/* =========================
+   区域标题
+========================= */
+
 .section-title {
+
     font-family: "Cinzel", serif;
 
     font-size: 13px;
@@ -407,6 +463,7 @@ body {
 ========================= */
 
 .form-grid {
+
     display: grid;
 
     grid-template-columns:
@@ -416,6 +473,7 @@ body {
 }
 
 .field {
+
     display: flex;
 
     flex-direction: column;
@@ -424,10 +482,12 @@ body {
 }
 
 .field.full {
+
     grid-column: 1 / -1;
 }
 
 label {
+
     font-family: "Cinzel", serif;
 
     font-size: 9px;
@@ -440,6 +500,7 @@ label {
 input,
 select,
 textarea {
+
     width: 100%;
 
     border:
@@ -468,10 +529,12 @@ textarea {
 
 input,
 select {
+
     height: 46px;
 }
 
 textarea {
+
     min-height: 140px;
 
     padding: 14px;
@@ -484,6 +547,7 @@ textarea {
 input:focus,
 select:focus,
 textarea:focus {
+
     border-color:
         rgba(180, 210, 240, 0.55);
 
@@ -493,6 +557,7 @@ textarea:focus {
 
 input::placeholder,
 textarea::placeholder {
+
     color:
         rgba(210, 225, 240, 0.28);
 }
@@ -503,6 +568,7 @@ textarea::placeholder {
 ========================= */
 
 .upload-box {
+
     width: 100%;
 
     min-height: 220px;
@@ -531,6 +597,7 @@ textarea::placeholder {
 }
 
 .upload-box:hover {
+
     border-color:
         rgba(180, 210, 240, 0.55);
 
@@ -539,11 +606,13 @@ textarea::placeholder {
 }
 
 .upload-box input[type="file"] {
+
     position: absolute;
 
     inset: 0;
 
     width: 100%;
+
     height: 100%;
 
     opacity: 0;
@@ -554,6 +623,7 @@ textarea::placeholder {
 }
 
 .upload-placeholder {
+
     display: flex;
 
     flex-direction: column;
@@ -566,6 +636,7 @@ textarea::placeholder {
 }
 
 .upload-symbol {
+
     font-size: 26px;
 
     opacity: 0.55;
@@ -574,6 +645,7 @@ textarea::placeholder {
 }
 
 .upload-text {
+
     font-family: "Cinzel", serif;
 
     font-size: 10px;
@@ -584,17 +656,20 @@ textarea::placeholder {
 }
 
 .upload-hint {
+
     font-size: 10px;
 
     opacity: 0.35;
 }
 
 .preview {
+
     position: absolute;
 
     inset: 0;
 
     width: 100%;
+
     height: 100%;
 
     object-fit: contain;
@@ -612,6 +687,7 @@ textarea::placeholder {
 ========================= */
 
 .save-area {
+
     margin-top: 38px;
 
     display: flex;
@@ -620,6 +696,7 @@ textarea::placeholder {
 }
 
 .save-button {
+
     min-width: 230px;
 
     height: 48px;
@@ -648,6 +725,7 @@ textarea::placeholder {
 }
 
 .save-button:hover {
+
     background:
         rgba(30, 65, 95, 0.5);
 
@@ -656,10 +734,12 @@ textarea::placeholder {
 }
 
 .save-button:active {
+
     transform: scale(0.98);
 }
 
 .save-button:disabled {
+
     opacity: 0.45;
 
     cursor: wait;
@@ -667,10 +747,11 @@ textarea::placeholder {
 
 
 /* =========================
-   状态提示
+   消息
 ========================= */
 
 .message {
+
     text-align: center;
 
     margin-top: 22px;
@@ -685,10 +766,12 @@ textarea::placeholder {
 }
 
 .message.success {
+
     color: #b8d8c8;
 }
 
 .message.error {
+
     color: #e0b8b8;
 }
 
@@ -698,6 +781,7 @@ textarea::placeholder {
 ========================= */
 
 .footer {
+
     text-align: center;
 
     margin-top: 55px;
@@ -717,6 +801,7 @@ textarea::placeholder {
 ========================= */
 
 body.day-mode {
+
     background:
         radial-gradient(
             circle at 50% 30%,
@@ -729,6 +814,7 @@ body.day-mode {
 }
 
 body.day-mode .admin-container {
+
     background:
         rgba(255, 255, 255, 0.52);
 
@@ -737,6 +823,7 @@ body.day-mode .admin-container {
 }
 
 body.day-mode .management-button {
+
     background:
         rgba(255, 255, 255, 0.35);
 
@@ -745,6 +832,7 @@ body.day-mode .management-button {
 }
 
 body.day-mode .management-button.active {
+
     background:
         rgba(255, 255, 255, 0.65);
 
@@ -755,6 +843,7 @@ body.day-mode .management-button.active {
 body.day-mode input,
 body.day-mode select,
 body.day-mode textarea {
+
     background:
         rgba(255, 255, 255, 0.65);
 
@@ -767,6 +856,7 @@ body.day-mode textarea {
 body.day-mode input:focus,
 body.day-mode select:focus,
 body.day-mode textarea:focus {
+
     background:
         rgba(255, 255, 255, 0.9);
 
@@ -775,11 +865,13 @@ body.day-mode textarea:focus {
 }
 
 body.day-mode .upload-box {
+
     border-color:
         rgba(40, 70, 100, 0.25);
 }
 
 body.day-mode .save-button {
+
     color: #24384c;
 
     background:
@@ -790,6 +882,7 @@ body.day-mode .save-button {
 }
 
 body.day-mode .theme-toggle {
+
     border-color:
         rgba(40, 70, 100, 0.25);
 }
@@ -802,42 +895,52 @@ body.day-mode .theme-toggle {
 @media (max-width: 700px) {
 
     .page {
+
         padding:
             25px 20px 50px;
     }
 
     .header {
+
         align-items: center;
     }
 
     .logo-cn {
+
         font-size: 13px;
     }
 
     .logo-en {
+
         font-size: 7px;
     }
 
     .header-right {
+
         gap: 10px;
     }
 
     .back {
+
         font-size: 8px;
     }
 
     .theme-toggle {
+
         width: 34px;
+
         height: 34px;
     }
 
     .title-area {
+
         margin-top: 55px;
 
         margin-bottom: 40px;
     }
 
     .title-en {
+
         font-size: 29px;
 
         letter-spacing: 0.14em;
@@ -846,6 +949,7 @@ body.day-mode .theme-toggle {
     }
 
     .title-sub {
+
         font-size: 8px;
 
         letter-spacing: 0.3em;
@@ -854,16 +958,19 @@ body.day-mode .theme-toggle {
     }
 
     .title-cn {
+
         font-size: 12px;
     }
 
     .management-switch {
+
         gap: 7px;
 
         margin-bottom: 20px;
     }
 
     .management-button {
+
         min-width: 0;
 
         width: 50%;
@@ -876,29 +983,35 @@ body.day-mode .theme-toggle {
     }
 
     .admin-container {
+
         padding:
             28px 20px;
     }
 
     .form-grid {
+
         grid-template-columns: 1fr;
 
         gap: 22px;
     }
 
     .field.full {
+
         grid-column: auto;
     }
 
     .upload-box {
+
         min-height: 200px;
     }
 
     .save-button {
+
         width: 100%;
     }
 
     textarea {
+
         min-height: 160px;
     }
 
@@ -1018,7 +1131,7 @@ body.day-mode .theme-toggle {
 
 
     <!-- =========================
-         管理类型切换
+         管理类型
     ========================= -->
 
     <div class="management-switch">
@@ -1063,7 +1176,7 @@ body.day-mode .theme-toggle {
 
 
                 <!-- =====================
-                     角色名字
+                     角色
                 ===================== -->
 
                 <div
@@ -1078,15 +1191,10 @@ body.day-mode .theme-toggle {
                         id="name"
                         type="text"
                         placeholder="例如：Evelina•Nieve 伊莉娜·妳芙"
-                        required
                     >
 
                 </div>
 
-
-                <!-- =====================
-                     种族
-                ===================== -->
 
                 <div
                     class="field character-field"
@@ -1105,10 +1213,6 @@ body.day-mode .theme-toggle {
                 </div>
 
 
-                <!-- =====================
-                     地区
-                ===================== -->
-
                 <div
                     class="field character-field"
                 >
@@ -1125,10 +1229,6 @@ body.day-mode .theme-toggle {
 
                 </div>
 
-
-                <!-- =====================
-                     身份
-                ===================== -->
 
                 <div
                     class="field character-field"
@@ -1147,10 +1247,6 @@ body.day-mode .theme-toggle {
                 </div>
 
 
-                <!-- =====================
-                     年龄
-                ===================== -->
-
                 <div
                     class="field character-field"
                 >
@@ -1168,10 +1264,6 @@ body.day-mode .theme-toggle {
 
                 </div>
 
-
-                <!-- =====================
-                     性别
-                ===================== -->
 
                 <div
                     class="field full character-field"
@@ -1204,10 +1296,6 @@ body.day-mode .theme-toggle {
                 </div>
 
 
-                <!-- =====================
-                     性格
-                ===================== -->
-
                 <div
                     class="field full character-field"
                 >
@@ -1223,10 +1311,6 @@ body.day-mode .theme-toggle {
 
                 </div>
 
-
-                <!-- =====================
-                     背景故事
-                ===================== -->
 
                 <div
                     class="field full character-field"
@@ -1245,7 +1329,7 @@ body.day-mode .theme-toggle {
 
 
                 <!-- =====================
-                     图片
+                     角色图片
                 ===================== -->
 
                 <div
@@ -1298,7 +1382,7 @@ body.day-mode .theme-toggle {
 
 
                 <!-- =========================
-                     国家字段
+                     国家
                 ========================= -->
 
                 <div
@@ -1331,7 +1415,7 @@ body.day-mode .theme-toggle {
                     <input
                         id="countrySubtitle"
                         type="text"
-                        placeholder="例如：永冬之国、雪山精灵王国"
+                        placeholder="例如：永冬之国"
                     >
 
                 </div>
@@ -1565,34 +1649,54 @@ const countryFields =
 ========================================================= */
 
 const nameInput =
-    document.getElementById("name");
+    document.getElementById(
+        "name"
+    );
 
 const raceInput =
-    document.getElementById("race");
+    document.getElementById(
+        "race"
+    );
 
 const regionInput =
-    document.getElementById("region");
+    document.getElementById(
+        "region"
+    );
 
 const roleInput =
-    document.getElementById("role");
+    document.getElementById(
+        "role"
+    );
 
 const ageInput =
-    document.getElementById("age");
+    document.getElementById(
+        "age"
+    );
 
 const genderInput =
-    document.getElementById("gender");
+    document.getElementById(
+        "gender"
+    );
 
 const personalityInput =
-    document.getElementById("personality");
+    document.getElementById(
+        "personality"
+    );
 
 const backstoryInput =
-    document.getElementById("backstory");
+    document.getElementById(
+        "backstory"
+    );
 
 const imageInput =
-    document.getElementById("image");
+    document.getElementById(
+        "image"
+    );
 
 const preview =
-    document.getElementById("preview");
+    document.getElementById(
+        "preview"
+    );
 
 const uploadPlaceholder =
     document.getElementById(
@@ -1646,7 +1750,7 @@ const countryCultureInput =
 
 
 /* =========================================================
-   通用 DOM
+   通用
 ========================================================= */
 
 const saveButton =
@@ -1660,16 +1764,12 @@ const message =
     );
 
 
-/* =========================================================
-   当前管理模式
-========================================================= */
-
 let currentMode =
     "character";
 
 
 /* =========================================================
-   显示消息
+   消息
 ========================================================= */
 
 function showMessage(
@@ -1682,12 +1782,11 @@ function showMessage(
 
     message.className =
         "message " + type;
-
 }
 
 
 /* =========================================================
-   切换到角色模式
+   角色模式
 ========================================================= */
 
 function showCharacterMode() {
@@ -1755,12 +1854,11 @@ function showCharacterMode() {
 
 
     showMessage("");
-
 }
 
 
 /* =========================================================
-   切换到国家模式
+   国家模式
 ========================================================= */
 
 function showCountryMode() {
@@ -1828,12 +1926,11 @@ function showCountryMode() {
 
 
     showMessage("");
-
 }
 
 
 /* =========================================================
-   切换按钮
+   模式按钮
 ========================================================= */
 
 characterModeButton.addEventListener(
@@ -1939,10 +2036,6 @@ async function saveCharacter() {
         imageInput.files[0];
 
 
-    /* -------------------------
-       基础检查
-    ------------------------- */
-
     if (!name) {
 
         showMessage(
@@ -1975,9 +2068,9 @@ async function saveCharacter() {
     try {
 
 
-        /* =================================================
-           1. 生成安全文件名
-        ================================================= */
+        /* =========================
+           文件扩展名
+        ========================= */
 
         const originalName =
             imageFile.name;
@@ -2000,14 +2093,14 @@ async function saveCharacter() {
             extension;
 
 
-        /* =================================================
-           2. 上传图片
-        ================================================= */
-
         showMessage(
             "正在上传立绘……"
         );
 
+
+        /* =========================
+           上传图片
+        ========================= */
 
         const {
             error: uploadError
@@ -2028,13 +2121,12 @@ async function saveCharacter() {
         if (uploadError) {
 
             throw uploadError;
-
         }
 
 
-        /* =================================================
-           3. 获取公开 URL
-        ================================================= */
+        /* =========================
+           获取图片 URL
+        ========================= */
 
         const {
             data: publicURLData
@@ -2051,14 +2143,14 @@ async function saveCharacter() {
             publicURLData.publicUrl;
 
 
-        /* =================================================
-           4. 写入 characters
-        ================================================= */
-
         showMessage(
             "立绘上传完成，正在建立角色档案……"
         );
 
+
+        /* =========================
+           写入角色
+        ========================= */
 
         const {
             error: insertError
@@ -2102,13 +2194,8 @@ async function saveCharacter() {
         if (insertError) {
 
             throw insertError;
-
         }
 
-
-        /* =================================================
-           5. 完成
-        ================================================= */
 
         showMessage(
             "角色档案保存成功！",
@@ -2207,10 +2294,6 @@ async function saveCountry() {
         countryCultureInput.value.trim();
 
 
-    /* -------------------------
-       基础检查
-    ------------------------- */
-
     if (!name) {
 
         showMessage(
@@ -2237,9 +2320,9 @@ async function saveCountry() {
     try {
 
 
-        /* =================================================
+        /* =========================
            写入 countries
-        ================================================= */
+        ========================= */
 
         const {
             error: insertError
@@ -2278,13 +2361,8 @@ async function saveCountry() {
         if (insertError) {
 
             throw insertError;
-
         }
 
-
-        /* =================================================
-           完成
-        ================================================= */
 
         showMessage(
             "国家设定保存成功！",
@@ -2295,6 +2373,11 @@ async function saveCountry() {
         saveButton.textContent =
             "SAVED";
 
+
+        /*
+         * 只清空表单，
+         * 不离开当前页面
+         */
 
         form.reset();
 
@@ -2371,7 +2454,7 @@ form.addEventListener(
 
 
 /* =========================================================
-   日间 / 夜间模式
+   日夜模式
 ========================================================= */
 
 const themeToggle =
@@ -2462,4 +2545,4 @@ showCharacterMode();
 
 </body>
 
-    </html>
+</html>
