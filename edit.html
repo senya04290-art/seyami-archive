@@ -1478,9 +1478,7 @@ body.day-mode .status-message.success{
             </div>
 
 
-            <!-- =================================================
-                 世界设定
-            ================================================= -->
+            <!-- 世界设定 -->
 
             <div
                 class="form-item full"
@@ -1729,14 +1727,8 @@ body.day-mode .status-message.success{
 const SUPABASE_URL =
     "https://rqqkdpzehxzwqzytpxgh.supabase.co";
 
-
 const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_T_gNdlgkOaXnzjSvdmI1Pw_HQOVTEWG";
-
-
-/* =========================================================
-   初始化 Supabase
-========================================================= */
 
 const supabaseClient =
     window.supabase.createClient(
@@ -1750,27 +1742,16 @@ const supabaseClient =
 ========================================================= */
 
 const pageTitleEn =
-    document.getElementById(
-        "pageTitleEn"
-    );
+    document.getElementById("pageTitleEn");
 
 const pageTitleCn =
-    document.getElementById(
-        "pageTitleCn"
-    );
+    document.getElementById("pageTitleCn");
 
 const archiveMark =
-    document.getElementById(
-        "archiveMark"
-    );
-
-
-/* 角色 */
+    document.getElementById("archiveMark");
 
 const characterImageSection =
-    document.getElementById(
-        "characterImageSection"
-    );
+    document.getElementById("characterImageSection");
 
 const nameInput =
     document.getElementById("name");
@@ -1791,141 +1772,79 @@ const regionInput =
     document.getElementById("region");
 
 const personalityInput =
-    document.getElementById(
-        "personality"
-    );
+    document.getElementById("personality");
 
 const backstoryInput =
-    document.getElementById(
-        "backstory"
-    );
-
-
-/* 图片 */
+    document.getElementById("backstory");
 
 const imageFile =
-    document.getElementById(
-        "imageFile"
-    );
+    document.getElementById("imageFile");
 
 const previewImage =
-    document.getElementById(
-        "previewImage"
-    );
+    document.getElementById("previewImage");
 
 const imagePlaceholder =
-    document.getElementById(
-        "imagePlaceholder"
-    );
-
-
-/* 世界 */
+    document.getElementById("imagePlaceholder");
 
 const worldContentItem =
-    document.getElementById(
-        "worldContentItem"
-    );
+    document.getElementById("worldContentItem");
 
 const worldContent =
-    document.getElementById(
-        "worldContent"
-    );
-
-
-/* 国家 */
+    document.getElementById("worldContent");
 
 const countrySubtitleItem =
-    document.getElementById(
-        "countrySubtitleItem"
-    );
+    document.getElementById("countrySubtitleItem");
 
 const countrySubtitle =
-    document.getElementById(
-        "countrySubtitle"
-    );
+    document.getElementById("countrySubtitle");
 
 const countryCapitalItem =
-    document.getElementById(
-        "countryCapitalItem"
-    );
+    document.getElementById("countryCapitalItem");
 
 const countryCapital =
-    document.getElementById(
-        "countryCapital"
-    );
+    document.getElementById("countryCapital");
 
 const countryGovernmentItem =
-    document.getElementById(
-        "countryGovernmentItem"
-    );
+    document.getElementById("countryGovernmentItem");
 
 const countryGovernment =
-    document.getElementById(
-        "countryGovernment"
-    );
+    document.getElementById("countryGovernment");
 
 const countryRegionItem =
-    document.getElementById(
-        "countryRegionItem"
-    );
+    document.getElementById("countryRegionItem");
 
 const countryRegion =
-    document.getElementById(
-        "countryRegion"
-    );
+    document.getElementById("countryRegion");
 
 const countryDescriptionItem =
-    document.getElementById(
-        "countryDescriptionItem"
-    );
+    document.getElementById("countryDescriptionItem");
 
 const countryDescription =
-    document.getElementById(
-        "countryDescription"
-    );
+    document.getElementById("countryDescription");
 
 const countryHistoryItem =
-    document.getElementById(
-        "countryHistoryItem"
-    );
+    document.getElementById("countryHistoryItem");
 
 const countryHistory =
-    document.getElementById(
-        "countryHistory"
-    );
+    document.getElementById("countryHistory");
 
 const countryCultureItem =
-    document.getElementById(
-        "countryCultureItem"
-    );
+    document.getElementById("countryCultureItem");
 
 const countryCulture =
-    document.getElementById(
-        "countryCulture"
-    );
-
-
-/* 按钮 */
+    document.getElementById("countryCulture");
 
 const saveButton =
-    document.getElementById(
-        "saveButton"
-    );
+    document.getElementById("saveButton");
 
 const cancelButton =
-    document.getElementById(
-        "cancelButton"
-    );
+    document.getElementById("cancelButton");
 
 const statusMessage =
-    document.getElementById(
-        "statusMessage"
-    );
+    document.getElementById("statusMessage");
 
 const themeToggle =
-    document.getElementById(
-        "themeToggle"
-    );
+    document.getElementById("themeToggle");
 
 
 /* =========================================================
@@ -1937,59 +1856,32 @@ const params =
         window.location.search
     );
 
-
-const characterId =
+const recordId =
     params.get("id");
-
 
 const editType =
     params.get("type");
 
-
-/*
-   当前编辑模式
-
-   type=world
-   → 世界设定
-
-   type=country
-   → 国家设定
-
-   其他情况
-   → 角色
-*/
-
+const isNewCountry =
+    editType === "country" &&
+    !recordId;
 
 const isWorldMode =
     editType === "world";
-
 
 const isCountryMode =
     editType === "country";
 
 
-/*
-   国家是否为新建模式
-
-   有 id
-   → 修改已有国家
-
-   没有 id
-   → 新建国家
-*/
-
-const isNewCountry =
-    isCountryMode &&
-    !characterId;
-
-
-let currentCharacter = null;
+/* =========================================================
+   状态
+========================================================= */
 
 let currentImageUrl = null;
 
 
 /* =========================================================
-   状态
+   状态提示
 ========================================================= */
 
 function showStatus(
@@ -2015,7 +1907,7 @@ function showStatus(
 
 
 /* =========================================================
-   隐藏所有国家字段
+   隐藏国家字段
 ========================================================= */
 
 function hideCountryFields(){
@@ -2045,7 +1937,7 @@ function hideCountryFields(){
 
 
 /* =========================================================
-   切换到角色编辑模式
+   角色模式
 ========================================================= */
 
 function setupCharacterMode(){
@@ -2059,63 +1951,43 @@ function setupCharacterMode(){
     archiveMark.textContent =
         "塞垭弥档案 · 人物记录";
 
-
     characterImageSection.style.display =
         "block";
-
 
     worldContentItem.style.display =
         "none";
 
-
     hideCountryFields();
 
-
-    nameInput.closest(
-        ".form-item"
-    ).style.display =
+    nameInput.closest(".form-item").style.display =
         "flex";
 
-    raceInput.closest(
-        ".form-item"
-    ).style.display =
+    raceInput.closest(".form-item").style.display =
         "flex";
 
-    roleInput.closest(
-        ".form-item"
-    ).style.display =
+    roleInput.closest(".form-item").style.display =
         "flex";
 
-    ageInput.closest(
-        ".form-item"
-    ).style.display =
+    ageInput.closest(".form-item").style.display =
         "flex";
 
-    genderInput.closest(
-        ".form-item"
-    ).style.display =
+    genderInput.closest(".form-item").style.display =
         "flex";
 
-    regionInput.closest(
-        ".form-item"
-    ).style.display =
+    regionInput.closest(".form-item").style.display =
         "flex";
 
-    personalityInput.closest(
-        ".form-item"
-    ).style.display =
+    personalityInput.closest(".form-item").style.display =
         "flex";
 
-    backstoryInput.closest(
-        ".form-item"
-    ).style.display =
+    backstoryInput.closest(".form-item").style.display =
         "flex";
 
 }
 
 
 /* =========================================================
-   切换到世界设定编辑模式
+   世界模式
 ========================================================= */
 
 function setupWorldMode(){
@@ -2129,65 +2001,41 @@ function setupWorldMode(){
     archiveMark.textContent =
         "塞垭弥档案 · 世界记录";
 
-
     characterImageSection.style.display =
         "none";
 
-
-    nameInput.closest(
-        ".form-item"
-    ).style.display =
+    nameInput.closest(".form-item").style.display =
         "flex";
 
-
-    document.getElementById(
-        "nameLabel"
-    ).textContent =
+    document.getElementById("nameLabel").textContent =
         "TITLE · 标题";
 
     nameInput.placeholder =
         "世界设定标题";
 
-
-    raceInput.closest(
-        ".form-item"
-    ).style.display =
+    raceInput.closest(".form-item").style.display =
         "none";
 
-    roleInput.closest(
-        ".form-item"
-    ).style.display =
+    roleInput.closest(".form-item").style.display =
         "none";
 
-    ageInput.closest(
-        ".form-item"
-    ).style.display =
+    ageInput.closest(".form-item").style.display =
         "none";
 
-    genderInput.closest(
-        ".form-item"
-    ).style.display =
+    genderInput.closest(".form-item").style.display =
         "none";
 
-    regionInput.closest(
-        ".form-item"
-    ).style.display =
+    regionInput.closest(".form-item").style.display =
         "none";
 
-    personalityInput.closest(
-        ".form-item"
-    ).style.display =
+    personalityInput.closest(".form-item").style.display =
         "none";
 
-    backstoryInput.closest(
-        ".form-item"
-    ).style.display =
+    backstoryInput.closest(".form-item").style.display =
         "none";
-
 
     worldContentItem.style.display =
         "flex";
-
 
     hideCountryFields();
 
@@ -2195,14 +2043,10 @@ function setupWorldMode(){
 
 
 /* =========================================================
-   切换到国家编辑模式
+   国家模式
 ========================================================= */
 
 function setupCountryMode(){
-
-    /*
-       新建 / 修改分别显示不同标题
-    */
 
     if(isNewCountry){
 
@@ -2210,7 +2054,7 @@ function setupCountryMode(){
             "NEW NATION";
 
         pageTitleCn.textContent =
-            "新增国家档案";
+            "建立国家档案";
 
     }else{
 
@@ -2222,89 +2066,44 @@ function setupCountryMode(){
 
     }
 
-
     archiveMark.textContent =
         "塞垭弥档案 · 国家记录";
-
-
-    /*
-       国家不需要角色图片
-    */
 
     characterImageSection.style.display =
         "none";
 
-
-    /*
-       国家名称
-    */
-
-    nameInput.closest(
-        ".form-item"
-    ).style.display =
+    nameInput.closest(".form-item").style.display =
         "flex";
 
-
-    document.getElementById(
-        "nameLabel"
-    ).textContent =
+    document.getElementById("nameLabel").textContent =
         "NAME · 国家名称";
 
     nameInput.placeholder =
         "国家名称";
 
-
-    /*
-       隐藏角色字段
-    */
-
-    raceInput.closest(
-        ".form-item"
-    ).style.display =
+    raceInput.closest(".form-item").style.display =
         "none";
 
-    roleInput.closest(
-        ".form-item"
-    ).style.display =
+    roleInput.closest(".form-item").style.display =
         "none";
 
-    ageInput.closest(
-        ".form-item"
-    ).style.display =
+    ageInput.closest(".form-item").style.display =
         "none";
 
-    genderInput.closest(
-        ".form-item"
-    ).style.display =
+    genderInput.closest(".form-item").style.display =
         "none";
 
-    regionInput.closest(
-        ".form-item"
-    ).style.display =
+    regionInput.closest(".form-item").style.display =
         "none";
 
-    personalityInput.closest(
-        ".form-item"
-    ).style.display =
+    personalityInput.closest(".form-item").style.display =
         "none";
 
-    backstoryInput.closest(
-        ".form-item"
-    ).style.display =
+    backstoryInput.closest(".form-item").style.display =
         "none";
-
-
-    /*
-       隐藏世界正文
-    */
 
     worldContentItem.style.display =
         "none";
-
-
-    /*
-       显示国家字段
-    */
 
     countrySubtitleItem.style.display =
         "flex";
@@ -2327,11 +2126,23 @@ function setupCountryMode(){
     countryCultureItem.style.display =
         "flex";
 
+    if(isNewCountry){
+
+        saveButton.textContent =
+            "建立档案";
+
+    }else{
+
+        saveButton.textContent =
+            "保存更改";
+
+    }
+
 }
 
 
 /* =========================================================
-   图片显示
+   图片
 ========================================================= */
 
 function showImage(url){
@@ -2347,7 +2158,6 @@ function showImage(url){
         return;
     }
 
-
     previewImage.src =
         url;
 
@@ -2359,10 +2169,6 @@ function showImage(url){
 }
 
 
-/* =========================================================
-   选择新图片
-========================================================= */
-
 imageFile.addEventListener(
     "change",
     function(){
@@ -2371,18 +2177,14 @@ imageFile.addEventListener(
             this.files &&
             this.files[0];
 
-
         if(!file){
 
             return;
+
         }
 
-
         const objectUrl =
-            URL.createObjectURL(
-                file
-            );
-
+            URL.createObjectURL(file);
 
         showImage(
             objectUrl
@@ -2398,7 +2200,7 @@ imageFile.addEventListener(
 
 async function loadCharacter(){
 
-    if(!characterId){
+    if(!recordId){
 
         showStatus(
             "缺少角色 ID",
@@ -2409,13 +2211,12 @@ async function loadCharacter(){
             true;
 
         return;
-    }
 
+    }
 
     showStatus(
         "正在读取角色档案……"
     );
-
 
     try{
 
@@ -2425,8 +2226,7 @@ async function loadCharacter(){
         } =
             await supabaseClient
                 .from("characters")
-                .select(
-                    `
+                .select(`
                     id,
                     name,
                     race,
@@ -2437,41 +2237,30 @@ async function loadCharacter(){
                     personality,
                     backstory,
                     image_url
-                    `
-                )
+                `)
                 .eq(
                     "id",
-                    characterId
+                    recordId
                 )
                 .single();
 
-
         if(error){
 
-            console.error(
-                "Supabase read error:",
-                error
-            );
-
             throw error;
-        }
 
+        }
 
         if(!data){
 
             throw new Error(
                 "没有找到这个角色"
             );
+
         }
-
-
-        currentCharacter =
-            data;
 
         currentImageUrl =
             data.image_url ||
             null;
-
 
         nameInput.value =
             data.name ||
@@ -2505,14 +2294,11 @@ async function loadCharacter(){
             data.backstory ||
             "";
 
-
         showImage(
             currentImageUrl
         );
 
-
         showStatus("");
-
 
     }catch(error){
 
@@ -2520,7 +2306,6 @@ async function loadCharacter(){
             "读取角色失败:",
             error
         );
-
 
         showStatus(
             "读取角色失败：" +
@@ -2531,16 +2316,16 @@ async function loadCharacter(){
             "error"
         );
 
-
         saveButton.disabled =
             true;
+
     }
 
 }
 
 
 /* =========================================================
-   读取世界设定
+   读取世界
 ========================================================= */
 
 async function loadWorld(){
@@ -2548,7 +2333,6 @@ async function loadWorld(){
     showStatus(
         "正在读取世界设定……"
     );
-
 
     try{
 
@@ -2558,52 +2342,41 @@ async function loadWorld(){
         } =
             await supabaseClient
                 .from("world_settings")
-                .select(
-                    `
+                .select(`
                     id,
                     title,
                     content,
                     updated_at
-                    `
-                )
+                `)
                 .eq(
                     "id",
                     1
                 )
                 .single();
 
-
         if(error){
 
-            console.error(
-                "Supabase world read error:",
-                error
-            );
-
             throw error;
-        }
 
+        }
 
         if(!data){
 
             throw new Error(
                 "没有找到世界设定"
             );
-        }
 
+        }
 
         nameInput.value =
             data.title ||
             "";
 
-
         worldContent.value =
             data.content ||
             "";
 
-
         showStatus("");
-
 
     }catch(error){
 
@@ -2611,7 +2384,6 @@ async function loadWorld(){
             "读取世界设定失败:",
             error
         );
-
 
         showStatus(
             "读取世界设定失败：" +
@@ -2622,9 +2394,9 @@ async function loadWorld(){
             "error"
         );
 
-
         saveButton.disabled =
             true;
+
     }
 
 }
@@ -2637,57 +2409,23 @@ async function loadWorld(){
 async function loadCountry(){
 
     /*
-       没有 ID
-       → 新建国家
-       → 不读取 Supabase
-       → 表单保持空白
+       新建国家：
+       不读取 Supabase
+       直接让用户填写
     */
 
     if(isNewCountry){
 
-        nameInput.value =
-            "";
+        showStatus("");
 
-        countrySubtitle.value =
-            "";
-
-        countryCapital.value =
-            "";
-
-        countryGovernment.value =
-            "";
-
-        countryRegion.value =
-            "";
-
-        countryDescription.value =
-            "";
-
-        countryHistory.value =
-            "";
-
-        countryCulture.value =
-            "";
-
-
-        saveButton.disabled =
-            false;
-
-
-        showStatus(
-            "可以开始填写新的国家档案。"
-        );
+        nameInput.focus();
 
         return;
+
     }
 
 
-    /*
-       有 ID
-       → 读取已有国家
-    */
-
-    if(!characterId){
+    if(!recordId){
 
         showStatus(
             "缺少国家 ID",
@@ -2698,6 +2436,7 @@ async function loadCountry(){
             true;
 
         return;
+
     }
 
 
@@ -2708,24 +2447,13 @@ async function loadCountry(){
 
     try{
 
-        /*
-           使用 maybeSingle()
-
-           如果 ID 不存在，
-           不会再出现：
-
-           Cannot coerce the result
-           to a single JSON object
-        */
-
         const {
             data,
             error
         } =
             await supabaseClient
                 .from("countries")
-                .select(
-                    `
+                .select(`
                     id,
                     name,
                     subtitle,
@@ -2736,112 +2464,63 @@ async function loadCountry(){
                     history,
                     culture,
                     updated_at
-                    `
-                )
+                `)
                 .eq(
                     "id",
-                    characterId
+                    recordId
                 )
-                .maybeSingle();
+                .single();
 
 
         if(error){
 
-            console.error(
-                "Supabase country read error:",
-                error
-            );
-
             throw error;
+
         }
 
 
         if(!data){
 
             throw new Error(
-                "没有找到这个国家档案，请检查国家 ID。"
+                "没有找到这个国家"
             );
+
         }
 
-
-        /*
-           国家名称
-        */
 
         nameInput.value =
             data.name ||
             "";
 
-
-        /*
-           副标题
-        */
-
         countrySubtitle.value =
             data.subtitle ||
             "";
-
-
-        /*
-           首都
-        */
 
         countryCapital.value =
             data.capital ||
             "";
 
-
-        /*
-           政体
-        */
-
         countryGovernment.value =
             data.government ||
             "";
-
-
-        /*
-           地区
-        */
 
         countryRegion.value =
             data.region ||
             "";
 
-
-        /*
-           国家介绍
-        */
-
         countryDescription.value =
             data.description ||
             "";
-
-
-        /*
-           历史
-        */
 
         countryHistory.value =
             data.history ||
             "";
 
-
-        /*
-           文化
-        */
-
         countryCulture.value =
             data.culture ||
             "";
 
-
-        saveButton.disabled =
-            false;
-
-
         showStatus("");
-
 
     }catch(error){
 
@@ -2849,7 +2528,6 @@ async function loadCountry(){
             "读取国家失败:",
             error
         );
-
 
         showStatus(
             "读取国家失败：" +
@@ -2860,88 +2538,11 @@ async function loadCountry(){
             "error"
         );
 
-
         saveButton.disabled =
             true;
+
     }
 
-}
-
-
-/* =========================================================
-   上传角色图片
-========================================================= */
-
-async function uploadImage(file){
-
-    if(!file){
-
-        return currentImageUrl;
-    }
-
-
-    const originalName =
-        file.name ||
-        "";
-
-
-    const extension =
-        originalName
-            .split(".")
-            .pop()
-            .toLowerCase();
-
-
-    const filePath =
-        "character-" +
-        Date.now() +
-        "-" +
-        Math.random()
-            .toString(36)
-            .substring(2,8) +
-        "." +
-        extension;
-
-
-    const {
-        error:uploadError
-    } =
-        await supabaseClient
-            .storage
-            .from("character-images")
-            .upload(
-                filePath,
-                file,
-                {
-                    cacheControl:"3600",
-                    upsert:false
-                }
-            );
-
-
-    if(uploadError){
-
-        console.error(
-            "Image upload error:",
-            uploadError
-        );
-
-        throw uploadError;
-    }
-
-
-    const {
-        data
-    } =
-        supabaseClient
-            .storage
-            .from("character-images")
-            .getPublicUrl(
-                filePath
-            );
-
-
-    return data.publicUrl;
 }
 
 
@@ -2951,11 +2552,11 @@ async function uploadImage(file){
 
 async function saveCharacter(){
 
-    if(!characterId){
+    if(!recordId){
 
         return;
-    }
 
+    }
 
     saveButton.disabled =
         true;
@@ -2963,36 +2564,11 @@ async function saveCharacter(){
     cancelButton.disabled =
         true;
 
-
     showStatus(
         "正在保存档案……"
     );
 
-
     try{
-
-        let imageURL =
-            currentImageUrl;
-
-
-        const file =
-            imageFile.files &&
-            imageFile.files[0];
-
-
-        if(file){
-
-            showStatus(
-                "正在上传新的角色图片……"
-            );
-
-
-            imageURL =
-                await uploadImage(
-                    file
-                );
-        }
-
 
         const updateData = {
 
@@ -3028,7 +2604,7 @@ async function saveCharacter(){
                 null,
 
             image_url:
-                imageURL ||
+                currentImageUrl ||
                 null
 
         };
@@ -3044,18 +2620,14 @@ async function saveCharacter(){
                 )
                 .eq(
                     "id",
-                    characterId
+                    recordId
                 );
 
 
         if(error){
 
-            console.error(
-                "Supabase update error:",
-                error
-            );
-
             throw error;
+
         }
 
 
@@ -3071,7 +2643,7 @@ async function saveCharacter(){
                 window.location.href =
                     "characters.html?id=" +
                     encodeURIComponent(
-                        characterId
+                        recordId
                     );
 
             },
@@ -3086,7 +2658,6 @@ async function saveCharacter(){
             error
         );
 
-
         showStatus(
             "保存失败：" +
             (
@@ -3095,7 +2666,6 @@ async function saveCharacter(){
             ),
             "error"
         );
-
 
         saveButton.disabled =
             false;
@@ -3109,7 +2679,7 @@ async function saveCharacter(){
 
 
 /* =========================================================
-   保存世界设定
+   保存世界
 ========================================================= */
 
 async function saveWorld(){
@@ -3120,11 +2690,9 @@ async function saveWorld(){
     cancelButton.disabled =
         true;
 
-
     showStatus(
         "正在保存世界设定……"
     );
-
 
     try{
 
@@ -3140,6 +2708,7 @@ async function saveWorld(){
             throw new Error(
                 "世界设定标题不能为空"
             );
+
         }
 
 
@@ -3169,12 +2738,8 @@ async function saveWorld(){
 
         if(error){
 
-            console.error(
-                "Supabase world update error:",
-                error
-            );
-
             throw error;
+
         }
 
 
@@ -3202,7 +2767,6 @@ async function saveWorld(){
             error
         );
 
-
         showStatus(
             "保存失败：" +
             (
@@ -3211,7 +2775,6 @@ async function saveWorld(){
             ),
             "error"
         );
-
 
         saveButton.disabled =
             false;
@@ -3236,9 +2799,10 @@ async function saveCountry(){
     cancelButton.disabled =
         true;
 
-
     showStatus(
-        "正在保存国家档案……"
+        isNewCountry
+            ? "正在建立国家档案……"
+            : "正在保存国家档案……"
     );
 
 
@@ -3253,6 +2817,7 @@ async function saveCountry(){
             throw new Error(
                 "国家名称不能为空"
             );
+
         }
 
 
@@ -3296,16 +2861,11 @@ async function saveCountry(){
         };
 
 
-        /* =================================================
+        /*
            新建国家
-        ================================================= */
+        */
 
         if(isNewCountry){
-
-            showStatus(
-                "正在建立新的国家档案……"
-            );
-
 
             const {
                 data,
@@ -3316,33 +2876,28 @@ async function saveCountry(){
                     .insert(
                         countryData
                     )
-                    .select(
-                        "id"
-                    )
+                    .select("id")
                     .single();
 
 
             if(error){
 
-                console.error(
-                    "Supabase country insert error:",
-                    error
-                );
-
                 throw error;
+
             }
 
 
             if(!data){
 
                 throw new Error(
-                    "国家创建成功，但没有取得国家 ID。"
+                    "国家创建成功，但没有返回国家 ID"
                 );
+
             }
 
 
             showStatus(
-                "国家档案创建成功，即将返回国家档案页面……",
+                "国家档案建立成功，即将返回国家档案……",
                 "success"
             );
 
@@ -3359,18 +2914,20 @@ async function saveCountry(){
 
 
             return;
+
         }
 
 
-        /* =================================================
-           修改已有国家
-        ================================================= */
+        /*
+           编辑已有国家
+        */
 
-        if(!characterId){
+        if(!recordId){
 
             throw new Error(
                 "缺少国家 ID"
             );
+
         }
 
 
@@ -3384,23 +2941,19 @@ async function saveCountry(){
                 )
                 .eq(
                     "id",
-                    characterId
+                    recordId
                 );
 
 
         if(error){
 
-            console.error(
-                "Supabase country update error:",
-                error
-            );
-
             throw error;
+
         }
 
 
         showStatus(
-            "国家档案保存成功，即将返回国家档案页面……",
+            "国家档案保存成功，即将返回国家档案……",
             "success"
         );
 
@@ -3485,6 +3038,7 @@ cancelButton.addEventListener(
                 "world.html";
 
             return;
+
         }
 
 
@@ -3494,13 +3048,14 @@ cancelButton.addEventListener(
                 "nations.html";
 
             return;
+
         }
 
 
         window.location.href =
             "characters.html?id=" +
             encodeURIComponent(
-                characterId
+                recordId
             );
 
     }
@@ -3583,29 +3138,17 @@ applyTheme();
 
 if(isWorldMode){
 
-    /*
-       世界设定模式
-    */
-
     setupWorldMode();
 
     loadWorld();
 
 }else if(isCountryMode){
 
-    /*
-       国家设定模式
-    */
-
     setupCountryMode();
 
     loadCountry();
 
 }else{
-
-    /*
-       角色编辑模式
-    */
 
     setupCharacterMode();
 
