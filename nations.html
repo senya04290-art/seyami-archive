@@ -11,6 +11,8 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 
 /* =========================================================
@@ -694,8 +696,6 @@ body{
     height:520px;
 
     display:block;
-
-    perspective:1800px;
 }
 
 
@@ -723,12 +723,6 @@ body{
 
     box-shadow:
         inset 0 0 45px rgba(65,132,178,.05);
-
-    backface-visibility:hidden;
-
-    transform-style:preserve-3d;
-
-    transform-origin:center left;
 
     transition:
         background .5s ease,
@@ -1001,181 +995,106 @@ body{
 
 
 /* =========================================================
-   真正的档案翻页动画
-========================================================= */
-
-/*
-   不再使用原来的：
-   0deg → -88deg → 0deg
-
-   现在改成：
-   当前页 → 翻到侧面 → 更换内容
-   → 从另一侧翻回来
-
-   这样视觉上才是“翻到下一页”。
-*/
-
-.book-page.turn-out-next{
-    animation:pageTurnOutNext .34s ease-in forwards;
-}
-
-.book-page.turn-in-next{
-    animation:pageTurnInNext .34s ease-out forwards;
-}
-
-.book-page.turn-out-prev{
-    animation:pageTurnOutPrev .34s ease-in forwards;
-}
-
-.book-page.turn-in-prev{
-    animation:pageTurnInPrev .34s ease-out forwards;
-}
-
-
-@keyframes pageTurnOutNext{
-
-    0%{
-        transform:
-            perspective(1800px)
-            rotateY(0deg);
-
-        opacity:1;
-    }
-
-    100%{
-        transform:
-            perspective(1800px)
-            rotateY(-90deg);
-
-        opacity:.25;
-    }
-
-}
-
-
-@keyframes pageTurnInNext{
-
-    0%{
-        transform:
-            perspective(1800px)
-            rotateY(90deg);
-
-        opacity:.25;
-    }
-
-    100%{
-        transform:
-            perspective(1800px)
-            rotateY(0deg);
-
-        opacity:1;
-    }
-
-}
-
-
-@keyframes pageTurnOutPrev{
-
-    0%{
-        transform:
-            perspective(1800px)
-            rotateY(0deg);
-
-        opacity:1;
-    }
-
-    100%{
-        transform:
-            perspective(1800px)
-            rotateY(90deg);
-
-        opacity:.25;
-    }
-
-}
-
-
-@keyframes pageTurnInPrev{
-
-    0%{
-        transform:
-            perspective(1800px)
-            rotateY(-90deg);
-
-        opacity:.25;
-    }
-
-    100%{
-        transform:
-            perspective(1800px)
-            rotateY(0deg);
-
-        opacity:1;
-    }
-
-}
-
-
-/* =========================================================
-   翻页控制
+   ★ 国家翻页
+   ★ 完全采用角色档案的翻页逻辑
 ========================================================= */
 
 .book-controls{
-    display:flex;
 
-    justify-content:center;
+    width:100%;
+
+    margin:28px auto 0;
+
+    display:flex;
 
     align-items:center;
 
-    gap:28px;
+    justify-content:space-between;
 
-    margin-top:25px;
+    position:relative;
+
+    z-index:10;
 }
 
 .page-button{
-    border:none;
+
+    appearance:none;
+
+    border:0;
 
     background:transparent;
 
-    color:rgba(191,220,243,.62);
+    padding:8px 4px;
 
-    font-family:"Cinzel",serif;
+    color:rgba(191,220,243,.68);
 
-    font-size:10px;
+    font-family:
+        "Cinzel",
+        "Noto Serif SC",
+        serif;
 
-    letter-spacing:2px;
+    font-size:9px;
+
+    letter-spacing:3px;
 
     cursor:pointer;
 
-    padding:8px 10px;
-
     transition:
         color .3s ease,
-        opacity .3s ease;
+        opacity .3s ease,
+        text-shadow .3s ease;
 }
 
 .page-button:hover:not(:disabled){
+
     color:#d9efff;
+
+    text-shadow:
+        0 0 10px
+        rgba(102,180,231,.35);
 }
 
 .page-button:disabled{
-    opacity:.20;
+
+    opacity:.18;
 
     cursor:default;
 }
 
 .page-count{
-    min-width:70px;
 
-    text-align:center;
+    color:rgba(115,182,224,.48);
 
     font-family:"Cinzel",serif;
 
-    font-size:10px;
+    font-size:8px;
 
     letter-spacing:3px;
 
-    color:rgba(137,190,220,.48);
+    min-width:auto;
+
+    text-align:center;
+}
+
+body.day .page-button{
+
+    color:
+        rgba(62,99,127,.70);
+}
+
+body.day .page-button:hover:not(:disabled){
+
+    color:#28536f;
+
+    text-shadow:
+        0 0 8px
+        rgba(76,151,202,.14);
+}
+
+body.day .page-count{
+
+    color:
+        rgba(70,135,165,.55);
 }
 
 
@@ -1485,18 +1404,6 @@ body.day .edit-button:hover{
 }
 
 
-body.day .page-button{
-    color:rgba(62,99,127,.70);
-}
-
-body.day .page-button:hover:not(:disabled){
-    color:#28536f;
-}
-
-body.day .page-count{
-    color:rgba(73,115,143,.52);
-}
-
 body.day .archive-note{
     color:rgba(73,115,143,.40);
 }
@@ -1620,8 +1527,6 @@ body.day .footer{
 
     .book{
         height:540px;
-
-        perspective:1200px;
     }
 
     .right-page{
@@ -1697,21 +1602,26 @@ body.day .footer{
     }
 
     .book-controls{
-        gap:18px;
 
-        margin-top:19px;
+        margin-top:22px;
+
+        padding:
+            0 5px;
+
     }
 
     .page-button{
-        font-size:9px;
+        font-size:8px;
 
-        padding:7px;
+        letter-spacing:2px;
+
+        padding:8px 4px;
     }
 
     .page-count{
-        min-width:60px;
+        font-size:7px;
 
-        font-size:9px;
+        letter-spacing:2px;
     }
 
     .archive-note{
@@ -2058,14 +1968,22 @@ body.day .footer{
             </div>
 
 
-            <div class="book-controls">
+            <!-- =================================================
+                 ★ 与角色档案完全相同的翻页结构
+            ================================================== -->
+
+            <nav
+                class="book-controls"
+                id="nationPagination"
+                aria-label="国家翻页"
+            >
 
                 <button
                     class="page-button"
                     id="prevButton"
                     type="button"
                 >
-                    ‹ PREV
+                    ← PREVIOUS
                 </button>
 
 
@@ -2073,7 +1991,7 @@ body.day .footer{
                     class="page-count"
                     id="pageCount"
                 >
-                    00 / 00
+                    NATION · 001
                 </div>
 
 
@@ -2082,10 +2000,10 @@ body.day .footer{
                     id="nextButton"
                     type="button"
                 >
-                    NEXT ›
+                    NEXT →
                 </button>
 
-            </div>
+            </nav>
 
 
             <div
@@ -2108,10 +2026,11 @@ body.day .footer{
 </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
 <script>
+
+/* =========================================================
+   SUPABASE
+========================================================= */
 
 const SUPABASE_URL =
     "https://rqqkdpzehxzwqzytpxgh.supabase.co";
@@ -2126,57 +2045,197 @@ const supabaseClient =
     );
 
 
-let nations = [];
+/* =========================================================
+   全部国家
+========================================================= */
 
-let currentPage = 0;
+let allNations = [];
 
-let totalPages = 0;
-
-let isTurning = false;
+let currentIndex = 0;
 
 
-const rightPage =
-    document.getElementById("rightPage");
+/* =========================================================
+   国家元素
+========================================================= */
 
 const rightTitle =
-    document.getElementById("rightTitle");
+    document.getElementById(
+        "rightTitle"
+    );
 
 const rightCn =
-    document.getElementById("rightCn");
+    document.getElementById(
+        "rightCn"
+    );
 
 const rightDescription =
-    document.getElementById("rightDescription");
+    document.getElementById(
+        "rightDescription"
+    );
 
 const rightInfo =
-    document.getElementById("rightInfo");
+    document.getElementById(
+        "rightInfo"
+    );
 
 const pageCount =
-    document.getElementById("pageCount");
+    document.getElementById(
+        "pageCount"
+    );
 
 const prevButton =
-    document.getElementById("prevButton");
+    document.getElementById(
+        "prevButton"
+    );
 
 const nextButton =
-    document.getElementById("nextButton");
+    document.getElementById(
+        "nextButton"
+    );
 
 const archiveNote =
-    document.getElementById("archiveNote");
+    document.getElementById(
+        "archiveNote"
+    );
 
 const editButton =
-    document.getElementById("editButton");
+    document.getElementById(
+        "editButton"
+    );
 
 
-function setPage(nation){
+/* =========================================================
+   GET NATION ID
+   ★ 与角色档案完全相同
+========================================================= */
+
+function getNationId(){
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    return params.get("id");
+
+}
+
+
+/* =========================================================
+   更新 URL
+   ★ 与角色档案完全相同
+========================================================= */
+
+function goToNation(nation){
+
+    if(!nation){
+        return;
+    }
+
+    const url =
+        "nations.html?id=" +
+        encodeURIComponent(
+            nation.id
+        );
+
+    window.location.href =
+        url;
+
+}
+
+
+/* =========================================================
+   更新翻页按钮
+   ★ 与角色档案逻辑一致
+========================================================= */
+
+function updatePagination(){
+
+    const total =
+        allNations.length;
+
+
+    if(total <= 1){
+
+        prevButton.disabled = true;
+
+        nextButton.disabled = true;
+
+    }else{
+
+        prevButton.disabled =
+            currentIndex <= 0;
+
+        nextButton.disabled =
+            currentIndex >= total - 1;
+
+    }
+
+
+    const displayNumber =
+        String(
+            currentIndex + 1
+        ).padStart(3,"0");
+
+
+    pageCount.textContent =
+        "NATION · " +
+        displayNumber;
+
+
+    document.title =
+        "国家档案 · " +
+        (
+            allNations[currentIndex]?.name ||
+            "Seyami Archive"
+        );
+
+}
+
+
+/* =========================================================
+   显示当前国家
+========================================================= */
+
+function renderNation(nation){
+
+    if(!nation){
+        return;
+    }
+
+
+    /* -------------------------
+       国家名称
+    ------------------------- */
 
     rightTitle.textContent =
         nation.name || "—";
 
+
+    /* -------------------------
+       副标题
+    ------------------------- */
+
     rightCn.textContent =
         nation.subtitle || "—";
+
+
+    /* -------------------------
+       国家介绍
+    ------------------------- */
 
     rightDescription.textContent =
         nation.description || "—";
 
+
+    /* -------------------------
+       基础资料
+
+       0 CAPITAL
+       1 REGION
+       2 GOVERNMENT
+       3 SUBTITLE
+    ------------------------- */
 
     const values = [
 
@@ -2207,30 +2266,53 @@ function setPage(nation){
     );
 
 
-    if(nation.id !== undefined && nation.id !== null){
+    /* -------------------------
+       修改档案
+    ------------------------- */
+
+    if(
+        nation.id !== undefined &&
+        nation.id !== null
+    ){
 
         editButton.href =
-            "edit.html?type=country&id="
-            + encodeURIComponent(nation.id);
+            "edit.html?type=country&id=" +
+            encodeURIComponent(
+                nation.id
+            );
 
-        editButton.style.opacity = "1";
+        editButton.style.opacity =
+            "1";
 
         editButton.style.pointerEvents =
             "auto";
 
     }else{
 
-        editButton.href = "#";
+        editButton.href =
+            "#";
 
-        editButton.style.opacity = ".25";
+        editButton.style.opacity =
+            ".25";
 
         editButton.style.pointerEvents =
             "none";
 
     }
 
+
+    /* -------------------------
+       翻页状态
+    ------------------------- */
+
+    updatePagination();
+
 }
 
+
+/* =========================================================
+   空档案
+========================================================= */
 
 function renderEmpty(){
 
@@ -2245,29 +2327,36 @@ function renderEmpty(){
 
 
     rightInfo
-        .querySelectorAll(".info-value")
+        .querySelectorAll(
+            ".info-value"
+        )
         .forEach(
             element=>{
-                element.textContent = "—";
+                element.textContent =
+                    "—";
             }
         );
 
 
-    editButton.href = "#";
+    editButton.href =
+        "#";
 
-    editButton.style.opacity = ".25";
+    editButton.style.opacity =
+        ".25";
 
     editButton.style.pointerEvents =
         "none";
 
 
     pageCount.textContent =
-        "00 / 00";
+        "NATION · 000";
 
 
-    prevButton.disabled = true;
+    prevButton.disabled =
+        true;
 
-    nextButton.disabled = true;
+    nextButton.disabled =
+        true;
 
 
     archiveNote.textContent =
@@ -2276,222 +2365,8 @@ function renderEmpty(){
 }
 
 
-function render(){
-
-    if(totalPages === 0){
-
-        renderEmpty();
-
-        return;
-
-    }
-
-
-    const nation =
-        nations[currentPage];
-
-
-    setPage(nation);
-
-
-    pageCount.textContent =
-        String(currentPage + 1)
-            .padStart(2,"0")
-        + " / "
-        + String(totalPages)
-            .padStart(2,"0");
-
-
-    prevButton.disabled =
-        currentPage <= 0;
-
-
-    nextButton.disabled =
-        currentPage >= totalPages - 1;
-
-
-    archiveNote.textContent =
-        "· ARCHIVE RECORDS AWAITING ·";
-
-}
-
-
 /* =========================================================
-   真正翻页
-========================================================= */
-
-function turnPage(direction){
-
-    if(isTurning){
-        return;
-    }
-
-
-    if(totalPages === 0){
-        return;
-    }
-
-
-    if(
-        direction === "next" &&
-        currentPage >= totalPages - 1
-    ){
-        return;
-    }
-
-
-    if(
-        direction === "prev" &&
-        currentPage <= 0
-    ){
-        return;
-    }
-
-
-    isTurning = true;
-
-
-    const outClass =
-        direction === "next"
-        ? "turn-out-next"
-        : "turn-out-prev";
-
-
-    const inClass =
-        direction === "next"
-        ? "turn-in-next"
-        : "turn-in-prev";
-
-
-    prevButton.disabled = true;
-    nextButton.disabled = true;
-
-
-    /*
-       第一阶段：
-       当前档案向侧面翻开
-    */
-
-    rightPage.classList.remove(
-        "turn-in-next",
-        "turn-in-prev"
-    );
-
-    rightPage.classList.add(
-        outClass
-    );
-
-
-    setTimeout(
-        function(){
-
-            /*
-               页面已经翻到侧面，
-               现在切换国家内容
-            */
-
-            if(direction === "next"){
-                currentPage++;
-            }else{
-                currentPage--;
-            }
-
-
-            render();
-
-
-            /*
-               让页面从另一侧开始
-            */
-
-            rightPage.classList.remove(
-                outClass
-            );
-
-
-            void rightPage.offsetWidth;
-
-
-            rightPage.classList.add(
-                inClass
-            );
-
-
-            setTimeout(
-                function(){
-
-                    rightPage.classList.remove(
-                        inClass
-                    );
-
-
-                    prevButton.disabled =
-                        currentPage <= 0;
-
-
-                    nextButton.disabled =
-                        currentPage >= totalPages - 1;
-
-
-                    isTurning = false;
-
-                },
-                360
-            );
-
-        },
-        340
-    );
-
-}
-
-
-nextButton.addEventListener(
-    "click",
-    function(){
-
-        turnPage("next");
-
-    }
-);
-
-
-prevButton.addEventListener(
-    "click",
-    function(){
-
-        turnPage("prev");
-
-    }
-);
-
-
-/* =========================================================
-   键盘翻页
-========================================================= */
-
-document.addEventListener(
-    "keydown",
-    function(event){
-
-        if(event.key === "ArrowRight"){
-
-            turnPage("next");
-
-        }
-
-        if(event.key === "ArrowLeft"){
-
-            turnPage("prev");
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   读取国家
+   LOAD ALL NATIONS
 ========================================================= */
 
 async function loadNations(){
@@ -2500,36 +2375,178 @@ async function loadNations(){
         "· LOADING NATION RECORDS ·";
 
 
-    const {
-        data,
-        error
-    } =
-    await supabaseClient
-        .from("countries")
-        .select(`
-            id,
-            name,
-            subtitle,
-            capital,
-            government,
-            region,
-            description,
-            history,
-            culture,
-            updated_at
-        `)
-        .order(
-            "id",
-            {
-                ascending:true
+    try{
+
+        const {
+            data,
+            error
+        } =
+        await supabaseClient
+            .from("countries")
+            .select(`
+                id,
+                name,
+                subtitle,
+                capital,
+                government,
+                region,
+                description,
+                history,
+                culture,
+                updated_at
+            `)
+            .order(
+                "id",
+                {
+                    ascending:true
+                }
+            );
+
+
+        /* -------------------------
+           ERROR
+        ------------------------- */
+
+        if(error){
+
+            console.error(
+                "读取国家档案失败：",
+                error
+            );
+
+
+            archiveNote.textContent =
+                "· FAILED TO LOAD NATION RECORDS ·";
+
+
+            rightTitle.textContent =
+                "READ ERROR";
+
+
+            rightCn.textContent =
+                "读取失败";
+
+
+            rightDescription.textContent =
+                "无法读取国家档案，请检查 Supabase 设置。";
+
+
+            editButton.href =
+                "#";
+
+            editButton.style.opacity =
+                ".25";
+
+            editButton.style.pointerEvents =
+                "none";
+
+
+            pageCount.textContent =
+                "NATION · 000";
+
+
+            prevButton.disabled =
+                true;
+
+            nextButton.disabled =
+                true;
+
+
+            return;
+
+        }
+
+
+        /* -------------------------
+           EMPTY
+        ------------------------- */
+
+        if(
+            !data ||
+            data.length === 0
+        ){
+
+            allNations = [];
+
+            currentIndex = 0;
+
+            renderEmpty();
+
+            return;
+
+        }
+
+
+        /* -------------------------
+           保存全部国家
+        ------------------------- */
+
+        allNations =
+            data;
+
+
+        /* -------------------------
+           根据 URL id 找当前国家
+           ★ 与角色档案完全一致
+        ------------------------- */
+
+        const nationId =
+            getNationId();
+
+
+        if(nationId){
+
+            const foundIndex =
+                allNations.findIndex(
+                    nation =>
+                        String(nation.id) ===
+                        String(nationId)
+                );
+
+
+            if(foundIndex >= 0){
+
+                currentIndex =
+                    foundIndex;
+
+            }else{
+
+                currentIndex =
+                    0;
+
             }
+
+        }else{
+
+            currentIndex =
+                0;
+
+        }
+
+
+        /* -------------------------
+           显示
+        ------------------------- */
+
+        renderNation(
+            allNations[currentIndex]
         );
 
 
-    if(error){
+        console.log(
+            "国家数量：",
+            allNations.length
+        );
+
+        console.log(
+            "当前国家：",
+            allNations[currentIndex]
+        );
+
+    }catch(error){
 
         console.error(
-            "读取国家档案失败：",
+            "国家档案加载失败：",
             error
         );
 
@@ -2539,59 +2556,181 @@ async function loadNations(){
 
 
         rightTitle.textContent =
-            "READ ERROR";
+            "ARCHIVE ERROR";
 
 
         rightCn.textContent =
-            "读取失败";
+            "档案读取失败";
 
 
         rightDescription.textContent =
-            "无法读取国家档案，请检查 Supabase 设置。";
-
-
-        editButton.href = "#";
-
-        editButton.style.opacity = ".25";
-
-        editButton.style.pointerEvents =
-            "none";
+            "DATABASE CONNECTION ERROR";
 
 
         pageCount.textContent =
-            "00 / 00";
+            "NATION · 000";
 
 
-        prevButton.disabled = true;
+        prevButton.disabled =
+            true;
 
-        nextButton.disabled = true;
-
-
-        return;
+        nextButton.disabled =
+            true;
 
     }
-
-
-    nations =
-        Array.isArray(data)
-        ? data
-        : [];
-
-
-    totalPages =
-        nations.length;
-
-
-    currentPage = 0;
-
-
-    render();
 
 }
 
 
 /* =========================================================
-   日夜模式
+   PREVIOUS
+   ★ 完全复制角色档案逻辑
+========================================================= */
+
+prevButton.addEventListener(
+    "click",
+    function(){
+
+        if(
+            currentIndex <= 0
+        ){
+            return;
+        }
+
+
+        const previous =
+            allNations[
+                currentIndex - 1
+            ];
+
+
+        goToNation(
+            previous
+        );
+
+    }
+);
+
+
+/* =========================================================
+   NEXT
+   ★ 完全复制角色档案逻辑
+========================================================= */
+
+nextButton.addEventListener(
+    "click",
+    function(){
+
+        if(
+            currentIndex >=
+            allNations.length - 1
+        ){
+            return;
+        }
+
+
+        const next =
+            allNations[
+                currentIndex + 1
+            ];
+
+
+        goToNation(
+            next
+        );
+
+    }
+);
+
+
+/* =========================================================
+   KEYBOARD
+   ← / →
+   ★ 与角色档案完全一致
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        const tag =
+            document.activeElement?.tagName;
+
+
+        if(
+            tag === "INPUT" ||
+            tag === "TEXTAREA"
+        ){
+            return;
+        }
+
+
+        if(
+            event.key === "ArrowLeft"
+        ){
+
+            if(
+                currentIndex > 0
+            ){
+
+                goToNation(
+                    allNations[
+                        currentIndex - 1
+                    ]
+                );
+
+            }
+
+        }
+
+
+        if(
+            event.key === "ArrowRight"
+        ){
+
+            if(
+                currentIndex <
+                allNations.length - 1
+            ){
+
+                goToNation(
+                    allNations[
+                        currentIndex + 1
+                    ]
+                );
+
+            }
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   ★ EDIT COUNTRY
+========================================================= */
+
+editButton.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            !allNations[currentIndex]
+        ){
+
+            event.preventDefault();
+
+            return;
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   DAY / NIGHT
 ========================================================= */
 
 const themeToggle =
@@ -2669,7 +2808,7 @@ themeToggle.addEventListener(
 
 
 /* =========================================================
-   启动
+   START
 ========================================================= */
 
 loadNations();
