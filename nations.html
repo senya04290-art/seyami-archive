@@ -933,6 +933,64 @@ body{
 
 
 /* =========================================================
+   修改档案按钮
+========================================================= */
+
+.edit-area{
+    display:flex;
+
+    justify-content:flex-end;
+
+    align-items:center;
+
+    margin-top:20px;
+
+    position:relative;
+
+    z-index:3;
+}
+
+.edit-button{
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    min-width:112px;
+
+    padding:8px 15px;
+
+    border:1px solid rgba(111,174,224,.28);
+
+    background:rgba(8,28,49,.28);
+
+    color:rgba(191,220,243,.62);
+
+    text-decoration:none;
+
+    font-family:"Cinzel","Noto Serif SC",serif;
+
+    font-size:9px;
+
+    letter-spacing:1.5px;
+
+    transition:
+        color .3s ease,
+        border-color .3s ease,
+        background .3s ease,
+        opacity .3s ease;
+}
+
+.edit-button:hover{
+    color:#d9efff;
+
+    border-color:rgba(111,174,224,.58);
+
+    background:rgba(18,48,72,.45);
+}
+
+
+/* =========================================================
    翻页动画
 ========================================================= */
 
@@ -1332,6 +1390,26 @@ body.day .page-text{
     color:rgba(61,98,125,.50);
 }
 
+
+/* 日间模式 · 修改按钮 */
+
+body.day .edit-button{
+    border-color:rgba(82,151,198,.32);
+
+    background:rgba(248,252,255,.55);
+
+    color:rgba(62,99,127,.70);
+}
+
+body.day .edit-button:hover{
+    color:#28536f;
+
+    border-color:rgba(82,151,198,.58);
+
+    background:rgba(248,252,255,.85);
+}
+
+
 body.day .page-button{
     color:rgba(62,99,127,.70);
 }
@@ -1521,6 +1599,20 @@ body.day .footer{
         line-height:2;
     }
 
+    .edit-area{
+        margin-top:16px;
+    }
+
+    .edit-button{
+        min-width:100px;
+
+        padding:7px 12px;
+
+        font-size:8px;
+
+        letter-spacing:1.2px;
+    }
+
     .book-controls{
         gap:18px;
 
@@ -1616,6 +1708,7 @@ body.day .footer{
     .book{
         height:570px;
     }
+
 }
 
 </style>
@@ -1626,14 +1719,8 @@ body.day .footer{
 
 <div class="page">
 
-    <!-- =====================================================
-         背景
-    ====================================================== -->
-
     <div class="stars"></div>
 
-
-    <!-- 微小星点 -->
 
     <div class="micro-stars">
 
@@ -1660,8 +1747,6 @@ body.day .footer{
 
     </div>
 
-
-    <!-- 魔法星 -->
 
     <div class="arcane-stars">
 
@@ -1697,19 +1782,10 @@ body.day .footer{
     </div>
 
 
-    <!-- 魔法阵 -->
-
     <div class="magic-circle"></div>
 
 
-    <!-- =====================================================
-         外框
-    ====================================================== -->
-
     <main class="frame">
-
-
-        <!-- ================= HEADER ================= -->
 
         <header class="header">
 
@@ -1757,8 +1833,6 @@ body.day .footer{
         </header>
 
 
-        <!-- ================= TITLE ================= -->
-
         <section class="hero">
 
             <div class="hero-main">
@@ -1775,10 +1849,6 @@ body.day .footer{
 
         </section>
 
-
-        <!-- =================================================
-             国家档案
-        ================================================== -->
 
         <section class="book-area">
 
@@ -1887,14 +1957,25 @@ body.day .footer{
 
                     </div>
 
+
+                    <!-- 修改档案按钮 -->
+
+                    <div class="edit-area">
+
+                        <a
+                            href="#"
+                            class="edit-button"
+                            id="editButton"
+                        >
+                            ✦ 修改档案
+                        </a>
+
+                    </div>
+
                 </article>
 
             </div>
 
-
-            <!-- =================================================
-                 翻页按钮
-            ================================================== -->
 
             <div class="book-controls">
 
@@ -1936,8 +2017,6 @@ body.day .footer{
         </section>
 
 
-        <!-- ================= FOOTER ================= -->
-
         <footer class="footer">
             SEYAMI CONTINENT · NATION ARCHIVE
         </footer>
@@ -1948,18 +2027,10 @@ body.day .footer{
 </div>
 
 
-<!-- =========================================================
-     SUPABASE
-========================================================= -->
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
 <script>
-
-/* =========================================================
-   Supabase
-========================================================= */
 
 const SUPABASE_URL =
     "https://rqqkdpzehxzwqzytpxgh.supabase.co";
@@ -1974,20 +2045,12 @@ const supabaseClient =
     );
 
 
-/* =========================================================
-   国家资料
-========================================================= */
-
 let nations = [];
 
 let currentPage = 0;
 
 let totalPages = 0;
 
-
-/* =========================================================
-   获取元素
-========================================================= */
 
 const rightPage =
     document.getElementById("rightPage");
@@ -2016,20 +2079,17 @@ const nextButton =
 const archiveNote =
     document.getElementById("archiveNote");
 
+const editButton =
+    document.getElementById("editButton");
 
-/* =========================================================
-   更新国家页面
-========================================================= */
 
 function setPage(nation){
 
     rightTitle.textContent =
         nation.name || "—";
 
-
     rightCn.textContent =
         nation.subtitle || "—";
-
 
     rightDescription.textContent =
         nation.description || "—";
@@ -2063,22 +2123,44 @@ function setPage(nation){
         }
     );
 
+
+    /* =====================================================
+       修改按钮
+       根据当前国家自动生成对应 ID
+    ===================================================== */
+
+    if(nation.id !== undefined && nation.id !== null){
+
+        editButton.href =
+            "edit.html?type=country&id="
+            + encodeURIComponent(nation.id);
+
+        editButton.style.opacity = "1";
+
+        editButton.style.pointerEvents =
+            "auto";
+
+    }else{
+
+        editButton.href = "#";
+
+        editButton.style.opacity = ".25";
+
+        editButton.style.pointerEvents =
+            "none";
+
+    }
+
 }
 
-
-/* =========================================================
-   没有国家时
-========================================================= */
 
 function renderEmpty(){
 
     rightTitle.textContent =
         "NO RECORD";
 
-
     rightCn.textContent =
         "暂无国家档案";
-
 
     rightDescription.textContent =
         "目前还没有录入国家设定。";
@@ -2093,11 +2175,20 @@ function renderEmpty(){
         );
 
 
+    editButton.href = "#";
+
+    editButton.style.opacity = ".25";
+
+    editButton.style.pointerEvents =
+        "none";
+
+
     pageCount.textContent =
         "00 / 00";
 
 
     prevButton.disabled = true;
+
     nextButton.disabled = true;
 
 
@@ -2106,10 +2197,6 @@ function renderEmpty(){
 
 }
 
-
-/* =========================================================
-   页面更新
-========================================================= */
 
 function render(){
 
@@ -2151,10 +2238,6 @@ function render(){
 }
 
 
-/* =========================================================
-   翻页动画
-========================================================= */
-
 function animatePage(direction){
 
     const animationClass =
@@ -2191,10 +2274,6 @@ function animatePage(direction){
 }
 
 
-/* =========================================================
-   下一页
-========================================================= */
-
 nextButton.addEventListener(
     "click",
     function(){
@@ -2223,10 +2302,6 @@ nextButton.addEventListener(
     }
 );
 
-
-/* =========================================================
-   上一页
-========================================================= */
 
 prevButton.addEventListener(
     "click",
@@ -2257,10 +2332,6 @@ prevButton.addEventListener(
 );
 
 
-/* =========================================================
-   键盘翻页
-========================================================= */
-
 document.addEventListener(
     "keydown",
     function(event){
@@ -2280,10 +2351,6 @@ document.addEventListener(
     }
 );
 
-
-/* =========================================================
-   从 Supabase 读取国家
-========================================================= */
 
 async function loadNations(){
 
@@ -2341,11 +2408,20 @@ async function loadNations(){
             "无法读取国家档案，请检查 Supabase 设置。";
 
 
+        editButton.href = "#";
+
+        editButton.style.opacity = ".25";
+
+        editButton.style.pointerEvents =
+            "none";
+
+
         pageCount.textContent =
             "00 / 00";
 
 
         prevButton.disabled = true;
+
         nextButton.disabled = true;
 
 
@@ -2371,10 +2447,6 @@ async function loadNations(){
 
 }
 
-
-/* =========================================================
-   日夜模式
-========================================================= */
 
 const themeToggle =
     document.getElementById(
@@ -2413,16 +2485,12 @@ function applyTheme(theme){
 }
 
 
-/* 读取保存的模式 */
-
 applyTheme(
     savedTheme === "day"
     ? "day"
     : "night"
 );
 
-
-/* 点击切换 */
 
 themeToggle.addEventListener(
     "click",
@@ -2453,10 +2521,6 @@ themeToggle.addEventListener(
     }
 );
 
-
-/* =========================================================
-   初始化
-========================================================= */
 
 loadNations();
 
