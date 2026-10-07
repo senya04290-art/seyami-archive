@@ -281,8 +281,6 @@ body{
 
 /* =========================================================
    ✦ ✶ 浮动魔法星
-   奇数 = ✦
-   偶数 = ✶
 ========================================================= */
 
 .arcane-stars span:nth-child(odd)::before{
@@ -340,7 +338,6 @@ body{
 
 /* =========================================================
    魔法阵
-   ★ 完整复制「档案目录」星环
 ========================================================= */
 
 .magic-circle{
@@ -525,8 +522,6 @@ body{
 
     font-size:13px;
 }
-
-/* 与前面页面一致的两行 Logo */
 
 .logo > span:last-child{
     display:flex;
@@ -980,6 +975,10 @@ body{
     letter-spacing:1px;
 
     color:rgba(191,220,243,.48);
+
+    white-space:pre-line;
+
+    overflow-y:auto;
 }
 
 
@@ -1213,7 +1212,6 @@ body.day .arcane-stars span{
 
 /* =========================================================
    日间模式 · 星环
-   ★ 完整复制「档案目录」
 ========================================================= */
 
 body.day .magic-circle{
@@ -1633,8 +1631,7 @@ body.day .footer{
 
 
     /* =====================================================
-       ★ 手机星环
-       完整复制「档案目录」
+       手机星环
     ====================================================== */
 
     .magic-circle{
@@ -1945,7 +1942,7 @@ body.day .footer{
                         <div class="info-item">
 
                             <div class="info-label">
-                                RACE
+                                GOVERNMENT
                             </div>
 
                             <div class="info-value">
@@ -1958,7 +1955,7 @@ body.day .footer{
                         <div class="info-item">
 
                             <div class="info-label">
-                                TERRAIN
+                                SUBTITLE
                             </div>
 
                             <div class="info-value">
@@ -2053,7 +2050,7 @@ body.day .footer{
                         <div class="info-item">
 
                             <div class="info-label">
-                                RACE
+                                GOVERNMENT
                             </div>
 
                             <div class="info-value">
@@ -2066,7 +2063,7 @@ body.day .footer{
                         <div class="info-item">
 
                             <div class="info-label">
-                                TERRAIN
+                                SUBTITLE
                             </div>
 
                             <div class="info-value">
@@ -2101,7 +2098,7 @@ body.day .footer{
                     class="page-count"
                     id="pageCount"
                 >
-                    01 / 03
+                    00 / 00
                 </div>
 
 
@@ -2116,7 +2113,10 @@ body.day .footer{
             </div>
 
 
-            <div class="archive-note">
+            <div
+                class="archive-note"
+                id="archiveNote"
+            >
                 · ARCHIVE RECORDS AWAITING ·
             </div>
 
@@ -2135,66 +2135,41 @@ body.day .footer{
 </div>
 
 
+<!-- =========================================================
+     SUPABASE
+========================================================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
 <script>
 
 /* =========================================================
-   国家资料
-   =========================================================
-   以后只需要修改这里。
-
-   name  = 英文国家名
-   cn    = 中文国家名
-   capital = 首都
-   region  = 地理位置
-   race    = 主要种族
-   terrain = 地形
-   description = 国家介绍
-
-   目前全部留空，不预设你的世界观。
+   Supabase
 ========================================================= */
 
-const nations = [
+const SUPABASE_URL =
+    "https://rqqkdpzehxzwqzytpxgh.supabase.co";
 
-    {
-        name:"",
-        cn:"",
-        capital:"",
-        region:"",
-        race:"",
-        terrain:"",
-        description:""
-    },
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_T_gNdlgkOaXnzjSvdmI1Pw_HQOVTEWG";
 
-    {
-        name:"",
-        cn:"",
-        capital:"",
-        region:"",
-        race:"",
-        terrain:"",
-        description:""
-    },
-
-    {
-        name:"",
-        cn:"",
-        capital:"",
-        region:"",
-        race:"",
-        terrain:"",
-        description:""
-    }
-
-];
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
 
 
 /* =========================================================
-   当前页
+   国家资料
 ========================================================= */
+
+let nations = [];
 
 let currentPage = 0;
 
-const totalPages = nations.length;
+let totalPages = 0;
 
 
 /* =========================================================
@@ -2237,6 +2212,9 @@ const prevButton =
 const nextButton =
     document.getElementById("nextButton");
 
+const archiveNote =
+    document.getElementById("archiveNote");
+
 
 /* =========================================================
    更新单个页面
@@ -2266,20 +2244,33 @@ function setPage(
     title.textContent =
         nation.name || "—";
 
+    /*
+       subtitle 是国家副标题。
+       如果没有单独的中文名称，
+       就直接显示 subtitle。
+    */
+
     cn.textContent =
-        nation.cn || "—";
+        nation.subtitle || "—";
 
 
     const values = [
+
         nation.capital,
+
         nation.region,
-        nation.race,
-        nation.terrain
+
+        nation.government,
+
+        nation.subtitle
+
     ];
 
 
     const valueElements =
-        info.querySelectorAll(".info-value");
+        info.querySelectorAll(
+            ".info-value"
+        );
 
 
     valueElements.forEach(
@@ -2303,32 +2294,101 @@ function setPage(
 
 
 /* =========================================================
+   没有国家时的显示
+========================================================= */
+
+function renderEmpty(){
+
+    leftTitle.textContent =
+        "NO RECORD";
+
+    leftCn.textContent =
+        "暂无国家档案";
+
+
+    rightTitle.textContent =
+        "NO RECORD";
+
+    rightCn.textContent =
+        "暂无国家档案";
+
+
+    rightDescription.textContent =
+        "目前还没有录入国家设定。";
+
+
+    leftInfo
+        .querySelectorAll(".info-value")
+        .forEach(
+            element=>{
+                element.textContent = "—";
+            }
+        );
+
+
+    rightInfo
+        .querySelectorAll(".info-value")
+        .forEach(
+            element=>{
+                element.textContent = "—";
+            }
+        );
+
+
+    pageCount.textContent =
+        "00 / 00";
+
+
+    prevButton.disabled = true;
+    nextButton.disabled = true;
+
+
+    archiveNote.textContent =
+        "· NO NATION RECORDS ·";
+
+}
+
+
+/* =========================================================
    手机 / 桌面页面更新
 ========================================================= */
 
 function render(){
 
+    if(totalPages === 0){
+
+        renderEmpty();
+
+        return;
+    }
+
+
     /*
        桌面：
-       左右两页显示相邻国家。
+
+       当前页显示左页
+       下一条国家显示右页
 
        手机：
-       只显示右页。
+
+       CSS 隐藏左页，
+       所以只显示右页。
     */
 
     const leftNation =
-        nations[currentPage] || nations[0];
+        nations[currentPage];
+
 
     const rightNation =
-        nations[currentPage + 1] ||
-        nations[currentPage] ||
-        nations[0];
+        nations[currentPage + 1]
+        || nations[currentPage];
 
 
     setPage(
         "left",
         leftNation
     );
+
 
     setPage(
         "right",
@@ -2337,16 +2397,27 @@ function render(){
 
 
     pageCount.textContent =
-        String(currentPage + 1).padStart(2,"0")
+        String(currentPage + 1)
+            .padStart(2,"0")
         + " / "
-        + String(totalPages).padStart(2,"0");
+        + String(totalPages)
+            .padStart(2,"0");
 
+
+    /*
+       最后一条国家时，
+       下一页按钮停止。
+    */
 
     prevButton.disabled =
         currentPage <= 0;
 
     nextButton.disabled =
         currentPage >= totalPages - 1;
+
+
+    archiveNote.textContent =
+        "· ARCHIVE RECORDS AWAITING ·";
 
 }
 
@@ -2413,8 +2484,13 @@ nextButton.addEventListener(
     "click",
     function(){
 
-        if(currentPage >= totalPages - 1){
+        if(
+            totalPages === 0 ||
+            currentPage >= totalPages - 1
+        ){
+
             return;
+
         }
 
 
@@ -2441,8 +2517,13 @@ prevButton.addEventListener(
     "click",
     function(){
 
-        if(currentPage <= 0){
+        if(
+            totalPages === 0 ||
+            currentPage <= 0
+        ){
+
             return;
+
         }
 
 
@@ -2459,6 +2540,126 @@ prevButton.addEventListener(
 
     }
 );
+
+
+/* =========================================================
+   键盘翻页
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "ArrowRight"){
+
+            nextButton.click();
+
+        }
+
+        if(event.key === "ArrowLeft"){
+
+            prevButton.click();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   从 Supabase 读取国家
+========================================================= */
+
+async function loadNations(){
+
+    archiveNote.textContent =
+        "· LOADING NATION RECORDS ·";
+
+
+    const {
+        data,
+        error
+    } =
+    await supabaseClient
+        .from("countries")
+        .select(`
+            id,
+            name,
+            subtitle,
+            capital,
+            government,
+            region,
+            description,
+            history,
+            culture,
+            updated_at
+        `)
+        .order(
+            "id",
+            {
+                ascending:true
+            }
+        );
+
+
+    if(error){
+
+        console.error(
+            "读取国家档案失败：",
+            error
+        );
+
+
+        archiveNote.textContent =
+            "· FAILED TO LOAD NATION RECORDS ·";
+
+
+        leftTitle.textContent =
+            "READ ERROR";
+
+        leftCn.textContent =
+            "读取失败";
+
+
+        rightTitle.textContent =
+            "READ ERROR";
+
+        rightCn.textContent =
+            "读取失败";
+
+
+        rightDescription.textContent =
+            "无法读取国家档案，请检查 Supabase 设置。";
+
+
+        pageCount.textContent =
+            "00 / 00";
+
+
+        prevButton.disabled = true;
+        nextButton.disabled = true;
+
+
+        return;
+    }
+
+
+    nations =
+        Array.isArray(data)
+        ? data
+        : [];
+
+
+    totalPages =
+        nations.length;
+
+
+    currentPage = 0;
+
+
+    render();
+
+}
 
 
 /* =========================================================
@@ -2547,7 +2748,7 @@ themeToggle.addEventListener(
    初始化
 ========================================================= */
 
-render();
+loadNations();
 
 </script>
 
