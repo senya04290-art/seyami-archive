@@ -308,23 +308,22 @@ body {
 
 .management-switch {
 
-    width: min(1100px, 100%);
+    width: min(900px, 100%);
 
     margin:
         0 auto 28px;
 
-    display: flex;
+    display: grid;
 
-    justify-content: center;
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
 
     gap: 10px;
-
-    flex-wrap: wrap;
 }
 
 .management-button {
 
-    min-width: 170px;
+    min-width: 0;
 
     height: 42px;
 
@@ -346,7 +345,7 @@ body {
 
     font-size: 9px;
 
-    letter-spacing: 0.2em;
+    letter-spacing: 0.15em;
 
     transition:
         background 0.3s ease,
@@ -685,14 +684,14 @@ textarea::placeholder {
 
 
 /* =========================
-   图集上传
+   图集上传区域
 ========================= */
 
 .gallery-upload-box {
 
     width: 100%;
 
-    min-height: 260px;
+    min-height: 380px;
 
     border:
         1px dashed
@@ -703,8 +702,6 @@ textarea::placeholder {
     align-items: center;
 
     justify-content: center;
-
-    flex-direction: column;
 
     position: relative;
 
@@ -745,24 +742,22 @@ textarea::placeholder {
 
 .gallery-preview {
 
-    position: absolute;
-
-    inset: 0;
-
     width: 100%;
 
     height: 100%;
 
+    max-height: 380px;
+
     object-fit: contain;
 
-    padding: 15px;
+    padding: 28px;
 
     display: none;
 
     pointer-events: none;
 }
 
-.gallery-upload-placeholder {
+.gallery-placeholder {
 
     display: flex;
 
@@ -770,9 +765,38 @@ textarea::placeholder {
 
     align-items: center;
 
-    gap: 12px;
+    gap: 13px;
 
     pointer-events: none;
+}
+
+.gallery-symbol {
+
+    font-size: 28px;
+
+    opacity: 0.55;
+
+    font-family: serif;
+}
+
+.gallery-upload-text {
+
+    font-family: "Cinzel", serif;
+
+    font-size: 11px;
+
+    letter-spacing: 0.25em;
+
+    opacity: 0.65;
+}
+
+.gallery-upload-hint {
+
+    font-size: 10px;
+
+    opacity: 0.35;
+
+    letter-spacing: 0.08em;
 }
 
 
@@ -1059,6 +1083,9 @@ body.day-mode .theme-toggle {
 
     .management-switch {
 
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
         gap: 7px;
 
         margin-bottom: 20px;
@@ -1066,9 +1093,7 @@ body.day-mode .theme-toggle {
 
     .management-button {
 
-        min-width: 0;
-
-        width: calc(50% - 4px);
+        width: 100%;
 
         height: 40px;
 
@@ -1095,10 +1120,21 @@ body.day-mode .theme-toggle {
         grid-column: auto;
     }
 
-    .upload-box,
-    .gallery-upload-box {
+    .upload-box {
 
         min-height: 200px;
+    }
+
+    .gallery-upload-box {
+
+        min-height: 280px;
+    }
+
+    .gallery-preview {
+
+        max-height: 280px;
+
+        padding: 18px;
     }
 
     .save-button {
@@ -1258,8 +1294,6 @@ body.day-mode .theme-toggle {
             HISTORY · 历史
         </button>
 
-
-        <!-- 新增：图集 -->
 
         <button
             type="button"
@@ -1443,10 +1477,6 @@ body.day-mode .theme-toggle {
 
                 </div>
 
-
-                <!-- =====================
-                     角色图片
-                ===================== -->
 
                 <div
                     class="field full character-field"
@@ -1779,19 +1809,19 @@ body.day-mode .theme-toggle {
 
 
                         <div
-                            class="gallery-upload-placeholder"
-                            id="galleryUploadPlaceholder"
+                            class="gallery-placeholder"
+                            id="galleryPlaceholder"
                         >
 
-                            <div class="upload-symbol">
+                            <div class="gallery-symbol">
                                 ✦
                             </div>
 
-                            <div class="upload-text">
+                            <div class="gallery-upload-text">
                                 SELECT GALLERY IMAGE
                             </div>
 
-                            <div class="upload-hint">
+                            <div class="gallery-upload-hint">
                                 PNG / JPG / WEBP
                             </div>
 
@@ -2103,9 +2133,9 @@ const galleryPreview =
         "galleryPreview"
     );
 
-const galleryUploadPlaceholder =
+const galleryPlaceholder =
     document.getElementById(
-        "galleryUploadPlaceholder"
+        "galleryPlaceholder"
     );
 
 
@@ -2515,10 +2545,8 @@ function showGalleryMode() {
     titleEn.textContent =
         "GALLERY";
 
-
     titleSub.textContent =
         "ARCHIVE ADMINISTRATION";
-
 
     titleCn.textContent =
         "档案图集管理";
@@ -2653,7 +2681,7 @@ galleryImageInput.addEventListener(
             galleryPreview.style.display =
                 "none";
 
-            galleryUploadPlaceholder.style.display =
+            galleryPlaceholder.style.display =
                 "flex";
 
             return;
@@ -2673,7 +2701,7 @@ galleryImageInput.addEventListener(
                 galleryPreview.style.display =
                     "block";
 
-                galleryUploadPlaceholder.style.display =
+                galleryPlaceholder.style.display =
                     "none";
 
             };
@@ -3395,6 +3423,25 @@ async function uploadGalleryImage() {
     }
 
 
+    /*
+       只允许图片
+    */
+
+    if (
+        !imageFile.type.startsWith(
+            "image/"
+        )
+    ) {
+
+        showMessage(
+            "请选择图片文件。",
+            "error"
+        );
+
+        return;
+    }
+
+
     saveButton.disabled =
         true;
 
@@ -3402,12 +3449,12 @@ async function uploadGalleryImage() {
         "UPLOADING...";
 
 
-    showMessage(
-        "正在上传图集图片……"
-    );
-
-
     try {
+
+        showMessage(
+            "正在上传图集图片……"
+        );
+
 
         const originalName =
             imageFile.name;
@@ -3419,6 +3466,11 @@ async function uploadGalleryImage() {
                 .pop()
                 .toLowerCase();
 
+
+        /*
+           使用时间戳 + 随机字符串，
+           避免图片重名。
+        */
 
         const filePath =
             "gallery-" +
@@ -3432,8 +3484,8 @@ async function uploadGalleryImage() {
 
 
         /*
-           第一步：
-           上传到 gallery-images
+           上传到：
+           gallery-images
         */
 
         const {
@@ -3464,8 +3516,7 @@ async function uploadGalleryImage() {
 
 
         /*
-           第二步：
-           获取公开 URL
+           获取公开地址
         */
 
         const {
@@ -3484,7 +3535,6 @@ async function uploadGalleryImage() {
 
 
         /*
-           第三步：
            写入 gallery_images
         */
 
@@ -3508,7 +3558,7 @@ async function uploadGalleryImage() {
 
 
         /*
-           完成
+           成功
         */
 
         showMessage(
@@ -3521,8 +3571,7 @@ async function uploadGalleryImage() {
             "UPLOADED";
 
 
-        galleryImageInput.value =
-            "";
+        form.reset();
 
 
         galleryPreview.src =
@@ -3531,7 +3580,7 @@ async function uploadGalleryImage() {
         galleryPreview.style.display =
             "none";
 
-        galleryUploadPlaceholder.style.display =
+        galleryPlaceholder.style.display =
             "flex";
 
 
