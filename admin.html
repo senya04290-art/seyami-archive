@@ -308,7 +308,7 @@ body {
 
 .management-switch {
 
-    width: min(820px, 100%);
+    width: min(900px, 100%);
 
     margin:
         0 auto 28px;
@@ -973,13 +973,13 @@ body.day-mode .theme-toggle {
 
         min-width: 0;
 
-        width: 50%;
+        width: 33.333%;
 
         height: 40px;
 
         font-size: 8px;
 
-        letter-spacing: 0.14em;
+        letter-spacing: 0.08em;
     }
 
     .admin-container {
@@ -1151,6 +1151,15 @@ body.day-mode .theme-toggle {
             id="countryModeButton"
         >
             COUNTRY · 国家
+        </button>
+
+
+        <button
+            type="button"
+            class="management-button"
+            id="historyModeButton"
+        >
+            HISTORY · 历史
         </button>
 
     </div>
@@ -1381,9 +1390,9 @@ body.day-mode .theme-toggle {
                 </div>
 
 
-                <!-- =========================
+                <!-- =====================
                      国家
-                ========================= -->
+                ===================== -->
 
                 <div
                     class="field full country-field"
@@ -1526,6 +1535,116 @@ body.day-mode .theme-toggle {
                 </div>
 
 
+                <!-- =====================
+                     历史
+                ===================== -->
+
+                <div
+                    class="field history-field"
+                    style="display:none;"
+                >
+
+                    <label for="historyYear">
+                        YEAR · 年代
+                    </label>
+
+                    <input
+                        id="historyYear"
+                        type="text"
+                        placeholder="例如：公元 1200 年"
+                    >
+
+                </div>
+
+
+                <div
+                    class="field history-field"
+                    style="display:none;"
+                >
+
+                    <label for="historyEra">
+                        ERA · 时期
+                    </label>
+
+                    <input
+                        id="historyEra"
+                        type="text"
+                        placeholder="例如：白银时代"
+                    >
+
+                </div>
+
+
+                <div
+                    class="field full history-field"
+                    style="display:none;"
+                >
+
+                    <label for="historyTitle">
+                        TITLE · 事件名称
+                    </label>
+
+                    <input
+                        id="historyTitle"
+                        type="text"
+                        placeholder="例如：雪境王国建立"
+                    >
+
+                </div>
+
+
+                <div
+                    class="field full history-field"
+                    style="display:none;"
+                >
+
+                    <label for="historyLocation">
+                        LOCATION · 地点
+                    </label>
+
+                    <input
+                        id="historyLocation"
+                        type="text"
+                        placeholder="例如：北境雪山 · 伊尔希亚"
+                    >
+
+                </div>
+
+
+                <div
+                    class="field full history-field"
+                    style="display:none;"
+                >
+
+                    <label for="historyDescription">
+                        DESCRIPTION · 事件简介
+                    </label>
+
+                    <textarea
+                        id="historyDescription"
+                        placeholder="用一小段文字介绍这个历史事件……"
+                    ></textarea>
+
+                </div>
+
+
+                <div
+                    class="field full history-field"
+                    style="display:none;"
+                >
+
+                    <label for="historyContent">
+                        CONTENT · HISTORICAL RECORD
+                    </label>
+
+                    <textarea
+                        id="historyContent"
+                        placeholder="填写完整的历史记录、事件经过、人物、影响等……"
+                    ></textarea>
+
+                </div>
+
+
             </div>
 
 
@@ -1623,6 +1742,7 @@ const footer =
         "footer"
     );
 
+
 const characterModeButton =
     document.getElementById(
         "characterModeButton"
@@ -1633,6 +1753,12 @@ const countryModeButton =
         "countryModeButton"
     );
 
+const historyModeButton =
+    document.getElementById(
+        "historyModeButton"
+    );
+
+
 const characterFields =
     document.querySelectorAll(
         ".character-field"
@@ -1641,6 +1767,11 @@ const characterFields =
 const countryFields =
     document.querySelectorAll(
         ".country-field"
+    );
+
+const historyFields =
+    document.querySelectorAll(
+        ".history-field"
     );
 
 
@@ -1750,6 +1881,41 @@ const countryCultureInput =
 
 
 /* =========================================================
+   历史 DOM
+========================================================= */
+
+const historyYearInput =
+    document.getElementById(
+        "historyYear"
+    );
+
+const historyTitleInput =
+    document.getElementById(
+        "historyTitle"
+    );
+
+const historyEraInput =
+    document.getElementById(
+        "historyEra"
+    );
+
+const historyLocationInput =
+    document.getElementById(
+        "historyLocation"
+    );
+
+const historyDescriptionInput =
+    document.getElementById(
+        "historyDescription"
+    );
+
+const historyContentInput =
+    document.getElementById(
+        "historyContent"
+    );
+
+
+/* =========================================================
    通用
 ========================================================= */
 
@@ -1786,6 +1952,62 @@ function showMessage(
 
 
 /* =========================================================
+   隐藏所有字段
+========================================================= */
+
+function hideAllFields() {
+
+    characterFields.forEach(
+        function(field) {
+
+            field.style.display =
+                "none";
+
+        }
+    );
+
+
+    countryFields.forEach(
+        function(field) {
+
+            field.style.display =
+                "none";
+
+        }
+    );
+
+
+    historyFields.forEach(
+        function(field) {
+
+            field.style.display =
+                "none";
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   清除 required
+========================================================= */
+
+function clearRequired() {
+
+    nameInput.required =
+        false;
+
+    countryNameInput.required =
+        false;
+
+    historyTitleInput.required =
+        false;
+
+}
+
+
+/* =========================================================
    角色模式
 ========================================================= */
 
@@ -1803,22 +2025,21 @@ function showCharacterMode() {
         "active"
     );
 
+    historyModeButton.classList.remove(
+        "active"
+    );
+
+
+    hideAllFields();
+
+    clearRequired();
+
 
     characterFields.forEach(
         function(field) {
 
             field.style.display =
                 "";
-
-        }
-    );
-
-
-    countryFields.forEach(
-        function(field) {
-
-            field.style.display =
-                "none";
 
         }
     );
@@ -1849,9 +2070,6 @@ function showCharacterMode() {
     nameInput.required =
         true;
 
-    countryNameInput.required =
-        false;
-
 
     showMessage("");
 }
@@ -1867,23 +2085,22 @@ function showCountryMode() {
         "country";
 
 
-    countryModeButton.classList.add(
-        "active"
-    );
-
     characterModeButton.classList.remove(
         "active"
     );
 
-
-    characterFields.forEach(
-        function(field) {
-
-            field.style.display =
-                "none";
-
-        }
+    countryModeButton.classList.add(
+        "active"
     );
+
+    historyModeButton.classList.remove(
+        "active"
+    );
+
+
+    hideAllFields();
+
+    clearRequired();
 
 
     countryFields.forEach(
@@ -1918,10 +2135,75 @@ function showCountryMode() {
         "SEYAMI · COUNTRY ARCHIVE";
 
 
-    nameInput.required =
-        false;
-
     countryNameInput.required =
+        true;
+
+
+    showMessage("");
+}
+
+
+/* =========================================================
+   历史模式
+========================================================= */
+
+function showHistoryMode() {
+
+    currentMode =
+        "history";
+
+
+    characterModeButton.classList.remove(
+        "active"
+    );
+
+    countryModeButton.classList.remove(
+        "active"
+    );
+
+    historyModeButton.classList.add(
+        "active"
+    );
+
+
+    hideAllFields();
+
+    clearRequired();
+
+
+    historyFields.forEach(
+        function(field) {
+
+            field.style.display =
+                "";
+
+        }
+    );
+
+
+    titleEn.textContent =
+        "HISTORY";
+
+    titleSub.textContent =
+        "ARCHIVE ADMINISTRATION";
+
+    titleCn.textContent =
+        "历史记录管理";
+
+
+    sectionTitle.textContent =
+        "CREATE HISTORY RECORD";
+
+
+    saveButton.textContent =
+        "SAVE HISTORY";
+
+
+    footer.textContent =
+        "SEYAMI · HISTORY ARCHIVE";
+
+
+    historyTitleInput.required =
         true;
 
 
@@ -1948,6 +2230,16 @@ countryModeButton.addEventListener(
     function() {
 
         showCountryMode();
+
+    }
+);
+
+
+historyModeButton.addEventListener(
+    "click",
+    function() {
+
+        showHistoryMode();
 
     }
 );
@@ -2067,11 +2359,6 @@ async function saveCharacter() {
 
     try {
 
-
-        /* =========================
-           文件扩展名
-        ========================= */
-
         const originalName =
             imageFile.name;
 
@@ -2098,10 +2385,6 @@ async function saveCharacter() {
         );
 
 
-        /* =========================
-           上传图片
-        ========================= */
-
         const {
             error: uploadError
         } =
@@ -2124,10 +2407,6 @@ async function saveCharacter() {
         }
 
 
-        /* =========================
-           获取图片 URL
-        ========================= */
-
         const {
             data: publicURLData
         } =
@@ -2147,10 +2426,6 @@ async function saveCharacter() {
             "立绘上传完成，正在建立角色档案……"
         );
 
-
-        /* =========================
-           写入角色
-        ========================= */
 
         const {
             error: insertError
@@ -2319,11 +2594,6 @@ async function saveCountry() {
 
     try {
 
-
-        /* =========================
-           写入 countries
-        ========================= */
-
         const {
             error: insertError
         } =
@@ -2374,11 +2644,6 @@ async function saveCountry() {
             "SAVED";
 
 
-        /*
-         * 只清空表单，
-         * 不离开当前页面
-         */
-
         form.reset();
 
 
@@ -2426,6 +2691,146 @@ async function saveCountry() {
 
 
 /* =========================================================
+   保存历史
+========================================================= */
+
+async function saveHistory() {
+
+    const year =
+        historyYearInput.value.trim();
+
+    const title =
+        historyTitleInput.value.trim();
+
+    const era =
+        historyEraInput.value.trim();
+
+    const location =
+        historyLocationInput.value.trim();
+
+    const description =
+        historyDescriptionInput.value.trim();
+
+    const content =
+        historyContentInput.value.trim();
+
+
+    if (!title) {
+
+        showMessage(
+            "请先填写事件名称。",
+            "error"
+        );
+
+        return;
+    }
+
+
+    saveButton.disabled =
+        true;
+
+    saveButton.textContent =
+        "SAVING...";
+
+
+    showMessage(
+        "正在建立历史档案……"
+    );
+
+
+    try {
+
+        const {
+            error: insertError
+        } =
+            await supabaseClient
+                .from("history_records")
+                .insert({
+
+                    year:
+                        year || null,
+
+                    title:
+                        title,
+
+                    era:
+                        era || null,
+
+                    location:
+                        location || null,
+
+                    description:
+                        description || null,
+
+                    content:
+                        content || null
+
+                });
+
+
+        if (insertError) {
+
+            throw insertError;
+        }
+
+
+        showMessage(
+            "历史记录保存成功！",
+            "success"
+        );
+
+
+        saveButton.textContent =
+            "SAVED";
+
+
+        form.reset();
+
+
+        setTimeout(
+            function() {
+
+                saveButton.disabled =
+                    false;
+
+                saveButton.textContent =
+                    "SAVE HISTORY";
+
+            },
+            2000
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "History save error:",
+            error
+        );
+
+
+        showMessage(
+            "保存失败：" +
+            (
+                error.message ||
+                "未知错误"
+            ),
+            "error"
+        );
+
+
+        saveButton.disabled =
+            false;
+
+        saveButton.textContent =
+            "SAVE HISTORY";
+
+    }
+
+}
+
+
+/* =========================================================
    表单提交
 ========================================================= */
 
@@ -2438,15 +2843,34 @@ form.addEventListener(
 
         if (
             currentMode ===
+            "character"
+        ) {
+
+            await saveCharacter();
+
+            return;
+        }
+
+
+        if (
+            currentMode ===
             "country"
         ) {
 
             await saveCountry();
 
-        } else {
+            return;
+        }
 
-            await saveCharacter();
 
+        if (
+            currentMode ===
+            "history"
+        ) {
+
+            await saveHistory();
+
+            return;
         }
 
     }
