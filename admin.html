@@ -1934,6 +1934,41 @@ let currentMode =
     "character";
 
 
+/*
+    如果这里有 ID，
+    就代表当前正在编辑一条历史记录。
+
+    例如：
+
+    admin.html?type=history&id=3
+
+    editHistoryId = "3"
+*/
+
+let editHistoryId =
+    null;
+
+
+/* =========================================================
+   URL 参数
+========================================================= */
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const urlType =
+    urlParams.get(
+        "type"
+    );
+
+const urlId =
+    urlParams.get(
+        "id"
+    );
+
+
 /* =========================================================
    消息
 ========================================================= */
@@ -2016,6 +2051,14 @@ function showCharacterMode() {
     currentMode =
         "character";
 
+    /*
+       从历史编辑切换出去时，
+       清除编辑 ID。
+    */
+
+    editHistoryId =
+        null;
+
 
     characterModeButton.classList.add(
         "active"
@@ -2083,6 +2126,14 @@ function showCountryMode() {
 
     currentMode =
         "country";
+
+    /*
+       从历史编辑切换出去时，
+       清除编辑 ID。
+    */
+
+    editHistoryId =
+        null;
 
 
     characterModeButton.classList.remove(
@@ -2182,21 +2233,31 @@ function showHistoryMode() {
 
 
     titleEn.textContent =
-        "HISTORY";
+        editHistoryId
+            ? "EDIT HISTORY"
+            : "HISTORY";
+
 
     titleSub.textContent =
         "ARCHIVE ADMINISTRATION";
 
+
     titleCn.textContent =
-        "历史记录管理";
+        editHistoryId
+            ? "修改历史记录"
+            : "历史记录管理";
 
 
     sectionTitle.textContent =
-        "CREATE HISTORY RECORD";
+        editHistoryId
+            ? "EDIT HISTORY RECORD"
+            : "CREATE HISTORY RECORD";
 
 
     saveButton.textContent =
-        "SAVE HISTORY";
+        editHistoryId
+            ? "UPDATE HISTORY"
+            : "SAVE HISTORY";
 
 
     footer.textContent =
@@ -2238,6 +2299,18 @@ countryModeButton.addEventListener(
 historyModeButton.addEventListener(
     "click",
     function() {
+
+        /*
+           手动点击 HISTORY
+           永远进入新增模式。
+
+           只有 URL 带
+           ?type=history&id=xxx
+           才进入编辑模式。
+        */
+
+        editHistoryId =
+            null;
 
         showHistoryMode();
 
@@ -2691,10 +2764,10 @@ async function saveCountry() {
 
 
 /* =========================================================
-   保存历史
+   新增历史
 ========================================================= */
 
-async function saveHistory() {
+async function createHistory() {
 
     const year =
         historyYearInput.value.trim();
@@ -2831,6 +2904,165 @@ async function saveHistory() {
 
 
 /* =========================================================
+   修改历史
+========================================================= */
+
+async function updateHistory() {
+
+    const year =
+        historyYearInput.value.trim();
+
+    const title =
+        historyTitleInput.value.trim();
+
+    const era =
+        historyEraInput.value.trim();
+
+    const location =
+        historyLocationInput.value.trim();
+
+    const description =
+        historyDescriptionInput.value.trim();
+
+    const content =
+        historyContentInput.value.trim();
+
+
+    if (!editHistoryId) {
+
+        showMessage(
+            "没有找到需要修改的历史记录。",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if (!title) {
+
+        showMessage(
+            "请先填写事件名称。",
+            "error"
+        );
+
+        return;
+    }
+
+
+    saveButton.disabled =
+        true;
+
+    saveButton.textContent =
+        "UPDATING...";
+
+
+    showMessage(
+        "正在更新历史记录……"
+    );
+
+
+    try {
+
+        const {
+            error: updateError
+        } =
+            await supabaseClient
+                .from("history_records")
+                .update({
+
+                    year:
+                        year || null,
+
+                    title:
+                        title,
+
+                    era:
+                        era || null,
+
+                    location:
+                        location || null,
+
+                    description:
+                        description || null,
+
+                    content:
+                        content || null,
+
+                    updated_at:
+                        new Date()
+                            .toISOString()
+
+                })
+                .eq(
+                    "id",
+                    editHistoryId
+                );
+
+
+        if (updateError) {
+
+            throw updateError;
+        }
+
+
+        showMessage(
+            "历史记录修改成功，正在返回……",
+            "success"
+        );
+
+
+        saveButton.textContent =
+            "UPDATED";
+
+
+        /*
+           稍微停一下，
+           让用户能看到成功提示，
+           然后回到历史页面。
+        */
+
+        setTimeout(
+            function() {
+
+                window.location.href =
+                    "history.html";
+
+            },
+            900
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "History update error:",
+            error
+        );
+
+
+        showMessage(
+            "修改失败：" +
+            (
+                error.message ||
+                "未知错误"
+            ),
+            "error"
+        );
+
+
+        saveButton.disabled =
+            false;
+
+        saveButton.textContent =
+            "UPDATE HISTORY";
+
+    }
+
+}
+
+
+/* =========================================================
    表单提交
 ========================================================= */
 
@@ -2868,13 +3100,214 @@ form.addEventListener(
             "history"
         ) {
 
-            await saveHistory();
+            /*
+               有 editHistoryId：
+               修改已有记录
+
+               没有：
+               新增历史记录
+            */
+
+            if (editHistoryId) {
+
+                await updateHistory();
+
+            } else {
+
+                await createHistory();
+
+            }
 
             return;
         }
 
     }
 );
+
+
+/* =========================================================
+   读取历史记录
+========================================================= */
+
+async function loadHistoryForEdit() {
+
+    /*
+       只有：
+
+       admin.html?type=history&id=xxx
+
+       才进入编辑模式。
+    */
+
+    if (
+        urlType !==
+            "history" ||
+        !urlId
+    ) {
+
+        showCharacterMode();
+
+        return;
+    }
+
+
+    /*
+       保存正在编辑的 ID
+    */
+
+    editHistoryId =
+        urlId;
+
+
+    /*
+       先显示历史编辑界面
+    */
+
+    showHistoryMode();
+
+
+    /*
+       防止读取完成之前
+       用户点击保存
+    */
+
+    saveButton.disabled =
+        true;
+
+
+    showMessage(
+        "正在读取历史记录……"
+    );
+
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from("history_records")
+                .select(`
+                    id,
+                    year,
+                    title,
+                    era,
+                    location,
+                    description,
+                    content
+                `)
+                .eq(
+                    "id",
+                    urlId
+                )
+                .single();
+
+
+        if (error) {
+
+            throw error;
+        }
+
+
+        if (!data) {
+
+            throw new Error(
+                "没有找到这条历史记录。"
+            );
+        }
+
+
+        /*
+           把数据库里的内容
+           填回表单
+        */
+
+        historyYearInput.value =
+            data.year || "";
+
+
+        historyTitleInput.value =
+            data.title || "";
+
+
+        historyEraInput.value =
+            data.era || "";
+
+
+        historyLocationInput.value =
+            data.location || "";
+
+
+        historyDescriptionInput.value =
+            data.description || "";
+
+
+        historyContentInput.value =
+            data.content || "";
+
+
+        /*
+           确保页面显示编辑状态
+        */
+
+        titleEn.textContent =
+            "EDIT HISTORY";
+
+
+        titleSub.textContent =
+            "ARCHIVE ADMINISTRATION";
+
+
+        titleCn.textContent =
+            "修改历史记录";
+
+
+        sectionTitle.textContent =
+            "EDIT HISTORY RECORD";
+
+
+        saveButton.textContent =
+            "UPDATE HISTORY";
+
+
+        footer.textContent =
+            "SEYAMI · HISTORY ARCHIVE";
+
+
+        saveButton.disabled =
+            false;
+
+
+        showMessage(
+            "历史记录已载入，可以修改。"
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Load history error:",
+            error
+        );
+
+
+        showMessage(
+            "读取历史记录失败：" +
+            (
+                error.message ||
+                "未知错误"
+            ),
+            "error"
+        );
+
+
+        saveButton.disabled =
+            true;
+
+    }
+
+}
 
 
 /* =========================================================
@@ -2960,10 +3393,35 @@ themeToggle.addEventListener(
 
 
 /* =========================================================
-   默认角色模式
+   初始化
 ========================================================= */
 
-showCharacterMode();
+/*
+   这里非常重要。
+
+   以前是：
+
+   showCharacterMode();
+
+   所以无论从哪里进入，
+   最后都会被强制变成
+   “新增角色”。
+
+   现在改成：
+
+   loadHistoryForEdit();
+
+   如果 URL 有：
+
+   ?type=history&id=xxx
+
+   就读取历史记录。
+
+   如果没有，
+   才默认显示角色新增。
+*/
+
+loadHistoryForEdit();
 
 </script>
 
