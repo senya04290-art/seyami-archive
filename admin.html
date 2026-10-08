@@ -1025,10 +1025,6 @@ body.day-mode .theme-toggle {
 <body>
 
 
-<!-- =========================
-     背景星点
-========================= -->
-
 <div class="stars">
 
     <span class="star" style="left:8%;top:14%;"></span>
@@ -1056,632 +1052,592 @@ body.day-mode .theme-toggle {
 <div class="page">
 
 
-    <!-- =========================
-         顶部
-    ========================= -->
+<header class="header">
 
-    <header class="header">
+    <div class="logo">
 
-        <div class="logo">
-
-            <div class="logo-cn">
-                塞垭弥大陆档案馆
-            </div>
-
-            <div class="logo-en">
-                SEYAMI ARCHIVE
-            </div>
-
+        <div class="logo-cn">
+            塞垭弥大陆档案馆
         </div>
 
-
-        <div class="header-right">
-
-            <a
-                href="archive.html"
-                class="back"
-            >
-                RETURN TO ARCHIVE
-            </a>
-
-
-            <button
-                class="theme-toggle"
-                id="themeToggle"
-                type="button"
-            >
-                ☾
-            </button>
-
+        <div class="logo-en">
+            SEYAMI ARCHIVE
         </div>
-
-    </header>
-
-
-    <!-- =========================
-         标题
-    ========================= -->
-
-    <section class="title-area">
-
-        <div
-            class="title-en"
-            id="titleEn"
-        >
-            CHARACTER
-        </div>
-
-
-        <div
-            class="title-sub"
-            id="titleSub"
-        >
-            ARCHIVE ADMINISTRATION
-        </div>
-
-
-        <div
-            class="title-cn"
-            id="titleCn"
-        >
-            角色档案管理
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         管理类型
-    ========================= -->
-
-    <div class="management-switch">
-
-        <button
-            type="button"
-            class="management-button active"
-            id="characterModeButton"
-        >
-            CHARACTER · 角色
-        </button>
-
-
-        <button
-            type="button"
-            class="management-button"
-            id="countryModeButton"
-        >
-            COUNTRY · 国家
-        </button>
-
-
-        <button
-            type="button"
-            class="management-button"
-            id="historyModeButton"
-        >
-            HISTORY · 历史
-        </button>
 
     </div>
 
 
-    <!-- =========================
-         管理表单
-    ========================= -->
+    <div class="header-right">
 
-    <main class="admin-container">
-
-        <div
-            class="section-title"
-            id="sectionTitle"
+        <a
+            href="archive.html"
+            class="back"
         >
-            CREATE CHARACTER RECORD
-        </div>
+            RETURN TO ARCHIVE
+        </a>
 
 
-        <form id="characterForm">
+        <button
+            class="theme-toggle"
+            id="themeToggle"
+            type="button"
+        >
+            ☾
+        </button>
 
-            <div class="form-grid">
+    </div>
+
+</header>
 
 
-                <!-- =====================
-                     角色
-                ===================== -->
+<section class="title-area">
 
-                <div
-                    class="field full character-field"
+    <div
+        class="title-en"
+        id="titleEn"
+    >
+        CHARACTER
+    </div>
+
+
+    <div
+        class="title-sub"
+        id="titleSub"
+    >
+        ARCHIVE ADMINISTRATION
+    </div>
+
+
+    <div
+        class="title-cn"
+        id="titleCn"
+    >
+        角色档案管理
+    </div>
+
+</section>
+
+
+<div class="management-switch">
+
+    <button
+        type="button"
+        class="management-button active"
+        id="characterModeButton"
+    >
+        CHARACTER · 角色
+    </button>
+
+
+    <button
+        type="button"
+        class="management-button"
+        id="countryModeButton"
+    >
+        COUNTRY · 国家
+    </button>
+
+
+    <button
+        type="button"
+        class="management-button"
+        id="historyModeButton"
+    >
+        HISTORY · 历史
+    </button>
+
+</div>
+
+
+<main class="admin-container">
+
+    <div
+        class="section-title"
+        id="sectionTitle"
+    >
+        CREATE CHARACTER RECORD
+    </div>
+
+
+    <form id="characterForm">
+
+        <div class="form-grid">
+
+
+            <!-- =====================
+                 角色
+            ===================== -->
+
+            <div
+                class="field full character-field"
+            >
+
+                <label for="name">
+                    CHARACTER NAME
+                </label>
+
+                <input
+                    id="name"
+                    type="text"
+                    placeholder="例如：Evelina•Nieve 伊莉娜·妳芙"
                 >
-
-                    <label for="name">
-                        CHARACTER NAME
-                    </label>
-
-                    <input
-                        id="name"
-                        type="text"
-                        placeholder="例如：Evelina•Nieve 伊莉娜·妳芙"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field character-field"
-                >
-
-                    <label for="race">
-                        RACE
-                    </label>
-
-                    <input
-                        id="race"
-                        type="text"
-                        placeholder="例如：雪山神"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field character-field"
-                >
-
-                    <label for="region">
-                        REGION
-                    </label>
-
-                    <input
-                        id="region"
-                        type="text"
-                        placeholder="例如：雪山"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field character-field"
-                >
-
-                    <label for="role">
-                        ROLE
-                    </label>
-
-                    <input
-                        id="role"
-                        type="text"
-                        placeholder="例如：雪山女神"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field character-field"
-                >
-
-                    <label for="age">
-                        AGE
-                    </label>
-
-                    <input
-                        id="age"
-                        type="number"
-                        min="0"
-                        placeholder="例如：1000"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field full character-field"
-                >
-
-                    <label for="gender">
-                        GENDER
-                    </label>
-
-                    <select id="gender">
-
-                        <option value="">
-                            请选择
-                        </option>
-
-                        <option value="女性">
-                            女性
-                        </option>
-
-                        <option value="男性">
-                            男性
-                        </option>
-
-                        <option value="其他">
-                            其他
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div
-                    class="field full character-field"
-                >
-
-                    <label for="personality">
-                        PERSONALITY · 性格
-                    </label>
-
-                    <textarea
-                        id="personality"
-                        placeholder="例如：冷静、温柔而神秘，对陌生人保持一定距离……"
-                    ></textarea>
-
-                </div>
-
-
-                <div
-                    class="field full character-field"
-                >
-
-                    <label for="backstory">
-                        BACKSTORY · 背景故事
-                    </label>
-
-                    <textarea
-                        id="backstory"
-                        placeholder="填写角色的背景、经历、世界观设定、人物关系等……"
-                    ></textarea>
-
-                </div>
-
-
-                <!-- =====================
-                     角色图片
-                ===================== -->
-
-                <div
-                    class="field full character-field"
-                >
-
-                    <label>
-                        CHARACTER ARTWORK
-                    </label>
-
-
-                    <div class="upload-box">
-
-                        <input
-                            id="image"
-                            type="file"
-                            accept="image/png,image/jpeg,image/webp"
-                        >
-
-
-                        <div
-                            class="upload-placeholder"
-                            id="uploadPlaceholder"
-                        >
-
-                            <div class="upload-symbol">
-                                ✦
-                            </div>
-
-                            <div class="upload-text">
-                                SELECT ARTWORK
-                            </div>
-
-                            <div class="upload-hint">
-                                PNG / JPG / WEBP
-                            </div>
-
-                        </div>
-
-
-                        <img
-                            id="preview"
-                            class="preview"
-                            alt="预览"
-                        >
-
-                    </div>
-
-                </div>
-
-
-                <!-- =====================
-                     国家
-                ===================== -->
-
-                <div
-                    class="field full country-field"
-                    style="display:none;"
-                >
-
-                    <label for="countryName">
-                        COUNTRY NAME · 国家名称
-                    </label>
-
-                    <input
-                        id="countryName"
-                        type="text"
-                        placeholder="例如：雪境王国"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field full country-field"
-                    style="display:none;"
-                >
-
-                    <label for="countrySubtitle">
-                        SUBTITLE · 副标题 / 别名
-                    </label>
-
-                    <input
-                        id="countrySubtitle"
-                        type="text"
-                        placeholder="例如：永冬之国"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field country-field"
-                    style="display:none;"
-                >
-
-                    <label for="countryCapital">
-                        CAPITAL · 首都
-                    </label>
-
-                    <input
-                        id="countryCapital"
-                        type="text"
-                        placeholder="例如：伊尔希亚"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field country-field"
-                    style="display:none;"
-                >
-
-                    <label for="countryGovernment">
-                        GOVERNMENT · 政体
-                    </label>
-
-                    <input
-                        id="countryGovernment"
-                        type="text"
-                        placeholder="例如：君主制"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field full country-field"
-                    style="display:none;"
-                >
-
-                    <label for="countryRegion">
-                        REGION · 所在地区
-                    </label>
-
-                    <input
-                        id="countryRegion"
-                        type="text"
-                        placeholder="例如：北境雪山"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field full country-field"
-                    style="display:none;"
-                >
-
-                    <label for="countryDescription">
-                        DESCRIPTION · 国家介绍
-                    </label>
-
-                    <textarea
-                        id="countryDescription"
-                        placeholder="填写这个国家的整体介绍、地理环境、国土情况等……"
-                    ></textarea>
-
-                </div>
-
-
-                <div
-                    class="field full country-field"
-                    style="display:none;"
-                >
-
-                    <label for="countryHistory">
-                        HISTORY · 国家历史
-                    </label>
-
-                    <textarea
-                        id="countryHistory"
-                        placeholder="填写国家的建立、战争、王朝、重要历史事件等……"
-                    ></textarea>
-
-                </div>
-
-
-                <div
-                    class="field full country-field"
-                    style="display:none;"
-                >
-
-                    <label for="countryCulture">
-                        CULTURE · 国家文化
-                    </label>
-
-                    <textarea
-                        id="countryCulture"
-                        placeholder="填写国家的文化、传统、宗教、节日、风俗等……"
-                    ></textarea>
-
-                </div>
-
-
-                <!-- =====================
-                     历史
-                ===================== -->
-
-                <div
-                    class="field history-field"
-                    style="display:none;"
-                >
-
-                    <label for="historyYear">
-                        YEAR · 年代
-                    </label>
-
-                    <input
-                        id="historyYear"
-                        type="text"
-                        placeholder="例如：公元 1200 年"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field history-field"
-                    style="display:none;"
-                >
-
-                    <label for="historyEra">
-                        ERA · 时期
-                    </label>
-
-                    <input
-                        id="historyEra"
-                        type="text"
-                        placeholder="例如：白银时代"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field full history-field"
-                    style="display:none;"
-                >
-
-                    <label for="historyTitle">
-                        TITLE · 事件名称
-                    </label>
-
-                    <input
-                        id="historyTitle"
-                        type="text"
-                        placeholder="例如：雪境王国建立"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field full history-field"
-                    style="display:none;"
-                >
-
-                    <label for="historyLocation">
-                        LOCATION · 地点
-                    </label>
-
-                    <input
-                        id="historyLocation"
-                        type="text"
-                        placeholder="例如：北境雪山 · 伊尔希亚"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field full history-field"
-                    style="display:none;"
-                >
-
-                    <label for="historyDescription">
-                        DESCRIPTION · 事件简介
-                    </label>
-
-                    <textarea
-                        id="historyDescription"
-                        placeholder="用一小段文字介绍这个历史事件……"
-                    ></textarea>
-
-                </div>
-
-
-                <div
-                    class="field full history-field"
-                    style="display:none;"
-                >
-
-                    <label for="historyContent">
-                        CONTENT · HISTORICAL RECORD
-                    </label>
-
-                    <textarea
-                        id="historyContent"
-                        placeholder="填写完整的历史记录、事件经过、人物、影响等……"
-                    ></textarea>
-
-                </div>
-
 
             </div>
 
 
-            <!-- =========================
-                 保存
-            ========================= -->
+            <div class="field character-field">
 
-            <div class="save-area">
+                <label for="race">
+                    RACE
+                </label>
 
-                <button
-                    class="save-button"
-                    id="saveButton"
-                    type="submit"
+                <input
+                    id="race"
+                    type="text"
+                    placeholder="例如：雪山神"
                 >
-                    SAVE CHARACTER
-                </button>
+
+            </div>
+
+
+            <div class="field character-field">
+
+                <label for="region">
+                    REGION
+                </label>
+
+                <input
+                    id="region"
+                    type="text"
+                    placeholder="例如：雪山"
+                >
+
+            </div>
+
+
+            <div class="field character-field">
+
+                <label for="role">
+                    ROLE
+                </label>
+
+                <input
+                    id="role"
+                    type="text"
+                    placeholder="例如：雪山女神"
+                >
+
+            </div>
+
+
+            <div class="field character-field">
+
+                <label for="age">
+                    AGE
+                </label>
+
+                <input
+                    id="age"
+                    type="number"
+                    min="0"
+                    placeholder="例如：1000"
+                >
+
+            </div>
+
+
+            <div class="field full character-field">
+
+                <label for="gender">
+                    GENDER
+                </label>
+
+                <select id="gender">
+
+                    <option value="">
+                        请选择
+                    </option>
+
+                    <option value="女性">
+                        女性
+                    </option>
+
+                    <option value="男性">
+                        男性
+                    </option>
+
+                    <option value="其他">
+                        其他
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="field full character-field">
+
+                <label for="personality">
+                    PERSONALITY · 性格
+                </label>
+
+                <textarea
+                    id="personality"
+                    placeholder="例如：冷静、温柔而神秘，对陌生人保持一定距离……"
+                ></textarea>
+
+            </div>
+
+
+            <div class="field full character-field">
+
+                <label for="backstory">
+                    BACKSTORY · 背景故事
+                </label>
+
+                <textarea
+                    id="backstory"
+                    placeholder="填写角色的背景、经历、世界观设定、人物关系等……"
+                ></textarea>
+
+            </div>
+
+
+            <div class="field full character-field">
+
+                <label>
+                    CHARACTER ARTWORK
+                </label>
+
+
+                <div class="upload-box">
+
+                    <input
+                        id="image"
+                        type="file"
+                        accept="image/png,image/jpeg,image/webp"
+                    >
+
+
+                    <div
+                        class="upload-placeholder"
+                        id="uploadPlaceholder"
+                    >
+
+                        <div class="upload-symbol">
+                            ✦
+                        </div>
+
+                        <div class="upload-text">
+                            SELECT ARTWORK
+                        </div>
+
+                        <div class="upload-hint">
+                            PNG / JPG / WEBP
+                        </div>
+
+                    </div>
+
+
+                    <img
+                        id="preview"
+                        class="preview"
+                        alt="预览"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- =====================
+                 国家
+            ===================== -->
+
+            <div
+                class="field full country-field"
+                style="display:none;"
+            >
+
+                <label for="countryName">
+                    COUNTRY NAME · 国家名称
+                </label>
+
+                <input
+                    id="countryName"
+                    type="text"
+                    placeholder="例如：雪境王国"
+                >
 
             </div>
 
 
             <div
-                class="message"
-                id="message"
-            ></div>
+                class="field full country-field"
+                style="display:none;"
+            >
+
+                <label for="countrySubtitle">
+                    SUBTITLE · 副标题 / 别名
+                </label>
+
+                <input
+                    id="countrySubtitle"
+                    type="text"
+                    placeholder="例如：永冬之国"
+                >
+
+            </div>
 
 
-        </form>
+            <div
+                class="field country-field"
+                style="display:none;"
+            >
 
-    </main>
+                <label for="countryCapital">
+                    CAPITAL · 首都
+                </label>
+
+                <input
+                    id="countryCapital"
+                    type="text"
+                    placeholder="例如：伊尔希亚"
+                >
+
+            </div>
 
 
-    <footer
-        class="footer"
-        id="footer"
-    >
-        SEYAMI · CHARACTER ARCHIVE
-    </footer>
+            <div
+                class="field country-field"
+                style="display:none;"
+            >
+
+                <label for="countryGovernment">
+                    GOVERNMENT · 政体
+                </label>
+
+                <input
+                    id="countryGovernment"
+                    type="text"
+                    placeholder="例如：君主制"
+                >
+
+            </div>
+
+
+            <div
+                class="field full country-field"
+                style="display:none;"
+            >
+
+                <label for="countryRegion">
+                    REGION · 所在地区
+                </label>
+
+                <input
+                    id="countryRegion"
+                    type="text"
+                    placeholder="例如：北境雪山"
+                >
+
+            </div>
+
+
+            <div
+                class="field full country-field"
+                style="display:none;"
+            >
+
+                <label for="countryDescription">
+                    DESCRIPTION · 国家介绍
+                </label>
+
+                <textarea
+                    id="countryDescription"
+                    placeholder="填写这个国家的整体介绍、地理环境、国土情况等……"
+                ></textarea>
+
+            </div>
+
+
+            <div
+                class="field full country-field"
+                style="display:none;"
+            >
+
+                <label for="countryHistory">
+                    HISTORY · 国家历史
+                </label>
+
+                <textarea
+                    id="countryHistory"
+                    placeholder="填写国家的建立、战争、王朝、重要历史事件等……"
+                ></textarea>
+
+            </div>
+
+
+            <div
+                class="field full country-field"
+                style="display:none;"
+            >
+
+                <label for="countryCulture">
+                    CULTURE · 国家文化
+                </label>
+
+                <textarea
+                    id="countryCulture"
+                    placeholder="填写国家的文化、传统、宗教、节日、风俗等……"
+                ></textarea>
+
+            </div>
+
+
+            <!-- =====================
+                 历史
+            ===================== -->
+
+            <div
+                class="field history-field"
+                style="display:none;"
+            >
+
+                <label for="historyYear">
+                    YEAR · 年代
+                </label>
+
+                <input
+                    id="historyYear"
+                    type="text"
+                    placeholder="例如：公元 1200 年"
+                >
+
+            </div>
+
+
+            <div
+                class="field history-field"
+                style="display:none;"
+            >
+
+                <label for="historyEra">
+                    ERA · 时期
+                </label>
+
+                <input
+                    id="historyEra"
+                    type="text"
+                    placeholder="例如：白银时代"
+                >
+
+            </div>
+
+
+            <div
+                class="field full history-field"
+                style="display:none;"
+            >
+
+                <label for="historyTitle">
+                    TITLE · 事件名称
+                </label>
+
+                <input
+                    id="historyTitle"
+                    type="text"
+                    placeholder="例如：雪境王国建立"
+                >
+
+            </div>
+
+
+            <div
+                class="field full history-field"
+                style="display:none;"
+            >
+
+                <label for="historyLocation">
+                    LOCATION · 地点
+                </label>
+
+                <input
+                    id="historyLocation"
+                    type="text"
+                    placeholder="例如：北境雪山 · 伊尔希亚"
+                >
+
+            </div>
+
+
+            <div
+                class="field full history-field"
+                style="display:none;"
+            >
+
+                <label for="historyDescription">
+                    DESCRIPTION · 事件简介
+                </label>
+
+                <textarea
+                    id="historyDescription"
+                    placeholder="用一小段文字介绍这个历史事件……"
+                ></textarea>
+
+            </div>
+
+
+            <div
+                class="field full history-field"
+                style="display:none;"
+            >
+
+                <label for="historyContent">
+                    CONTENT · HISTORICAL RECORD
+                </label>
+
+                <textarea
+                    id="historyContent"
+                    placeholder="填写完整的历史记录、事件经过、人物、影响等……"
+                ></textarea>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="save-area">
+
+            <button
+                class="save-button"
+                id="saveButton"
+                type="submit"
+            >
+                SAVE CHARACTER
+            </button>
+
+        </div>
+
+
+        <div
+            class="message"
+            id="message"
+        ></div>
+
+
+    </form>
+
+</main>
+
+
+<footer
+    class="footer"
+    id="footer"
+>
+    SEYAMI · CHARACTER ARCHIVE
+</footer>
 
 
 </div>
@@ -1696,10 +1652,8 @@ body.day-mode .theme-toggle {
 const SUPABASE_URL =
     "https://rqqkdpzehxzwqzytpxgh.supabase.co";
 
-
 const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_T_gNdlgkOaXnzjSvdmI1Pw_HQOVTEWG";
-
 
 const supabaseClient =
     window.supabase.createClient(
@@ -1713,66 +1667,42 @@ const supabaseClient =
 ========================================================= */
 
 const form =
-    document.getElementById(
-        "characterForm"
-    );
+    document.getElementById("characterForm");
 
 const titleEn =
-    document.getElementById(
-        "titleEn"
-    );
+    document.getElementById("titleEn");
 
 const titleSub =
-    document.getElementById(
-        "titleSub"
-    );
+    document.getElementById("titleSub");
 
 const titleCn =
-    document.getElementById(
-        "titleCn"
-    );
+    document.getElementById("titleCn");
 
 const sectionTitle =
-    document.getElementById(
-        "sectionTitle"
-    );
+    document.getElementById("sectionTitle");
 
 const footer =
-    document.getElementById(
-        "footer"
-    );
+    document.getElementById("footer");
 
 
 const characterModeButton =
-    document.getElementById(
-        "characterModeButton"
-    );
+    document.getElementById("characterModeButton");
 
 const countryModeButton =
-    document.getElementById(
-        "countryModeButton"
-    );
+    document.getElementById("countryModeButton");
 
 const historyModeButton =
-    document.getElementById(
-        "historyModeButton"
-    );
+    document.getElementById("historyModeButton");
 
 
 const characterFields =
-    document.querySelectorAll(
-        ".character-field"
-    );
+    document.querySelectorAll(".character-field");
 
 const countryFields =
-    document.querySelectorAll(
-        ".country-field"
-    );
+    document.querySelectorAll(".country-field");
 
 const historyFields =
-    document.querySelectorAll(
-        ".history-field"
-    );
+    document.querySelectorAll(".history-field");
 
 
 /* =========================================================
@@ -1780,59 +1710,37 @@ const historyFields =
 ========================================================= */
 
 const nameInput =
-    document.getElementById(
-        "name"
-    );
+    document.getElementById("name");
 
 const raceInput =
-    document.getElementById(
-        "race"
-    );
+    document.getElementById("race");
 
 const regionInput =
-    document.getElementById(
-        "region"
-    );
+    document.getElementById("region");
 
 const roleInput =
-    document.getElementById(
-        "role"
-    );
+    document.getElementById("role");
 
 const ageInput =
-    document.getElementById(
-        "age"
-    );
+    document.getElementById("age");
 
 const genderInput =
-    document.getElementById(
-        "gender"
-    );
+    document.getElementById("gender");
 
 const personalityInput =
-    document.getElementById(
-        "personality"
-    );
+    document.getElementById("personality");
 
 const backstoryInput =
-    document.getElementById(
-        "backstory"
-    );
+    document.getElementById("backstory");
 
 const imageInput =
-    document.getElementById(
-        "image"
-    );
+    document.getElementById("image");
 
 const preview =
-    document.getElementById(
-        "preview"
-    );
+    document.getElementById("preview");
 
 const uploadPlaceholder =
-    document.getElementById(
-        "uploadPlaceholder"
-    );
+    document.getElementById("uploadPlaceholder");
 
 
 /* =========================================================
@@ -1840,44 +1748,28 @@ const uploadPlaceholder =
 ========================================================= */
 
 const countryNameInput =
-    document.getElementById(
-        "countryName"
-    );
+    document.getElementById("countryName");
 
 const countrySubtitleInput =
-    document.getElementById(
-        "countrySubtitle"
-    );
+    document.getElementById("countrySubtitle");
 
 const countryCapitalInput =
-    document.getElementById(
-        "countryCapital"
-    );
+    document.getElementById("countryCapital");
 
 const countryGovernmentInput =
-    document.getElementById(
-        "countryGovernment"
-    );
+    document.getElementById("countryGovernment");
 
 const countryRegionInput =
-    document.getElementById(
-        "countryRegion"
-    );
+    document.getElementById("countryRegion");
 
 const countryDescriptionInput =
-    document.getElementById(
-        "countryDescription"
-    );
+    document.getElementById("countryDescription");
 
 const countryHistoryInput =
-    document.getElementById(
-        "countryHistory"
-    );
+    document.getElementById("countryHistory");
 
 const countryCultureInput =
-    document.getElementById(
-        "countryCulture"
-    );
+    document.getElementById("countryCulture");
 
 
 /* =========================================================
@@ -1885,34 +1777,22 @@ const countryCultureInput =
 ========================================================= */
 
 const historyYearInput =
-    document.getElementById(
-        "historyYear"
-    );
+    document.getElementById("historyYear");
 
 const historyTitleInput =
-    document.getElementById(
-        "historyTitle"
-    );
+    document.getElementById("historyTitle");
 
 const historyEraInput =
-    document.getElementById(
-        "historyEra"
-    );
+    document.getElementById("historyEra");
 
 const historyLocationInput =
-    document.getElementById(
-        "historyLocation"
-    );
+    document.getElementById("historyLocation");
 
 const historyDescriptionInput =
-    document.getElementById(
-        "historyDescription"
-    );
+    document.getElementById("historyDescription");
 
 const historyContentInput =
-    document.getElementById(
-        "historyContent"
-    );
+    document.getElementById("historyContent");
 
 
 /* =========================================================
@@ -1920,53 +1800,14 @@ const historyContentInput =
 ========================================================= */
 
 const saveButton =
-    document.getElementById(
-        "saveButton"
-    );
+    document.getElementById("saveButton");
 
 const message =
-    document.getElementById(
-        "message"
-    );
+    document.getElementById("message");
 
 
 let currentMode =
     "character";
-
-
-/*
-    如果这里有 ID，
-    就代表当前正在编辑一条历史记录。
-
-    例如：
-
-    admin.html?type=history&id=3
-
-    editHistoryId = "3"
-*/
-
-let editHistoryId =
-    null;
-
-
-/* =========================================================
-   URL 参数
-========================================================= */
-
-const urlParams =
-    new URLSearchParams(
-        window.location.search
-    );
-
-const urlType =
-    urlParams.get(
-        "type"
-    );
-
-const urlId =
-    urlParams.get(
-        "id"
-    );
 
 
 /* =========================================================
@@ -2001,7 +1842,6 @@ function hideAllFields() {
         }
     );
 
-
     countryFields.forEach(
         function(field) {
 
@@ -2010,7 +1850,6 @@ function hideAllFields() {
 
         }
     );
-
 
     historyFields.forEach(
         function(field) {
@@ -2051,15 +1890,6 @@ function showCharacterMode() {
     currentMode =
         "character";
 
-    /*
-       从历史编辑切换出去时，
-       清除编辑 ID。
-    */
-
-    editHistoryId =
-        null;
-
-
     characterModeButton.classList.add(
         "active"
     );
@@ -2072,11 +1902,9 @@ function showCharacterMode() {
         "active"
     );
 
-
     hideAllFields();
 
     clearRequired();
-
 
     characterFields.forEach(
         function(field) {
@@ -2087,7 +1915,6 @@ function showCharacterMode() {
         }
     );
 
-
     titleEn.textContent =
         "CHARACTER";
 
@@ -2097,22 +1924,17 @@ function showCharacterMode() {
     titleCn.textContent =
         "角色档案管理";
 
-
     sectionTitle.textContent =
         "CREATE CHARACTER RECORD";
-
 
     saveButton.textContent =
         "SAVE CHARACTER";
 
-
     footer.textContent =
         "SEYAMI · CHARACTER ARCHIVE";
 
-
     nameInput.required =
         true;
-
 
     showMessage("");
 }
@@ -2127,15 +1949,6 @@ function showCountryMode() {
     currentMode =
         "country";
 
-    /*
-       从历史编辑切换出去时，
-       清除编辑 ID。
-    */
-
-    editHistoryId =
-        null;
-
-
     characterModeButton.classList.remove(
         "active"
     );
@@ -2148,11 +1961,9 @@ function showCountryMode() {
         "active"
     );
 
-
     hideAllFields();
 
     clearRequired();
-
 
     countryFields.forEach(
         function(field) {
@@ -2163,7 +1974,6 @@ function showCountryMode() {
         }
     );
 
-
     titleEn.textContent =
         "COUNTRY";
 
@@ -2173,22 +1983,17 @@ function showCountryMode() {
     titleCn.textContent =
         "国家设定管理";
 
-
     sectionTitle.textContent =
         "CREATE COUNTRY RECORD";
-
 
     saveButton.textContent =
         "SAVE COUNTRY";
 
-
     footer.textContent =
         "SEYAMI · COUNTRY ARCHIVE";
 
-
     countryNameInput.required =
         true;
-
 
     showMessage("");
 }
@@ -2196,13 +2001,13 @@ function showCountryMode() {
 
 /* =========================================================
    历史模式
+   这里只负责新增
 ========================================================= */
 
 function showHistoryMode() {
 
     currentMode =
         "history";
-
 
     characterModeButton.classList.remove(
         "active"
@@ -2216,11 +2021,9 @@ function showHistoryMode() {
         "active"
     );
 
-
     hideAllFields();
 
     clearRequired();
-
 
     historyFields.forEach(
         function(field) {
@@ -2231,42 +2034,26 @@ function showHistoryMode() {
         }
     );
 
-
     titleEn.textContent =
-        editHistoryId
-            ? "EDIT HISTORY"
-            : "HISTORY";
-
+        "HISTORY";
 
     titleSub.textContent =
         "ARCHIVE ADMINISTRATION";
 
-
     titleCn.textContent =
-        editHistoryId
-            ? "修改历史记录"
-            : "历史记录管理";
-
+        "历史记录管理";
 
     sectionTitle.textContent =
-        editHistoryId
-            ? "EDIT HISTORY RECORD"
-            : "CREATE HISTORY RECORD";
-
+        "CREATE HISTORY RECORD";
 
     saveButton.textContent =
-        editHistoryId
-            ? "UPDATE HISTORY"
-            : "SAVE HISTORY";
-
+        "SAVE HISTORY";
 
     footer.textContent =
         "SEYAMI · HISTORY ARCHIVE";
 
-
     historyTitleInput.required =
         true;
-
 
     showMessage("");
 }
@@ -2300,18 +2087,6 @@ historyModeButton.addEventListener(
     "click",
     function() {
 
-        /*
-           手动点击 HISTORY
-           永远进入新增模式。
-
-           只有 URL 带
-           ?type=history&id=xxx
-           才进入编辑模式。
-        */
-
-        editHistoryId =
-            null;
-
         showHistoryMode();
 
     }
@@ -2329,7 +2104,6 @@ imageInput.addEventListener(
         const file =
             this.files[0];
 
-
         if (!file) {
 
             preview.style.display =
@@ -2341,10 +2115,8 @@ imageInput.addEventListener(
             return;
         }
 
-
         const reader =
             new FileReader();
-
 
         reader.onload =
             function(event) {
@@ -2359,7 +2131,6 @@ imageInput.addEventListener(
                     "none";
 
             };
-
 
         reader.readAsDataURL(file);
 
@@ -2904,165 +2675,6 @@ async function createHistory() {
 
 
 /* =========================================================
-   修改历史
-========================================================= */
-
-async function updateHistory() {
-
-    const year =
-        historyYearInput.value.trim();
-
-    const title =
-        historyTitleInput.value.trim();
-
-    const era =
-        historyEraInput.value.trim();
-
-    const location =
-        historyLocationInput.value.trim();
-
-    const description =
-        historyDescriptionInput.value.trim();
-
-    const content =
-        historyContentInput.value.trim();
-
-
-    if (!editHistoryId) {
-
-        showMessage(
-            "没有找到需要修改的历史记录。",
-            "error"
-        );
-
-        return;
-    }
-
-
-    if (!title) {
-
-        showMessage(
-            "请先填写事件名称。",
-            "error"
-        );
-
-        return;
-    }
-
-
-    saveButton.disabled =
-        true;
-
-    saveButton.textContent =
-        "UPDATING...";
-
-
-    showMessage(
-        "正在更新历史记录……"
-    );
-
-
-    try {
-
-        const {
-            error: updateError
-        } =
-            await supabaseClient
-                .from("history_records")
-                .update({
-
-                    year:
-                        year || null,
-
-                    title:
-                        title,
-
-                    era:
-                        era || null,
-
-                    location:
-                        location || null,
-
-                    description:
-                        description || null,
-
-                    content:
-                        content || null,
-
-                    updated_at:
-                        new Date()
-                            .toISOString()
-
-                })
-                .eq(
-                    "id",
-                    editHistoryId
-                );
-
-
-        if (updateError) {
-
-            throw updateError;
-        }
-
-
-        showMessage(
-            "历史记录修改成功，正在返回……",
-            "success"
-        );
-
-
-        saveButton.textContent =
-            "UPDATED";
-
-
-        /*
-           稍微停一下，
-           让用户能看到成功提示，
-           然后回到历史页面。
-        */
-
-        setTimeout(
-            function() {
-
-                window.location.href =
-                    "history.html";
-
-            },
-            900
-        );
-
-
-    } catch (error) {
-
-        console.error(
-            "History update error:",
-            error
-        );
-
-
-        showMessage(
-            "修改失败：" +
-            (
-                error.message ||
-                "未知错误"
-            ),
-            "error"
-        );
-
-
-        saveButton.disabled =
-            false;
-
-        saveButton.textContent =
-            "UPDATE HISTORY";
-
-    }
-
-}
-
-
-/* =========================================================
    表单提交
 ========================================================= */
 
@@ -3100,214 +2712,13 @@ form.addEventListener(
             "history"
         ) {
 
-            /*
-               有 editHistoryId：
-               修改已有记录
-
-               没有：
-               新增历史记录
-            */
-
-            if (editHistoryId) {
-
-                await updateHistory();
-
-            } else {
-
-                await createHistory();
-
-            }
+            await createHistory();
 
             return;
         }
 
     }
 );
-
-
-/* =========================================================
-   读取历史记录
-========================================================= */
-
-async function loadHistoryForEdit() {
-
-    /*
-       只有：
-
-       admin.html?type=history&id=xxx
-
-       才进入编辑模式。
-    */
-
-    if (
-        urlType !==
-            "history" ||
-        !urlId
-    ) {
-
-        showCharacterMode();
-
-        return;
-    }
-
-
-    /*
-       保存正在编辑的 ID
-    */
-
-    editHistoryId =
-        urlId;
-
-
-    /*
-       先显示历史编辑界面
-    */
-
-    showHistoryMode();
-
-
-    /*
-       防止读取完成之前
-       用户点击保存
-    */
-
-    saveButton.disabled =
-        true;
-
-
-    showMessage(
-        "正在读取历史记录……"
-    );
-
-
-    try {
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient
-                .from("history_records")
-                .select(`
-                    id,
-                    year,
-                    title,
-                    era,
-                    location,
-                    description,
-                    content
-                `)
-                .eq(
-                    "id",
-                    urlId
-                )
-                .single();
-
-
-        if (error) {
-
-            throw error;
-        }
-
-
-        if (!data) {
-
-            throw new Error(
-                "没有找到这条历史记录。"
-            );
-        }
-
-
-        /*
-           把数据库里的内容
-           填回表单
-        */
-
-        historyYearInput.value =
-            data.year || "";
-
-
-        historyTitleInput.value =
-            data.title || "";
-
-
-        historyEraInput.value =
-            data.era || "";
-
-
-        historyLocationInput.value =
-            data.location || "";
-
-
-        historyDescriptionInput.value =
-            data.description || "";
-
-
-        historyContentInput.value =
-            data.content || "";
-
-
-        /*
-           确保页面显示编辑状态
-        */
-
-        titleEn.textContent =
-            "EDIT HISTORY";
-
-
-        titleSub.textContent =
-            "ARCHIVE ADMINISTRATION";
-
-
-        titleCn.textContent =
-            "修改历史记录";
-
-
-        sectionTitle.textContent =
-            "EDIT HISTORY RECORD";
-
-
-        saveButton.textContent =
-            "UPDATE HISTORY";
-
-
-        footer.textContent =
-            "SEYAMI · HISTORY ARCHIVE";
-
-
-        saveButton.disabled =
-            false;
-
-
-        showMessage(
-            "历史记录已载入，可以修改。"
-        );
-
-
-    } catch (error) {
-
-        console.error(
-            "Load history error:",
-            error
-        );
-
-
-        showMessage(
-            "读取历史记录失败：" +
-            (
-                error.message ||
-                "未知错误"
-            ),
-            "error"
-        );
-
-
-        saveButton.disabled =
-            true;
-
-    }
-
-}
 
 
 /* =========================================================
@@ -3396,32 +2807,7 @@ themeToggle.addEventListener(
    初始化
 ========================================================= */
 
-/*
-   这里非常重要。
-
-   以前是：
-
-   showCharacterMode();
-
-   所以无论从哪里进入，
-   最后都会被强制变成
-   “新增角色”。
-
-   现在改成：
-
-   loadHistoryForEdit();
-
-   如果 URL 有：
-
-   ?type=history&id=xxx
-
-   就读取历史记录。
-
-   如果没有，
-   才默认显示角色新增。
-*/
-
-loadHistoryForEdit();
+showCharacterMode();
 
 </script>
 
