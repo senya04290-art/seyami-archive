@@ -1185,7 +1185,9 @@ body.day-mode .theme-toggle {
             </div>
 
 
-            <div class="field character-field">
+            <div
+                class="field character-field"
+            >
 
                 <label for="race">
                     RACE
@@ -1200,7 +1202,9 @@ body.day-mode .theme-toggle {
             </div>
 
 
-            <div class="field character-field">
+            <div
+                class="field character-field"
+            >
 
                 <label for="region">
                     REGION
@@ -1215,7 +1219,9 @@ body.day-mode .theme-toggle {
             </div>
 
 
-            <div class="field character-field">
+            <div
+                class="field character-field"
+            >
 
                 <label for="role">
                     ROLE
@@ -1230,7 +1236,9 @@ body.day-mode .theme-toggle {
             </div>
 
 
-            <div class="field character-field">
+            <div
+                class="field character-field"
+            >
 
                 <label for="age">
                     AGE
@@ -1246,7 +1254,9 @@ body.day-mode .theme-toggle {
             </div>
 
 
-            <div class="field full character-field">
+            <div
+                class="field full character-field"
+            >
 
                 <label for="gender">
                     GENDER
@@ -1275,7 +1285,9 @@ body.day-mode .theme-toggle {
             </div>
 
 
-            <div class="field full character-field">
+            <div
+                class="field full character-field"
+            >
 
                 <label for="personality">
                     PERSONALITY · 性格
@@ -1289,7 +1301,9 @@ body.day-mode .theme-toggle {
             </div>
 
 
-            <div class="field full character-field">
+            <div
+                class="field full character-field"
+            >
 
                 <label for="backstory">
                     BACKSTORY · 背景故事
@@ -1303,7 +1317,9 @@ body.day-mode .theme-toggle {
             </div>
 
 
-            <div class="field full character-field">
+            <div
+                class="field full character-field"
+            >
 
                 <label>
                     CHARACTER ARTWORK
@@ -1684,7 +1700,6 @@ const sectionTitle =
 const footer =
     document.getElementById("footer");
 
-
 const characterModeButton =
     document.getElementById("characterModeButton");
 
@@ -1693,7 +1708,6 @@ const countryModeButton =
 
 const historyModeButton =
     document.getElementById("historyModeButton");
-
 
 const characterFields =
     document.querySelectorAll(".character-field");
@@ -1805,9 +1819,37 @@ const saveButton =
 const message =
     document.getElementById("message");
 
-
 let currentMode =
     "character";
+
+
+/*
+   这里保存当前正在修改的历史记录 ID。
+
+   没有 ID：
+   → 新建历史
+
+   有 ID：
+   → 修改历史
+*/
+
+let editHistoryId = null;
+
+
+/* =========================================================
+   URL
+========================================================= */
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const urlType =
+    urlParams.get("type");
+
+const urlId =
+    urlParams.get("id");
 
 
 /* =========================================================
@@ -1890,6 +1932,9 @@ function showCharacterMode() {
     currentMode =
         "character";
 
+    editHistoryId =
+        null;
+
     characterModeButton.classList.add(
         "active"
     );
@@ -1936,7 +1981,11 @@ function showCharacterMode() {
     nameInput.required =
         true;
 
+    saveButton.disabled =
+        false;
+
     showMessage("");
+
 }
 
 
@@ -1948,6 +1997,9 @@ function showCountryMode() {
 
     currentMode =
         "country";
+
+    editHistoryId =
+        null;
 
     characterModeButton.classList.remove(
         "active"
@@ -1995,13 +2047,16 @@ function showCountryMode() {
     countryNameInput.required =
         true;
 
+    saveButton.disabled =
+        false;
+
     showMessage("");
+
 }
 
 
 /* =========================================================
    历史模式
-   这里只负责新增
 ========================================================= */
 
 function showHistoryMode() {
@@ -2034,20 +2089,40 @@ function showHistoryMode() {
         }
     );
 
-    titleEn.textContent =
-        "HISTORY";
+
+    if (editHistoryId) {
+
+        titleEn.textContent =
+            "EDIT HISTORY";
+
+        titleCn.textContent =
+            "修改历史记录";
+
+        sectionTitle.textContent =
+            "EDIT HISTORY RECORD";
+
+        saveButton.textContent =
+            "UPDATE HISTORY";
+
+    } else {
+
+        titleEn.textContent =
+            "HISTORY";
+
+        titleCn.textContent =
+            "历史记录管理";
+
+        sectionTitle.textContent =
+            "CREATE HISTORY RECORD";
+
+        saveButton.textContent =
+            "SAVE HISTORY";
+
+    }
+
 
     titleSub.textContent =
         "ARCHIVE ADMINISTRATION";
-
-    titleCn.textContent =
-        "历史记录管理";
-
-    sectionTitle.textContent =
-        "CREATE HISTORY RECORD";
-
-    saveButton.textContent =
-        "SAVE HISTORY";
 
     footer.textContent =
         "SEYAMI · HISTORY ARCHIVE";
@@ -2056,6 +2131,7 @@ function showHistoryMode() {
         true;
 
     showMessage("");
+
 }
 
 
@@ -2086,6 +2162,17 @@ countryModeButton.addEventListener(
 historyModeButton.addEventListener(
     "click",
     function() {
+
+        /*
+           手动点击 HISTORY
+           = 新建历史
+
+           修改历史只有从
+           history.html 的修改按钮进入。
+        */
+
+        editHistoryId =
+            null;
 
         showHistoryMode();
 
@@ -2203,11 +2290,8 @@ async function saveCharacter() {
 
     try {
 
-        const originalName =
-            imageFile.name;
-
         const extension =
-            originalName
+            imageFile.name
                 .split(".")
                 .pop()
                 .toLowerCase();
@@ -2248,6 +2332,7 @@ async function saveCharacter() {
         if (uploadError) {
 
             throw uploadError;
+
         }
 
 
@@ -2313,6 +2398,7 @@ async function saveCharacter() {
         if (insertError) {
 
             throw insertError;
+
         }
 
 
@@ -2325,9 +2411,7 @@ async function saveCharacter() {
         saveButton.textContent =
             "SAVED";
 
-
         form.reset();
-
 
         preview.src =
             "";
@@ -2360,7 +2444,6 @@ async function saveCharacter() {
             error
         );
 
-
         showMessage(
             "保存失败：" +
             (
@@ -2369,7 +2452,6 @@ async function saveCharacter() {
             ),
             "error"
         );
-
 
         saveButton.disabled =
             false;
@@ -2475,6 +2557,7 @@ async function saveCountry() {
         if (insertError) {
 
             throw insertError;
+
         }
 
 
@@ -2486,7 +2569,6 @@ async function saveCountry() {
 
         saveButton.textContent =
             "SAVED";
-
 
         form.reset();
 
@@ -2512,7 +2594,6 @@ async function saveCountry() {
             error
         );
 
-
         showMessage(
             "保存失败：" +
             (
@@ -2521,7 +2602,6 @@ async function saveCountry() {
             ),
             "error"
         );
-
 
         saveButton.disabled =
             false;
@@ -2615,6 +2695,7 @@ async function createHistory() {
         if (insertError) {
 
             throw insertError;
+
         }
 
 
@@ -2626,7 +2707,6 @@ async function createHistory() {
 
         saveButton.textContent =
             "SAVED";
-
 
         form.reset();
 
@@ -2652,7 +2732,6 @@ async function createHistory() {
             error
         );
 
-
         showMessage(
             "保存失败：" +
             (
@@ -2662,12 +2741,163 @@ async function createHistory() {
             "error"
         );
 
-
         saveButton.disabled =
             false;
 
         saveButton.textContent =
             "SAVE HISTORY";
+
+    }
+
+}
+
+
+/* =========================================================
+   修改历史
+========================================================= */
+
+async function updateHistory() {
+
+    const year =
+        historyYearInput.value.trim();
+
+    const title =
+        historyTitleInput.value.trim();
+
+    const era =
+        historyEraInput.value.trim();
+
+    const location =
+        historyLocationInput.value.trim();
+
+    const description =
+        historyDescriptionInput.value.trim();
+
+    const content =
+        historyContentInput.value.trim();
+
+
+    if (!editHistoryId) {
+
+        showMessage(
+            "没有找到需要修改的历史记录。",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if (!title) {
+
+        showMessage(
+            "请先填写事件名称。",
+            "error"
+        );
+
+        return;
+    }
+
+
+    saveButton.disabled =
+        true;
+
+    saveButton.textContent =
+        "UPDATING...";
+
+
+    showMessage(
+        "正在更新历史记录……"
+    );
+
+
+    try {
+
+        const {
+            error: updateError
+        } =
+            await supabaseClient
+                .from("history_records")
+                .update({
+
+                    year:
+                        year || null,
+
+                    title:
+                        title,
+
+                    era:
+                        era || null,
+
+                    location:
+                        location || null,
+
+                    description:
+                        description || null,
+
+                    content:
+                        content || null,
+
+                    updated_at:
+                        new Date()
+                            .toISOString()
+
+                })
+                .eq(
+                    "id",
+                    editHistoryId
+                );
+
+
+        if (updateError) {
+
+            throw updateError;
+
+        }
+
+
+        showMessage(
+            "历史记录修改成功，正在返回……",
+            "success"
+        );
+
+
+        saveButton.textContent =
+            "UPDATED";
+
+
+        setTimeout(
+            function() {
+
+                window.location.href =
+                    "history.html";
+
+            },
+            900
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "History update error:",
+            error
+        );
+
+        showMessage(
+            "修改失败：" +
+            (
+                error.message ||
+                "未知错误"
+            ),
+            "error"
+        );
+
+        saveButton.disabled =
+            false;
+
+        saveButton.textContent =
+            "UPDATE HISTORY";
 
     }
 
@@ -2712,13 +2942,185 @@ form.addEventListener(
             "history"
         ) {
 
-            await createHistory();
+            if (editHistoryId) {
 
-            return;
+                await updateHistory();
+
+            } else {
+
+                await createHistory();
+
+            }
+
         }
 
     }
 );
+
+
+/* =========================================================
+   从 history.html 进入修改
+========================================================= */
+
+async function loadHistoryForEdit() {
+
+    /*
+       普通打开 admin.html
+       → 直接显示角色新增
+    */
+
+    if (
+        urlType !== "history" ||
+        !urlId
+    ) {
+
+        showCharacterMode();
+
+        return;
+
+    }
+
+
+    /*
+       只有带：
+
+       ?type=history&id=xxx
+
+       才进入历史修改。
+    */
+
+    editHistoryId =
+        urlId;
+
+
+    showHistoryMode();
+
+
+    saveButton.disabled =
+        true;
+
+
+    showMessage(
+        "正在读取历史记录……"
+    );
+
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from("history_records")
+                .select(`
+                    id,
+                    year,
+                    title,
+                    era,
+                    location,
+                    description,
+                    content
+                `)
+                .eq(
+                    "id",
+                    urlId
+                )
+                .single();
+
+
+        if (error) {
+
+            throw error;
+
+        }
+
+
+        if (!data) {
+
+            throw new Error(
+                "没有找到这条历史记录。"
+            );
+
+        }
+
+
+        /*
+           将数据库中的内容
+           填回表单
+        */
+
+        historyYearInput.value =
+            data.year || "";
+
+        historyTitleInput.value =
+            data.title || "";
+
+        historyEraInput.value =
+            data.era || "";
+
+        historyLocationInput.value =
+            data.location || "";
+
+        historyDescriptionInput.value =
+            data.description || "";
+
+        historyContentInput.value =
+            data.content || "";
+
+
+        titleEn.textContent =
+            "EDIT HISTORY";
+
+        titleSub.textContent =
+            "ARCHIVE ADMINISTRATION";
+
+        titleCn.textContent =
+            "修改历史记录";
+
+        sectionTitle.textContent =
+            "EDIT HISTORY RECORD";
+
+        saveButton.textContent =
+            "UPDATE HISTORY";
+
+        footer.textContent =
+            "SEYAMI · HISTORY ARCHIVE";
+
+
+        saveButton.disabled =
+            false;
+
+
+        showMessage(
+            "历史记录已载入，可以修改。"
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Load history error:",
+            error
+        );
+
+
+        showMessage(
+            "读取历史记录失败：" +
+            (
+                error.message ||
+                "未知错误"
+            ),
+            "error"
+        );
+
+
+        saveButton.disabled =
+            true;
+
+    }
+
+}
 
 
 /* =========================================================
@@ -2731,13 +3133,10 @@ const themeToggle =
     );
 
 
-function applyTheme(
-    theme
-) {
+function applyTheme(theme) {
 
     if (
-        theme ===
-        "day"
+        theme === "day"
     ) {
 
         document.body.classList.add(
@@ -2768,8 +3167,7 @@ const savedTheme =
 
 
 applyTheme(
-    savedTheme ||
-    "night"
+    savedTheme || "night"
 );
 
 
@@ -2807,7 +3205,25 @@ themeToggle.addEventListener(
    初始化
 ========================================================= */
 
-showCharacterMode();
+/*
+   普通进入：
+
+   admin.html
+
+   → 新建角色
+
+
+   从历史记录点击修改：
+
+   admin.html?type=history&id=3
+
+   → 修改历史记录
+
+
+   不创建任何新的 HTML 页面。
+*/
+
+loadHistoryForEdit();
 
 </script>
 
