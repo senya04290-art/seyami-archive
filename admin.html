@@ -308,7 +308,7 @@ body {
 
 .management-switch {
 
-    width: min(900px, 100%);
+    width: min(1100px, 100%);
 
     margin:
         0 auto 28px;
@@ -318,6 +318,8 @@ body {
     justify-content: center;
 
     gap: 10px;
+
+    flex-wrap: wrap;
 }
 
 .management-button {
@@ -683,6 +685,98 @@ textarea::placeholder {
 
 
 /* =========================
+   图集上传
+========================= */
+
+.gallery-upload-box {
+
+    width: 100%;
+
+    min-height: 260px;
+
+    border:
+        1px dashed
+        rgba(180, 210, 240, 0.25);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    position: relative;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.3s ease,
+        background 0.3s ease;
+}
+
+.gallery-upload-box:hover {
+
+    border-color:
+        rgba(180, 210, 240, 0.55);
+
+    background:
+        rgba(180, 210, 240, 0.025);
+}
+
+.gallery-upload-box input[type="file"] {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    opacity: 0;
+
+    cursor: pointer;
+
+    padding: 0;
+}
+
+.gallery-preview {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: contain;
+
+    padding: 15px;
+
+    display: none;
+
+    pointer-events: none;
+}
+
+.gallery-upload-placeholder {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 12px;
+
+    pointer-events: none;
+}
+
+
+/* =========================
    保存按钮
 ========================= */
 
@@ -864,7 +958,8 @@ body.day-mode textarea:focus {
         rgba(40, 70, 100, 0.45);
 }
 
-body.day-mode .upload-box {
+body.day-mode .upload-box,
+body.day-mode .gallery-upload-box {
 
     border-color:
         rgba(40, 70, 100, 0.25);
@@ -973,7 +1068,7 @@ body.day-mode .theme-toggle {
 
         min-width: 0;
 
-        width: 33.333%;
+        width: calc(50% - 4px);
 
         height: 40px;
 
@@ -1000,7 +1095,8 @@ body.day-mode .theme-toggle {
         grid-column: auto;
     }
 
-    .upload-box {
+    .upload-box,
+    .gallery-upload-box {
 
         min-height: 200px;
     }
@@ -1160,6 +1256,17 @@ body.day-mode .theme-toggle {
             id="historyModeButton"
         >
             HISTORY · 历史
+        </button>
+
+
+        <!-- 新增：图集 -->
+
+        <button
+            type="button"
+            class="management-button"
+            id="galleryModeButton"
+        >
+            GALLERY · 图集
         </button>
 
     </div>
@@ -1645,6 +1752,63 @@ body.day-mode .theme-toggle {
                 </div>
 
 
+                <!-- =====================
+                     图集
+                ===================== -->
+
+                <div
+                    class="field full gallery-field"
+                    style="display:none;"
+                >
+
+                    <label>
+                        GALLERY ARTWORK · 图集图片
+                    </label>
+
+
+                    <div
+                        class="gallery-upload-box"
+                        id="galleryUploadBox"
+                    >
+
+                        <input
+                            id="galleryImage"
+                            type="file"
+                            accept="image/png,image/jpeg,image/webp"
+                        >
+
+
+                        <div
+                            class="gallery-upload-placeholder"
+                            id="galleryUploadPlaceholder"
+                        >
+
+                            <div class="upload-symbol">
+                                ✦
+                            </div>
+
+                            <div class="upload-text">
+                                SELECT GALLERY IMAGE
+                            </div>
+
+                            <div class="upload-hint">
+                                PNG / JPG / WEBP
+                            </div>
+
+                        </div>
+
+
+                        <img
+                            id="galleryPreview"
+                            class="gallery-preview"
+                            alt="图集预览"
+                        >
+
+                    </div>
+
+                </div>
+
+
             </div>
 
 
@@ -1758,6 +1922,11 @@ const historyModeButton =
         "historyModeButton"
     );
 
+const galleryModeButton =
+    document.getElementById(
+        "galleryModeButton"
+    );
+
 
 const characterFields =
     document.querySelectorAll(
@@ -1772,6 +1941,11 @@ const countryFields =
 const historyFields =
     document.querySelectorAll(
         ".history-field"
+    );
+
+const galleryFields =
+    document.querySelectorAll(
+        ".gallery-field"
     );
 
 
@@ -1916,6 +2090,26 @@ const historyContentInput =
 
 
 /* =========================================================
+   图集 DOM
+========================================================= */
+
+const galleryImageInput =
+    document.getElementById(
+        "galleryImage"
+    );
+
+const galleryPreview =
+    document.getElementById(
+        "galleryPreview"
+    );
+
+const galleryUploadPlaceholder =
+    document.getElementById(
+        "galleryUploadPlaceholder"
+    );
+
+
+/* =========================================================
    通用
 ========================================================= */
 
@@ -1933,17 +2127,6 @@ const message =
 let currentMode =
     "character";
 
-
-/*
-    如果这里有 ID，
-    就代表当前正在编辑一条历史记录。
-
-    例如：
-
-    admin.html?type=history&id=3
-
-    editHistoryId = "3"
-*/
 
 let editHistoryId =
     null;
@@ -2021,6 +2204,16 @@ function hideAllFields() {
         }
     );
 
+
+    galleryFields.forEach(
+        function(field) {
+
+            field.style.display =
+                "none";
+
+        }
+    );
+
 }
 
 
@@ -2051,11 +2244,6 @@ function showCharacterMode() {
     currentMode =
         "character";
 
-    /*
-       从历史编辑切换出去时，
-       清除编辑 ID。
-    */
-
     editHistoryId =
         null;
 
@@ -2069,6 +2257,10 @@ function showCharacterMode() {
     );
 
     historyModeButton.classList.remove(
+        "active"
+    );
+
+    galleryModeButton.classList.remove(
         "active"
     );
 
@@ -2127,11 +2319,6 @@ function showCountryMode() {
     currentMode =
         "country";
 
-    /*
-       从历史编辑切换出去时，
-       清除编辑 ID。
-    */
-
     editHistoryId =
         null;
 
@@ -2145,6 +2332,10 @@ function showCountryMode() {
     );
 
     historyModeButton.classList.remove(
+        "active"
+    );
+
+    galleryModeButton.classList.remove(
         "active"
     );
 
@@ -2216,6 +2407,10 @@ function showHistoryMode() {
         "active"
     );
 
+    galleryModeButton.classList.remove(
+        "active"
+    );
+
 
     hideAllFields();
 
@@ -2273,6 +2468,79 @@ function showHistoryMode() {
 
 
 /* =========================================================
+   图集模式
+========================================================= */
+
+function showGalleryMode() {
+
+    currentMode =
+        "gallery";
+
+    editHistoryId =
+        null;
+
+
+    characterModeButton.classList.remove(
+        "active"
+    );
+
+    countryModeButton.classList.remove(
+        "active"
+    );
+
+    historyModeButton.classList.remove(
+        "active"
+    );
+
+    galleryModeButton.classList.add(
+        "active"
+    );
+
+
+    hideAllFields();
+
+    clearRequired();
+
+
+    galleryFields.forEach(
+        function(field) {
+
+            field.style.display =
+                "";
+
+        }
+    );
+
+
+    titleEn.textContent =
+        "GALLERY";
+
+
+    titleSub.textContent =
+        "ARCHIVE ADMINISTRATION";
+
+
+    titleCn.textContent =
+        "档案图集管理";
+
+
+    sectionTitle.textContent =
+        "ADD GALLERY IMAGE";
+
+
+    saveButton.textContent =
+        "UPLOAD IMAGE";
+
+
+    footer.textContent =
+        "SEYAMI · GALLERY ARCHIVE";
+
+
+    showMessage("");
+}
+
+
+/* =========================================================
    模式按钮
 ========================================================= */
 
@@ -2300,15 +2568,6 @@ historyModeButton.addEventListener(
     "click",
     function() {
 
-        /*
-           手动点击 HISTORY
-           永远进入新增模式。
-
-           只有 URL 带
-           ?type=history&id=xxx
-           才进入编辑模式。
-        */
-
         editHistoryId =
             null;
 
@@ -2318,8 +2577,18 @@ historyModeButton.addEventListener(
 );
 
 
+galleryModeButton.addEventListener(
+    "click",
+    function() {
+
+        showGalleryMode();
+
+    }
+);
+
+
 /* =========================================================
-   图片预览
+   角色图片预览
 ========================================================= */
 
 imageInput.addEventListener(
@@ -2356,6 +2625,55 @@ imageInput.addEventListener(
                     "block";
 
                 uploadPlaceholder.style.display =
+                    "none";
+
+            };
+
+
+        reader.readAsDataURL(file);
+
+    }
+);
+
+
+/* =========================================================
+   图集图片预览
+========================================================= */
+
+galleryImageInput.addEventListener(
+    "change",
+    function() {
+
+        const file =
+            this.files[0];
+
+
+        if (!file) {
+
+            galleryPreview.style.display =
+                "none";
+
+            galleryUploadPlaceholder.style.display =
+                "flex";
+
+            return;
+        }
+
+
+        const reader =
+            new FileReader();
+
+
+        reader.onload =
+            function(event) {
+
+                galleryPreview.src =
+                    event.target.result;
+
+                galleryPreview.style.display =
+                    "block";
+
+                galleryUploadPlaceholder.style.display =
                     "none";
 
             };
@@ -3016,12 +3334,6 @@ async function updateHistory() {
             "UPDATED";
 
 
-        /*
-           稍微停一下，
-           让用户能看到成功提示，
-           然后回到历史页面。
-        */
-
         setTimeout(
             function() {
 
@@ -3056,6 +3368,210 @@ async function updateHistory() {
 
         saveButton.textContent =
             "UPDATE HISTORY";
+
+    }
+
+}
+
+
+/* =========================================================
+   上传图集
+========================================================= */
+
+async function uploadGalleryImage() {
+
+    const imageFile =
+        galleryImageInput.files[0];
+
+
+    if (!imageFile) {
+
+        showMessage(
+            "请先选择一张图集图片。",
+            "error"
+        );
+
+        return;
+    }
+
+
+    saveButton.disabled =
+        true;
+
+    saveButton.textContent =
+        "UPLOADING...";
+
+
+    showMessage(
+        "正在上传图集图片……"
+    );
+
+
+    try {
+
+        const originalName =
+            imageFile.name;
+
+
+        const extension =
+            originalName
+                .split(".")
+                .pop()
+                .toLowerCase();
+
+
+        const filePath =
+            "gallery-" +
+            Date.now() +
+            "-" +
+            Math.random()
+                .toString(36)
+                .substring(2, 10) +
+            "." +
+            extension;
+
+
+        /*
+           第一步：
+           上传到 gallery-images
+        */
+
+        const {
+            error: uploadError
+        } =
+            await supabaseClient
+                .storage
+                .from("gallery-images")
+                .upload(
+                    filePath,
+                    imageFile,
+                    {
+                        cacheControl: "3600",
+                        upsert: false
+                    }
+                );
+
+
+        if (uploadError) {
+
+            throw uploadError;
+        }
+
+
+        showMessage(
+            "图片上传完成，正在建立图集记录……"
+        );
+
+
+        /*
+           第二步：
+           获取公开 URL
+        */
+
+        const {
+            data: publicURLData
+        } =
+            supabaseClient
+                .storage
+                .from("gallery-images")
+                .getPublicUrl(
+                    filePath
+                );
+
+
+        const imageURL =
+            publicURLData.publicUrl;
+
+
+        /*
+           第三步：
+           写入 gallery_images
+        */
+
+        const {
+            error: insertError
+        } =
+            await supabaseClient
+                .from("gallery_images")
+                .insert({
+
+                    image_url:
+                        imageURL
+
+                });
+
+
+        if (insertError) {
+
+            throw insertError;
+        }
+
+
+        /*
+           完成
+        */
+
+        showMessage(
+            "图集图片上传成功！",
+            "success"
+        );
+
+
+        saveButton.textContent =
+            "UPLOADED";
+
+
+        galleryImageInput.value =
+            "";
+
+
+        galleryPreview.src =
+            "";
+
+        galleryPreview.style.display =
+            "none";
+
+        galleryUploadPlaceholder.style.display =
+            "flex";
+
+
+        setTimeout(
+            function() {
+
+                saveButton.disabled =
+                    false;
+
+                saveButton.textContent =
+                    "UPLOAD IMAGE";
+
+            },
+            2000
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Gallery upload error:",
+            error
+        );
+
+
+        showMessage(
+            "上传失败：" +
+            (
+                error.message ||
+                "未知错误"
+            ),
+            "error"
+        );
+
+
+        saveButton.disabled =
+            false;
+
+        saveButton.textContent =
+            "UPLOAD IMAGE";
 
     }
 
@@ -3100,14 +3616,6 @@ form.addEventListener(
             "history"
         ) {
 
-            /*
-               有 editHistoryId：
-               修改已有记录
-
-               没有：
-               新增历史记录
-            */
-
             if (editHistoryId) {
 
                 await updateHistory();
@@ -3117,6 +3625,17 @@ form.addEventListener(
                 await createHistory();
 
             }
+
+            return;
+        }
+
+
+        if (
+            currentMode ===
+            "gallery"
+        ) {
+
+            await uploadGalleryImage();
 
             return;
         }
@@ -3131,14 +3650,6 @@ form.addEventListener(
 
 async function loadHistoryForEdit() {
 
-    /*
-       只有：
-
-       admin.html?type=history&id=xxx
-
-       才进入编辑模式。
-    */
-
     if (
         urlType !==
             "history" ||
@@ -3151,25 +3662,12 @@ async function loadHistoryForEdit() {
     }
 
 
-    /*
-       保存正在编辑的 ID
-    */
-
     editHistoryId =
         urlId;
 
 
-    /*
-       先显示历史编辑界面
-    */
-
     showHistoryMode();
 
-
-    /*
-       防止读取完成之前
-       用户点击保存
-    */
 
     saveButton.disabled =
         true;
@@ -3218,11 +3716,6 @@ async function loadHistoryForEdit() {
         }
 
 
-        /*
-           把数据库里的内容
-           填回表单
-        */
-
         historyYearInput.value =
             data.year || "";
 
@@ -3246,10 +3739,6 @@ async function loadHistoryForEdit() {
         historyContentInput.value =
             data.content || "";
 
-
-        /*
-           确保页面显示编辑状态
-        */
 
         titleEn.textContent =
             "EDIT HISTORY";
@@ -3395,31 +3884,6 @@ themeToggle.addEventListener(
 /* =========================================================
    初始化
 ========================================================= */
-
-/*
-   这里非常重要。
-
-   以前是：
-
-   showCharacterMode();
-
-   所以无论从哪里进入，
-   最后都会被强制变成
-   “新增角色”。
-
-   现在改成：
-
-   loadHistoryForEdit();
-
-   如果 URL 有：
-
-   ?type=history&id=xxx
-
-   就读取历史记录。
-
-   如果没有，
-   才默认显示角色新增。
-*/
 
 loadHistoryForEdit();
 
