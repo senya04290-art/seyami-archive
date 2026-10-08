@@ -10,304 +10,159 @@
     content="width=device-width, initial-scale=1.0"
 >
 
-<title>编辑档案 · Seyami Archive</title>
+<title>塞垭弥大陆档案馆 · 编辑档案</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
->
-
-<link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
-    crossorigin
->
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600&display=swap"
     rel="stylesheet"
 >
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
 <style>
 
-/* =========================================================
+/* ==================================================
    基础
-========================================================= */
+================================================== */
 
 *{
     box-sizing:border-box;
 }
 
-html,
-body{
-    margin:0;
-    padding:0;
+html{
     min-height:100%;
 }
 
 body{
-    background:#061426;
+    margin:0;
+    min-height:100vh;
+
+    background:
+        radial-gradient(
+            circle at 50% 30%,
+            rgba(45,80,125,.12),
+            transparent 42%
+        ),
+        #061426;
+
     color:#dcecff;
 
     font-family:
         "Noto Serif SC",
-        "Cinzel",
         serif;
 
-    font-weight:300;
-    letter-spacing:1px;
-
     transition:
-        background .5s ease,
-        color .5s ease;
+        background .35s ease,
+        color .35s ease;
 }
 
 
-/* =========================================================
-   星空
-========================================================= */
+/* ==================================================
+   日间模式
+================================================== */
 
-.stars{
+body.day-mode{
+
+    background:
+        radial-gradient(
+            circle at 50% 25%,
+            rgba(255,255,255,.8),
+            transparent 45%
+        ),
+        #edf4fb;
+
+    color:#243b56;
+}
+
+
+/* ==================================================
+   星点
+================================================== */
+
+.star-field{
     position:fixed;
     inset:0;
 
     pointer-events:none;
+
     overflow:hidden;
 
     z-index:0;
 }
 
-.star{
+.star-field span{
     position:absolute;
 
-    color:rgba(220,236,255,.45);
+    color:#dcecff;
 
-    font-family:serif;
-    font-size:13px;
+    font-family:
+        "Cinzel",
+        serif;
 
-    animation:
-        starFloat 8s ease-in-out infinite;
+    opacity:.55;
+
+    font-size:11px;
 }
 
-.star:nth-child(1){
-    left:7%;
-    top:18%;
-    animation-delay:-1s;
-}
-
-.star:nth-child(2){
-    left:15%;
-    top:72%;
-    animation-delay:-4s;
-}
-
-.star:nth-child(3){
-    left:24%;
-    top:35%;
-    animation-delay:-2s;
-}
-
-.star:nth-child(4){
-    left:32%;
-    top:82%;
-    animation-delay:-6s;
-}
-
-.star:nth-child(5){
-    left:43%;
-    top:14%;
-    animation-delay:-3s;
-}
-
-.star:nth-child(6){
-    left:51%;
-    top:66%;
-    animation-delay:-5s;
-}
-
-.star:nth-child(7){
-    left:62%;
-    top:27%;
-    animation-delay:-1.5s;
-}
-
-.star:nth-child(8){
-    left:71%;
-    top:79%;
-    animation-delay:-7s;
-}
-
-.star:nth-child(9){
-    left:82%;
-    top:21%;
-    animation-delay:-2.5s;
-}
-
-.star:nth-child(10){
-    left:91%;
-    top:59%;
-    animation-delay:-5.5s;
-}
-
-.star:nth-child(11){
-    left:5%;
-    top:47%;
-    animation-delay:-3.5s;
-}
-
-.star:nth-child(12){
-    left:18%;
-    top:9%;
-    animation-delay:-6.5s;
-}
-
-.star:nth-child(13){
-    left:28%;
-    top:58%;
-    animation-delay:-4.5s;
-}
-
-.star:nth-child(14){
-    left:39%;
-    top:91%;
-    animation-delay:-1.8s;
-}
-
-.star:nth-child(15){
-    left:57%;
-    top:9%;
-    animation-delay:-3.8s;
-}
-
-.star:nth-child(16){
-    left:68%;
-    top:48%;
-    animation-delay:-6.2s;
-}
-
-.star:nth-child(17){
-    left:77%;
-    top:11%;
-    animation-delay:-2.2s;
-}
-
-.star:nth-child(18){
-    left:88%;
-    top:87%;
-    animation-delay:-4.2s;
-}
-
-.star:nth-child(19){
-    left:94%;
-    top:33%;
-    animation-delay:-7.2s;
-}
-
-.star:nth-child(20){
-    left:11%;
-    top:91%;
-    animation-delay:-5.2s;
+body.day-mode .star-field span{
+    color:#5d7895;
+    opacity:.35;
 }
 
 
-@keyframes starFloat{
-
-    0%,
-    100%{
-        opacity:.25;
-        transform:translateY(0);
-    }
-
-    50%{
-        opacity:.75;
-        transform:translateY(-5px);
-    }
-
-}
-
-
-/* =========================================================
-   外框
-========================================================= */
+/* ==================================================
+   页面框架
+================================================== */
 
 .page-frame{
+
     position:relative;
 
-    z-index:2;
+    width:min(1120px,92vw);
 
-    width:
-        min(
-            calc(100% - 76px),
-            1100px
+    min-height:calc(100vh - 70px);
+
+    margin:35px auto;
+
+    padding:34px 42px 45px;
+
+    border:1px solid rgba(150,190,230,.18);
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(8,25,46,.76),
+            rgba(5,18,34,.82)
         );
 
-    min-height:
-        calc(100vh - 76px);
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.25);
 
-    margin:38px auto;
-
-    border:
-        1px solid
-        rgba(190,215,238,.22);
-
-    padding:
-        0
-        68px
-        60px;
-
-    overflow:hidden;
+    z-index:1;
 }
 
-.page-frame::before,
-.page-frame::after{
-    content:"";
+body.day-mode .page-frame{
 
-    position:absolute;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.88),
+            rgba(244,248,252,.94)
+        );
 
-    width:24px;
-    height:24px;
+    border-color:rgba(70,105,140,.18);
 
-    pointer-events:none;
-}
-
-.page-frame::before{
-    top:-1px;
-    left:-1px;
-
-    border-top:
-        1px solid
-        rgba(220,236,255,.65);
-
-    border-left:
-        1px solid
-        rgba(220,236,255,.65);
-}
-
-.page-frame::after{
-    right:-1px;
-    bottom:-1px;
-
-    border-right:
-        1px solid
-        rgba(220,236,255,.65);
-
-    border-bottom:
-        1px solid
-        rgba(220,236,255,.65);
+    box-shadow:
+        0 25px 70px rgba(50,75,100,.10);
 }
 
 
-/* =========================================================
+/* ==================================================
    Header
-========================================================= */
+================================================== */
 
-.header{
-    position:relative;
-
-    z-index:5;
+header{
 
     display:flex;
 
@@ -315,173 +170,221 @@ body{
 
     justify-content:space-between;
 
-    padding-top:36px;
+    gap:25px;
+
+    margin-bottom:45px;
 }
 
-.archive-logo{
-    display:flex;
-
-    flex-direction:column;
-
-    gap:7px;
+.logo{
 
     text-decoration:none;
 
     color:inherit;
+
+    display:block;
 }
 
-.archive-logo-cn{
-    font-family:
-        "Noto Serif SC",
-        serif;
+.logo-cn{
 
-    font-size:17px;
+    font-size:18px;
 
     letter-spacing:3px;
+
+    line-height:1.5;
 }
 
-.archive-logo-en{
-    font-family:
-        "Cinzel",
-        serif;
+.logo-en{
 
-    font-size:9px;
+    margin-top:4px;
 
-    letter-spacing:4px;
+    font-family:"Cinzel",serif;
+
+    font-size:10px;
+
+    letter-spacing:3px;
 
     opacity:.58;
 }
 
 .header-right{
+
     display:flex;
 
     align-items:center;
 
-    gap:24px;
+    gap:14px;
 }
 
 .back-link{
+
     color:inherit;
 
     text-decoration:none;
 
-    font-family:
-        "Cinzel",
-        "Noto Serif SC",
-        serif;
+    font-size:12px;
 
-    font-size:9px;
+    letter-spacing:1px;
 
-    letter-spacing:2px;
+    opacity:.72;
 
-    opacity:.65;
-
-    transition:
-        opacity .3s ease,
-        transform .3s ease;
+    transition:.25s;
 }
 
 .back-link:hover{
     opacity:1;
-
-    transform:
-        translateX(-3px);
 }
 
 
-/* =========================================================
-   日夜切换
-========================================================= */
+/* ==================================================
+   Theme button
+================================================== */
 
 .theme-toggle{
-    width:42px;
-    height:22px;
 
-    padding:0;
+    width:34px;
+    height:34px;
 
-    border:
-        1px solid
-        rgba(190,215,238,.32);
+    border:1px solid rgba(150,190,230,.25);
 
-    border-radius:20px;
+    background:transparent;
 
-    background:
-        rgba(255,255,255,.03);
+    color:inherit;
 
     cursor:pointer;
 
-    position:relative;
+    font-family:inherit;
 
-    transition:
-        background .4s ease,
-        border-color .4s ease;
+    font-size:14px;
+
+    transition:.25s;
 }
 
-.theme-toggle::before{
-    content:"";
+.theme-toggle:hover{
 
-    position:absolute;
+    border-color:rgba(180,215,245,.55);
 
-    width:14px;
-    height:14px;
-
-    left:3px;
-    top:3px;
-
-    border-radius:50%;
-
-    background:
-        rgba(220,236,255,.78);
-
-    transition:
-        transform .4s ease,
-        background .4s ease;
-}
-
-body.day-mode .theme-toggle::before{
-    transform:
-        translateX(20px);
-
-    background:#ffffff;
+    transform:rotate(8deg);
 }
 
 
-/* =========================================================
-   页面标题
-========================================================= */
+/* ==================================================
+   标题
+================================================== */
 
-.page-title{
-    position:relative;
-
-    z-index:2;
+.title-area{
 
     text-align:center;
 
-    margin:
-        90px
-        0
-        55px;
+    margin-bottom:45px;
 }
 
-.page-title-en{
-    font-family:
-        "Cinzel",
-        serif;
+.title-en{
 
-    font-size:
-        clamp(
-            25px,
-            4vw,
-            42px
+    margin:0;
+
+    font-family:"Cinzel",serif;
+
+    font-size:clamp(28px,5vw,48px);
+
+    font-weight:400;
+
+    letter-spacing:8px;
+
+    line-height:1.15;
+}
+
+.title-cn{
+
+    margin-top:14px;
+
+    font-size:15px;
+
+    letter-spacing:5px;
+
+    opacity:.72;
+}
+
+
+/* ==================================================
+   分隔线
+================================================== */
+
+.title-line{
+
+    width:90px;
+
+    height:1px;
+
+    margin:25px auto 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            currentColor,
+            transparent
         );
 
-    font-weight:300;
-
-    letter-spacing:9px;
+    opacity:.3;
 }
 
-.page-title-cn{
-    margin-top:14px;
+
+/* ==================================================
+   表单
+================================================== */
+
+.form{
+
+    width:100%;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
+
+    gap:22px 25px;
+}
+
+.form-item{
+
+    min-width:0;
+}
+
+.form-item.full{
+
+    grid-column:1 / -1;
+}
+
+.form-label{
+
+    display:block;
+
+    margin-bottom:9px;
+
+    font-family:"Cinzel",serif;
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    opacity:.62;
+}
+
+.form-input,
+.form-textarea{
+
+    width:100%;
+
+    border:1px solid rgba(150,190,230,.2);
+
+    outline:none;
+
+    background:
+        rgba(2,13,27,.45);
+
+    color:inherit;
+
+    padding:13px 15px;
 
     font-family:
         "Noto Serif SC",
@@ -489,51 +392,76 @@ body.day-mode .theme-toggle::before{
 
     font-size:13px;
 
-    letter-spacing:5px;
+    transition:
+        border-color .25s ease,
+        background .25s ease;
+}
 
-    opacity:.62;
+.form-input{
+
+    height:46px;
+}
+
+.form-textarea{
+
+    min-height:220px;
+
+    resize:vertical;
+
+    line-height:1.9;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder{
+
+    color:inherit;
+
+    opacity:.3;
+}
+
+.form-input:focus,
+.form-textarea:focus{
+
+    border-color:
+        rgba(160,205,240,.5);
+
+    background:
+        rgba(5,22,42,.7);
+}
+
+body.day-mode .form-input,
+body.day-mode .form-textarea{
+
+    background:
+        rgba(255,255,255,.72);
+
+    border-color:
+        rgba(70,105,140,.2);
 }
 
 
-/* =========================================================
-   编辑区域
-========================================================= */
-
-.edit-container{
-    position:relative;
-
-    z-index:3;
-
-    width:
-        min(
-            100%,
-            820px
-        );
-
-    margin:0 auto;
-}
-
-
-/* =========================================================
-   图片
-========================================================= */
+/* ==================================================
+   图片区域
+================================================== */
 
 .image-section{
-    position:relative;
 
-    width:100%;
+    grid-column:1 / -1;
 
-    margin-bottom:42px;
+    margin-bottom:5px;
 }
 
 .image-preview{
-    width:100%;
 
-    min-height:420px;
+    width:180px;
+    height:230px;
 
-    border:
-        1px dashed
-        rgba(190,215,238,.30);
+    margin-bottom:15px;
+
+    border:1px solid rgba(150,190,230,.22);
+
+    background:
+        rgba(2,12,25,.45);
 
     display:flex;
 
@@ -542,281 +470,97 @@ body.day-mode .theme-toggle::before{
     justify-content:center;
 
     overflow:hidden;
-
-    background:
-        rgba(255,255,255,.015);
-
-    transition:
-        border-color .4s ease,
-        background .4s ease;
 }
 
 .image-preview img{
-    display:block;
 
-    width:auto;
+    width:100%;
+    height:100%;
 
-    max-width:100%;
+    object-fit:cover;
 
-    max-height:570px;
-
-    object-fit:contain;
+    display:none;
 }
 
-.image-placeholder{
-    font-family:
-        "Cinzel",
-        "Noto Serif SC",
-        serif;
+.image-empty{
 
-    font-size:11px;
+    font-family:"Cinzel",serif;
 
-    letter-spacing:3px;
+    font-size:10px;
 
-    opacity:.38;
+    letter-spacing:2px;
+
+    opacity:.35;
 
     text-align:center;
 }
 
+.image-upload{
 
-/* =========================================================
-   文件
-========================================================= */
+    display:inline-block;
 
-.file-input-wrap{
-    position:relative;
+    padding:10px 17px;
 
-    display:flex;
+    border:1px solid rgba(150,190,230,.22);
 
-    align-items:center;
+    cursor:pointer;
 
-    width:100%;
-
-    margin-top:28px;
-
-    border:
-        1px solid
-        rgba(190,215,238,.20);
-
-    background:
-        rgba(255,255,255,.015);
-}
-
-.file-input-wrap input[type="file"]{
-    width:100%;
-
-    padding:17px 20px;
-
-    color:inherit;
-
-    font-family:
-        "Noto Serif SC",
-        serif;
-
-    font-size:12px;
+    font-size:11px;
 
     letter-spacing:1px;
 
-    cursor:pointer;
+    transition:.25s;
 }
 
-.file-input-wrap input[type="file"]::file-selector-button{
+.image-upload:hover{
 
-    margin-right:22px;
+    border-color:
+        rgba(180,215,245,.55);
+}
 
-    padding:10px 22px;
+.image-upload input{
 
-    border:
-        1px solid
-        rgba(190,215,238,.18);
+    display:none;
+}
+
+
+/* ==================================================
+   按钮区域
+================================================== */
+
+.actions{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:18px;
+
+    margin-top:42px;
+
+    padding-top:28px;
+
+    border-top:
+        1px solid rgba(150,190,230,.13);
+}
+
+.action-button{
+
+    min-width:145px;
+
+    height:44px;
+
+    padding:0 22px;
+
+    border:1px solid rgba(150,190,230,.25);
 
     background:transparent;
 
     color:inherit;
 
-    font-family:
-        "Noto Serif SC",
-        serif;
-
-    font-size:12px;
-
     cursor:pointer;
-}
-
-
-/* =========================================================
-   表单
-========================================================= */
-
-.form-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(
-            2,
-            minmax(0,1fr)
-        );
-
-    gap:25px 30px;
-}
-
-.form-item{
-    display:flex;
-
-    flex-direction:column;
-}
-
-.form-item.full{
-    grid-column:
-        1 / -1;
-}
-
-.form-label{
-    margin-bottom:10px;
-
-    font-family:
-        "Cinzel",
-        "Noto Serif SC",
-        serif;
-
-    font-size:9px;
-
-    letter-spacing:3px;
-
-    opacity:.58;
-}
-
-.form-input,
-.form-textarea{
-    width:100%;
-
-    border:
-        1px solid
-        rgba(190,215,238,.22);
-
-    outline:none;
-
-    background:
-        rgba(255,255,255,.015);
-
-    color:inherit;
-
-    font-family:
-        "Noto Serif SC",
-        serif;
-
-    font-size:13px;
-
-    font-weight:300;
-
-    letter-spacing:1px;
-
-    padding:14px 16px;
-
-    transition:
-        border-color .3s ease,
-        background .3s ease;
-}
-
-.form-input{
-    height:48px;
-}
-
-.form-textarea{
-    min-height:130px;
-
-    resize:vertical;
-
-    line-height:1.9;
-}
-
-.form-input:focus,
-.form-textarea:focus{
-    border-color:
-        rgba(190,215,238,.55);
-
-    background:
-        rgba(255,255,255,.025);
-}
-
-.form-input::placeholder,
-.form-textarea::placeholder{
-    color:inherit;
-
-    opacity:.25;
-}
-
-
-/* =========================================================
-   按钮
-========================================================= */
-
-.action-area{
-    display:flex;
-
-    gap:28px;
-
-    margin-top:48px;
-}
-
-.action-button{
-    flex:1;
-
-    height:70px;
-
-    border:
-        1px solid
-        rgba(190,215,238,.30);
-
-    background:
-        rgba(255,255,255,.015);
-
-    color:inherit;
-
-    font-family:
-        "Noto Serif SC",
-        "Cinzel",
-        serif;
-
-    font-size:13px;
-
-    font-weight:300;
-
-    letter-spacing:4px;
-
-    cursor:pointer;
-
-    transition:
-        background .35s ease,
-        border-color .35s ease,
-        opacity .35s ease;
-}
-
-.action-button:hover{
-    background:
-        rgba(255,255,255,.045);
-
-    border-color:
-        rgba(210,230,250,.55);
-}
-
-.action-button:disabled{
-    opacity:.45;
-
-    cursor:default;
-}
-
-
-/* =========================================================
-   状态
-========================================================= */
-
-.status-message{
-    min-height:32px;
-
-    margin-top:36px;
-
-    text-align:center;
 
     font-family:
         "Noto Serif SC",
@@ -826,304 +570,137 @@ body.day-mode .theme-toggle::before{
 
     letter-spacing:2px;
 
-    line-height:1.8;
-
-    opacity:.78;
+    transition:.25s;
 }
 
-.status-message.error{
-    color:#e9bcbc;
+.action-button:hover{
+
+    border-color:
+        rgba(190,220,245,.65);
+
+    background:
+        rgba(100,145,190,.08);
 }
 
-.status-message.success{
-    color:#b9dccb;
+.action-button.primary{
+
+    border-color:
+        rgba(180,215,245,.4);
+
+    background:
+        rgba(100,145,190,.1);
+}
+
+.action-button:disabled{
+
+    opacity:.35;
+
+    cursor:not-allowed;
 }
 
 
-/* =========================================================
-   底部
-========================================================= */
+/* ==================================================
+   状态提示
+================================================== */
 
-.archive-mark{
-    margin-top:85px;
+.status-message{
+
+    min-height:22px;
+
+    margin-top:20px;
 
     text-align:center;
 
-    font-family:
-        "Noto Serif SC",
-        serif;
+    font-size:12px;
 
-    font-size:11px;
+    letter-spacing:1px;
 
-    letter-spacing:5px;
+    opacity:.7;
+}
+
+
+/* ==================================================
+   Footer
+================================================== */
+
+.archive-mark{
+
+    margin-top:45px;
+
+    text-align:center;
+
+    font-family:"Cinzel",serif;
+
+    font-size:9px;
+
+    letter-spacing:3px;
 
     opacity:.35;
 }
 
 
-/* =========================================================
-   日间模式
-========================================================= */
+/* ==================================================
+   小屏幕
+================================================== */
 
-body.day-mode{
-    background:#edf4fa;
-
-    color:#34404d;
-}
-
-body.day-mode .page-frame{
-    border-color:
-        rgba(72,101,126,.22);
-}
-
-body.day-mode .page-frame::before,
-body.day-mode .page-frame::after{
-    border-color:
-        rgba(72,101,126,.55);
-}
-
-body.day-mode .star{
-    color:
-        rgba(72,101,126,.38);
-}
-
-body.day-mode .theme-toggle{
-    border-color:
-        rgba(72,101,126,.30);
-
-    background:
-        rgba(255,255,255,.30);
-}
-
-body.day-mode .image-preview,
-body.day-mode .file-input-wrap,
-body.day-mode .form-input,
-body.day-mode .form-textarea,
-body.day-mode .action-button{
-
-    background:
-        rgba(255,255,255,.38);
-
-    border-color:
-        rgba(72,101,126,.20);
-}
-
-body.day-mode .image-preview{
-    border-color:
-        rgba(72,101,126,.25);
-}
-
-body.day-mode .form-input:focus,
-body.day-mode .form-textarea:focus{
-
-    border-color:
-        rgba(72,101,126,.48);
-
-    background:
-        rgba(255,255,255,.58);
-}
-
-body.day-mode .action-button:hover{
-
-    background:
-        rgba(255,255,255,.58);
-
-    border-color:
-        rgba(72,101,126,.40);
-}
-
-body.day-mode .status-message.error{
-    color:#b98282;
-}
-
-body.day-mode .status-message.success{
-    color:#668f7c;
-}
-
-
-/* =========================================================
-   手机
-========================================================= */
-
-@media(max-width:700px){
+@media(max-width:720px){
 
     .page-frame{
 
-        width:
-            calc(100% - 36px);
-
-        min-height:
-            calc(100vh - 36px);
+        width:94vw;
 
         margin:18px auto;
 
-        padding:
-            0
-            22px
-            40px;
+        padding:25px 20px 35px;
     }
 
-    .header{
-        padding-top:25px;
+    header{
+
+        margin-bottom:35px;
     }
 
-    .archive-logo-cn{
-        font-size:13px;
+    .logo-cn{
+
+        font-size:15px;
 
         letter-spacing:2px;
     }
 
-    .archive-logo-en{
-        font-size:7px;
-
-        letter-spacing:3px;
-    }
-
     .header-right{
-        gap:13px;
+
+        gap:8px;
+
+        flex-direction:column-reverse;
+
+        align-items:flex-end;
     }
 
-    .back-link{
-        font-size:7px;
+    .form{
 
-        letter-spacing:1px;
-    }
-
-    .page-title{
-
-        margin:
-            62px
-            0
-            38px;
-    }
-
-    .page-title-en{
-        font-size:23px;
-
-        letter-spacing:5px;
-    }
-
-    .page-title-cn{
-        font-size:11px;
-
-        letter-spacing:3px;
-    }
-
-    .image-preview{
-        min-height:300px;
-    }
-
-    .image-preview img{
-        max-height:430px;
-    }
-
-    .form-grid{
         grid-template-columns:1fr;
 
-        gap:22px;
     }
 
     .form-item.full{
+
         grid-column:auto;
     }
 
-    .action-area{
+    .image-section{
+
+        grid-column:auto;
+    }
+
+    .actions{
+
         flex-direction:column;
 
-        gap:16px;
-
-        margin-top:35px;
+        gap:12px;
     }
 
     .action-button{
-        height:64px;
-    }
 
-    .archive-mark{
-        margin-top:60px;
-    }
-
-}
-
-
-@media(max-width:430px){
-
-    .page-frame{
-
-        width:
-            calc(100% - 24px);
-
-        margin:12px auto;
-
-        padding-left:16px;
-
-        padding-right:16px;
-    }
-
-    .archive-logo-cn{
-        font-size:11px;
-    }
-
-    .header-right{
-        gap:8px;
-    }
-
-    .page-title-en{
-        font-size:20px;
-    }
-
-    .image-preview{
-        min-height:250px;
-    }
-
-    .image-preview img{
-        max-height:350px;
-    }
-
-    .file-input-wrap input[type="file"]{
-
-        padding:
-            13px
-            10px;
-
-        font-size:10px;
-    }
-
-    .file-input-wrap
-    input[type="file"]::file-selector-button{
-
-        margin-right:8px;
-
-        padding:
-            8px
-            10px;
-
-        font-size:10px;
-    }
-
-    .form-input,
-    .form-textarea{
-        font-size:12px;
-    }
-
-}
-
-
-/* =========================================================
-   减少动画
-========================================================= */
-
-@media(prefers-reduced-motion:reduce){
-
-    *,
-    *::before,
-    *::after{
-
-        animation-duration:.01ms !important;
-
-        animation-iteration-count:1 !important;
-
-        transition-duration:.01ms !important;
+        width:100%;
     }
 
 }
@@ -1136,50 +713,44 @@ body.day-mode .status-message.success{
 <body>
 
 
-<div class="stars">
+<!-- ==================================================
+     装饰星点
+================================================== -->
 
-    <span class="star">✦</span>
-    <span class="star">✶</span>
-    <span class="star">✧</span>
-    <span class="star">✦</span>
-    <span class="star">✧</span>
-    <span class="star">✶</span>
-    <span class="star">✦</span>
-    <span class="star">✧</span>
-    <span class="star">✶</span>
-    <span class="star">✦</span>
+<div class="star-field" aria-hidden="true">
 
-    <span class="star">✧</span>
-    <span class="star">✦</span>
-    <span class="star">✶</span>
-    <span class="star">✧</span>
-    <span class="star">✦</span>
-    <span class="star">✶</span>
-    <span class="star">✧</span>
-    <span class="star">✦</span>
-    <span class="star">✶</span>
-    <span class="star">✧</span>
+    <span style="left:8%;top:13%;">✦</span>
+    <span style="left:18%;top:38%;">✶</span>
+    <span style="left:11%;top:77%;">✧</span>
+
+    <span style="right:9%;top:18%;">✡</span>
+    <span style="right:19%;top:47%;">✦</span>
+    <span style="right:11%;bottom:12%;">✶</span>
 
 </div>
 
 
-<div class="page-frame">
+<!-- ==================================================
+     页面
+================================================== -->
+
+<main class="page-frame">
 
 
-<header class="header">
+<header>
 
     <a
+        class="logo"
         href="archive.html"
-        class="archive-logo"
     >
 
-        <span class="archive-logo-cn">
+        <div class="logo-cn">
             塞垭弥大陆档案馆
-        </span>
+        </div>
 
-        <span class="archive-logo-en">
+        <div class="logo-en">
             SEYAMI ARCHIVE
-        </span>
+        </div>
 
     </a>
 
@@ -1187,75 +758,95 @@ body.day-mode .status-message.success{
     <div class="header-right">
 
         <a
-            href="javascript:history.back()"
             class="back-link"
+            id="backLink"
+            href="javascript:history.back()"
         >
-            ← RETURN
+            ← 返回
         </a>
 
-
         <button
-            type="button"
             class="theme-toggle"
             id="themeToggle"
+            type="button"
             aria-label="切换主题"
-        ></button>
+        >
+            ☼
+        </button>
 
     </div>
 
 </header>
 
 
-<section class="page-title">
+<!-- ==================================================
+     标题
+================================================== -->
 
-    <div
-        class="page-title-en"
+<section class="title-area">
+
+    <h1
+        class="title-en"
         id="pageTitleEn"
     >
         EDIT CHARACTER
-    </div>
+    </h1>
 
     <div
-        class="page-title-cn"
+        class="title-cn"
         id="pageTitleCn"
     >
         编辑角色档案
     </div>
 
+    <div class="title-line"></div>
+
 </section>
 
 
-<main class="edit-container">
+<!-- ==================================================
+     表单
+================================================== -->
+
+<form
+    class="form"
+    id="editForm"
+    onsubmit="return false;"
+>
 
 
-<section
+<!-- ==================================================
+     人物图片
+================================================== -->
+
+<div
     class="image-section"
     id="characterImageSection"
 >
 
-    <div
-        class="image-preview"
-        id="imagePreview"
-    >
+    <label class="form-label">
+        PORTRAIT · 角色立绘
+    </label>
 
-        <div
-            class="image-placeholder"
-            id="imagePlaceholder"
-        >
-            CHARACTER IMAGE
-        </div>
-
+    <div class="image-preview">
 
         <img
-            id="previewImage"
-            alt="角色图片预览"
-            style="display:none;"
+            id="imagePreview"
+            alt=""
         >
+
+        <div
+            class="image-empty"
+            id="imageEmpty"
+        >
+            NO IMAGE
+        </div>
 
     </div>
 
+    <label class="image-upload">
 
-    <div class="file-input-wrap">
+        ✦ 选择图片
 
         <input
             type="file"
@@ -1263,25 +854,26 @@ body.day-mode .status-message.success{
             accept="image/*"
         >
 
-    </div>
+    </label>
 
-</section>
+</div>
 
 
-<section class="form-grid">
-
+<!-- ==================================================
+     人物字段
+================================================== -->
 
 <div
-    class="form-item full"
-    id="characterNameItem"
+    class="form-item"
+    id="nameItem"
 >
 
     <label
         class="form-label"
-        for="name"
         id="nameLabel"
+        for="name"
     >
-        NAME · 名称
+        NAME · 姓名
     </label>
 
     <input
@@ -1310,7 +902,7 @@ body.day-mode .status-message.success{
         class="form-input"
         id="race"
         type="text"
-        placeholder="种族"
+        placeholder="角色种族"
     >
 
 </div>
@@ -1332,7 +924,7 @@ body.day-mode .status-message.success{
         class="form-input"
         id="role"
         type="text"
-        placeholder="身份 / 职位"
+        placeholder="角色身份 / 职位"
     >
 
 </div>
@@ -1354,7 +946,7 @@ body.day-mode .status-message.success{
         class="form-input"
         id="age"
         type="text"
-        placeholder="年龄"
+        placeholder="角色年龄"
     >
 
 </div>
@@ -1376,14 +968,14 @@ body.day-mode .status-message.success{
         class="form-input"
         id="gender"
         type="text"
-        placeholder="性别"
+        placeholder="角色性别"
     >
 
 </div>
 
 
 <div
-    class="form-item full"
+    class="form-item"
     id="regionItem"
 >
 
@@ -1398,7 +990,7 @@ body.day-mode .status-message.success{
         class="form-input"
         id="region"
         type="text"
-        placeholder="所属地区"
+        placeholder="所属国家 / 地区"
     >
 
 </div>
@@ -1419,7 +1011,8 @@ body.day-mode .status-message.success{
     <textarea
         class="form-textarea"
         id="personality"
-        placeholder="角色性格……"
+        placeholder="角色性格、习惯、特点……"
+        style="min-height:180px;"
     ></textarea>
 
 </div>
@@ -1441,10 +1034,15 @@ body.day-mode .status-message.success{
         class="form-textarea"
         id="backstory"
         placeholder="角色背景故事……"
+        style="min-height:280px;"
     ></textarea>
 
 </div>
 
+
+<!-- ==================================================
+     世界设定
+================================================== -->
 
 <div
     class="form-item full"
@@ -1456,18 +1054,22 @@ body.day-mode .status-message.success{
         class="form-label"
         for="worldContent"
     >
-        WORLD SETTING · 世界设定
+        CONTENT · 世界设定
     </label>
 
     <textarea
         class="form-textarea"
         id="worldContent"
-        placeholder="在这里填写塞垭弥大陆的世界设定……"
+        placeholder="世界观设定内容……"
         style="min-height:420px;"
     ></textarea>
 
 </div>
 
+
+<!-- ==================================================
+     国家档案
+================================================== -->
 
 <div
     class="form-item full"
@@ -1479,14 +1081,14 @@ body.day-mode .status-message.success{
         class="form-label"
         for="countrySubtitle"
     >
-        SUBTITLE · 副标题
+        SUBTITLE · 国家副标题
     </label>
 
     <input
         class="form-input"
         id="countrySubtitle"
         type="text"
-        placeholder="国家副标题 / 别称"
+        placeholder="例如：雪境之国"
     >
 
 </div>
@@ -1509,7 +1111,7 @@ body.day-mode .status-message.success{
         class="form-input"
         id="countryCapital"
         type="text"
-        placeholder="首都"
+        placeholder="国家首都"
     >
 
 </div>
@@ -1532,14 +1134,14 @@ body.day-mode .status-message.success{
         class="form-input"
         id="countryGovernment"
         type="text"
-        placeholder="政体"
+        placeholder="国家政体"
     >
 
 </div>
 
 
 <div
-    class="form-item full"
+    class="form-item"
     id="countryRegionItem"
     style="display:none;"
 >
@@ -1548,14 +1150,14 @@ body.day-mode .status-message.success{
         class="form-label"
         for="countryRegion"
     >
-        REGION · 地区
+        REGION · 所属地区
     </label>
 
     <input
         class="form-input"
         id="countryRegion"
         type="text"
-        placeholder="所属地区"
+        placeholder="国家所在地区"
     >
 
 </div>
@@ -1571,14 +1173,14 @@ body.day-mode .status-message.success{
         class="form-label"
         for="countryDescription"
     >
-        DESCRIPTION · 国家介绍
+        DESCRIPTION · 国家简介
     </label>
 
     <textarea
         class="form-textarea"
         id="countryDescription"
-        placeholder="国家介绍……"
-        style="min-height:220px;"
+        placeholder="国家简介……"
+        style="min-height:200px;"
     ></textarea>
 
 </div>
@@ -1594,14 +1196,14 @@ body.day-mode .status-message.success{
         class="form-label"
         for="countryHistory"
     >
-        HISTORY · 历史
+        HISTORY · 国家历史
     </label>
 
     <textarea
         class="form-textarea"
         id="countryHistory"
         placeholder="国家历史……"
-        style="min-height:220px;"
+        style="min-height:260px;"
     ></textarea>
 
 </div>
@@ -1623,31 +1225,176 @@ body.day-mode .status-message.success{
     <textarea
         class="form-textarea"
         id="countryCulture"
-        placeholder="国家文化……"
-        style="min-height:220px;"
+        placeholder="国家文化、风俗、信仰……"
+        style="min-height:260px;"
     ></textarea>
 
 </div>
 
 
-</section>
+<!-- ==================================================
+     历史记录
+================================================== -->
+
+<div
+    class="form-item"
+    id="historyYearItem"
+    style="display:none;"
+>
+
+    <label
+        class="form-label"
+        for="historyYear"
+    >
+        YEAR · 年代
+    </label>
+
+    <input
+        class="form-input"
+        id="historyYear"
+        type="text"
+        placeholder="例如：公元 1247 年"
+    >
+
+</div>
 
 
-<div class="action-area">
+<div
+    class="form-item"
+    id="historyEraItem"
+    style="display:none;"
+>
+
+    <label
+        class="form-label"
+        for="historyEra"
+    >
+        ERA · 时期
+    </label>
+
+    <input
+        class="form-input"
+        id="historyEra"
+        type="text"
+        placeholder="例如：王国时代"
+    >
+
+</div>
+
+
+<div
+    class="form-item full"
+    id="historyTitleItem"
+    style="display:none;"
+>
+
+    <label
+        class="form-label"
+        for="historyTitle"
+    >
+        TITLE · 事件名称
+    </label>
+
+    <input
+        class="form-input"
+        id="historyTitle"
+        type="text"
+        placeholder="历史事件名称"
+    >
+
+</div>
+
+
+<div
+    class="form-item full"
+    id="historyLocationItem"
+    style="display:none;"
+>
+
+    <label
+        class="form-label"
+        for="historyLocation"
+    >
+        LOCATION · 地点
+    </label>
+
+    <input
+        class="form-input"
+        id="historyLocation"
+        type="text"
+        placeholder="事件发生地点"
+    >
+
+</div>
+
+
+<div
+    class="form-item full"
+    id="historyDescriptionItem"
+    style="display:none;"
+>
+
+    <label
+        class="form-label"
+        for="historyDescription"
+    >
+        DESCRIPTION · 事件简介
+    </label>
+
+    <textarea
+        class="form-textarea"
+        id="historyDescription"
+        placeholder="历史事件简介……"
+        style="min-height:180px;"
+    ></textarea>
+
+</div>
+
+
+<div
+    class="form-item full"
+    id="historyContentItem"
+    style="display:none;"
+>
+
+    <label
+        class="form-label"
+        for="historyContent"
+    >
+        CONTENT · HISTORICAL RECORD
+    </label>
+
+    <textarea
+        class="form-textarea"
+        id="historyContent"
+        placeholder="完整历史记录……"
+        style="min-height:420px;"
+    ></textarea>
+
+</div>
+
+
+</form>
+
+
+<!-- ==================================================
+     操作按钮
+================================================== -->
+
+<div class="actions">
 
     <button
-        type="button"
         class="action-button"
         id="cancelButton"
+        type="button"
     >
         取消
     </button>
 
-
     <button
-        type="button"
-        class="action-button"
+        class="action-button primary"
         id="saveButton"
+        type="button"
     >
         保存更改
     </button>
@@ -1661,9 +1408,6 @@ body.day-mode .status-message.success{
 ></div>
 
 
-</main>
-
-
 <div
     class="archive-mark"
     id="archiveMark"
@@ -1672,92 +1416,267 @@ body.day-mode .status-message.success{
 </div>
 
 
-</div>
-
+</main>
 
 
 <script>
 
-/* =========================================================
+/* ==================================================
    Supabase
-========================================================= */
+================================================== */
 
 const SUPABASE_URL =
     "https://rqqkdpzehxzwqzytpxgh.supabase.co";
 
-
-const SUPABASE_PUBLISHABLE_KEY =
+const SUPABASE_KEY =
     "sb_publishable_T_gNdlgkOaXnzjSvdmI1Pw_HQOVTEWG";
 
 
 const supabaseClient =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
+    window.supabase
+        ? window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        )
+        : null;
+
+
+/* ==================================================
+   如果没有加载 Supabase SDK
+================================================== */
+
+if(!window.supabase){
+
+    const script =
+        document.createElement("script");
+
+    script.src =
+        "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+
+    script.onload = () => {
+
+        window.supabase =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY
+            );
+
+        initPage();
+
+    };
+
+    document.head.appendChild(script);
+
+}else{
+
+    initPage();
+
+}
+
+
+/* ==================================================
+   URL 参数
+================================================== */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const recordId =
+    params.get("id");
+
+const editType =
+    params.get("type");
+
+
+const isWorldMode =
+    editType === "world";
+
+const isCountryMode =
+    editType === "country";
+
+const isHistoryMode =
+    editType === "history";
+
+
+const isCreatingCountry =
+    isCountryMode && !recordId;
+
+const isCreatingHistory =
+    isHistoryMode && !recordId;
+
+
+/* ==================================================
+   当前图片
+================================================== */
+
+let currentImageUrl = null;
+
+
+/* ==================================================
+   DOM
+================================================== */
+
+const pageTitleEn =
+    document.getElementById(
+        "pageTitleEn"
+    );
+
+const pageTitleCn =
+    document.getElementById(
+        "pageTitleCn"
+    );
+
+const archiveMark =
+    document.getElementById(
+        "archiveMark"
+    );
+
+const saveButton =
+    document.getElementById(
+        "saveButton"
+    );
+
+const cancelButton =
+    document.getElementById(
+        "cancelButton"
+    );
+
+const statusMessage =
+    document.getElementById(
+        "statusMessage"
     );
 
 
-/* =========================================================
-   DOM
-========================================================= */
-
-const pageTitleEn =
-    document.getElementById("pageTitleEn");
-
-const pageTitleCn =
-    document.getElementById("pageTitleCn");
-
-const archiveMark =
-    document.getElementById("archiveMark");
-
+/* ==================================================
+   人物 DOM
+================================================== */
 
 const characterImageSection =
     document.getElementById(
         "characterImageSection"
     );
 
-
-const nameInput =
-    document.getElementById("name");
-
-const raceInput =
-    document.getElementById("race");
-
-const roleInput =
-    document.getElementById("role");
-
-const ageInput =
-    document.getElementById("age");
-
-const genderInput =
-    document.getElementById("gender");
-
-const regionInput =
-    document.getElementById("region");
-
-const personalityInput =
-    document.getElementById("personality");
-
-const backstoryInput =
-    document.getElementById("backstory");
-
-
 const imageFile =
-    document.getElementById("imageFile");
+    document.getElementById(
+        "imageFile"
+    );
 
-const previewImage =
-    document.getElementById("previewImage");
+const imagePreview =
+    document.getElementById(
+        "imagePreview"
+    );
 
-const imagePlaceholder =
-    document.getElementById("imagePlaceholder");
+const imageEmpty =
+    document.getElementById(
+        "imageEmpty"
+    );
 
+const nameItem =
+    document.getElementById(
+        "nameItem"
+    );
+
+const nameLabel =
+    document.getElementById(
+        "nameLabel"
+    );
+
+const name =
+    document.getElementById(
+        "name"
+    );
+
+const raceItem =
+    document.getElementById(
+        "raceItem"
+    );
+
+const race =
+    document.getElementById(
+        "race"
+    );
+
+const roleItem =
+    document.getElementById(
+        "roleItem"
+    );
+
+const role =
+    document.getElementById(
+        "role"
+    );
+
+const ageItem =
+    document.getElementById(
+        "ageItem"
+    );
+
+const age =
+    document.getElementById(
+        "age"
+    );
+
+const genderItem =
+    document.getElementById(
+        "genderItem"
+    );
+
+const gender =
+    document.getElementById(
+        "gender"
+    );
+
+const regionItem =
+    document.getElementById(
+        "regionItem"
+    );
+
+const region =
+    document.getElementById(
+        "region"
+    );
+
+const personalityItem =
+    document.getElementById(
+        "personalityItem"
+    );
+
+const personality =
+    document.getElementById(
+        "personality"
+    );
+
+const backstoryItem =
+    document.getElementById(
+        "backstoryItem"
+    );
+
+const backstory =
+    document.getElementById(
+        "backstory"
+    );
+
+
+/* ==================================================
+   世界 DOM
+================================================== */
 
 const worldContentItem =
-    document.getElementById("worldContentItem");
+    document.getElementById(
+        "worldContentItem"
+    );
 
 const worldContent =
-    document.getElementById("worldContent");
+    document.getElementById(
+        "worldContent"
+    );
 
+
+/* ==================================================
+   国家 DOM
+================================================== */
 
 const countrySubtitleItem =
     document.getElementById(
@@ -1830,96 +1749,93 @@ const countryCulture =
     );
 
 
-const saveButton =
-    document.getElementById("saveButton");
+/* ==================================================
+   历史 DOM
+================================================== */
 
-const cancelButton =
-    document.getElementById("cancelButton");
+const historyYearItem =
+    document.getElementById(
+        "historyYearItem"
+    );
 
-const statusMessage =
-    document.getElementById("statusMessage");
+const historyYear =
+    document.getElementById(
+        "historyYear"
+    );
 
-const themeToggle =
-    document.getElementById("themeToggle");
+const historyEraItem =
+    document.getElementById(
+        "historyEraItem"
+    );
 
+const historyEra =
+    document.getElementById(
+        "historyEra"
+    );
 
-/* =========================================================
-   URL 参数
-========================================================= */
+const historyTitleItem =
+    document.getElementById(
+        "historyTitleItem"
+    );
 
-const params =
-    new URLSearchParams(
-        window.location.search
+const historyTitle =
+    document.getElementById(
+        "historyTitle"
+    );
+
+const historyLocationItem =
+    document.getElementById(
+        "historyLocationItem"
+    );
+
+const historyLocation =
+    document.getElementById(
+        "historyLocation"
+    );
+
+const historyDescriptionItem =
+    document.getElementById(
+        "historyDescriptionItem"
+    );
+
+const historyDescription =
+    document.getElementById(
+        "historyDescription"
+    );
+
+const historyContentItem =
+    document.getElementById(
+        "historyContentItem"
+    );
+
+const historyContent =
+    document.getElementById(
+        "historyContent"
     );
 
 
-const recordId =
-    params.get("id");
-
-const editType =
-    params.get("type");
-
-
-/*
-   没有 id 的 country 模式
-   就视为“新建国家”
-*/
-
-const isNewCountry =
-    isCountryModeCandidate();
-
-
-function isCountryModeCandidate(){
-
-    return editType === "country";
-
-}
-
-
-const isWorldMode =
-    editType === "world";
-
-const isCountryMode =
-    editType === "country";
-
-
-const isCreatingCountry =
-    isCountryMode &&
-    !recordId;
-
-
-let currentImageUrl = null;
-
-
-/* =========================================================
+/* ==================================================
    状态
-========================================================= */
+================================================== */
 
 function showStatus(
     message,
-    type = ""
+    isError = false
 ){
 
     statusMessage.textContent =
         message;
 
-    statusMessage.className =
-        "status-message";
-
-    if(type){
-
-        statusMessage.classList.add(
-            type
-        );
-
-    }
-
+    statusMessage.style.color =
+        isError
+            ? "#d89b9b"
+            : "";
 }
 
 
-/* =========================================================
-   隐藏国家字段
-========================================================= */
+/* ==================================================
+   隐藏国家
+================================================== */
 
 function hideCountryFields(){
 
@@ -1943,13 +1859,70 @@ function hideCountryFields(){
 
     countryCultureItem.style.display =
         "none";
-
 }
 
 
-/* =========================================================
-   角色模式
-========================================================= */
+/* ==================================================
+   隐藏历史
+================================================== */
+
+function hideHistoryFields(){
+
+    historyYearItem.style.display =
+        "none";
+
+    historyEraItem.style.display =
+        "none";
+
+    historyTitleItem.style.display =
+        "none";
+
+    historyLocationItem.style.display =
+        "none";
+
+    historyDescriptionItem.style.display =
+        "none";
+
+    historyContentItem.style.display =
+        "none";
+}
+
+
+/* ==================================================
+   隐藏所有人物字段
+================================================== */
+
+function hideCharacterFields(){
+
+    nameItem.style.display =
+        "none";
+
+    raceItem.style.display =
+        "none";
+
+    roleItem.style.display =
+        "none";
+
+    ageItem.style.display =
+        "none";
+
+    genderItem.style.display =
+        "none";
+
+    regionItem.style.display =
+        "none";
+
+    personalityItem.style.display =
+        "none";
+
+    backstoryItem.style.display =
+        "none";
+}
+
+
+/* ==================================================
+   人物模式
+================================================== */
 
 function setupCharacterMode(){
 
@@ -1962,56 +1935,51 @@ function setupCharacterMode(){
     archiveMark.textContent =
         "塞垭弥档案 · 人物记录";
 
+    saveButton.textContent =
+        "保存更改";
 
     characterImageSection.style.display =
         "block";
 
-
     worldContentItem.style.display =
         "none";
 
-
     hideCountryFields();
 
+    hideHistoryFields();
 
-    nameInput.closest(
-        ".form-item"
-    ).style.display = "flex";
+    nameLabel.textContent =
+        "NAME · 姓名";
 
-    raceInput.closest(
-        ".form-item"
-    ).style.display = "flex";
+    nameItem.style.display =
+        "block";
 
-    roleInput.closest(
-        ".form-item"
-    ).style.display = "flex";
+    raceItem.style.display =
+        "block";
 
-    ageInput.closest(
-        ".form-item"
-    ).style.display = "flex";
+    roleItem.style.display =
+        "block";
 
-    genderInput.closest(
-        ".form-item"
-    ).style.display = "flex";
+    ageItem.style.display =
+        "block";
 
-    regionInput.closest(
-        ".form-item"
-    ).style.display = "flex";
+    genderItem.style.display =
+        "block";
 
-    personalityInput.closest(
-        ".form-item"
-    ).style.display = "flex";
+    regionItem.style.display =
+        "block";
 
-    backstoryInput.closest(
-        ".form-item"
-    ).style.display = "flex";
+    personalityItem.style.display =
+        "block";
 
+    backstoryItem.style.display =
+        "block";
 }
 
 
-/* =========================================================
+/* ==================================================
    世界模式
-========================================================= */
+================================================== */
 
 function setupWorldMode(){
 
@@ -2024,68 +1992,72 @@ function setupWorldMode(){
     archiveMark.textContent =
         "塞垭弥档案 · 世界记录";
 
+    saveButton.textContent =
+        "保存更改";
 
     characterImageSection.style.display =
         "none";
 
-
-    nameInput.closest(
-        ".form-item"
-    ).style.display = "flex";
-
-
-    document.getElementById(
-        "nameLabel"
-    ).textContent =
-        "TITLE · 标题";
-
-    nameInput.placeholder =
-        "世界设定标题";
-
-
-    raceInput.closest(
-        ".form-item"
-    ).style.display = "none";
-
-    roleInput.closest(
-        ".form-item"
-    ).style.display = "none";
-
-    ageInput.closest(
-        ".form-item"
-    ).style.display = "none";
-
-    genderInput.closest(
-        ".form-item"
-    ).style.display = "none";
-
-    regionInput.closest(
-        ".form-item"
-    ).style.display = "none";
-
-    personalityInput.closest(
-        ".form-item"
-    ).style.display = "none";
-
-    backstoryInput.closest(
-        ".form-item"
-    ).style.display = "none";
-
-
-    worldContentItem.style.display =
-        "flex";
-
+    hideCharacterFields();
 
     hideCountryFields();
 
+    hideHistoryFields();
+
+    nameLabel.textContent =
+        "TITLE · 标题";
+
+    nameItem.style.display =
+        "block";
+
+    worldContentItem.style.display =
+        "block";
 }
 
 
-/* =========================================================
+/* ==================================================
    国家模式
-========================================================= */
+================================================== */
 
 function setupCountryMode(){
+
+    characterImageSection.style.display =
+        "none";
+
+    hideCharacterFields();
+
+    worldContentItem.style.display =
+        "none";
+
+    hideHistoryFields();
+
+    nameLabel.textContent =
+        "NAME · 国家名称";
+
+    nameItem.style.display =
+        "block";
+
+    countrySubtitleItem.style.display =
+        "block";
+
+    countryCapitalItem.style.display =
+        "block";
+
+    countryGovernmentItem.style.display =
+        "block";
+
+    countryRegionItem.style.display =
+        "block";
+
+    countryDescriptionItem.style.display =
+        "block";
+
+    countryHistoryItem.style.display =
+        "block";
+
+    countryCultureItem.style.display =
+        "block";
+
 
     if(isCreatingCountry){
 
@@ -2114,121 +2086,80 @@ function setupCountryMode(){
 
         saveButton.textContent =
             "保存更改";
-
     }
+}
 
+
+/* ==================================================
+   历史模式
+================================================== */
+
+function setupHistoryMode(){
 
     characterImageSection.style.display =
         "none";
 
-
-    nameInput.closest(
-        ".form-item"
-    ).style.display =
-        "flex";
-
-
-    document.getElementById(
-        "nameLabel"
-    ).textContent =
-        "NAME · 国家名称";
-
-    nameInput.placeholder =
-        "国家名称";
-
-
-    raceInput.closest(
-        ".form-item"
-    ).style.display =
-        "none";
-
-    roleInput.closest(
-        ".form-item"
-    ).style.display =
-        "none";
-
-    ageInput.closest(
-        ".form-item"
-    ).style.display =
-        "none";
-
-    genderInput.closest(
-        ".form-item"
-    ).style.display =
-        "none";
-
-    regionInput.closest(
-        ".form-item"
-    ).style.display =
-        "none";
-
-    personalityInput.closest(
-        ".form-item"
-    ).style.display =
-        "none";
-
-    backstoryInput.closest(
-        ".form-item"
-    ).style.display =
-        "none";
-
+    hideCharacterFields();
 
     worldContentItem.style.display =
         "none";
 
-
-    countrySubtitleItem.style.display =
-        "flex";
-
-    countryCapitalItem.style.display =
-        "flex";
-
-    countryGovernmentItem.style.display =
-        "flex";
-
-    countryRegionItem.style.display =
-        "flex";
-
-    countryDescriptionItem.style.display =
-        "flex";
-
-    countryHistoryItem.style.display =
-        "flex";
-
-    countryCultureItem.style.display =
-        "flex";
-
-}
+    hideCountryFields();
 
 
-/* =========================================================
-   图片
-========================================================= */
-
-function showImage(url){
-
-    if(!url){
-
-        previewImage.style.display =
-            "none";
-
-        imagePlaceholder.style.display =
-            "block";
-
-        return;
-    }
-
-
-    previewImage.src =
-        url;
-
-    previewImage.style.display =
+    historyYearItem.style.display =
         "block";
 
-    imagePlaceholder.style.display =
-        "none";
+    historyEraItem.style.display =
+        "block";
+
+    historyTitleItem.style.display =
+        "block";
+
+    historyLocationItem.style.display =
+        "block";
+
+    historyDescriptionItem.style.display =
+        "block";
+
+    historyContentItem.style.display =
+        "block";
+
+
+    if(isCreatingHistory){
+
+        pageTitleEn.textContent =
+            "NEW HISTORY";
+
+        pageTitleCn.textContent =
+            "建立历史记录";
+
+        archiveMark.textContent =
+            "塞垭弥档案 · 新历史记录";
+
+        saveButton.textContent =
+            "建立档案";
+
+    }else{
+
+        pageTitleEn.textContent =
+            "EDIT HISTORY";
+
+        pageTitleCn.textContent =
+            "编辑历史记录";
+
+        archiveMark.textContent =
+            "塞垭弥档案 · 历史记录";
+
+        saveButton.textContent =
+            "保存更改";
+    }
 }
 
+
+/* ==================================================
+   图片预览
+================================================== */
 
 imageFile.addEventListener(
     "change",
@@ -2238,38 +2169,43 @@ imageFile.addEventListener(
             this.files &&
             this.files[0];
 
-
         if(!file){
 
             return;
         }
 
+        const reader =
+            new FileReader();
 
-        const objectUrl =
-            URL.createObjectURL(
-                file
-            );
+        reader.onload =
+            function(event){
 
+                imagePreview.src =
+                    event.target.result;
 
-        showImage(
-            objectUrl
-        );
+                imagePreview.style.display =
+                    "block";
 
+                imageEmpty.style.display =
+                    "none";
+            };
+
+        reader.readAsDataURL(file);
     }
 );
 
 
-/* =========================================================
-   读取角色
-========================================================= */
+/* ==================================================
+   加载人物
+================================================== */
 
 async function loadCharacter(){
 
     if(!recordId){
 
         showStatus(
-            "缺少角色 ID",
-            "error"
+            "缺少角色 ID。",
+            true
         );
 
         saveButton.disabled =
@@ -2284,114 +2220,110 @@ async function loadCharacter(){
     );
 
 
-    try{
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient
-                .from("characters")
-                .select(`
-                    id,
-                    name,
-                    race,
-                    role,
-                    age,
-                    gender,
-                    region,
-                    personality,
-                    backstory,
-                    image_url
-                `)
-                .eq(
-                    "id",
-                    recordId
-                )
-                .maybeSingle();
+    const {
+        data,
+        error
+    } =
+        await supabase
+            .from("characters")
+            .select(`
+                id,
+                name,
+                race,
+                role,
+                age,
+                gender,
+                region,
+                personality,
+                backstory,
+                image_url
+            `)
+            .eq(
+                "id",
+                recordId
+            )
+            .maybeSingle();
 
 
-        if(error){
+    if(error){
 
-            throw error;
-        }
-
-
-        if(!data){
-
-            throw new Error(
-                "没有找到这个角色"
-            );
-        }
-
-
-        currentImageUrl =
-            data.image_url ||
-            null;
-
-
-        nameInput.value =
-            data.name || "";
-
-        raceInput.value =
-            data.race || "";
-
-        roleInput.value =
-            data.role || "";
-
-        ageInput.value =
-            data.age ?? "";
-
-        genderInput.value =
-            data.gender || "";
-
-        regionInput.value =
-            data.region || "";
-
-        personalityInput.value =
-            data.personality || "";
-
-        backstoryInput.value =
-            data.backstory || "";
-
-
-        showImage(
-            currentImageUrl
-        );
-
-
-        showStatus("");
-
-
-    }catch(error){
-
-        console.error(
-            "读取角色失败:",
-            error
-        );
-
+        console.error(error);
 
         showStatus(
-            "读取角色失败：" +
-            (
-                error?.message ||
-                "未知错误"
-            ),
-            "error"
+            "读取角色档案失败。",
+            true
         );
-
 
         saveButton.disabled =
             true;
 
+        return;
     }
 
+
+    if(!data){
+
+        showStatus(
+            "没有找到这份角色档案。",
+            true
+        );
+
+        saveButton.disabled =
+            true;
+
+        return;
+    }
+
+
+    name.value =
+        data.name || "";
+
+    race.value =
+        data.race || "";
+
+    role.value =
+        data.role || "";
+
+    age.value =
+        data.age || "";
+
+    gender.value =
+        data.gender || "";
+
+    region.value =
+        data.region || "";
+
+    personality.value =
+        data.personality || "";
+
+    backstory.value =
+        data.backstory || "";
+
+
+    currentImageUrl =
+        data.image_url || null;
+
+
+    if(currentImageUrl){
+
+        imagePreview.src =
+            currentImageUrl;
+
+        imagePreview.style.display =
+            "block";
+
+        imageEmpty.style.display =
+            "none";
+    }
+
+
+    showStatus("");
 }
 
 
-/* =========================================================
-   读取世界
-========================================================= */
+/* ==================================================
+   加载世界
+================================================== */
 
 async function loadWorld(){
 
@@ -2400,91 +2332,74 @@ async function loadWorld(){
     );
 
 
-    try{
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient
-                .from("world_settings")
-                .select(`
-                    id,
-                    title,
-                    content,
-                    updated_at
-                `)
-                .eq(
-                    "id",
-                    1
-                )
-                .maybeSingle();
+    const {
+        data,
+        error
+    } =
+        await supabase
+            .from("world_settings")
+            .select(`
+                id,
+                title,
+                content,
+                updated_at
+            `)
+            .eq(
+                "id",
+                1
+            )
+            .maybeSingle();
 
 
-        if(error){
+    if(error){
 
-            throw error;
-        }
-
-
-        if(!data){
-
-            throw new Error(
-                "没有找到世界设定"
-            );
-        }
-
-
-        nameInput.value =
-            data.title || "";
-
-        worldContent.value =
-            data.content || "";
-
-
-        showStatus("");
-
-
-    }catch(error){
-
-        console.error(
-            "读取世界设定失败:",
-            error
-        );
-
+        console.error(error);
 
         showStatus(
-            "读取世界设定失败：" +
-            (
-                error?.message ||
-                "未知错误"
-            ),
-            "error"
+            "读取世界设定失败。",
+            true
         );
-
 
         saveButton.disabled =
             true;
 
+        return;
     }
 
+
+    if(!data){
+
+        showStatus(
+            "没有找到世界设定。",
+            true
+        );
+
+        saveButton.disabled =
+            true;
+
+        return;
+    }
+
+
+    name.value =
+        data.title || "";
+
+    worldContent.value =
+        data.content || "";
+
+    showStatus("");
 }
 
 
-/* =========================================================
-   读取国家
-========================================================= */
+/* ==================================================
+   加载国家
+================================================== */
 
 async function loadCountry(){
 
-    /*
-       新建国家：
-       不需要读取数据库
-    */
-
     if(isCreatingCountry){
 
-        nameInput.value = "";
+        name.value = "";
 
         countrySubtitle.value = "";
 
@@ -2500,7 +2415,6 @@ async function loadCountry(){
 
         countryCulture.value = "";
 
-
         showStatus(
             "可以开始建立新的国家档案。"
         );
@@ -2512,8 +2426,8 @@ async function loadCountry(){
     if(!recordId){
 
         showStatus(
-            "缺少国家 ID",
-            "error"
+            "缺少国家档案 ID。",
+            true
         );
 
         saveButton.disabled =
@@ -2528,108 +2442,220 @@ async function loadCountry(){
     );
 
 
-    try{
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient
-                .from("countries")
-                .select(`
-                    id,
-                    name,
-                    subtitle,
-                    capital,
-                    government,
-                    region,
-                    description,
-                    history,
-                    culture,
-                    updated_at
-                `)
-                .eq(
-                    "id",
-                    recordId
-                )
-                .maybeSingle();
+    const {
+        data,
+        error
+    } =
+        await supabase
+            .from("countries")
+            .select(`
+                id,
+                name,
+                subtitle,
+                capital,
+                government,
+                region,
+                description,
+                history,
+                culture,
+                updated_at
+            `)
+            .eq(
+                "id",
+                recordId
+            )
+            .maybeSingle();
 
 
-        if(error){
+    if(error){
 
-            throw error;
-        }
-
-
-        /*
-           找不到对应国家
-        */
-
-        if(!data){
-
-            throw new Error(
-                "没有找到这个国家档案，请检查国家 ID。"
-            );
-        }
-
-
-        nameInput.value =
-            data.name || "";
-
-        countrySubtitle.value =
-            data.subtitle || "";
-
-        countryCapital.value =
-            data.capital || "";
-
-        countryGovernment.value =
-            data.government || "";
-
-        countryRegion.value =
-            data.region || "";
-
-        countryDescription.value =
-            data.description || "";
-
-        countryHistory.value =
-            data.history || "";
-
-        countryCulture.value =
-            data.culture || "";
-
-
-        showStatus("");
-
-
-    }catch(error){
-
-        console.error(
-            "读取国家失败:",
-            error
-        );
-
+        console.error(error);
 
         showStatus(
-            "读取国家失败：" +
-            (
-                error?.message ||
-                "未知错误"
-            ),
-            "error"
+            "读取国家档案失败。",
+            true
         );
-
 
         saveButton.disabled =
             true;
 
+        return;
     }
 
+
+    if(!data){
+
+        showStatus(
+            "没有找到这份国家档案。",
+            true
+        );
+
+        saveButton.disabled =
+            true;
+
+        return;
+    }
+
+
+    name.value =
+        data.name || "";
+
+    countrySubtitle.value =
+        data.subtitle || "";
+
+    countryCapital.value =
+        data.capital || "";
+
+    countryGovernment.value =
+        data.government || "";
+
+    countryRegion.value =
+        data.region || "";
+
+    countryDescription.value =
+        data.description || "";
+
+    countryHistory.value =
+        data.history || "";
+
+    countryCulture.value =
+        data.culture || "";
+
+
+    showStatus("");
 }
 
 
-/* =========================================================
-   上传角色图片
-========================================================= */
+/* ==================================================
+   加载历史记录
+================================================== */
+
+async function loadHistory(){
+
+    /* 新建历史 */
+
+    if(isCreatingHistory){
+
+        historyYear.value = "";
+
+        historyTitle.value = "";
+
+        historyEra.value = "";
+
+        historyLocation.value = "";
+
+        historyDescription.value = "";
+
+        historyContent.value = "";
+
+        showStatus(
+            "可以开始建立新的历史记录。"
+        );
+
+        return;
+    }
+
+
+    /* 编辑历史但没有 ID */
+
+    if(!recordId){
+
+        showStatus(
+            "缺少历史记录 ID。",
+            true
+        );
+
+        saveButton.disabled =
+            true;
+
+        return;
+    }
+
+
+    showStatus(
+        "正在读取历史记录……"
+    );
+
+
+    const {
+        data,
+        error
+    } =
+        await supabase
+            .from("history_records")
+            .select(`
+                id,
+                year,
+                title,
+                era,
+                location,
+                description,
+                content,
+                updated_at
+            `)
+            .eq(
+                "id",
+                recordId
+            )
+            .maybeSingle();
+
+
+    if(error){
+
+        console.error(error);
+
+        showStatus(
+            "读取历史记录失败。",
+            true
+        );
+
+        saveButton.disabled =
+            true;
+
+        return;
+    }
+
+
+    if(!data){
+
+        showStatus(
+            "没有找到这份历史记录。",
+            true
+        );
+
+        saveButton.disabled =
+            true;
+
+        return;
+    }
+
+
+    historyYear.value =
+        data.year || "";
+
+    historyTitle.value =
+        data.title || "";
+
+    historyEra.value =
+        data.era || "";
+
+    historyLocation.value =
+        data.location || "";
+
+    historyDescription.value =
+        data.description || "";
+
+    historyContent.value =
+        data.content || "";
+
+
+    showStatus("");
+}
+
+
+/* ==================================================
+   上传人物图片
+================================================== */
 
 async function uploadImage(file){
 
@@ -2639,40 +2665,33 @@ async function uploadImage(file){
     }
 
 
-    const originalName =
-        file.name || "";
-
-
     const extension =
-        originalName
-            .split(".")
-            .pop()
-            .toLowerCase();
+        file.name.includes(".")
+            ? file.name
+                .split(".")
+                .pop()
+                .toLowerCase()
+            : "png";
 
 
-    const filePath =
-        "character-" +
-        Date.now() +
-        "-" +
-        Math.random()
+    const fileName =
+        `${Date.now()}-${Math.random()
             .toString(36)
-            .substring(2,8) +
-        "." +
-        extension;
+            .slice(2)}.${extension}`;
 
 
     const {
-        error:uploadError
+        error: uploadError
     } =
-        await supabaseClient
+        await supabase
             .storage
             .from("character-images")
             .upload(
-                filePath,
+                fileName,
                 file,
                 {
-                    cacheControl:"3600",
-                    upsert:false
+                    upsert:false,
+                    contentType:file.type
                 }
             );
 
@@ -2686,35 +2705,23 @@ async function uploadImage(file){
     const {
         data
     } =
-        supabaseClient
+        supabase
             .storage
             .from("character-images")
             .getPublicUrl(
-                filePath
+                fileName
             );
 
 
     return data.publicUrl;
-
 }
 
 
-/* =========================================================
-   保存角色
-========================================================= */
+/* ==================================================
+   保存人物
+================================================== */
 
 async function saveCharacter(){
-
-    if(!recordId){
-
-        showStatus(
-            "缺少角色 ID",
-            "error"
-        );
-
-        return;
-    }
-
 
     saveButton.disabled =
         true;
@@ -2723,85 +2730,71 @@ async function saveCharacter(){
         true;
 
 
-    showStatus(
-        "正在保存档案……"
-    );
-
-
     try{
 
-        let imageURL =
+        showStatus(
+            "正在保存角色档案……"
+        );
+
+
+        let imageUrl =
             currentImageUrl;
 
 
-        const file =
-            imageFile.files &&
-            imageFile.files[0];
+        if(imageFile.files.length){
 
-
-        if(file){
-
-            showStatus(
-                "正在上传新的角色图片……"
-            );
-
-
-            imageURL =
+            imageUrl =
                 await uploadImage(
-                    file
+                    imageFile.files[0]
                 );
-
         }
 
 
-        const updateData = {
+        const payload = {
 
             name:
-                nameInput.value.trim(),
+                name.value.trim(),
 
             race:
-                raceInput.value.trim() ||
-                null,
+                race.value.trim() || null,
 
             role:
-                roleInput.value.trim() ||
-                null,
+                role.value.trim() || null,
 
             age:
-                ageInput.value.trim() ||
-                null,
+                age.value.trim() || null,
 
             gender:
-                genderInput.value.trim() ||
-                null,
+                gender.value.trim() || null,
 
             region:
-                regionInput.value.trim() ||
-                null,
+                region.value.trim() || null,
 
             personality:
-                personalityInput.value.trim() ||
-                null,
+                personality.value.trim() || null,
 
             backstory:
-                backstoryInput.value.trim() ||
-                null,
+                backstory.value.trim() || null,
 
             image_url:
-                imageURL ||
-                null
-
+                imageUrl || null
         };
+
+
+        if(!payload.name){
+
+            throw new Error(
+                "角色名称不能为空。"
+            );
+        }
 
 
         const {
             error
         } =
-            await supabaseClient
+            await supabase
                 .from("characters")
-                .update(
-                    updateData
-                )
+                .update(payload)
                 .eq(
                     "id",
                     recordId
@@ -2815,57 +2808,43 @@ async function saveCharacter(){
 
 
         showStatus(
-            "档案保存成功，即将返回角色页面……",
-            "success"
+            "角色档案保存成功，即将返回……"
         );
 
 
         setTimeout(
-            function(){
+            () => {
 
                 window.location.href =
-                    "characters.html?id=" +
-                    encodeURIComponent(
-                        recordId
-                    );
+                    `characters.html?id=${encodeURIComponent(recordId)}`;
 
             },
-            900
+            700
         );
 
 
     }catch(error){
 
-        console.error(
-            "保存角色失败:",
-            error
-        );
-
+        console.error(error);
 
         showStatus(
-            "保存失败：" +
-            (
-                error?.message ||
-                "未知错误"
-            ),
-            "error"
+            error.message ||
+            "保存角色档案失败。",
+            true
         );
-
 
         saveButton.disabled =
             false;
 
         cancelButton.disabled =
             false;
-
     }
-
 }
 
 
-/* =========================================================
+/* ==================================================
    保存世界
-========================================================= */
+================================================== */
 
 async function saveWorld(){
 
@@ -2876,24 +2855,30 @@ async function saveWorld(){
         true;
 
 
-    showStatus(
-        "正在保存世界设定……"
-    );
-
-
     try{
 
-        const title =
-            nameInput.value.trim();
-
-        const content =
-            worldContent.value.trim();
+        showStatus(
+            "正在保存世界设定……"
+        );
 
 
-        if(!title){
+        const payload = {
+
+            title:
+                name.value.trim(),
+
+            content:
+                worldContent.value.trim(),
+
+            updated_at:
+                new Date().toISOString()
+        };
+
+
+        if(!payload.title){
 
             throw new Error(
-                "世界设定标题不能为空"
+                "世界设定标题不能为空。"
             );
         }
 
@@ -2901,21 +2886,9 @@ async function saveWorld(){
         const {
             error
         } =
-            await supabaseClient
+            await supabase
                 .from("world_settings")
-                .update({
-
-                    title:
-                        title,
-
-                    content:
-                        content,
-
-                    updated_at:
-                        new Date()
-                            .toISOString()
-
-                })
+                .update(payload)
                 .eq(
                     "id",
                     1
@@ -2929,54 +2902,43 @@ async function saveWorld(){
 
 
         showStatus(
-            "世界设定保存成功，即将返回世界设定页面……",
-            "success"
+            "世界设定保存成功，即将返回……"
         );
 
 
         setTimeout(
-            function(){
+            () => {
 
                 window.location.href =
                     "world.html";
 
             },
-            900
+            700
         );
 
 
     }catch(error){
 
-        console.error(
-            "保存世界设定失败:",
-            error
-        );
-
+        console.error(error);
 
         showStatus(
-            "保存失败：" +
-            (
-                error?.message ||
-                "未知错误"
-            ),
-            "error"
+            error.message ||
+            "保存世界设定失败。",
+            true
         );
-
 
         saveButton.disabled =
             false;
 
         cancelButton.disabled =
             false;
-
     }
-
 }
 
 
-/* =========================================================
+/* ==================================================
    保存国家
-========================================================= */
+================================================== */
 
 async function saveCountry(){
 
@@ -2987,31 +2949,19 @@ async function saveCountry(){
         true;
 
 
-    showStatus(
-        isCreatingCountry
-            ? "正在建立国家档案……"
-            : "正在保存国家档案……"
-    );
-
-
     try{
 
-        const name =
-            nameInput.value.trim();
+        showStatus(
+            isCreatingCountry
+                ? "正在建立国家档案……"
+                : "正在保存国家档案……"
+        );
 
 
-        if(!name){
-
-            throw new Error(
-                "国家名称不能为空"
-            );
-        }
-
-
-        const countryData = {
+        const payload = {
 
             name:
-                name,
+                name.value.trim(),
 
             subtitle:
                 countrySubtitle.value.trim() ||
@@ -3042,18 +2992,17 @@ async function saveCountry(){
                 null,
 
             updated_at:
-                new Date()
-                    .toISOString()
-
+                new Date().toISOString()
         };
 
 
-        let savedId = recordId;
+        if(!payload.name){
 
+            throw new Error(
+                "国家名称不能为空。"
+            );
+        }
 
-        /* =================================================
-           新建国家
-        ================================================= */
 
         if(isCreatingCountry){
 
@@ -3061,11 +3010,9 @@ async function saveCountry(){
                 data,
                 error
             } =
-                await supabaseClient
+                await supabase
                     .from("countries")
-                    .insert(
-                        countryData
-                    )
+                    .insert(payload)
                     .select("id")
                     .single();
 
@@ -3076,40 +3023,19 @@ async function saveCountry(){
             }
 
 
-            if(!data){
-
-                throw new Error(
-                    "国家创建成功，但没有返回国家 ID。"
-                );
-            }
-
-
-            savedId =
-                data.id;
-
-
             showStatus(
-                "国家档案建立成功，即将返回国家档案页面……",
-                "success"
+                "国家档案建立成功，即将返回……"
             );
 
-        }
 
-
-        /* =================================================
-           修改已有国家
-        ================================================= */
-
-        else{
+        }else{
 
             const {
                 error
             } =
-                await supabaseClient
+                await supabase
                     .from("countries")
-                    .update(
-                        countryData
-                    )
+                    .update(payload)
                     .eq(
                         "id",
                         recordId
@@ -3123,68 +3049,204 @@ async function saveCountry(){
 
 
             showStatus(
-                "国家档案保存成功，即将返回国家档案页面……",
-                "success"
+                "国家档案保存成功，即将返回……"
             );
-
         }
 
 
         setTimeout(
-            function(){
-
-                /*
-                   返回国家档案页面。
-                   如果之后 nations.html 支持指定 ID，
-                   也可以进一步跳转到刚刚建立的国家。
-                */
+            () => {
 
                 window.location.href =
                     "nations.html";
 
             },
-            900
+            700
         );
 
 
     }catch(error){
 
-        console.error(
-            "保存国家失败:",
-            error
-        );
-
+        console.error(error);
 
         showStatus(
-            "保存失败：" +
-            (
-                error?.message ||
-                "未知错误"
-            ),
-            "error"
+            error.message ||
+            "保存国家档案失败。",
+            true
         );
-
 
         saveButton.disabled =
             false;
 
         cancelButton.disabled =
             false;
-
     }
-
 }
 
 
-/* =========================================================
+/* ==================================================
+   保存历史记录
+================================================== */
+
+async function saveHistory(){
+
+    saveButton.disabled =
+        true;
+
+    cancelButton.disabled =
+        true;
+
+
+    try{
+
+        showStatus(
+            isCreatingHistory
+                ? "正在建立历史记录……"
+                : "正在保存历史记录……"
+        );
+
+
+        const payload = {
+
+            year:
+                historyYear.value.trim() ||
+                null,
+
+            title:
+                historyTitle.value.trim(),
+
+            era:
+                historyEra.value.trim() ||
+                null,
+
+            location:
+                historyLocation.value.trim() ||
+                null,
+
+            description:
+                historyDescription.value.trim() ||
+                null,
+
+            content:
+                historyContent.value.trim() ||
+                null,
+
+            updated_at:
+                new Date().toISOString()
+        };
+
+
+        if(!payload.title){
+
+            throw new Error(
+                "事件名称不能为空。"
+            );
+        }
+
+
+        /* ================================
+           新建
+        ================================= */
+
+        if(isCreatingHistory){
+
+            const {
+                data,
+                error
+            } =
+                await supabase
+                    .from("history_records")
+                    .insert(payload)
+                    .select("id")
+                    .single();
+
+
+            if(error){
+
+                throw error;
+            }
+
+
+            showStatus(
+                "历史记录建立成功，即将返回历史档案页面……"
+            );
+
+
+        }
+
+        /* ================================
+           编辑
+        ================================= */
+
+        else{
+
+            const {
+                error
+            } =
+                await supabase
+                    .from("history_records")
+                    .update(payload)
+                    .eq(
+                        "id",
+                        recordId
+                    );
+
+
+            if(error){
+
+                throw error;
+            }
+
+
+            showStatus(
+                "历史记录保存成功，即将返回历史档案页面……"
+            );
+        }
+
+
+        setTimeout(
+            () => {
+
+                window.location.href =
+                    "history.html";
+
+            },
+            700
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+        showStatus(
+            error.message ||
+            "保存历史记录失败。",
+            true
+        );
+
+        saveButton.disabled =
+            false;
+
+        cancelButton.disabled =
+            false;
+    }
+}
+
+
+/* ==================================================
    保存按钮
-========================================================= */
+================================================== */
 
 saveButton.addEventListener(
     "click",
     function(){
 
-        if(isWorldMode){
+        if(isHistoryMode){
+
+            saveHistory();
+
+        }else if(isWorldMode){
 
             saveWorld();
 
@@ -3202,59 +3264,68 @@ saveButton.addEventListener(
 );
 
 
-/* =========================================================
-   取消
-========================================================= */
+/* ==================================================
+   取消按钮
+================================================== */
 
 cancelButton.addEventListener(
     "click",
     function(){
 
-        if(isWorldMode){
+        if(isHistoryMode){
+
+            window.location.href =
+                "history.html";
+
+        }else if(isWorldMode){
 
             window.location.href =
                 "world.html";
 
-            return;
-        }
-
-
-        if(isCountryMode){
+        }else if(isCountryMode){
 
             window.location.href =
                 "nations.html";
 
-            return;
+        }else{
+
+            if(recordId){
+
+                window.location.href =
+                    `characters.html?id=${encodeURIComponent(recordId)}`;
+
+            }else{
+
+                window.location.href =
+                    "characters.html";
+            }
         }
-
-
-        window.location.href =
-            "characters.html?id=" +
-            encodeURIComponent(
-                recordId
-            );
 
     }
 );
 
 
-/* =========================================================
-   日夜模式
-========================================================= */
+/* ==================================================
+   主题
+================================================== */
 
 function applyTheme(){
 
-    const theme =
+    const savedTheme =
         localStorage.getItem(
             "seyami-theme"
         );
 
 
-    if(theme === "day"){
+    if(savedTheme === "day"){
 
         document.body.classList.add(
             "day-mode"
         );
+
+        document.getElementById(
+            "themeToggle"
+        ).textContent = "☾";
 
     }else{
 
@@ -3262,14 +3333,23 @@ function applyTheme(){
             "day-mode"
         );
 
+        document.getElementById(
+            "themeToggle"
+        ).textContent = "☼";
     }
-
 }
 
 
-themeToggle.addEventListener(
+document.getElementById(
+    "themeToggle"
+).addEventListener(
     "click",
     function(){
+
+        document.body.classList.toggle(
+            "day-mode"
+        );
+
 
         const isDay =
             document.body.classList.contains(
@@ -3277,63 +3357,59 @@ themeToggle.addEventListener(
             );
 
 
-        if(isDay){
+        localStorage.setItem(
+            "seyami-theme",
+            isDay
+                ? "day"
+                : "night"
+        );
 
-            document.body.classList.remove(
-                "day-mode"
-            );
 
-            localStorage.setItem(
-                "seyami-theme",
-                "night"
-            );
-
-        }else{
-
-            document.body.classList.add(
-                "day-mode"
-            );
-
-            localStorage.setItem(
-                "seyami-theme",
-                "day"
-            );
-
-        }
+        this.textContent =
+            isDay
+                ? "☾"
+                : "☼";
 
     }
 );
 
 
-/* =========================================================
-   启动
-========================================================= */
+/* ==================================================
+   初始化
+================================================== */
 
-applyTheme();
+function initPage(){
+
+    applyTheme();
 
 
-if(isWorldMode){
+    if(isHistoryMode){
 
-    setupWorldMode();
+        setupHistoryMode();
 
-    loadWorld();
+        loadHistory();
 
-}else if(isCountryMode){
+    }else if(isWorldMode){
 
-    setupCountryMode();
+        setupWorldMode();
 
-    loadCountry();
+        loadWorld();
 
-}else{
+    }else if(isCountryMode){
 
-    setupCharacterMode();
+        setupCountryMode();
 
-    loadCharacter();
+        loadCountry();
 
+    }else{
+
+        setupCharacterMode();
+
+        loadCharacter();
+    }
 }
 
 </script>
 
 </body>
-
 </html>
