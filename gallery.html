@@ -20,13 +20,20 @@
 <link
     rel="preconnect"
     href="https://fonts.gstatic.com"
-    crossorigin
+>
+
+<link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
 >
 
 <link
     href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Noto+Serif+SC:wght@300;400;500&display=swap"
     rel="stylesheet"
 >
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 
@@ -2078,35 +2085,32 @@ body.day .footer{
 <script>
 
 /* =========================================================
-   画廊图片
-   现在只需要填写 image
+   SUPABASE
 ========================================================= */
 
-const galleryItems = [
-
-    /*
-    
-    {
-        image: "images/ilina.jpg"
-    },
+const SUPABASE_URL =
+    "https://rqqkdpzehxzwqzytpxgh.supabase.co";
 
 
-    {
-        image: "images/example.png"
-    },
+const SUPABASE_KEY =
+    "sb_publishable_T_gNdlgkOaXnzjSvdmI1Pw_HQOVTEWG";
 
 
-    {
-        image: "images/example-2.jpg"
-    }
+const supabaseClient =
+    supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
 
-    */
 
-];
-
+/* =========================================================
+   画廊
+========================================================= */
 
 const galleryList =
-    document.getElementById("galleryList");
+    document.getElementById(
+        "galleryList"
+    );
 
 
 /* =========================================================
@@ -2114,37 +2118,98 @@ const galleryList =
 ========================================================= */
 
 const lightbox =
-    document.getElementById("lightbox");
+    document.getElementById(
+        "lightbox"
+    );
 
 
 const lightboxImage =
-    document.getElementById("lightboxImage");
+    document.getElementById(
+        "lightboxImage"
+    );
 
 
 const lightboxClose =
-    document.getElementById("lightboxClose");
+    document.getElementById(
+        "lightboxClose"
+    );
 
 
 /* =========================================================
-   渲染画廊
+   空画廊
 ========================================================= */
 
-function renderGallery(){
+function showEmptyGallery(){
 
-    galleryList.innerHTML = "";
+    galleryList.innerHTML = `
+
+        <div class="empty-gallery">
+
+            <span class="empty-gallery-en">
+                ARCHIVE EMPTY
+            </span>
+
+            暂无档案画廊记录
+
+        </div>
+
+    `;
+
+}
 
 
-    if(galleryItems.length === 0){
+/* =========================================================
+   读取 Supabase 画廊
+========================================================= */
+
+async function loadGallery(){
+
+    galleryList.innerHTML = `
+
+        <div class="empty-gallery">
+
+            <span class="empty-gallery-en">
+                LOADING ARCHIVE
+            </span>
+
+            正在读取档案画廊……
+
+        </div>
+
+    `;
+
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+        .from("gallery_images")
+        .select("id,image_url,created_at")
+        .order(
+            "created_at",
+            {
+                ascending:false
+            }
+        );
+
+
+    if(error){
+
+        console.error(
+            "Gallery loading error:",
+            error
+        );
+
 
         galleryList.innerHTML = `
 
             <div class="empty-gallery">
 
                 <span class="empty-gallery-en">
-                    ARCHIVE EMPTY
+                    ARCHIVE ERROR
                 </span>
 
-                暂无档案画廊记录
+                档案画廊读取失败
 
             </div>
 
@@ -2154,11 +2219,29 @@ function renderGallery(){
     }
 
 
-    galleryItems.forEach(
+    if(!data || data.length === 0){
+
+        showEmptyGallery();
+
+        return;
+    }
+
+
+    galleryList.innerHTML = "";
+
+
+    data.forEach(
         (item)=>{
 
+            if(!item.image_url){
+                return;
+            }
+
+
             const card =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
 
             card.className =
@@ -2171,7 +2254,7 @@ function renderGallery(){
 
                     <img
                         class="gallery-image"
-                        src="${item.image}"
+                        src="${item.image_url}"
                         alt="塞垭弥大陆档案馆画廊图片"
                         loading="lazy"
                     >
@@ -2181,7 +2264,9 @@ function renderGallery(){
             `;
 
 
-            galleryList.appendChild(card);
+            galleryList.appendChild(
+                card
+            );
 
 
             const image =
@@ -2195,7 +2280,7 @@ function renderGallery(){
                 ()=>{
 
                     lightboxImage.src =
-                        item.image;
+                        item.image_url;
 
                     lightboxImage.alt =
                         "塞垭弥大陆档案馆画廊图片";
@@ -2213,7 +2298,11 @@ function renderGallery(){
 }
 
 
-renderGallery();
+/* =========================================================
+   启动画廊
+========================================================= */
+
+loadGallery();
 
 
 /* =========================================================
