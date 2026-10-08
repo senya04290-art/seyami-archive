@@ -600,6 +600,33 @@ body.day-mode .form-textarea{
 
 
 /* ==================================================
+   删除按钮
+================================================== */
+
+.delete-button{
+
+    border-color:
+        rgba(190,120,120,.28);
+}
+
+.delete-button:hover{
+
+    border-color:
+        rgba(210,145,145,.65);
+
+    background:
+        rgba(150,80,80,.08);
+}
+
+.delete-button:disabled{
+
+    opacity:.35;
+
+    cursor:not-allowed;
+}
+
+
+/* ==================================================
    状态提示
 ================================================== */
 
@@ -1399,6 +1426,14 @@ body.day-mode .form-textarea{
         保存更改
     </button>
 
+    <button
+        class="action-button delete-button"
+        id="deleteButton"
+        type="button"
+    >
+        删除档案
+    </button>
+
 </div>
 
 
@@ -1541,6 +1576,11 @@ const saveButton =
 const cancelButton =
     document.getElementById(
         "cancelButton"
+    );
+
+const deleteButton =
+    document.getElementById(
+        "deleteButton"
     );
 
 const statusMessage =
@@ -1938,6 +1978,9 @@ function setupCharacterMode(){
     saveButton.textContent =
         "保存更改";
 
+    deleteButton.style.display =
+        "inline-block";
+
     characterImageSection.style.display =
         "block";
 
@@ -1994,6 +2037,9 @@ function setupWorldMode(){
 
     saveButton.textContent =
         "保存更改";
+
+    deleteButton.style.display =
+        "none";
 
     characterImageSection.style.display =
         "none";
@@ -2073,6 +2119,9 @@ function setupCountryMode(){
         saveButton.textContent =
             "建立档案";
 
+        deleteButton.style.display =
+            "none";
+
     }else{
 
         pageTitleEn.textContent =
@@ -2086,6 +2135,9 @@ function setupCountryMode(){
 
         saveButton.textContent =
             "保存更改";
+
+        deleteButton.style.display =
+            "inline-block";
     }
 }
 
@@ -2140,6 +2192,9 @@ function setupHistoryMode(){
         saveButton.textContent =
             "建立档案";
 
+        deleteButton.style.display =
+            "none";
+
     }else{
 
         pageTitleEn.textContent =
@@ -2153,6 +2208,9 @@ function setupHistoryMode(){
 
         saveButton.textContent =
             "保存更改";
+
+        deleteButton.style.display =
+            "inline-block";
     }
 }
 
@@ -2211,6 +2269,9 @@ async function loadCharacter(){
         saveButton.disabled =
             true;
 
+        deleteButton.disabled =
+            true;
+
         return;
     }
 
@@ -2257,6 +2318,9 @@ async function loadCharacter(){
         saveButton.disabled =
             true;
 
+        deleteButton.disabled =
+            true;
+
         return;
     }
 
@@ -2269,6 +2333,9 @@ async function loadCharacter(){
         );
 
         saveButton.disabled =
+            true;
+
+        deleteButton.disabled =
             true;
 
         return;
@@ -2433,6 +2500,9 @@ async function loadCountry(){
         saveButton.disabled =
             true;
 
+        deleteButton.disabled =
+            true;
+
         return;
     }
 
@@ -2479,6 +2549,9 @@ async function loadCountry(){
         saveButton.disabled =
             true;
 
+        deleteButton.disabled =
+            true;
+
         return;
     }
 
@@ -2491,6 +2564,9 @@ async function loadCountry(){
         );
 
         saveButton.disabled =
+            true;
+
+        deleteButton.disabled =
             true;
 
         return;
@@ -2568,6 +2644,9 @@ async function loadHistory(){
         saveButton.disabled =
             true;
 
+        deleteButton.disabled =
+            true;
+
         return;
     }
 
@@ -2612,6 +2691,9 @@ async function loadHistory(){
         saveButton.disabled =
             true;
 
+        deleteButton.disabled =
+            true;
+
         return;
     }
 
@@ -2624,6 +2706,9 @@ async function loadHistory(){
         );
 
         saveButton.disabled =
+            true;
+
+        deleteButton.disabled =
             true;
 
         return;
@@ -2727,6 +2812,9 @@ async function saveCharacter(){
         true;
 
     cancelButton.disabled =
+        true;
+
+    deleteButton.disabled =
         true;
 
 
@@ -2838,6 +2926,9 @@ async function saveCharacter(){
 
         cancelButton.disabled =
             false;
+
+        deleteButton.disabled =
+            false;
     }
 }
 
@@ -2946,6 +3037,9 @@ async function saveCountry(){
         true;
 
     cancelButton.disabled =
+        true;
+
+    deleteButton.disabled =
         true;
 
 
@@ -3080,6 +3174,9 @@ async function saveCountry(){
 
         cancelButton.disabled =
             false;
+
+        deleteButton.disabled =
+            false;
     }
 }
 
@@ -3094,6 +3191,9 @@ async function saveHistory(){
         true;
 
     cancelButton.disabled =
+        true;
+
+    deleteButton.disabled =
         true;
 
 
@@ -3230,6 +3330,174 @@ async function saveHistory(){
 
         cancelButton.disabled =
             false;
+
+        deleteButton.disabled =
+            false;
+    }
+}
+
+
+/* ==================================================
+   删除档案
+================================================== */
+
+async function deleteRecord(){
+
+    if(!recordId){
+
+        showStatus(
+            "没有可以删除的档案。",
+            true
+        );
+
+        return;
+    }
+
+
+    let recordType = "";
+
+
+    if(isHistoryMode){
+
+        recordType =
+            "历史记录";
+
+    }else if(isCountryMode){
+
+        recordType =
+            "国家档案";
+
+    }else if(!isWorldMode){
+
+        recordType =
+            "角色档案";
+
+    }else{
+
+        showStatus(
+            "世界设定不支持删除。",
+            true
+        );
+
+        return;
+    }
+
+
+    const confirmed =
+        window.confirm(
+            `确定要删除这份${recordType}吗？\n\n删除后无法恢复。`
+        );
+
+
+    if(!confirmed){
+
+        return;
+    }
+
+
+    deleteButton.disabled =
+        true;
+
+    saveButton.disabled =
+        true;
+
+    cancelButton.disabled =
+        true;
+
+
+    try{
+
+        showStatus(
+            `正在删除${recordType}……`
+        );
+
+
+        let tableName = "";
+
+
+        if(isHistoryMode){
+
+            tableName =
+                "history_records";
+
+        }else if(isCountryMode){
+
+            tableName =
+                "countries";
+
+        }else{
+
+            tableName =
+                "characters";
+        }
+
+
+        const {
+            error
+        } =
+            await supabase
+                .from(tableName)
+                .delete()
+                .eq(
+                    "id",
+                    recordId
+                );
+
+
+        if(error){
+
+            throw error;
+        }
+
+
+        showStatus(
+            `${recordType}删除成功，即将返回……`
+        );
+
+
+        setTimeout(
+            () => {
+
+                if(isHistoryMode){
+
+                    window.location.href =
+                        "history.html";
+
+                }else if(isCountryMode){
+
+                    window.location.href =
+                        "nations.html";
+
+                }else{
+
+                    window.location.href =
+                        "characters.html";
+                }
+
+            },
+            700
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+        showStatus(
+            error.message ||
+            `删除${recordType}失败。`,
+            true
+        );
+
+
+        deleteButton.disabled =
+            false;
+
+        saveButton.disabled =
+            false;
+
+        cancelButton.disabled =
+            false;
     }
 }
 
@@ -3259,6 +3527,20 @@ saveButton.addEventListener(
             saveCharacter();
 
         }
+
+    }
+);
+
+
+/* ==================================================
+   删除按钮
+================================================== */
+
+deleteButton.addEventListener(
+    "click",
+    function(){
+
+        deleteRecord();
 
     }
 );
