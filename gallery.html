@@ -23,11 +23,6 @@
 >
 
 <link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
->
-
-<link
     href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Noto+Serif+SC:wght@300;400;500&display=swap"
     rel="stylesheet"
 >
@@ -961,7 +956,7 @@ body{
 
 
 /* =========================================================
-   ★ 纯图片卡片
+   ★ 图片卡片
 ========================================================= */
 
 .gallery-item{
@@ -997,8 +992,6 @@ body{
         background .35s ease,
         transform .35s ease,
         box-shadow .35s ease;
-
-    cursor:pointer;
 
 }
 
@@ -1062,6 +1055,142 @@ body{
     max-width:100%;
 
     object-fit:contain;
+
+    cursor:pointer;
+
+}
+
+
+/* =========================================================
+   ★ 删除按钮
+========================================================= */
+
+.delete-button{
+
+    display:block;
+
+    width:100%;
+
+    margin-top:10px;
+
+    padding:8px 10px;
+
+    border:
+        1px solid
+        rgba(120,170,205,.22);
+
+    background:
+        rgba(6,20,38,.28);
+
+    color:
+        rgba(177,207,230,.52);
+
+    font-family:
+        "Cinzel",
+        "Noto Serif SC",
+        serif;
+
+    font-size:8px;
+
+    letter-spacing:2px;
+
+    cursor:pointer;
+
+    text-align:center;
+
+    transition:
+        color .3s ease,
+        border-color .3s ease,
+        background .3s ease,
+        box-shadow .3s ease;
+
+}
+
+
+.delete-button:hover{
+
+    color:
+        rgba(225,242,255,.90);
+
+    border-color:
+        rgba(138,190,222,.58);
+
+    background:
+        rgba(31,70,96,.45);
+
+    box-shadow:
+        0 0 14px
+        rgba(76,151,202,.10);
+
+}
+
+
+.delete-button:active{
+
+    transform:
+        translateY(1px);
+
+}
+
+
+.delete-button:disabled{
+
+    cursor:
+        wait;
+
+    opacity:.45;
+
+}
+
+
+/* =========================================================
+   删除状态
+========================================================= */
+
+.gallery-item.deleting{
+
+    opacity:.45;
+
+    pointer-events:none;
+
+    transition:
+        opacity .3s ease;
+
+}
+
+
+/* =========================================================
+   日间模式 · 删除按钮
+========================================================= */
+
+body.day .delete-button{
+
+    border-color:
+        rgba(82,151,198,.24);
+
+    background:
+        rgba(240,248,253,.62);
+
+    color:
+        rgba(65,106,133,.58);
+
+}
+
+
+body.day .delete-button:hover{
+
+    border-color:
+        rgba(79,151,200,.58);
+
+    background:
+        rgba(225,239,248,.90);
+
+    color:
+        rgba(42,82,107,.88);
+
+    box-shadow:
+        0 0 14px
+        rgba(76,151,202,.10);
 
 }
 
@@ -1774,6 +1903,15 @@ body.day .footer{
     }
 
 
+    .delete-button{
+
+        padding:9px 10px;
+
+        font-size:8px;
+
+    }
+
+
     .empty-gallery{
 
         padding:40px 15px;
@@ -2159,6 +2297,290 @@ function showEmptyGallery(){
 
 
 /* =========================================================
+   提取 Supabase Storage 文件路径
+========================================================= */
+
+function getStorageFileInfo(imageUrl){
+
+    try{
+
+        const url =
+            new URL(imageUrl);
+
+        const marker =
+            "/storage/v1/object/public/";
+
+        const index =
+            url.pathname.indexOf(
+                marker
+            );
+
+        if(index === -1){
+
+            return null;
+
+        }
+
+
+        const path =
+            url.pathname.substring(
+                index + marker.length
+            );
+
+
+        const slash =
+            path.indexOf("/");
+
+
+        if(slash === -1){
+
+            return null;
+
+        }
+
+
+        const bucket =
+            path.substring(
+                0,
+                slash
+            );
+
+
+        const filePath =
+            decodeURIComponent(
+                path.substring(
+                    slash + 1
+                )
+            );
+
+
+        return {
+
+            bucket,
+            filePath
+
+        };
+
+    }catch(error){
+
+        console.error(
+            "Storage URL parsing error:",
+            error
+        );
+
+        return null;
+
+    }
+
+}
+
+
+/* =========================================================
+   删除 Storage 文件
+========================================================= */
+
+async function deleteStorageFile(imageUrl){
+
+    const info =
+        getStorageFileInfo(
+            imageUrl
+        );
+
+
+    /*
+       如果不是 Supabase Storage 公共地址，
+       就只删除数据库记录。
+    */
+
+    if(!info){
+
+        return {
+
+            success:true
+
+        };
+
+    }
+
+
+    const {
+        error
+    } =
+        await supabaseClient
+            .storage
+            .from(info.bucket)
+            .remove([
+                info.filePath
+            ]);
+
+
+    if(error){
+
+        console.error(
+            "Storage deletion error:",
+            error
+        );
+
+
+        return {
+
+            success:false,
+            error
+
+        };
+
+    }
+
+
+    return {
+
+        success:true
+
+    };
+
+}
+
+
+/* =========================================================
+   删除画廊记录
+========================================================= */
+
+async function deleteGalleryItem(
+    item,
+    card,
+    deleteButton
+){
+
+    const confirmed =
+        window.confirm(
+            "确认要删除这张档案图片吗？\n\n删除后无法恢复。"
+        );
+
+
+    if(!confirmed){
+
+        return;
+
+    }
+
+
+    deleteButton.disabled =
+        true;
+
+    deleteButton.textContent =
+        "正在删除 · DELETING";
+
+
+    card.classList.add(
+        "deleting"
+    );
+
+
+    /*
+       第一步：
+       如果图片来自 Supabase Storage，
+       先删除 Storage 文件。
+    */
+
+    const storageResult =
+        await deleteStorageFile(
+            item.image_url
+        );
+
+
+    if(!storageResult.success){
+
+        card.classList.remove(
+            "deleting"
+        );
+
+        deleteButton.disabled =
+            false;
+
+        deleteButton.textContent =
+            "删除档案 · DELETE";
+
+
+        alert(
+            "图片文件删除失败。\n\n数据库记录暂未删除，请检查 Supabase Storage 的删除权限。"
+        );
+
+        return;
+
+    }
+
+
+    /*
+       第二步：
+       删除 gallery_images 数据库记录。
+    */
+
+    const {
+        error
+    } =
+        await supabaseClient
+            .from("gallery_images")
+            .delete()
+            .eq(
+                "id",
+                item.id
+            );
+
+
+    if(error){
+
+        console.error(
+            "Database deletion error:",
+            error
+        );
+
+
+        card.classList.remove(
+            "deleting"
+        );
+
+        deleteButton.disabled =
+            false;
+
+        deleteButton.textContent =
+            "删除档案 · DELETE";
+
+
+        alert(
+            "数据库记录删除失败。\n\n请检查 gallery_images 表的 DELETE 权限。"
+        );
+
+        return;
+
+    }
+
+
+    /*
+       删除成功。
+    */
+
+    card.remove();
+
+
+    /*
+       如果已经没有图片了，
+       显示空画廊。
+    */
+
+    if(
+        galleryList.querySelector(
+            ".gallery-item"
+        ) === null
+    ){
+
+        showEmptyGallery();
+
+    }
+
+}
+
+
+/* =========================================================
    读取 Supabase 画廊
 ========================================================= */
 
@@ -2184,7 +2606,9 @@ async function loadGallery(){
         error
     } = await supabaseClient
         .from("gallery_images")
-        .select("id,image_url,created_at")
+        .select(
+            "id,image_url,created_at"
+        )
         .order(
             "created_at",
             {
@@ -2216,6 +2640,7 @@ async function loadGallery(){
         `;
 
         return;
+
     }
 
 
@@ -2224,6 +2649,7 @@ async function loadGallery(){
         showEmptyGallery();
 
         return;
+
     }
 
 
@@ -2234,7 +2660,9 @@ async function loadGallery(){
         (item)=>{
 
             if(!item.image_url){
+
                 return;
+
             }
 
 
@@ -2247,6 +2675,11 @@ async function loadGallery(){
             card.className =
                 "gallery-item";
 
+
+            /*
+               不再把整张卡片设置为 cursor:pointer，
+               只有图片本身可以点击放大。
+            */
 
             card.innerHTML = `
 
@@ -2261,6 +2694,13 @@ async function loadGallery(){
 
                 </div>
 
+                <button
+                    class="delete-button"
+                    type="button"
+                >
+                    删除档案 · DELETE
+                </button>
+
             `;
 
 
@@ -2268,6 +2708,10 @@ async function loadGallery(){
                 card
             );
 
+
+            /* =================================================
+               图片放大
+            ================================================= */
 
             const image =
                 card.querySelector(
@@ -2287,6 +2731,40 @@ async function loadGallery(){
 
                     lightbox.classList.add(
                         "active"
+                    );
+
+                }
+            );
+
+
+            /* =================================================
+               删除
+            ================================================= */
+
+            const deleteButton =
+                card.querySelector(
+                    ".delete-button"
+                );
+
+
+            deleteButton.addEventListener(
+                "click",
+                (event)=>{
+
+                    /*
+                       防止点击删除按钮时
+                       触发其他点击行为。
+                    */
+
+                    event.preventDefault();
+
+                    event.stopPropagation();
+
+
+                    deleteGalleryItem(
+                        item,
+                        card,
+                        deleteButton
                     );
 
                 }
