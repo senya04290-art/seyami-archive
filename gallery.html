@@ -167,7 +167,7 @@ body{
 
 
 /* =========================================================
-   ★ 国家档案 · 星空
+   ★ 星空
 ========================================================= */
 
 .stars,
@@ -936,25 +936,44 @@ body{
 }
 
 
+/* =========================================================
+   ★ 图片墙
+========================================================= */
+
 .gallery-list{
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:28px;
 
     position:relative;
 
     z-index:2;
+
+    column-count:3;
+
+    column-gap:28px;
+
 }
 
 
 /* =========================================================
-   画廊卡片
+   ★ 纯图片卡片
 ========================================================= */
 
 .gallery-item{
+
+    display:block;
+
+    width:100%;
+
+    margin:
+        0
+        0
+        28px;
+
+    padding:14px;
+
+    break-inside:avoid;
+
+    -webkit-column-break-inside:avoid;
+
     border:
         1px solid
         rgba(111,174,224,.32);
@@ -966,8 +985,6 @@ body{
             rgba(11,45,75,.45)
         );
 
-    padding:14px;
-
     transition:
         border-color .35s ease,
         background .35s ease,
@@ -975,10 +992,12 @@ body{
         box-shadow .35s ease;
 
     cursor:pointer;
+
 }
 
 
 .gallery-item:hover{
+
     border-color:
         rgba(122,192,235,.62);
 
@@ -999,17 +1018,19 @@ body{
 
         0 0 25px
         rgba(56,143,201,.12);
+
 }
 
 
+/* =========================================================
+   ★ 图片
+========================================================= */
+
 .gallery-image-wrap{
+
     width:100%;
 
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
+    display:block;
 
     overflow:hidden;
 
@@ -1020,11 +1041,11 @@ body{
         1px solid
         rgba(91,162,213,.18);
 
-    min-height:180px;
 }
 
 
 .gallery-image{
+
     display:block;
 
     width:100%;
@@ -1034,72 +1055,7 @@ body{
     max-width:100%;
 
     object-fit:contain;
-}
 
-
-.gallery-info{
-    padding:
-        17px
-        4px
-        4px;
-}
-
-
-.gallery-era{
-    font-family:
-        "Cinzel",
-        serif;
-
-    font-size:8px;
-
-    letter-spacing:3px;
-
-    color:
-        rgba(157,204,239,.52);
-
-    margin-bottom:8px;
-}
-
-
-.gallery-title{
-    font-family:
-        "Cinzel",
-        serif;
-
-    font-size:16px;
-
-    font-weight:400;
-
-    letter-spacing:2px;
-
-    color:
-        rgba(220,238,255,.92);
-
-    margin-bottom:7px;
-}
-
-
-.gallery-cn{
-    font-size:11px;
-
-    letter-spacing:2px;
-
-    color:
-        rgba(177,207,230,.62);
-
-    margin-bottom:8px;
-}
-
-
-.gallery-description{
-    font-size:10px;
-
-    line-height:1.9;
-
-    letter-spacing:1px;
-
-    color:
-        rgba(177,207,230,.45);
 }
 
 
@@ -1108,7 +1064,8 @@ body{
 ========================================================= */
 
 .empty-gallery{
-    grid-column:1 / -1;
+
+    width:100%;
 
     text-align:center;
 
@@ -1127,10 +1084,12 @@ body{
     font-size:11px;
 
     letter-spacing:2px;
+
 }
 
 
 .empty-gallery-en{
+
     display:block;
 
     font-family:
@@ -1145,6 +1104,7 @@ body{
 
     color:
         rgba(157,204,239,.45);
+
 }
 
 
@@ -1153,6 +1113,7 @@ body{
 ========================================================= */
 
 .lightbox{
+
     position:fixed;
 
     inset:0;
@@ -1171,15 +1132,19 @@ body{
     backdrop-filter:blur(5px);
 
     z-index:100;
+
 }
 
 
 .lightbox.active{
+
     display:flex;
+
 }
 
 
 .lightbox-image{
+
     max-width:90vw;
 
     max-height:85vh;
@@ -1197,10 +1162,12 @@ body{
     border:
         1px solid
         rgba(122,192,235,.25);
+
 }
 
 
 .lightbox-close{
+
     position:absolute;
 
     top:28px;
@@ -1220,13 +1187,16 @@ body{
     cursor:pointer;
 
     transition:.3s;
+
 }
 
 
 .lightbox-close:hover{
+
     color:#e5f5ff;
 
     transform:rotate(90deg);
+
 }
 
 
@@ -1235,6 +1205,7 @@ body{
 ========================================================= */
 
 .footer{
+
     position:relative;
 
     z-index:5;
@@ -1253,6 +1224,7 @@ body{
 
     color:
         rgba(133,177,207,.38);
+
 }
 
 
@@ -1261,12 +1233,16 @@ body{
 ========================================================= */
 
 body.day{
+
     background:#f4f9fd;
+
     color:#2e5069;
+
 }
 
 
 body.day .page{
+
     background:
 
         radial-gradient(
@@ -1282,6 +1258,7 @@ body.day .page{
         ),
 
         #f4f9fd;
+
 }
 
 
@@ -1290,6 +1267,7 @@ body.day .page{
 ========================================================= */
 
 body.day .stars::before{
+
     background:
         rgba(103,166,207,.42);
 
@@ -1304,22 +1282,28 @@ body.day .stars::before{
         74vw 16vh rgba(103,166,207,.25),
         86vw 8vh rgba(103,166,207,.40),
         94vw 20vh rgba(103,166,207,.28);
+
 }
 
 
 body.day .stars::after{
+
     background:
         rgba(103,166,207,.30);
+
 }
 
 
 body.day .micro-stars span{
+
     background:
         rgba(87,151,199,.50);
+
 }
 
 
 body.day .arcane-stars span{
+
     background:none;
 
     color:
@@ -1330,6 +1314,7 @@ body.day .arcane-stars span{
     text-shadow:
         0 0 7px
         rgba(87,151,199,.18);
+
 }
 
 
@@ -1338,6 +1323,7 @@ body.day .arcane-stars span{
 ========================================================= */
 
 body.day .magic-circle{
+
     border-color:
         rgba(79,148,196,.26);
 
@@ -1349,26 +1335,31 @@ body.day .magic-circle{
         inset
         0 0 60px
         rgba(78,151,204,.028);
+
 }
 
 
 body.day .magic-circle::before{
+
     border-color:
         rgba(79,148,196,.26);
 
     box-shadow:
         0 0 25px
         rgba(70,142,196,.055);
+
 }
 
 
 body.day .magic-circle::after{
+
     border-color:
         rgba(101,168,207,.20);
 
     box-shadow:
         0 0 18px
         rgba(76,151,202,.065);
+
 }
 
 
@@ -1377,71 +1368,90 @@ body.day .magic-circle::after{
 ========================================================= */
 
 body.day .frame{
+
     border-color:
         rgba(91,145,184,.34);
+
 }
 
 
 body.day .frame::before{
+
     border-left-color:
         rgba(79,141,190,.68);
 
     border-top-color:
         rgba(79,141,190,.68);
+
 }
 
 
 body.day .frame::after{
+
     border-right-color:
         rgba(79,141,190,.68);
 
     border-bottom-color:
         rgba(79,141,190,.68);
+
 }
 
 
 body.day .logo{
+
     color:#2e526c;
+
 }
 
 
 body.day .logo-cn{
+
     color:#2e526c;
+
 }
 
 
 body.day .logo-en{
+
     color:
         rgba(81,137,173,.62);
+
 }
 
 
 body.day .logo-symbol{
+
     color:
         rgba(79,151,201,.84);
 
     text-shadow:
         0 0 7px
         rgba(86,158,208,.20);
+
 }
 
 
 body.day .back{
+
     color:
         rgba(62,99,127,.70);
+
 }
 
 
 body.day .back:hover{
+
     color:#28536f;
 
     text-shadow:
         0 0 8px
         rgba(76,151,202,.14);
+
 }
 
 
 body.day .theme-toggle{
+
     border-color:
         rgba(91,145,184,.34);
 
@@ -1450,10 +1460,12 @@ body.day .theme-toggle{
 
     color:
         rgba(61,98,125,.76);
+
 }
 
 
 body.day .theme-toggle:hover{
+
     border-color:
         rgba(79,151,200,.62);
 
@@ -1465,31 +1477,43 @@ body.day .theme-toggle:hover{
     box-shadow:
         0 0 14px
         rgba(76,151,202,.11);
+
 }
 
 
 body.day .hero-en{
+
     color:
         rgba(81,137,173,.68);
+
 }
 
 
 body.day .hero-title{
+
     color:#2b506a;
 
     text-shadow:
         0 0 18px
         rgba(80,151,201,.065);
+
 }
 
 
 body.day .hero-cn{
+
     color:
         rgba(45,82,106,.80);
+
 }
 
 
+/* =========================================================
+   日间模式 · 图片
+========================================================= */
+
 body.day .gallery-item{
+
     border-color:
         rgba(82,151,198,.36);
 
@@ -1499,10 +1523,12 @@ body.day .gallery-item{
             rgba(242,249,253,.76),
             rgba(226,240,249,.68)
         );
+
 }
 
 
 body.day .gallery-item:hover{
+
     border-color:
         rgba(79,151,200,.62);
 
@@ -1512,42 +1538,23 @@ body.day .gallery-item:hover{
             rgba(225,238,247,1),
             rgba(250,253,255,1)
         );
+
 }
 
 
 body.day .gallery-image-wrap{
+
     background:
         rgba(226,240,249,.45);
 
     border-color:
         rgba(82,155,203,.12);
-}
 
-
-body.day .gallery-era{
-    color:
-        rgba(81,137,173,.62);
-}
-
-
-body.day .gallery-title{
-    color:#2b506a;
-}
-
-
-body.day .gallery-cn{
-    color:
-        rgba(65,106,133,.64);
-}
-
-
-body.day .gallery-description{
-    color:
-        rgba(65,106,133,.55);
 }
 
 
 body.day .empty-gallery{
+
     border-color:
         rgba(82,151,198,.36);
 
@@ -1556,18 +1563,23 @@ body.day .empty-gallery{
 
     color:
         rgba(65,106,133,.48);
+
 }
 
 
 body.day .empty-gallery-en{
+
     color:
         rgba(81,137,173,.55);
+
 }
 
 
 body.day .footer{
+
     color:
         rgba(73,115,143,.40);
+
 }
 
 
@@ -1578,10 +1590,11 @@ body.day .footer{
 @media(max-width:900px){
 
     .gallery-list{
-        grid-template-columns:
-            repeat(2,1fr);
 
-        gap:22px;
+        column-count:2;
+
+        column-gap:22px;
+
     }
 
 }
@@ -1590,34 +1603,43 @@ body.day .footer{
 @media(max-width:700px){
 
     .page{
+
         padding:
             22px
             20px
             55px;
+
     }
 
 
     .frame{
+
         top:14px;
         left:14px;
         right:14px;
         bottom:14px;
+
     }
 
 
     .header{
+
         left:25px;
         right:25px;
         top:24px;
+
     }
 
 
     .logo{
+
         gap:10px;
+
     }
 
 
     .logo-symbol{
+
         width:15px;
         height:11px;
 
@@ -1625,39 +1647,49 @@ body.day .footer{
         line-height:11px;
 
         margin-top:2px;
+
     }
 
 
     .logo-cn{
+
         height:11px;
         line-height:11px;
 
         font-size:11px;
         letter-spacing:2px;
+
     }
 
 
     .logo-en{
+
         margin-top:4px;
 
         font-size:7px;
         line-height:7px;
 
         letter-spacing:2px;
+
     }
 
 
     .header-right{
+
         gap:8px;
+
     }
 
 
     .back{
+
         font-size:10px;
+
     }
 
 
     .theme-toggle{
+
         height:25px;
 
         padding:
@@ -1668,105 +1700,121 @@ body.day .footer{
         font-size:6px;
 
         letter-spacing:1px;
+
     }
 
 
     .hero{
+
         padding-top:120px;
 
         margin-bottom:60px;
+
     }
 
 
     .hero-en{
+
         font-size:8px;
 
         letter-spacing:5px;
+
     }
 
 
     .hero-title{
+
         font-size:27px;
 
         letter-spacing:4px;
+
     }
 
 
     .hero-cn{
+
         font-size:12px;
 
         letter-spacing:5px;
+
     }
 
 
     .gallery{
+
         width:100%;
 
         margin-top:0;
+
     }
 
 
     .gallery-list{
-        grid-template-columns:1fr;
 
-        gap:25px;
+        column-count:1;
+
+        column-gap:0;
+
     }
 
 
     .gallery-item{
+
         padding:12px;
-    }
 
+        margin-bottom:25px;
 
-    .gallery-image-wrap{
-        min-height:140px;
-    }
-
-
-    .gallery-title{
-        font-size:15px;
-    }
-
-
-    .gallery-description{
-        font-size:10px;
     }
 
 
     .empty-gallery{
+
         padding:40px 15px;
+
     }
 
 
     .lightbox{
+
         padding:
             30px
             20px;
+
     }
 
 
     .lightbox-image{
+
         max-width:94vw;
+
         max-height:82vh;
+
     }
 
 
     .lightbox-close{
+
         top:18px;
         right:22px;
 
         font-size:22px;
+
     }
 
 
     .footer{
+
         margin-top:70px;
+
     }
 
 
     .magic-circle{
+
         width:105vw;
+
         height:105vw;
+
     }
 
 }
@@ -1775,34 +1823,44 @@ body.day .footer{
 @media(max-width:360px){
 
     .header{
+
         left:20px;
         right:20px;
         top:24px;
+
     }
 
 
     .header-right{
+
         gap:5px;
+
     }
 
 
     .back{
+
         font-size:9px;
+
     }
 
 
     .theme-toggle{
+
         padding:
             0 6px;
 
         font-size:6px;
+
     }
 
 
     .hero-title{
+
         font-size:24px;
 
         letter-spacing:3px;
+
     }
 
 }
@@ -1888,7 +1946,7 @@ body.day .footer{
     <div class="magic-circle"></div>
 
 
-    <!-- ★ 边框恢复 -->
+    <!-- ★ 边框 -->
 
     <div class="frame"></div>
 
@@ -1990,6 +2048,10 @@ body.day .footer{
 </div>
 
 
+<!-- =========================================================
+     图片放大层
+========================================================= -->
+
 <div
     class="lightbox"
     id="lightbox"
@@ -2016,7 +2078,8 @@ body.day .footer{
 <script>
 
 /* =========================================================
-   画廊资料
+   画廊图片
+   现在只需要填写 image
 ========================================================= */
 
 const galleryItems = [
@@ -2024,19 +2087,17 @@ const galleryItems = [
     /*
     
     {
-        image: "images/ilina.jpg",
-        era: "CHARACTER ARCHIVE",
-        title: "ILINA",
-        cn: "伊莉娜",
-        description: "雪山的神女。"
+        image: "images/ilina.jpg"
     },
 
+
     {
-        image: "images/example.png",
-        era: "WORLD ARCHIVE",
-        title: "EXAMPLE",
-        cn: "示例档案",
-        description: "这里填写图片说明。"
+        image: "images/example.png"
+    },
+
+
+    {
+        image: "images/example-2.jpg"
     }
 
     */
@@ -2047,6 +2108,26 @@ const galleryItems = [
 const galleryList =
     document.getElementById("galleryList");
 
+
+/* =========================================================
+   图片放大层
+========================================================= */
+
+const lightbox =
+    document.getElementById("lightbox");
+
+
+const lightboxImage =
+    document.getElementById("lightboxImage");
+
+
+const lightboxClose =
+    document.getElementById("lightboxClose");
+
+
+/* =========================================================
+   渲染画廊
+========================================================= */
 
 function renderGallery(){
 
@@ -2091,57 +2172,9 @@ function renderGallery(){
                     <img
                         class="gallery-image"
                         src="${item.image}"
-                        alt="${item.title || ""}"
+                        alt="塞垭弥大陆档案馆画廊图片"
                         loading="lazy"
                     >
-
-                </div>
-
-
-                <div class="gallery-info">
-
-                    ${
-                        item.era
-                        ?
-                        `<div class="gallery-era">
-                            ${item.era}
-                        </div>`
-                        :
-                        ""
-                    }
-
-
-                    ${
-                        item.title
-                        ?
-                        `<div class="gallery-title">
-                            ${item.title}
-                        </div>`
-                        :
-                        ""
-                    }
-
-
-                    ${
-                        item.cn
-                        ?
-                        `<div class="gallery-cn">
-                            ${item.cn}
-                        </div>`
-                        :
-                        ""
-                    }
-
-
-                    ${
-                        item.description
-                        ?
-                        `<div class="gallery-description">
-                            ${item.description}
-                        </div>`
-                        :
-                        ""
-                    }
 
                 </div>
 
@@ -2165,7 +2198,7 @@ function renderGallery(){
                         item.image;
 
                     lightboxImage.alt =
-                        item.title || "";
+                        "塞垭弥大陆档案馆画廊图片";
 
                     lightbox.classList.add(
                         "active"
@@ -2184,32 +2217,23 @@ renderGallery();
 
 
 /* =========================================================
-   图片放大层
+   关闭图片放大
 ========================================================= */
 
-const lightbox =
-    document.getElementById("lightbox");
+function closeLightbox(){
 
+    lightbox.classList.remove(
+        "active"
+    );
 
-const lightboxImage =
-    document.getElementById("lightboxImage");
+    lightboxImage.src = "";
 
-
-const lightboxClose =
-    document.getElementById("lightboxClose");
+}
 
 
 lightboxClose.addEventListener(
     "click",
-    ()=>{
-
-        lightbox.classList.remove(
-            "active"
-        );
-
-        lightboxImage.src = "";
-
-    }
+    closeLightbox
 );
 
 
@@ -2219,11 +2243,7 @@ lightbox.addEventListener(
 
         if(event.target === lightbox){
 
-            lightbox.classList.remove(
-                "active"
-            );
-
-            lightboxImage.src = "";
+            closeLightbox();
 
         }
 
@@ -2237,11 +2257,7 @@ document.addEventListener(
 
         if(event.key === "Escape"){
 
-            lightbox.classList.remove(
-                "active"
-            );
-
-            lightboxImage.src = "";
+            closeLightbox();
 
         }
 
