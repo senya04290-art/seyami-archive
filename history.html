@@ -626,6 +626,55 @@ body{
 
 
 /* ================================
+   修改记录按钮
+================================ */
+
+.edit-history-button{
+
+    display:inline-block;
+
+    margin-top:22px;
+
+    padding:8px 14px;
+
+    color:#dcecff;
+
+    text-decoration:none;
+
+    font-family:
+        "Cinzel",
+        "Noto Serif SC",
+        serif;
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    border:
+        1px solid rgba(190,220,255,.25);
+
+    background:
+        rgba(7,21,34,.2);
+
+    transition:
+        border-color .3s ease,
+        background .3s ease,
+        color .3s ease;
+}
+
+.edit-history-button:hover{
+
+    border-color:
+        rgba(220,240,255,.6);
+
+    background:
+        rgba(140,180,220,.08);
+
+    color:#eef7ff;
+}
+
+
+/* ================================
    空状态
 ================================ */
 
@@ -880,6 +929,28 @@ body.day-mode .floating-symbol{
         rgba(50,90,125,.28);
 }
 
+body.day-mode .edit-history-button{
+
+    color:#17324a;
+
+    background:
+        rgba(255,255,255,.35);
+
+    border-color:
+        rgba(50,90,125,.22);
+}
+
+body.day-mode .edit-history-button:hover{
+
+    border-color:
+        rgba(50,90,125,.5);
+
+    background:
+        rgba(255,255,255,.65);
+
+    color:#17324a;
+}
+
 body.day-mode .empty-state{
 
     color:
@@ -1041,6 +1112,15 @@ body.day-mode .footer{
         font-size:12px;
 
         line-height:2;
+    }
+
+    .edit-history-button{
+
+        font-size:9px;
+
+        padding:7px 11px;
+
+        margin-top:18px;
     }
 
 }
@@ -1222,6 +1302,7 @@ body.day-mode .footer{
         id="historyList"
     ></div>
 
+
     <!-- 空状态 -->
 
     <div
@@ -1243,6 +1324,7 @@ body.day-mode .footer{
         </div>
 
     </div>
+
 
     <!-- 错误状态 -->
 
@@ -1548,6 +1630,23 @@ async function loadHistory(){
                 }
 
 
+                /*
+                 * 修改按钮
+                 *
+                 * 使用当前历史记录的 id
+                 * 跳转到 history-edit.html
+                 */
+
+                const editButtonHTML = `
+                    <a
+                        href="history-edit.html?id=${encodeURIComponent(record.id)}"
+                        class="edit-history-button"
+                    >
+                        ✦ 修改记录
+                    </a>
+                `;
+
+
                 item.innerHTML = `
 
                     <div class="history-date">
@@ -1571,6 +1670,8 @@ async function loadHistory(){
                     ${metaHTML}
 
                     ${contentHTML}
+
+                    ${editButtonHTML}
 
                 `;
 
