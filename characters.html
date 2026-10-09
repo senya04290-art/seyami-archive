@@ -2251,6 +2251,7 @@ body.day-mode .archive-mark{
             type="button"
             id="editCharacterButton"
             class="edit-character-button"
+            style="display:none;"
           >
             EDIT CHARACTER
           </button>
@@ -2547,6 +2548,97 @@ const editCharacterButton =
   document.getElementById(
     "editCharacterButton"
   );
+
+
+/* =========================================================
+   ★ 管理员身份检查
+   ★ 只有指定管理员可以显示编辑按钮
+========================================================= */
+
+async function checkSeyamiAdmin(){
+
+  try{
+
+    const {
+      data,
+      error
+    } = await supabaseClient.auth.getUser();
+
+    if(
+      error ||
+      !data ||
+      !data.user
+    ){
+      return false;
+    }
+
+    return (
+      (data.user.email || "")
+        .trim()
+        .toLowerCase() ===
+      "1296457710@qq.com"
+    );
+
+  }catch(error){
+
+    console.error(
+      "管理员身份检查失败：",
+      error
+    );
+
+    return false;
+
+  }
+
+}
+
+
+/* =========================================================
+   ★ 设置编辑按钮
+========================================================= */
+
+async function setupCharacterEditButton(){
+
+  /* 默认隐藏，避免游客短暂看到按钮 */
+
+  editCharacterButton.style.display =
+    "none";
+
+  const isAdmin =
+    await checkSeyamiAdmin();
+
+  if(!isAdmin){
+    return;
+  }
+
+  /* 管理员通过身份检查后显示 */
+
+  editCharacterButton.style.display =
+    "";
+
+  editCharacterButton.addEventListener(
+    "click",
+    function(){
+
+      if(
+        !allCharacters[currentIndex]
+      ){
+        return;
+      }
+
+      const character =
+        allCharacters[currentIndex];
+
+      window.location.href =
+        "edit.html?id=" +
+        encodeURIComponent(
+          character.id
+        );
+
+    }
+  );
+
+}
 
 
 const prevCharacter =
@@ -3224,35 +3316,6 @@ document.addEventListener(
 
 
 /* =========================================================
-   ★ EDIT CHARACTER
-========================================================= */
-
-editCharacterButton.addEventListener(
-  "click",
-  function(){
-
-    if(
-      !allCharacters[currentIndex]
-    ){
-      return;
-    }
-
-
-    const character =
-      allCharacters[currentIndex];
-
-
-    window.location.href =
-      "edit.html?id=" +
-      encodeURIComponent(
-        character.id
-      );
-
-  }
-);
-
-
-/* =========================================================
    DAY / NIGHT
 ========================================================= */
 
@@ -3351,6 +3414,7 @@ themeToggle.addEventListener(
 ========================================================= */
 
 loadCharacters();
+setupCharacterEditButton();
 
 </script>
 
