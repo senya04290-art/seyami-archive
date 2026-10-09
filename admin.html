@@ -1,3973 +1,1019 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>档案管理 · Seyami Archive</title>
-
-<link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
->
-
-<link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
->
-
-<link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
-    crossorigin
->
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500&display=swap"
-    rel="stylesheet"
->
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-
 <style>
-
-/* =========================
-   基础
-========================= */
-
-* {
-    box-sizing: border-box;
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;min-height:100%}
+body{visibility:hidden;background:radial-gradient(circle at 50% 30%,rgba(20,55,95,.16),transparent 45%),#061426;color:#dbe8f5;font-family:"Noto Serif SC",serif;transition:background .5s,color .5s}
+body.auth-ready{visibility:visible}
+.stars{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.star{position:absolute;width:2px;height:2px;border-radius:50%;background:rgba(190,220,245,.65);opacity:.5}
+.page{position:relative;min-height:100vh;padding:38px 58px 70px;z-index:1}
+.header{display:flex;justify-content:space-between;align-items:flex-start;width:100%;gap:20px}
+.logo{display:flex;flex-direction:column;gap:4px}
+.logo-cn{font-size:16px;letter-spacing:.16em;font-weight:400}
+.logo-en{font-family:"Cinzel",serif;font-size:9px;letter-spacing:.3em;opacity:.55}
+.header-right{display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:flex-end}
+.back,.logout-button{color:inherit;text-decoration:none;font-family:"Cinzel",serif;font-size:10px;letter-spacing:.16em;opacity:.7;transition:opacity .3s;background:transparent;border:0;cursor:pointer}
+.back:hover,.logout-button:hover{opacity:1}
+.logout-button{border:1px solid rgba(190,215,240,.25);padding:10px 12px}
+.theme-toggle{width:38px;height:38px;border:1px solid rgba(190,215,240,.25);background:transparent;color:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px}
+.theme-toggle:hover{background:rgba(180,210,240,.06);border-color:rgba(190,215,240,.45)}
+.title-area{text-align:center;margin:70px 0 55px}
+.title-en{font-family:"Cinzel",serif;font-size:clamp(30px,5vw,58px);font-weight:300;letter-spacing:.22em;margin-left:.22em;line-height:1.2}
+.title-sub{margin-top:12px;font-family:"Cinzel",serif;font-size:10px;letter-spacing:.42em;opacity:.45;margin-left:.42em}
+.title-cn{margin-top:18px;font-size:14px;letter-spacing:.25em;opacity:.65}
+.management-switch{width:min(900px,100%);margin:0 auto 28px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.management-button{min-width:0;height:42px;border:1px solid rgba(180,210,240,.2);background:rgba(4,17,32,.35);color:inherit;cursor:pointer;font-family:"Cinzel","Noto Serif SC",serif;font-size:9px;letter-spacing:.12em;transition:background .3s,border-color .3s}
+.management-button:hover{border-color:rgba(180,210,240,.45);background:rgba(180,210,240,.05)}
+.management-button.active{border-color:rgba(190,220,245,.5);background:rgba(30,65,95,.45)}
+.admin-container{width:min(820px,100%);margin:0 auto;border:1px solid rgba(180,210,240,.18);background:rgba(4,17,32,.42);padding:42px;position:relative}
+.admin-container:before,.admin-container:after{content:"";position:absolute;width:18px;height:18px;border-color:rgba(180,210,240,.45);pointer-events:none}
+.admin-container:before{top:-1px;left:-1px;border-top:1px solid;border-left:1px solid}
+.admin-container:after{right:-1px;bottom:-1px;border-right:1px solid;border-bottom:1px solid}
+.section-title{font-family:"Cinzel",serif;font-size:13px;letter-spacing:.3em;margin-bottom:30px;opacity:.8}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 28px}
+.field{display:flex;flex-direction:column;gap:9px}
+.field.full{grid-column:1/-1}
+label{font-family:"Cinzel",serif;font-size:9px;letter-spacing:.2em;opacity:.6}
+input,select,textarea{width:100%;border:1px solid rgba(180,210,240,.2);outline:none;background:rgba(3,15,29,.75);color:#dbe8f5;padding:0 14px;font-family:"Noto Serif SC",serif;font-size:13px;transition:border-color .3s,background .3s}
+input,select{height:46px}
+textarea{min-height:140px;padding:14px;resize:vertical;line-height:1.8}
+input:focus,select:focus,textarea:focus{border-color:rgba(180,210,240,.55);background:rgba(5,20,38,.9)}
+input::placeholder,textarea::placeholder{color:rgba(210,225,240,.35)}
+.upload-box,.gallery-upload-box{width:100%;min-height:220px;border:1px dashed rgba(180,210,240,.25);display:flex;align-items:center;justify-content:center;flex-direction:column;position:relative;overflow:hidden;cursor:pointer;transition:border-color .3s,background .3s}
+.upload-box:hover,.gallery-upload-box:hover{border-color:rgba(180,210,240,.55);background:rgba(180,210,240,.025)}
+.gallery-upload-box{min-height:360px}
+.upload-box input[type=file],.gallery-upload-box input[type=file]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;padding:0;z-index:2}
+.upload-placeholder,.gallery-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;pointer-events:none;text-align:center}
+.upload-symbol,.gallery-symbol{font-size:28px;opacity:.55;font-family:serif}
+.upload-text,.gallery-upload-text{font-family:"Cinzel",serif;font-size:10px;letter-spacing:.22em;opacity:.65}
+.upload-hint,.gallery-upload-hint{font-size:10px;opacity:.4}
+.preview,.gallery-preview{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:15px;display:none;pointer-events:none}
+.save-area{margin-top:38px;display:flex;justify-content:center}
+.save-button{min-width:230px;height:48px;border:1px solid rgba(190,220,245,.4);background:rgba(10,32,55,.5);color:#dbe8f5;font-family:"Cinzel",serif;font-size:10px;letter-spacing:.3em;cursor:pointer;transition:background .3s,border-color .3s,transform .2s}
+.save-button:hover{background:rgba(30,65,95,.5);border-color:rgba(210,230,245,.65)}
+.save-button:active{transform:scale(.98)}
+.save-button:disabled{opacity:.45;cursor:wait}
+.message{text-align:center;margin-top:22px;min-height:20px;font-size:12px;letter-spacing:.06em;opacity:.85;overflow-wrap:anywhere}
+.message.success{color:#b8d8c8}
+.message.error{color:#e0b8b8}
+.footer{text-align:center;margin-top:55px;font-family:"Cinzel",serif;font-size:8px;letter-spacing:.35em;opacity:.25}
+body.day-mode{background:radial-gradient(circle at 50% 30%,rgba(210,225,238,.35),transparent 50%),#e9eef3;color:#24384c}
+body.day-mode .admin-container{background:rgba(255,255,255,.52);border-color:rgba(40,70,100,.18)}
+body.day-mode .management-button{background:rgba(255,255,255,.35);border-color:rgba(40,70,100,.2)}
+body.day-mode .management-button.active{background:rgba(255,255,255,.65);border-color:rgba(40,70,100,.4)}
+body.day-mode input,body.day-mode select,body.day-mode textarea{background:rgba(255,255,255,.65);color:#24384c;border-color:rgba(40,70,100,.2)}
+body.day-mode input:focus,body.day-mode select:focus,body.day-mode textarea:focus{background:rgba(255,255,255,.9);border-color:rgba(40,70,100,.45)}
+body.day-mode .upload-box,body.day-mode .gallery-upload-box{border-color:rgba(40,70,100,.25)}
+body.day-mode .save-button{color:#24384c;background:rgba(255,255,255,.5);border-color:rgba(40,70,100,.35)}
+body.day-mode .theme-toggle,body.day-mode .logout-button{border-color:rgba(40,70,100,.25)}
+@media(max-width:700px){
+.page{padding:25px 20px 50px}
+.header{align-items:center}
+.logo-cn{font-size:13px}
+.logo-en{font-size:7px}
+.header-right{gap:9px}
+.back,.logout-button{font-size:8px;letter-spacing:.08em}
+.logout-button{padding:8px 7px}
+.theme-toggle{width:34px;height:34px}
+.title-area{margin-top:55px;margin-bottom:40px}
+.title-en{font-size:29px;letter-spacing:.14em;margin-left:.14em}
+.title-sub{font-size:8px;letter-spacing:.3em;margin-left:.3em}
+.title-cn{font-size:12px}
+.management-switch{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-bottom:20px}
+.management-button{height:40px;font-size:8px;letter-spacing:.08em}
+.admin-container{padding:28px 20px}
+.form-grid{grid-template-columns:1fr;gap:22px}
+.field.full{grid-column:auto}
+.upload-box{min-height:200px}
+.gallery-upload-box{min-height:300px}
+.save-button{width:100%}
+textarea{min-height:160px}
 }
-
-html,
-body {
-    margin: 0;
-    padding: 0;
-    min-height: 100%;
-}
-
-body {
-
-    background:
-        radial-gradient(
-            circle at 50% 30%,
-            rgba(20, 55, 95, 0.16),
-            transparent 45%
-        ),
-        #061426;
-
-    color: #dbe8f5;
-
-    font-family:
-        "Noto Serif SC",
-        serif;
-
-    transition:
-        background 0.5s ease,
-        color 0.5s ease;
-}
-
-
-/* =========================
-   背景星点
-========================= */
-
-.stars {
-
-    position: fixed;
-
-    inset: 0;
-
-    pointer-events: none;
-
-    overflow: hidden;
-
-    z-index: 0;
-}
-
-.star {
-
-    position: absolute;
-
-    width: 2px;
-
-    height: 2px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(190, 220, 245, 0.65);
-
-    opacity: 0.5;
-}
-
-
-/* =========================
-   页面
-========================= */
-
-.page {
-
-    position: relative;
-
-    min-height: 100vh;
-
-    padding:
-        38px 58px 70px;
-
-    z-index: 1;
-}
-
-
-/* =========================
-   顶部
-========================= */
-
-.header {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: flex-start;
-
-    width: 100%;
-}
-
-.logo {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 4px;
-}
-
-.logo-cn {
-
-    font-size: 16px;
-
-    letter-spacing: 0.16em;
-
-    font-weight: 400;
-}
-
-.logo-en {
-
-    font-family: "Cinzel", serif;
-
-    font-size: 9px;
-
-    letter-spacing: 0.3em;
-
-    opacity: 0.55;
-}
-
-.header-right {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 20px;
-}
-
-.back {
-
-    color: inherit;
-
-    text-decoration: none;
-
-    font-family: "Cinzel", serif;
-
-    font-size: 10px;
-
-    letter-spacing: 0.22em;
-
-    opacity: 0.65;
-
-    transition:
-        opacity 0.3s ease;
-}
-
-.back:hover {
-
-    opacity: 1;
-}
-
-
-/* =========================
-   日夜按钮
-========================= */
-
-.theme-toggle {
-
-    width: 38px;
-
-    height: 38px;
-
-    border:
-        1px solid
-        rgba(190, 215, 240, 0.25);
-
-    background: transparent;
-
-    color: inherit;
-
-    cursor: pointer;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 14px;
-
-    transition:
-        background 0.3s ease,
-        border-color 0.3s ease;
-}
-
-.theme-toggle:hover {
-
-    background:
-        rgba(180, 210, 240, 0.06);
-
-    border-color:
-        rgba(190, 215, 240, 0.45);
-}
-
-
-/* =========================
-   标题
-========================= */
-
-.title-area {
-
-    text-align: center;
-
-    margin-top: 70px;
-
-    margin-bottom: 55px;
-}
-
-.title-en {
-
-    font-family: "Cinzel", serif;
-
-    font-size:
-        clamp(30px, 5vw, 58px);
-
-    font-weight: 300;
-
-    letter-spacing: 0.22em;
-
-    margin-left: 0.22em;
-
-    line-height: 1.2;
-}
-
-.title-sub {
-
-    margin-top: 12px;
-
-    font-family: "Cinzel", serif;
-
-    font-size: 10px;
-
-    letter-spacing: 0.42em;
-
-    opacity: 0.45;
-
-    margin-left: 0.42em;
-}
-
-.title-cn {
-
-    margin-top: 18px;
-
-    font-size: 14px;
-
-    letter-spacing: 0.25em;
-
-    opacity: 0.65;
-}
-
-
-/* =========================
-   管理类型
-========================= */
-
-.management-switch {
-
-    width: min(900px, 100%);
-
-    margin:
-        0 auto 28px;
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
-    gap: 10px;
-}
-
-.management-button {
-
-    min-width: 170px;
-
-    height: 42px;
-
-    border:
-        1px solid
-        rgba(180, 210, 240, 0.2);
-
-    background:
-        rgba(4, 17, 32, 0.35);
-
-    color: inherit;
-
-    cursor: pointer;
-
-    font-family:
-        "Cinzel",
-        "Noto Serif SC",
-        serif;
-
-    font-size: 9px;
-
-    letter-spacing: 0.2em;
-
-    transition:
-        background 0.3s ease,
-        border-color 0.3s ease,
-        opacity 0.3s ease;
-}
-
-.management-button:hover {
-
-    border-color:
-        rgba(180, 210, 240, 0.45);
-
-    background:
-        rgba(180, 210, 240, 0.05);
-}
-
-.management-button.active {
-
-    border-color:
-        rgba(190, 220, 245, 0.5);
-
-    background:
-        rgba(30, 65, 95, 0.45);
-
-    opacity: 1;
-}
-
-
-/* =========================
-   表单容器
-========================= */
-
-.admin-container {
-
-    width: min(820px, 100%);
-
-    margin: 0 auto;
-
-    border:
-        1px solid
-        rgba(180, 210, 240, 0.18);
-
-    background:
-        rgba(4, 17, 32, 0.42);
-
-    padding: 42px;
-
-    position: relative;
-}
-
-
-/* =========================
-   四角
-========================= */
-
-.admin-container::before,
-.admin-container::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 18px;
-
-    height: 18px;
-
-    border-color:
-        rgba(180, 210, 240, 0.45);
-
-    pointer-events: none;
-}
-
-.admin-container::before {
-
-    top: -1px;
-
-    left: -1px;
-
-    border-top: 1px solid;
-
-    border-left: 1px solid;
-}
-
-.admin-container::after {
-
-    right: -1px;
-
-    bottom: -1px;
-
-    border-right: 1px solid;
-
-    border-bottom: 1px solid;
-}
-
-
-/* =========================
-   区域标题
-========================= */
-
-.section-title {
-
-    font-family: "Cinzel", serif;
-
-    font-size: 13px;
-
-    letter-spacing: 0.3em;
-
-    margin-bottom: 30px;
-
-    opacity: 0.8;
-}
-
-
-/* =========================
-   表单
-========================= */
-
-.form-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
-    gap: 24px 28px;
-}
-
-.field {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 9px;
-}
-
-.field.full {
-
-    grid-column: 1 / -1;
-}
-
-label {
-
-    font-family: "Cinzel", serif;
-
-    font-size: 9px;
-
-    letter-spacing: 0.25em;
-
-    opacity: 0.6;
-}
-
-input,
-select,
-textarea {
-
-    width: 100%;
-
-    border:
-        1px solid
-        rgba(180, 210, 240, 0.2);
-
-    outline: none;
-
-    background:
-        rgba(3, 15, 29, 0.75);
-
-    color: #dbe8f5;
-
-    padding: 0 14px;
-
-    font-family:
-        "Noto Serif SC",
-        serif;
-
-    font-size: 13px;
-
-    transition:
-        border-color 0.3s ease,
-        background 0.3s ease;
-}
-
-input,
-select {
-
-    height: 46px;
-}
-
-textarea {
-
-    min-height: 140px;
-
-    padding: 14px;
-
-    resize: vertical;
-
-    line-height: 1.8;
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-
-    border-color:
-        rgba(180, 210, 240, 0.55);
-
-    background:
-        rgba(5, 20, 38, 0.9);
-}
-
-input::placeholder,
-textarea::placeholder {
-
-    color:
-        rgba(210, 225, 240, 0.28);
-}
-
-
-/* =========================
-   图片上传
-========================= */
-
-.upload-box {
-
-    width: 100%;
-
-    min-height: 220px;
-
-    border:
-        1px dashed
-        rgba(180, 210, 240, 0.25);
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    flex-direction: column;
-
-    position: relative;
-
-    overflow: hidden;
-
-    cursor: pointer;
-
-    transition:
-        border-color 0.3s ease,
-        background 0.3s ease;
-}
-
-.upload-box:hover {
-
-    border-color:
-        rgba(180, 210, 240, 0.55);
-
-    background:
-        rgba(180, 210, 240, 0.025);
-}
-
-.upload-box input[type="file"] {
-
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-
-    height: 100%;
-
-    opacity: 0;
-
-    cursor: pointer;
-
-    padding: 0;
-}
-
-.upload-placeholder {
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    gap: 12px;
-
-    pointer-events: none;
-}
-
-.upload-symbol {
-
-    font-size: 26px;
-
-    opacity: 0.55;
-
-    font-family: serif;
-}
-
-.upload-text {
-
-    font-family: "Cinzel", serif;
-
-    font-size: 10px;
-
-    letter-spacing: 0.22em;
-
-    opacity: 0.6;
-}
-
-.upload-hint {
-
-    font-size: 10px;
-
-    opacity: 0.35;
-}
-
-.preview {
-
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: contain;
-
-    padding: 15px;
-
-    display: none;
-
-    pointer-events: none;
-}
-
-
-/* =========================
-   图集上传预览
-========================= */
-
-.gallery-upload-box {
-
-    width: 100%;
-
-    min-height: 360px;
-
-    border:
-        1px dashed
-        rgba(180, 210, 240, 0.25);
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    position: relative;
-
-    overflow: hidden;
-
-    cursor: pointer;
-
-    transition:
-        border-color 0.3s ease,
-        background 0.3s ease;
-}
-
-.gallery-upload-box:hover {
-
-    border-color:
-        rgba(180, 210, 240, 0.55);
-
-    background:
-        rgba(180, 210, 240, 0.025);
-}
-
-.gallery-upload-box input[type="file"] {
-
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-
-    height: 100%;
-
-    opacity: 0;
-
-    cursor: pointer;
-
-    padding: 0;
-}
-
-.gallery-placeholder {
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 14px;
-
-    pointer-events: none;
-
-    text-align: center;
-}
-
-.gallery-symbol {
-
-    font-size: 28px;
-
-    opacity: 0.55;
-
-    font-family: serif;
-}
-
-.gallery-upload-text {
-
-    font-family: "Cinzel", serif;
-
-    font-size: 10px;
-
-    letter-spacing: 0.25em;
-
-    opacity: 0.65;
-}
-
-.gallery-upload-hint {
-
-    font-size: 10px;
-
-    opacity: 0.35;
-}
-
-.gallery-preview {
-
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: contain;
-
-    padding: 15px;
-
-    display: none;
-
-    pointer-events: none;
-}
-
-
-/* =========================
-   保存按钮
-========================= */
-
-.save-area {
-
-    margin-top: 38px;
-
-    display: flex;
-
-    justify-content: center;
-}
-
-.save-button {
-
-    min-width: 230px;
-
-    height: 48px;
-
-    border:
-        1px solid
-        rgba(190, 220, 245, 0.4);
-
-    background:
-        rgba(10, 32, 55, 0.5);
-
-    color: #dbe8f5;
-
-    font-family: "Cinzel", serif;
-
-    font-size: 10px;
-
-    letter-spacing: 0.3em;
-
-    cursor: pointer;
-
-    transition:
-        background 0.3s ease,
-        border-color 0.3s ease,
-        transform 0.2s ease;
-}
-
-.save-button:hover {
-
-    background:
-        rgba(30, 65, 95, 0.5);
-
-    border-color:
-        rgba(210, 230, 245, 0.65);
-}
-
-.save-button:active {
-
-    transform: scale(0.98);
-}
-
-.save-button:disabled {
-
-    opacity: 0.45;
-
-    cursor: wait;
-}
-
-
-/* =========================
-   消息
-========================= */
-
-.message {
-
-    text-align: center;
-
-    margin-top: 22px;
-
-    min-height: 20px;
-
-    font-size: 12px;
-
-    letter-spacing: 0.08em;
-
-    opacity: 0.8;
-}
-
-.message.success {
-
-    color: #b8d8c8;
-}
-
-.message.error {
-
-    color: #e0b8b8;
-}
-
-
-/* =========================
-   底部
-========================= */
-
-.footer {
-
-    text-align: center;
-
-    margin-top: 55px;
-
-    font-family: "Cinzel", serif;
-
-    font-size: 8px;
-
-    letter-spacing: 0.35em;
-
-    opacity: 0.25;
-}
-
-
-/* =========================
-   日间模式
-========================= */
-
-body.day-mode {
-
-    background:
-        radial-gradient(
-            circle at 50% 30%,
-            rgba(210, 225, 238, 0.35),
-            transparent 50%
-        ),
-        #e9eef3;
-
-    color: #24384c;
-}
-
-body.day-mode .admin-container {
-
-    background:
-        rgba(255, 255, 255, 0.52);
-
-    border-color:
-        rgba(40, 70, 100, 0.18);
-}
-
-body.day-mode .management-button {
-
-    background:
-        rgba(255, 255, 255, 0.35);
-
-    border-color:
-        rgba(40, 70, 100, 0.2);
-}
-
-body.day-mode .management-button.active {
-
-    background:
-        rgba(255, 255, 255, 0.65);
-
-    border-color:
-        rgba(40, 70, 100, 0.4);
-}
-
-body.day-mode input,
-body.day-mode select,
-body.day-mode textarea {
-
-    background:
-        rgba(255, 255, 255, 0.65);
-
-    color: #24384c;
-
-    border-color:
-        rgba(40, 70, 100, 0.2);
-}
-
-body.day-mode input:focus,
-body.day-mode select:focus,
-body.day-mode textarea:focus {
-
-    background:
-        rgba(255, 255, 255, 0.9);
-
-    border-color:
-        rgba(40, 70, 100, 0.45);
-}
-
-body.day-mode .upload-box,
-body.day-mode .gallery-upload-box {
-
-    border-color:
-        rgba(40, 70, 100, 0.25);
-}
-
-body.day-mode .save-button {
-
-    color: #24384c;
-
-    background:
-        rgba(255, 255, 255, 0.5);
-
-    border-color:
-        rgba(40, 70, 100, 0.35);
-}
-
-body.day-mode .theme-toggle {
-
-    border-color:
-        rgba(40, 70, 100, 0.25);
-}
-
-
-/* =========================
-   手机
-========================= */
-
-@media (max-width: 700px) {
-
-    .page {
-
-        padding:
-            25px 20px 50px;
-    }
-
-    .header {
-
-        align-items: center;
-    }
-
-    .logo-cn {
-
-        font-size: 13px;
-    }
-
-    .logo-en {
-
-        font-size: 7px;
-    }
-
-    .header-right {
-
-        gap: 10px;
-    }
-
-    .back {
-
-        font-size: 8px;
-    }
-
-    .theme-toggle {
-
-        width: 34px;
-
-        height: 34px;
-    }
-
-    .title-area {
-
-        margin-top: 55px;
-
-        margin-bottom: 40px;
-    }
-
-    .title-en {
-
-        font-size: 29px;
-
-        letter-spacing: 0.14em;
-
-        margin-left: 0.14em;
-    }
-
-    .title-sub {
-
-        font-size: 8px;
-
-        letter-spacing: 0.3em;
-
-        margin-left: 0.3em;
-    }
-
-    .title-cn {
-
-        font-size: 12px;
-    }
-
-    .management-switch {
-
-        gap: 7px;
-
-        margin-bottom: 20px;
-    }
-
-    .management-button {
-
-        min-width: 0;
-
-        width: 100%;
-
-        height: 40px;
-
-        font-size: 8px;
-
-        letter-spacing: 0.08em;
-    }
-
-    .admin-container {
-
-        padding:
-            28px 20px;
-    }
-
-    .form-grid {
-
-        grid-template-columns: 1fr;
-
-        gap: 22px;
-    }
-
-    .field.full {
-
-        grid-column: auto;
-    }
-
-    .upload-box {
-
-        min-height: 200px;
-    }
-
-    .gallery-upload-box {
-
-        min-height: 300px;
-    }
-
-    .save-button {
-
-        width: 100%;
-    }
-
-    textarea {
-
-        min-height: 160px;
-    }
-
-}
-
 </style>
-
 </head>
 
-
 <body>
-
-
-<!-- =========================
-     背景星点
-========================= -->
-
 <div class="stars">
-
-    <span class="star" style="left:8%;top:14%;"></span>
-    <span class="star" style="left:18%;top:31%;"></span>
-    <span class="star" style="left:27%;top:9%;"></span>
-    <span class="star" style="left:36%;top:23%;"></span>
-    <span class="star" style="left:46%;top:12%;"></span>
-    <span class="star" style="left:58%;top:28%;"></span>
-    <span class="star" style="left:67%;top:8%;"></span>
-    <span class="star" style="left:78%;top:20%;"></span>
-    <span class="star" style="left:91%;top:12%;"></span>
-
-    <span class="star" style="left:13%;top:57%;"></span>
-    <span class="star" style="left:23%;top:76%;"></span>
-    <span class="star" style="left:34%;top:64%;"></span>
-    <span class="star" style="left:49%;top:82%;"></span>
-    <span class="star" style="left:61%;top:69%;"></span>
-    <span class="star" style="left:73%;top:88%;"></span>
-    <span class="star" style="left:86%;top:61%;"></span>
-    <span class="star" style="left:94%;top:78%;"></span>
-
+<span class="star" style="left:8%;top:14%"></span>
+<span class="star" style="left:18%;top:31%"></span>
+<span class="star" style="left:27%;top:9%"></span>
+<span class="star" style="left:36%;top:23%"></span>
+<span class="star" style="left:46%;top:12%"></span>
+<span class="star" style="left:58%;top:28%"></span>
+<span class="star" style="left:67%;top:8%"></span>
+<span class="star" style="left:78%;top:20%"></span>
+<span class="star" style="left:91%;top:12%"></span>
+<span class="star" style="left:13%;top:57%"></span>
+<span class="star" style="left:23%;top:76%"></span>
+<span class="star" style="left:34%;top:64%"></span>
+<span class="star" style="left:49%;top:82%"></span>
+<span class="star" style="left:61%;top:69%"></span>
+<span class="star" style="left:73%;top:88%"></span>
+<span class="star" style="left:86%;top:61%"></span>
+<span class="star" style="left:94%;top:78%"></span>
 </div>
-
 
 <div class="page">
-
-
-    <!-- =========================
-         顶部
-    ========================= -->
-
-    <header class="header">
-
-        <div class="logo">
-
-            <div class="logo-cn">
-                塞垭弥大陆档案馆
-            </div>
-
-            <div class="logo-en">
-                SEYAMI ARCHIVE
-            </div>
-
-        </div>
-
-
-        <div class="header-right">
-
-            <a
-                href="archive.html"
-                class="back"
-            >
-                RETURN TO ARCHIVE
-            </a>
-
-
-            <button
-                class="theme-toggle"
-                id="themeToggle"
-                type="button"
-            >
-                ☾
-            </button>
-
-        </div>
-
-    </header>
-
-
-    <!-- =========================
-         标题
-    ========================= -->
-
-    <section class="title-area">
-
-        <div
-            class="title-en"
-            id="titleEn"
-        >
-            CHARACTER
-        </div>
-
-
-        <div
-            class="title-sub"
-            id="titleSub"
-        >
-            ARCHIVE ADMINISTRATION
-        </div>
-
-
-        <div
-            class="title-cn"
-            id="titleCn"
-        >
-            角色档案管理
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         管理类型
-    ========================= -->
-
-    <div class="management-switch">
-
-        <button
-            type="button"
-            class="management-button active"
-            id="characterModeButton"
-        >
-            CHARACTER · 角色
-        </button>
-
-
-        <button
-            type="button"
-            class="management-button"
-            id="countryModeButton"
-        >
-            COUNTRY · 国家
-        </button>
-
-
-        <button
-            type="button"
-            class="management-button"
-            id="historyModeButton"
-        >
-            HISTORY · 历史
-        </button>
-
-
-        <button
-            type="button"
-            class="management-button"
-            id="galleryModeButton"
-        >
-            GALLERY · 图集
-        </button>
-
-    </div>
-
-
-    <!-- =========================
-         管理表单
-    ========================= -->
-
-    <main class="admin-container">
-
-        <div
-            class="section-title"
-            id="sectionTitle"
-        >
-            CREATE CHARACTER RECORD
-        </div>
-
-
-        <form id="characterForm">
-
-            <div class="form-grid">
-
-
-                <!-- =====================
-                     角色
-                ===================== -->
-
-                <div
-                    class="field full character-field"
-                >
-
-                    <label for="name">
-                        CHARACTER NAME
-                    </label>
-
-                    <input
-                        id="name"
-                        type="text"
-                        placeholder="例如：Evelina•Nieve 伊莉娜·妳芙"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field character-field"
-                >
-
-                    <label for="race">
-                        RACE
-                    </label>
-
-                    <input
-                        id="race"
-                        type="text"
-                        placeholder="例如：雪山神"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field character-field"
-                >
-
-                    <label for="region">
-                        REGION
-                    </label>
-
-                    <input
-                        id="region"
-                        type="text"
-                        placeholder="例如：雪山"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field character-field"
-                >
-
-                    <label for="role">
-                        ROLE
-                    </label>
-
-                    <input
-                        id="role"
-                        type="text"
-                        placeholder="例如：雪山女神"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field character-field"
-                >
-
-                    <label for="age">
-                        AGE
-                    </label>
-
-                    <input
-                        id="age"
-                        type="number"
-                        min="0"
-                        placeholder="例如：1000"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field full character-field"
-                >
-
-                    <label for="gender">
-                        GENDER
-                    </label>
-
-                    <select id="gender">
-
-                        <option value="">
-                            请选择
-                        </option>
-
-                        <option value="女性">
-                            女性
-                        </option>
-
-                        <option value="男性">
-                            男性
-                        </option>
-
-                        <option value="其他">
-                            其他
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div
-                    class="field full character-field"
-                >
-
-                    <label for="personality">
-                        PERSONALITY · 性格
-                    </label>
-
-                    <textarea
-                        id="personality"
-                        placeholder="例如：冷静、温柔而神秘，对陌生人保持一定距离……"
-                    ></textarea>
-
-                </div>
-
-
-                <div
-                    class="field full character-field"
-                >
-
-                    <label for="backstory">
-                        BACKSTORY · 背景故事
-                    </label>
-
-                    <textarea
-                        id="backstory"
-                        placeholder="填写角色的背景、经历、世界观设定、人物关系等……"
-                    ></textarea>
-
-                </div>
-
-
-                <!-- =====================
-                     角色图片
-                ===================== -->
-
-                <div
-                    class="field full character-field"
-                >
-
-                    <label>
-                        CHARACTER ARTWORK
-                    </label>
-
-
-                    <div class="upload-box">
-
-                        <input
-                            id="image"
-                            type="file"
-                            accept="image/png,image/jpeg,image/webp"
-                        >
-
-
-                        <div
-                            class="upload-placeholder"
-                            id="uploadPlaceholder"
-                        >
-
-                            <div class="upload-symbol">
-                                ✦
-                            </div>
-
-                            <div class="upload-text">
-                                SELECT ARTWORK
-                            </div>
-
-                            <div class="upload-hint">
-                                PNG / JPG / WEBP
-                            </div>
-
-                        </div>
-
-
-                        <img
-                            id="preview"
-                            class="preview"
-                            alt="预览"
-                        >
-
-                    </div>
-
-                </div>
-
-
-                <!-- =====================
-                     国家
-                ===================== -->
-
-                <div
-                    class="field full country-field"
-                    style="display:none;"
-                >
-
-                    <label for="countryName">
-                        COUNTRY NAME · 国家名称
-                    </label>
-
-                    <input
-                        id="countryName"
-                        type="text"
-                        placeholder="例如：雪境王国"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field full country-field"
-                    style="display:none;"
-                >
-
-                    <label for="countrySubtitle">
-                        SUBTITLE · 副标题 / 别名
-                    </label>
-
-                    <input
-                        id="countrySubtitle"
-                        type="text"
-                        placeholder="例如：永冬之国"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field country-field"
-                    style="display:none;"
-                >
-
-                    <label for="countryCapital">
-                        CAPITAL · 首都
-                    </label>
-
-                    <input
-                        id="countryCapital"
-                        type="text"
-                        placeholder="例如：伊尔希亚"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field country-field"
-                    style="display:none;"
-                >
-
-                    <label for="countryGovernment">
-                        GOVERNMENT · 政体
-                    </label>
-
-                    <input
-                        id="countryGovernment"
-                        type="text"
-                        placeholder="例如：君主制"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field full country-field"
-                    style="display:none;"
-                >
-
-                    <label for="countryRegion">
-                        REGION · 所在地区
-                    </label>
-
-                    <input
-                        id="countryRegion"
-                        type="text"
-                        placeholder="例如：北境雪山"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field full country-field"
-                    style="display:none;"
-                >
-
-                    <label for="countryDescription">
-                        DESCRIPTION · 国家介绍
-                    </label>
-
-                    <textarea
-                        id="countryDescription"
-                        placeholder="填写这个国家的整体介绍、地理环境、国土情况等……"
-                    ></textarea>
-
-                </div>
-
-
-                <div
-                    class="field full country-field"
-                    style="display:none;"
-                >
-
-                    <label for="countryHistory">
-                        HISTORY · 国家历史
-                    </label>
-
-                    <textarea
-                        id="countryHistory"
-                        placeholder="填写国家的建立、战争、王朝、重要历史事件等……"
-                    ></textarea>
-
-                </div>
-
-
-                <div
-                    class="field full country-field"
-                    style="display:none;"
-                >
-
-                    <label for="countryCulture">
-                        CULTURE · 国家文化
-                    </label>
-
-                    <textarea
-                        id="countryCulture"
-                        placeholder="填写国家的文化、传统、宗教、节日、风俗等……"
-                    ></textarea>
-
-                </div>
-
-
-                <!-- =====================
-                     历史
-                ===================== -->
-
-                <div
-                    class="field history-field"
-                    style="display:none;"
-                >
-
-                    <label for="historyYear">
-                        YEAR · 年代
-                    </label>
-
-                    <input
-                        id="historyYear"
-                        type="text"
-                        placeholder="例如：公元 1200 年"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field history-field"
-                    style="display:none;"
-                >
-
-                    <label for="historyEra">
-                        ERA · 时期
-                    </label>
-
-                    <input
-                        id="historyEra"
-                        type="text"
-                        placeholder="例如：白银时代"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field full history-field"
-                    style="display:none;"
-                >
-
-                    <label for="historyTitle">
-                        TITLE · 事件名称
-                    </label>
-
-                    <input
-                        id="historyTitle"
-                        type="text"
-                        placeholder="例如：雪境王国建立"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field full history-field"
-                    style="display:none;"
-                >
-
-                    <label for="historyLocation">
-                        LOCATION · 地点
-                    </label>
-
-                    <input
-                        id="historyLocation"
-                        type="text"
-                        placeholder="例如：北境雪山 · 伊尔希亚"
-                    >
-
-                </div>
-
-
-                <div
-                    class="field full history-field"
-                    style="display:none;"
-                >
-
-                    <label for="historyDescription">
-                        DESCRIPTION · 事件简介
-                    </label>
-
-                    <textarea
-                        id="historyDescription"
-                        placeholder="用一小段文字介绍这个历史事件……"
-                    ></textarea>
-
-                </div>
-
-
-                <div
-                    class="field full history-field"
-                    style="display:none;"
-                >
-
-                    <label for="historyContent">
-                        CONTENT · HISTORICAL RECORD
-                    </label>
-
-                    <textarea
-                        id="historyContent"
-                        placeholder="填写完整的历史记录、事件经过、人物、影响等……"
-                    ></textarea>
-
-                </div>
-
-
-                <!-- =====================
-                     图集
-                ===================== -->
-
-                <div
-                    class="field full gallery-field"
-                    style="display:none;"
-                >
-
-                    <label>
-                        GALLERY ARTWORK · 图集图片
-                    </label>
-
-
-                    <div class="gallery-upload-box">
-
-                        <input
-                            id="galleryImage"
-                            type="file"
-                            accept="image/png,image/jpeg,image/webp"
-                        >
-
-
-                        <div
-                            class="gallery-placeholder"
-                            id="galleryPlaceholder"
-                        >
-
-                            <div class="gallery-symbol">
-                                ✦
-                            </div>
-
-                            <div class="gallery-upload-text">
-                                SELECT GALLERY IMAGE
-                            </div>
-
-                            <div class="gallery-upload-hint">
-                                PNG / JPG / WEBP
-                            </div>
-
-                        </div>
-
-
-                        <img
-                            id="galleryPreview"
-                            class="gallery-preview"
-                            alt="图集预览"
-                        >
-
-                    </div>
-
-                </div>
-
-
-            </div>
-
-
-            <!-- =========================
-                 保存
-            ========================= -->
-
-            <div class="save-area">
-
-                <button
-                    class="save-button"
-                    id="saveButton"
-                    type="submit"
-                >
-                    SAVE CHARACTER
-                </button>
-
-            </div>
-
-
-            <div
-                class="message"
-                id="message"
-            ></div>
-
-
-        </form>
-
-    </main>
-
-
-    <footer
-        class="footer"
-        id="footer"
-    >
-        SEYAMI · CHARACTER ARCHIVE
-    </footer>
-
+<header class="header">
+<div class="logo">
+<div class="logo-cn">塞垭弥大陆档案馆</div>
+<div class="logo-en">SEYAMI ARCHIVE</div>
+</div>
+<div class="header-right">
+<a href="archive.html" class="back">RETURN TO ARCHIVE</a>
+<button class="logout-button" id="logoutButton" type="button">LOG OUT</button>
+<button class="theme-toggle" id="themeToggle" type="button" aria-label="切换日夜模式">☾</button>
+</div>
+</header>
+
+<section class="title-area">
+<div class="title-en" id="titleEn">CHARACTER</div>
+<div class="title-sub" id="titleSub">ARCHIVE ADMINISTRATION</div>
+<div class="title-cn" id="titleCn">角色档案管理</div>
+</section>
+
+<div class="management-switch">
+<button type="button" class="management-button active" id="characterModeButton">CHARACTER · 角色</button>
+<button type="button" class="management-button" id="countryModeButton">COUNTRY · 国家</button>
+<button type="button" class="management-button" id="historyModeButton">HISTORY · 历史</button>
+<button type="button" class="management-button" id="galleryModeButton">GALLERY · 图集</button>
+</div>
+
+<main class="admin-container">
+<div class="section-title" id="sectionTitle">CREATE CHARACTER RECORD</div>
+<form id="characterForm">
+<div class="form-grid">
+
+<div class="field full character-field">
+<label for="name">CHARACTER NAME</label>
+<input id="name" type="text" placeholder="例如：Evelina•Nieve 伊莉娜·妳芙">
+</div>
+
+<div class="field character-field">
+<label for="race">RACE</label>
+<input id="race" type="text" placeholder="例如：雪山神">
+</div>
+
+<div class="field character-field">
+<label for="region">REGION</label>
+<input id="region" type="text" placeholder="例如：雪山">
+</div>
+
+<div class="field character-field">
+<label for="role">ROLE</label>
+<input id="role" type="text" placeholder="例如：雪山女神">
+</div>
+
+<div class="field character-field">
+<label for="age">AGE</label>
+<input id="age" type="number" min="0" placeholder="例如：1000">
+</div>
+
+<div class="field full character-field">
+<label for="gender">GENDER</label>
+<select id="gender">
+<option value="">请选择</option>
+<option value="女性">女性</option>
+<option value="男性">男性</option>
+<option value="其他">其他</option>
+</select>
+</div>
+
+<div class="field full character-field">
+<label>CHARACTER ARTWORK</label>
+<div class="upload-box">
+<input id="image" type="file" accept="image/png,image/jpeg,image/webp">
+<div class="upload-placeholder" id="uploadPlaceholder">
+<div class="upload-symbol">✦</div>
+<div class="upload-text">SELECT ARTWORK</div>
+<div class="upload-hint">PNG / JPG / WEBP</div>
+</div>
+<img id="preview" class="preview" alt="角色立绘预览">
+</div>
+</div>
+
+<div class="field full country-field" style="display:none">
+<label for="countryName">COUNTRY NAME · 国家名称</label>
+<input id="countryName" type="text" placeholder="例如：雪境王国">
+</div>
+
+<div class="field full country-field" style="display:none">
+<label for="countrySubtitle">SUBTITLE · 副标题 / 别名</label>
+<input id="countrySubtitle" type="text" placeholder="例如：永冬之国">
+</div>
+
+<div class="field country-field" style="display:none">
+<label for="countryCapital">CAPITAL · 首都</label>
+<input id="countryCapital" type="text" placeholder="例如：伊尔希亚">
+</div>
+
+<div class="field country-field" style="display:none">
+<label for="countryGovernment">GOVERNMENT · 政体</label>
+<input id="countryGovernment" type="text" placeholder="例如：君主制">
+</div>
+
+<div class="field full country-field" style="display:none">
+<label for="countryRegion">REGION · 所在地区</label>
+<input id="countryRegion" type="text" placeholder="例如：北境雪山">
+</div>
+
+<div class="field full country-field" style="display:none">
+<label for="countryDescription">DESCRIPTION · 国家介绍</label>
+<textarea id="countryDescription" placeholder="填写国家的整体介绍、地理环境、国土情况等……"></textarea>
+</div>
+
+<div class="field full country-field" style="display:none">
+<label for="countryHistory">HISTORY · 国家历史</label>
+<textarea id="countryHistory" placeholder="填写国家的建立、战争、王朝、重要历史事件等……"></textarea>
+</div>
+
+<div class="field full country-field" style="display:none">
+<label for="countryCulture">CULTURE · 国家文化</label>
+<textarea id="countryCulture" placeholder="填写国家的文化、传统、宗教、节日、风俗等……"></textarea>
+</div>
+
+<div class="field history-field" style="display:none">
+<label for="historyYear">YEAR · 年代</label>
+<input id="historyYear" type="text" placeholder="例如：公元 1200 年">
+</div>
+
+<div class="field history-field" style="display:none">
+<label for="historyEra">ERA · 时期</label>
+<input id="historyEra" type="text" placeholder="例如：白银时代">
+</div>
+
+<div class="field full history-field" style="display:none">
+<label for="historyTitle">TITLE · 事件名称</label>
+<input id="historyTitle" type="text" placeholder="例如：雪境王国建立">
+</div>
+
+<div class="field full history-field" style="display:none">
+<label for="historyLocation">LOCATION · 地点</label>
+<input id="historyLocation" type="text" placeholder="例如：北境雪山 · 伊尔希亚">
+</div>
+
+<div class="field full history-field" style="display:none">
+<label for="historyDescription">DESCRIPTION · 事件简介</label>
+<textarea id="historyDescription" placeholder="用一小段文字介绍这个历史事件……"></textarea>
+</div>
+
+<div class="field full history-field" style="display:none">
+<label for="historyContent">CONTENT · HISTORICAL RECORD</label>
+<textarea id="historyContent" placeholder="填写完整的历史记录、事件经过、人物、影响等……"></textarea>
+</div>
+
+<div class="field full gallery-field" style="display:none">
+<label>GALLERY ARTWORK · 图集图片</label>
+<div class="gallery-upload-box">
+<input id="galleryImage" type="file" accept="image/png,image/jpeg,image/webp">
+<div class="gallery-placeholder" id="galleryPlaceholder">
+<div class="gallery-symbol">✦</div>
+<div class="gallery-upload-text">SELECT GALLERY IMAGE</div>
+<div class="gallery-upload-hint">PNG / JPG / WEBP</div>
+</div>
+<img id="galleryPreview" class="gallery-preview" alt="图集预览">
+</div>
+</div>
 
 </div>
 
+<div class="save-area">
+<button class="save-button" id="saveButton" type="submit">SAVE CHARACTER</button>
+</div>
+<div class="message" id="message" role="status" aria-live="polite"></div>
+</form>
+</main>
+
+<footer class="footer" id="footer">SEYAMI · CHARACTER ARCHIVE</footer>
+</div>
 
 <script>
-
-/* =========================================================
-   SUPABASE
-========================================================= */
-
-const SUPABASE_URL =
-    "https://rqqkdpzehxzwqzytpxgh.supabase.co";
-
-
-const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_T_gNdlgkOaXnzjSvdmI1Pw_HQOVTEWG";
-
-
-const supabaseClient =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
-    );
-
-
-/* =========================================================
-   DOM
-========================================================= */
-
-const form =
-    document.getElementById(
-        "characterForm"
-    );
-
-const titleEn =
-    document.getElementById(
-        "titleEn"
-    );
-
-const titleSub =
-    document.getElementById(
-        "titleSub"
-    );
-
-const titleCn =
-    document.getElementById(
-        "titleCn"
-    );
-
-const sectionTitle =
-    document.getElementById(
-        "sectionTitle"
-    );
-
-const footer =
-    document.getElementById(
-        "footer"
-    );
-
-
-const characterModeButton =
-    document.getElementById(
-        "characterModeButton"
-    );
-
-const countryModeButton =
-    document.getElementById(
-        "countryModeButton"
-    );
-
-const historyModeButton =
-    document.getElementById(
-        "historyModeButton"
-    );
-
-const galleryModeButton =
-    document.getElementById(
-        "galleryModeButton"
-    );
-
-
-const characterFields =
-    document.querySelectorAll(
-        ".character-field"
-    );
-
-const countryFields =
-    document.querySelectorAll(
-        ".country-field"
-    );
-
-const historyFields =
-    document.querySelectorAll(
-        ".history-field"
-    );
-
-const galleryFields =
-    document.querySelectorAll(
-        ".gallery-field"
-    );
-
-
-/* =========================================================
-   角色 DOM
-========================================================= */
-
-const nameInput =
-    document.getElementById(
-        "name"
-    );
-
-const raceInput =
-    document.getElementById(
-        "race"
-    );
-
-const regionInput =
-    document.getElementById(
-        "region"
-    );
-
-const roleInput =
-    document.getElementById(
-        "role"
-    );
-
-const ageInput =
-    document.getElementById(
-        "age"
-    );
-
-const genderInput =
-    document.getElementById(
-        "gender"
-    );
-
-const personalityInput =
-    document.getElementById(
-        "personality"
-    );
-
-const backstoryInput =
-    document.getElementById(
-        "backstory"
-    );
-
-const imageInput =
-    document.getElementById(
-        "image"
-    );
-
-const preview =
-    document.getElementById(
-        "preview"
-    );
-
-const uploadPlaceholder =
-    document.getElementById(
-        "uploadPlaceholder"
-    );
-
-
-/* =========================================================
-   国家 DOM
-========================================================= */
-
-const countryNameInput =
-    document.getElementById(
-        "countryName"
-    );
-
-const countrySubtitleInput =
-    document.getElementById(
-        "countrySubtitle"
-    );
-
-const countryCapitalInput =
-    document.getElementById(
-        "countryCapital"
-    );
-
-const countryGovernmentInput =
-    document.getElementById(
-        "countryGovernment"
-    );
-
-const countryRegionInput =
-    document.getElementById(
-        "countryRegion"
-    );
-
-const countryDescriptionInput =
-    document.getElementById(
-        "countryDescription"
-    );
-
-const countryHistoryInput =
-    document.getElementById(
-        "countryHistory"
-    );
-
-const countryCultureInput =
-    document.getElementById(
-        "countryCulture"
-    );
-
-
-/* =========================================================
-   历史 DOM
-========================================================= */
-
-const historyYearInput =
-    document.getElementById(
-        "historyYear"
-    );
-
-const historyTitleInput =
-    document.getElementById(
-        "historyTitle"
-    );
-
-const historyEraInput =
-    document.getElementById(
-        "historyEra"
-    );
-
-const historyLocationInput =
-    document.getElementById(
-        "historyLocation"
-    );
-
-const historyDescriptionInput =
-    document.getElementById(
-        "historyDescription"
-    );
-
-const historyContentInput =
-    document.getElementById(
-        "historyContent"
-    );
-
-
-/* =========================================================
-   图集 DOM
-========================================================= */
-
-const galleryImageInput =
-    document.getElementById(
-        "galleryImage"
-    );
-
-const galleryPreview =
-    document.getElementById(
-        "galleryPreview"
-    );
-
-const galleryPlaceholder =
-    document.getElementById(
-        "galleryPlaceholder"
-    );
-
-
-/* =========================================================
-   通用
-========================================================= */
-
-const saveButton =
-    document.getElementById(
-        "saveButton"
-    );
-
-const message =
-    document.getElementById(
-        "message"
-    );
-
-
-let currentMode =
-    "character";
-
-
-let editHistoryId =
-    null;
-
-
-/* =========================================================
-   URL 参数
-========================================================= */
-
-const urlParams =
-    new URLSearchParams(
-        window.location.search
-    );
-
-const urlType =
-    urlParams.get(
-        "type"
-    );
-
-const urlId =
-    urlParams.get(
-        "id"
-    );
-
-
-/* =========================================================
-   消息
-========================================================= */
-
-function showMessage(
-    text,
-    type = ""
-) {
-
-    message.textContent =
-        text;
-
-    message.className =
-        "message " + type;
+"use strict";
+
+/* =========================
+   Supabase 设置
+========================= */
+const SUPABASE_URL = "https://rqqkdpzehxzwqzytpxgh.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_T_gNdlgkOaXnzjSvdmI1Pw_HQOVTEWG";
+const ADMIN_EMAIL = "1296457710@qq.com";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY,
+    {
+        auth: {
+            persistSession: true,
+            autoRefreshToken: true,
+            detectSessionInUrl: true
+        }
+    }
+);
+
+/* =========================
+   登录保护
+========================= */
+let adminAuthorized = false;
+
+function goToLogin() {
+    window.location.replace("login.html");
 }
 
+async function verifyAdmin() {
+    try {
+        const { data: sessionData, error: sessionError } =
+            await supabaseClient.auth.getSession();
 
-/* =========================================================
-   隐藏所有字段
-========================================================= */
+        if (sessionError || !sessionData.session) {
+            goToLogin();
+            return false;
+        }
+
+        const { data: userData, error: userError } =
+            await supabaseClient.auth.getUser();
+
+        if (userError || !userData.user) {
+            await supabaseClient.auth.signOut();
+            goToLogin();
+            return false;
+        }
+
+        const email = (userData.user.email || "").trim().toLowerCase();
+
+        if (email !== ADMIN_EMAIL.toLowerCase()) {
+            await supabaseClient.auth.signOut();
+            goToLogin();
+            return false;
+        }
+
+        adminAuthorized = true;
+        document.body.classList.add("auth-ready");
+        return true;
+    } catch (error) {
+        console.error("管理员验证失败：", error);
+        goToLogin();
+        return false;
+    }
+}
+
+document.getElementById("logoutButton").addEventListener("click", async () => {
+    const button = document.getElementById("logoutButton");
+    button.disabled = true;
+    button.textContent = "SIGNING OUT...";
+
+    try {
+        await supabaseClient.auth.signOut();
+    } finally {
+        adminAuthorized = false;
+        goToLogin();
+    }
+});
+
+/* 登录状态被其他页面或操作清除时，返回登录页 */
+supabaseClient.auth.onAuthStateChange((event, session) => {
+    if (event === "SIGNED_OUT" && adminAuthorized) {
+        adminAuthorized = false;
+        goToLogin();
+    }
+});
+
+/* =========================
+   DOM
+========================= */
+const form = document.getElementById("characterForm");
+const titleEn = document.getElementById("titleEn");
+const titleSub = document.getElementById("titleSub");
+const titleCn = document.getElementById("titleCn");
+const sectionTitle = document.getElementById("sectionTitle");
+const footer = document.getElementById("footer");
+
+const characterModeButton = document.getElementById("characterModeButton");
+const countryModeButton = document.getElementById("countryModeButton");
+const historyModeButton = document.getElementById("historyModeButton");
+const galleryModeButton = document.getElementById("galleryModeButton");
+
+const characterFields = document.querySelectorAll(".character-field");
+const countryFields = document.querySelectorAll(".country-field");
+const historyFields = document.querySelectorAll(".history-field");
+const galleryFields = document.querySelectorAll(".gallery-field");
+
+const nameInput = document.getElementById("name");
+const raceInput = document.getElementById("race");
+const regionInput = document.getElementById("region");
+const roleInput = document.getElementById("role");
+const ageInput = document.getElementById("age");
+const genderInput = document.getElementById("gender");
+const imageInput = document.getElementById("image");
+const preview = document.getElementById("preview");
+const uploadPlaceholder = document.getElementById("uploadPlaceholder");
+
+const countryNameInput = document.getElementById("countryName");
+const countrySubtitleInput = document.getElementById("countrySubtitle");
+const countryCapitalInput = document.getElementById("countryCapital");
+const countryGovernmentInput = document.getElementById("countryGovernment");
+const countryRegionInput = document.getElementById("countryRegion");
+const countryDescriptionInput = document.getElementById("countryDescription");
+const countryHistoryInput = document.getElementById("countryHistory");
+const countryCultureInput = document.getElementById("countryCulture");
+
+const historyYearInput = document.getElementById("historyYear");
+const historyTitleInput = document.getElementById("historyTitle");
+const historyEraInput = document.getElementById("historyEra");
+const historyLocationInput = document.getElementById("historyLocation");
+const historyDescriptionInput = document.getElementById("historyDescription");
+const historyContentInput = document.getElementById("historyContent");
+
+const galleryImageInput = document.getElementById("galleryImage");
+const galleryPreview = document.getElementById("galleryPreview");
+const galleryPlaceholder = document.getElementById("galleryPlaceholder");
+
+const saveButton = document.getElementById("saveButton");
+const message = document.getElementById("message");
+const themeToggle = document.getElementById("themeToggle");
+
+let currentMode = "character";
+let editHistoryId = null;
+
+const urlParams = new URLSearchParams(window.location.search);
+const urlType = urlParams.get("type");
+const urlId = urlParams.get("id");
+
+function showMessage(text, type = "") {
+    message.textContent = text;
+    message.className = "message " + type;
+}
 
 function hideAllFields() {
-
-    characterFields.forEach(
-        function(field) {
-
-            field.style.display =
-                "none";
-
-        }
-    );
-
-
-    countryFields.forEach(
-        function(field) {
-
-            field.style.display =
-                "none";
-
-        }
-    );
-
-
-    historyFields.forEach(
-        function(field) {
-
-            field.style.display =
-                "none";
-
-        }
-    );
-
-
-    galleryFields.forEach(
-        function(field) {
-
-            field.style.display =
-                "none";
-
-        }
-    );
-
+    [characterFields, countryFields, historyFields, galleryFields].forEach(fields => {
+        fields.forEach(field => field.style.display = "none");
+    });
 }
-
-
-/* =========================================================
-   清除 required
-========================================================= */
 
 function clearRequired() {
-
-    nameInput.required =
-        false;
-
-    countryNameInput.required =
-        false;
-
-    historyTitleInput.required =
-        false;
-
+    nameInput.required = false;
+    countryNameInput.required = false;
+    historyTitleInput.required = false;
 }
 
-
-/* =========================================================
-   清除图集预览
-========================================================= */
+function clearCharacterPreview() {
+    imageInput.value = "";
+    preview.removeAttribute("src");
+    preview.style.display = "none";
+    uploadPlaceholder.style.display = "flex";
+}
 
 function clearGalleryPreview() {
-
-    galleryImageInput.value =
-        "";
-
-    galleryPreview.src =
-        "";
-
-    galleryPreview.style.display =
-        "none";
-
-    galleryPlaceholder.style.display =
-        "flex";
+    galleryImageInput.value = "";
+    galleryPreview.removeAttribute("src");
+    galleryPreview.style.display = "none";
+    galleryPlaceholder.style.display = "flex";
 }
 
-
-/* =========================================================
-   角色模式
-========================================================= */
+function setActiveButton(activeButton) {
+    [
+        characterModeButton,
+        countryModeButton,
+        historyModeButton,
+        galleryModeButton
+    ].forEach(button => button.classList.toggle("active", button === activeButton));
+}
 
 function showCharacterMode() {
-
-    currentMode =
-        "character";
-
-    editHistoryId =
-        null;
-
-
-    characterModeButton.classList.add(
-        "active"
-    );
-
-    countryModeButton.classList.remove(
-        "active"
-    );
-
-    historyModeButton.classList.remove(
-        "active"
-    );
-
-    galleryModeButton.classList.remove(
-        "active"
-    );
-
-
+    currentMode = "character";
+    editHistoryId = null;
+    setActiveButton(characterModeButton);
     hideAllFields();
-
     clearRequired();
-
-
-    characterFields.forEach(
-        function(field) {
-
-            field.style.display =
-                "";
-
-        }
-    );
-
-
-    titleEn.textContent =
-        "CHARACTER";
-
-    titleSub.textContent =
-        "ARCHIVE ADMINISTRATION";
-
-    titleCn.textContent =
-        "角色档案管理";
-
-
-    sectionTitle.textContent =
-        "CREATE CHARACTER RECORD";
-
-
-    saveButton.textContent =
-        "SAVE CHARACTER";
-
-
-    footer.textContent =
-        "SEYAMI · CHARACTER ARCHIVE";
-
-
-    nameInput.required =
-        true;
-
-
+    characterFields.forEach(field => field.style.display = "");
+    titleEn.textContent = "CHARACTER";
+    titleSub.textContent = "ARCHIVE ADMINISTRATION";
+    titleCn.textContent = "角色档案管理";
+    sectionTitle.textContent = "CREATE CHARACTER RECORD";
+    saveButton.textContent = "SAVE CHARACTER";
+    footer.textContent = "SEYAMI · CHARACTER ARCHIVE";
+    nameInput.required = true;
     showMessage("");
 }
-
-
-/* =========================================================
-   国家模式
-========================================================= */
 
 function showCountryMode() {
-
-    currentMode =
-        "country";
-
-    editHistoryId =
-        null;
-
-
-    characterModeButton.classList.remove(
-        "active"
-    );
-
-    countryModeButton.classList.add(
-        "active"
-    );
-
-    historyModeButton.classList.remove(
-        "active"
-    );
-
-    galleryModeButton.classList.remove(
-        "active"
-    );
-
-
+    currentMode = "country";
+    editHistoryId = null;
+    setActiveButton(countryModeButton);
     hideAllFields();
-
     clearRequired();
-
-
-    countryFields.forEach(
-        function(field) {
-
-            field.style.display =
-                "";
-
-        }
-    );
-
-
-    titleEn.textContent =
-        "COUNTRY";
-
-    titleSub.textContent =
-        "ARCHIVE ADMINISTRATION";
-
-    titleCn.textContent =
-        "国家设定管理";
-
-
-    sectionTitle.textContent =
-        "CREATE COUNTRY RECORD";
-
-
-    saveButton.textContent =
-        "SAVE COUNTRY";
-
-
-    footer.textContent =
-        "SEYAMI · COUNTRY ARCHIVE";
-
-
-    countryNameInput.required =
-        true;
-
-
+    countryFields.forEach(field => field.style.display = "");
+    titleEn.textContent = "COUNTRY";
+    titleSub.textContent = "ARCHIVE ADMINISTRATION";
+    titleCn.textContent = "国家设定管理";
+    sectionTitle.textContent = "CREATE COUNTRY RECORD";
+    saveButton.textContent = "SAVE COUNTRY";
+    footer.textContent = "SEYAMI · COUNTRY ARCHIVE";
+    countryNameInput.required = true;
     showMessage("");
 }
-
-
-/* =========================================================
-   历史模式
-========================================================= */
 
 function showHistoryMode() {
-
-    currentMode =
-        "history";
-
-
-    characterModeButton.classList.remove(
-        "active"
-    );
-
-    countryModeButton.classList.remove(
-        "active"
-    );
-
-    historyModeButton.classList.add(
-        "active"
-    );
-
-    galleryModeButton.classList.remove(
-        "active"
-    );
-
-
+    currentMode = "history";
+    setActiveButton(historyModeButton);
     hideAllFields();
-
     clearRequired();
-
-
-    historyFields.forEach(
-        function(field) {
-
-            field.style.display =
-                "";
-
-        }
-    );
-
-
-    titleEn.textContent =
-        editHistoryId
-            ? "EDIT HISTORY"
-            : "HISTORY";
-
-
-    titleSub.textContent =
-        "ARCHIVE ADMINISTRATION";
-
-
-    titleCn.textContent =
-        editHistoryId
-            ? "修改历史记录"
-            : "历史记录管理";
-
-
-    sectionTitle.textContent =
-        editHistoryId
-            ? "EDIT HISTORY RECORD"
-            : "CREATE HISTORY RECORD";
-
-
-    saveButton.textContent =
-        editHistoryId
-            ? "UPDATE HISTORY"
-            : "SAVE HISTORY";
-
-
-    footer.textContent =
-        "SEYAMI · HISTORY ARCHIVE";
-
-
-    historyTitleInput.required =
-        true;
-
-
+    historyFields.forEach(field => field.style.display = "");
+    titleEn.textContent = editHistoryId ? "EDIT HISTORY" : "HISTORY";
+    titleSub.textContent = "ARCHIVE ADMINISTRATION";
+    titleCn.textContent = editHistoryId ? "修改历史记录" : "历史记录管理";
+    sectionTitle.textContent = editHistoryId ? "EDIT HISTORY RECORD" : "CREATE HISTORY RECORD";
+    saveButton.textContent = editHistoryId ? "UPDATE HISTORY" : "SAVE HISTORY";
+    footer.textContent = "SEYAMI · HISTORY ARCHIVE";
+    historyTitleInput.required = true;
     showMessage("");
 }
-
-
-/* =========================================================
-   图集模式
-========================================================= */
 
 function showGalleryMode() {
-
-    currentMode =
-        "gallery";
-
-    editHistoryId =
-        null;
-
-
-    characterModeButton.classList.remove(
-        "active"
-    );
-
-    countryModeButton.classList.remove(
-        "active"
-    );
-
-    historyModeButton.classList.remove(
-        "active"
-    );
-
-    galleryModeButton.classList.add(
-        "active"
-    );
-
-
+    currentMode = "gallery";
+    editHistoryId = null;
+    setActiveButton(galleryModeButton);
     hideAllFields();
-
     clearRequired();
-
-
-    galleryFields.forEach(
-        function(field) {
-
-            field.style.display =
-                "";
-
-        }
-    );
-
-
-    titleEn.textContent =
-        "GALLERY";
-
-    titleSub.textContent =
-        "ARCHIVE ADMINISTRATION";
-
-    titleCn.textContent =
-        "档案图集管理";
-
-
-    sectionTitle.textContent =
-        "ADD GALLERY IMAGE";
-
-
-    saveButton.textContent =
-        "UPLOAD IMAGE";
-
-
-    footer.textContent =
-        "SEYAMI · GALLERY ARCHIVE";
-
-
+    galleryFields.forEach(field => field.style.display = "");
+    titleEn.textContent = "GALLERY";
+    titleSub.textContent = "ARCHIVE ADMINISTRATION";
+    titleCn.textContent = "档案图集管理";
+    sectionTitle.textContent = "ADD GALLERY IMAGE";
+    saveButton.textContent = "UPLOAD IMAGE";
+    footer.textContent = "SEYAMI · GALLERY ARCHIVE";
     showMessage("");
 }
 
-
-/* =========================================================
-   模式按钮
-========================================================= */
-
-characterModeButton.addEventListener(
-    "click",
-    function() {
-
-        showCharacterMode();
-
-    }
-);
-
-
-countryModeButton.addEventListener(
-    "click",
-    function() {
-
-        showCountryMode();
-
-    }
-);
-
-
-historyModeButton.addEventListener(
-    "click",
-    function() {
-
-        editHistoryId =
-            null;
-
-        showHistoryMode();
-
-    }
-);
-
-
-galleryModeButton.addEventListener(
-    "click",
-    function() {
-
-        showGalleryMode();
-
-    }
-);
-
-
-/* =========================================================
-   角色图片预览
-========================================================= */
-
-imageInput.addEventListener(
-    "change",
-    function() {
-
-        const file =
-            this.files[0];
-
-
-        if (!file) {
-
-            preview.style.display =
-                "none";
-
-            uploadPlaceholder.style.display =
-                "flex";
-
-            return;
-        }
-
-
-        const reader =
-            new FileReader();
-
-
-        reader.onload =
-            function(event) {
-
-                preview.src =
-                    event.target.result;
-
-                preview.style.display =
-                    "block";
-
-                uploadPlaceholder.style.display =
-                    "none";
-
-            };
-
-
-        reader.readAsDataURL(file);
-
-    }
-);
-
-
-/* =========================================================
-   图集图片预览
-========================================================= */
-
-galleryImageInput.addEventListener(
-    "change",
-    function() {
-
-        const file =
-            this.files[0];
-
-
-        if (!file) {
-
-            clearGalleryPreview();
-
-            return;
-        }
-
-
-        const reader =
-            new FileReader();
-
-
-        reader.onload =
-            function(event) {
-
-                galleryPreview.src =
-                    event.target.result;
-
-                galleryPreview.style.display =
-                    "block";
-
-                galleryPlaceholder.style.display =
-                    "none";
-
-            };
-
-
-        reader.readAsDataURL(file);
-
-    }
-);
-
-
-/* =========================================================
-   保存角色
-========================================================= */
-
-async function saveCharacter() {
-
-    const name =
-        nameInput.value.trim();
-
-    const race =
-        raceInput.value.trim();
-
-    const region =
-        regionInput.value.trim();
-
-    const role =
-        roleInput.value.trim();
-
-    const age =
-        ageInput.value.trim();
-
-    const gender =
-        genderInput.value.trim();
-
-    const personality =
-        personalityInput.value.trim();
-
-    const backstory =
-        backstoryInput.value.trim();
-
-    const imageFile =
-        imageInput.files[0];
-
-
-    if (!name) {
-
-        showMessage(
-            "请先填写角色名字。",
-            "error"
-        );
-
+/* =========================
+   模式切换
+========================= */
+characterModeButton.addEventListener("click", () => {
+    form.reset();
+    clearCharacterPreview();
+    clearGalleryPreview();
+    showCharacterMode();
+});
+
+countryModeButton.addEventListener("click", () => {
+    form.reset();
+    clearCharacterPreview();
+    clearGalleryPreview();
+    showCountryMode();
+});
+
+historyModeButton.addEventListener("click", () => {
+    form.reset();
+    clearCharacterPreview();
+    clearGalleryPreview();
+    editHistoryId = null;
+    showHistoryMode();
+});
+
+galleryModeButton.addEventListener("click", () => {
+    form.reset();
+    clearCharacterPreview();
+    clearGalleryPreview();
+    showGalleryMode();
+});
+
+/* =========================
+   图片预览
+========================= */
+imageInput.addEventListener("change", () => {
+    const file = imageInput.files[0];
+
+    if (!file) {
+        clearCharacterPreview();
         return;
     }
 
+    if (!file.type.startsWith("image/")) {
+        showMessage("请选择有效的图片文件。", "error");
+        clearCharacterPreview();
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = event => {
+        preview.src = event.target.result;
+        preview.style.display = "block";
+        uploadPlaceholder.style.display = "none";
+    };
+    reader.readAsDataURL(file);
+});
+
+galleryImageInput.addEventListener("change", () => {
+    const file = galleryImageInput.files[0];
+
+    if (!file) {
+        clearGalleryPreview();
+        return;
+    }
+
+    if (!file.type.startsWith("image/")) {
+        showMessage("请选择有效的图片文件。", "error");
+        clearGalleryPreview();
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = event => {
+        galleryPreview.src = event.target.result;
+        galleryPreview.style.display = "block";
+        galleryPlaceholder.style.display = "none";
+    };
+    reader.readAsDataURL(file);
+});
+
+/* =========================
+   文件上传通用函数
+========================= */
+function makeFilePath(prefix, file) {
+    const rawExtension = file.name.includes(".")
+        ? file.name.split(".").pop().toLowerCase()
+        : "";
+
+    const allowed = ["png", "jpg", "jpeg", "webp"];
+    const extension = allowed.includes(rawExtension) ? rawExtension : "png";
+
+    return prefix + "-" + Date.now() + "-" +
+        Math.random().toString(36).slice(2, 10) + "." + extension;
+}
+
+async function uploadPublicImage(bucket, path, file) {
+    const { error: uploadError } = await supabaseClient.storage
+        .from(bucket)
+        .upload(path, file, {
+            cacheControl: "3600",
+            upsert: false
+        });
+
+    if (uploadError) throw uploadError;
+
+    const { data } = supabaseClient.storage.from(bucket).getPublicUrl(path);
+    return data.publicUrl;
+}
+
+function setSaving(text) {
+    saveButton.disabled = true;
+    saveButton.textContent = text;
+}
+
+function finishSaving(text) {
+    saveButton.disabled = false;
+    saveButton.textContent = text;
+}
+
+/* =========================
+   保存角色
+   已移除 personality / backstory
+========================= */
+async function saveCharacter() {
+    const name = nameInput.value.trim();
+    const race = raceInput.value.trim();
+    const region = regionInput.value.trim();
+    const role = roleInput.value.trim();
+    const age = ageInput.value.trim();
+    const gender = genderInput.value.trim();
+    const imageFile = imageInput.files[0];
+
+    if (!name) {
+        showMessage("请先填写角色名字。", "error");
+        return;
+    }
 
     if (!imageFile) {
-
-        showMessage(
-            "请先选择角色立绘。",
-            "error"
-        );
-
+        showMessage("请先选择角色立绘。", "error");
         return;
     }
 
-
-    saveButton.disabled =
-        true;
-
-    saveButton.textContent =
-        "UPLOADING...";
-
-
-    try {
-
-        const originalName =
-            imageFile.name;
-
-        const extension =
-            originalName
-                .split(".")
-                .pop()
-                .toLowerCase();
-
-
-        const filePath =
-            "character-" +
-            Date.now() +
-            "-" +
-            Math.random()
-                .toString(36)
-                .substring(2, 8) +
-            "." +
-            extension;
-
-
-        showMessage(
-            "正在上传立绘……"
-        );
-
-
-        const {
-            error: uploadError
-        } =
-            await supabaseClient
-                .storage
-                .from("character-images")
-                .upload(
-                    filePath,
-                    imageFile,
-                    {
-                        cacheControl: "3600",
-                        upsert: false
-                    }
-                );
-
-
-        if (uploadError) {
-
-            throw uploadError;
-        }
-
-
-        const {
-            data: publicURLData
-        } =
-            supabaseClient
-                .storage
-                .from("character-images")
-                .getPublicUrl(
-                    filePath
-                );
-
-
-        const imageURL =
-            publicURLData.publicUrl;
-
-
-        showMessage(
-            "立绘上传完成，正在建立角色档案……"
-        );
-
-
-        const {
-            error: insertError
-        } =
-            await supabaseClient
-                .from("characters")
-                .insert({
-
-                    name:
-                        name,
-
-                    race:
-                        race || null,
-
-                    role:
-                        role || null,
-
-                    age:
-                        age === ""
-                            ? null
-                            : Number(age),
-
-                    gender:
-                        gender || null,
-
-                    region:
-                        region || null,
-
-                    personality:
-                        personality || null,
-
-                    backstory:
-                        backstory || null,
-
-                    image_url:
-                        imageURL
-
-                });
-
-
-        if (insertError) {
-
-            throw insertError;
-        }
-
-
-        showMessage(
-            "角色档案保存成功！",
-            "success"
-        );
-
-
-        saveButton.textContent =
-            "SAVED";
-
-
-        form.reset();
-
-
-        preview.src =
-            "";
-
-        preview.style.display =
-            "none";
-
-        uploadPlaceholder.style.display =
-            "flex";
-
-
-        setTimeout(
-            function() {
-
-                saveButton.disabled =
-                    false;
-
-                saveButton.textContent =
-                    "SAVE CHARACTER";
-
-            },
-            2000
-        );
-
-
-    } catch (error) {
-
-        console.error(
-            "Character save error:",
-            error
-        );
-
-
-        showMessage(
-            "保存失败：" +
-            (
-                error.message ||
-                "未知错误"
-            ),
-            "error"
-        );
-
-
-        saveButton.disabled =
-            false;
-
-        saveButton.textContent =
-            "SAVE CHARACTER";
-
+    if (!imageFile.type.startsWith("image/")) {
+        showMessage("请选择有效的图片文件。", "error");
+        return;
     }
 
+    setSaving("UPLOADING...");
+
+    try {
+        showMessage("正在上传立绘……");
+
+        const filePath = makeFilePath("character", imageFile);
+        const imageURL = await uploadPublicImage("character-images", filePath, imageFile);
+
+        showMessage("立绘上传完成，正在建立角色档案……");
+
+        const { error } = await supabaseClient.from("characters").insert({
+            name: name,
+            race: race || null,
+            role: role || null,
+            age: age === "" ? null : Number(age),
+            gender: gender || null,
+            region: region || null,
+            image_url: imageURL
+        });
+
+        if (error) throw error;
+
+        showMessage("角色档案保存成功！", "success");
+        form.reset();
+        clearCharacterPreview();
+        finishSaving("SAVE CHARACTER");
+    } catch (error) {
+        console.error("Character save error:", error);
+        showMessage("保存失败：" + (error.message || "未知错误"), "error");
+        finishSaving("SAVE CHARACTER");
+    }
 }
 
-
-/* =========================================================
+/* =========================
    保存国家
-========================================================= */
-
+========================= */
 async function saveCountry() {
-
-    const name =
-        countryNameInput.value.trim();
-
-    const subtitle =
-        countrySubtitleInput.value.trim();
-
-    const capital =
-        countryCapitalInput.value.trim();
-
-    const government =
-        countryGovernmentInput.value.trim();
-
-    const region =
-        countryRegionInput.value.trim();
-
-    const description =
-        countryDescriptionInput.value.trim();
-
-    const history =
-        countryHistoryInput.value.trim();
-
-    const culture =
-        countryCultureInput.value.trim();
-
+    const name = countryNameInput.value.trim();
 
     if (!name) {
-
-        showMessage(
-            "请先填写国家名称。",
-            "error"
-        );
-
+        showMessage("请先填写国家名称。", "error");
         return;
     }
 
-
-    saveButton.disabled =
-        true;
-
-    saveButton.textContent =
-        "SAVING...";
-
-
-    showMessage(
-        "正在建立国家档案……"
-    );
-
+    setSaving("SAVING...");
+    showMessage("正在建立国家档案……");
 
     try {
+        const { error } = await supabaseClient.from("countries").insert({
+            name: name,
+            subtitle: countrySubtitleInput.value.trim() || null,
+            capital: countryCapitalInput.value.trim() || null,
+            government: countryGovernmentInput.value.trim() || null,
+            region: countryRegionInput.value.trim() || null,
+            description: countryDescriptionInput.value.trim() || null,
+            history: countryHistoryInput.value.trim() || null,
+            culture: countryCultureInput.value.trim() || null
+        });
 
-        const {
-            error: insertError
-        } =
-            await supabaseClient
-                .from("countries")
-                .insert({
+        if (error) throw error;
 
-                    name:
-                        name,
-
-                    subtitle:
-                        subtitle || null,
-
-                    capital:
-                        capital || null,
-
-                    government:
-                        government || null,
-
-                    region:
-                        region || null,
-
-                    description:
-                        description || null,
-
-                    history:
-                        history || null,
-
-                    culture:
-                        culture || null
-
-                });
-
-
-        if (insertError) {
-
-            throw insertError;
-        }
-
-
-        showMessage(
-            "国家设定保存成功！",
-            "success"
-        );
-
-
-        saveButton.textContent =
-            "SAVED";
-
-
+        showMessage("国家设定保存成功！", "success");
         form.reset();
-
-
-        setTimeout(
-            function() {
-
-                saveButton.disabled =
-                    false;
-
-                saveButton.textContent =
-                    "SAVE COUNTRY";
-
-            },
-            2000
-        );
-
-
+        finishSaving("SAVE COUNTRY");
     } catch (error) {
-
-        console.error(
-            "Country save error:",
-            error
-        );
-
-
-        showMessage(
-            "保存失败：" +
-            (
-                error.message ||
-                "未知错误"
-            ),
-            "error"
-        );
-
-
-        saveButton.disabled =
-            false;
-
-        saveButton.textContent =
-            "SAVE COUNTRY";
-
+        console.error("Country save error:", error);
+        showMessage("保存失败：" + (error.message || "未知错误"), "error");
+        finishSaving("SAVE COUNTRY");
     }
-
 }
 
-
-/* =========================================================
+/* =========================
    新增历史
-========================================================= */
+========================= */
+function getHistoryPayload() {
+    return {
+        year: historyYearInput.value.trim() || null,
+        title: historyTitleInput.value.trim(),
+        era: historyEraInput.value.trim() || null,
+        location: historyLocationInput.value.trim() || null,
+        description: historyDescriptionInput.value.trim() || null,
+        content: historyContentInput.value.trim() || null
+    };
+}
 
 async function createHistory() {
+    const payload = getHistoryPayload();
 
-    const year =
-        historyYearInput.value.trim();
-
-    const title =
-        historyTitleInput.value.trim();
-
-    const era =
-        historyEraInput.value.trim();
-
-    const location =
-        historyLocationInput.value.trim();
-
-    const description =
-        historyDescriptionInput.value.trim();
-
-    const content =
-        historyContentInput.value.trim();
-
-
-    if (!title) {
-
-        showMessage(
-            "请先填写事件名称。",
-            "error"
-        );
-
+    if (!payload.title) {
+        showMessage("请先填写事件名称。", "error");
         return;
     }
 
-
-    saveButton.disabled =
-        true;
-
-    saveButton.textContent =
-        "SAVING...";
-
-
-    showMessage(
-        "正在建立历史档案……"
-    );
-
+    setSaving("SAVING...");
+    showMessage("正在建立历史档案……");
 
     try {
+        const { error } = await supabaseClient
+            .from("history_records")
+            .insert(payload);
 
-        const {
-            error: insertError
-        } =
-            await supabaseClient
-                .from("history_records")
-                .insert({
+        if (error) throw error;
 
-                    year:
-                        year || null,
-
-                    title:
-                        title,
-
-                    era:
-                        era || null,
-
-                    location:
-                        location || null,
-
-                    description:
-                        description || null,
-
-                    content:
-                        content || null
-
-                });
-
-
-        if (insertError) {
-
-            throw insertError;
-        }
-
-
-        showMessage(
-            "历史记录保存成功！",
-            "success"
-        );
-
-
-        saveButton.textContent =
-            "SAVED";
-
-
+        showMessage("历史记录保存成功！", "success");
         form.reset();
-
-
-        setTimeout(
-            function() {
-
-                saveButton.disabled =
-                    false;
-
-                saveButton.textContent =
-                    "SAVE HISTORY";
-
-            },
-            2000
-        );
-
-
+        finishSaving("SAVE HISTORY");
     } catch (error) {
-
-        console.error(
-            "History save error:",
-            error
-        );
-
-
-        showMessage(
-            "保存失败：" +
-            (
-                error.message ||
-                "未知错误"
-            ),
-            "error"
-        );
-
-
-        saveButton.disabled =
-            false;
-
-        saveButton.textContent =
-            "SAVE HISTORY";
-
+        console.error("History save error:", error);
+        showMessage("保存失败：" + (error.message || "未知错误"), "error");
+        finishSaving("SAVE HISTORY");
     }
-
 }
 
-
-/* =========================================================
+/* =========================
    修改历史
-========================================================= */
-
+========================= */
 async function updateHistory() {
-
-    const year =
-        historyYearInput.value.trim();
-
-    const title =
-        historyTitleInput.value.trim();
-
-    const era =
-        historyEraInput.value.trim();
-
-    const location =
-        historyLocationInput.value.trim();
-
-    const description =
-        historyDescriptionInput.value.trim();
-
-    const content =
-        historyContentInput.value.trim();
-
-
     if (!editHistoryId) {
-
-        showMessage(
-            "没有找到需要修改的历史记录。",
-            "error"
-        );
-
+        showMessage("没有找到需要修改的历史记录。", "error");
         return;
     }
 
+    const payload = getHistoryPayload();
 
-    if (!title) {
-
-        showMessage(
-            "请先填写事件名称。",
-            "error"
-        );
-
+    if (!payload.title) {
+        showMessage("请先填写事件名称。", "error");
         return;
     }
 
-
-    saveButton.disabled =
-        true;
-
-    saveButton.textContent =
-        "UPDATING...";
-
-
-    showMessage(
-        "正在更新历史记录……"
-    );
-
+    setSaving("UPDATING...");
+    showMessage("正在更新历史记录……");
 
     try {
+        const { error } = await supabaseClient
+            .from("history_records")
+            .update({
+                ...payload,
+                updated_at: new Date().toISOString()
+            })
+            .eq("id", editHistoryId);
 
-        const {
-            error: updateError
-        } =
-            await supabaseClient
-                .from("history_records")
-                .update({
+        if (error) throw error;
 
-                    year:
-                        year || null,
+        showMessage("历史记录修改成功，正在返回……", "success");
+        saveButton.textContent = "UPDATED";
 
-                    title:
-                        title,
-
-                    era:
-                        era || null,
-
-                    location:
-                        location || null,
-
-                    description:
-                        description || null,
-
-                    content:
-                        content || null,
-
-                    updated_at:
-                        new Date()
-                            .toISOString()
-
-                })
-                .eq(
-                    "id",
-                    editHistoryId
-                );
-
-
-        if (updateError) {
-
-            throw updateError;
-        }
-
-
-        showMessage(
-            "历史记录修改成功，正在返回……",
-            "success"
-        );
-
-
-        saveButton.textContent =
-            "UPDATED";
-
-
-        setTimeout(
-            function() {
-
-                window.location.href =
-                    "history.html";
-
-            },
-            900
-        );
-
-
+        setTimeout(() => {
+            window.location.href = "history.html";
+        }, 900);
     } catch (error) {
-
-        console.error(
-            "History update error:",
-            error
-        );
-
-
-        showMessage(
-            "修改失败：" +
-            (
-                error.message ||
-                "未知错误"
-            ),
-            "error"
-        );
-
-
-        saveButton.disabled =
-            false;
-
-        saveButton.textContent =
-            "UPDATE HISTORY";
-
+        console.error("History update error:", error);
+        showMessage("修改失败：" + (error.message || "未知错误"), "error");
+        finishSaving("UPDATE HISTORY");
     }
-
 }
 
-
-/* =========================================================
-   新增图集图片
-========================================================= */
-
+/* =========================
+   保存图集图片
+========================= */
 async function saveGalleryImage() {
-
-    const imageFile =
-        galleryImageInput.files[0];
-
+    const imageFile = galleryImageInput.files[0];
 
     if (!imageFile) {
-
-        showMessage(
-            "请先选择一张图集图片。",
-            "error"
-        );
-
+        showMessage("请先选择一张图集图片。", "error");
         return;
     }
 
-
-    /*
-       防止上传非图片文件
-    */
-
-    if (
-        !imageFile.type.startsWith(
-            "image/"
-        )
-    ) {
-
-        showMessage(
-            "请选择 PNG、JPG 或 WEBP 图片。",
-            "error"
-        );
-
+    if (!imageFile.type.startsWith("image/")) {
+        showMessage("请选择 PNG、JPG 或 WEBP 图片。", "error");
         return;
     }
 
-
-    saveButton.disabled =
-        true;
-
-    saveButton.textContent =
-        "UPLOADING...";
-
-
-    let uploadedFilePath =
-        null;
-
+    setSaving("UPLOADING...");
+    let uploadedFilePath = null;
 
     try {
+        uploadedFilePath = makeFilePath("gallery", imageFile);
+        showMessage("正在上传图集图片……");
 
-        /*
-           获取文件扩展名
-        */
-
-        const originalName =
-            imageFile.name;
-
-        const extension =
-            originalName
-                .split(".")
-                .pop()
-                .toLowerCase();
-
-
-        /*
-           创建唯一文件名
-        */
-
-        uploadedFilePath =
-            "gallery-" +
-            Date.now() +
-            "-" +
-            Math.random()
-                .toString(36)
-                .substring(2, 10) +
-            "." +
-            extension;
-
-
-        showMessage(
-            "正在上传图集图片……"
+        const imageURL = await uploadPublicImage(
+            "gallery-images",
+            uploadedFilePath,
+            imageFile
         );
 
-
-        /*
-           上传到 gallery-images
-        */
-
-        const {
-            error: uploadError
-        } =
-            await supabaseClient
-                .storage
-                .from("gallery-images")
-                .upload(
-                    uploadedFilePath,
-                    imageFile,
-                    {
-                        cacheControl: "3600",
-                        upsert: false
-                    }
-                );
-
-
-        if (uploadError) {
-
-            throw uploadError;
-        }
-
-
-        /*
-           获取公开图片地址
-        */
-
-        const {
-            data: publicURLData
-        } =
-            supabaseClient
-                .storage
-                .from("gallery-images")
-                .getPublicUrl(
-                    uploadedFilePath
-                );
-
-
-        const imageURL =
-            publicURLData.publicUrl;
-
-
-        showMessage(
-            "图片上传完成，正在建立图集记录……"
-        );
-
-
-        /*
-           写入 gallery_images
-        */
-
-        const {
-            error: insertError
-        } =
-            await supabaseClient
-                .from("gallery_images")
-                .insert({
-
-                    image_url:
-                        imageURL
-
-                });
-
-
-        if (insertError) {
-
-            /*
-               如果数据库写入失败，
-               自动删除刚才上传的图片，
-               避免 Storage 里留下孤立文件。
-            */
-
-            await supabaseClient
-                .storage
-                .from("gallery-images")
-                .remove([
-                    uploadedFilePath
-                ]);
-
-
-            throw insertError;
-        }
-
-
-        /*
-           全部成功
-        */
-
-        showMessage(
-            "图集图片上传成功！",
-            "success"
-        );
-
-
-        saveButton.textContent =
-            "UPLOADED";
-
-
-        clearGalleryPreview();
-
-
-        setTimeout(
-            function() {
-
-                saveButton.disabled =
-                    false;
-
-                saveButton.textContent =
-                    "UPLOAD IMAGE";
-
-            },
-            2000
-        );
-
-
-    } catch (error) {
-
-        console.error(
-            "Gallery upload error:",
-            error
-        );
-
-
-        showMessage(
-            "上传失败：" +
-            (
-                error.message ||
-                "未知错误"
-            ),
-            "error"
-        );
-
-
-        saveButton.disabled =
-            false;
-
-        saveButton.textContent =
-            "UPLOAD IMAGE";
-
-    }
-
-}
-
-
-/* =========================================================
-   表单提交
-========================================================= */
-
-form.addEventListener(
-    "submit",
-    async function(event) {
-
-        event.preventDefault();
-
-
-        if (
-            currentMode ===
-            "character"
-        ) {
-
-            await saveCharacter();
-
-            return;
-        }
-
-
-        if (
-            currentMode ===
-            "country"
-        ) {
-
-            await saveCountry();
-
-            return;
-        }
-
-
-        if (
-            currentMode ===
-            "history"
-        ) {
-
-            if (editHistoryId) {
-
-                await updateHistory();
-
-            } else {
-
-                await createHistory();
-
-            }
-
-            return;
-        }
-
-
-        if (
-            currentMode ===
-            "gallery"
-        ) {
-
-            await saveGalleryImage();
-
-            return;
-        }
-
-    }
-);
-
-
-/* =========================================================
-   读取历史记录
-========================================================= */
-
-async function loadHistoryForEdit() {
-
-    /*
-       只有：
-
-       admin.html?type=history&id=xxx
-
-       才进入历史编辑模式。
-    */
-
-    if (
-        urlType !==
-            "history" ||
-        !urlId
-    ) {
-
-        showCharacterMode();
-
-        return;
-    }
-
-
-    editHistoryId =
-        urlId;
-
-
-    showHistoryMode();
-
-
-    saveButton.disabled =
-        true;
-
-
-    showMessage(
-        "正在读取历史记录……"
-    );
-
-
-    try {
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient
-                .from("history_records")
-                .select(`
-                    id,
-                    year,
-                    title,
-                    era,
-                    location,
-                    description,
-                    content
-                `)
-                .eq(
-                    "id",
-                    urlId
-                )
-                .single();
-
+        showMessage("图片上传完成，正在建立图集记录……");
+
+        const { error } = await supabaseClient
+            .from("gallery_images")
+            .insert({ image_url: imageURL });
 
         if (error) {
+            await supabaseClient.storage
+                .from("gallery-images")
+                .remove([uploadedFilePath]);
 
             throw error;
         }
 
-
-        if (!data) {
-
-            throw new Error(
-                "没有找到这条历史记录。"
-            );
-        }
-
-
-        historyYearInput.value =
-            data.year || "";
-
-
-        historyTitleInput.value =
-            data.title || "";
-
-
-        historyEraInput.value =
-            data.era || "";
-
-
-        historyLocationInput.value =
-            data.location || "";
-
-
-        historyDescriptionInput.value =
-            data.description || "";
-
-
-        historyContentInput.value =
-            data.content || "";
-
-
-        titleEn.textContent =
-            "EDIT HISTORY";
-
-
-        titleSub.textContent =
-            "ARCHIVE ADMINISTRATION";
-
-
-        titleCn.textContent =
-            "修改历史记录";
-
-
-        sectionTitle.textContent =
-            "EDIT HISTORY RECORD";
-
-
-        saveButton.textContent =
-            "UPDATE HISTORY";
-
-
-        footer.textContent =
-            "SEYAMI · HISTORY ARCHIVE";
-
-
-        saveButton.disabled =
-            false;
-
-
-        showMessage(
-            "历史记录已载入，可以修改。"
-        );
-
-
+        showMessage("图集图片上传成功！", "success");
+        clearGalleryPreview();
+        finishSaving("UPLOAD IMAGE");
     } catch (error) {
-
-        console.error(
-            "Load history error:",
-            error
-        );
-
-
-        showMessage(
-            "读取历史记录失败：" +
-            (
-                error.message ||
-                "未知错误"
-            ),
-            "error"
-        );
-
-
-        saveButton.disabled =
-            true;
-
+        console.error("Gallery upload error:", error);
+        showMessage("上传失败：" + (error.message || "未知错误"), "error");
+        finishSaving("UPLOAD IMAGE");
     }
-
 }
 
+/* =========================
+   表单提交
+========================= */
+form.addEventListener("submit", async event => {
+    event.preventDefault();
 
-/* =========================================================
+    if (!adminAuthorized) {
+        showMessage("管理员身份尚未验证，请重新登录。", "error");
+        goToLogin();
+        return;
+    }
+
+    if (currentMode === "character") {
+        await saveCharacter();
+    } else if (currentMode === "country") {
+        await saveCountry();
+    } else if (currentMode === "history") {
+        if (editHistoryId) {
+            await updateHistory();
+        } else {
+            await createHistory();
+        }
+    } else if (currentMode === "gallery") {
+        await saveGalleryImage();
+    }
+});
+
+/* =========================
+   读取历史记录以便修改
+========================= */
+async function loadHistoryForEdit() {
+    if (urlType !== "history" || !urlId) {
+        showCharacterMode();
+        return;
+    }
+
+    editHistoryId = urlId;
+    showHistoryMode();
+    setSaving("LOADING...");
+    showMessage("正在读取历史记录……");
+
+    try {
+        const { data, error } = await supabaseClient
+            .from("history_records")
+            .select("id,year,title,era,location,description,content")
+            .eq("id", urlId)
+            .single();
+
+        if (error) throw error;
+        if (!data) throw new Error("没有找到这条历史记录。");
+
+        historyYearInput.value = data.year || "";
+        historyTitleInput.value = data.title || "";
+        historyEraInput.value = data.era || "";
+        historyLocationInput.value = data.location || "";
+        historyDescriptionInput.value = data.description || "";
+        historyContentInput.value = data.content || "";
+
+        titleEn.textContent = "EDIT HISTORY";
+        titleSub.textContent = "ARCHIVE ADMINISTRATION";
+        titleCn.textContent = "修改历史记录";
+        sectionTitle.textContent = "EDIT HISTORY RECORD";
+        saveButton.textContent = "UPDATE HISTORY";
+        footer.textContent = "SEYAMI · HISTORY ARCHIVE";
+
+        saveButton.disabled = false;
+        showMessage("历史记录已载入，可以修改。");
+    } catch (error) {
+        console.error("Load history error:", error);
+        showMessage("读取历史记录失败：" + (error.message || "未知错误"), "error");
+        saveButton.disabled = true;
+    }
+}
+
+/* =========================
    日夜模式
-========================================================= */
-
-const themeToggle =
-    document.getElementById(
-        "themeToggle"
-    );
-
-
-function applyTheme(
-    theme
-) {
-
-    if (
-        theme ===
-        "day"
-    ) {
-
-        document.body.classList.add(
-            "day-mode"
-        );
-
-        themeToggle.textContent =
-            "☀";
-
-    } else {
-
-        document.body.classList.remove(
-            "day-mode"
-        );
-
-        themeToggle.textContent =
-            "☾";
-
-    }
-
+========================= */
+function applyTheme(theme) {
+    const isDay = theme === "day";
+    document.body.classList.toggle("day-mode", isDay);
+    themeToggle.textContent = isDay ? "☀" : "☾";
 }
 
+applyTheme(localStorage.getItem("seyami-theme") || "night");
 
-const savedTheme =
-    localStorage.getItem(
-        "seyami-theme"
-    );
+themeToggle.addEventListener("click", () => {
+    const newTheme = document.body.classList.contains("day-mode")
+        ? "night"
+        : "day";
 
+    localStorage.setItem("seyami-theme", newTheme);
+    applyTheme(newTheme);
+});
 
-applyTheme(
-    savedTheme ||
-    "night"
-);
+/* =========================
+   初始化：验证身份后再加载后台
+========================= */
+(async function initAdmin() {
+    const authorized = await verifyAdmin();
 
+    if (!authorized) return;
 
-themeToggle.addEventListener(
-    "click",
-    function() {
-
-        const isDay =
-            document.body.classList.contains(
-                "day-mode"
-            );
-
-
-        const newTheme =
-            isDay
-                ? "night"
-                : "day";
-
-
-        localStorage.setItem(
-            "seyami-theme",
-            newTheme
-        );
-
-
-        applyTheme(
-            newTheme
-        );
-
-    }
-);
-
-
-/* =========================================================
-   初始化
-========================================================= */
-
-loadHistoryForEdit();
-
+    await loadHistoryForEdit();
+})();
 </script>
-
 </body>
-
 </html>
