@@ -1,3 +1,2478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>角色档案 · Seyami Archive</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Noto+Serif+SC:wght@400;500&display=swap"
+rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+/* =========================
+   BASE
+========================= */
+
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
+  margin:0;
+  min-height:100%;
+}
+
+body{
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(38,91,137,.18),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(11,45,75,.45),
+      transparent 70%
+    ),
+    #061426;
+
+  color:#dcecff;
+
+  font-family:
+    "Noto Serif SC",
+    "Times New Roman",
+    serif;
+
+  overflow-x:hidden;
+
+  transition:
+    background .6s ease,
+    color .6s ease;
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+.page{
+
+  position:relative;
+
+  min-height:100vh;
+
+  padding:
+    30px
+    clamp(24px,6vw,90px)
+    70px;
+
+  overflow:hidden;
+
+  transition:
+    background .6s ease;
+}
+
+
+/* =========================
+   FLOATING STARS
+========================= */
+
+.stars{
+
+  position:absolute;
+
+  inset:0;
+
+  z-index:1;
+
+  pointer-events:none;
+
+  overflow:hidden;
+}
+
+.stars span{
+
+  position:absolute;
+
+  display:block;
+
+  color:rgba(158,207,247,.62);
+
+  font-family:
+    "Times New Roman",
+    serif;
+
+  line-height:1;
+
+  text-shadow:
+    0 0 8px rgba(96,177,242,.5);
+
+  animation:
+    starFloat 8s ease-in-out infinite,
+    starTwinkle 5s ease-in-out infinite;
+
+  transition:
+    color .6s ease,
+    text-shadow .6s ease;
+}
+
+
+/* star positions */
+
+.stars span:nth-child(1){
+  left:8%;
+  top:15%;
+  font-size:15px;
+  animation-delay:-2s,-1s;
+  opacity:.55;
+}
+
+.stars span:nth-child(2){
+  left:19%;
+  top:32%;
+  font-size:10px;
+  animation-delay:-4s,-2s;
+  opacity:.32;
+}
+
+.stars span:nth-child(3){
+  left:31%;
+  top:12%;
+  font-size:12px;
+  animation-delay:-6s,-1s;
+  opacity:.38;
+}
+
+.stars span:nth-child(4){
+  right:17%;
+  top:18%;
+  font-size:18px;
+  animation-delay:-3s,-2s;
+  opacity:.42;
+}
+
+.stars span:nth-child(5){
+  right:8%;
+  top:38%;
+  font-size:10px;
+  animation-delay:-5s,-3s;
+  opacity:.32;
+}
+
+.stars span:nth-child(6){
+  left:10%;
+  top:57%;
+  font-size:13px;
+  animation-delay:-4s,-1s;
+  opacity:.35;
+}
+
+.stars span:nth-child(7){
+  left:27%;
+  top:69%;
+  font-size:9px;
+  animation-delay:-7s,-2s;
+  opacity:.28;
+}
+
+.stars span:nth-child(8){
+  right:25%;
+  top:58%;
+  font-size:15px;
+  animation-delay:-3s,-1s;
+  opacity:.30;
+}
+
+.stars span:nth-child(9){
+  right:9%;
+  top:73%;
+  font-size:18px;
+  animation-delay:-6s,-3s;
+  opacity:.26;
+}
+
+.stars span:nth-child(10){
+  left:43%;
+  top:78%;
+  font-size:11px;
+  animation-delay:-2s,-2s;
+  opacity:.30;
+}
+
+.stars span:nth-child(11){
+  left:4%;
+  top:30%;
+  font-size:9px;
+  animation-delay:-1s,-2s;
+  opacity:.32;
+}
+
+.stars span:nth-child(12){
+  left:38%;
+  top:8%;
+  font-size:12px;
+  animation-delay:-4s,-1s;
+  opacity:.38;
+}
+
+.stars span:nth-child(13){
+  right:5%;
+  top:31%;
+  font-size:15px;
+  animation-delay:-6s,-3s;
+  opacity:.30;
+}
+
+.stars span:nth-child(14){
+  left:24%;
+  top:53%;
+  font-size:8px;
+  animation-delay:-3s,-1s;
+  opacity:.28;
+}
+
+.stars span:nth-child(15){
+  right:24%;
+  top:53%;
+  font-size:14px;
+  animation-delay:-7s,-2s;
+  opacity:.24;
+}
+
+.stars span:nth-child(16){
+  left:6%;
+  top:72%;
+  font-size:12px;
+  animation-delay:-5s,-3s;
+  opacity:.34;
+}
+
+.stars span:nth-child(17){
+  right:7%;
+  top:70%;
+  font-size:18px;
+  animation-delay:-8s,-4s;
+  opacity:.25;
+}
+
+.stars span:nth-child(18){
+  left:34%;
+  bottom:9%;
+  font-size:10px;
+  animation-delay:-2s,-2s;
+  opacity:.30;
+}
+
+.stars span:nth-child(19){
+  right:36%;
+  bottom:8%;
+  font-size:11px;
+  animation-delay:-5s,-1s;
+  opacity:.34;
+}
+
+.stars span:nth-child(20){
+  left:46%;
+  top:8%;
+  font-size:13px;
+  animation-delay:-9s,-4s;
+  opacity:.20;
+}
+
+
+/* =========================
+   STAR ANIMATION
+========================= */
+
+@keyframes starFloat{
+
+  0%,
+  100%{
+    transform:translate3d(0,0,0);
+  }
+
+  50%{
+    transform:translate3d(0,-8px,0);
+  }
+}
+
+@keyframes starTwinkle{
+
+  0%,
+  100%{
+    opacity:.18;
+  }
+
+  50%{
+    opacity:.65;
+  }
+}
+
+
+/* =========================
+   MAGIC CIRCLE
+========================= */
+
+.magic-circle{
+
+  position:absolute;
+
+  width:min(72vw,760px);
+  height:min(72vw,760px);
+
+  left:50%;
+  top:47%;
+
+  transform:translate(-50%,-50%);
+
+  border:
+    1px solid
+    rgba(73,143,198,.28);
+
+  border-radius:50%;
+
+  box-shadow:
+    0 0 50px rgba(47,126,184,.08),
+    inset 0 0 60px rgba(62,139,194,.04);
+
+  z-index:0;
+
+  pointer-events:none;
+
+  opacity:.55;
+
+  transition:
+    border-color .6s ease,
+    box-shadow .6s ease;
+}
+
+.magic-circle::before,
+.magic-circle::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  transform:translate(-50%,-50%);
+
+  border-radius:50%;
+
+  pointer-events:none;
+
+  transition:
+    border-color .6s ease;
+}
+
+.magic-circle::before{
+
+  width:82%;
+  height:82%;
+
+  border:
+    1px solid
+    rgba(73,143,198,.22);
+}
+
+.magic-circle::after{
+
+  width:61%;
+  height:61%;
+
+  border:
+    1px solid
+    rgba(91,162,213,.22);
+}
+
+
+/* =========================
+   OUTER FRAME
+========================= */
+
+.frame{
+
+  position:absolute;
+
+  top:20px;
+  left:20px;
+  right:20px;
+  bottom:20px;
+
+  border:
+    1px solid
+    rgba(111,174,224,.32);
+
+  pointer-events:none;
+
+  z-index:2;
+
+  transition:
+    border-color .6s ease;
+}
+
+.frame::before,
+.frame::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:45px;
+  height:45px;
+
+  transition:
+    border-color .6s ease;
+}
+
+.frame::before{
+
+  left:-1px;
+  top:-1px;
+
+  border-left:
+    1px solid
+    rgba(108,178,230,.88);
+
+  border-top:
+    1px solid
+    rgba(108,178,230,.88);
+}
+
+.frame::after{
+
+  right:-1px;
+  bottom:-1px;
+
+  border-right:
+    1px solid
+    rgba(108,178,230,.88);
+
+  border-bottom:
+    1px solid
+    rgba(108,178,230,.88);
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+
+  position:absolute;
+
+  left:58px;
+  right:58px;
+  top:38px;
+
+  z-index:20;
+
+  display:flex;
+
+  align-items:flex-start;
+
+  justify-content:space-between;
+
+  width:auto;
+  max-width:none;
+
+  margin:0;
+  padding:0;
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.logo{
+
+  display:flex;
+
+  align-items:flex-start;
+
+  gap:12px;
+
+  color:#d9edff;
+
+  text-decoration:none;
+
+  transition:
+    color .6s ease;
+}
+
+.logo-symbol{
+
+  color:rgba(137,201,239,.9);
+
+  width:17px;
+  height:13px;
+
+  display:flex;
+
+  align-items:flex-start;
+
+  justify-content:center;
+
+  font-size:17px;
+
+  line-height:13px;
+
+  margin:0;
+  padding:0;
+
+  text-shadow:
+    0 0 7px rgba(76,159,216,.5),
+    0 0 15px rgba(49,132,191,.22);
+
+  flex-shrink:0;
+
+  transition:
+    color .6s ease,
+    text-shadow .6s ease;
+}
+
+.logo-text{
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:flex-start;
+
+  line-height:1;
+}
+
+.logo-cn{
+
+  display:block;
+
+  height:13px;
+
+  line-height:13px;
+
+  color:#d9edff;
+
+  font-size:13px;
+
+  letter-spacing:3px;
+
+  white-space:nowrap;
+
+  transition:
+    color .6s ease;
+}
+
+.logo-en{
+
+  display:block;
+
+  margin-top:5px;
+
+  color:rgba(157,204,239,.63);
+
+  font-family:
+    "Times New Roman",
+    serif;
+
+  font-size:8px;
+
+  line-height:8px;
+
+  letter-spacing:3px;
+
+  white-space:nowrap;
+
+  transition:
+    color .6s ease;
+}
+
+
+/* =========================
+   HEADER RIGHT
+========================= */
+
+.header-right{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:20px;
+}
+
+
+/* =========================
+   BACK
+========================= */
+
+.back{
+
+  color:rgba(191,220,243,.68);
+
+  text-decoration:none;
+
+  font-family:
+    "Cinzel",
+    "Noto Serif SC",
+    serif;
+
+  font-size:11px;
+
+  letter-spacing:1px;
+
+  transition:
+    color .3s ease,
+    text-shadow .3s ease;
+}
+
+.back:hover{
+
+  color:#d9efff;
+
+  text-shadow:
+    0 0 10px
+    rgba(102,180,231,.35);
+}
+
+
+/* =========================
+   DAY / NIGHT TOGGLE
+========================= */
+
+.theme-toggle{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  height:28px;
+
+  padding:
+    0 11px;
+
+  border:
+    1px solid
+    rgba(111,174,224,.32);
+
+  background:
+    rgba(8,28,49,.35);
+
+  color:
+    rgba(191,220,243,.68);
+
+  font-family:
+    "Cinzel",
+    "Noto Serif SC",
+    serif;
+
+  font-size:8px;
+
+  letter-spacing:2px;
+
+  cursor:pointer;
+
+  border-radius:0;
+
+  white-space:nowrap;
+
+  transition:
+    color .35s ease,
+    border-color .35s ease,
+    background .35s ease,
+    box-shadow .35s ease;
+}
+
+.theme-toggle:hover{
+
+  color:#d9efff;
+
+  border-color:
+    rgba(122,192,235,.62);
+
+  background:
+    rgba(8,31,52,.55);
+
+  box-shadow:
+    0 0 14px
+    rgba(76,151,202,.12);
+}
+
+.theme-icon{
+
+  font-size:12px;
+
+  line-height:1;
+
+  letter-spacing:0;
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.content{
+
+  position:relative;
+
+  z-index:5;
+
+  width:min(1100px,100%);
+
+  margin:0 auto;
+
+  padding-top:145px;
+}
+
+
+/* =========================
+   HEADING
+========================= */
+
+.heading{
+
+  text-align:center;
+
+  margin-bottom:48px;
+}
+
+.heading-small{
+
+  font-family:"Cinzel",serif;
+
+  font-size:10px;
+
+  letter-spacing:6px;
+
+  color:rgba(115,182,224,.62);
+
+  margin-bottom:12px;
+
+  transition:
+    color .6s ease;
+}
+
+.heading-main{
+
+  font-family:"Cinzel",serif;
+
+  font-size:clamp(34px,5vw,56px);
+
+  font-weight:400;
+
+  letter-spacing:8px;
+
+  line-height:1;
+
+  color:#dceeff;
+
+  transition:
+    color .6s ease,
+    text-shadow .6s ease;
+}
+
+.heading-cn{
+
+  margin-top:14px;
+
+  font-size:13px;
+
+  letter-spacing:5px;
+
+  color:rgba(207,229,246,.86);
+
+  transition:
+    color .6s ease;
+}
+
+
+/* =========================
+   CHARACTER PANEL
+========================= */
+
+.character-panel{
+
+  position:relative;
+
+  display:grid;
+
+  grid-template-columns:
+    minmax(300px,430px)
+    1fr;
+
+  gap:55px;
+
+  width:100%;
+
+  padding:38px;
+
+  border:
+    1px solid
+    rgba(111,174,224,.32);
+
+  background:
+
+    linear-gradient(
+      145deg,
+      rgba(38,91,137,.13),
+      rgba(11,45,75,.10)
+    );
+
+  box-shadow:
+    0 20px 60px
+    rgba(0,0,0,.15);
+
+  transition:
+    background .6s ease,
+    border-color .6s ease,
+    box-shadow .6s ease;
+}
+
+
+/* =========================
+   CHARACTER IMAGE
+========================= */
+
+.character-image{
+
+  position:relative;
+
+  min-height:540px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  border:
+    1px solid
+    rgba(111,174,224,.25);
+
+  background:
+
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(38,91,137,.14),
+      transparent 58%
+    ),
+
+    rgba(6,20,38,.4);
+
+  overflow:hidden;
+
+  transition:
+    background .6s ease,
+    border-color .6s ease;
+}
+
+.character-image::before{
+
+  content:"";
+
+  position:absolute;
+
+  inset:18px;
+
+  border:
+    1px solid
+    rgba(140,210,245,.07);
+
+  pointer-events:none;
+
+  transition:
+    border-color .6s ease;
+}
+
+.character-image::after{
+
+  content:"✦";
+
+  position:absolute;
+
+  right:24px;
+  top:20px;
+
+  color:rgba(143,202,237,.8);
+
+  font-size:16px;
+
+  text-shadow:
+    0 0 10px
+    rgba(90,190,240,.25);
+
+  transition:
+    color .6s ease,
+    text-shadow .6s ease;
+}
+
+
+/* =========================
+   IMAGE
+========================= */
+
+.character-image img{
+
+  display:block;
+
+  width:100%;
+  height:100%;
+
+  object-fit:contain;
+
+  position:relative;
+
+  z-index:1;
+}
+
+
+/* =========================
+   IMAGE PLACEHOLDER
+========================= */
+
+.image-placeholder{
+
+  text-align:center;
+
+  color:rgba(177,207,230,.62);
+
+  font-family:"Cinzel",serif;
+
+  letter-spacing:4px;
+
+  font-size:10px;
+
+  transition:
+    color .6s ease;
+}
+
+.image-placeholder-symbol{
+
+  display:block;
+
+  margin-bottom:15px;
+
+  font-family:
+    "Times New Roman",
+    serif;
+
+  font-size:34px;
+
+  color:rgba(143,210,246,.08);
+
+  transition:
+    color .6s ease;
+}
+
+.image-placeholder-cn{
+
+  display:block;
+
+  margin-top:10px;
+
+  font-family:
+    "Noto Serif SC",
+    serif;
+
+  font-size:10px;
+
+  letter-spacing:3px;
+
+  color:rgba(177,207,230,.62);
+
+  transition:
+    color .6s ease;
+}
+
+
+/* =========================
+   CHARACTER INFO
+========================= */
+
+.character-info{
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:center;
+}
+
+
+/* CHARACTER NUMBER */
+
+.character-number{
+
+  font-family:"Cinzel",serif;
+
+  font-size:9px;
+
+  letter-spacing:4px;
+
+  color:rgba(115,182,224,.62);
+
+  margin-bottom:22px;
+
+  transition:
+    color .6s ease;
+}
+
+
+/* CHARACTER NAME */
+
+.character-name-en{
+
+  font-family:"Cinzel",serif;
+
+  font-size:clamp(32px,4vw,52px);
+
+  font-weight:400;
+
+  letter-spacing:5px;
+
+  line-height:1;
+
+  color:#d9edff;
+
+  transition:
+    color .6s ease;
+}
+
+.character-name-cn{
+
+  margin-top:13px;
+
+  font-size:18px;
+
+  letter-spacing:7px;
+
+  color:rgba(207,229,246,.86);
+
+  transition:
+    color .6s ease;
+}
+
+.character-role{
+
+  margin-top:18px;
+
+  font-family:"Cinzel",serif;
+
+  font-size:10px;
+
+  letter-spacing:4px;
+
+  color:rgba(115,182,224,.62);
+
+  transition:
+    color .6s ease;
+}
+
+
+/* =========================
+   DIVIDER
+========================= */
+
+.divider{
+
+  width:100%;
+
+  height:1px;
+
+  margin:30px 0;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      rgba(120,195,235,.3),
+      rgba(120,195,235,.06),
+      transparent
+    );
+
+  transition:
+    background .6s ease;
+}
+
+
+/* =========================
+   BASIC INFO
+========================= */
+
+.basic-info{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:22px 35px;
+}
+
+.info-item{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:7px;
+}
+
+.info-label{
+
+  font-family:"Cinzel",serif;
+
+  font-size:8px;
+
+  letter-spacing:3px;
+
+  color:rgba(115,182,224,.62);
+
+  transition:
+    color .6s ease;
+}
+
+.info-value{
+
+  font-size:12px;
+
+  letter-spacing:2px;
+
+  color:rgba(207,229,246,.86);
+
+  min-height:14px;
+
+  transition:
+    color .6s ease;
+}
+
+
+/* =========================
+   PROFILE
+========================= */
+
+.description-title{
+
+  font-family:"Cinzel",serif;
+
+  font-size:9px;
+
+  letter-spacing:4px;
+
+  color:rgba(115,182,224,.62);
+
+  margin-bottom:13px;
+
+  transition:
+    color .6s ease;
+}
+
+.description{
+
+  font-size:13px;
+
+  line-height:2;
+
+  letter-spacing:1px;
+
+  color:rgba(177,207,230,.62);
+
+  min-height:20px;
+
+  transition:
+    color .6s ease;
+}
+
+
+/* =========================
+   ★ EDIT CHARACTER
+========================= */
+
+.edit-character-wrap{
+
+  margin-top:28px;
+
+  display:flex;
+
+  justify-content:flex-start;
+}
+
+.edit-character-button{
+
+  appearance:none;
+
+  border:
+    1px solid
+    rgba(111,174,224,.25);
+
+  background:
+    transparent;
+
+  padding:
+    9px 15px;
+
+  color:
+    rgba(191,220,243,.55);
+
+  font-family:
+    "Cinzel",
+    "Noto Serif SC",
+    serif;
+
+  font-size:8px;
+
+  letter-spacing:2px;
+
+  cursor:pointer;
+
+  transition:
+    color .3s ease,
+    border-color .3s ease,
+    background .3s ease,
+    text-shadow .3s ease;
+}
+
+.edit-character-button:hover{
+
+  color:#d9efff;
+
+  border-color:
+    rgba(122,192,235,.55);
+
+  background:
+    rgba(76,151,202,.06);
+
+  text-shadow:
+    0 0 10px
+    rgba(102,180,231,.25);
+}
+
+
+/* =========================
+   ARCHIVE MARK
+========================= */
+
+.archive-mark{
+
+  position:absolute;
+
+  right:25px;
+  bottom:20px;
+
+  font-family:"Cinzel",serif;
+
+  font-size:8px;
+
+  letter-spacing:3px;
+
+  color:rgba(137,201,239,.28);
+
+  transition:
+    color .6s ease;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media(max-width:800px){
+
+  .header{
+
+    left:35px;
+    right:35px;
+    top:30px;
+  }
+
+  .header-right{
+
+    gap:14px;
+  }
+
+  .theme-toggle{
+
+    height:27px;
+
+    padding:
+      0 9px;
+
+    font-size:7px;
+  }
+
+  .character-panel{
+
+    grid-template-columns:1fr;
+
+    gap:40px;
+
+    padding:30px;
+  }
+
+  .character-image{
+
+    min-height:500px;
+  }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+  .page{
+
+    padding:
+      22px
+      20px
+      55px;
+  }
+
+  .header{
+
+    left:25px;
+    right:25px;
+    top:24px;
+
+    width:auto;
+    max-width:none;
+
+    margin:0;
+    padding:0;
+
+    align-items:flex-start;
+  }
+
+  .frame{
+
+    top:14px;
+    left:14px;
+    right:14px;
+    bottom:14px;
+  }
+
+
+  .logo{
+
+    align-items:flex-start;
+
+    gap:10px;
+  }
+
+  .logo-symbol{
+
+    width:15px;
+    height:11px;
+
+    font-size:15px;
+
+    line-height:11px;
+
+    margin-top:2px;
+  }
+
+  .logo-cn{
+
+    height:11px;
+
+    line-height:11px;
+
+    font-size:11px;
+
+    letter-spacing:2px;
+  }
+
+  .logo-en{
+
+    margin-top:4px;
+
+    font-size:7px;
+
+    line-height:7px;
+
+    letter-spacing:2px;
+  }
+
+  .header-right{
+
+    gap:8px;
+  }
+
+  .back{
+
+    font-size:10px;
+  }
+
+  .theme-toggle{
+
+    height:25px;
+
+    padding:
+      0 7px;
+
+    gap:5px;
+
+    font-size:6px;
+
+    letter-spacing:1px;
+  }
+
+  .theme-icon{
+
+    font-size:10px;
+  }
+
+
+  .content{
+
+    padding-top:120px;
+  }
+
+  .heading{
+
+    margin-bottom:30px;
+  }
+
+  .heading-small{
+
+    font-size:8px;
+
+    letter-spacing:4px;
+  }
+
+  .heading-main{
+
+    font-size:30px;
+
+    letter-spacing:5px;
+  }
+
+  .heading-cn{
+
+    font-size:10px;
+
+    letter-spacing:3px;
+  }
+
+
+  .character-panel{
+
+    padding:20px;
+
+    gap:30px;
+  }
+
+  .character-image{
+
+    min-height:430px;
+  }
+
+  .character-image::before{
+
+    inset:12px;
+  }
+
+
+  .character-name-en{
+
+    font-size:32px;
+
+    letter-spacing:4px;
+  }
+
+  .character-name-cn{
+
+    font-size:15px;
+
+    letter-spacing:5px;
+  }
+
+
+  .basic-info{
+
+    grid-template-columns:1fr;
+
+    gap:17px;
+  }
+
+  .description{
+
+    font-size:12px;
+
+    line-height:1.9;
+  }
+
+
+  .magic-circle{
+
+    width:105vw;
+
+    height:105vw;
+  }
+
+
+  /* ★ 编辑按钮手机适配 */
+
+  .edit-character-wrap{
+
+    margin-top:24px;
+  }
+
+  .edit-character-button{
+
+    font-size:7px;
+
+    letter-spacing:1.5px;
+
+    padding:
+      8px 13px;
+  }
+
+
+  .archive-mark{
+
+    position:relative;
+
+    right:auto;
+    bottom:auto;
+
+    margin-top:24px;
+
+    text-align:right;
+
+    font-size:7px;
+
+    letter-spacing:2px;
+
+    line-height:1.4;
+
+    white-space:nowrap;
+  }
+}
+
+
+/* =========================
+   VERY SMALL
+========================= */
+
+@media(max-width:360px){
+
+  .header{
+
+    left:20px;
+    right:20px;
+    top:24px;
+  }
+
+  .heading-main{
+
+    font-size:27px;
+  }
+
+  .header-right{
+
+    gap:5px;
+  }
+
+  .back{
+
+    font-size:9px;
+  }
+
+  .theme-toggle{
+
+    padding:
+      0 6px;
+
+    font-size:6px;
+  }
+}
+
+
+/* =========================================================
+   ★ DAY MODE
+   ★ 与首页 / 档案目录统一
+========================================================= */
+
+body.day-mode{
+
+  background:#f4f9fd;
+
+  color:#2e5069;
+}
+
+
+body.day-mode .page{
+
+  background:
+
+    radial-gradient(
+      circle at 50% 42%,
+      rgba(165,211,238,.20),
+      transparent 38%
+    ),
+
+    radial-gradient(
+      circle at 50% 52%,
+      rgba(226,240,249,.68),
+      transparent 72%
+    ),
+
+    #f4f9fd;
+}
+
+
+body.day-mode .stars span{
+
+  color:
+    rgba(87,151,199,.50);
+
+  text-shadow:none;
+}
+
+
+body.day-mode .magic-circle{
+
+  border-color:
+    rgba(79,148,196,.26);
+
+  box-shadow:
+
+    0 0 50px
+    rgba(70,142,196,.055),
+
+    inset
+    0 0 60px
+    rgba(78,151,204,.028);
+}
+
+body.day-mode .magic-circle::before{
+
+  border-color:
+    rgba(79,148,196,.26);
+}
+
+body.day-mode .magic-circle::after{
+
+  border-color:
+    rgba(101,168,207,.20);
+}
+
+
+body.day-mode .frame{
+
+  border-color:
+    rgba(91,145,184,.34);
+}
+
+body.day-mode .frame::before{
+
+  border-left-color:
+    rgba(79,141,190,.68);
+
+  border-top-color:
+    rgba(79,141,190,.68);
+}
+
+body.day-mode .frame::after{
+
+  border-right-color:
+    rgba(79,141,190,.68);
+
+  border-bottom-color:
+    rgba(79,141,190,.68);
+}
+
+
+body.day-mode .logo{
+
+  color:#2e526c;
+}
+
+body.day-mode .logo-symbol{
+
+  color:
+    rgba(79,151,201,.84);
+
+  text-shadow:
+    0 0 7px
+    rgba(86,158,208,.20);
+}
+
+body.day-mode .logo-cn{
+
+  color:
+    rgba(46,82,108,.92);
+}
+
+body.day-mode .logo-en{
+
+  color:
+    rgba(81,137,173,.62);
+}
+
+
+body.day-mode .back{
+
+  color:
+    rgba(62,99,127,.70);
+}
+
+body.day-mode .back:hover{
+
+  color:#28536f;
+
+  text-shadow:
+    0 0 8px
+    rgba(76,151,202,.14);
+}
+
+
+body.day-mode .theme-toggle{
+
+  border-color:
+    rgba(91,145,184,.34);
+
+  background:
+    rgba(248,252,255,.78);
+
+  color:
+    rgba(61,98,125,.76);
+}
+
+body.day-mode .theme-toggle:hover{
+
+  border-color:
+    rgba(79,151,200,.62);
+
+  background:
+    rgba(248,252,255,.90);
+
+  color:#28536f;
+
+  box-shadow:
+    0 0 14px
+    rgba(76,151,202,.11);
+}
+
+
+body.day-mode .heading-small{
+
+  color:
+    rgba(81,151,198,.54);
+}
+
+body.day-mode .heading-main{
+
+  color:#2b506a;
+
+  text-shadow:
+    0 0 18px
+    rgba(80,151,201,.065);
+}
+
+body.day-mode .heading-cn{
+
+  color:
+    rgba(45,82,106,.80);
+}
+
+
+body.day-mode .character-panel{
+
+  border-color:
+    rgba(82,151,198,.36);
+
+  background:
+
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.58),
+      rgba(239,247,251,.40)
+    );
+
+  box-shadow:
+    0 20px 60px
+    rgba(70,110,130,.08);
+}
+
+
+body.day-mode .character-image{
+
+  border-color:
+    rgba(82,151,198,.36);
+
+  background:
+
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(165,211,238,.20),
+      transparent 58%
+    ),
+
+    rgba(248,252,255,.42);
+}
+
+body.day-mode .character-image::before{
+
+  border-color:
+    rgba(82,151,198,.14);
+}
+
+body.day-mode .character-image::after{
+
+  color:
+    rgba(76,151,201,.50);
+
+  text-shadow:none;
+}
+
+
+body.day-mode .image-placeholder{
+
+  color:
+    rgba(65,106,133,.64);
+}
+
+body.day-mode .image-placeholder-symbol{
+
+  color:
+    rgba(112,188,224,.055);
+}
+
+body.day-mode .image-placeholder-cn{
+
+  color:
+    rgba(65,106,133,.64);
+}
+
+
+body.day-mode .character-number{
+
+  color:
+    rgba(81,151,198,.54);
+}
+
+body.day-mode .character-name-en{
+
+  color:
+    rgba(46,82,108,.92);
+}
+
+body.day-mode .character-name-cn{
+
+  color:
+    rgba(45,82,106,.80);
+}
+
+body.day-mode .character-role{
+
+  color:
+    rgba(70,135,165,.60);
+}
+
+
+body.day-mode .divider{
+
+  background:
+
+    linear-gradient(
+      90deg,
+      rgba(81,151,198,.34),
+      rgba(81,151,198,.08),
+      transparent
+    );
+}
+
+
+body.day-mode .info-label{
+
+  color:
+    rgba(70,135,165,.68);
+}
+
+body.day-mode .info-value{
+
+  color:
+    rgba(65,106,133,.64);
+}
+
+
+body.day-mode .description-title{
+
+  color:
+    rgba(70,135,165,.68);
+}
+
+body.day-mode .description{
+
+  color:
+    rgba(65,106,133,.64);
+}
+
+
+/* ★ 编辑按钮日间模式 */
+
+body.day-mode .edit-character-button{
+
+  color:
+    rgba(62,99,127,.68);
+
+  border-color:
+    rgba(91,145,184,.30);
+}
+
+body.day-mode .edit-character-button:hover{
+
+  color:#28536f;
+
+  border-color:
+    rgba(79,151,200,.55);
+
+  background:
+    rgba(76,151,202,.05);
+
+  text-shadow:
+    0 0 8px
+    rgba(76,151,202,.12);
+}
+
+
+body.day-mode .archive-mark{
+
+  color:
+    rgba(73,115,143,.40);
+}
+
+
+@media(prefers-reduced-motion:reduce){
+
+  .stars span{
+
+    animation:none;
+  }
+
+  body,
+  .theme-toggle,
+  .magic-circle,
+  .frame,
+  .logo,
+  .logo-symbol,
+  .logo-cn,
+  .logo-en,
+  .heading-small,
+  .heading-main,
+  .heading-cn,
+  .character-panel,
+  .character-image,
+  .character-image::before,
+  .character-image::after,
+  .image-placeholder,
+  .image-placeholder-symbol,
+  .image-placeholder-cn,
+  .character-number,
+  .character-name-en,
+  .character-name-cn,
+  .character-role,
+  .divider,
+  .info-label,
+  .info-value,
+  .description-title,
+  .description,
+  .edit-character-button,
+  .archive-mark{
+
+    transition:none;
+  }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="page">
+
+
+  <div class="stars">
+
+    <span>✦</span>
+    <span>✦</span>
+    <span>✡</span>
+    <span>✶</span>
+    <span>✦</span>
+
+    <span>✶</span>
+    <span>✦</span>
+    <span>✡</span>
+    <span>✶</span>
+    <span>✦</span>
+
+    <span>✦</span>
+    <span>✦</span>
+    <span>✶</span>
+    <span>✦</span>
+    <span>✡</span>
+
+    <span>✦</span>
+    <span>✶</span>
+    <span>✦</span>
+    <span>✦</span>
+    <span>✡</span>
+
+  </div>
+
+
+  <div class="magic-circle"></div>
+
+
+  <div class="frame"></div>
+
+
+  <header class="header">
+
+    <a href="archive.html" class="logo">
+
+      <span class="logo-symbol">
+        ✦
+      </span>
+
+      <span class="logo-text">
+
+        <span class="logo-cn">
+          塞垭弥大陆档案馆
+        </span>
+
+        <span class="logo-en">
+          SEYAMI ARCHIVE
+        </span>
+
+      </span>
+
+    </a>
+
+
+    <div class="header-right">
+
+      <a href="archive.html" class="back">
+        ← 返回档案目录
+      </a>
+
+
+      <button
+        class="theme-toggle"
+        id="themeToggle"
+        type="button"
+        aria-label="切换昼夜模式"
+      >
+
+        <span
+          class="theme-icon"
+          id="themeIcon"
+        >
+          ☾
+        </span>
+
+        <span id="themeText">
+          NIGHT
+        </span>
+
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <main class="content">
+
+
+    <section class="heading">
+
+      <div class="heading-small">
+        CHARACTER RECORD
+      </div>
+
+      <div class="heading-main">
+        ARCHIVE
+      </div>
+
+      <div class="heading-cn">
+        角色档案
+      </div>
+
+    </section>
+
+
+    <section class="character-panel">
+
+
+      <div class="character-image">
+
+        <img
+          id="characterImage"
+          src=""
+          alt=""
+          style="display:none;"
+        >
+
+        <div
+          class="image-placeholder"
+          id="imagePlaceholder"
+        >
+
+          <span class="image-placeholder-symbol">
+            ✦
+          </span>
+
+          CHARACTER PORTRAIT
+
+          <span class="image-placeholder-cn">
+            角色立绘
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="character-info">
+
+
+        <div class="character-number">
+          CHARACTER · 001
+        </div>
+
+
+        <div class="character-name-en">
+        </div>
+
+
+        <div class="character-name-cn">
+        </div>
+
+
+        <div class="character-role">
+        </div>
+
+
+        <div class="divider"></div>
+
+
+        <div class="basic-info">
+
+
+          <div class="info-item">
+
+            <div class="info-label">
+              RACE
+            </div>
+
+            <div class="info-value">
+            </div>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <div class="info-label">
+              REGION
+            </div>
+
+            <div class="info-value">
+            </div>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <div class="info-label">
+              STATUS
+            </div>
+
+            <div class="info-value">
+            </div>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <div class="info-label">
+              ROLE
+            </div>
+
+            <div class="info-value">
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+        <div class="divider"></div>
+
+
+        <div class="description-title">
+          PROFILE
+        </div>
+
+        <div class="description">
+        </div>
+
+
+        <!-- ★ 编辑档案按钮 -->
+
+        <div class="edit-character-wrap">
+
+          <button
+            type="button"
+            id="editCharacterButton"
+            class="edit-character-button"
+            style="display:none;"
+          >
+            EDIT CHARACTER
+          </button>
+
+        </div>
+
+
+      </div>
+
+
+      <div class="archive-mark">
+        SEYAMI · CHARACTER ARCHIVE · 001
+      </div>
+
+
+    </section>
+
+
+    <!-- =====================================================
+         ★ 角色翻页
+    ====================================================== -->
+
+    <nav
+      class="character-pagination"
+      id="characterPagination"
+      aria-label="角色翻页"
+    >
+
+      <button
+        type="button"
+        id="prevCharacter"
+        class="pagination-button"
+      >
+        ← PREVIOUS
+      </button>
+
+      <div
+        id="paginationStatus"
+        class="pagination-status"
+      >
+        CHARACTER · 001
+      </div>
+
+      <button
+        type="button"
+        id="nextCharacter"
+        class="pagination-button"
+      >
+        NEXT →
+      </button>
+
+    </nav>
+
+
+  </main>
+
+</div>
+
+
+<style>
+
+/* =========================================================
+   ★ CHARACTER PAGINATION
+   ★ 只负责翻页，不修改原有美化
+========================================================= */
+
+.character-pagination{
+
+  width:min(1100px,100%);
+
+  margin:28px auto 0;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  position:relative;
+
+  z-index:10;
+
+}
+
+.pagination-button{
+
+  appearance:none;
+
+  border:0;
+
+  background:transparent;
+
+  padding:8px 4px;
+
+  color:rgba(191,220,243,.68);
+
+  font-family:
+    "Cinzel",
+    "Noto Serif SC",
+    serif;
+
+  font-size:9px;
+
+  letter-spacing:3px;
+
+  cursor:pointer;
+
+  transition:
+    color .3s ease,
+    opacity .3s ease,
+    text-shadow .3s ease;
+
+}
+
+.pagination-button:hover:not(:disabled){
+
+  color:#d9efff;
+
+  text-shadow:
+    0 0 10px
+    rgba(102,180,231,.35);
+
+}
+
+.pagination-button:disabled{
+
+  opacity:.18;
+
+  cursor:default;
+
+}
+
+.pagination-status{
+
+  color:rgba(115,182,224,.48);
+
+  font-family:"Cinzel",serif;
+
+  font-size:8px;
+
+  letter-spacing:3px;
+
+}
+
+body.day-mode .pagination-button{
+
+  color:
+    rgba(62,99,127,.70);
+
+}
+
+body.day-mode .pagination-button:hover:not(:disabled){
+
+  color:#28536f;
+
+  text-shadow:
+    0 0 8px
+    rgba(76,151,202,.14);
+
+}
+
+body.day-mode .pagination-status{
+
+  color:
+    rgba(70,135,165,.55);
+
+}
+
+
+@media(max-width:600px){
+
+  .character-pagination{
+
+    margin-top:22px;
+
+    padding:
+      0 5px;
+
+  }
+
+  .pagination-button{
+
+    font-size:8px;
+
+    letter-spacing:2px;
+
+  }
+
+  .pagination-status{
+
+    font-size:7px;
+
+    letter-spacing:2px;
+
+  }
+
+}
+
+@media(max-width:360px){
+
+  .pagination-button{
+
+    font-size:7px;
+
+    letter-spacing:1px;
+
+  }
+
+  .pagination-status{
+
+    font-size:6px;
+
+    letter-spacing:1px;
+
+  }
+
+}
+
+</style>
+
+
 <script>
 
 /* =========================================================
@@ -22,62 +2497,168 @@ const supabaseClient =
 ========================================================= */
 
 const characterNumber =
-  document.querySelector(".character-number");
+  document.querySelector(
+    ".character-number"
+  );
 
 const characterNameEn =
-  document.querySelector(".character-name-en");
+  document.querySelector(
+    ".character-name-en"
+  );
 
 const characterNameCn =
-  document.querySelector(".character-name-cn");
+  document.querySelector(
+    ".character-name-cn"
+  );
 
 const characterRole =
-  document.querySelector(".character-role");
+  document.querySelector(
+    ".character-role"
+  );
 
 const infoValues =
-  document.querySelectorAll(".info-value");
+  document.querySelectorAll(
+    ".info-value"
+  );
 
 const characterImage =
-  document.getElementById("characterImage");
+  document.getElementById(
+    "characterImage"
+  );
 
 const imagePlaceholder =
-  document.getElementById("imagePlaceholder");
+  document.getElementById(
+    "imagePlaceholder"
+  );
 
 const description =
-  document.querySelector(".description");
+  document.querySelector(
+    ".description"
+  );
 
 const archiveMark =
-  document.querySelector(".archive-mark");
+  document.querySelector(
+    ".archive-mark"
+  );
+
+
+/* ★ 编辑按钮 */
+
+const editCharacterButton =
+  document.getElementById(
+    "editCharacterButton"
+  );
 
 
 /* =========================================================
-   EDIT BUTTON
-   游客默认隐藏，管理员验证通过后才显示
+   ★ 管理员身份检查
+   ★ 只有指定管理员可以显示编辑按钮
 ========================================================= */
 
-const editCharacterButton =
-  document.getElementById("editCharacterButton");
+async function checkSeyamiAdmin(){
 
-if (editCharacterButton) {
-  editCharacterButton.style.display = "none";
+  try{
+
+    const {
+      data,
+      error
+    } = await supabaseClient.auth.getUser();
+
+    if(
+      error ||
+      !data ||
+      !data.user
+    ){
+      return false;
+    }
+
+    return (
+      (data.user.email || "")
+        .trim()
+        .toLowerCase() ===
+      "1296457710@qq.com"
+    );
+
+  }catch(error){
+
+    console.error(
+      "管理员身份检查失败：",
+      error
+    );
+
+    return false;
+
+  }
+
 }
 
 
 /* =========================================================
-   PAGINATION ELEMENTS
+   ★ 设置编辑按钮
 ========================================================= */
 
+async function setupCharacterEditButton(){
+
+  /* 默认隐藏，避免游客短暂看到按钮 */
+
+  editCharacterButton.style.display =
+    "none";
+
+  const isAdmin =
+    await checkSeyamiAdmin();
+
+  if(!isAdmin){
+    return;
+  }
+
+  /* 管理员通过身份检查后显示 */
+
+  editCharacterButton.style.display =
+    "";
+
+  editCharacterButton.addEventListener(
+    "click",
+    function(){
+
+      if(
+        !allCharacters[currentIndex]
+      ){
+        return;
+      }
+
+      const character =
+        allCharacters[currentIndex];
+
+      window.location.href =
+        "edit.html?id=" +
+        encodeURIComponent(
+          character.id
+        );
+
+    }
+  );
+
+}
+
+
 const prevCharacter =
-  document.getElementById("prevCharacter");
+  document.getElementById(
+    "prevCharacter"
+  );
 
 const nextCharacter =
-  document.getElementById("nextCharacter");
+  document.getElementById(
+    "nextCharacter"
+  );
 
 const paginationStatus =
-  document.getElementById("paginationStatus");
+  document.getElementById(
+    "paginationStatus"
+  );
 
 
 /* =========================================================
-   ALL CHARACTERS
+   全部角色
 ========================================================= */
 
 let allCharacters = [];
@@ -86,248 +2667,355 @@ let currentIndex = 0;
 
 
 /* =========================================================
-   CHECK ADMIN
-========================================================= */
-
-async function checkSeyamiAdmin() {
-  try {
-    const {
-      data,
-      error
-    } = await supabaseClient.auth.getUser();
-
-    if (error || !data || !data.user) {
-      return false;
-    }
-
-    return (
-      (data.user.email || "").trim().toLowerCase() ===
-      "1296457710@qq.com"
-    );
-
-  } catch (error) {
-    console.error("管理员身份检查失败：", error);
-    return false;
-  }
-}
-
-
-/* =========================================================
-   SET UP EDIT BUTTON
-========================================================= */
-
-async function setupCharacterEditButton() {
-  if (!editCharacterButton) return;
-
-  /* 再次确保游客看不到按钮 */
-  editCharacterButton.style.display = "none";
-
-  const isAdmin = await checkSeyamiAdmin();
-
-  if (!isAdmin) return;
-
-  /* 仅管理员显示 */
-  editCharacterButton.style.display = "";
-
-  editCharacterButton.addEventListener("click", function () {
-    const character = allCharacters[currentIndex];
-
-    if (!character) return;
-
-    window.location.href =
-      "edit.html?id=" +
-      encodeURIComponent(character.id);
-  });
-}
-
-
-/* =========================================================
    GET CHARACTER ID
 ========================================================= */
 
-function getCharacterId() {
+function getCharacterId(){
+
   const params =
-    new URLSearchParams(window.location.search);
+    new URLSearchParams(
+      window.location.search
+    );
 
   return params.get("id");
+
 }
 
 
 /* =========================================================
-   UPDATE URL
+   更新 URL
 ========================================================= */
 
-function goToCharacter(character) {
-  if (!character) return;
+function goToCharacter(character){
+
+  if(!character){
+    return;
+  }
 
   const url =
     "characters.html?id=" +
-    encodeURIComponent(character.id);
+    encodeURIComponent(
+      character.id
+    );
 
-  window.location.href = url;
+  window.location.href =
+    url;
+
 }
 
 
 /* =========================================================
-   UPDATE PAGINATION
+   更新翻页按钮
 ========================================================= */
 
-function updatePagination() {
-  const total = allCharacters.length;
+function updatePagination(){
 
-  if (total <= 1) {
+  const total =
+    allCharacters.length;
+
+
+  if(total <= 1){
+
     prevCharacter.disabled = true;
+
     nextCharacter.disabled = true;
-  } else {
-    prevCharacter.disabled = currentIndex <= 0;
-    nextCharacter.disabled = currentIndex >= total - 1;
+
+  }else{
+
+    prevCharacter.disabled =
+      currentIndex <= 0;
+
+    nextCharacter.disabled =
+      currentIndex >= total - 1;
+
   }
 
+
   const displayNumber =
-    String(currentIndex + 1).padStart(3, "0");
+    String(
+      currentIndex + 1
+    ).padStart(3,"0");
+
 
   paginationStatus.textContent =
-    "CHARACTER · " + displayNumber;
+    "CHARACTER · " +
+    displayNumber;
+
 
   document.title =
     "角色档案 · " +
-    (allCharacters[currentIndex]?.name || "Seyami Archive");
+    (
+      allCharacters[currentIndex]?.name ||
+      "Seyami Archive"
+    );
+
 }
 
 
 /* =========================================================
-   RENDER CHARACTER
+   显示当前角色
 ========================================================= */
 
-function renderCharacter(character) {
-  if (!character) return;
+function renderCharacter(character){
 
-  const displayNumber =
-    String(currentIndex + 1).padStart(3, "0");
-
-  characterNumber.textContent =
-    "CHARACTER · " + displayNumber;
-
-  archiveMark.textContent =
-    "SEYAMI · CHARACTER ARCHIVE · " + displayNumber;
-
-
-  /* NAME */
-
-  const fullName = (character.name || "").trim();
-
-  const chineseIndex =
-    fullName.search(/[\u4e00-\u9fff]/);
-
-  if (chineseIndex > -1) {
-    characterNameEn.textContent =
-      fullName.substring(0, chineseIndex).trim();
-
-    characterNameCn.textContent =
-      fullName.substring(chineseIndex).trim();
-  } else {
-    characterNameEn.textContent = fullName;
-    characterNameCn.textContent = "";
+  if(!character){
+    return;
   }
 
 
-  /* ROLE */
+  /* -------------------------
+     NUMBER
+  ------------------------- */
+
+  const displayNumber =
+    String(
+      currentIndex + 1
+    ).padStart(3,"0");
+
+
+  characterNumber.textContent =
+    "CHARACTER · " +
+    displayNumber;
+
+
+  archiveMark.textContent =
+    "SEYAMI · CHARACTER ARCHIVE · " +
+    displayNumber;
+
+
+  /* -------------------------
+     NAME
+  ------------------------- */
+
+  const fullName =
+    (character.name || "").trim();
+
+
+  const chineseIndex =
+    fullName.search(
+      /[\u4e00-\u9fff]/
+    );
+
+
+  if(chineseIndex > -1){
+
+    characterNameEn.textContent =
+      fullName
+        .substring(
+          0,
+          chineseIndex
+        )
+        .trim();
+
+    characterNameCn.textContent =
+      fullName
+        .substring(
+          chineseIndex
+        )
+        .trim();
+
+  }else{
+
+    characterNameEn.textContent =
+      fullName;
+
+    characterNameCn.textContent =
+      "";
+
+  }
+
+
+  /* -------------------------
+     ROLE
+  ------------------------- */
 
   characterRole.textContent =
     character.role || "";
 
 
-  /* BASIC INFO */
+  /* -------------------------
+     BASIC INFO
 
-  if (infoValues.length >= 4) {
+     0 RACE
+     1 REGION
+     2 STATUS
+     3 ROLE
+  ------------------------- */
+
+  if(infoValues.length >= 4){
+
     infoValues[0].textContent =
       character.race || "";
+
 
     infoValues[1].textContent =
       character.region || "";
 
+
     let status = "";
 
-    if (character.gender) {
-      status = character.gender;
+
+    if(character.gender){
+
+      status =
+        character.gender;
+
     }
 
-    if (
+
+    if(
       character.age !== null &&
       character.age !== undefined &&
       character.age !== ""
-    ) {
-      if (status) status += " · ";
-      status += character.age + "岁";
+    ){
+
+      if(status){
+
+        status += " · ";
+
+      }
+
+      status +=
+        character.age + "岁";
+
     }
 
-    infoValues[2].textContent = status;
+
+    infoValues[2].textContent =
+      status;
+
 
     infoValues[3].textContent =
       character.role || "";
+
   }
 
 
-  /* PROFILE */
+  /* -------------------------
+     PROFILE
+  ------------------------- */
 
   let profileText = "";
 
-  if (
+
+  if(
     character.personality !== null &&
     character.personality !== undefined &&
     String(character.personality).trim() !== ""
-  ) {
+  ){
+
     profileText +=
-      "性格： " + String(character.personality).trim();
+      "性格： " +
+      String(
+        character.personality
+      ).trim();
+
   }
 
-  if (
+
+  if(
     character.backstory !== null &&
     character.backstory !== undefined &&
     String(character.backstory).trim() !== ""
-  ) {
-    if (profileText) profileText += "\n\n";
+  ){
+
+    if(profileText){
+
+      profileText +=
+        "\n\n";
+
+    }
 
     profileText +=
-      "背景： " + String(character.backstory).trim();
+      "背景： " +
+      String(
+        character.backstory
+      ).trim();
+
   }
 
-  description.style.whiteSpace = "pre-line";
-  description.textContent = profileText;
+
+  description.style.whiteSpace =
+    "pre-line";
+
+  description.textContent =
+    profileText;
 
 
-  /* IMAGE */
+  /* -------------------------
+     IMAGE
+  ------------------------- */
 
   const imageURL =
     (character.image_url || "").trim();
 
-  characterImage.style.display = "none";
-  imagePlaceholder.style.display = "block";
 
-  characterImage.onload = null;
-  characterImage.onerror = null;
+  characterImage.style.display =
+    "none";
 
-  if (imageURL) {
-    characterImage.onload = function () {
-      characterImage.style.display = "block";
-      imagePlaceholder.style.display = "none";
-    };
+  imagePlaceholder.style.display =
+    "block";
 
-    characterImage.onerror = function () {
-      characterImage.style.display = "none";
-      imagePlaceholder.style.display = "block";
 
-      console.error("角色图片加载失败：", imageURL);
-    };
+  characterImage.onload =
+    null;
 
-    characterImage.src = imageURL;
-    characterImage.alt = fullName;
+  characterImage.onerror =
+    null;
 
-  } else {
-    characterImage.removeAttribute("src");
+
+  if(imageURL){
+
+    characterImage.onload =
+      function(){
+
+        characterImage.style.display =
+          "block";
+
+        imagePlaceholder.style.display =
+          "none";
+
+      };
+
+
+    characterImage.onerror =
+      function(){
+
+        characterImage.style.display =
+          "none";
+
+        imagePlaceholder.style.display =
+          "block";
+
+        console.error(
+          "角色图片加载失败：",
+          imageURL
+        );
+
+      };
+
+
+    characterImage.src =
+      imageURL;
+
+    characterImage.alt =
+      fullName;
+
+  }else{
+
+    characterImage.removeAttribute(
+      "src"
+    );
+
   }
 
+
+  /* -------------------------
+     翻页状态
+  ------------------------- */
+
   updatePagination();
+
 }
 
 
@@ -335,78 +3023,173 @@ function renderCharacter(character) {
    LOAD ALL CHARACTERS
 ========================================================= */
 
-async function loadCharacters() {
-  try {
+async function loadCharacters(){
+
+  try{
+
     const {
       data,
       error
-    } = await supabaseClient
-      .from("characters")
-      .select(`
-        id,
-        name,
-        race,
-        role,
-        age,
-        gender,
-        region,
-        personality,
-        backstory,
-        image_url
-      `)
-      .order("id", {
-        ascending: true
-      });
+    } =
+      await supabaseClient
+        .from("characters")
+        .select(`
+          id,
+          name,
+          race,
+          role,
+          age,
+          gender,
+          region,
+          personality,
+          backstory,
+          image_url
+        `)
+        .order(
+          "id",
+          {
+            ascending:true
+          }
+        );
 
-    if (error) {
-      console.error("Supabase 读取失败：", error);
 
-      characterNameEn.textContent = "ARCHIVE ERROR";
-      characterNameCn.textContent = "档案读取失败";
-      description.textContent = "DATABASE CONNECTION ERROR";
+    /* -------------------------
+       ERROR
+    ------------------------- */
+
+    if(error){
+
+      console.error(
+        "Supabase 读取失败：",
+        error
+      );
+
+      characterNameEn.textContent =
+        "ARCHIVE ERROR";
+
+      characterNameCn.textContent =
+        "档案读取失败";
+
+      description.textContent =
+        "DATABASE CONNECTION ERROR";
 
       return;
+
     }
 
-    if (!data || data.length === 0) {
-      characterNameEn.textContent = "ARCHIVE NOT FOUND";
-      characterNameCn.textContent = "暂无角色档案";
-      description.textContent = "";
 
-      prevCharacter.disabled = true;
-      nextCharacter.disabled = true;
+    /* -------------------------
+       EMPTY
+    ------------------------- */
+
+    if(
+      !data ||
+      data.length === 0
+    ){
+
+      characterNameEn.textContent =
+        "ARCHIVE NOT FOUND";
+
+      characterNameCn.textContent =
+        "暂无角色档案";
+
+      description.textContent =
+        "";
+
+      prevCharacter.disabled =
+        true;
+
+      nextCharacter.disabled =
+        true;
 
       return;
+
     }
 
-    allCharacters = data;
 
-    const characterId = getCharacterId();
+    /* -------------------------
+       保存全部角色
+    ------------------------- */
 
-    if (characterId) {
+    allCharacters =
+      data;
+
+
+    /* -------------------------
+       根据 URL id 找当前角色
+    ------------------------- */
+
+    const characterId =
+      getCharacterId();
+
+
+    if(characterId){
+
       const foundIndex =
         allCharacters.findIndex(
           character =>
-            String(character.id) === String(characterId)
+            String(character.id) ===
+            String(characterId)
         );
 
-      currentIndex = foundIndex >= 0 ? foundIndex : 0;
-    } else {
-      currentIndex = 0;
+
+      if(foundIndex >= 0){
+
+        currentIndex =
+          foundIndex;
+
+      }else{
+
+        currentIndex =
+          0;
+
+      }
+
+    }else{
+
+      currentIndex =
+        0;
+
     }
 
-    renderCharacter(allCharacters[currentIndex]);
 
-    console.log("角色数量：", allCharacters.length);
-    console.log("当前角色：", allCharacters[currentIndex]);
+    /* -------------------------
+       显示
+    ------------------------- */
 
-  } catch (error) {
-    console.error("角色档案加载失败：", error);
+    renderCharacter(
+      allCharacters[currentIndex]
+    );
 
-    characterNameEn.textContent = "ARCHIVE ERROR";
-    characterNameCn.textContent = "档案读取失败";
-    description.textContent = "DATABASE CONNECTION ERROR";
+
+    console.log(
+      "角色数量：",
+      allCharacters.length
+    );
+
+    console.log(
+      "当前角色：",
+      allCharacters[currentIndex]
+    );
+
+  }catch(error){
+
+    console.error(
+      "角色档案加载失败：",
+      error
+    );
+
+    characterNameEn.textContent =
+      "ARCHIVE ERROR";
+
+    characterNameCn.textContent =
+      "档案读取失败";
+
+    description.textContent =
+      "DATABASE CONNECTION ERROR";
+
   }
+
 }
 
 
@@ -414,46 +3197,122 @@ async function loadCharacters() {
    PREVIOUS
 ========================================================= */
 
-prevCharacter.addEventListener("click", function () {
-  if (currentIndex <= 0) return;
+prevCharacter.addEventListener(
+  "click",
+  function(){
 
-  goToCharacter(allCharacters[currentIndex - 1]);
-});
+    if(
+      currentIndex <= 0
+    ){
+      return;
+    }
+
+
+    const previous =
+      allCharacters[
+        currentIndex - 1
+      ];
+
+
+    goToCharacter(
+      previous
+    );
+
+  }
+);
 
 
 /* =========================================================
    NEXT
 ========================================================= */
 
-nextCharacter.addEventListener("click", function () {
-  if (currentIndex >= allCharacters.length - 1) return;
+nextCharacter.addEventListener(
+  "click",
+  function(){
 
-  goToCharacter(allCharacters[currentIndex + 1]);
-});
+    if(
+      currentIndex >=
+      allCharacters.length - 1
+    ){
+      return;
+    }
+
+
+    const next =
+      allCharacters[
+        currentIndex + 1
+      ];
+
+
+    goToCharacter(
+      next
+    );
+
+  }
+);
 
 
 /* =========================================================
-   KEYBOARD NAVIGATION
+   KEYBOARD
+   ← / →
 ========================================================= */
 
-document.addEventListener("keydown", function (event) {
-  const tag = document.activeElement?.tagName;
+document.addEventListener(
+  "keydown",
+  function(event){
 
-  if (tag === "INPUT" || tag === "TEXTAREA") {
-    return;
-  }
+    const tag =
+      document.activeElement?.tagName;
 
-  if (event.key === "ArrowLeft" && currentIndex > 0) {
-    goToCharacter(allCharacters[currentIndex - 1]);
-  }
 
-  if (
-    event.key === "ArrowRight" &&
-    currentIndex < allCharacters.length - 1
-  ) {
-    goToCharacter(allCharacters[currentIndex + 1]);
+    if(
+      tag === "INPUT" ||
+      tag === "TEXTAREA"
+    ){
+      return;
+    }
+
+
+    if(
+      event.key === "ArrowLeft"
+    ){
+
+      if(
+        currentIndex > 0
+      ){
+
+        goToCharacter(
+          allCharacters[
+            currentIndex - 1
+          ]
+        );
+
+      }
+
+    }
+
+
+    if(
+      event.key === "ArrowRight"
+    ){
+
+      if(
+        currentIndex <
+        allCharacters.length - 1
+      ){
+
+        goToCharacter(
+          allCharacters[
+            currentIndex + 1
+          ]
+        );
+
+      }
+
+    }
+
   }
-});
+);
 
 
 /* =========================================================
@@ -461,46 +3320,93 @@ document.addEventListener("keydown", function (event) {
 ========================================================= */
 
 const themeToggle =
-  document.getElementById("themeToggle");
+  document.getElementById(
+    "themeToggle"
+  );
 
 const themeIcon =
-  document.getElementById("themeIcon");
+  document.getElementById(
+    "themeIcon"
+  );
 
 const themeText =
-  document.getElementById("themeText");
+  document.getElementById(
+    "themeText"
+  );
 
 
-function applyTheme(theme) {
-  if (theme === "day") {
-    document.body.classList.add("day-mode");
+function applyTheme(theme){
 
-    themeIcon.textContent = "☀";
-    themeText.textContent = "DAY";
-  } else {
-    document.body.classList.remove("day-mode");
+  if(theme === "day"){
 
-    themeIcon.textContent = "☾";
-    themeText.textContent = "NIGHT";
+    document.body.classList.add(
+      "day-mode"
+    );
+
+    themeIcon.textContent =
+      "☀";
+
+    themeText.textContent =
+      "DAY";
+
+  }else{
+
+    document.body.classList.remove(
+      "day-mode"
+    );
+
+    themeIcon.textContent =
+      "☾";
+
+    themeText.textContent =
+      "NIGHT";
+
   }
+
 }
 
 
 const savedTheme =
-  localStorage.getItem("seyami-theme");
+  localStorage.getItem(
+    "seyami-theme"
+  );
 
-applyTheme(savedTheme === "day" ? "day" : "night");
+
+applyTheme(
+  savedTheme === "day"
+    ? "day"
+    : "night"
+);
 
 
-themeToggle.addEventListener("click", function () {
-  const isDay =
-    document.body.classList.contains("day-mode");
+themeToggle.addEventListener(
+  "click",
+  () => {
 
-  const nextTheme = isDay ? "night" : "day";
+    const isDay =
+      document.body.classList.contains(
+        "day-mode"
+      );
 
-  localStorage.setItem("seyami-theme", nextTheme);
 
-  applyTheme(nextTheme);
-});
+    const nextTheme =
+      isDay
+        ? "night"
+        : "day";
+
+
+    localStorage.setItem(
+      "seyami-theme",
+      nextTheme
+    );
+
+
+    applyTheme(
+      nextTheme
+    );
+
+  }
+);
 
 
 /* =========================================================
@@ -511,3 +3417,6 @@ loadCharacters();
 setupCharacterEditButton();
 
 </script>
+
+</body>
+</html>
