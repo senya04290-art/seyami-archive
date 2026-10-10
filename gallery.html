@@ -12,21 +12,182 @@
 
 <style>
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;width:100%;min-height:100%}
-body{overflow-x:hidden;background:#061426;color:#dcecff;font-family:"Cinzel","Noto Serif SC",serif;transition:background .6s ease,color .6s ease}
-.page{position:relative;min-height:100vh;padding:30px 70px 80px;overflow:hidden;background:radial-gradient(circle at 50% 42%,rgba(38,91,137,.18),transparent 38%),radial-gradient(circle at 50% 52%,rgba(11,45,75,.45),transparent 72%),#061426;transition:background .6s ease}
-.frame{position:absolute;top:20px;left:20px;right:20px;bottom:20px;border:1px solid rgba(111,174,224,.32);pointer-events:none;z-index:10;transition:border-color .6s ease}
-.frame::before,.frame::after{content:"";position:absolute;width:45px;height:45px;transition:border-color .6s ease}
-.frame::before{left:-1px;top:-1px;border-left:1px solid rgba(108,178,230,.88);border-top:1px solid rgba(108,178,230,.88)}
-.frame::after{right:-1px;bottom:-1px;border-right:1px solid rgba(108,178,230,.88);border-bottom:1px solid rgba(108,178,230,.88)}
 
-.stars,.stars::before,.stars::after{position:absolute;content:"";pointer-events:none}
-.stars{inset:0;z-index:0}
-.stars::before{width:2px;height:2px;background:rgba(182,220,255,.55);box-shadow:5vw 8vh rgba(182,220,255,.55),13vw 18vh rgba(182,220,255,.40),22vw 7vh rgba(182,220,255,.55),31vw 14vh rgba(182,220,255,.32),41vw 5vh rgba(182,220,255,.50),52vw 12vh rgba(182,220,255,.38),63vw 7vh rgba(182,220,255,.48),74vw 16vh rgba(182,220,255,.32),86vw 8vh rgba(182,220,255,.52),94vw 20vh rgba(182,220,255,.38),8vw 31vh rgba(182,220,255,.34),18vw 39vh rgba(182,220,255,.48),29vw 27vh rgba(182,220,255,.32),39vw 34vh rgba(182,220,255,.44),49vw 26vh rgba(182,220,255,.36),61vw 38vh rgba(182,220,255,.46),72vw 29vh rgba(182,220,255,.34),83vw 36vh rgba(182,220,255,.50),92vw 28vh rgba(182,220,255,.36),4vw 55vh rgba(182,220,255,.46),15vw 63vh rgba(182,220,255,.34),25vw 52vh rgba(182,220,255,.52),36vw 61vh rgba(182,220,255,.32),47vw 54vh rgba(182,220,255,.44),58vw 67vh rgba(182,220,255,.38),69vw 55vh rgba(182,220,255,.50),80vw 64vh rgba(182,220,255,.34),91vw 53vh rgba(182,220,255,.46),9vw 81vh rgba(182,220,255,.34),20vw 91vh rgba(182,220,255,.48),33vw 82vh rgba(182,220,255,.36),45vw 94vh rgba(182,220,255,.42),57vw 84vh rgba(182,220,255,.32),68vw 92vh rgba(182,220,255,.48),79vw 82vh rgba(182,220,255,.36),89vw 90vh rgba(182,220,255,.44)}
-.stars::after{width:1px;height:1px;background:rgba(182,220,255,.38);box-shadow:2vw 14vh rgba(182,220,255,.35),17vw 5vh rgba(182,220,255,.28),27vw 20vh rgba(182,220,255,.35),37vw 8vh rgba(182,220,255,.28),47vw 18vh rgba(182,220,255,.35),58vw 5vh rgba(182,220,255,.28),69vw 22vh rgba(182,220,255,.35),79vw 9vh rgba(182,220,255,.28),90vw 15vh rgba(182,220,255,.35),11vw 45vh rgba(182,220,255,.28),22vw 34vh rgba(182,220,255,.35),34vw 47vh rgba(182,220,255,.28),44vw 39vh rgba(182,220,255,.35),55vw 47vh rgba(182,220,255,.28),66vw 42vh rgba(182,220,255,.35),77vw 48vh rgba(182,220,255,.28),88vw 40vh rgba(182,220,255,.35),6vw 72vh rgba(182,220,255,.35),17vw 78vh rgba(182,220,255,.28),29vw 70vh rgba(182,220,255,.35),41vw 77vh rgba(182,220,255,.28),53vw 72vh rgba(182,220,255,.35),64vw 79vh rgba(182,220,255,.28),76vw 71vh rgba(182,220,255,.35),87vw 78vh rgba(182,220,255,.28)}
+html,body{
+    margin:0;
+    padding:0;
+    width:100%;
+    min-height:100%;
+}
 
-.micro-stars{position:absolute;inset:0;z-index:1;pointer-events:none}
-.micro-stars span{position:absolute;width:2px;height:2px;border-radius:50%;background:rgba(158,207,247,.62);opacity:.45;animation:microTwinkle 5s ease-in-out infinite}
+body{
+    overflow-x:hidden;
+    background:#061426;
+    color:#dcecff;
+    font-family:"Cinzel","Noto Serif SC",serif;
+    transition:background .6s ease,color .6s ease;
+}
+
+.page{
+    position:relative;
+    min-height:100vh;
+    padding:30px 70px 80px;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 50% 42%,rgba(38,91,137,.18),transparent 38%),
+        radial-gradient(circle at 50% 52%,rgba(11,45,75,.45),transparent 72%),
+        #061426;
+    transition:background .6s ease;
+}
+
+.frame{
+    position:absolute;
+    top:20px;
+    left:20px;
+    right:20px;
+    bottom:20px;
+    border:1px solid rgba(111,174,224,.32);
+    pointer-events:none;
+    z-index:10;
+    transition:border-color .6s ease;
+}
+
+.frame::before,
+.frame::after{
+    content:"";
+    position:absolute;
+    width:45px;
+    height:45px;
+    transition:border-color .6s ease;
+}
+
+.frame::before{
+    left:-1px;
+    top:-1px;
+    border-left:1px solid rgba(108,178,230,.88);
+    border-top:1px solid rgba(108,178,230,.88);
+}
+
+.frame::after{
+    right:-1px;
+    bottom:-1px;
+    border-right:1px solid rgba(108,178,230,.88);
+    border-bottom:1px solid rgba(108,178,230,.88);
+}
+
+/* ==============================
+   背景星点
+============================== */
+
+.stars,
+.stars::before,
+.stars::after{
+    position:absolute;
+    content:"";
+    pointer-events:none;
+}
+
+.stars{
+    inset:0;
+    z-index:0;
+}
+
+.stars::before{
+    width:2px;
+    height:2px;
+    background:rgba(182,220,255,.55);
+    box-shadow:
+        5vw 8vh rgba(182,220,255,.55),
+        13vw 18vh rgba(182,220,255,.40),
+        22vw 7vh rgba(182,220,255,.55),
+        31vw 14vh rgba(182,220,255,.32),
+        41vw 5vh rgba(182,220,255,.50),
+        52vw 12vh rgba(182,220,255,.38),
+        63vw 7vh rgba(182,220,255,.48),
+        74vw 16vh rgba(182,220,255,.32),
+        86vw 8vh rgba(182,220,255,.52),
+        94vw 20vh rgba(182,220,255,.38),
+        8vw 31vh rgba(182,220,255,.34),
+        18vw 39vh rgba(182,220,255,.48),
+        29vw 27vh rgba(182,220,255,.32),
+        39vw 34vh rgba(182,220,255,.44),
+        49vw 26vh rgba(182,220,255,.36),
+        61vw 38vh rgba(182,220,255,.46),
+        72vw 29vh rgba(182,220,255,.34),
+        83vw 36vh rgba(182,220,255,.50),
+        92vw 28vh rgba(182,220,255,.36),
+        4vw 55vh rgba(182,220,255,.46),
+        15vw 63vh rgba(182,220,255,.34),
+        25vw 52vh rgba(182,220,255,.52),
+        36vw 61vh rgba(182,220,255,.32),
+        47vw 54vh rgba(182,220,255,.44),
+        58vw 67vh rgba(182,220,255,.38),
+        69vw 55vh rgba(182,220,255,.50),
+        80vw 64vh rgba(182,220,255,.34),
+        91vw 53vh rgba(182,220,255,.46),
+        9vw 81vh rgba(182,220,255,.34),
+        20vw 91vh rgba(182,220,255,.48),
+        33vw 82vh rgba(182,220,255,.36),
+        45vw 94vh rgba(182,220,255,.42),
+        57vw 84vh rgba(182,220,255,.32),
+        68vw 92vh rgba(182,220,255,.48),
+        79vw 82vh rgba(182,220,255,.36),
+        89vw 90vh rgba(182,220,255,.44);
+}
+
+.stars::after{
+    width:1px;
+    height:1px;
+    background:rgba(182,220,255,.38);
+    box-shadow:
+        2vw 14vh rgba(182,220,255,.35),
+        17vw 5vh rgba(182,220,255,.28),
+        27vw 20vh rgba(182,220,255,.35),
+        37vw 8vh rgba(182,220,255,.28),
+        47vw 18vh rgba(182,220,255,.35),
+        58vw 5vh rgba(182,220,255,.28),
+        69vw 22vh rgba(182,220,255,.35),
+        79vw 9vh rgba(182,220,255,.28),
+        90vw 15vh rgba(182,220,255,.35),
+        11vw 45vh rgba(182,220,255,.28),
+        22vw 34vh rgba(182,220,255,.35),
+        34vw 47vh rgba(182,220,255,.28),
+        44vw 39vh rgba(182,220,255,.35),
+        55vw 47vh rgba(182,220,255,.28),
+        66vw 42vh rgba(182,220,255,.35),
+        77vw 48vh rgba(182,220,255,.28),
+        88vw 40vh rgba(182,220,255,.35),
+        6vw 72vh rgba(182,220,255,.35),
+        17vw 78vh rgba(182,220,255,.28),
+        29vw 70vh rgba(182,220,255,.35),
+        41vw 77vh rgba(182,220,255,.28),
+        53vw 72vh rgba(182,220,255,.35),
+        64vw 79vh rgba(182,220,255,.28),
+        76vw 71vh rgba(182,220,255,.35),
+        87vw 78vh rgba(182,220,255,.28);
+}
+
+/* ==============================
+   闪烁微星
+============================== */
+
+.micro-stars{
+    position:absolute;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+}
+
+.micro-stars span{
+    position:absolute;
+    width:2px;
+    height:2px;
+    border-radius:50%;
+    background:rgba(158,207,247,.62);
+    opacity:.45;
+    animation:microTwinkle 5s ease-in-out infinite;
+}
+
 .micro-stars span:nth-child(1){left:9%;top:12%}
 .micro-stars span:nth-child(2){left:18%;top:25%;animation-delay:1s}
 .micro-stars span:nth-child(3){left:28%;top:11%;animation-delay:2s}
@@ -46,140 +207,966 @@ body{overflow-x:hidden;background:#061426;color:#dcecff;font-family:"Cinzel","No
 .micro-stars span:nth-child(17){left:80%;top:47%;animation-delay:2.8s}
 .micro-stars span:nth-child(18){left:91%;top:57%;animation-delay:4.5s}
 .micro-stars span:nth-child(19){left:13%;top:84%;animation-delay:3.8s}
-@keyframes microTwinkle{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:.9;transform:scale(1.5)}}
 
-.arcane-stars{position:absolute;inset:0;z-index:1;pointer-events:none}
-.arcane-stars span{position:absolute;width:auto;height:auto;background:none;transform:none;opacity:.52;color:rgba(158,207,247,.62);font-family:"Cinzel",serif;font-size:10px;line-height:1;letter-spacing:0;text-shadow:0 0 7px rgba(113,177,220,.28);animation:arcaneTwinkle 6s ease-in-out infinite}
+@keyframes microTwinkle{
+    0%,100%{opacity:.25;transform:scale(.8)}
+    50%{opacity:.9;transform:scale(1.5)}
+}
+
+/* ==============================
+   西幻装饰星
+============================== */
+
+.arcane-stars{
+    position:absolute;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+}
+
+.arcane-stars span{
+    position:absolute;
+    width:auto;
+    height:auto;
+    background:none;
+    transform:none;
+    opacity:.52;
+    color:rgba(158,207,247,.62);
+    font-family:"Cinzel",serif;
+    font-size:10px;
+    line-height:1;
+    letter-spacing:0;
+    text-shadow:0 0 7px rgba(113,177,220,.28);
+    animation:arcaneTwinkle 6s ease-in-out infinite;
+}
+
 .arcane-stars span:nth-child(odd)::before{content:"✦"}
 .arcane-stars span:nth-child(even)::before{content:"✶"}
-@keyframes arcaneTwinkle{0%,100%{opacity:.38;transform:scale(.85)}50%{opacity:.72;transform:scale(1.15)}}
-.star-a{left:7%;top:19%}.star-b{left:15%;top:8%}.star-c{left:24%;top:31%}.star-d{left:34%;top:12%}.star-e{left:43%;top:24%}.star-f{left:54%;top:10%}.star-g{left:64%;top:31%}.star-h{left:74%;top:17%}.star-i{left:84%;top:28%}.star-j{left:93%;top:13%}
-.star-k{left:5%;top:67%}.star-l{left:16%;top:77%}.star-m{left:27%;top:64%}.star-n{left:38%;top:75%}.star-o{left:49%;top:67%}.star-p{left:61%;top:78%}.star-q{left:72%;top:65%}.star-r{left:83%;top:76%}.star-s{left:94%;top:68%}.star-t{left:57%;top:90%}
-.extra-u{left:12%;top:42%}.extra-v{left:30%;top:54%}.extra-w{left:46%;top:42%}.extra-x{left:66%;top:49%}.extra-y{left:86%;top:44%}.extra-z{left:97%;top:55%}
 
-.magic-circle{position:absolute;width:min(72vw,760px);height:min(72vw,760px);left:50%;top:47%;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(73,143,198,.28);box-shadow:0 0 50px rgba(47,126,184,.08),inset 0 0 60px rgba(62,139,194,.04);z-index:0;pointer-events:none;transition:border-color .6s ease,box-shadow .6s ease}
-.magic-circle::before,.magic-circle::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;transition:border-color .6s ease,box-shadow .6s ease}
-.magic-circle::before{width:82%;height:82%;border:1px solid rgba(91,162,213,.22);box-shadow:0 0 25px rgba(47,126,184,.08)}
-.magic-circle::after{width:61%;height:61%;border:1px solid rgba(91,162,213,.22);box-shadow:0 0 18px rgba(62,139,194,.04)}
-
-.header{position:absolute;left:58px;right:58px;top:38px;z-index:20;display:flex;align-items:flex-start;justify-content:space-between}
-.logo{display:flex;align-items:flex-start;gap:12px;color:#d9edff;text-decoration:none;transition:color .6s ease}
-.logo-symbol{color:rgba(137,201,239,.9);width:17px;height:13px;display:flex;align-items:flex-start;justify-content:center;font-size:17px;line-height:13px;margin:0;padding:0;text-shadow:0 0 7px rgba(76,159,216,.5),0 0 15px rgba(49,132,191,.22);flex-shrink:0;transition:color .6s ease,text-shadow .6s ease}
-.logo>span:last-child{display:flex;flex-direction:column;align-items:flex-start;line-height:1}
-.logo-cn{display:block;height:13px;line-height:13px;color:#d9edff;font-size:13px;letter-spacing:3px;white-space:nowrap}
-.logo-en{display:block;margin-top:5px;color:rgba(157,204,239,.63);font-family:"Times New Roman",serif;font-size:8px;line-height:8px;letter-spacing:3px;white-space:nowrap}
-.header-right{display:flex;align-items:center;gap:20px}
-.back{color:rgba(191,220,243,.68);text-decoration:none;font-family:"Cinzel","Noto Serif SC",serif;font-size:11px;letter-spacing:1px;transition:color .3s ease,text-shadow .3s ease}
-.back:hover{color:#d9efff;text-shadow:0 0 8px rgba(102,180,231,.35)}
-.theme-toggle{display:flex;align-items:center;gap:7px;height:28px;padding:0 11px;border:1px solid rgba(111,174,224,.32);background:rgba(8,28,49,.35);color:rgba(191,220,243,.68);font-family:"Cinzel","Noto Serif SC",serif;font-size:8px;letter-spacing:2px;cursor:pointer;border-radius:0;white-space:nowrap;transition:color .35s ease,border-color .35s ease,background .35s ease,box-shadow .35s ease}
-.theme-toggle:hover{color:#d9efff;border-color:rgba(122,192,235,.62);background:rgba(8,31,52,.55);box-shadow:0 0 14px rgba(76,151,202,.12)}
-.theme-icon{font-size:12px;line-height:1;letter-spacing:0}
-
-.hero{position:relative;z-index:5;text-align:center;padding-top:150px;margin-bottom:78px}
-.hero-en{font-family:"Cinzel",serif;font-size:11px;letter-spacing:6px;color:rgba(157,204,239,.63);margin-bottom:12px}
-.hero-title{font-family:"Cinzel",serif;font-size:42px;font-weight:400;letter-spacing:8px;color:#dceeff;line-height:1.1;text-shadow:0 0 16px rgba(47,126,184,.14)}
-.hero-cn{margin-top:15px;font-size:13px;letter-spacing:5px;color:rgba(177,207,230,.62)}
-.gallery{position:relative;z-index:5;width:min(1100px,94%);margin:0 auto}
-.gallery-list{position:relative;z-index:2;column-count:3;column-gap:28px}
-.gallery-item{display:block;width:100%;margin:0 0 28px;padding:14px;break-inside:avoid;-webkit-column-break-inside:avoid;border:1px solid rgba(111,174,224,.32);background:linear-gradient(135deg,rgba(38,91,137,.18),rgba(11,45,75,.45));transition:border-color .35s ease,background .35s ease,transform .35s ease,box-shadow .35s ease}
-.gallery-item:hover{border-color:rgba(122,192,235,.62);background:linear-gradient(135deg,rgba(38,91,137,.26),rgba(11,45,75,.55));transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.12),0 0 25px rgba(56,143,201,.12)}
-.gallery-image-wrap{position:relative;width:100%;display:block;overflow:hidden;background:rgba(11,45,75,.22);border:1px solid rgba(91,162,213,.18);isolation:isolate}
-.gallery-image{display:block;width:100%;height:auto;max-width:100%;object-fit:contain;cursor:pointer;user-select:none;-webkit-user-select:none;-webkit-user-drag:none;-webkit-touch-callout:none}
-
-/* B款重复斜向水印：新增样式，不改变原卡片布局 */
-.watermark-pattern{position:absolute;inset:-35%;z-index:2;display:flex;flex-direction:column;justify-content:space-around;pointer-events:none;overflow:hidden;transform:rotate(-25deg);user-select:none;-webkit-user-select:none}
-.watermark-row{display:flex;align-items:center;justify-content:space-around;gap:25px;width:150%;white-space:nowrap}
-.watermark-row span{flex-shrink:0;color:rgba(235,245,255,.36);font-family:"Cinzel","Noto Serif SC",serif;font-size:10px;font-weight:500;letter-spacing:2px;white-space:nowrap;text-shadow:0 1px 3px rgba(0,0,0,.35)}
-.watermark-signature{position:absolute;right:8px;bottom:8px;z-index:3;padding:5px 8px;border:1px solid rgba(220,236,255,.3);background:rgba(3,15,29,.62);color:rgba(245,250,255,.9);font-family:"Cinzel","Noto Serif SC",serif;font-size:9px;letter-spacing:1px;line-height:1.5;pointer-events:none;user-select:none;-webkit-user-select:none;white-space:nowrap}
-
-/* 删除按钮：默认隐藏，只有验证通过的管理员才会显示 */
-.delete-button{display:none;width:100%;margin-top:10px;padding:8px 10px;border:1px solid rgba(120,170,205,.22);background:rgba(6,20,38,.28);color:rgba(177,207,230,.52);font-family:"Cinzel","Noto Serif SC",serif;font-size:8px;letter-spacing:2px;cursor:pointer;text-align:center;transition:color .3s ease,border-color .3s ease,background .3s ease,box-shadow .3s ease}
-.delete-button:hover{color:rgba(225,242,255,.90);border-color:rgba(138,190,222,.58);background:rgba(31,70,96,.45);box-shadow:0 0 14px rgba(76,151,202,.10)}
-.delete-button:active{transform:translateY(1px)}
-.delete-button:disabled{cursor:wait;opacity:.45}
-.gallery-item.deleting{opacity:.45;pointer-events:none;transition:opacity .3s ease}
-body.day .delete-button{border-color:rgba(82,151,198,.24);background:rgba(240,248,253,.62);color:rgba(65,106,133,.58)}
-body.day .delete-button:hover{border-color:rgba(79,151,200,.58);background:rgba(225,239,248,.90);color:rgba(42,82,107,.88);box-shadow:0 0 14px rgba(76,151,202,.10)}
-
-.empty-gallery{width:100%;text-align:center;padding:50px 20px;border:1px solid rgba(111,174,224,.32);background:rgba(11,45,75,.20);color:rgba(177,207,230,.48);font-size:11px;letter-spacing:2px}
-.empty-gallery-en{display:block;font-family:"Cinzel",serif;font-size:9px;letter-spacing:3px;margin-bottom:9px;color:rgba(157,204,239,.45)}
-.lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:50px;background:rgba(6,20,38,.86);backdrop-filter:blur(5px);z-index:100}
-.lightbox.active{display:flex}
-.lightbox-stage{position:relative;display:inline-block;max-width:90vw;max-height:85vh;overflow:hidden;isolation:isolate}
-.lightbox-image{display:block;max-width:90vw;max-height:85vh;width:auto;height:auto;object-fit:contain;box-shadow:0 0 40px rgba(47,126,184,.18);border:1px solid rgba(122,192,235,.25);user-select:none;-webkit-user-select:none;-webkit-user-drag:none;-webkit-touch-callout:none}
-.lightbox-stage .watermark-row span{font-size:13px;letter-spacing:2px}
-.lightbox-stage .watermark-signature{font-size:10px;padding:6px 9px}
-.lightbox-close{position:absolute;top:28px;right:35px;color:rgba(210,235,248,.7);font-family:"Cinzel",serif;font-size:25px;font-weight:400;cursor:pointer;transition:.3s;z-index:110}
-.lightbox-close:hover{color:#e5f5ff;transform:rotate(90deg)}
-.footer{position:relative;z-index:5;text-align:center;margin-top:100px;font-family:"Cinzel",serif;font-size:8px;letter-spacing:4px;color:rgba(133,177,207,.38)}
-
-body.day{background:#f4f9fd;color:#2e5069}
-body.day .page{background:radial-gradient(circle at 50% 42%,rgba(165,211,238,.20),transparent 38%),radial-gradient(circle at 50% 52%,rgba(226,240,249,.68),transparent 72%),#f4f9fd}
-body.day .stars::before{background:rgba(103,166,207,.42);box-shadow:5vw 8vh rgba(103,166,207,.42),13vw 18vh rgba(103,166,207,.30),22vw 7vh rgba(103,166,207,.42),31vw 14vh rgba(103,166,207,.25),41vw 5vh rgba(103,166,207,.38),52vw 12vh rgba(103,166,207,.28),63vw 7vh rgba(103,166,207,.38),74vw 16vh rgba(103,166,207,.25),86vw 8vh rgba(103,166,207,.40),94vw 20vh rgba(103,166,207,.28)}
-body.day .stars::after{background:rgba(103,166,207,.30)}
-body.day .micro-stars span{background:rgba(87,151,199,.50)}
-body.day .arcane-stars span{background:none;color:rgba(87,151,199,.50);box-shadow:none;text-shadow:0 0 7px rgba(87,151,199,.18)}
-body.day .magic-circle{border-color:rgba(79,148,196,.26);box-shadow:0 0 50px rgba(70,142,196,.055),inset 0 0 60px rgba(78,151,204,.028)}
-body.day .magic-circle::before{border-color:rgba(79,148,196,.26);box-shadow:0 0 25px rgba(70,142,196,.055)}
-body.day .magic-circle::after{border-color:rgba(101,168,207,.20);box-shadow:0 0 18px rgba(76,151,202,.065)}
-body.day .frame{border-color:rgba(91,145,184,.34)}
-body.day .frame::before{border-left-color:rgba(79,141,190,.68);border-top-color:rgba(79,141,190,.68)}
-body.day .frame::after{border-right-color:rgba(79,141,190,.68);border-bottom-color:rgba(79,141,190,.68)}
-body.day .logo,body.day .logo-cn{color:#2e526c}
-body.day .logo-en{color:rgba(81,137,173,.62)}
-body.day .logo-symbol{color:rgba(79,151,201,.84);text-shadow:0 0 7px rgba(86,158,208,.20)}
-body.day .back{color:rgba(62,99,127,.70)}
-body.day .back:hover{color:#28536f;text-shadow:0 0 8px rgba(76,151,202,.14)}
-body.day .theme-toggle{border-color:rgba(91,145,184,.34);background:rgba(248,252,255,.78);color:rgba(61,98,125,.76)}
-body.day .theme-toggle:hover{border-color:rgba(79,151,200,.62);background:rgba(248,252,255,.90);color:#28536f;box-shadow:0 0 14px rgba(76,151,202,.11)}
-body.day .hero-en{color:rgba(81,137,173,.68)}
-body.day .hero-title{color:#2b506a;text-shadow:0 0 18px rgba(80,151,201,.065)}
-body.day .hero-cn{color:rgba(45,82,106,.80)}
-body.day .gallery-item{border-color:rgba(82,151,198,.36);background:linear-gradient(135deg,rgba(242,249,253,.76),rgba(226,240,249,.68))}
-body.day .gallery-item:hover{border-color:rgba(79,151,200,.62);background:linear-gradient(135deg,rgba(225,238,247,1),rgba(250,253,255,1))}
-body.day .gallery-image-wrap{background:rgba(226,240,249,.45);border-color:rgba(82,155,203,.12)}
-body.day .empty-gallery{border-color:rgba(82,151,198,.36);background:rgba(242,249,253,.55);color:rgba(65,106,133,.48)}
-body.day .empty-gallery-en{color:rgba(81,137,173,.55)}
-body.day .footer{color:rgba(73,115,143,.40)}
-body.day .watermark-row span{color:rgba(255,255,255,.62);text-shadow:0 1px 3px rgba(0,0,0,.65)}
-body.day .watermark-signature{border-color:rgba(79,128,162,.35);background:rgba(239,248,253,.82);color:rgba(39,77,102,.92)}
-
-@media(max-width:900px){.gallery-list{column-count:2;column-gap:22px}}
-@media(max-width:700px){
-.page{padding:22px 20px 55px}
-.frame{top:14px;left:14px;right:14px;bottom:14px}
-.header{left:25px;right:25px;top:24px}
-.logo{gap:10px}
-.logo-symbol{width:15px;height:11px;font-size:15px;line-height:11px;margin-top:2px}
-.logo-cn{height:11px;line-height:11px;font-size:11px;letter-spacing:2px}
-.logo-en{margin-top:4px;font-size:7px;line-height:7px;letter-spacing:2px}
-.header-right{gap:8px}
-.back{font-size:10px}
-.theme-toggle{height:25px;padding:0 7px;gap:5px;font-size:6px;letter-spacing:1px}
-.hero{padding-top:120px;margin-bottom:60px}
-.hero-en{font-size:8px;letter-spacing:5px}
-.hero-title{font-size:27px;letter-spacing:4px}
-.hero-cn{font-size:12px;letter-spacing:5px}
-.gallery{width:100%;margin-top:0}
-.gallery-list{column-count:1;column-gap:0}
-.gallery-item{padding:12px;margin-bottom:25px}
-.delete-button{padding:9px 10px;font-size:8px}
-.empty-gallery{padding:40px 15px}
-.lightbox{padding:30px 20px}
-.lightbox-image{max-width:94vw;max-height:82vh}
-.lightbox-stage{max-width:94vw;max-height:82vh}
-.lightbox-close{top:18px;right:22px;font-size:22px}
-.footer{margin-top:70px}
-.magic-circle{width:105vw;height:105vw}
-.watermark-row span{font-size:9px}
-.watermark-signature{right:6px;bottom:6px;font-size:8px;padding:4px 6px}
+@keyframes arcaneTwinkle{
+    0%,100%{opacity:.38;transform:scale(.85)}
+    50%{opacity:.72;transform:scale(1.15)}
 }
-@media(max-width:360px){
-.header{left:20px;right:20px;top:24px}
-.header-right{gap:5px}
-.back{font-size:9px}
-.theme-toggle{padding:0 6px;font-size:6px}
-.hero-title{font-size:24px;letter-spacing:3px}
+
+.star-a{left:7%;top:19%}
+.star-b{left:15%;top:8%}
+.star-c{left:24%;top:31%}
+.star-d{left:34%;top:12%}
+.star-e{left:43%;top:24%}
+.star-f{left:54%;top:10%}
+.star-g{left:64%;top:31%}
+.star-h{left:74%;top:17%}
+.star-i{left:84%;top:28%}
+.star-j{left:93%;top:13%}
+.star-k{left:5%;top:67%}
+.star-l{left:16%;top:77%}
+.star-m{left:27%;top:64%}
+.star-n{left:38%;top:75%}
+.star-o{left:49%;top:67%}
+.star-p{left:61%;top:78%}
+.star-q{left:72%;top:65%}
+.star-r{left:83%;top:76%}
+.star-s{left:94%;top:68%}
+.star-t{left:57%;top:90%}
+.extra-u{left:12%;top:42%}
+.extra-v{left:30%;top:54%}
+.extra-w{left:46%;top:42%}
+.extra-x{left:66%;top:49%}
+.extra-y{left:86%;top:44%}
+.extra-z{left:97%;top:55%}
+
+/* ==============================
+   魔法阵
+============================== */
+
+.magic-circle{
+    position:absolute;
+    width:min(72vw,760px);
+    height:min(72vw,760px);
+    left:50%;
+    top:47%;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    border:1px solid rgba(73,143,198,.28);
+    box-shadow:0 0 50px rgba(47,126,184,.08),inset 0 0 60px rgba(62,139,194,.04);
+    z-index:0;
+    pointer-events:none;
+    transition:border-color .6s ease,box-shadow .6s ease;
+}
+
+.magic-circle::before,
+.magic-circle::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    pointer-events:none;
+    transition:border-color .6s ease,box-shadow .6s ease;
+}
+
+.magic-circle::before{
+    width:82%;
+    height:82%;
+    border:1px solid rgba(91,162,213,.22);
+    box-shadow:0 0 25px rgba(47,126,184,.08);
+}
+
+.magic-circle::after{
+    width:61%;
+    height:61%;
+    border:1px solid rgba(91,162,213,.22);
+    box-shadow:0 0 18px rgba(62,139,194,.04);
+}
+
+/* ==============================
+   顶部导航
+============================== */
+
+.header{
+    position:absolute;
+    left:58px;
+    right:58px;
+    top:38px;
+    z-index:20;
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+}
+
+.logo{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    color:#d9edff;
+    text-decoration:none;
+    transition:color .6s ease;
+}
+
+.logo-symbol{
+    color:rgba(137,201,239,.9);
+    width:17px;
+    height:13px;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    font-size:17px;
+    line-height:13px;
+    margin:0;
+    padding:0;
+    text-shadow:0 0 7px rgba(76,159,216,.5),0 0 15px rgba(49,132,191,.22);
+    flex-shrink:0;
+    transition:color .6s ease,text-shadow .6s ease;
+}
+
+.logo>span:last-child{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    line-height:1;
+}
+
+.logo-cn{
+    display:block;
+    height:13px;
+    line-height:13px;
+    color:#d9edff;
+    font-size:13px;
+    letter-spacing:3px;
+    white-space:nowrap;
+}
+
+.logo-en{
+    display:block;
+    margin-top:5px;
+    color:rgba(157,204,239,.63);
+    font-family:"Times New Roman",serif;
+    font-size:8px;
+    line-height:8px;
+    letter-spacing:3px;
+    white-space:nowrap;
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.back{
+    color:rgba(191,220,243,.68);
+    text-decoration:none;
+    font-family:"Cinzel","Noto Serif SC",serif;
+    font-size:11px;
+    letter-spacing:1px;
+    transition:color .3s ease,text-shadow .3s ease;
+}
+
+.back:hover{
+    color:#d9efff;
+    text-shadow:0 0 8px rgba(102,180,231,.35);
+}
+
+.theme-toggle{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    height:28px;
+    padding:0 11px;
+    border:1px solid rgba(111,174,224,.32);
+    background:rgba(8,28,49,.35);
+    color:rgba(191,220,243,.68);
+    font-family:"Cinzel","Noto Serif SC",serif;
+    font-size:8px;
+    letter-spacing:2px;
+    cursor:pointer;
+    border-radius:0;
+    white-space:nowrap;
+    transition:color .35s ease,border-color .35s ease,background .35s ease,box-shadow .35s ease;
+}
+
+.theme-toggle:hover{
+    color:#d9efff;
+    border-color:rgba(122,192,235,.62);
+    background:rgba(8,31,52,.55);
+    box-shadow:0 0 14px rgba(76,151,202,.12);
+}
+
+.theme-icon{
+    font-size:12px;
+    line-height:1;
+    letter-spacing:0;
+}
+
+/* ==============================
+   页面标题
+============================== */
+
+.hero{
+    position:relative;
+    z-index:5;
+    text-align:center;
+    padding-top:150px;
+    margin-bottom:78px;
+}
+
+.hero-en{
+    font-family:"Cinzel",serif;
+    font-size:11px;
+    letter-spacing:6px;
+    color:rgba(157,204,239,.63);
+    margin-bottom:12px;
+}
+
+.hero-title{
+    font-family:"Cinzel",serif;
+    font-size:42px;
+    font-weight:400;
+    letter-spacing:8px;
+    color:#dceeff;
+    line-height:1.1;
+    text-shadow:0 0 16px rgba(47,126,184,.14);
+}
+
+.hero-cn{
+    margin-top:15px;
+    font-size:13px;
+    letter-spacing:5px;
+    color:rgba(177,207,230,.62);
+}
+
+/* ==============================
+   响应式瀑布流
+   电脑端自动根据可用宽度增加列数
+============================== */
+
+.gallery{
+    position:relative;
+    z-index:5;
+    width:min(1400px,100%);
+    margin:0 auto;
+}
+
+.gallery-list{
+    position:relative;
+    z-index:2;
+
+    /*
+       column-width 控制每列理想宽度。
+       浏览器会根据容器实际宽度自动决定列数，
+       不需要固定为三列。
+    */
+    column-width:260px;
+    column-count:auto;
+    column-gap:24px;
+}
+
+/* 每张卡片独立完整显示，不拆分 */
+.gallery-item{
+    display:inline-block;
+    vertical-align:top;
+    width:100%;
+    margin:0 0 24px;
+    padding:14px;
+    break-inside:avoid;
+    -webkit-column-break-inside:avoid;
+
+    border:1px solid rgba(111,174,224,.32);
+    background:linear-gradient(
+        135deg,
+        rgba(38,91,137,.18),
+        rgba(11,45,75,.45)
+    );
+
+    transition:
+        border-color .35s ease,
+        background .35s ease,
+        transform .35s ease,
+        box-shadow .35s ease;
+}
+
+.gallery-item:hover{
+    border-color:rgba(122,192,235,.62);
+    background:linear-gradient(
+        135deg,
+        rgba(38,91,137,.26),
+        rgba(11,45,75,.55)
+    );
+    transform:translateY(-3px);
+    box-shadow:0 8px 28px rgba(0,0,0,.12),0 0 25px rgba(56,143,201,.12);
+}
+
+/* 图片容器 */
+
+.gallery-image-wrap{
+    position:relative;
+    width:100%;
+    display:block;
+    overflow:hidden;
+    background:rgba(11,45,75,.22);
+    border:1px solid rgba(91,162,213,.18);
+    isolation:isolate;
+}
+
+.gallery-image{
+    display:block;
+    width:100%;
+    height:auto;
+    max-width:100%;
+    object-fit:contain;
+    cursor:pointer;
+    user-select:none;
+    -webkit-user-select:none;
+    -webkit-user-drag:none;
+    -webkit-touch-callout:none;
+}
+
+/* ==============================
+   B 款重复斜向水印
+============================== */
+
+.watermark-pattern{
+    position:absolute;
+    inset:-35%;
+    z-index:2;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-around;
+    pointer-events:none;
+    overflow:hidden;
+    transform:rotate(-25deg);
+    user-select:none;
+    -webkit-user-select:none;
+}
+
+.watermark-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    gap:25px;
+    width:150%;
+    white-space:nowrap;
+}
+
+.watermark-row span{
+    flex-shrink:0;
+    color:rgba(235,245,255,.36);
+    font-family:"Cinzel","Noto Serif SC",serif;
+    font-size:10px;
+    font-weight:500;
+    letter-spacing:2px;
+    white-space:nowrap;
+    text-shadow:0 1px 3px rgba(0,0,0,.35);
+}
+
+.watermark-signature{
+    position:absolute;
+    right:8px;
+    bottom:8px;
+    z-index:3;
+    padding:5px 8px;
+    border:1px solid rgba(220,236,255,.3);
+    background:rgba(3,15,29,.62);
+    color:rgba(245,250,255,.9);
+    font-family:"Cinzel","Noto Serif SC",serif;
+    font-size:9px;
+    letter-spacing:1px;
+    line-height:1.5;
+    pointer-events:none;
+    user-select:none;
+    -webkit-user-select:none;
+    white-space:nowrap;
+}
+
+/* ==============================
+   管理员删除按钮
+============================== */
+
+.delete-button{
+    display:none;
+    width:100%;
+    margin-top:10px;
+    padding:8px 10px;
+    border:1px solid rgba(120,170,205,.22);
+    background:rgba(6,20,38,.28);
+    color:rgba(177,207,230,.52);
+    font-family:"Cinzel","Noto Serif SC",serif;
+    font-size:8px;
+    letter-spacing:2px;
+    cursor:pointer;
+    text-align:center;
+    transition:color .3s ease,border-color .3s ease,background .3s ease,box-shadow .3s ease;
+}
+
+.delete-button:hover{
+    color:rgba(225,242,255,.90);
+    border-color:rgba(138,190,222,.58);
+    background:rgba(31,70,96,.45);
+    box-shadow:0 0 14px rgba(76,151,202,.10);
+}
+
+.delete-button:active{
+    transform:translateY(1px);
+}
+
+.delete-button:disabled{
+    cursor:wait;
+    opacity:.45;
+}
+
+.gallery-item.deleting{
+    opacity:.45;
+    pointer-events:none;
+    transition:opacity .3s ease;
+}
+
+/* 空画廊 */
+
+.empty-gallery{
+    width:100%;
+    text-align:center;
+    padding:50px 20px;
+    border:1px solid rgba(111,174,224,.32);
+    background:rgba(11,45,75,.20);
+    color:rgba(177,207,230,.48);
+    font-size:11px;
+    letter-spacing:2px;
+}
+
+.empty-gallery-en{
+    display:block;
+    font-family:"Cinzel",serif;
+    font-size:9px;
+    letter-spacing:3px;
+    margin-bottom:9px;
+    color:rgba(157,204,239,.45);
+}
+
+/* ==============================
+   图片放大查看
+============================== */
+
+.lightbox{
+    position:fixed;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:50px;
+    background:rgba(6,20,38,.86);
+    backdrop-filter:blur(5px);
+    z-index:100;
+}
+
+.lightbox.active{
+    display:flex;
+}
+
+.lightbox-stage{
+    position:relative;
+    display:inline-block;
+    max-width:90vw;
+    max-height:85vh;
+    overflow:hidden;
+    isolation:isolate;
+}
+
+.lightbox-image{
+    display:block;
+    max-width:90vw;
+    max-height:85vh;
+    width:auto;
+    height:auto;
+    object-fit:contain;
+    box-shadow:0 0 40px rgba(47,126,184,.18);
+    border:1px solid rgba(122,192,235,.25);
+    user-select:none;
+    -webkit-user-select:none;
+    -webkit-user-drag:none;
+    -webkit-touch-callout:none;
+}
+
+.lightbox-stage .watermark-row span{
+    font-size:13px;
+    letter-spacing:2px;
+}
+
+.lightbox-stage .watermark-signature{
+    font-size:10px;
+    padding:6px 9px;
+}
+
+.lightbox-close{
+    position:absolute;
+    top:28px;
+    right:35px;
+    color:rgba(210,235,248,.7);
+    font-family:"Cinzel",serif;
+    font-size:25px;
+    font-weight:400;
+    cursor:pointer;
+    transition:.3s;
+    z-index:110;
+}
+
+.lightbox-close:hover{
+    color:#e5f5ff;
+    transform:rotate(90deg);
+}
+
+/* 页脚 */
+
+.footer{
+    position:relative;
+    z-index:5;
+    text-align:center;
+    margin-top:100px;
+    font-family:"Cinzel",serif;
+    font-size:8px;
+    letter-spacing:4px;
+    color:rgba(133,177,207,.38);
+}
+
+/* ==============================
+   日间模式
+============================== */
+
+body.day{
+    background:#f4f9fd;
+    color:#2e5069;
+}
+
+body.day .page{
+    background:
+        radial-gradient(circle at 50% 42%,rgba(165,211,238,.20),transparent 38%),
+        radial-gradient(circle at 50% 52%,rgba(226,240,249,.68),transparent 72%),
+        #f4f9fd;
+}
+
+body.day .stars::before{
+    background:rgba(103,166,207,.42);
+    box-shadow:
+        5vw 8vh rgba(103,166,207,.42),
+        13vw 18vh rgba(103,166,207,.30),
+        22vw 7vh rgba(103,166,207,.42),
+        31vw 14vh rgba(103,166,207,.25),
+        41vw 5vh rgba(103,166,207,.38),
+        52vw 12vh rgba(103,166,207,.28),
+        63vw 7vh rgba(103,166,207,.38),
+        74vw 16vh rgba(103,166,207,.25),
+        86vw 8vh rgba(103,166,207,.40),
+        94vw 20vh rgba(103,166,207,.28);
+}
+
+body.day .stars::after{
+    background:rgba(103,166,207,.30);
+}
+
+body.day .micro-stars span{
+    background:rgba(87,151,199,.50);
+}
+
+body.day .arcane-stars span{
+    background:none;
+    color:rgba(87,151,199,.50);
+    box-shadow:none;
+    text-shadow:0 0 7px rgba(87,151,199,.18);
+}
+
+body.day .magic-circle{
+    border-color:rgba(79,148,196,.26);
+    box-shadow:0 0 50px rgba(70,142,196,.055),inset 0 0 60px rgba(78,151,204,.028);
+}
+
+body.day .magic-circle::before{
+    border-color:rgba(79,148,196,.26);
+    box-shadow:0 0 25px rgba(70,142,196,.055);
+}
+
+body.day .magic-circle::after{
+    border-color:rgba(101,168,207,.20);
+    box-shadow:0 0 18px rgba(76,151,202,.065);
+}
+
+body.day .frame{
+    border-color:rgba(91,145,184,.34);
+}
+
+body.day .frame::before{
+    border-left-color:rgba(79,141,190,.68);
+    border-top-color:rgba(79,141,190,.68);
+}
+
+body.day .frame::after{
+    border-right-color:rgba(79,141,190,.68);
+    border-bottom-color:rgba(79,141,190,.68);
+}
+
+body.day .logo,
+body.day .logo-cn{
+    color:#2e526c;
+}
+
+body.day .logo-en{
+    color:rgba(81,137,173,.62);
+}
+
+body.day .logo-symbol{
+    color:rgba(79,151,201,.84);
+    text-shadow:0 0 7px rgba(86,158,208,.20);
+}
+
+body.day .back{
+    color:rgba(62,99,127,.70);
+}
+
+body.day .back:hover{
+    color:#28536f;
+    text-shadow:0 0 8px rgba(76,151,202,.14);
+}
+
+body.day .theme-toggle{
+    border-color:rgba(91,145,184,.34);
+    background:rgba(248,252,255,.78);
+    color:rgba(61,98,125,.76);
+}
+
+body.day .theme-toggle:hover{
+    border-color:rgba(79,151,200,.62);
+    background:rgba(248,252,255,.90);
+    color:#28536f;
+    box-shadow:0 0 14px rgba(76,151,202,.11);
+}
+
+body.day .hero-en{
+    color:rgba(81,137,173,.68);
+}
+
+body.day .hero-title{
+    color:#2b506a;
+    text-shadow:0 0 18px rgba(80,151,201,.065);
+}
+
+body.day .hero-cn{
+    color:rgba(45,82,106,.80);
+}
+
+body.day .gallery-item{
+    border-color:rgba(82,151,198,.36);
+    background:linear-gradient(135deg,rgba(242,249,253,.76),rgba(226,240,249,.68));
+}
+
+body.day .gallery-item:hover{
+    border-color:rgba(79,151,200,.62);
+    background:linear-gradient(135deg,rgba(225,238,247,1),rgba(250,253,255,1));
+}
+
+body.day .gallery-image-wrap{
+    background:rgba(226,240,249,.45);
+    border-color:rgba(82,155,203,.12);
+}
+
+body.day .empty-gallery{
+    border-color:rgba(82,151,198,.36);
+    background:rgba(242,249,253,.55);
+    color:rgba(65,106,133,.48);
+}
+
+body.day .empty-gallery-en{
+    color:rgba(81,137,173,.55);
+}
+
+body.day .footer{
+    color:rgba(73,115,143,.40);
+}
+
+body.day .watermark-row span{
+    color:rgba(255,255,255,.62);
+    text-shadow:0 1px 3px rgba(0,0,0,.65);
+}
+
+body.day .watermark-signature{
+    border-color:rgba(79,128,162,.35);
+    background:rgba(239,248,253,.82);
+    color:rgba(39,77,102,.92);
+}
+
+body.day .delete-button{
+    border-color:rgba(82,151,198,.24);
+    background:rgba(240,248,253,.62);
+    color:rgba(65,106,133,.58);
+}
+
+body.day .delete-button:hover{
+    border-color:rgba(79,151,200,.58);
+    background:rgba(225,239,248,.90);
+    color:rgba(42,82,107,.88);
+    box-shadow:0 0 14px rgba(76,151,202,.10);
+}
+
+/* ==============================
+   平板：两列
+============================== */
+
+@media (min-width:541px) and (max-width:900px){
+    .page{
+        padding-left:35px;
+        padding-right:35px;
+    }
+
+    .gallery-list{
+        column-count:2;
+        column-width:auto;
+        column-gap:20px;
+    }
+
+    .gallery-item{
+        padding:10px;
+        margin-bottom:20px;
+    }
+
+    .header{
+        left:35px;
+        right:35px;
+    }
+
+    .hero{
+        margin-bottom:60px;
+    }
+}
+
+/* ==============================
+   手机：两列瀑布流
+============================== */
+
+@media (max-width:540px){
+    .page{
+        padding:22px 20px 55px;
+    }
+
+    .frame{
+        top:14px;
+        left:14px;
+        right:14px;
+        bottom:14px;
+    }
+
+    .header{
+        left:25px;
+        right:25px;
+        top:24px;
+    }
+
+    .logo{
+        gap:10px;
+    }
+
+    .logo-symbol{
+        width:15px;
+        height:11px;
+        font-size:15px;
+        line-height:11px;
+        margin-top:2px;
+    }
+
+    .logo-cn{
+        height:11px;
+        line-height:11px;
+        font-size:11px;
+        letter-spacing:2px;
+    }
+
+    .logo-en{
+        margin-top:4px;
+        font-size:7px;
+        line-height:7px;
+        letter-spacing:2px;
+    }
+
+    .header-right{
+        gap:8px;
+    }
+
+    .back{
+        font-size:10px;
+    }
+
+    .theme-toggle{
+        height:25px;
+        padding:0 7px;
+        gap:5px;
+        font-size:6px;
+        letter-spacing:1px;
+    }
+
+    .hero{
+        padding-top:120px;
+        margin-bottom:50px;
+    }
+
+    .hero-en{
+        font-size:8px;
+        letter-spacing:5px;
+    }
+
+    .hero-title{
+        font-size:27px;
+        letter-spacing:4px;
+    }
+
+    .hero-cn{
+        font-size:12px;
+        letter-spacing:5px;
+    }
+
+    .gallery{
+        width:100%;
+        margin-top:0;
+    }
+
+    .gallery-list{
+        column-count:2;
+        column-width:auto;
+        column-gap:12px;
+    }
+
+    .gallery-item{
+        padding:7px;
+        margin-bottom:14px;
+    }
+
+    .delete-button{
+        padding:8px 4px;
+        font-size:7px;
+        letter-spacing:1px;
+    }
+
+    .empty-gallery{
+        padding:40px 15px;
+        column-span:all;
+    }
+
+    .lightbox{
+        padding:30px 15px;
+    }
+
+    .lightbox-image{
+        max-width:94vw;
+        max-height:82vh;
+    }
+
+    .lightbox-stage{
+        max-width:94vw;
+        max-height:82vh;
+    }
+
+    .lightbox-close{
+        top:18px;
+        right:22px;
+        font-size:22px;
+    }
+
+    .footer{
+        margin-top:70px;
+        font-size:7px;
+        letter-spacing:2px;
+    }
+
+    .magic-circle{
+        width:105vw;
+        height:105vw;
+    }
+
+    .watermark-row span{
+        font-size:9px;
+    }
+
+    .watermark-signature{
+        right:5px;
+        bottom:5px;
+        font-size:7px;
+        padding:3px 5px;
+        letter-spacing:.5px;
+    }
+}
+
+/* 极窄手机 */
+
+@media (max-width:360px){
+    .header{
+        left:20px;
+        right:20px;
+        top:24px;
+    }
+
+    .header-right{
+        gap:5px;
+    }
+
+    .back{
+        font-size:9px;
+    }
+
+    .theme-toggle{
+        padding:0 6px;
+        font-size:6px;
+    }
+
+    .hero-title{
+        font-size:24px;
+        letter-spacing:3px;
+    }
+
+    .gallery-list{
+        column-count:2;
+        column-gap:9px;
+    }
+
+    .gallery-item{
+        padding:5px;
+        margin-bottom:11px;
+    }
 }
 </style>
 </head>
@@ -239,18 +1226,22 @@ body.day .watermark-signature{border-color:rgba(79,128,162,.35);background:rgba(
     <div class="lightbox-close" id="lightboxClose">×</div>
     <div class="lightbox-stage" id="lightboxStage">
         <img class="lightbox-image" id="lightboxImage" src="" alt="">
-        <div class="watermark-pattern" aria-hidden="true"></div>
+        <div class="watermark-pattern" id="lightboxWatermark" aria-hidden="true"></div>
         <div class="watermark-signature" aria-hidden="true">SEYAMI ARCHIVE</div>
     </div>
 </div>
 
 <script>
 /* =========================================================
-   SUPABASE
+   SUPABASE 配置
 ========================================================= */
 const SUPABASE_URL = "https://rqqkdpzehxzwqzytpxgh.supabase.co";
 const SUPABASE_KEY = "sb_publishable_T_gNdlgkOaXnzjSvdmI1Pw_HQOVTEWG";
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 
 const galleryList = document.getElementById("galleryList");
 const lightbox = document.getElementById("lightbox");
@@ -258,10 +1249,11 @@ const lightboxImage = document.getElementById("lightboxImage");
 const lightboxClose = document.getElementById("lightboxClose");
 const lightboxStage = document.getElementById("lightboxStage");
 
-/* 水印文字 */
 const WATERMARK_TEXT = "塞垭弥大陆档案馆 · SEYAMI ARCHIVE";
 
-/* 生成重复斜向水印 */
+/* =========================================================
+   生成重复斜向水印
+========================================================= */
 function createWatermarkPattern() {
     const pattern = document.createElement("div");
     pattern.className = "watermark-pattern";
@@ -283,6 +1275,10 @@ function createWatermarkPattern() {
     return pattern;
 }
 
+/* 放大图片的水印 */
+document.getElementById("lightboxWatermark")
+    .replaceWith(createWatermarkPattern());
+
 /* =========================================================
    管理员权限
 ========================================================= */
@@ -293,11 +1289,14 @@ async function checkGalleryAdmin(sessionFromAuth = undefined) {
         let session = sessionFromAuth;
 
         if (sessionFromAuth === undefined) {
-            const { data, error } = await supabaseClient.auth.getSession();
+            const { data, error } =
+                await supabaseClient.auth.getSession();
+
             if (error) {
                 console.error("获取登录状态失败：", error);
                 return false;
             }
+
             session = data.session;
         }
 
@@ -305,7 +1304,8 @@ async function checkGalleryAdmin(sessionFromAuth = undefined) {
             return false;
         }
 
-        const { data, error } = await supabaseClient.rpc("is_admin");
+        const { data, error } =
+            await supabaseClient.rpc("is_admin");
 
         if (error) {
             console.error("管理员权限验证失败：", error);
@@ -313,6 +1313,7 @@ async function checkGalleryAdmin(sessionFromAuth = undefined) {
         }
 
         return data === true;
+
     } catch (error) {
         console.error("管理员权限检查失败：", error);
         return false;
@@ -332,7 +1333,7 @@ function showEmptyGallery() {
 }
 
 /* =========================================================
-   提取 Supabase Storage 文件路径
+   解析 Supabase Storage 文件路径
 ========================================================= */
 function getStorageFileInfo(imageUrl) {
     try {
@@ -342,15 +1343,21 @@ function getStorageFileInfo(imageUrl) {
 
         if (index === -1) return null;
 
-        const path = url.pathname.substring(index + marker.length);
+        const path = url.pathname.substring(
+            index + marker.length
+        );
+
         const slash = path.indexOf("/");
 
         if (slash === -1) return null;
 
         return {
             bucket: path.substring(0, slash),
-            filePath: decodeURIComponent(path.substring(slash + 1))
+            filePath: decodeURIComponent(
+                path.substring(slash + 1)
+            )
         };
+
     } catch (error) {
         console.error("Storage URL parsing error:", error);
         return null;
@@ -358,12 +1365,14 @@ function getStorageFileInfo(imageUrl) {
 }
 
 /* =========================================================
-   删除 Storage 文件
+   删除 Storage 图片
 ========================================================= */
 async function deleteStorageFile(imageUrl) {
     const info = getStorageFileInfo(imageUrl);
 
-    if (!info) return { success: true };
+    if (!info) {
+        return { success: true };
+    }
 
     const { error } = await supabaseClient
         .storage
@@ -387,6 +1396,7 @@ async function deleteGalleryItem(item, card, deleteButton) {
     if (!stillAdmin) {
         isGalleryAdmin = false;
         deleteButton.remove();
+
         alert("管理员登录状态已失效，无法删除档案。");
         return;
     }
@@ -401,13 +1411,19 @@ async function deleteGalleryItem(item, card, deleteButton) {
     deleteButton.textContent = "正在删除 · DELETING";
     card.classList.add("deleting");
 
-    const storageResult = await deleteStorageFile(item.image_url);
+    const storageResult =
+        await deleteStorageFile(item.image_url);
 
     if (!storageResult.success) {
         card.classList.remove("deleting");
         deleteButton.disabled = false;
         deleteButton.textContent = "删除档案 · DELETE";
-        alert("图片文件删除失败。\n\n数据库记录暂未删除，请检查 Supabase Storage 的删除权限。");
+
+        alert(
+            "图片文件删除失败。\n\n" +
+            "数据库记录暂未删除，请检查 Supabase Storage 的删除权限。"
+        );
+
         return;
     }
 
@@ -418,22 +1434,30 @@ async function deleteGalleryItem(item, card, deleteButton) {
 
     if (error) {
         console.error("Database deletion error:", error);
+
         card.classList.remove("deleting");
         deleteButton.disabled = false;
         deleteButton.textContent = "删除档案 · DELETE";
-        alert("数据库记录删除失败。\n\n请检查 gallery_images 表的 DELETE 权限。");
+
+        alert(
+            "数据库记录删除失败。\n\n" +
+            "请检查 gallery_images 表的 DELETE 权限。"
+        );
+
         return;
     }
 
     card.remove();
 
-    if (galleryList.querySelector(".gallery-item") === null) {
+    if (
+        galleryList.querySelector(".gallery-item") === null
+    ) {
         showEmptyGallery();
     }
 }
 
 /* =========================================================
-   读取 Supabase 画廊
+   加载画廊图片
 ========================================================= */
 async function loadGallery() {
     galleryList.innerHTML = `
@@ -450,12 +1474,14 @@ async function loadGallery() {
 
     if (error) {
         console.error("Gallery loading error:", error);
+
         galleryList.innerHTML = `
             <div class="empty-gallery">
                 <span class="empty-gallery-en">ARCHIVE ERROR</span>
                 档案画廊读取失败
             </div>
         `;
+
         return;
     }
 
@@ -484,16 +1510,16 @@ async function loadGallery() {
 
         imageWrap.appendChild(image);
 
-        /* 新增：每张缩略图上的重复水印 */
+        /* 每张缩略图的重复水印 */
         imageWrap.appendChild(createWatermarkPattern());
 
-        /* 新增：每张缩略图右下角署名 */
+        /* 每张缩略图右下角署名 */
         const signature = document.createElement("div");
         signature.className = "watermark-signature";
         signature.textContent = "SEYAMI ARCHIVE";
         signature.setAttribute("aria-hidden", "true");
-        imageWrap.appendChild(signature);
 
+        imageWrap.appendChild(signature);
         card.appendChild(imageWrap);
 
         let deleteButton = null;
@@ -504,6 +1530,7 @@ async function loadGallery() {
             deleteButton.type = "button";
             deleteButton.textContent = "删除档案 · DELETE";
             deleteButton.style.display = "block";
+
             card.appendChild(deleteButton);
         }
 
@@ -516,12 +1543,17 @@ async function loadGallery() {
             lightbox.classList.add("active");
         });
 
-        /* 管理员删除按钮 */
+        /* 管理员删除 */
         if (deleteButton) {
             deleteButton.addEventListener("click", (event) => {
                 event.preventDefault();
                 event.stopPropagation();
-                deleteGalleryItem(item, card, deleteButton);
+
+                deleteGalleryItem(
+                    item,
+                    card,
+                    deleteButton
+                );
             });
         }
     });
@@ -537,17 +1569,20 @@ async function initGallery() {
 
 initGallery();
 
-/* 登录状态变化时重新验证权限 */
-supabaseClient.auth.onAuthStateChange((_event, session) => {
-    queueMicrotask(async () => {
-        const nextAdminStatus = await checkGalleryAdmin(session);
+/* 登录状态变化时重新验证管理员权限 */
+supabaseClient.auth.onAuthStateChange(
+    (_event, session) => {
+        queueMicrotask(async () => {
+            const nextAdminStatus =
+                await checkGalleryAdmin(session);
 
-        if (nextAdminStatus !== isGalleryAdmin) {
-            isGalleryAdmin = nextAdminStatus;
-            await loadGallery();
-        }
-    });
-});
+            if (nextAdminStatus !== isGalleryAdmin) {
+                isGalleryAdmin = nextAdminStatus;
+                await loadGallery();
+            }
+        });
+    }
+);
 
 /* =========================================================
    关闭图片放大
@@ -560,11 +1595,15 @@ function closeLightbox() {
 lightboxClose.addEventListener("click", closeLightbox);
 
 lightbox.addEventListener("click", (event) => {
-    if (event.target === lightbox) closeLightbox();
+    if (event.target === lightbox) {
+        closeLightbox();
+    }
 });
 
 document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeLightbox();
+    if (event.key === "Escape") {
+        closeLightbox();
+    }
 });
 
 /* =========================================================
@@ -587,10 +1626,15 @@ function applyTheme(theme) {
 }
 
 const savedTheme = localStorage.getItem("seyami-theme");
-applyTheme(savedTheme === "day" ? "day" : "night");
+
+applyTheme(
+    savedTheme === "day" ? "day" : "night"
+);
 
 themeToggle.addEventListener("click", () => {
-    const isDay = document.body.classList.contains("day");
+    const isDay =
+        document.body.classList.contains("day");
+
     const nextTheme = isDay ? "night" : "day";
 
     localStorage.setItem("seyami-theme", nextTheme);
@@ -599,12 +1643,14 @@ themeToggle.addEventListener("click", () => {
 
 /* =========================================================
    基础防保存措施
-   说明：只能增加保存难度，不能完全阻止截图或获取公开图片地址。
+   不能完全阻止截图或获取公开图片地址
 ========================================================= */
 document.addEventListener("contextmenu", (event) => {
     if (
         event.target instanceof Element &&
-        event.target.closest(".gallery-image-wrap, .lightbox-stage")
+        event.target.closest(
+            ".gallery-image-wrap, .lightbox-stage"
+        )
     ) {
         event.preventDefault();
     }
@@ -613,7 +1659,9 @@ document.addEventListener("contextmenu", (event) => {
 document.addEventListener("dragstart", (event) => {
     if (
         event.target instanceof Element &&
-        event.target.closest(".gallery-image-wrap, .lightbox-stage")
+        event.target.closest(
+            ".gallery-image-wrap, .lightbox-stage"
+        )
     ) {
         event.preventDefault();
     }
