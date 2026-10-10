@@ -8,47 +8,252 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
 :root{color-scheme:dark;--bg:#061426;--panel:rgba(11,29,51,.92);--panel-soft:rgba(18,40,66,.78);--text:#dcecff;--muted:#91a9c8;--line:rgba(153,190,235,.25);--gold:#d9c49a;--blue:#7dbdff;--pink:#ff9fc9;--purple:#c1a5ff;--tile-bg:rgba(28,54,83,.92);--tile-border:rgba(172,204,245,.25);--shadow:rgba(0,0,0,.25)}
-*{box-sizing:border-box}html{min-height:100%;background:var(--bg)}body{margin:0;min-height:100vh;overflow-x:hidden;color:var(--text);background:radial-gradient(ellipse at 50% 5%,rgba(47,85,139,.20),transparent 45%),radial-gradient(ellipse at 8% 65%,rgba(85,65,139,.10),transparent 38%),var(--bg);font-family:"Noto Serif SC",serif;transition:background .25s,color .25s}button{font:inherit;color:inherit}button:focus-visible{outline:2px solid var(--blue);outline-offset:3px}a{color:inherit;text-decoration:none}
-.star-field{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}.star-field span{position:absolute;color:rgba(190,216,255,.65);animation:twinkle 3.5s ease-in-out infinite alternate}.star-field span:nth-child(3n){color:rgba(255,191,222,.7);animation-delay:-1.3s}.star-field span:nth-child(4n){color:rgba(224,202,255,.72);animation-delay:-2.1s}@keyframes twinkle{from{opacity:.25;transform:scale(.85) rotate(0)}to{opacity:.9;transform:scale(1.15) rotate(18deg)}}
-.site-header,main,.site-footer{position:relative;z-index:1}.site-header{width:min(1180px,calc(100% - 40px));margin:0 auto;padding:28px 0 18px;display:flex;align-items:center;justify-content:space-between;gap:16px}.logo{display:flex;flex-direction:column;gap:4px}.logo-cn{font-size:16px;letter-spacing:3px}.logo-en{font-family:Cinzel,serif;font-size:10px;letter-spacing:3.5px;color:var(--muted)}.header-actions{display:flex;align-items:center;gap:10px}.nav-link,.theme-toggle{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:8px 13px;border:1px solid var(--line);border-radius:3px;background:rgba(16,35,59,.55);color:var(--text);font-size:12px;cursor:pointer;transition:background .2s,border-color .2s,transform .2s}.nav-link:hover,.theme-toggle:hover{border-color:var(--gold);background:rgba(39,61,89,.72)}.nav-link:active,.theme-toggle:active,.action-button:active{transform:translateY(1px)}
-main{width:min(1040px,calc(100% - 32px));margin:0 auto;padding:20px 0 55px}.intro{text-align:center;margin:12px auto 25px}.eyebrow{color:var(--gold);font-family:Cinzel,serif;font-size:11px;letter-spacing:4px}h1{margin:12px 0 7px;font-family:Cinzel,serif;font-size:clamp(27px,5vw,43px);font-weight:400;letter-spacing:3px}.subtitle{color:var(--muted);font-size:13px;letter-spacing:2px}.intro-stars{margin-top:13px;color:var(--gold);font-size:15px;letter-spacing:13px}
-.game-frame{position:relative;width:min(100%,900px);margin:0 auto;padding:1px;background:linear-gradient(135deg,rgba(217,196,154,.72),rgba(113,157,213,.22),rgba(217,196,154,.55));clip-path:polygon(20px 0,calc(100% - 20px) 0,100% 20px,100% calc(100% - 20px),calc(100% - 20px) 100%,20px 100%,0 calc(100% - 20px),0 20px)}.game-panel{position:relative;padding:clamp(14px,3vw,27px);background:radial-gradient(ellipse at 50% 0%,rgba(64,92,147,.16),transparent 60%),var(--panel);clip-path:polygon(20px 0,calc(100% - 20px) 0,100% 20px,100% calc(100% - 20px),calc(100% - 20px) 100%,20px 100%,0 calc(100% - 20px),0 20px)}.corner{position:absolute;color:var(--gold);opacity:.8;font-size:19px;pointer-events:none}.corner.tl{top:10px;left:12px}.corner.tr{top:10px;right:12px}.corner.bl{bottom:10px;left:12px}.corner.br{bottom:10px;right:12px}.game-topline{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px}.mode-label{color:var(--gold);font-size:12px;letter-spacing:2px}.step-display{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px}.step-number{color:var(--text);font-family:Cinzel,serif;font-size:22px;font-variant-numeric:tabular-nums}.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-bottom:16px}.stat-card{padding:10px 7px;text-align:center;border:1px solid var(--line);background:var(--panel-soft)}.stat-label{color:var(--muted);font-size:11px;letter-spacing:1px}.stat-value{margin-top:4px;color:var(--text);font-family:Cinzel,serif;font-size:clamp(17px,3vw,23px);font-variant-numeric:tabular-nums}.stat-value.score-pop{animation:scorePop .25s ease-out}@keyframes scorePop{50%{transform:scale(1.13);color:var(--gold)}}
-.board-wrap{width:min(100%,640px);margin:0 auto;padding:8px;border:1px solid rgba(151,190,241,.30);background:radial-gradient(circle at 50% 50%,rgba(93,117,181,.17),transparent 70%),rgba(3,14,28,.55);box-shadow:inset 0 0 35px rgba(64,106,171,.08)}.board{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:4px;touch-action:manipulation;user-select:none}.tile{position:relative;display:flex;align-items:center;justify-content:center;aspect-ratio:1;min-width:0;padding:0;overflow:hidden;border:1px solid var(--tile-border);border-radius:8px;background:radial-gradient(circle at 32% 25%,rgba(255,255,255,.09),transparent 55%),var(--tile-bg);box-shadow:inset 0 1px rgba(255,255,255,.05),0 2px 5px var(--shadow);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .12s,background .12s,transform .12s,opacity .12s}.tile:hover{border-color:rgba(217,196,154,.8)}.tile.selected{z-index:2;border:2px solid var(--gold);background:rgba(79,99,139,.8);box-shadow:0 0 0 2px rgba(217,196,154,.13),0 0 14px rgba(217,196,154,.25);transform:scale(.94)}.tile img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}.tile .emoji{font-size:clamp(17px,4.2vw,34px);line-height:1;filter:drop-shadow(0 2px 3px rgba(0,0,0,.25));pointer-events:none}.tile.matched{animation:none;opacity:1}.tile.falling{animation:appear .19s ease-out}@keyframes appear{from{transform:translateY(-12px) scale(.8);opacity:.35}to{transform:translateY(0) scale(1);opacity:1}}
-.game-message{min-height:27px;margin:12px auto 3px;text-align:center;color:var(--muted);font-size:12px;line-height:1.8}.game-message.success{color:#b9e6ff}.game-message.warning{color:#ffd1e6}.action-row{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:13px}.action-button{min-height:39px;padding:9px 19px;border:1px solid var(--line);border-radius:3px;background:rgba(19,42,69,.8);color:var(--text);font-size:12px;letter-spacing:1px;cursor:pointer;transition:.2s}.action-button:hover{border-color:var(--gold);background:rgba(48,66,95,.9)}.action-button.primary{border-color:rgba(217,196,154,.55);color:#f3e5c5;background:rgba(90,76,65,.3)}.rules{width:min(100%,800px);margin:18px auto 0;padding:16px 18px;border-left:2px solid rgba(217,196,154,.55);background:rgba(17,34,55,.48)}.rules h2{margin:0 0 8px;color:var(--gold);font-size:13px;font-weight:400;letter-spacing:2px}.rules p{margin:5px 0;color:var(--muted);font-size:12px;line-height:1.9}.site-footer{padding:0 20px 30px;color:var(--muted);text-align:center;font-family:Cinzel,serif;font-size:9px;letter-spacing:2px}
-.result-overlay{position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(1,8,18,.76);backdrop-filter:blur(5px)}.result-overlay.show{display:flex}.result-card{width:min(100%,380px);padding:28px 22px;border:1px solid rgba(217,196,154,.65);background:var(--panel);text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3)}.result-symbol{color:var(--gold);font-size:32px}.result-card h2{margin:12px 0;font-size:20px;font-weight:400}.result-card p{color:var(--muted);font-size:13px;line-height:1.9}.result-score{margin:16px 0;color:var(--gold);font-family:Cinzel,serif;font-size:31px}
-body.day-mode{color-scheme:light;--bg:#e9eef7;--panel:rgba(248,250,255,.96);--panel-soft:rgba(231,238,250,.92);--text:#263b59;--muted:#647895;--line:rgba(80,108,153,.28);--gold:#98783c;--blue:#3b76bd;--pink:#bf6490;--purple:#8160be;--tile-bg:rgba(218,230,248,.96);--tile-border:rgba(99,128,177,.28);--shadow:rgba(42,64,99,.10);background:radial-gradient(ellipse at 50% 5%,rgba(177,201,241,.48),transparent 48%),radial-gradient(ellipse at 8% 65%,rgba(218,198,245,.25),transparent 38%),var(--bg)}body.day-mode .game-panel{background:radial-gradient(ellipse at 50% 0%,rgba(172,195,233,.24),transparent 60%),var(--panel)}body.day-mode .nav-link,body.day-mode .theme-toggle,body.day-mode .action-button{background:rgba(224,233,247,.85)}body.day-mode .board-wrap{background:rgba(215,226,243,.65)}body.day-mode .rules{background:rgba(248,250,255,.76)}body.day-mode .tile{background:radial-gradient(circle at 32% 25%,rgba(255,255,255,.65),transparent 55%),var(--tile-bg)}body.day-mode .action-button.primary{color:#725c32;background:rgba(231,220,196,.55)}
-@media(max-width:700px){.site-header{width:calc(100% - 20px);padding-top:16px;gap:6px}.logo-cn{font-size:12px;letter-spacing:1px}.logo-en{font-size:8px;letter-spacing:1.5px}.header-actions{gap:5px}.nav-link,.theme-toggle{min-height:32px;padding:6px 7px;font-size:10px}main{width:calc(100% - 8px);padding-top:10px}.intro{margin:8px auto 16px}.eyebrow{font-size:9px;letter-spacing:2px}h1{font-size:clamp(23px,6vw,34px);letter-spacing:1px}.subtitle{font-size:11px;letter-spacing:.5px}.intro-stars{margin-top:8px;font-size:13px;letter-spacing:8px}.game-frame{width:100%}.game-panel{padding:12px 4px}.game-topline{flex-direction:column;align-items:stretch;justify-content:flex-start;gap:10px;margin:0 8px 14px}.mode-label{font-size:10px;letter-spacing:.5px;line-height:1.8;text-align:center;overflow-wrap:anywhere}.step-display{justify-content:center;gap:8px;font-size:12px;line-height:1.5;white-space:nowrap}.step-number{font-size:22px;line-height:1.2}.stats{gap:5px;margin:0 3px 12px}.stat-card{padding:8px 2px;min-width:0}.stat-label{font-size:9px;letter-spacing:0}.stat-value{font-size:clamp(15px,4.5vw,21px)}.board-wrap{width:100%;max-width:none;padding:3px;border-width:1px}.board{width:100%;gap:2px}.tile{width:100%;min-width:0;border-radius:4px;border-width:1px}.tile .emoji{font-size:clamp(17px,6.2vw,30px)}.game-message{margin:10px 5px 3px;font-size:11px}.action-row{gap:7px;margin-top:10px}.action-button{min-height:37px;padding:8px 10px;font-size:11px;letter-spacing:.5px}.rules{width:100%;margin-top:14px;padding:13px 12px}.rules p{font-size:11px}.site-footer{font-size:8px;letter-spacing:1px}}
-@media(max-width:380px){.site-header{width:calc(100% - 14px)}.logo-cn{font-size:11px;letter-spacing:.5px}.nav-link,.theme-toggle{padding:6px 5px;font-size:9px}.game-panel{padding-right:3px;padding-left:3px}.board-wrap{padding:2px}.board{gap:1.5px}.tile .emoji{font-size:clamp(15px,6vw,23px)}.stat-label{font-size:8px}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+*{box-sizing:border-box}
+html{min-height:100%;background:var(--bg)}
+body{margin:0;min-height:100vh;overflow-x:hidden;color:var(--text);background:radial-gradient(ellipse at 50% 5%,rgba(47,85,139,.20),transparent 45%),radial-gradient(ellipse at 8% 65%,rgba(85,65,139,.10),transparent 38%),var(--bg);font-family:"Noto Serif SC",serif;transition:background .25s,color .25s}
+button{font:inherit;color:inherit}
+button:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+a{color:inherit;text-decoration:none}
+
+.star-field{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.star-field span{position:absolute;color:rgba(190,216,255,.65);animation:twinkle 3.5s ease-in-out infinite alternate}
+.star-field span:nth-child(3n){color:rgba(255,191,222,.7);animation-delay:-1.3s}
+.star-field span:nth-child(4n){color:rgba(224,202,255,.72);animation-delay:-2.1s}
+@keyframes twinkle{from{opacity:.25;transform:scale(.85) rotate(0)}to{opacity:.9;transform:scale(1.15) rotate(18deg)}}
+
+.site-header,main,.site-footer{position:relative;z-index:1}
+.site-header{width:min(1180px,calc(100% - 40px));margin:0 auto;padding:28px 0 18px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{display:flex;flex-direction:column;gap:4px}
+.logo-cn{font-size:16px;letter-spacing:3px}
+.logo-en{font-family:Cinzel,serif;font-size:10px;letter-spacing:3.5px;color:var(--muted)}
+.header-actions{display:flex;align-items:center;gap:10px}
+.nav-link,.theme-toggle{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:8px 13px;border:1px solid var(--line);border-radius:3px;background:rgba(16,35,59,.55);color:var(--text);font-size:12px;cursor:pointer;transition:background .2s,border-color .2s,transform .2s}
+.nav-link:hover,.theme-toggle:hover{border-color:var(--gold);background:rgba(39,61,89,.72)}
+.nav-link:active,.theme-toggle:active,.action-button:active{transform:translateY(1px)}
+
+main{width:min(1040px,calc(100% - 32px));margin:0 auto;padding:20px 0 55px}
+.intro{text-align:center;margin:12px auto 25px}
+.eyebrow{color:var(--gold);font-family:Cinzel,serif;font-size:11px;letter-spacing:4px}
+h1{margin:12px 0 7px;font-family:Cinzel,serif;font-size:clamp(27px,5vw,43px);font-weight:400;letter-spacing:3px}
+.subtitle{color:var(--muted);font-size:13px;letter-spacing:2px}
+.intro-stars{margin-top:13px;color:var(--gold);font-size:15px;letter-spacing:13px}
+
+.game-frame{position:relative;width:min(100%,900px);margin:0 auto;padding:1px;background:linear-gradient(135deg,rgba(217,196,154,.72),rgba(113,157,213,.22),rgba(217,196,154,.55));clip-path:polygon(20px 0,calc(100% - 20px) 0,100% 20px,100% calc(100% - 20px),calc(100% - 20px) 100%,20px 100%,0 calc(100% - 20px),0 20px)}
+.game-panel{position:relative;padding:clamp(14px,3vw,27px);background:radial-gradient(ellipse at 50% 0%,rgba(64,92,147,.16),transparent 60%),var(--panel);clip-path:polygon(20px 0,calc(100% - 20px) 0,100% 20px,100% calc(100% - 20px),calc(100% - 20px) 100%,20px 100%,0 calc(100% - 20px),0 20px)}
+.corner{position:absolute;color:var(--gold);opacity:.8;font-size:19px;pointer-events:none}
+.corner.tl{top:10px;left:12px}
+.corner.tr{top:10px;right:12px}
+.corner.bl{bottom:10px;left:12px}
+.corner.br{bottom:10px;right:12px}
+
+.game-topline{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.mode-label{color:var(--gold);font-size:12px;letter-spacing:2px}
+.step-display{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px}
+.step-number{color:var(--text);font-family:Cinzel,serif;font-size:22px;font-variant-numeric:tabular-nums}
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-bottom:16px}
+.stat-card{padding:10px 7px;text-align:center;border:1px solid var(--line);background:var(--panel-soft)}
+.stat-label{color:var(--muted);font-size:11px;letter-spacing:1px}
+.stat-value{margin-top:4px;color:var(--text);font-family:Cinzel,serif;font-size:clamp(17px,3vw,23px);font-variant-numeric:tabular-nums}
+.stat-value.score-pop{animation:scorePop .25s ease-out}
+@keyframes scorePop{50%{transform:scale(1.13);color:var(--gold)}}
+
+.board-wrap{width:min(100%,640px);margin:0 auto;padding:8px;border:1px solid rgba(151,190,241,.30);background:radial-gradient(circle at 50% 50%,rgba(93,117,181,.17),transparent 70%),rgba(3,14,28,.55);box-shadow:inset 0 0 35px rgba(64,106,171,.08)}
+.board{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:4px;touch-action:manipulation;user-select:none}
+.tile{position:relative;display:flex;align-items:center;justify-content:center;aspect-ratio:1;min-width:0;padding:0;overflow:hidden;border:1px solid var(--tile-border);border-radius:8px;background:radial-gradient(circle at 32% 25%,rgba(255,255,255,.09),transparent 55%),var(--tile-bg);box-shadow:inset 0 1px rgba(255,255,255,.05),0 2px 5px var(--shadow);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .12s,background .12s,transform .12s,opacity .12s}
+.tile:hover{border-color:rgba(217,196,154,.8)}
+.tile.selected{z-index:2;border:2px solid var(--gold);background:rgba(79,99,139,.8);box-shadow:0 0 0 2px rgba(217,196,154,.13),0 0 14px rgba(217,196,154,.25);transform:scale(.94)}
+.tile img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
+.tile .emoji{font-size:clamp(17px,4.2vw,34px);line-height:1;filter:drop-shadow(0 2px 3px rgba(0,0,0,.25));pointer-events:none}
+.tile.matched{animation:none;opacity:1}
+.tile.falling{animation:appear .19s ease-out}
+@keyframes appear{from{transform:translateY(-12px) scale(.8);opacity:.35}to{transform:translateY(0) scale(1);opacity:1}}
+
+.game-message{min-height:27px;margin:12px auto 3px;text-align:center;color:var(--muted);font-size:12px;line-height:1.8}
+.game-message.success{color:#b9e6ff}
+.game-message.warning{color:#ffd1e6}
+.action-row{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:13px}
+.action-button{min-height:39px;padding:9px 19px;border:1px solid var(--line);border-radius:3px;background:rgba(19,42,69,.8);color:var(--text);font-size:12px;letter-spacing:1px;cursor:pointer;transition:.2s}
+.action-button:hover{border-color:var(--gold);background:rgba(48,66,95,.9)}
+.action-button.primary{border-color:rgba(217,196,154,.55);color:#f3e5c5;background:rgba(90,76,65,.3)}
+
+.rules{width:min(100%,800px);margin:18px auto 0;padding:16px 18px;border-left:2px solid rgba(217,196,154,.55);background:rgba(17,34,55,.48)}
+.rules h2{margin:0 0 8px;color:var(--gold);font-size:13px;font-weight:400;letter-spacing:2px}
+.rules p{margin:5px 0;color:var(--muted);font-size:12px;line-height:1.9}
+.site-footer{padding:0 20px 30px;color:var(--muted);text-align:center;font-family:Cinzel,serif;font-size:9px;letter-spacing:2px}
+
+.result-overlay{position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(1,8,18,.76);backdrop-filter:blur(5px)}
+.result-overlay.show{display:flex}
+.result-card{width:min(100%,380px);padding:28px 22px;border:1px solid rgba(217,196,154,.65);background:var(--panel);text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.result-symbol{color:var(--gold);font-size:32px}
+.result-card h2{margin:12px 0;font-size:20px;font-weight:400}
+.result-card p{color:var(--muted);font-size:13px;line-height:1.9}
+.result-score{margin:16px 0;color:var(--gold);font-family:Cinzel,serif;font-size:31px}
+
+body.day-mode{color-scheme:light;--bg:#e9eef7;--panel:rgba(248,250,255,.96);--panel-soft:rgba(231,238,250,.92);--text:#263b59;--muted:#647895;--line:rgba(80,108,153,.28);--gold:#98783c;--blue:#3b76bd;--pink:#bf6490;--purple:#8160be;--tile-bg:rgba(218,230,248,.96);--tile-border:rgba(99,128,177,.28);--shadow:rgba(42,64,99,.10);background:radial-gradient(ellipse at 50% 5%,rgba(177,201,241,.48),transparent 48%),radial-gradient(ellipse at 8% 65%,rgba(218,198,245,.25),transparent 38%),var(--bg)}
+body.day-mode .game-panel{background:radial-gradient(ellipse at 50% 0%,rgba(172,195,233,.24),transparent 60%),var(--panel)}
+body.day-mode .nav-link,body.day-mode .theme-toggle,body.day-mode .action-button{background:rgba(224,233,247,.85)}
+body.day-mode .board-wrap{background:rgba(215,226,243,.65)}
+body.day-mode .rules{background:rgba(248,250,255,.76)}
+body.day-mode .tile{background:radial-gradient(circle at 32% 25%,rgba(255,255,255,.65),transparent 55%),var(--tile-bg)}
+body.day-mode .action-button.primary{color:#725c32;background:rgba(231,220,196,.55)}
+
+@media(max-width:700px){
+.site-header{width:calc(100% - 20px);padding-top:16px;gap:6px}
+.logo-cn{font-size:12px;letter-spacing:1px}
+.logo-en{font-size:8px;letter-spacing:1.5px}
+.header-actions{gap:5px}
+.nav-link,.theme-toggle{min-height:32px;padding:6px 7px;font-size:10px}
+main{width:calc(100% - 8px);padding-top:10px}
+.intro{margin:8px auto 16px}
+.eyebrow{font-size:9px;letter-spacing:2px}
+h1{font-size:clamp(23px,6vw,34px);letter-spacing:1px}
+.subtitle{font-size:11px;letter-spacing:.5px}
+.intro-stars{margin-top:8px;font-size:13px;letter-spacing:8px}
+.game-frame{width:100%}
+.game-panel{padding:12px 4px}
+.game-topline{flex-direction:column;align-items:stretch;justify-content:flex-start;gap:10px;margin:0 8px 14px}
+.mode-label{font-size:10px;letter-spacing:.5px;line-height:1.8;text-align:center;overflow-wrap:anywhere}
+.step-display{justify-content:center;gap:8px;font-size:12px;line-height:1.5;white-space:nowrap}
+.step-number{font-size:22px;line-height:1.2}
+.stats{gap:5px;margin:0 3px 12px}
+.stat-card{padding:8px 2px;min-width:0}
+.stat-label{font-size:9px;letter-spacing:0}
+.stat-value{font-size:clamp(15px,4.5vw,21px)}
+.board-wrap{width:100%;max-width:none;padding:3px;border-width:1px}
+.board{width:100%;gap:2px}
+.tile{width:100%;min-width:0;border-radius:4px;border-width:1px}
+.tile .emoji{font-size:clamp(17px,6.2vw,30px)}
+.game-message{margin:10px 5px 3px;font-size:11px}
+.action-row{gap:7px;margin-top:10px}
+.action-button{min-height:37px;padding:8px 10px;font-size:11px;letter-spacing:.5px}
+.rules{width:100%;margin-top:14px;padding:13px 12px}
+.rules p{font-size:11px}
+.site-footer{font-size:8px;letter-spacing:1px}
+}
+@media(max-width:380px){
+.site-header{width:calc(100% - 14px)}
+.logo-cn{font-size:11px;letter-spacing:.5px}
+.nav-link,.theme-toggle{padding:6px 5px;font-size:9px}
+.game-panel{padding-right:3px;padding-left:3px}
+.board-wrap{padding:2px}
+.board{gap:1.5px}
+.tile .emoji{font-size:clamp(15px,6vw,23px)}
+.stat-label{font-size:8px}
+}
+@media(prefers-reduced-motion:reduce){
+*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
 </style>
 </head>
+
 <body>
-<div class="star-field" aria-hidden="true"><span style="left:7%;top:9%">✦</span><span style="left:19%;top:22%;font-size:10px">✧</span><span style="left:86%;top:12%">✡</span><span style="left:93%;top:31%;font-size:11px">✦</span><span style="left:5%;top:47%;font-size:12px">✧</span><span style="left:79%;top:52%">✶</span><span style="left:15%;top:76%">✦</span><span style="left:91%;top:80%;font-size:12px">✧</span><span style="left:46%;top:7%;font-size:10px">✦</span><span style="left:61%;top:90%">✡</span><span style="left:35%;top:93%;font-size:10px">✧</span><span style="left:70%;top:23%">✦</span><span style="left:28%;top:48%;font-size:9px">✧</span><span style="left:96%;top:61%">✦</span><span style="left:54%;top:80%;font-size:10px">✧</span><span style="left:40%;top:34%">✦</span></div>
-<header class="site-header"><a class="logo" href="index.html" aria-label="返回塞垭弥大陆档案馆首页"><span class="logo-cn">塞垭弥大陆档案馆</span><span class="logo-en">SEYAMI ARCHIVE</span></a><div class="header-actions"><a class="nav-link" href="archive.html">返回档案</a><button class="theme-toggle" id="themeToggle" type="button">☼ 日间</button></div></header>
+<div class="star-field" aria-hidden="true">
+<span style="left:7%;top:9%">✦</span>
+<span style="left:19%;top:22%;font-size:10px">✧</span>
+<span style="left:86%;top:12%">✡</span>
+<span style="left:93%;top:31%;font-size:11px">✦</span>
+<span style="left:5%;top:47%;font-size:12px">✧</span>
+<span style="left:79%;top:52%">✶</span>
+<span style="left:15%;top:76%">✦</span>
+<span style="left:91%;top:80%;font-size:12px">✧</span>
+<span style="left:46%;top:7%;font-size:10px">✦</span>
+<span style="left:61%;top:90%">✡</span>
+<span style="left:35%;top:93%;font-size:10px">✧</span>
+<span style="left:70%;top:23%">✦</span>
+<span style="left:28%;top:48%;font-size:9px">✧</span>
+<span style="left:96%;top:61%">✦</span>
+<span style="left:54%;top:80%;font-size:10px">✧</span>
+<span style="left:40%;top:34%">✦</span>
+</div>
+
+<header class="site-header">
+<a class="logo" href="index.html" aria-label="返回塞垭弥大陆档案馆首页">
+<span class="logo-cn">塞垭弥大陆档案馆</span>
+<span class="logo-en">SEYAMI ARCHIVE</span>
+</a>
+<div class="header-actions">
+<a class="nav-link" href="archive.html">返回档案</a>
+<button class="theme-toggle" id="themeToggle" type="button">☼ 日间</button>
+</div>
+</header>
+
 <main>
-<section class="intro"><div class="eyebrow">✧ THE LITTLE STAR ALCHEMIST ✧</div><h1>星屑魔法消消乐</h1><div class="subtitle">在星海中收集闪耀的魔法碎片</div><div class="intro-stars" aria-hidden="true">✧ ♡ ✦ ♡ ✧</div></section>
-<section class="game-frame" aria-label="消消乐游戏"><div class="game-panel"><span class="corner tl" aria-hidden="true">✧</span><span class="corner tr" aria-hidden="true">✧</span><span class="corner bl" aria-hidden="true">✧</span><span class="corner br" aria-hidden="true">✧</span>
-<div class="game-topline"><div class="mode-label">✦ 限步挑战 · MAGIC CHALLENGE</div><div class="step-display">剩余步数 <span class="step-number" id="steps">25</span></div></div>
-<div class="stats"><div class="stat-card"><div class="stat-label">魔力积分</div><div class="stat-value" id="score">0</div></div><div class="stat-card"><div class="stat-label">本局最高连击</div><div class="stat-value" id="combo">×0</div></div><div class="stat-card"><div class="stat-label">历史最高分</div><div class="stat-value" id="best">0</div></div></div>
-<div class="board-wrap"><div class="board" id="board" role="group" aria-label="八乘八消消乐棋盘"></div></div><div class="game-message" id="message" aria-live="polite">点击一个图块，再点击相邻图块交换。连成三个即可消除！</div><div class="action-row"><button class="action-button primary" id="restart" type="button">✧ 重新开始</button><button class="action-button" id="shuffle" type="button">✦ 重排棋盘</button></div>
-</div></section>
-<section class="rules"><h2>✧ 魔法规则</h2><p>交换相邻的角色图块，让三个或更多相同图块连成一线，即可收集魔力积分。</p><p>每次有效交换消耗一步；连锁消除会获得更高倍率。试着在 25 步内挑战你的最高纪录吧。</p><p>棋盘使用档案馆公开的 OC 图片。替换图片时，请把新图片上传到网站的 <code>images/game/</code> 文件夹，并使用代码中对应的文件名。</p></section>
-</main><footer class="site-footer">SEYAMI ARCHIVE · STAR DUST MAGIC</footer>
-<div class="result-overlay" id="resultOverlay" role="dialog" aria-modal="true" aria-labelledby="resultTitle"><div class="result-card"><div class="result-symbol" id="resultSymbol">🌟</div><h2 id="resultTitle">挑战结束</h2><p id="resultDescription">本次收集了许多闪耀的星屑。</p><div class="result-score" id="finalScore">0 分</div><p id="resultBest">历史最高分：0</p><button class="action-button primary" id="playAgain" type="button">✧ 再挑战一次</button></div></div>
+<section class="intro">
+<div class="eyebrow">✧ THE LITTLE STAR ALCHEMIST ✧</div>
+<h1>星屑魔法消消乐</h1>
+<div class="subtitle">在星海中收集闪耀的魔法碎片</div>
+<div class="intro-stars" aria-hidden="true">✧ ♡ ✦ ♡ ✧</div>
+</section>
+
+<section class="game-frame" aria-label="消消乐游戏">
+<div class="game-panel">
+<span class="corner tl" aria-hidden="true">✧</span>
+<span class="corner tr" aria-hidden="true">✧</span>
+<span class="corner bl" aria-hidden="true">✧</span>
+<span class="corner br" aria-hidden="true">✧</span>
+
+<div class="game-topline">
+<div class="mode-label">✦ 限步挑战 · MAGIC CHALLENGE</div>
+<div class="step-display">剩余步数 <span class="step-number" id="steps">25</span></div>
+</div>
+
+<div class="stats">
+<div class="stat-card"><div class="stat-label">魔力积分</div><div class="stat-value" id="score">0</div></div>
+<div class="stat-card"><div class="stat-label">本局最高连击</div><div class="stat-value" id="combo">×0</div></div>
+<div class="stat-card"><div class="stat-label">历史最高分</div><div class="stat-value" id="best">0</div></div>
+</div>
+
+<div class="board-wrap">
+<div class="board" id="board" role="group" aria-label="八乘八消消乐棋盘"></div>
+</div>
+
+<div class="game-message" id="message" aria-live="polite">点击一个图块，再点击相邻图块交换。连成三个即可消除！</div>
+
+<div class="action-row">
+<button class="action-button primary" id="restart" type="button">✧ 重新开始</button>
+<button class="action-button" id="shuffle" type="button">✦ 重排棋盘</button>
+</div>
+</div>
+</section>
+
+<section class="rules">
+<h2>✧ 魔法规则</h2>
+<p>交换相邻的角色图块，让三个或更多相同图块连成一线，即可收集魔力积分。</p>
+<p>每次有效交换消耗一步；连锁消除会获得更高倍率。试着在 25 步内挑战你的最高纪录吧。</p>
+<p>棋盘使用档案馆公开的 OC 图片。五张图片目前设置为网站根目录中的 <code>oc-01.png</code> 至 <code>oc-05.png</code>。</p>
+</section>
+</main>
+
+<footer class="site-footer">SEYAMI ARCHIVE · STAR DUST MAGIC</footer>
+
+<div class="result-overlay" id="resultOverlay" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+<div class="result-card">
+<div class="result-symbol" id="resultSymbol">🌟</div>
+<h2 id="resultTitle">挑战结束</h2>
+<p id="resultDescription">本次收集了许多闪耀的星屑。</p>
+<div class="result-score" id="finalScore">0 分</div>
+<p id="resultBest">历史最高分：0</p>
+<button class="action-button primary" id="playAgain" type="button">✧ 再挑战一次</button>
+</div>
+</div>
+
 <script>
 (() => {
   const SIZE = 8;
   const START_STEPS = 25;
-  // 全站共用的 5 张 OC 图块，图片文件位于 images/game/。
+
+  // 图片位于 GitHub 仓库根目录，与 index.html 等文件处于同一层。
   const TILE_TYPES = [
-    { id: "oc-01", name: "伊莉娜·皇冠礼服 Q 版", image: "images/game/oc-01.png", emoji: "⭐" },
-    { id: "oc-02", name: "伊莉娜·星星帽 Q 版", image: "images/game/oc-02.png", emoji: "💖" },
-    { id: "oc-03", name: "伊莉娜·像素风头像", image: "images/game/oc-03.png", emoji: "🌙" },
-    { id: "oc-04", name: "伊莉娜·蓝白女仆 Q 版", image: "images/game/oc-04.png", emoji: "🌟" },
-    { id: "oc-05", name: "伊莉娜·皇冠立绘", image: "images/game/oc-05.png", emoji: "🌸" }
+    { id: "oc-01", name: "伊莉娜·皇冠礼服 Q 版", image: "oc-01.png", emoji: "⭐" },
+    { id: "oc-02", name: "伊莉娜·星星帽 Q 版", image: "oc-02.png", emoji: "💖" },
+    { id: "oc-03", name: "伊莉娜·像素风头像", image: "oc-03.png", emoji: "🌙" },
+    { id: "oc-04", name: "伊莉娜·蓝白女仆 Q 版", image: "oc-04.png", emoji: "🌟" },
+    { id: "oc-05", name: "伊莉娜·皇冠立绘", image: "oc-05.png", emoji: "🌸" }
   ];
+
   const boardElement = document.getElementById("board");
   const scoreElement = document.getElementById("score");
   const stepsElement = document.getElementById("steps");
@@ -56,8 +261,18 @@ body.day-mode{color-scheme:light;--bg:#e9eef7;--panel:rgba(248,250,255,.96);--pa
   const bestElement = document.getElementById("best");
   const messageElement = document.getElementById("message");
   const resultOverlay = document.getElementById("resultOverlay");
-  let board = [], score = 0, steps = START_STEPS, maxCombo = 0, selectedIndex = null, busy = false, ended = false, lastCascade = 0;
+
+  let board = [];
+  let score = 0;
+  let steps = START_STEPS;
+  let maxCombo = 0;
+  let selectedIndex = null;
+  let busy = false;
+  let ended = false;
+  let lastCascade = 0;
+
   let bestScore = Number(localStorage.getItem("seyami-match-best") || 0);
+
   const randomType = () => Math.floor(Math.random() * TILE_TYPES.length);
   const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -67,110 +282,373 @@ body.day-mode{color-scheme:light;--bg:#e9eef7;--panel:rgba(248,250,255,.96);--pa
     document.body.classList.toggle("day-mode", day);
     document.getElementById("themeToggle").textContent = day ? "☾ 夜间" : "☼ 日间";
   }
+
   document.getElementById("themeToggle").addEventListener("click", () => {
     const isDay = document.body.classList.contains("day-mode");
     localStorage.setItem("seyami-theme", isDay ? "night" : "day");
     applyTheme();
   });
+
   applyTheme();
 
   function createInitialBoard() {
     const next = Array(SIZE * SIZE).fill(0);
+
     for (let row = 0; row < SIZE; row++) {
       for (let col = 0; col < SIZE; col++) {
-        let candidate, attempts = 0;
+        let candidate;
+        let attempts = 0;
+
         do {
-          candidate = randomType(); attempts++;
-        } while (attempts < 100 && ((col >= 2 && next[row * SIZE + col - 1] === candidate && next[row * SIZE + col - 2] === candidate) || (row >= 2 && next[(row - 1) * SIZE + col] === candidate && next[(row - 2) * SIZE + col] === candidate)));
+          candidate = randomType();
+          attempts++;
+        } while (
+          attempts < 100 &&
+          (
+            (col >= 2 &&
+             next[row * SIZE + col - 1] === candidate &&
+             next[row * SIZE + col - 2] === candidate) ||
+            (row >= 2 &&
+             next[(row - 1) * SIZE + col] === candidate &&
+             next[(row - 2) * SIZE + col] === candidate)
+          )
+        );
+
         next[row * SIZE + col] = candidate;
       }
     }
+
     return next;
   }
-  function setMessage(text, type = "") { messageElement.textContent = text; messageElement.className = "game-message" + (type ? " " + type : ""); }
-  function updateStats() { scoreElement.textContent = score.toLocaleString(); stepsElement.textContent = String(steps); comboElement.textContent = "×" + maxCombo; bestElement.textContent = bestScore.toLocaleString(); }
+
+  function setMessage(text, type = "") {
+    messageElement.textContent = text;
+    messageElement.className = "game-message" + (type ? " " + type : "");
+  }
+
+  function updateStats() {
+    scoreElement.textContent = score.toLocaleString();
+    stepsElement.textContent = String(steps);
+    comboElement.textContent = "×" + maxCombo;
+    bestElement.textContent = bestScore.toLocaleString();
+  }
+
   function renderBoard() {
     boardElement.replaceChildren();
+
     board.forEach((typeIndex, index) => {
       const type = TILE_TYPES[typeIndex];
-      const tile = document.createElement("button"); tile.type = "button"; tile.className = "tile"; tile.dataset.index = String(index); tile.setAttribute("aria-label", type.name); tile.setAttribute("aria-pressed", selectedIndex === index ? "true" : "false");
-      if (selectedIndex === index) tile.classList.add("selected");
-      const img = document.createElement("img"); img.src = type.image; img.alt = type.name; img.draggable = false;
-      img.onerror = () => { img.remove(); const emoji = document.createElement("span"); emoji.className = "emoji"; emoji.textContent = type.emoji; tile.appendChild(emoji); };
-      tile.appendChild(img); tile.addEventListener("click", () => handleTileClick(index)); boardElement.appendChild(tile);
+      const tile = document.createElement("button");
+
+      tile.type = "button";
+      tile.className = "tile";
+      tile.dataset.index = String(index);
+      tile.setAttribute("aria-label", type.name);
+      tile.setAttribute("aria-pressed", selectedIndex === index ? "true" : "false");
+
+      if (selectedIndex === index) {
+        tile.classList.add("selected");
+      }
+
+      const img = document.createElement("img");
+      img.src = type.image;
+      img.alt = type.name;
+      img.draggable = false;
+
+      // 图片加载失败时显示备用符号，同时在控制台留下错误信息。
+      img.onerror = () => {
+        console.warn("OC 图片加载失败，请检查文件名和路径：", type.image);
+        img.remove();
+
+        const emoji = document.createElement("span");
+        emoji.className = "emoji";
+        emoji.textContent = type.emoji;
+        tile.appendChild(emoji);
+      };
+
+      tile.appendChild(img);
+      tile.addEventListener("click", () => handleTileClick(index));
+      boardElement.appendChild(tile);
     });
   }
+
   function getMatches(source = board) {
     const found = new Set();
+
     for (let row = 0; row < SIZE; row++) {
       let start = 0;
+
       while (start < SIZE) {
-        const value = source[row * SIZE + start]; let end = start + 1;
-        while (value !== null && end < SIZE && source[row * SIZE + end] === value) end++;
-        if (value !== null && end - start >= 3) for (let col = start; col < end; col++) found.add(row * SIZE + col);
+        const value = source[row * SIZE + start];
+        let end = start + 1;
+
+        while (
+          value !== null &&
+          end < SIZE &&
+          source[row * SIZE + end] === value
+        ) {
+          end++;
+        }
+
+        if (value !== null && end - start >= 3) {
+          for (let col = start; col < end; col++) {
+            found.add(row * SIZE + col);
+          }
+        }
+
         start = end;
       }
     }
+
     for (let col = 0; col < SIZE; col++) {
       let start = 0;
+
       while (start < SIZE) {
-        const value = source[start * SIZE + col]; let end = start + 1;
-        while (value !== null && end < SIZE && source[end * SIZE + col] === value) end++;
-        if (value !== null && end - start >= 3) for (let row = start; row < end; row++) found.add(row * SIZE + col);
+        const value = source[start * SIZE + col];
+        let end = start + 1;
+
+        while (
+          value !== null &&
+          end < SIZE &&
+          source[end * SIZE + col] === value
+        ) {
+          end++;
+        }
+
+        if (value !== null && end - start >= 3) {
+          for (let row = start; row < end; row++) {
+            found.add(row * SIZE + col);
+          }
+        }
+
         start = end;
       }
     }
+
     return found;
   }
-  function areAdjacent(a, b) { const ar = Math.floor(a / SIZE), ac = a % SIZE, br = Math.floor(b / SIZE), bc = b % SIZE; return Math.abs(ar - br) + Math.abs(ac - bc) === 1; }
-  function startGame() { board = createInitialBoard(); score = 0; steps = START_STEPS; maxCombo = 0; selectedIndex = null; busy = false; ended = false; lastCascade = 0; resultOverlay.classList.remove("show"); updateStats(); renderBoard(); setMessage("选择一个图块，再交换相邻图块。试着冲击高分吧！"); }
+
+  function areAdjacent(a, b) {
+    const ar = Math.floor(a / SIZE);
+    const ac = a % SIZE;
+    const br = Math.floor(b / SIZE);
+    const bc = b % SIZE;
+
+    return Math.abs(ar - br) + Math.abs(ac - bc) === 1;
+  }
+
+  function startGame() {
+    board = createInitialBoard();
+    score = 0;
+    steps = START_STEPS;
+    maxCombo = 0;
+    selectedIndex = null;
+    busy = false;
+    ended = false;
+    lastCascade = 0;
+
+    resultOverlay.classList.remove("show");
+    updateStats();
+    renderBoard();
+    setMessage("选择一个图块，再交换相邻图块。试着冲击高分吧！");
+  }
+
   async function handleTileClick(index) {
     if (busy || ended) return;
-    if (selectedIndex === null) { selectedIndex = index; renderBoard(); return; }
-    if (selectedIndex === index) { selectedIndex = null; renderBoard(); return; }
-    if (!areAdjacent(selectedIndex, index)) { selectedIndex = index; renderBoard(); return; }
-    const first = selectedIndex; selectedIndex = null; await attemptSwap(first, index);
+
+    if (selectedIndex === null) {
+      selectedIndex = index;
+      renderBoard();
+      return;
+    }
+
+    if (selectedIndex === index) {
+      selectedIndex = null;
+      renderBoard();
+      return;
+    }
+
+    if (!areAdjacent(selectedIndex, index)) {
+      selectedIndex = index;
+      renderBoard();
+      return;
+    }
+
+    const first = selectedIndex;
+    selectedIndex = null;
+    await attemptSwap(first, index);
   }
+
   async function attemptSwap(a, b) {
-    if (busy || ended) return; busy = true; [board[a], board[b]] = [board[b], board[a]]; renderBoard(); await sleep(100);
+    if (busy || ended) return;
+
+    busy = true;
+
+    [board[a], board[b]] = [board[b], board[a]];
+    renderBoard();
+    await sleep(100);
+
     const matches = getMatches();
-    if (matches.size === 0) { [board[a], board[b]] = [board[b], board[a]]; renderBoard(); setMessage("这次没有连成三个，再试试其他位置吧。"); busy = false; return; }
-    steps--; lastCascade = 0; await resolveMatches(); updateStats(); busy = false;
-    if (steps <= 0) finishGame(); else setMessage(lastCascade > 1 ? "✨ " + lastCascade + " 连击！魔力正在涌动！" : "消除成功！继续收集星屑吧！", "success");
+
+    if (matches.size === 0) {
+      [board[a], board[b]] = [board[b], board[a]];
+      renderBoard();
+      setMessage("这次没有连成三个，再试试其他位置吧。");
+      busy = false;
+      return;
+    }
+
+    steps--;
+    lastCascade = 0;
+
+    await resolveMatches();
+
+    updateStats();
+    busy = false;
+
+    if (steps <= 0) {
+      finishGame();
+    } else {
+      setMessage(
+        lastCascade > 1
+          ? "✨ " + lastCascade + " 连击！魔力正在涌动！"
+          : "消除成功！继续收集星屑吧！",
+        "success"
+      );
+    }
   }
+
   async function resolveMatches() {
-    let matches = getMatches(), cascade = 0;
+    let matches = getMatches();
+    let cascade = 0;
+
     while (matches.size > 0) {
-      cascade++; lastCascade = cascade; maxCombo = Math.max(maxCombo, cascade); score += matches.size * 30 * cascade;
-      if (score > bestScore) { bestScore = score; localStorage.setItem("seyami-match-best", String(bestScore)); }
-      matches.forEach(index => { const tile = boardElement.children[index]; if (tile) tile.classList.add("matched"); });
-      updateStats(); scoreElement.classList.remove("score-pop"); void scoreElement.offsetWidth; scoreElement.classList.add("score-pop");
+      cascade++;
+      lastCascade = cascade;
+      maxCombo = Math.max(maxCombo, cascade);
+
+      score += matches.size * 30 * cascade;
+
+      if (score > bestScore) {
+        bestScore = score;
+        localStorage.setItem("seyami-match-best", String(bestScore));
+      }
+
+      matches.forEach(index => {
+        const tile = boardElement.children[index];
+        if (tile) tile.classList.add("matched");
+      });
+
+      updateStats();
+
+      scoreElement.classList.remove("score-pop");
+      void scoreElement.offsetWidth;
+      scoreElement.classList.add("score-pop");
+
       await sleep(0);
-      matches.forEach(index => { board[index] = null; });
+
+      matches.forEach(index => {
+        board[index] = null;
+      });
+
       for (let col = 0; col < SIZE; col++) {
         const remaining = [];
-        for (let row = SIZE - 1; row >= 0; row--) { const value = board[row * SIZE + col]; if (value !== null) remaining.push(value); }
-        for (let row = SIZE - 1; row >= 0; row--) { const position = row * SIZE + col; const nextValue = remaining[SIZE - 1 - row]; board[position] = nextValue === undefined ? randomType() : nextValue; }
+
+        for (let row = SIZE - 1; row >= 0; row--) {
+          const value = board[row * SIZE + col];
+
+          if (value !== null) {
+            remaining.push(value);
+          }
+        }
+
+        for (let row = SIZE - 1; row >= 0; row--) {
+          const position = row * SIZE + col;
+          const nextValue = remaining[SIZE - 1 - row];
+
+          board[position] = nextValue === undefined ? randomType() : nextValue;
+        }
       }
-      renderBoard(); Array.from(boardElement.children).forEach(tile => tile.classList.add("falling")); await sleep(180); matches = getMatches();
+
+      renderBoard();
+
+      Array.from(boardElement.children).forEach(tile => {
+        tile.classList.add("falling");
+      });
+
+      await sleep(180);
+      matches = getMatches();
     }
+
     updateStats();
   }
+
   function finishGame() {
-    ended = true; busy = false; const isBest = score >= bestScore && score > 0;
-    document.getElementById("resultSymbol").textContent = score >= 1500 ? "🌟" : "♡";
-    document.getElementById("resultTitle").textContent = score >= 1500 ? "星屑收集大师！" : "本次挑战结束";
-    document.getElementById("resultDescription").textContent = score >= 1500 ? "你的魔法非常耀眼，继续创造新的纪录吧！" : "步数已经用完，再试一次，也许会有更高的分数。";
-    document.getElementById("finalScore").textContent = score.toLocaleString() + " 分";
-    document.getElementById("resultBest").textContent = isBest ? "✧ 创造了新的最高纪录！" : "历史最高分：" + bestScore.toLocaleString();
-    resultOverlay.classList.add("show"); setMessage("挑战结束！本局获得 " + score.toLocaleString() + " 分。");
+    ended = true;
+    busy = false;
+
+    const isBest = score >= bestScore && score > 0;
+
+    document.getElementById("resultSymbol").textContent =
+      score >= 1500 ? "🌟" : "♡";
+
+    document.getElementById("resultTitle").textContent =
+      score >= 1500 ? "星屑收集大师！" : "本次挑战结束";
+
+    document.getElementById("resultDescription").textContent =
+      score >= 1500
+        ? "你的魔法非常耀眼，继续创造新的纪录吧！"
+        : "步数已经用完，再试一次，也许会有更高的分数。";
+
+    document.getElementById("finalScore").textContent =
+      score.toLocaleString() + " 分";
+
+    document.getElementById("resultBest").textContent =
+      isBest
+        ? "✧ 创造了新的最高纪录！"
+        : "历史最高分：" + bestScore.toLocaleString();
+
+    resultOverlay.classList.add("show");
+    setMessage("挑战结束！本局获得 " + score.toLocaleString() + " 分。");
   }
-  function shuffleBoard() { if (busy || ended) return; if (steps <= 0) { finishGame(); return; } steps--; board = createInitialBoard(); selectedIndex = null; renderBoard(); updateStats(); setMessage("棋盘已重排，继续挑战吧！"); if (steps <= 0) finishGame(); }
-  document.getElementById("restart").addEventListener("click", () => { if (!busy) startGame(); });
+
+  function shuffleBoard() {
+    if (busy || ended) return;
+
+    if (steps <= 0) {
+      finishGame();
+      return;
+    }
+
+    steps--;
+    board = createInitialBoard();
+    selectedIndex = null;
+
+    renderBoard();
+    updateStats();
+
+    setMessage("棋盘已重排，继续挑战吧！");
+
+    if (steps <= 0) {
+      finishGame();
+    }
+  }
+
+  document.getElementById("restart").addEventListener("click", () => {
+    if (!busy) startGame();
+  });
+
   document.getElementById("shuffle").addEventListener("click", shuffleBoard);
   document.getElementById("playAgain").addEventListener("click", startGame);
-  resultOverlay.addEventListener("click", event => { if (event.target === resultOverlay) resultOverlay.classList.remove("show"); });
-  bestElement.textContent = bestScore.toLocaleString(); startGame();
+
+  resultOverlay.addEventListener("click", event => {
+    if (event.target === resultOverlay) {
+      resultOverlay.classList.remove("show");
+    }
+  });
+
+  bestElement.textContent = bestScore.toLocaleString();
+  startGame();
 })();
 </script>
 </body>
