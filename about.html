@@ -757,23 +757,37 @@ body.day-mode .action-button.primary {
     padding: 12px 4px;
   }
 
+  /* 修复手机端挑战标题与剩余步数重叠 */
   .game-topline {
-    gap: 6px;
-    margin: 0 5px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 10px;
+    margin: 0 8px 14px;
   }
 
   .mode-label {
     font-size: 10px;
     letter-spacing: .5px;
+    line-height: 1.8;
+    text-align: center;
+    overflow-wrap: anywhere;
   }
 
   .step-display {
-    gap: 5px;
-    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 12px;
+    line-height: 1.5;
+    white-space: nowrap;
   }
 
   .step-number {
-    font-size: 20px;
+    font-size: 22px;
+    line-height: 1.2;
   }
 
   .stats {
