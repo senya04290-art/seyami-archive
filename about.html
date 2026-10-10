@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -206,7 +207,6 @@ h1 {
   letter-spacing: 13px;
 }
 
-/* 放大游戏外框，让棋盘有更多空间 */
 .game-frame {
   position: relative;
   width: min(100%, 900px);
@@ -312,7 +312,7 @@ h1 {
   50% { transform: scale(1.13); color: var(--gold); }
 }
 
-/* 桌面端棋盘最大宽度增至 640px，图片会明显更清晰 */
+/* 桌面端棋盘 */
 .board-wrap {
   width: min(100%, 640px);
   margin: 0 auto;
@@ -690,88 +690,238 @@ body.day-mode .action-button.primary {
   background: rgba(231, 220, 196, .55);
 }
 
-/* 手机和平板适配 */
+/* 手机和平板：放大棋盘，缩小外围留白 */
 @media (max-width: 700px) {
   .site-header {
-    width: calc(100% - 26px);
-    padding-top: 18px;
-    gap: 8px;
+    width: calc(100% - 20px);
+    padding-top: 16px;
+    gap: 6px;
   }
 
   .logo-cn {
-    font-size: 13px;
-    letter-spacing: 1.5px;
+    font-size: 12px;
+    letter-spacing: 1px;
   }
 
   .logo-en {
     font-size: 8px;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
   }
 
   .header-actions {
-    gap: 6px;
+    gap: 5px;
   }
 
   .nav-link,
   .theme-toggle {
-    min-height: 33px;
-    padding: 7px 9px;
-    font-size: 11px;
+    min-height: 32px;
+    padding: 6px 7px;
+    font-size: 10px;
   }
 
   main {
-    width: calc(100% - 20px);
-    padding-top: 13px;
+    width: calc(100% - 8px);
+    padding-top: 10px;
   }
 
   .intro {
-    margin: 9px auto 20px;
+    margin: 8px auto 16px;
+  }
+
+  .eyebrow {
+    font-size: 9px;
+    letter-spacing: 2px;
   }
 
   h1 {
-    letter-spacing: 1.5px;
+    font-size: clamp(23px, 6vw, 34px);
+    letter-spacing: 1px;
   }
 
   .subtitle {
     font-size: 11px;
-    letter-spacing: 1px;
+    letter-spacing: .5px;
+  }
+
+  .intro-stars {
+    margin-top: 8px;
+    font-size: 13px;
+    letter-spacing: 8px;
+  }
+
+  .game-frame {
+    width: 100%;
   }
 
   .game-panel {
-    padding: 14px 9px;
+    padding: 12px 4px;
+  }
+
+  .game-topline {
+    gap: 6px;
+    margin: 0 5px 12px;
+  }
+
+  .mode-label {
+    font-size: 10px;
+    letter-spacing: .5px;
+  }
+
+  .step-display {
+    gap: 5px;
+    font-size: 11px;
+  }
+
+  .step-number {
+    font-size: 20px;
+  }
+
+  .stats {
+    gap: 5px;
+    margin: 0 3px 12px;
+  }
+
+  .stat-card {
+    padding: 8px 2px;
+    min-width: 0;
+  }
+
+  .stat-label {
+    font-size: 9px;
+    letter-spacing: 0;
+  }
+
+  .stat-value {
+    font-size: clamp(15px, 4.5vw, 21px);
   }
 
   .board-wrap {
     width: 100%;
-    padding: 5px;
+    max-width: none;
+    padding: 3px;
+    border-width: 1px;
   }
 
   .board {
-    gap: 3px;
+    width: 100%;
+    gap: 2px;
   }
 
   .tile {
-    border-radius: 5px;
+    width: 100%;
+    min-width: 0;
+    border-radius: 4px;
+    border-width: 1px;
   }
 
   .tile .emoji {
-    font-size: clamp(15px, 5vw, 25px);
+    font-size: clamp(17px, 6.2vw, 30px);
   }
 
-  .stat-card {
-    padding: 8px 4px;
+  .tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
-  .stat-label {
-    font-size: 10px;
+  .game-message {
+    margin: 10px 5px 3px;
+    font-size: 11px;
+  }
+
+  .action-row {
+    gap: 7px;
+    margin-top: 10px;
   }
 
   .action-button {
-    padding: 9px 13px;
+    min-height: 37px;
+    padding: 8px 10px;
+    font-size: 11px;
+    letter-spacing: .5px;
   }
 
   .upload-section {
-    padding: 15px 12px;
+    width: 100%;
+    margin-top: 14px;
+    padding: 14px 10px;
+  }
+
+  .section-title {
+    font-size: 14px;
+  }
+
+  .section-description {
+    font-size: 11px;
+  }
+
+  .upload-controls {
+    gap: 8px;
+  }
+
+  .upload-button {
+    min-height: 38px;
+    padding: 9px 12px;
+    font-size: 11px;
+  }
+
+  .preview-item {
+    width: 52px;
+    height: 52px;
+  }
+
+  .rules {
+    width: 100%;
+    margin-top: 14px;
+    padding: 13px 12px;
+  }
+
+  .rules p {
+    font-size: 11px;
+  }
+
+  .site-footer {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+}
+
+/* 特别窄的手机 */
+@media (max-width: 380px) {
+  .site-header {
+    width: calc(100% - 14px);
+  }
+
+  .logo-cn {
+    font-size: 11px;
+    letter-spacing: .5px;
+  }
+
+  .nav-link,
+  .theme-toggle {
+    padding: 6px 5px;
+    font-size: 9px;
+  }
+
+  .game-panel {
+    padding-right: 3px;
+    padding-left: 3px;
+  }
+
+  .board-wrap {
+    padding: 2px;
+  }
+
+  .board {
+    gap: 1.5px;
+  }
+
+  .tile .emoji {
+    font-size: clamp(15px, 6vw, 23px);
+  }
+
+  .stat-label {
+    font-size: 8px;
   }
 }
 
