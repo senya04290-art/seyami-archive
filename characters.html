@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -130,7 +131,7 @@ body{
 .character-image::after{content:"✦";position:absolute;right:24px;top:20px;color:rgba(143,202,237,.8);font-size:16px;text-shadow:0 0 10px rgba(90,190,240,.25);transition:color .6s ease,text-shadow .6s ease}
 .character-image img{display:block;width:100%;height:100%;object-fit:contain;position:relative;z-index:1}
 
-/* 立绘防保存：禁止选中、拖拽和触屏长按菜单 */
+/* 立绘防保存 */
 .character-image,
 .character-image img{
   -webkit-user-select:none;
@@ -140,6 +141,99 @@ body{
 .character-image img{
   -webkit-user-drag:none;
   user-drag:none;
+}
+
+/* 点击放大提示 */
+.character-image.image-clickable{cursor:zoom-in}
+.character-image.image-clickable::before{pointer-events:none}
+.character-image.image-clickable::after{content:"⌕";font-size:22px;z-index:3;pointer-events:none}
+
+/* 立绘放大查看层 */
+.image-lightbox{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:55px 24px;
+  background:rgba(2,8,18,.94);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .25s ease,visibility .25s ease;
+}
+.image-lightbox.is-open{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+}
+.lightbox-image{
+  display:block;
+  max-width: min(92vw,1200px);
+  max-height: calc(100vh - 110px);
+  width:auto;
+  height:auto;
+  object-fit:contain;
+  user-select:none;
+  -webkit-user-select:none;
+  -webkit-user-drag:none;
+  -webkit-touch-callout:none;
+  cursor:zoom-out;
+  box-shadow:0 0 35px rgba(58,133,190,.12);
+  transform:scale(.97);
+  transition:transform .25s ease;
+}
+.image-lightbox.is-open .lightbox-image{transform:scale(1)}
+.lightbox-close{
+  position:absolute;
+  top:20px;
+  right:24px;
+  width:42px;
+  height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+  border:1px solid rgba(157,204,239,.35);
+  background:rgba(8,28,49,.45);
+  color:#dcecff;
+  font-family:"Times New Roman",serif;
+  font-size:27px;
+  font-weight:400;
+  line-height:1;
+  cursor:pointer;
+  transition:background .2s ease,border-color .2s ease,color .2s ease;
+}
+.lightbox-close:hover{
+  background:rgba(38,91,137,.35);
+  border-color:rgba(157,204,239,.75);
+  color:#fff;
+}
+.lightbox-caption{
+  position:absolute;
+  left:20px;
+  right:20px;
+  bottom:20px;
+  color:rgba(207,229,246,.58);
+  font-family:"Cinzel","Noto Serif SC",serif;
+  font-size:9px;
+  letter-spacing:3px;
+  text-align:center;
+  pointer-events:none;
+}
+body.day-mode .lightbox-close{
+  background:rgba(8,28,49,.72);
+  border-color:rgba(157,204,239,.4);
+  color:#dcecff;
+}
+@media(max-width:600px){
+  .image-lightbox{padding:54px 12px}
+  .lightbox-image{max-width:96vw;max-height:calc(100vh - 108px)}
+  .lightbox-close{top:12px;right:12px;width:38px;height:38px}
+  .lightbox-caption{bottom:13px;font-size:8px;letter-spacing:2px}
 }
 
 .image-placeholder{text-align:center;color:rgba(177,207,230,.62);font-family:"Cinzel",serif;letter-spacing:4px;font-size:10px;transition:color .6s ease}
@@ -392,6 +486,13 @@ body.day-mode .pagination-status{color:rgba(70,135,165,.55)}
   </main>
 </div>
 
+<!-- 立绘放大查看层 -->
+<div class="image-lightbox" id="imageLightbox" aria-hidden="true">
+  <button type="button" class="lightbox-close" id="lightboxClose" aria-label="关闭放大图片">×</button>
+  <img class="lightbox-image" id="lightboxImage" src="" alt="" draggable="false">
+  <div class="lightbox-caption" id="lightboxCaption">SEYAMI · CHARACTER PORTRAIT</div>
+</div>
+
 <script>
 /* SUPABASE */
 const SUPABASE_URL = "https://rqqkdpzehxzwqzytpxgh.supabase.co";
@@ -415,6 +516,12 @@ const description = document.querySelector(".description");
 const archiveMark = document.querySelector(".archive-mark");
 const editCharacterButton = document.getElementById("editCharacterButton");
 
+/* 图片放大元素 */
+const imageLightbox = document.getElementById("imageLightbox");
+const lightboxImage = document.getElementById("lightboxImage");
+const lightboxClose = document.getElementById("lightboxClose");
+const lightboxCaption = document.getElementById("lightboxCaption");
+
 const prevCharacter = document.getElementById("prevCharacter");
 const nextCharacter = document.getElementById("nextCharacter");
 const paginationStatus = document.getElementById("paginationStatus");
@@ -426,7 +533,6 @@ function preventImageSave(event){
 
 if(characterImage){
   characterImage.setAttribute("draggable","false");
-
   characterImage.addEventListener("contextmenu",preventImageSave);
   characterImage.addEventListener("dragstart",preventImageSave);
   characterImage.addEventListener("selectstart",preventImageSave);
@@ -434,32 +540,76 @@ if(characterImage){
 
 if(characterImageContainer){
   characterImageContainer.addEventListener("contextmenu",function(event){
-    if(event.target.closest("img")){
-      event.preventDefault();
-    }
+    if(event.target.closest("img")) event.preventDefault();
   });
 
   characterImageContainer.addEventListener("dragstart",function(event){
-    if(event.target.closest("img")){
-      event.preventDefault();
-    }
+    if(event.target.closest("img")) event.preventDefault();
   });
 
   characterImageContainer.addEventListener("selectstart",function(event){
-    if(event.target.closest("img")){
-      event.preventDefault();
-    }
+    if(event.target.closest("img")) event.preventDefault();
   });
 }
+
+/* IMAGE LIGHTBOX */
+function openImageLightbox(){
+  if(!characterImage.src || characterImage.style.display === "none") return;
+
+  lightboxImage.src = characterImage.src;
+  lightboxImage.alt = characterImage.alt || "";
+  lightboxCaption.textContent =
+    "SEYAMI · " + (characterImage.alt || "CHARACTER PORTRAIT");
+
+  imageLightbox.classList.add("is-open");
+  imageLightbox.setAttribute("aria-hidden","false");
+  document.body.style.overflow = "hidden";
+}
+
+function closeImageLightbox(){
+  imageLightbox.classList.remove("is-open");
+  imageLightbox.setAttribute("aria-hidden","true");
+  document.body.style.overflow = "";
+
+  /* 等关闭动画开始后再清除图片 */
+  window.setTimeout(function(){
+    if(!imageLightbox.classList.contains("is-open")){
+      lightboxImage.removeAttribute("src");
+    }
+  },250);
+}
+
+characterImageContainer.addEventListener("click",function(event){
+  if(event.target.closest("img") && characterImage.style.display !== "none"){
+    openImageLightbox();
+  }
+});
+
+lightboxClose.addEventListener("click",closeImageLightbox);
+
+/* 点击图片外的暗色背景关闭 */
+imageLightbox.addEventListener("click",function(event){
+  if(event.target === imageLightbox){
+    closeImageLightbox();
+  }
+});
+
+/* 放大图本身也可以点击关闭 */
+lightboxImage.addEventListener("click",closeImageLightbox);
+
+/* Esc 关闭放大层 */
+document.addEventListener("keydown",function(event){
+  if(event.key === "Escape" && imageLightbox.classList.contains("is-open")){
+    closeImageLightbox();
+  }
+});
 
 /* ADMIN CHECK */
 async function checkSeyamiAdmin(){
   try{
     const {data,error} = await supabaseClient.auth.getUser();
 
-    if(error || !data || !data.user){
-      return false;
-    }
+    if(error || !data || !data.user) return false;
 
     return (data.user.email || "").trim().toLowerCase() === "1296457710@qq.com";
   }catch(error){
@@ -482,7 +632,6 @@ async function setupCharacterEditButton(){
 
   editCharacterButton.onclick = function(){
     const character = allCharacters[currentIndex];
-
     if(!character) return;
 
     window.location.href = "edit.html?id=" + encodeURIComponent(character.id);
@@ -527,6 +676,9 @@ function updatePagination(){
 function renderCharacter(character){
   if(!character) return;
 
+  /* 切换角色时确保放大层关闭 */
+  closeImageLightbox();
+
   const displayNumber = String(currentIndex + 1).padStart(3,"0");
 
   characterNumber.textContent = "CHARACTER · " + displayNumber;
@@ -551,9 +703,7 @@ function renderCharacter(character){
 
     let status = "";
 
-    if(character.gender){
-      status = character.gender;
-    }
+    if(character.gender) status = character.gender;
 
     if(character.age !== null && character.age !== undefined && character.age !== ""){
       if(status) status += " · ";
@@ -583,6 +733,7 @@ function renderCharacter(character){
   const imageURL = (character.image_url || "").trim();
 
   characterImage.style.display = "none";
+  characterImageContainer.classList.remove("image-clickable");
   imagePlaceholder.style.display = "block";
   characterImage.onload = null;
   characterImage.onerror = null;
@@ -591,10 +742,12 @@ function renderCharacter(character){
     characterImage.onload = function(){
       characterImage.style.display = "block";
       imagePlaceholder.style.display = "none";
+      characterImageContainer.classList.add("image-clickable");
     };
 
     characterImage.onerror = function(){
       characterImage.style.display = "none";
+      characterImageContainer.classList.remove("image-clickable");
       imagePlaceholder.style.display = "block";
       console.error("角色图片加载失败：",imageURL);
     };
@@ -685,8 +838,9 @@ nextCharacter.addEventListener("click",function(){
 
 /* KEYBOARD */
 document.addEventListener("keydown",function(event){
-  const tag = document.activeElement?.tagName;
+  if(imageLightbox.classList.contains("is-open")) return;
 
+  const tag = document.activeElement?.tagName;
   if(tag === "INPUT" || tag === "TEXTAREA") return;
 
   if(event.key === "ArrowLeft" && currentIndex > 0){
