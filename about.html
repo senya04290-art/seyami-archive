@@ -67,9 +67,9 @@ h1{margin:12px 0 7px;font-family:Cinzel,serif;font-size:clamp(27px,5vw,43px);fon
 .tile.selected{z-index:2;border:2px solid var(--gold);background:rgba(79,99,139,.8);box-shadow:0 0 0 2px rgba(217,196,154,.13),0 0 14px rgba(217,196,154,.25);transform:scale(.94)}
 .tile img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
 .tile .emoji{font-size:clamp(17px,4.2vw,34px);line-height:1;filter:drop-shadow(0 2px 3px rgba(0,0,0,.25));pointer-events:none}
-.tile.matched{animation:none;opacity:1}
-.tile.falling{animation:appear .19s ease-out}
-@keyframes appear{from{transform:translateY(-12px) scale(.8);opacity:.35}to{transform:translateY(0) scale(1);opacity:1}}
+
+/* 修改：取消棋子掉落时的闪烁、缩放和透明度变化 */
+.tile.falling{animation:none}
 
 .game-message{min-height:27px;margin:12px auto 3px;text-align:center;color:var(--muted);font-size:12px;line-height:1.8}
 .game-message.success{color:#b9e6ff}
@@ -223,7 +223,7 @@ h1{font-size:clamp(23px,6vw,34px);letter-spacing:1px}
 <h2>✧ 魔法规则</h2>
 <p>交换相邻的角色图块，让三个或更多相同图块连成一线，即可收集魔力积分。</p>
 <p>每次有效交换消耗一步；连锁消除会获得更高倍率。试着在 25 步内挑战你的最高纪录吧。</p>
-<p>棋盘使用档案馆公开的 OC 图片。五张图片目前设置为网站根目录中的 <code>oc-01.png</code> 至 <code>oc-05.png</code>。</p>
+<p>棋盘使用档案馆公开的 OC 图片。五张图片位于网站根目录：<code>oc-01.png</code> 至 <code>oc-05.png</code>。</p>
 </section>
 </main>
 
@@ -245,7 +245,7 @@ h1{font-size:clamp(23px,6vw,34px);letter-spacing:1px}
   const SIZE = 8;
   const START_STEPS = 25;
 
-  // 图片位于 GitHub 仓库根目录，与 index.html 等文件处于同一层。
+  // 五张图片位于 GitHub 仓库根目录。
   const TILE_TYPES = [
     { id: "oc-01", name: "伊莉娜·皇冠礼服 Q 版", image: "oc-01.png", emoji: "⭐" },
     { id: "oc-02", name: "伊莉娜·星星帽 Q 版", image: "oc-02.png", emoji: "💖" },
@@ -355,7 +355,6 @@ h1{font-size:clamp(23px,6vw,34px);letter-spacing:1px}
       img.alt = type.name;
       img.draggable = false;
 
-      // 图片加载失败时显示备用符号，同时在控制台留下错误信息。
       img.onerror = () => {
         console.warn("OC 图片加载失败，请检查文件名和路径：", type.image);
         img.remove();
@@ -570,13 +569,12 @@ h1{font-size:clamp(23px,6vw,34px);letter-spacing:1px}
         }
       }
 
+      // 修改：直接显示补位后的棋盘，不再给棋子添加闪烁动画。
       renderBoard();
 
-      Array.from(boardElement.children).forEach(tile => {
-        tile.classList.add("falling");
-      });
-
+      // 保留原来的等待时间，让连锁消除判定正常进行。
       await sleep(180);
+
       matches = getMatches();
     }
 
