@@ -206,9 +206,10 @@ h1 {
   letter-spacing: 13px;
 }
 
+/* 放大游戏外框，让棋盘有更多空间 */
 .game-frame {
   position: relative;
-  width: min(100%, 800px);
+  width: min(100%, 900px);
   margin: 0 auto;
   padding: 1px;
   background: linear-gradient(135deg, rgba(217,196,154,.72), rgba(113,157,213,.22), rgba(217,196,154,.55));
@@ -311,8 +312,9 @@ h1 {
   50% { transform: scale(1.13); color: var(--gold); }
 }
 
+/* 桌面端棋盘最大宽度增至 640px，图片会明显更清晰 */
 .board-wrap {
-  width: min(100%, 520px);
+  width: min(100%, 640px);
   margin: 0 auto;
   padding: 8px;
   border: 1px solid rgba(151, 190, 241, .30);
@@ -325,7 +327,7 @@ h1 {
 .board {
   display: grid;
   grid-template-columns: repeat(8, minmax(0, 1fr));
-  gap: clamp(3px, .9vw, 7px);
+  gap: 4px;
   touch-action: manipulation;
   user-select: none;
 }
@@ -633,7 +635,7 @@ h1 {
   font-size: 31px;
 }
 
-/* 日间主题：只切换本页的背景、文字和面板明暗 */
+/* 日间主题 */
 body.day-mode {
   color-scheme: light;
   --bg: #e9eef7;
@@ -688,7 +690,8 @@ body.day-mode .action-button.primary {
   background: rgba(231, 220, 196, .55);
 }
 
-@media (max-width: 520px) {
+/* 手机和平板适配 */
+@media (max-width: 700px) {
   .site-header {
     width: calc(100% - 26px);
     padding-top: 18px;
@@ -739,6 +742,7 @@ body.day-mode .action-button.primary {
   }
 
   .board-wrap {
+    width: 100%;
     padding: 5px;
   }
 
@@ -946,7 +950,6 @@ body.day-mode .action-button.primary {
   const resultOverlay = document.getElementById("resultOverlay");
 
   let customImages = [];
-  let selectedFiles = [];
   let tileTypes = [...DEFAULT_TILES];
   let board = [];
   let selectedIndex = null;
@@ -960,7 +963,6 @@ body.day-mode .action-button.primary {
 
   bestElement.textContent = String(bestScore);
 
-  /* 与档案馆共用 seyami-theme；尽可能兼容常见主题值 */
   function applyTheme() {
     const theme = localStorage.getItem("seyami-theme");
     const day = ["day", "light", "day-mode"].includes(theme);
@@ -976,7 +978,6 @@ body.day-mode .action-button.primary {
 
   applyTheme();
 
-  /* 使用 IndexedDB 保存图片，避免把大图片塞进 localStorage */
   function openDatabase() {
     return new Promise((resolve, reject) => {
       if (!("indexedDB" in window)) {
@@ -1001,6 +1002,7 @@ body.day-mode .action-button.primary {
   async function saveImages() {
     try {
       const db = await openDatabase();
+
       await new Promise((resolve, reject) => {
         const tx = db.transaction(STORE_NAME, "readwrite");
         tx.objectStore(STORE_NAME).put(customImages, "custom-images");
@@ -1008,6 +1010,7 @@ body.day-mode .action-button.primary {
         tx.onerror = () => reject(tx.error);
         tx.onabort = () => reject(tx.error);
       });
+
       db.close();
       return true;
     } catch (error) {
@@ -1019,12 +1022,14 @@ body.day-mode .action-button.primary {
   async function loadImages() {
     try {
       const db = await openDatabase();
+
       const images = await new Promise((resolve, reject) => {
         const tx = db.transaction(STORE_NAME, "readonly");
         const request = tx.objectStore(STORE_NAME).get("custom-images");
         request.onsuccess = () => resolve(request.result || []);
         request.onerror = () => reject(request.error);
       });
+
       db.close();
       customImages = Array.isArray(images) ? images : [];
     } catch (error) {
@@ -1044,10 +1049,6 @@ body.day-mode .action-button.primary {
       name: image.name || ("角色 " + (index + 1))
     }));
 
-    /*
-      上传 3 张及以上时使用上传的图片作为全部图块类型。
-      少于 3 张时，补充可爱符号，保证游戏仍然可玩。
-    */
     if (imageTypes.length >= 3) {
       tileTypes = imageTypes;
     } else {
@@ -1062,6 +1063,7 @@ body.day-mode .action-button.primary {
 
   function renderPreviews() {
     previewList.replaceChildren();
+
     uploadCount.textContent = customImages.length
       ? "已保存 " + customImages.length + " 张图片"
       : "尚未上传角色图片";
@@ -1080,8 +1082,10 @@ body.day-mode .action-button.primary {
       remove.type = "button";
       remove.textContent = "×";
       remove.setAttribute("aria-label", "移除这张图片");
+
       remove.addEventListener("click", async () => {
         if (busy) return;
+
         customImages.splice(index, 1);
         await saveImages();
         renderPreviews();
@@ -1202,7 +1206,6 @@ body.day-mode .action-button.primary {
   function getMatches(source = board) {
     const found = new Set();
 
-    /* 横向匹配 */
     for (let row = 0; row < SIZE; row++) {
       let start = 0;
 
@@ -1228,7 +1231,6 @@ body.day-mode .action-button.primary {
       }
     }
 
-    /* 纵向匹配 */
     for (let col = 0; col < SIZE; col++) {
       let start = 0;
 
@@ -1343,8 +1345,7 @@ body.day-mode .action-button.primary {
       lastCascade = cascade;
       maxCombo = Math.max(maxCombo, cascade);
 
-      const points = matches.size * 30 * cascade;
-      score += points;
+      score += matches.size * 30 * cascade;
 
       if (score > bestScore) {
         bestScore = score;
@@ -1367,7 +1368,6 @@ body.day-mode .action-button.primary {
         board[index] = null;
       });
 
-      /* 每一列独立下落，再从顶部补充新图块 */
       for (let col = 0; col < SIZE; col++) {
         const remaining = [];
 
@@ -1384,7 +1384,10 @@ body.day-mode .action-button.primary {
       }
 
       renderBoard();
-      Array.from(boardElement.children).forEach(tile => tile.classList.add("falling"));
+
+      Array.from(boardElement.children).forEach(tile => {
+        tile.classList.add("falling");
+      });
 
       await sleep(180);
       matches = getMatches();
@@ -1423,10 +1426,6 @@ body.day-mode .action-button.primary {
   function shuffleBoard() {
     if (busy || ended) return;
 
-    /*
-      重排棋盘属于一次挑战操作，因此消耗一步。
-      若已没有步数，直接结束本局。
-    */
     if (steps <= 0) {
       finishGame();
       return;
@@ -1456,11 +1455,13 @@ body.day-mode .action-button.primary {
 
     const readFile = file => new Promise((resolve, reject) => {
       const reader = new FileReader();
+
       reader.onload = () => resolve({
         id: "upload-" + Date.now() + "-" + Math.random().toString(36).slice(2, 9),
         name: file.name,
         data: reader.result
       });
+
       reader.onerror = () => reject(reader.error);
       reader.readAsDataURL(file);
     });
@@ -1471,6 +1472,7 @@ body.day-mode .action-button.primary {
       const saved = await saveImages();
 
       renderPreviews();
+
       setMessage(
         saved
           ? "图片已保存。点击“使用这些图片开局”开始游戏。"
@@ -1486,8 +1488,10 @@ body.day-mode .action-button.primary {
 
   document.getElementById("applyImages").addEventListener("click", () => {
     if (busy) return;
+
     setTileTypes();
     startGame();
+
     setMessage(
       customImages.length >= 3
         ? "角色图块已启用！交换相同角色的图片即可消除。"
@@ -1498,6 +1502,7 @@ body.day-mode .action-button.primary {
 
   document.getElementById("clearImages").addEventListener("click", async () => {
     if (busy) return;
+
     customImages = [];
     await saveImages();
     renderPreviews();
@@ -1523,7 +1528,6 @@ body.day-mode .action-button.primary {
     }
   });
 
-  /* 页面打开时自动恢复之前保存的图片 */
   loadImages();
 })();
 </script>
