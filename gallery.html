@@ -1,1279 +1,369 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>塞垭弥大陆档案馆 · 档案画廊</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
+<link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-:root {
-    --bg: #061426;
-    --bg-deep: #030b16;
-    --text: #dcecff;
-    --text-soft: #9eb5d1;
-    --line: rgba(151, 190, 232, .24);
-    --line-bright: rgba(173, 210, 255, .48);
-    --accent: #b9d7ff;
-    --card-bg: rgba(10, 29, 52, .78);
-    --button-bg: rgba(12, 34, 59, .78);
-    --watermark: rgba(225, 239, 255, .34);
-}
-
-* {
-    box-sizing: border-box;
-}
-
-html {
-    min-height: 100%;
-    scroll-behavior: smooth;
-}
-
-body {
-    margin: 0;
-    min-height: 100vh;
-    overflow-x: hidden;
-    color: var(--text);
-    background:
-        radial-gradient(
-            ellipse at 50% 35%,
-            rgba(24, 57, 91, .2),
-            transparent 55%
-        ),
-        var(--bg);
-    font-family: "Noto Serif SC", serif;
-    font-weight: 300;
-    transition: background-color .3s, color .3s;
-}
-
-body.day-mode {
-    --bg: #eaf0f7;
-    --bg-deep: #dfe8f2;
-    --text: #263b54;
-    --text-soft: #637b96;
-    --line: rgba(66, 101, 142, .25);
-    --line-bright: rgba(66, 101, 142, .45);
-    --accent: #496b95;
-    --card-bg: rgba(255, 255, 255, .78);
-    --button-bg: rgba(255, 255, 255, .82);
-    --watermark: rgba(255, 255, 255, .52);
-
-    background:
-        radial-gradient(
-            ellipse at 50% 35%,
-            rgba(194, 211, 235, .3),
-            transparent 55%
-        ),
-        var(--bg);
-}
-
-button,
-a {
-    -webkit-tap-highlight-color: transparent;
-}
-
-button {
-    font: inherit;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-/* 星空 */
-
-.stars,
-.micro-stars,
-.arcane-stars {
-    position: fixed;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-}
-
-.stars {
-    z-index: 0;
-}
-
-.micro-stars {
-    z-index: 0;
-    opacity: .5;
-}
-
-.arcane-stars {
-    z-index: 0;
-    opacity: .35;
-}
-
-.star {
-    position: absolute;
-    color: #d9eaff;
-    animation: twinkle 4s ease-in-out infinite;
-    user-select: none;
-}
-
-.micro-star {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    border-radius: 50%;
-    background: #d9eaff;
-    animation: twinkle 5s ease-in-out infinite;
-}
-
-.arcane-star {
-    position: absolute;
-    color: #9bbde5;
-    font-family: "Cinzel", serif;
-    animation: twinkle 6s ease-in-out infinite;
-}
-
-body.day-mode .star,
-body.day-mode .arcane-star {
-    color: #738eaf;
-}
-
-body.day-mode .micro-star {
-    background: #738eaf;
-}
-
-@keyframes twinkle {
-    0%, 100% {
-        opacity: .25;
-    }
-
-    50% {
-        opacity: .85;
-    }
-}
-
-/* 魔法圆环 */
-
-.magic-circle {
-    position: fixed;
-    width: min(72vw, 760px);
-    aspect-ratio: 1;
-    top: 47%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: 1px solid var(--line);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-    opacity: .55;
-}
-
-.magic-circle::before,
-.magic-circle::after {
-    content: "";
-    position: absolute;
-    border: 1px solid var(--line);
-    border-radius: 50%;
-    inset: 9%;
-}
-
-.magic-circle::after {
-    inset: 19.5%;
-}
-
-.magic-circle .magic-line {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 1px;
-    background: var(--line);
-    transform: translate(-50%, -50%);
-}
-
-.magic-circle .magic-line:nth-child(2) {
-    transform: translate(-50%, -50%) rotate(60deg);
-}
-
-.magic-circle .magic-line:nth-child(3) {
-    transform: translate(-50%, -50%) rotate(-60deg);
-}
-
-body.day-mode .magic-circle {
-    opacity: .35;
-}
-
-/* 页面框架 */
-
-.page-frame {
-    position: relative;
-    z-index: 1;
-    min-height: 100vh;
-    padding: 38px 58px 70px;
-}
-
-.page-frame::before {
-    content: "";
-    position: fixed;
-    inset: 17px;
-    border: 1px solid var(--line);
-    pointer-events: none;
-    z-index: -1;
-}
-
-.page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 20px;
-    position: relative;
-    z-index: 2;
-}
-
-.logo {
-    display: inline-flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.logo-cn {
-    font-family: "Noto Serif SC", serif;
-    font-size: 16px;
-    letter-spacing: 4px;
-    font-weight: 400;
-}
-
-.logo-en {
-    font-family: "Cinzel", serif;
-    font-size: 11px;
-    letter-spacing: 3px;
-    opacity: .72;
-}
-
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.back-link,
-.theme-toggle {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 36px;
-    padding: 8px 15px;
-    border: 1px solid var(--line);
-    background: var(--button-bg);
-    color: var(--text);
-    font-size: 12px;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: background .25s, border-color .25s;
-}
-
-.back-link:hover,
-.theme-toggle:hover {
-    border-color: var(--line-bright);
-    background: var(--card-bg);
-}
-
-/* 标题 */
-
-.page-title {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    margin: 66px 0 16px;
-}
-
-.page-title h1 {
-    margin: 0;
-    font-family: "Cinzel", serif;
-    font-size: clamp(30px, 4.5vw, 49px);
-    font-weight: 400;
-    letter-spacing: 8px;
-}
-
-.page-title p {
-    margin: 14px 0 0;
-    color: var(--text-soft);
-    font-size: 12px;
-    letter-spacing: 5px;
-}
-
-.title-divider {
-    width: 90px;
-    height: 1px;
-    margin: 24px auto 0;
-    background: var(--line-bright);
-}
-
-/* 画廊 */
-
-.gallery-container {
-    position: relative;
-    z-index: 1;
-    max-width: 1250px;
-    margin: 45px auto 0;
-}
-
-.gallery-list {
-    column-count: 3;
-    column-gap: 24px;
-}
-
-.gallery-item {
-    display: inline-block;
-    width: 100%;
-    margin: 0 0 24px;
-    padding: 10px;
-    break-inside: avoid;
-    border: 1px solid var(--line);
-    background: var(--card-bg);
-    vertical-align: top;
-    transition:
-        border-color .3s,
-        transform .3s,
-        background .3s;
-}
-
-.gallery-item:hover {
-    border-color: var(--line-bright);
-    transform: translateY(-3px);
-}
-
-.gallery-image-wrap {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    background: rgba(0, 0, 0, .15);
-    isolation: isolate;
-}
-
-.gallery-image {
-    display: block;
-    width: 100%;
-    height: auto;
-    min-height: 100px;
-    object-fit: contain;
-    cursor: zoom-in;
-
-    -webkit-user-drag: none;
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
-}
-
-/* 重复斜向水印 */
-
-.watermark-pattern {
-    position: absolute;
-    inset: -25%;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    overflow: hidden;
-    transform: rotate(-25deg);
-    transform-origin: center;
-    pointer-events: none;
-    user-select: none;
-    -webkit-user-select: none;
-}
-
-.watermark-row {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    gap: 30px;
-    width: 150%;
-    white-space: nowrap;
-}
-
-.watermark-row span {
-    color: var(--watermark);
-    font-family: "Cinzel", "Noto Serif SC", serif;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    white-space: nowrap;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, .28);
-}
-
-/* 右下角署名 */
-
-.watermark-signature {
-    position: absolute;
-    right: 9px;
-    bottom: 9px;
-    z-index: 3;
-    max-width: calc(100% - 18px);
-    padding: 5px 8px;
-    color: rgba(255, 255, 255, .92);
-    background: rgba(3, 13, 27, .66);
-    border: 1px solid rgba(220, 236, 255, .32);
-    font-family: "Cinzel", "Noto Serif SC", serif;
-    font-size: 9px;
-    letter-spacing: 1px;
-    line-height: 1.6;
-    pointer-events: none;
-    user-select: none;
-    -webkit-user-select: none;
-    white-space: nowrap;
-}
-
-.gallery-caption {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 8px;
-    padding: 11px 3px 2px;
-    color: var(--text-soft);
-    font-size: 10px;
-    letter-spacing: 1px;
-}
-
-.gallery-caption span {
-    overflow-wrap: anywhere;
-}
-
-.delete-button {
-    display: none;
-    flex-shrink: 0;
-    border: 1px solid rgba(230, 119, 119, .42);
-    background: rgba(95, 25, 35, .28);
-    color: #ffcaca;
-    padding: 5px 9px;
-    cursor: pointer;
-    font-size: 11px;
-    letter-spacing: 1px;
-}
-
-.delete-button:hover {
-    background: rgba(130, 35, 45, .5);
-}
-
-body.is-gallery-admin .delete-button {
-    display: inline-flex;
-}
-
-/* 空状态 */
-
-.empty-gallery {
-    display: none;
-    padding: 70px 20px;
-    border: 1px solid var(--line);
-    text-align: center;
-    color: var(--text-soft);
-    font-size: 13px;
-    letter-spacing: 2px;
-    background: var(--card-bg);
-}
-
-.empty-gallery.show {
-    display: block;
-}
-
-.empty-symbol {
-    margin-bottom: 18px;
-    font-family: "Cinzel", serif;
-    font-size: 34px;
-    opacity: .65;
-}
-
-/* 加载状态 */
-
-.loading-message {
-    padding: 50px 15px;
-    text-align: center;
-    color: var(--text-soft);
-    font-size: 12px;
-    letter-spacing: 3px;
-}
-
-/* 图片放大查看 */
-
-.lightbox {
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    padding: 35px;
-    background: rgba(1, 7, 16, .94);
-}
-
-.lightbox.active {
-    display: flex;
-}
-
-.lightbox-stage {
-    position: relative;
-    display: inline-block;
-    max-width: min(92vw, 1200px);
-    max-height: 88vh;
-    overflow: hidden;
-    isolation: isolate;
-}
-
-.lightbox-image {
-    display: block;
-    max-width: min(92vw, 1200px);
-    max-height: 88vh;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    cursor: default;
-
-    -webkit-user-drag: none;
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
-}
-
-.lightbox-stage .watermark-pattern {
-    inset: -20%;
-}
-
-.lightbox-stage .watermark-row span {
-    font-size: 14px;
-    letter-spacing: 3px;
-}
-
-.lightbox-stage .watermark-signature {
-    font-size: 11px;
-    padding: 7px 11px;
-}
-
-.lightbox-close {
-    position: fixed;
-    top: 20px;
-    right: 24px;
-    z-index: 1002;
-    width: 42px;
-    height: 42px;
-    border: 1px solid rgba(220, 236, 255, .4);
-    background: rgba(5, 20, 38, .7);
-    color: #fff;
-    font-size: 25px;
-    font-weight: 300;
-    cursor: pointer;
-}
-
-.lightbox-close:hover {
-    background: rgba(35, 60, 90, .8);
-}
-
-.lightbox-tip {
-    position: fixed;
-    bottom: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: rgba(220, 236, 255, .55);
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-align: center;
-    white-space: nowrap;
-    pointer-events: none;
-}
-
-/* 页脚 */
-
-.page-footer {
-    position: relative;
-    z-index: 1;
-    margin-top: 65px;
-    padding-top: 20px;
-    border-top: 1px solid var(--line);
-    color: var(--text-soft);
-    text-align: center;
-    font-family: "Cinzel", "Noto Serif SC", serif;
-    font-size: 10px;
-    letter-spacing: 3px;
-}
-
-/* 手机端 */
-
-@media (max-width: 900px) {
-    .page-frame {
-        padding: 28px 30px 55px;
-    }
-
-    .gallery-list {
-        column-count: 2;
-        column-gap: 18px;
-    }
-
-    .gallery-item {
-        margin-bottom: 18px;
-    }
-
-    .page-title {
-        margin-top: 55px;
-    }
-}
-
-@media (max-width: 560px) {
-    .page-frame {
-        padding: 24px 20px 45px;
-    }
-
-    .page-frame::before {
-        inset: 8px;
-    }
-
-    .page-header {
-        gap: 10px;
-    }
-
-    .logo-cn {
-        font-size: 13px;
-        letter-spacing: 2px;
-    }
-
-    .logo-en {
-        font-size: 9px;
-        letter-spacing: 2px;
-    }
-
-    .header-actions {
-        gap: 6px;
-    }
-
-    .back-link,
-    .theme-toggle {
-        min-height: 32px;
-        padding: 6px 9px;
-        font-size: 10px;
-        letter-spacing: 0;
-    }
-
-    .page-title {
-        margin-top: 48px;
-    }
-
-    .page-title h1 {
-        font-size: 30px;
-        letter-spacing: 5px;
-    }
-
-    .page-title p {
-        font-size: 10px;
-        letter-spacing: 3px;
-    }
-
-    .gallery-container {
-        margin-top: 30px;
-    }
-
-    .gallery-list {
-        column-count: 2;
-        column-gap: 12px;
-    }
-
-    .gallery-item {
-        padding: 6px;
-        margin-bottom: 12px;
-    }
-
-    .gallery-caption {
-        font-size: 9px;
-        flex-wrap: wrap;
-    }
-
-    .watermark-row {
-        gap: 18px;
-    }
-
-    .watermark-row span {
-        font-size: 8px;
-        letter-spacing: 1px;
-    }
-
-    .watermark-signature {
-        right: 5px;
-        bottom: 5px;
-        padding: 4px 5px;
-        font-size: 7px;
-        letter-spacing: .5px;
-    }
-
-    .lightbox {
-        padding: 12px;
-    }
-
-    .lightbox-stage,
-    .lightbox-image {
-        max-width: 96vw;
-        max-height: 84vh;
-    }
-
-    .lightbox-stage .watermark-row span {
-        font-size: 9px;
-        letter-spacing: 1px;
-    }
-
-    .lightbox-stage .watermark-signature {
-        font-size: 8px;
-    }
-
-    .lightbox-close {
-        top: 12px;
-        right: 12px;
-        width: 36px;
-        height: 36px;
-    }
-
-    .lightbox-tip {
-        bottom: 10px;
-        font-size: 9px;
-        letter-spacing: 1px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
-        scroll-behavior: auto !important;
-    }
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;width:100%;min-height:100%}
+body{overflow-x:hidden;background:#061426;color:#dcecff;font-family:"Cinzel","Noto Serif SC",serif;transition:background .6s ease,color .6s ease}
+.page{position:relative;min-height:100vh;padding:30px 70px 80px;overflow:hidden;background:radial-gradient(circle at 50% 42%,rgba(38,91,137,.18),transparent 38%),radial-gradient(circle at 50% 52%,rgba(11,45,75,.45),transparent 72%),#061426;transition:background .6s ease}
+.frame{position:absolute;top:20px;left:20px;right:20px;bottom:20px;border:1px solid rgba(111,174,224,.32);pointer-events:none;z-index:10;transition:border-color .6s ease}
+.frame::before,.frame::after{content:"";position:absolute;width:45px;height:45px;transition:border-color .6s ease}
+.frame::before{left:-1px;top:-1px;border-left:1px solid rgba(108,178,230,.88);border-top:1px solid rgba(108,178,230,.88)}
+.frame::after{right:-1px;bottom:-1px;border-right:1px solid rgba(108,178,230,.88);border-bottom:1px solid rgba(108,178,230,.88)}
+
+.stars,.stars::before,.stars::after{position:absolute;content:"";pointer-events:none}
+.stars{inset:0;z-index:0}
+.stars::before{width:2px;height:2px;background:rgba(182,220,255,.55);box-shadow:5vw 8vh rgba(182,220,255,.55),13vw 18vh rgba(182,220,255,.40),22vw 7vh rgba(182,220,255,.55),31vw 14vh rgba(182,220,255,.32),41vw 5vh rgba(182,220,255,.50),52vw 12vh rgba(182,220,255,.38),63vw 7vh rgba(182,220,255,.48),74vw 16vh rgba(182,220,255,.32),86vw 8vh rgba(182,220,255,.52),94vw 20vh rgba(182,220,255,.38),8vw 31vh rgba(182,220,255,.34),18vw 39vh rgba(182,220,255,.48),29vw 27vh rgba(182,220,255,.32),39vw 34vh rgba(182,220,255,.44),49vw 26vh rgba(182,220,255,.36),61vw 38vh rgba(182,220,255,.46),72vw 29vh rgba(182,220,255,.34),83vw 36vh rgba(182,220,255,.50),92vw 28vh rgba(182,220,255,.36),4vw 55vh rgba(182,220,255,.46),15vw 63vh rgba(182,220,255,.34),25vw 52vh rgba(182,220,255,.52),36vw 61vh rgba(182,220,255,.32),47vw 54vh rgba(182,220,255,.44),58vw 67vh rgba(182,220,255,.38),69vw 55vh rgba(182,220,255,.50),80vw 64vh rgba(182,220,255,.34),91vw 53vh rgba(182,220,255,.46),9vw 81vh rgba(182,220,255,.34),20vw 91vh rgba(182,220,255,.48),33vw 82vh rgba(182,220,255,.36),45vw 94vh rgba(182,220,255,.42),57vw 84vh rgba(182,220,255,.32),68vw 92vh rgba(182,220,255,.48),79vw 82vh rgba(182,220,255,.36),89vw 90vh rgba(182,220,255,.44)}
+.stars::after{width:1px;height:1px;background:rgba(182,220,255,.38);box-shadow:2vw 14vh rgba(182,220,255,.35),17vw 5vh rgba(182,220,255,.28),27vw 20vh rgba(182,220,255,.35),37vw 8vh rgba(182,220,255,.28),47vw 18vh rgba(182,220,255,.35),58vw 5vh rgba(182,220,255,.28),69vw 22vh rgba(182,220,255,.35),79vw 9vh rgba(182,220,255,.28),90vw 15vh rgba(182,220,255,.35),11vw 45vh rgba(182,220,255,.28),22vw 34vh rgba(182,220,255,.35),34vw 47vh rgba(182,220,255,.28),44vw 39vh rgba(182,220,255,.35),55vw 47vh rgba(182,220,255,.28),66vw 42vh rgba(182,220,255,.35),77vw 48vh rgba(182,220,255,.28),88vw 40vh rgba(182,220,255,.35),6vw 72vh rgba(182,220,255,.35),17vw 78vh rgba(182,220,255,.28),29vw 70vh rgba(182,220,255,.35),41vw 77vh rgba(182,220,255,.28),53vw 72vh rgba(182,220,255,.35),64vw 79vh rgba(182,220,255,.28),76vw 71vh rgba(182,220,255,.35),87vw 78vh rgba(182,220,255,.28)}
+
+.micro-stars{position:absolute;inset:0;z-index:1;pointer-events:none}
+.micro-stars span{position:absolute;width:2px;height:2px;border-radius:50%;background:rgba(158,207,247,.62);opacity:.45;animation:microTwinkle 5s ease-in-out infinite}
+.micro-stars span:nth-child(1){left:9%;top:12%}
+.micro-stars span:nth-child(2){left:18%;top:25%;animation-delay:1s}
+.micro-stars span:nth-child(3){left:28%;top:11%;animation-delay:2s}
+.micro-stars span:nth-child(4){left:37%;top:21%;animation-delay:3s}
+.micro-stars span:nth-child(5){left:48%;top:9%;animation-delay:1.5s}
+.micro-stars span:nth-child(6){left:58%;top:27%;animation-delay:2.5s}
+.micro-stars span:nth-child(7){left:69%;top:14%;animation-delay:4s}
+.micro-stars span:nth-child(8){left:78%;top:24%;animation-delay:.5s}
+.micro-stars span:nth-child(9){left:88%;top:11%;animation-delay:3.5s}
+.micro-stars span:nth-child(10){left:94%;top:31%;animation-delay:1.2s}
+.micro-stars span:nth-child(11){left:7%;top:48%;animation-delay:2.2s}
+.micro-stars span:nth-child(12){left:20%;top:58%;animation-delay:4.2s}
+.micro-stars span:nth-child(13){left:31%;top:46%;animation-delay:1.8s}
+.micro-stars span:nth-child(14){left:44%;top:57%;animation-delay:.8s}
+.micro-stars span:nth-child(15){left:56%;top:48%;animation-delay:3.2s}
+.micro-stars span:nth-child(16){left:68%;top:59%;animation-delay:1.4s}
+.micro-stars span:nth-child(17){left:80%;top:47%;animation-delay:2.8s}
+.micro-stars span:nth-child(18){left:91%;top:57%;animation-delay:4.5s}
+.micro-stars span:nth-child(19){left:13%;top:84%;animation-delay:3.8s}
+@keyframes microTwinkle{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:.9;transform:scale(1.5)}}
+
+.arcane-stars{position:absolute;inset:0;z-index:1;pointer-events:none}
+.arcane-stars span{position:absolute;width:auto;height:auto;background:none;transform:none;opacity:.52;color:rgba(158,207,247,.62);font-family:"Cinzel",serif;font-size:10px;line-height:1;letter-spacing:0;text-shadow:0 0 7px rgba(113,177,220,.28);animation:arcaneTwinkle 6s ease-in-out infinite}
+.arcane-stars span:nth-child(odd)::before{content:"✦"}
+.arcane-stars span:nth-child(even)::before{content:"✶"}
+@keyframes arcaneTwinkle{0%,100%{opacity:.38;transform:scale(.85)}50%{opacity:.72;transform:scale(1.15)}}
+.star-a{left:7%;top:19%}.star-b{left:15%;top:8%}.star-c{left:24%;top:31%}.star-d{left:34%;top:12%}.star-e{left:43%;top:24%}.star-f{left:54%;top:10%}.star-g{left:64%;top:31%}.star-h{left:74%;top:17%}.star-i{left:84%;top:28%}.star-j{left:93%;top:13%}
+.star-k{left:5%;top:67%}.star-l{left:16%;top:77%}.star-m{left:27%;top:64%}.star-n{left:38%;top:75%}.star-o{left:49%;top:67%}.star-p{left:61%;top:78%}.star-q{left:72%;top:65%}.star-r{left:83%;top:76%}.star-s{left:94%;top:68%}.star-t{left:57%;top:90%}
+.extra-u{left:12%;top:42%}.extra-v{left:30%;top:54%}.extra-w{left:46%;top:42%}.extra-x{left:66%;top:49%}.extra-y{left:86%;top:44%}.extra-z{left:97%;top:55%}
+
+.magic-circle{position:absolute;width:min(72vw,760px);height:min(72vw,760px);left:50%;top:47%;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(73,143,198,.28);box-shadow:0 0 50px rgba(47,126,184,.08),inset 0 0 60px rgba(62,139,194,.04);z-index:0;pointer-events:none;transition:border-color .6s ease,box-shadow .6s ease}
+.magic-circle::before,.magic-circle::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;transition:border-color .6s ease,box-shadow .6s ease}
+.magic-circle::before{width:82%;height:82%;border:1px solid rgba(91,162,213,.22);box-shadow:0 0 25px rgba(47,126,184,.08)}
+.magic-circle::after{width:61%;height:61%;border:1px solid rgba(91,162,213,.22);box-shadow:0 0 18px rgba(62,139,194,.04)}
+
+.header{position:absolute;left:58px;right:58px;top:38px;z-index:20;display:flex;align-items:flex-start;justify-content:space-between}
+.logo{display:flex;align-items:flex-start;gap:12px;color:#d9edff;text-decoration:none;transition:color .6s ease}
+.logo-symbol{color:rgba(137,201,239,.9);width:17px;height:13px;display:flex;align-items:flex-start;justify-content:center;font-size:17px;line-height:13px;margin:0;padding:0;text-shadow:0 0 7px rgba(76,159,216,.5),0 0 15px rgba(49,132,191,.22);flex-shrink:0;transition:color .6s ease,text-shadow .6s ease}
+.logo>span:last-child{display:flex;flex-direction:column;align-items:flex-start;line-height:1}
+.logo-cn{display:block;height:13px;line-height:13px;color:#d9edff;font-size:13px;letter-spacing:3px;white-space:nowrap}
+.logo-en{display:block;margin-top:5px;color:rgba(157,204,239,.63);font-family:"Times New Roman",serif;font-size:8px;line-height:8px;letter-spacing:3px;white-space:nowrap}
+.header-right{display:flex;align-items:center;gap:20px}
+.back{color:rgba(191,220,243,.68);text-decoration:none;font-family:"Cinzel","Noto Serif SC",serif;font-size:11px;letter-spacing:1px;transition:color .3s ease,text-shadow .3s ease}
+.back:hover{color:#d9efff;text-shadow:0 0 8px rgba(102,180,231,.35)}
+.theme-toggle{display:flex;align-items:center;gap:7px;height:28px;padding:0 11px;border:1px solid rgba(111,174,224,.32);background:rgba(8,28,49,.35);color:rgba(191,220,243,.68);font-family:"Cinzel","Noto Serif SC",serif;font-size:8px;letter-spacing:2px;cursor:pointer;border-radius:0;white-space:nowrap;transition:color .35s ease,border-color .35s ease,background .35s ease,box-shadow .35s ease}
+.theme-toggle:hover{color:#d9efff;border-color:rgba(122,192,235,.62);background:rgba(8,31,52,.55);box-shadow:0 0 14px rgba(76,151,202,.12)}
+.theme-icon{font-size:12px;line-height:1;letter-spacing:0}
+
+.hero{position:relative;z-index:5;text-align:center;padding-top:150px;margin-bottom:78px}
+.hero-en{font-family:"Cinzel",serif;font-size:11px;letter-spacing:6px;color:rgba(157,204,239,.63);margin-bottom:12px}
+.hero-title{font-family:"Cinzel",serif;font-size:42px;font-weight:400;letter-spacing:8px;color:#dceeff;line-height:1.1;text-shadow:0 0 16px rgba(47,126,184,.14)}
+.hero-cn{margin-top:15px;font-size:13px;letter-spacing:5px;color:rgba(177,207,230,.62)}
+.gallery{position:relative;z-index:5;width:min(1100px,94%);margin:0 auto}
+.gallery-list{position:relative;z-index:2;column-count:3;column-gap:28px}
+.gallery-item{display:block;width:100%;margin:0 0 28px;padding:14px;break-inside:avoid;-webkit-column-break-inside:avoid;border:1px solid rgba(111,174,224,.32);background:linear-gradient(135deg,rgba(38,91,137,.18),rgba(11,45,75,.45));transition:border-color .35s ease,background .35s ease,transform .35s ease,box-shadow .35s ease}
+.gallery-item:hover{border-color:rgba(122,192,235,.62);background:linear-gradient(135deg,rgba(38,91,137,.26),rgba(11,45,75,.55));transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.12),0 0 25px rgba(56,143,201,.12)}
+.gallery-image-wrap{position:relative;width:100%;display:block;overflow:hidden;background:rgba(11,45,75,.22);border:1px solid rgba(91,162,213,.18);isolation:isolate}
+.gallery-image{display:block;width:100%;height:auto;max-width:100%;object-fit:contain;cursor:pointer;user-select:none;-webkit-user-select:none;-webkit-user-drag:none;-webkit-touch-callout:none}
+
+/* B款重复斜向水印：新增样式，不改变原卡片布局 */
+.watermark-pattern{position:absolute;inset:-35%;z-index:2;display:flex;flex-direction:column;justify-content:space-around;pointer-events:none;overflow:hidden;transform:rotate(-25deg);user-select:none;-webkit-user-select:none}
+.watermark-row{display:flex;align-items:center;justify-content:space-around;gap:25px;width:150%;white-space:nowrap}
+.watermark-row span{flex-shrink:0;color:rgba(235,245,255,.36);font-family:"Cinzel","Noto Serif SC",serif;font-size:10px;font-weight:500;letter-spacing:2px;white-space:nowrap;text-shadow:0 1px 3px rgba(0,0,0,.35)}
+.watermark-signature{position:absolute;right:8px;bottom:8px;z-index:3;padding:5px 8px;border:1px solid rgba(220,236,255,.3);background:rgba(3,15,29,.62);color:rgba(245,250,255,.9);font-family:"Cinzel","Noto Serif SC",serif;font-size:9px;letter-spacing:1px;line-height:1.5;pointer-events:none;user-select:none;-webkit-user-select:none;white-space:nowrap}
+
+/* 删除按钮：默认隐藏，只有验证通过的管理员才会显示 */
+.delete-button{display:none;width:100%;margin-top:10px;padding:8px 10px;border:1px solid rgba(120,170,205,.22);background:rgba(6,20,38,.28);color:rgba(177,207,230,.52);font-family:"Cinzel","Noto Serif SC",serif;font-size:8px;letter-spacing:2px;cursor:pointer;text-align:center;transition:color .3s ease,border-color .3s ease,background .3s ease,box-shadow .3s ease}
+.delete-button:hover{color:rgba(225,242,255,.90);border-color:rgba(138,190,222,.58);background:rgba(31,70,96,.45);box-shadow:0 0 14px rgba(76,151,202,.10)}
+.delete-button:active{transform:translateY(1px)}
+.delete-button:disabled{cursor:wait;opacity:.45}
+.gallery-item.deleting{opacity:.45;pointer-events:none;transition:opacity .3s ease}
+body.day .delete-button{border-color:rgba(82,151,198,.24);background:rgba(240,248,253,.62);color:rgba(65,106,133,.58)}
+body.day .delete-button:hover{border-color:rgba(79,151,200,.58);background:rgba(225,239,248,.90);color:rgba(42,82,107,.88);box-shadow:0 0 14px rgba(76,151,202,.10)}
+
+.empty-gallery{width:100%;text-align:center;padding:50px 20px;border:1px solid rgba(111,174,224,.32);background:rgba(11,45,75,.20);color:rgba(177,207,230,.48);font-size:11px;letter-spacing:2px}
+.empty-gallery-en{display:block;font-family:"Cinzel",serif;font-size:9px;letter-spacing:3px;margin-bottom:9px;color:rgba(157,204,239,.45)}
+.lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:50px;background:rgba(6,20,38,.86);backdrop-filter:blur(5px);z-index:100}
+.lightbox.active{display:flex}
+.lightbox-stage{position:relative;display:inline-block;max-width:90vw;max-height:85vh;overflow:hidden;isolation:isolate}
+.lightbox-image{display:block;max-width:90vw;max-height:85vh;width:auto;height:auto;object-fit:contain;box-shadow:0 0 40px rgba(47,126,184,.18);border:1px solid rgba(122,192,235,.25);user-select:none;-webkit-user-select:none;-webkit-user-drag:none;-webkit-touch-callout:none}
+.lightbox-stage .watermark-row span{font-size:13px;letter-spacing:2px}
+.lightbox-stage .watermark-signature{font-size:10px;padding:6px 9px}
+.lightbox-close{position:absolute;top:28px;right:35px;color:rgba(210,235,248,.7);font-family:"Cinzel",serif;font-size:25px;font-weight:400;cursor:pointer;transition:.3s;z-index:110}
+.lightbox-close:hover{color:#e5f5ff;transform:rotate(90deg)}
+.footer{position:relative;z-index:5;text-align:center;margin-top:100px;font-family:"Cinzel",serif;font-size:8px;letter-spacing:4px;color:rgba(133,177,207,.38)}
+
+body.day{background:#f4f9fd;color:#2e5069}
+body.day .page{background:radial-gradient(circle at 50% 42%,rgba(165,211,238,.20),transparent 38%),radial-gradient(circle at 50% 52%,rgba(226,240,249,.68),transparent 72%),#f4f9fd}
+body.day .stars::before{background:rgba(103,166,207,.42);box-shadow:5vw 8vh rgba(103,166,207,.42),13vw 18vh rgba(103,166,207,.30),22vw 7vh rgba(103,166,207,.42),31vw 14vh rgba(103,166,207,.25),41vw 5vh rgba(103,166,207,.38),52vw 12vh rgba(103,166,207,.28),63vw 7vh rgba(103,166,207,.38),74vw 16vh rgba(103,166,207,.25),86vw 8vh rgba(103,166,207,.40),94vw 20vh rgba(103,166,207,.28)}
+body.day .stars::after{background:rgba(103,166,207,.30)}
+body.day .micro-stars span{background:rgba(87,151,199,.50)}
+body.day .arcane-stars span{background:none;color:rgba(87,151,199,.50);box-shadow:none;text-shadow:0 0 7px rgba(87,151,199,.18)}
+body.day .magic-circle{border-color:rgba(79,148,196,.26);box-shadow:0 0 50px rgba(70,142,196,.055),inset 0 0 60px rgba(78,151,204,.028)}
+body.day .magic-circle::before{border-color:rgba(79,148,196,.26);box-shadow:0 0 25px rgba(70,142,196,.055)}
+body.day .magic-circle::after{border-color:rgba(101,168,207,.20);box-shadow:0 0 18px rgba(76,151,202,.065)}
+body.day .frame{border-color:rgba(91,145,184,.34)}
+body.day .frame::before{border-left-color:rgba(79,141,190,.68);border-top-color:rgba(79,141,190,.68)}
+body.day .frame::after{border-right-color:rgba(79,141,190,.68);border-bottom-color:rgba(79,141,190,.68)}
+body.day .logo,body.day .logo-cn{color:#2e526c}
+body.day .logo-en{color:rgba(81,137,173,.62)}
+body.day .logo-symbol{color:rgba(79,151,201,.84);text-shadow:0 0 7px rgba(86,158,208,.20)}
+body.day .back{color:rgba(62,99,127,.70)}
+body.day .back:hover{color:#28536f;text-shadow:0 0 8px rgba(76,151,202,.14)}
+body.day .theme-toggle{border-color:rgba(91,145,184,.34);background:rgba(248,252,255,.78);color:rgba(61,98,125,.76)}
+body.day .theme-toggle:hover{border-color:rgba(79,151,200,.62);background:rgba(248,252,255,.90);color:#28536f;box-shadow:0 0 14px rgba(76,151,202,.11)}
+body.day .hero-en{color:rgba(81,137,173,.68)}
+body.day .hero-title{color:#2b506a;text-shadow:0 0 18px rgba(80,151,201,.065)}
+body.day .hero-cn{color:rgba(45,82,106,.80)}
+body.day .gallery-item{border-color:rgba(82,151,198,.36);background:linear-gradient(135deg,rgba(242,249,253,.76),rgba(226,240,249,.68))}
+body.day .gallery-item:hover{border-color:rgba(79,151,200,.62);background:linear-gradient(135deg,rgba(225,238,247,1),rgba(250,253,255,1))}
+body.day .gallery-image-wrap{background:rgba(226,240,249,.45);border-color:rgba(82,155,203,.12)}
+body.day .empty-gallery{border-color:rgba(82,151,198,.36);background:rgba(242,249,253,.55);color:rgba(65,106,133,.48)}
+body.day .empty-gallery-en{color:rgba(81,137,173,.55)}
+body.day .footer{color:rgba(73,115,143,.40)}
+body.day .watermark-row span{color:rgba(255,255,255,.62);text-shadow:0 1px 3px rgba(0,0,0,.65)}
+body.day .watermark-signature{border-color:rgba(79,128,162,.35);background:rgba(239,248,253,.82);color:rgba(39,77,102,.92)}
+
+@media(max-width:900px){.gallery-list{column-count:2;column-gap:22px}}
+@media(max-width:700px){
+.page{padding:22px 20px 55px}
+.frame{top:14px;left:14px;right:14px;bottom:14px}
+.header{left:25px;right:25px;top:24px}
+.logo{gap:10px}
+.logo-symbol{width:15px;height:11px;font-size:15px;line-height:11px;margin-top:2px}
+.logo-cn{height:11px;line-height:11px;font-size:11px;letter-spacing:2px}
+.logo-en{margin-top:4px;font-size:7px;line-height:7px;letter-spacing:2px}
+.header-right{gap:8px}
+.back{font-size:10px}
+.theme-toggle{height:25px;padding:0 7px;gap:5px;font-size:6px;letter-spacing:1px}
+.hero{padding-top:120px;margin-bottom:60px}
+.hero-en{font-size:8px;letter-spacing:5px}
+.hero-title{font-size:27px;letter-spacing:4px}
+.hero-cn{font-size:12px;letter-spacing:5px}
+.gallery{width:100%;margin-top:0}
+.gallery-list{column-count:1;column-gap:0}
+.gallery-item{padding:12px;margin-bottom:25px}
+.delete-button{padding:9px 10px;font-size:8px}
+.empty-gallery{padding:40px 15px}
+.lightbox{padding:30px 20px}
+.lightbox-image{max-width:94vw;max-height:82vh}
+.lightbox-stage{max-width:94vw;max-height:82vh}
+.lightbox-close{top:18px;right:22px;font-size:22px}
+.footer{margin-top:70px}
+.magic-circle{width:105vw;height:105vw}
+.watermark-row span{font-size:9px}
+.watermark-signature{right:6px;bottom:6px;font-size:8px;padding:4px 6px}
+}
+@media(max-width:360px){
+.header{left:20px;right:20px;top:24px}
+.header-right{gap:5px}
+.back{font-size:9px}
+.theme-toggle{padding:0 6px;font-size:6px}
+.hero-title{font-size:24px;letter-spacing:3px}
 }
 </style>
 </head>
 
 <body>
+<div class="page">
+    <div class="stars"></div>
 
-<!-- 星空背景 -->
-<div class="stars" id="stars"></div>
-<div class="micro-stars" id="micro-stars"></div>
-<div class="arcane-stars" id="arcane-stars"></div>
+    <div class="micro-stars">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+    </div>
 
-<!-- 魔法圆环 -->
-<div class="magic-circle" aria-hidden="true">
-    <div class="magic-line"></div>
-    <div class="magic-line"></div>
-    <div class="magic-line"></div>
-</div>
+    <div class="arcane-stars">
+        <span class="star-a"></span><span class="star-b"></span><span class="star-c"></span><span class="star-d"></span><span class="star-e"></span><span class="star-f"></span><span class="star-g"></span><span class="star-h"></span><span class="star-i"></span><span class="star-j"></span>
+        <span class="star-k"></span><span class="star-l"></span><span class="star-m"></span><span class="star-n"></span><span class="star-o"></span><span class="star-p"></span><span class="star-q"></span><span class="star-r"></span><span class="star-s"></span><span class="star-t"></span>
+        <span class="extra-u"></span><span class="extra-v"></span><span class="extra-w"></span><span class="extra-x"></span><span class="extra-y"></span><span class="extra-z"></span>
+    </div>
 
-<div class="page-frame">
+    <div class="magic-circle"></div>
+    <div class="frame"></div>
 
-    <header class="page-header">
-
-        <a class="logo" href="index.html" aria-label="返回塞垭弥大陆档案馆首页">
-            <span class="logo-cn">塞垭弥大陆档案馆</span>
-            <span class="logo-en">SEYAMI ARCHIVE</span>
+    <header class="header">
+        <a href="index.html" class="logo">
+            <span class="logo-symbol">✦</span>
+            <span>
+                <span class="logo-cn">塞垭弥大陆档案馆</span>
+                <span class="logo-en">SEYAMI ARCHIVE</span>
+            </span>
         </a>
 
-        <div class="header-actions">
-            <a class="back-link" href="archive.html">返回档案</a>
-            <button class="theme-toggle" id="themeToggle" type="button">
-                ☼ 昼夜
+        <div class="header-right">
+            <a href="archive.html" class="back">← 返回档案目录</a>
+            <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换昼夜模式">
+                <span class="theme-icon" id="themeIcon">☾</span>
+                <span id="themeText">NIGHT</span>
             </button>
         </div>
-
     </header>
 
-    <section class="page-title">
-        <h1>GALLERY</h1>
-        <p>档案画廊 · VISUAL ARCHIVE</p>
-        <div class="title-divider"></div>
+    <section class="hero">
+        <div class="hero-en">ARCHIVE GALLERY</div>
+        <div class="hero-title">GALLERY</div>
+        <div class="hero-cn">档案画廊</div>
     </section>
 
-    <main class="gallery-container">
-
-        <div class="loading-message" id="loadingMessage">
-            正在读取档案……
-        </div>
-
+    <main class="gallery">
         <div class="gallery-list" id="galleryList"></div>
-
-        <div class="empty-gallery" id="emptyGallery">
-            <div class="empty-symbol">✧</div>
-            <div>这里暂时还没有收藏的画作</div>
-        </div>
-
     </main>
 
-    <footer class="page-footer">
-        SEYAMI ARCHIVE · THE WORLD OF SEYAMI
-    </footer>
-
+    <footer class="footer">SEYAMI CONTINENT · ARCHIVE GALLERY</footer>
 </div>
 
-<!-- 图片放大查看 -->
-<div class="lightbox" id="lightbox" aria-hidden="true">
-
-    <button
-        class="lightbox-close"
-        id="lightboxClose"
-        type="button"
-        aria-label="关闭图片"
-    >×</button>
-
+<div class="lightbox" id="lightbox">
+    <div class="lightbox-close" id="lightboxClose">×</div>
     <div class="lightbox-stage" id="lightboxStage">
-
-        <img
-            class="lightbox-image"
-            id="lightboxImage"
-            src=""
-            alt="塞垭弥大陆档案馆画廊图片"
-            draggable="false"
-        >
-
+        <img class="lightbox-image" id="lightboxImage" src="" alt="">
         <div class="watermark-pattern" aria-hidden="true"></div>
-
-        <div class="watermark-signature" aria-hidden="true">
-            ✦ SEYAMI ARCHIVE
-        </div>
-
+        <div class="watermark-signature" aria-hidden="true">SEYAMI ARCHIVE</div>
     </div>
-
-    <div class="lightbox-tip">
-        SEYAMI ARCHIVE · 塞垭弥大陆档案馆
-    </div>
-
 </div>
 
 <script>
-/* ==============================
-   Supabase 配置
-============================== */
-
-const SUPABASE_URL =
-    "https://rqqkdpzehxzwqzytpxgh.supabase.co";
-
-const SUPABASE_KEY =
-    "sb_publishable_T_gNdlgkOaXnzjSvdmI1Pw_HQOVTEWG";
-
-const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
-
-/* ==============================
-   页面元素
-============================== */
+/* =========================================================
+   SUPABASE
+========================================================= */
+const SUPABASE_URL = "https://rqqkdpzehxzwqzytpxgh.supabase.co";
+const SUPABASE_KEY = "sb_publishable_T_gNdlgkOaXnzjSvdmI1Pw_HQOVTEWG";
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const galleryList = document.getElementById("galleryList");
-const loadingMessage = document.getElementById("loadingMessage");
-const emptyGallery = document.getElementById("emptyGallery");
-
 const lightbox = document.getElementById("lightbox");
 const lightboxImage = document.getElementById("lightboxImage");
-const lightboxStage = document.getElementById("lightboxStage");
 const lightboxClose = document.getElementById("lightboxClose");
+const lightboxStage = document.getElementById("lightboxStage");
 
-let isGalleryAdmin = false;
+/* 水印文字 */
+const WATERMARK_TEXT = "塞垭弥大陆档案馆 · SEYAMI ARCHIVE";
 
-/* ==============================
-   生成星空
-============================== */
-
-function createStars() {
-    const stars = document.getElementById("stars");
-    const microStars = document.getElementById("micro-stars");
-    const arcaneStars = document.getElementById("arcane-stars");
-
-    stars.innerHTML = "";
-    microStars.innerHTML = "";
-    arcaneStars.innerHTML = "";
-
-    for (let i = 0; i < 28; i++) {
-        const star = document.createElement("span");
-        star.className = "star";
-        star.textContent = i % 3 === 0 ? "✦" : "✶";
-
-        star.style.left = Math.random() * 100 + "%";
-        star.style.top = Math.random() * 100 + "%";
-        star.style.fontSize = (8 + Math.random() * 9) + "px";
-        star.style.animationDelay = (Math.random() * 5) + "s";
-        star.style.animationDuration = (3 + Math.random() * 5) + "s";
-
-        stars.appendChild(star);
-    }
-
-    for (let i = 0; i < 65; i++) {
-        const star = document.createElement("span");
-        star.className = "micro-star";
-
-        star.style.left = Math.random() * 100 + "%";
-        star.style.top = Math.random() * 100 + "%";
-        star.style.animationDelay = (Math.random() * 6) + "s";
-
-        microStars.appendChild(star);
-    }
-
-    for (let i = 0; i < 9; i++) {
-        const star = document.createElement("span");
-        star.className = "arcane-star";
-        star.textContent = i % 2 === 0 ? "✡" : "✧";
-
-        star.style.left = Math.random() * 100 + "%";
-        star.style.top = Math.random() * 100 + "%";
-        star.style.fontSize = (10 + Math.random() * 9) + "px";
-        star.style.animationDelay = (Math.random() * 5) + "s";
-
-        arcaneStars.appendChild(star);
-    }
-}
-
-createStars();
-
-/* ==============================
-   昼夜模式
-============================== */
-
-const themeToggle = document.getElementById("themeToggle");
-
-function applyTheme(theme) {
-    document.body.classList.toggle("day-mode", theme === "day");
-
-    themeToggle.textContent =
-        theme === "day" ? "☾ 夜间" : "☼ 昼夜";
-}
-
-const savedTheme = localStorage.getItem("seyami-theme") || "night";
-applyTheme(savedTheme);
-
-themeToggle.addEventListener("click", () => {
-    const isDay = document.body.classList.contains("day-mode");
-    const nextTheme = isDay ? "night" : "day";
-
-    localStorage.setItem("seyami-theme", nextTheme);
-    applyTheme(nextTheme);
-});
-
-/* ==============================
-   水印
-============================== */
-
-function createWatermarkPattern(container) {
-    container.replaceChildren();
-
-    const watermarkText = "✦ 塞垭弥大陆档案馆 · SEYAMI ARCHIVE ✦";
-
-    for (let i = 0; i < 7; i++) {
-        const row = document.createElement("div");
-        row.className = "watermark-row";
-
-        for (let j = 0; j < 3; j++) {
-            const span = document.createElement("span");
-            span.textContent = watermarkText;
-            row.appendChild(span);
-        }
-
-        container.appendChild(row);
-    }
-}
-
-function addCardWatermark(wrap) {
+/* 生成重复斜向水印 */
+function createWatermarkPattern() {
     const pattern = document.createElement("div");
     pattern.className = "watermark-pattern";
     pattern.setAttribute("aria-hidden", "true");
 
-    createWatermarkPattern(pattern);
+    for (let rowIndex = 0; rowIndex < 7; rowIndex++) {
+        const row = document.createElement("div");
+        row.className = "watermark-row";
 
-    const signature = document.createElement("div");
-    signature.className = "watermark-signature";
-    signature.textContent = "✦ SEYAMI ARCHIVE";
+        for (let itemIndex = 0; itemIndex < 4; itemIndex++) {
+            const label = document.createElement("span");
+            label.textContent = WATERMARK_TEXT;
+            row.appendChild(label);
+        }
 
-    wrap.appendChild(pattern);
-    wrap.appendChild(signature);
+        pattern.appendChild(row);
+    }
+
+    return pattern;
 }
 
-createWatermarkPattern(
-    lightboxStage.querySelector(".watermark-pattern")
-);
-
-/* ==============================
-   管理员身份检查
-============================== */
+/* =========================================================
+   管理员权限
+========================================================= */
+let isGalleryAdmin = false;
 
 async function checkGalleryAdmin(sessionFromAuth = undefined) {
     try {
         let session = sessionFromAuth;
 
-        if (session === undefined) {
-            const { data, error } =
-                await supabaseClient.auth.getSession();
-
-            if (error) throw error;
-
+        if (sessionFromAuth === undefined) {
+            const { data, error } = await supabaseClient.auth.getSession();
+            if (error) {
+                console.error("获取登录状态失败：", error);
+                return false;
+            }
             session = data.session;
         }
 
         if (!session || !session.user) {
-            isGalleryAdmin = false;
-            document.body.classList.remove("is-gallery-admin");
             return false;
         }
 
         const { data, error } = await supabaseClient.rpc("is_admin");
 
         if (error) {
-            console.error("管理员权限检查失败：", error);
-            isGalleryAdmin = false;
-            document.body.classList.remove("is-gallery-admin");
+            console.error("管理员权限验证失败：", error);
             return false;
         }
 
-        isGalleryAdmin = data === true;
-
-        document.body.classList.toggle(
-            "is-gallery-admin",
-            isGalleryAdmin
-        );
-
-        return isGalleryAdmin;
-
+        return data === true;
     } catch (error) {
-        console.error("身份检查失败：", error);
-
-        isGalleryAdmin = false;
-        document.body.classList.remove("is-gallery-admin");
-
+        console.error("管理员权限检查失败：", error);
         return false;
     }
 }
 
-/* ==============================
-   加载画廊
-============================== */
+/* =========================================================
+   空画廊
+========================================================= */
+function showEmptyGallery() {
+    galleryList.innerHTML = `
+        <div class="empty-gallery">
+            <span class="empty-gallery-en">ARCHIVE EMPTY</span>
+            暂无档案画廊记录
+        </div>
+    `;
+}
 
-async function loadGallery() {
-    loadingMessage.style.display = "block";
-    loadingMessage.textContent = "正在读取档案……";
-
-    galleryList.replaceChildren();
-    emptyGallery.classList.remove("show");
-
+/* =========================================================
+   提取 Supabase Storage 文件路径
+========================================================= */
+function getStorageFileInfo(imageUrl) {
     try {
-        const { data, error } = await supabaseClient
-            .from("gallery_images")
-            .select("id,image_url,created_at")
-            .order("created_at", { ascending: false });
-
-        if (error) throw error;
-
-        loadingMessage.style.display = "none";
-
-        if (!data || data.length === 0) {
-            emptyGallery.classList.add("show");
-            return;
-        }
-
-        for (const item of data) {
-            if (!item.image_url) continue;
-
-            const card = document.createElement("article");
-            card.className = "gallery-item";
-
-            const wrap = document.createElement("div");
-            wrap.className = "gallery-image-wrap";
-
-            const img = document.createElement("img");
-            img.className = "gallery-image";
-            img.src = item.image_url;
-            img.alt = "塞垭弥大陆档案馆画廊图片";
-            img.loading = "lazy";
-            img.draggable = false;
-            img.decoding = "async";
-
-            img.addEventListener("click", () => {
-                openLightbox(item.image_url);
-            });
-
-            img.addEventListener("contextmenu", event => {
-                event.preventDefault();
-            });
-
-            wrap.appendChild(img);
-            addCardWatermark(wrap);
-
-            const caption = document.createElement("div");
-            caption.className = "gallery-caption";
-
-            const date = document.createElement("span");
-
-            if (item.created_at) {
-                const parsedDate = new Date(item.created_at);
-
-                date.textContent = Number.isNaN(parsedDate.getTime())
-                    ? "SEYAMI ARCHIVE"
-                    : parsedDate.toLocaleDateString("zh-CN");
-            } else {
-                date.textContent = "SEYAMI ARCHIVE";
-            }
-
-            caption.appendChild(date);
-
-            if (isGalleryAdmin) {
-                const deleteButton = document.createElement("button");
-                deleteButton.className = "delete-button";
-                deleteButton.type = "button";
-                deleteButton.textContent = "删除";
-
-                deleteButton.addEventListener("click", async event => {
-                    event.stopPropagation();
-                    await deleteGalleryImage(item);
-                });
-
-                caption.appendChild(deleteButton);
-            }
-
-            card.appendChild(wrap);
-            card.appendChild(caption);
-            galleryList.appendChild(card);
-        }
-
-        if (galleryList.children.length === 0) {
-            emptyGallery.classList.add("show");
-        }
-
-    } catch (error) {
-        console.error("读取画廊失败：", error);
-
-        loadingMessage.style.display = "block";
-        loadingMessage.textContent =
-            "档案读取失败，请检查网络或稍后再试。";
-    }
-}
-
-/* ==============================
-   图片放大查看
-============================== */
-
-function openLightbox(src) {
-    lightboxImage.src = src;
-    lightbox.classList.add("active");
-    lightbox.setAttribute("aria-hidden", "false");
-
-    document.body.style.overflow = "hidden";
-}
-
-function closeLightbox() {
-    lightbox.classList.remove("active");
-    lightbox.setAttribute("aria-hidden", "true");
-
-    lightboxImage.src = "";
-    document.body.style.overflow = "";
-}
-
-lightboxClose.addEventListener("click", closeLightbox);
-
-lightbox.addEventListener("click", event => {
-    if (
-        event.target === lightbox ||
-        event.target === lightboxStage
-    ) {
-        closeLightbox();
-    }
-});
-
-lightboxImage.addEventListener("contextmenu", event => {
-    event.preventDefault();
-});
-
-lightboxImage.addEventListener("dragstart", event => {
-    event.preventDefault();
-});
-
-document.addEventListener("keydown", event => {
-    if (event.key === "Escape") {
-        closeLightbox();
-    }
-});
-
-/* ==============================
-   基础防直接保存措施
-============================== */
-
-document.addEventListener("contextmenu", event => {
-    if (
-        event.target.closest(".gallery-image-wrap") ||
-        event.target.closest(".lightbox-stage")
-    ) {
-        event.preventDefault();
-    }
-});
-
-document.addEventListener("dragstart", event => {
-    if (
-        event.target.closest(".gallery-image-wrap") ||
-        event.target.closest(".lightbox-stage")
-    ) {
-        event.preventDefault();
-    }
-});
-
-/*
-  注意：
-  这些措施只能增加直接保存图片的难度，
-  不能阻止截图、开发者工具或直接访问公开图片地址。
-*/
-
-/* ==============================
-   删除图片
-============================== */
-
-function getStorageFileInfo(publicUrl) {
-    try {
-        const url = new URL(publicUrl);
-
+        const url = new URL(imageUrl);
         const marker = "/storage/v1/object/public/";
-        const markerIndex = url.pathname.indexOf(marker);
+        const index = url.pathname.indexOf(marker);
 
-        if (markerIndex === -1) {
-            return null;
-        }
+        if (index === -1) return null;
 
-        const remainder = url.pathname.slice(
-            markerIndex + marker.length
-        );
+        const path = url.pathname.substring(index + marker.length);
+        const slash = path.indexOf("/");
 
-        const firstSlash = remainder.indexOf("/");
-
-        if (firstSlash === -1) {
-            return null;
-        }
-
-        const bucket = remainder.slice(0, firstSlash);
-
-        const encodedPath = remainder.slice(firstSlash + 1);
-
-        const filePath = encodedPath
-            .split("/")
-            .map(part => decodeURIComponent(part))
-            .join("/");
+        if (slash === -1) return null;
 
         return {
-            bucket,
-            filePath
+            bucket: path.substring(0, slash),
+            filePath: decodeURIComponent(path.substring(slash + 1))
         };
-
     } catch (error) {
-        console.error("无法解析图片地址：", error);
+        console.error("Storage URL parsing error:", error);
         return null;
     }
 }
 
-async function deleteStorageFile(publicUrl) {
-    const info = getStorageFileInfo(publicUrl);
+/* =========================================================
+   删除 Storage 文件
+========================================================= */
+async function deleteStorageFile(imageUrl) {
+    const info = getStorageFileInfo(imageUrl);
 
-    if (!info) {
-        throw new Error(
-            "无法识别图片的存储地址，请检查图片 URL。"
-        );
-    }
+    if (!info) return { success: true };
 
     const { error } = await supabaseClient
         .storage
@@ -1281,101 +371,253 @@ async function deleteStorageFile(publicUrl) {
         .remove([info.filePath]);
 
     if (error) {
-        throw error;
+        console.error("Storage deletion error:", error);
+        return { success: false, error };
     }
+
+    return { success: true };
 }
 
-async function deleteGalleryImage(item) {
-    if (!isGalleryAdmin) {
-        alert("只有管理员可以删除画廊图片。");
+/* =========================================================
+   删除画廊记录
+========================================================= */
+async function deleteGalleryItem(item, card, deleteButton) {
+    const stillAdmin = await checkGalleryAdmin();
+
+    if (!stillAdmin) {
+        isGalleryAdmin = false;
+        deleteButton.remove();
+        alert("管理员登录状态已失效，无法删除档案。");
         return;
     }
 
-    const confirmed = confirm(
-        "确定要删除这张图片吗？\n\n删除后无法通过画廊恢复。"
+    const confirmed = window.confirm(
+        "确认要删除这张档案图片吗？\n\n删除后无法恢复。"
     );
 
     if (!confirmed) return;
 
-    try {
-        const { data: userData, error: userError } =
-            await supabaseClient.auth.getUser();
+    deleteButton.disabled = true;
+    deleteButton.textContent = "正在删除 · DELETING";
+    card.classList.add("deleting");
 
-        if (userError || !userData.user) {
-            throw new Error("登录状态已失效，请重新登录。");
-        }
+    const storageResult = await deleteStorageFile(item.image_url);
 
-        const { data: adminResult, error: adminError } =
-            await supabaseClient.rpc("is_admin");
+    if (!storageResult.success) {
+        card.classList.remove("deleting");
+        deleteButton.disabled = false;
+        deleteButton.textContent = "删除档案 · DELETE";
+        alert("图片文件删除失败。\n\n数据库记录暂未删除，请检查 Supabase Storage 的删除权限。");
+        return;
+    }
 
-        if (adminError || adminResult !== true) {
-            throw new Error("当前账号没有管理员权限。");
-        }
+    const { error } = await supabaseClient
+        .from("gallery_images")
+        .delete()
+        .eq("id", item.id);
 
-        /*
-          先删除数据库记录，确认成功后再尝试删除存储文件。
-          这样即使存储删除失败，画廊记录也不会继续显示。
-        */
+    if (error) {
+        console.error("Database deletion error:", error);
+        card.classList.remove("deleting");
+        deleteButton.disabled = false;
+        deleteButton.textContent = "删除档案 · DELETE";
+        alert("数据库记录删除失败。\n\n请检查 gallery_images 表的 DELETE 权限。");
+        return;
+    }
 
-        const { error: rowError } = await supabaseClient
-            .from("gallery_images")
-            .delete()
-            .eq("id", item.id);
+    card.remove();
 
-        if (rowError) {
-            throw rowError;
-        }
-
-        try {
-            await deleteStorageFile(item.image_url);
-        } catch (storageError) {
-            console.error("图片记录已删除，但存储文件删除失败：", storageError);
-
-            alert(
-                "画廊记录已删除，但存储文件可能仍然存在。\n" +
-                "请检查 Supabase Storage 权限。"
-            );
-
-            await loadGallery();
-            return;
-        }
-
-        alert("图片已删除。");
-        await loadGallery();
-
-    } catch (error) {
-        console.error("删除图片失败：", error);
-
-        alert(
-            "删除失败： " +
-            (error.message || "发生未知错误")
-        );
+    if (galleryList.querySelector(".gallery-item") === null) {
+        showEmptyGallery();
     }
 }
 
-/* ==============================
-   初始化与登录状态变化
-============================== */
+/* =========================================================
+   读取 Supabase 画廊
+========================================================= */
+async function loadGallery() {
+    galleryList.innerHTML = `
+        <div class="empty-gallery">
+            <span class="empty-gallery-en">LOADING ARCHIVE</span>
+            正在读取档案画廊……
+        </div>
+    `;
 
+    const { data, error } = await supabaseClient
+        .from("gallery_images")
+        .select("id,image_url,created_at")
+        .order("created_at", { ascending: false });
+
+    if (error) {
+        console.error("Gallery loading error:", error);
+        galleryList.innerHTML = `
+            <div class="empty-gallery">
+                <span class="empty-gallery-en">ARCHIVE ERROR</span>
+                档案画廊读取失败
+            </div>
+        `;
+        return;
+    }
+
+    if (!data || data.length === 0) {
+        showEmptyGallery();
+        return;
+    }
+
+    galleryList.innerHTML = "";
+
+    data.forEach((item) => {
+        if (!item.image_url) return;
+
+        const card = document.createElement("div");
+        card.className = "gallery-item";
+
+        const imageWrap = document.createElement("div");
+        imageWrap.className = "gallery-image-wrap";
+
+        const image = document.createElement("img");
+        image.className = "gallery-image";
+        image.src = item.image_url;
+        image.alt = "塞垭弥大陆档案馆画廊图片";
+        image.loading = "lazy";
+        image.draggable = false;
+
+        imageWrap.appendChild(image);
+
+        /* 新增：每张缩略图上的重复水印 */
+        imageWrap.appendChild(createWatermarkPattern());
+
+        /* 新增：每张缩略图右下角署名 */
+        const signature = document.createElement("div");
+        signature.className = "watermark-signature";
+        signature.textContent = "SEYAMI ARCHIVE";
+        signature.setAttribute("aria-hidden", "true");
+        imageWrap.appendChild(signature);
+
+        card.appendChild(imageWrap);
+
+        let deleteButton = null;
+
+        if (isGalleryAdmin) {
+            deleteButton = document.createElement("button");
+            deleteButton.className = "delete-button";
+            deleteButton.type = "button";
+            deleteButton.textContent = "删除档案 · DELETE";
+            deleteButton.style.display = "block";
+            card.appendChild(deleteButton);
+        }
+
+        galleryList.appendChild(card);
+
+        /* 点击图片放大 */
+        image.addEventListener("click", () => {
+            lightboxImage.src = item.image_url;
+            lightboxImage.alt = "塞垭弥大陆档案馆画廊图片";
+            lightbox.classList.add("active");
+        });
+
+        /* 管理员删除按钮 */
+        if (deleteButton) {
+            deleteButton.addEventListener("click", (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                deleteGalleryItem(item, card, deleteButton);
+            });
+        }
+    });
+}
+
+/* =========================================================
+   启动画廊
+========================================================= */
 async function initGallery() {
-    await checkGalleryAdmin();
+    isGalleryAdmin = await checkGalleryAdmin();
     await loadGallery();
 }
 
-supabaseClient.auth.onAuthStateChange(
-    async (_event, session) => {
-        const previousAdminStatus = isGalleryAdmin;
+initGallery();
 
-        await checkGalleryAdmin(session);
+/* 登录状态变化时重新验证权限 */
+supabaseClient.auth.onAuthStateChange((_event, session) => {
+    queueMicrotask(async () => {
+        const nextAdminStatus = await checkGalleryAdmin(session);
 
-        if (previousAdminStatus !== isGalleryAdmin) {
+        if (nextAdminStatus !== isGalleryAdmin) {
+            isGalleryAdmin = nextAdminStatus;
             await loadGallery();
         }
+    });
+});
+
+/* =========================================================
+   关闭图片放大
+========================================================= */
+function closeLightbox() {
+    lightbox.classList.remove("active");
+    lightboxImage.src = "";
+}
+
+lightboxClose.addEventListener("click", closeLightbox);
+
+lightbox.addEventListener("click", (event) => {
+    if (event.target === lightbox) closeLightbox();
+});
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeLightbox();
+});
+
+/* =========================================================
+   日间 / 夜间模式
+========================================================= */
+const themeToggle = document.getElementById("themeToggle");
+const themeIcon = document.getElementById("themeIcon");
+const themeText = document.getElementById("themeText");
+
+function applyTheme(theme) {
+    if (theme === "day") {
+        document.body.classList.add("day");
+        themeIcon.textContent = "☀";
+        themeText.textContent = "DAY";
+    } else {
+        document.body.classList.remove("day");
+        themeIcon.textContent = "☾";
+        themeText.textContent = "NIGHT";
     }
-);
+}
 
-initGallery();
+const savedTheme = localStorage.getItem("seyami-theme");
+applyTheme(savedTheme === "day" ? "day" : "night");
+
+themeToggle.addEventListener("click", () => {
+    const isDay = document.body.classList.contains("day");
+    const nextTheme = isDay ? "night" : "day";
+
+    localStorage.setItem("seyami-theme", nextTheme);
+    applyTheme(nextTheme);
+});
+
+/* =========================================================
+   基础防保存措施
+   说明：只能增加保存难度，不能完全阻止截图或获取公开图片地址。
+========================================================= */
+document.addEventListener("contextmenu", (event) => {
+    if (
+        event.target instanceof Element &&
+        event.target.closest(".gallery-image-wrap, .lightbox-stage")
+    ) {
+        event.preventDefault();
+    }
+});
+
+document.addEventListener("dragstart", (event) => {
+    if (
+        event.target instanceof Element &&
+        event.target.closest(".gallery-image-wrap, .lightbox-stage")
+    ) {
+        event.preventDefault();
+    }
+});
 </script>
-
 </body>
 </html>
