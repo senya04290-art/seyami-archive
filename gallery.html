@@ -76,10 +76,7 @@ body{
     border-bottom:1px solid rgba(108,178,230,.88);
 }
 
-/* ==============================
-   背景星点
-============================== */
-
+/* 背景星点 */
 .stars,
 .stars::before,
 .stars::after{
@@ -168,10 +165,7 @@ body{
         87vw 78vh rgba(182,220,255,.28);
 }
 
-/* ==============================
-   闪烁微星
-============================== */
-
+/* 闪烁微星 */
 .micro-stars{
     position:absolute;
     inset:0;
@@ -214,10 +208,7 @@ body{
     50%{opacity:.9;transform:scale(1.5)}
 }
 
-/* ==============================
-   西幻装饰星
-============================== */
-
+/* 西幻装饰星 */
 .arcane-stars{
     position:absolute;
     inset:0;
@@ -276,10 +267,7 @@ body{
 .extra-y{left:86%;top:44%}
 .extra-z{left:97%;top:55%}
 
-/* ==============================
-   魔法阵
-============================== */
-
+/* 魔法阵 */
 .magic-circle{
     position:absolute;
     width:min(72vw,760px);
@@ -321,10 +309,7 @@ body{
     box-shadow:0 0 18px rgba(62,139,194,.04);
 }
 
-/* ==============================
-   顶部导航
-============================== */
-
+/* 顶部导航 */
 .header{
     position:absolute;
     left:58px;
@@ -440,10 +425,7 @@ body{
     letter-spacing:0;
 }
 
-/* ==============================
-   页面标题
-============================== */
-
+/* 页面标题 */
 .hero{
     position:relative;
     z-index:5;
@@ -477,10 +459,11 @@ body{
     color:rgba(177,207,230,.62);
 }
 
-/* ==============================
-   响应式瀑布流
-   电脑端自动根据可用宽度增加列数
-============================== */
+/* =================================================
+   左右交错双列瀑布流
+   图片按上传时间从新到旧依次分配：
+   左、右、左、右……
+================================================= */
 
 .gallery{
     position:relative;
@@ -492,20 +475,28 @@ body{
 .gallery-list{
     position:relative;
     z-index:2;
-    column-width:260px;
-    column-count:auto;
-    column-gap:24px;
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:24px;
+    align-items:start;
 }
 
-/* 每张卡片独立完整显示，不拆分 */
+/* 左右两列分别纵向排列，图片高度不需要对齐 */
+.gallery-column{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:24px;
+    min-width:0;
+}
+
+/* 每张卡片独立完整显示 */
 .gallery-item{
-    display:inline-block;
-    vertical-align:top;
+    display:block;
     width:100%;
-    margin:0 0 24px;
+    margin:0;
     padding:14px;
-    break-inside:avoid;
-    -webkit-column-break-inside:avoid;
+    min-width:0;
     border:1px solid rgba(111,174,224,.32);
     background:linear-gradient(
         135deg,
@@ -531,7 +522,6 @@ body{
 }
 
 /* 图片容器 */
-
 .gallery-image-wrap{
     position:relative;
     width:100%;
@@ -554,10 +544,7 @@ body{
     -webkit-touch-callout:none;
 }
 
-/* ==============================
-   管理员删除按钮
-============================== */
-
+/* 管理员删除按钮 */
 .delete-button{
     display:none;
     width:100%;
@@ -597,7 +584,6 @@ body{
 }
 
 /* 空画廊 */
-
 .empty-gallery{
     width:100%;
     text-align:center;
@@ -607,6 +593,7 @@ body{
     color:rgba(177,207,230,.48);
     font-size:11px;
     letter-spacing:2px;
+    grid-column:1 / -1;
 }
 
 .empty-gallery-en{
@@ -618,10 +605,7 @@ body{
     color:rgba(157,204,239,.45);
 }
 
-/* ==============================
-   图片放大查看
-============================== */
-
+/* 图片放大查看 */
 .lightbox{
     position:fixed;
     inset:0;
@@ -680,7 +664,6 @@ body{
 }
 
 /* 页脚 */
-
 .footer{
     position:relative;
     z-index:5;
@@ -692,10 +675,7 @@ body{
     color:rgba(133,177,207,.38);
 }
 
-/* ==============================
-   日间模式
-============================== */
-
+/* 日间模式 */
 body.day{
     background:#f4f9fd;
     color:#2e5069;
@@ -858,10 +838,7 @@ body.day .delete-button:hover{
     box-shadow:0 0 14px rgba(76,151,202,.10);
 }
 
-/* ==============================
-   平板：两列
-============================== */
-
+/* 平板 */
 @media (min-width:541px) and (max-width:900px){
     .page{
         padding-left:35px;
@@ -869,14 +846,15 @@ body.day .delete-button:hover{
     }
 
     .gallery-list{
-        column-count:2;
-        column-width:auto;
-        column-gap:20px;
+        gap:20px;
+    }
+
+    .gallery-column{
+        gap:20px;
     }
 
     .gallery-item{
         padding:10px;
-        margin-bottom:20px;
     }
 
     .header{
@@ -889,10 +867,7 @@ body.day .delete-button:hover{
     }
 }
 
-/* ==============================
-   手机：两列瀑布流
-============================== */
-
+/* 手机 */
 @media (max-width:540px){
     .page{
         padding:22px 20px 55px;
@@ -979,14 +954,15 @@ body.day .delete-button:hover{
     }
 
     .gallery-list{
-        column-count:2;
-        column-width:auto;
-        column-gap:12px;
+        gap:12px;
+    }
+
+    .gallery-column{
+        gap:14px;
     }
 
     .gallery-item{
         padding:7px;
-        margin-bottom:14px;
     }
 
     .delete-button{
@@ -997,7 +973,6 @@ body.day .delete-button:hover{
 
     .empty-gallery{
         padding:40px 15px;
-        column-span:all;
     }
 
     .lightbox{
@@ -1033,7 +1008,6 @@ body.day .delete-button:hover{
 }
 
 /* 极窄手机 */
-
 @media (max-width:360px){
     .header{
         left:20px;
@@ -1060,13 +1034,15 @@ body.day .delete-button:hover{
     }
 
     .gallery-list{
-        column-count:2;
-        column-gap:9px;
+        gap:9px;
+    }
+
+    .gallery-column{
+        gap:11px;
     }
 
     .gallery-item{
         padding:5px;
-        margin-bottom:11px;
     }
 }
 </style>
@@ -1131,9 +1107,7 @@ body.day .delete-button:hover{
 </div>
 
 <script>
-/* =========================================================
-   SUPABASE 配置
-========================================================= */
+/* SUPABASE 配置 */
 const SUPABASE_URL = "https://rqqkdpzehxzwqzytpxgh.supabase.co";
 const SUPABASE_KEY = "sb_publishable_T_gNdlgkOaXnzjSvdmI1Pw_HQOVTEWG";
 
@@ -1147,9 +1121,7 @@ const lightbox = document.getElementById("lightbox");
 const lightboxImage = document.getElementById("lightboxImage");
 const lightboxClose = document.getElementById("lightboxClose");
 
-/* =========================================================
-   管理员权限
-========================================================= */
+/* 管理员权限 */
 let isGalleryAdmin = false;
 
 async function checkGalleryAdmin(sessionFromAuth = undefined) {
@@ -1188,9 +1160,7 @@ async function checkGalleryAdmin(sessionFromAuth = undefined) {
     }
 }
 
-/* =========================================================
-   空画廊
-========================================================= */
+/* 空画廊 */
 function showEmptyGallery() {
     galleryList.innerHTML = `
         <div class="empty-gallery">
@@ -1200,9 +1170,7 @@ function showEmptyGallery() {
     `;
 }
 
-/* =========================================================
-   解析 Supabase Storage 文件路径
-========================================================= */
+/* 解析 Supabase Storage 文件路径 */
 function getStorageFileInfo(imageUrl) {
     try {
         const url = new URL(imageUrl);
@@ -1232,9 +1200,7 @@ function getStorageFileInfo(imageUrl) {
     }
 }
 
-/* =========================================================
-   删除 Storage 图片
-========================================================= */
+/* 删除 Storage 图片 */
 async function deleteStorageFile(imageUrl) {
     const info = getStorageFileInfo(imageUrl);
 
@@ -1255,9 +1221,7 @@ async function deleteStorageFile(imageUrl) {
     return { success: true };
 }
 
-/* =========================================================
-   删除画廊记录
-========================================================= */
+/* 删除画廊记录 */
 async function deleteGalleryItem(item, card, deleteButton) {
     const stillAdmin = await checkGalleryAdmin();
 
@@ -1324,9 +1288,7 @@ async function deleteGalleryItem(item, card, deleteButton) {
     }
 }
 
-/* =========================================================
-   加载画廊图片
-========================================================= */
+/* 加载画廊图片 */
 async function loadGallery() {
     galleryList.innerHTML = `
         <div class="empty-gallery">
@@ -1360,9 +1322,20 @@ async function loadGallery() {
 
     galleryList.innerHTML = "";
 
-    data.forEach((item) => {
-        if (!item.image_url) return;
+    /* 建立左右两列 */
+    const leftColumn = document.createElement("div");
+    leftColumn.className = "gallery-column";
 
+    const rightColumn = document.createElement("div");
+    rightColumn.className = "gallery-column";
+
+    galleryList.appendChild(leftColumn);
+    galleryList.appendChild(rightColumn);
+
+    /* 过滤无图片地址的记录 */
+    const validItems = data.filter(item => item.image_url);
+
+    validItems.forEach((item, index) => {
         const card = document.createElement("div");
         card.className = "gallery-item";
 
@@ -1376,7 +1349,7 @@ async function loadGallery() {
         image.loading = "lazy";
         image.draggable = false;
 
-        /* 只显示原图，不再添加任何自动水印 */
+        /* 只显示原图，不添加自动水印 */
         imageWrap.appendChild(image);
         card.appendChild(imageWrap);
 
@@ -1392,7 +1365,18 @@ async function loadGallery() {
             card.appendChild(deleteButton);
         }
 
-        galleryList.appendChild(card);
+        /*
+         * 交错分配：
+         * 第 1 张 → 左列
+         * 第 2 张 → 右列
+         * 第 3 张 → 左列
+         * 第 4 张 → 右列
+         */
+        const targetColumn = index % 2 === 0
+            ? leftColumn
+            : rightColumn;
+
+        targetColumn.appendChild(card);
 
         /* 点击图片放大 */
         image.addEventListener("click", () => {
@@ -1415,11 +1399,14 @@ async function loadGallery() {
             });
         }
     });
+
+    /* 没有有效图片时显示空状态 */
+    if (validItems.length === 0) {
+        showEmptyGallery();
+    }
 }
 
-/* =========================================================
-   启动画廊
-========================================================= */
+/* 启动画廊 */
 async function initGallery() {
     isGalleryAdmin = await checkGalleryAdmin();
     await loadGallery();
@@ -1442,9 +1429,7 @@ supabaseClient.auth.onAuthStateChange(
     }
 );
 
-/* =========================================================
-   关闭图片放大
-========================================================= */
+/* 关闭图片放大 */
 function closeLightbox() {
     lightbox.classList.remove("active");
     lightboxImage.src = "";
@@ -1464,9 +1449,7 @@ document.addEventListener("keydown", (event) => {
     }
 });
 
-/* =========================================================
-   日间 / 夜间模式
-========================================================= */
+/* 日间 / 夜间模式 */
 const themeToggle = document.getElementById("themeToggle");
 const themeIcon = document.getElementById("themeIcon");
 const themeText = document.getElementById("themeText");
@@ -1499,10 +1482,7 @@ themeToggle.addEventListener("click", () => {
     applyTheme(nextTheme);
 });
 
-/* =========================================================
-   基础防保存措施
-   不能完全阻止截图或获取公开图片地址
-========================================================= */
+/* 基础防保存措施：无法完全阻止截图或获取公开图片地址 */
 document.addEventListener("contextmenu", (event) => {
     if (
         event.target instanceof Element &&
