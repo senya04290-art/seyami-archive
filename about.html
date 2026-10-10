@@ -379,16 +379,14 @@ h1 {
   pointer-events: none;
 }
 
+/* 修改：消除时不再闪烁、缩小或旋转 */
 .tile.matched {
-  animation: vanish .23s ease-in forwards;
+  animation: none;
+  opacity: 1;
 }
 
 .tile.falling {
   animation: appear .19s ease-out;
-}
-
-@keyframes vanish {
-  to { transform: scale(.3) rotate(12deg); opacity: 0; }
 }
 
 @keyframes appear {
@@ -1516,16 +1514,13 @@ body.day-mode .action-button.primary {
         localStorage.setItem("seyami-match-best", String(bestScore));
       }
 
-      matches.forEach(index => {
-        const tile = boardElement.children[index];
-        if (tile) tile.classList.add("matched");
-      });
-
+      /* 不再给匹配图块添加 matched 动画 */
       updateStats();
       scoreElement.classList.remove("score-pop");
       void scoreElement.offsetWidth;
       scoreElement.classList.add("score-pop");
 
+      /* 保留原有消除等待时间与计分节奏 */
       await sleep(230);
 
       matches.forEach(index => {
