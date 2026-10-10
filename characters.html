@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -130,6 +129,19 @@ body{
 .character-image::before{content:"";position:absolute;inset:18px;border:1px solid rgba(140,210,245,.07);pointer-events:none;transition:border-color .6s ease}
 .character-image::after{content:"✦";position:absolute;right:24px;top:20px;color:rgba(143,202,237,.8);font-size:16px;text-shadow:0 0 10px rgba(90,190,240,.25);transition:color .6s ease,text-shadow .6s ease}
 .character-image img{display:block;width:100%;height:100%;object-fit:contain;position:relative;z-index:1}
+
+/* 立绘防保存：禁止选中、拖拽和触屏长按菜单 */
+.character-image,
+.character-image img{
+  -webkit-user-select:none;
+  user-select:none;
+  -webkit-touch-callout:none;
+}
+.character-image img{
+  -webkit-user-drag:none;
+  user-drag:none;
+}
+
 .image-placeholder{text-align:center;color:rgba(177,207,230,.62);font-family:"Cinzel",serif;letter-spacing:4px;font-size:10px;transition:color .6s ease}
 .image-placeholder-symbol{display:block;margin-bottom:15px;font-family:"Times New Roman",serif;font-size:34px;color:rgba(143,210,246,.08);transition:color .6s ease}
 .image-placeholder-cn{display:block;margin-top:10px;font-family:"Noto Serif SC",serif;font-size:10px;letter-spacing:3px;color:rgba(177,207,230,.62);transition:color .6s ease}
@@ -323,8 +335,8 @@ body.day-mode .pagination-status{color:rgba(70,135,165,.55)}
     </section>
 
     <section class="character-panel">
-      <div class="character-image">
-        <img id="characterImage" src="" alt="" style="display:none;">
+      <div class="character-image" id="characterImageContainer">
+        <img id="characterImage" src="" alt="" style="display:none;" draggable="false">
         <div class="image-placeholder" id="imagePlaceholder">
           <span class="image-placeholder-symbol">✦</span>
           CHARACTER PORTRAIT
@@ -397,6 +409,7 @@ const characterNameCn = document.querySelector(".character-name-cn");
 const characterRole = document.querySelector(".character-role");
 const infoValues = document.querySelectorAll(".info-value");
 const characterImage = document.getElementById("characterImage");
+const characterImageContainer = document.getElementById("characterImageContainer");
 const imagePlaceholder = document.getElementById("imagePlaceholder");
 const description = document.querySelector(".description");
 const archiveMark = document.querySelector(".archive-mark");
@@ -405,6 +418,39 @@ const editCharacterButton = document.getElementById("editCharacterButton");
 const prevCharacter = document.getElementById("prevCharacter");
 const nextCharacter = document.getElementById("nextCharacter");
 const paginationStatus = document.getElementById("paginationStatus");
+
+/* IMAGE SAVE PROTECTION */
+function preventImageSave(event){
+  event.preventDefault();
+}
+
+if(characterImage){
+  characterImage.setAttribute("draggable","false");
+
+  characterImage.addEventListener("contextmenu",preventImageSave);
+  characterImage.addEventListener("dragstart",preventImageSave);
+  characterImage.addEventListener("selectstart",preventImageSave);
+}
+
+if(characterImageContainer){
+  characterImageContainer.addEventListener("contextmenu",function(event){
+    if(event.target.closest("img")){
+      event.preventDefault();
+    }
+  });
+
+  characterImageContainer.addEventListener("dragstart",function(event){
+    if(event.target.closest("img")){
+      event.preventDefault();
+    }
+  });
+
+  characterImageContainer.addEventListener("selectstart",function(event){
+    if(event.target.closest("img")){
+      event.preventDefault();
+    }
+  });
+}
 
 /* ADMIN CHECK */
 async function checkSeyamiAdmin(){
@@ -555,6 +601,7 @@ function renderCharacter(character){
 
     characterImage.src = imageURL;
     characterImage.alt = fullName;
+    characterImage.setAttribute("draggable","false");
   }else{
     characterImage.removeAttribute("src");
   }
