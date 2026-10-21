@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -94,6 +93,7 @@ body{
 .micro-stars span:nth-child(18){left:91%;top:57%;animation-delay:4.5s}
 .micro-stars span:nth-child(19){left:13%;top:84%;animation-delay:3.8s}
 @keyframes microTwinkle{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:.9;transform:scale(1.5)}}
+
 .arcane-stars{position:absolute;inset:0;z-index:1;pointer-events:none}
 .arcane-stars span{
     position:absolute;width:auto;height:auto;background:none;transform:none;
@@ -114,6 +114,7 @@ body{
 .star-s{left:94%;top:68%}.star-t{left:57%;top:90%}.extra-u{left:12%;top:42%}
 .extra-v{left:30%;top:54%}.extra-w{left:46%;top:42%}.extra-x{left:66%;top:49%}
 .extra-y{left:86%;top:44%}.extra-z{left:97%;top:55%}
+
 .magic-circle{
     position:absolute;width:min(72vw,760px);height:min(72vw,760px);
     left:50%;top:47%;transform:translate(-50%,-50%);border-radius:50%;
@@ -127,6 +128,7 @@ body{
 }
 .magic-circle::before{width:82%;height:82%;border:1px solid rgba(91,162,213,.22);box-shadow:0 0 25px rgba(47,126,184,.08)}
 .magic-circle::after{width:61%;height:61%;border:1px solid rgba(91,162,213,.22);box-shadow:0 0 18px rgba(62,139,194,.04)}
+
 .frame{
     position:relative;z-index:5;max-width:1280px;min-height:calc(100vh - 76px);
     margin:0 auto;border:1px solid rgba(111,174,224,.32);padding:28px 34px 32px;
@@ -150,6 +152,7 @@ body{
 .hero-main{font-family:"Cinzel",serif;font-size:clamp(30px,5vw,56px);font-weight:400;letter-spacing:8px;line-height:1.15;color:#dceeff;text-shadow:0 0 18px rgba(106,172,220,.08)}
 .hero-sub{margin-top:15px;font-family:"Cinzel",serif;font-size:13px;letter-spacing:5px;color:rgba(177,207,230,.62)}
 .hero-cn{margin-top:9px;font-size:13px;letter-spacing:4px;color:rgba(177,207,230,.62)}
+
 .book-area{position:relative;z-index:6;width:100%;max-width:1040px;margin:0 auto;padding:12px 0 0}
 .book{position:relative;width:100%;height:520px;display:block}
 .book-page{position:relative;width:100%;height:100%;overflow:hidden;border:1px solid rgba(111,174,224,.28);background:linear-gradient(135deg,rgba(12,38,62,.76),rgba(7,25,44,.82));box-shadow:inset 0 0 45px rgba(65,132,178,.05);transition:background .5s ease,border-color .5s ease}
@@ -168,7 +171,7 @@ body{
 .page-heading{font-family:"Cinzel",serif;font-size:10px;letter-spacing:3px;color:rgba(137,190,220,.55);margin-bottom:15px}
 .page-text{min-height:125px;max-width:880px;font-size:11px;line-height:2.15;letter-spacing:1px;color:rgba(191,220,243,.48);white-space:pre-line;overflow-y:auto}
 
-/* 管理员修改按钮：默认隐藏 */
+/* 管理员修改按钮：未登录时隐藏 */
 .edit-area{
     display:none;
     position:absolute;right:42px;bottom:28px;
@@ -176,6 +179,7 @@ body{
 }
 .edit-button{display:inline-flex;align-items:center;justify-content:center;min-width:112px;padding:8px 15px;border:1px solid rgba(111,174,224,.38);background:rgba(8,28,49,.55);color:rgba(191,220,243,.78);text-decoration:none;font-family:"Cinzel","Noto Serif SC",serif;font-size:9px;letter-spacing:1.5px;cursor:pointer;transition:color .3s ease,border-color .3s ease,background .3s ease,opacity .3s ease}
 .edit-button:hover{color:#d9efff;border-color:rgba(111,174,224,.68);background:rgba(18,48,72,.65)}
+
 .book-controls{width:100%;margin:28px auto 0;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:10}
 .page-button{appearance:none;border:0;background:transparent;padding:8px 4px;color:rgba(191,220,243,.68);font-family:"Cinzel","Noto Serif SC",serif;font-size:9px;letter-spacing:3px;cursor:pointer;transition:color .3s ease,opacity .3s ease,text-shadow .3s ease}
 .page-button:hover:not(:disabled){color:#d9efff;text-shadow:0 0 10px rgba(102,180,231,.35)}
@@ -186,6 +190,7 @@ body.day .page-button:hover:not(:disabled){color:#28536f;text-shadow:0 0 8px rgb
 body.day .page-count{color:rgba(70,135,165,.55)}
 .archive-note{text-align:center;margin-top:17px;font-family:"Cinzel","Noto Serif SC",serif;font-size:9px;letter-spacing:2px;color:rgba(133,177,207,.34)}
 .footer{position:relative;z-index:5;margin-top:auto;padding-top:38px;text-align:center;font-family:"Cinzel",serif;font-size:9px;letter-spacing:3px;color:rgba(133,177,207,.38)}
+
 body.day{background:#f4f9fd;color:#2e5069}
 body.day .page{background:radial-gradient(circle at 50% 42%,rgba(165,211,238,.20),transparent 38%),radial-gradient(circle at 50% 52%,rgba(226,240,249,.68),transparent 72%),#f4f9fd}
 body.day .stars::before{background:rgba(103,166,207,.42);box-shadow:5vw 8vh rgba(103,166,207,.42),13vw 18vh rgba(103,166,207,.30),22vw 7vh rgba(103,166,207,.42),31vw 14vh rgba(103,166,207,.25),41vw 5vh rgba(103,166,207,.38),52vw 12vh rgba(103,166,207,.28),63vw 7vh rgba(103,166,207,.38),74vw 16vh rgba(103,166,207,.25),86vw 8vh rgba(103,166,207,.40),94vw 20vh rgba(103,166,207,.28)}
@@ -221,6 +226,7 @@ body.day .edit-button{border-color:rgba(82,151,198,.38);background:rgba(248,252,
 body.day .edit-button:hover{color:#28536f;border-color:rgba(82,151,198,.68);background:rgba(248,252,255,.92)}
 body.day .archive-note{color:rgba(73,115,143,.40)}
 body.day .footer{color:rgba(73,115,143,.40)}
+
 @media(max-width:800px){
     .page{padding:24px 18px 30px}
     .frame{padding:24px 24px 28px}
@@ -284,7 +290,7 @@ body.day .footer{color:rgba(73,115,143,.40)}
         <span></span><span></span><span></span><span></span><span></span>
         <span></span><span></span><span></span><span></span><span></span>
         <span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span>
     </div>
 
     <div class="arcane-stars">
@@ -387,8 +393,11 @@ const supabaseClient = window.supabase.createClient(
     SUPABASE_PUBLISHABLE_KEY
 );
 
-/* 管理员邮箱 */
-const ADMIN_EMAIL = "senya04290@gmail.com";
+/*
+ * 必须与 admin.html 中实际用于登录的管理员邮箱一致。
+ * 这里沿用后台代码中使用的邮箱。
+ */
+const ADMIN_EMAIL = "1296457710@qq.com";
 
 /* =========================================================
    国家数据
@@ -411,34 +420,47 @@ const editArea = document.getElementById("editArea");
 /* =========================================================
    管理员登录检查
 ========================================================= */
+function isAuthorizedAdmin(session){
+    const email = session?.user?.email || "";
+    return email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
+}
+
 function updateEditVisibility(){
-    editArea.style.display = isAdmin ? "flex" : "none";
+    const hasNation = allNations.length > 0 &&
+        !!allNations[currentIndex]?.id;
+
+    editArea.style.display = isAdmin && hasNation ? "flex" : "none";
 }
 
 async function checkAdminLogin(){
-    // 检查期间先隐藏，避免访客短暂看到按钮
+    // 默认隐藏，避免登录状态确认前短暂显示按钮
     isAdmin = false;
     updateEditVisibility();
 
-    const { data, error } = await supabaseClient.auth.getSession();
+    try{
+        const { data, error } = await supabaseClient.auth.getSession();
 
-    if(error || !data.session){
-        return;
+        if(error){
+            console.error("检查管理员登录状态失败：", error);
+            return;
+        }
+
+        isAdmin = isAuthorizedAdmin(data.session);
+        updateEditVisibility();
+    }catch(error){
+        console.error("检查管理员登录状态失败：", error);
+        isAdmin = false;
+        updateEditVisibility();
     }
-
-    const email = data.session.user?.email || "";
-    isAdmin = email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
-    updateEditVisibility();
 }
 
-// 监听登录与退出事件
+// 登录、退出或会话更新时同步按钮显示状态
 supabaseClient.auth.onAuthStateChange((event, session) => {
-    isAdmin = !!session &&
-        (session.user?.email || "").toLowerCase() === ADMIN_EMAIL.toLowerCase();
+    isAdmin = isAuthorizedAdmin(session);
     updateEditVisibility();
 });
 
-// 先检查登录状态
+// 检查当前会话
 checkAdminLogin();
 
 /* =========================================================
@@ -450,7 +472,8 @@ function getNationId(){
 }
 
 function goToNation(nation){
-    if(!nation) return;
+    if(!nation || nation.id === undefined || nation.id === null) return;
+
     const url = "nations.html?id=" + encodeURIComponent(nation.id);
     window.location.href = url;
 }
@@ -486,8 +509,14 @@ function renderNation(nation){
         element.textContent = values[index] || "—";
     });
 
+    /*
+     * 修改按钮指向现有后台。
+     * 后台还需要支持 type=country 和 id 参数，
+     * 才能读取并更新对应国家。
+     */
     if(nation.id !== undefined && nation.id !== null){
-        editButton.href = "edit.html?type=country&id=" + encodeURIComponent(nation.id);
+        editButton.href = "admin.html?type=country&id=" +
+            encodeURIComponent(nation.id);
         editButton.style.opacity = "1";
         editButton.style.pointerEvents = "auto";
     }else{
@@ -496,7 +525,6 @@ function renderNation(nation){
         editButton.style.pointerEvents = "none";
     }
 
-    // 即使国家资料重新渲染，也必须服从管理员权限
     updateEditVisibility();
     updatePagination();
 }
@@ -518,6 +546,7 @@ function renderEmpty(){
     prevButton.disabled = true;
     nextButton.disabled = true;
     archiveNote.textContent = "· NO NATION RECORDS ·";
+
     updateEditVisibility();
 }
 
@@ -549,10 +578,13 @@ async function loadNations(){
             archiveNote.textContent = "· FAILED TO LOAD NATION RECORDS ·";
             rightTitle.textContent = "READ ERROR";
             rightCn.textContent = "读取失败";
-            rightDescription.textContent = "无法读取国家档案，请检查 Supabase 设置。";
+            rightDescription.textContent =
+                "无法读取国家档案，请检查 Supabase 设置。";
+
             editButton.href = "#";
             editButton.style.opacity = ".25";
             editButton.style.pointerEvents = "none";
+
             pageCount.textContent = "NATION · 000";
             prevButton.disabled = true;
             nextButton.disabled = true;
@@ -568,6 +600,7 @@ async function loadNations(){
         }
 
         allNations = data;
+
         const nationId = getNationId();
 
         if(nationId){
@@ -580,6 +613,7 @@ async function loadNations(){
         }
 
         renderNation(allNations[currentIndex]);
+
         console.log("国家数量：", allNations.length);
         console.log("当前国家：", allNations[currentIndex]);
 
@@ -611,7 +645,7 @@ nextButton.addEventListener("click", function(){
 
 document.addEventListener("keydown", function(event){
     const tag = document.activeElement?.tagName;
-    if(tag === "INPUT" || tag === "TEXTAREA") return;
+    if(tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
 
     if(event.key === "ArrowLeft" && currentIndex > 0){
         goToNation(allNations[currentIndex - 1]);
@@ -653,6 +687,7 @@ applyTheme(savedTheme === "day" ? "day" : "night");
 themeToggle.addEventListener("click", function(){
     const isDay = document.body.classList.contains("day");
     const newTheme = isDay ? "night" : "day";
+
     localStorage.setItem("seyami-theme", newTheme);
     applyTheme(newTheme);
 });
