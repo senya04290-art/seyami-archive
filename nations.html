@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -250,14 +251,13 @@ body.day .footer{color:rgba(73,115,143,.40)}
     .hero-sub{font-size:10px;letter-spacing:3px}
     .hero-cn{font-size:11px;letter-spacing:3px}
 
-    /* 修复：手机书页改为随内容自动延伸 */
+    /* 手机端书页随内容自动延伸，保留原有美化 */
     .book{
         height:auto !important;
         min-height:540px;
         overflow:visible !important;
     }
 
-    /* 修复：不再让书页固定高度并裁切正文 */
     .book-page{
         height:auto !important;
         min-height:540px;
@@ -281,7 +281,7 @@ body.day .footer{color:rgba(73,115,143,.40)}
     .country-title{font-size:24px;letter-spacing:4px}
     .country-info{grid-template-columns:1fr 1fr;gap:22px 14px}
 
-    /* 修复：简介不再限制最小高度或独立裁切 */
+    /* 国家介绍随文字长度延伸，不单独裁切 */
     .page-text{
         min-height:0 !important;
         height:auto !important;
@@ -297,7 +297,7 @@ body.day .footer{color:rgba(73,115,143,.40)}
     .info-item{min-width:0;overflow-wrap:anywhere}
     .info-value{overflow-wrap:anywhere;word-break:break-word}
 
-    /* 修复：修改按钮移到内容之后，不再覆盖文字 */
+    /* 管理员修改按钮放在正文之后 */
     .edit-area{
         position:relative !important;
         right:auto !important;
@@ -329,7 +329,6 @@ body.day .footer{color:rgba(73,115,143,.40)}
     .country-title{font-size:21px;letter-spacing:3px}
     .country-info{grid-template-columns:1fr}
 
-    /* 窄屏手机也由内容决定高度 */
     .book{
         height:auto !important;
         min-height:570px;
@@ -399,19 +398,19 @@ body.day .footer{color:rgba(73,115,143,.40)}
             <div class="book" id="book">
                 <article class="book-page right-page" id="rightPage">
                     <div class="page-index">NATION RECORD</div>
-                    <div class="country-title" id="rightTitle">—</div>
-                    <div class="country-cn" id="rightCn">—</div>
-                    <div class="page-line"></div>
-                    <div class="page-heading">PROFILE</div>
-                    <div class="page-text" id="rightDescription">—</div>
 
+                    <!-- 1. 国家名称 -->
+                    <div class="country-title" id="rightTitle">—</div>
+
+                    <!-- 2. 国家副标题 -->
+                    <div class="country-cn" id="rightCn">—</div>
+
+                    <div class="page-line"></div>
+
+                    <!-- 3. 国家基本信息：首都、政治体系、所在地区 -->
                     <div class="country-info" id="rightInfo">
                         <div class="info-item">
                             <div class="info-label">CAPITAL</div>
-                            <div class="info-value">—</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">REGION</div>
                             <div class="info-value">—</div>
                         </div>
                         <div class="info-item">
@@ -419,10 +418,14 @@ body.day .footer{color:rgba(73,115,143,.40)}
                             <div class="info-value">—</div>
                         </div>
                         <div class="info-item">
-                            <div class="info-label">SUBTITLE</div>
+                            <div class="info-label">REGION</div>
                             <div class="info-value">—</div>
                         </div>
                     </div>
+
+                    <!-- 4. 国家介绍 -->
+                    <div class="page-heading" style="margin-top:30px">PROFILE</div>
+                    <div class="page-text" id="rightDescription">—</div>
 
                     <div class="edit-area" id="editArea">
                         <a href="#" class="edit-button" id="editButton">✦ 修改档案</a>
@@ -455,10 +458,7 @@ const supabaseClient = window.supabase.createClient(
     SUPABASE_PUBLISHABLE_KEY
 );
 
-/*
- * 必须与 admin.html 中实际用于登录的管理员邮箱一致。
- * 这里沿用原代码中的邮箱。
- */
+/* 管理员邮箱：需与 admin.html 中的管理员邮箱一致 */
 const ADMIN_EMAIL = "1296457710@qq.com";
 
 /* =========================================================
@@ -557,11 +557,11 @@ function renderNation(nation){
     rightCn.textContent = nation.subtitle || "—";
     rightDescription.textContent = nation.description || "—";
 
+    /* 顺序与页面一致：首都、政治体系、所在地区 */
     const values = [
         nation.capital,
-        nation.region,
         nation.government,
-        nation.subtitle
+        nation.region
     ];
 
     rightInfo.querySelectorAll(".info-value").forEach((element, index) => {
