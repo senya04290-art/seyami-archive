@@ -4,1001 +4,981 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#061426">
 <title>塞垭弥大陆档案馆 · 国家档案</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-:root {
-  color-scheme: dark;
-  --bg: #061426;
-  --text: #dcecff;
-  --muted: #91a9c8;
-  --line: rgba(153,190,235,.28);
-  --gold: #d9c49a;
-  --panel: rgba(9,25,45,.88);
-  --panel-soft: rgba(15,36,61,.76);
-  --shadow: rgba(0,0,0,.3);
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  min-height: 100%;
-  background: var(--bg);
-}
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  overflow-x: clip;
-  color: var(--text);
-  background:
-    radial-gradient(ellipse at 50% 5%, rgba(47,85,139,.2), transparent 45%),
-    radial-gradient(ellipse at 8% 65%, rgba(85,65,139,.1), transparent 38%),
-    var(--bg);
-  font-family: "Noto Serif SC", serif;
-  transition: background .25s, color .25s;
-}
-
-body.day-mode {
-  color-scheme: light;
-  --bg: #e8eef6;
-  --text: #203650;
-  --muted: #627b98;
-  --line: rgba(69,101,143,.3);
-  --gold: #947746;
-  --panel: rgba(255,255,255,.82);
-  --panel-soft: rgba(235,242,251,.8);
-  --shadow: rgba(40,60,90,.12);
-
-  background:
-    radial-gradient(ellipse at 50% 5%, rgba(120,158,207,.2), transparent 48%),
-    #e8eef6;
-}
-
-button,
-a {
-  font: inherit;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button:focus-visible,
-a:focus-visible {
-  outline: 2px solid #7dbdff;
-  outline-offset: 3px;
-}
-
-/* 星空背景 */
-.star-field {
-  position: fixed;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.star-field span {
-  position: absolute;
-  color: rgba(190,216,255,.65);
-  animation: twinkle 3.5s ease-in-out infinite alternate;
-}
-
-.star-field span:nth-child(3n) {
-  color: rgba(255,191,222,.7);
-  animation-delay: -1.3s;
-}
-
-.star-field span:nth-child(4n) {
-  color: rgba(224,202,255,.72);
-  animation-delay: -2.1s;
-}
-
-@keyframes twinkle {
-  from {
-    opacity: .25;
-    transform: scale(.85) rotate(0);
-  }
-  to {
-    opacity: .9;
-    transform: scale(1.15) rotate(18deg);
-  }
-}
-
-.site-header,
-main,
-.site-footer {
-  position: relative;
-  z-index: 1;
-}
-
-.site-header {
-  width: min(1180px, calc(100% - 40px));
-  margin: 0 auto;
-  padding: 28px 0 18px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.logo {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.logo-cn {
-  font-size: 16px;
-  letter-spacing: 3px;
-}
-
-.logo-en {
-  font-family: Cinzel, serif;
-  font-size: 10px;
-  letter-spacing: 3.5px;
-  color: var(--muted);
-}
-
-.header-actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.nav-link,
-.theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 36px;
-  padding: 7px 13px;
-  border: 1px solid var(--line);
-  border-radius: 3px;
-  background: var(--panel-soft);
-  color: var(--text);
-  font-size: 12px;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: background .2s, border-color .2s;
-}
-
-.nav-link:hover,
-.theme-toggle:hover {
-  border-color: var(--gold);
-}
-
-/* 页面标题 */
-.intro {
-  text-align: center;
-  padding: 22px 20px 16px;
-}
-
-.eyebrow {
-  color: var(--gold);
-  font-family: Cinzel, serif;
-  font-size: 11px;
-  letter-spacing: 4px;
-}
-
-.intro h1 {
-  margin: 14px 0 8px;
-  font-family: Cinzel, "Noto Serif SC", serif;
-  font-size: clamp(27px, 4vw, 40px);
-  font-weight: 400;
-  letter-spacing: 4px;
-}
-
-.subtitle {
-  color: var(--muted);
-  font-size: 13px;
-  letter-spacing: 3px;
-}
-
-.intro-stars {
-  margin-top: 14px;
-  color: var(--gold);
-  font-size: 13px;
-  letter-spacing: 8px;
-}
-
-/* 书本区域 */
-.book-wrap {
-  width: min(1100px, calc(100% - 40px));
-  margin: 12px auto 0;
-}
-
-.book {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, .88fr) minmax(0, 1.12fr);
-  gap: 0;
-  min-height: 500px;
-  border: 1px solid var(--line);
-  background: var(--panel);
-  box-shadow: 0 18px 50px var(--shadow);
-}
-
-.book::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 44%;
-  width: 1px;
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    var(--line) 10%,
-    var(--line) 90%,
-    transparent
-  );
-  pointer-events: none;
-}
-
-.book-page {
-  position: relative;
-  min-width: 0;
-  padding: 38px 34px 36px;
-}
-
-.left-page {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  background: linear-gradient(145deg, rgba(26,48,76,.2), transparent 70%);
-}
-
-.right-page {
-  min-width: 0;
-}
-
-.corner {
-  position: absolute;
-  color: var(--gold);
-  opacity: .8;
-  font-size: 15px;
-  pointer-events: none;
-}
-
-.corner.tl {
-  top: 13px;
-  left: 15px;
-}
-
-.corner.tr {
-  top: 13px;
-  right: 15px;
-}
-
-.corner.bl {
-  bottom: 13px;
-  left: 15px;
-}
-
-.corner.br {
-  bottom: 13px;
-  right: 15px;
-}
-
-.page-kicker {
-  color: var(--gold);
-  font-family: Cinzel, serif;
-  font-size: 10px;
-  letter-spacing: 3px;
-}
-
-.country-title {
-  margin: 20px 0 10px;
-  font-size: clamp(25px, 3vw, 35px);
-  font-weight: 500;
-  line-height: 1.5;
-  overflow-wrap: anywhere;
-}
-
-.country-subtitle {
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.9;
-  overflow-wrap: anywhere;
-}
-
-.ornament {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 25px 0;
-  color: var(--gold);
-  font-size: 12px;
-}
-
-.ornament::before,
-.ornament::after {
-  content: "";
-  height: 1px;
-  flex: 1;
-  background: var(--line);
-}
-
-.country-info {
-  display: grid;
-  gap: 0;
-  margin: 0;
-}
-
-.info-row {
-  display: grid;
-  grid-template-columns: 78px minmax(0, 1fr);
-  gap: 12px;
-  padding: 13px 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.info-row dt {
-  color: var(--muted);
-  font-size: 12px;
-  letter-spacing: 1px;
-}
-
-.info-row dd {
-  min-width: 0;
-  margin: 0;
-  font-size: 13px;
-  line-height: 1.8;
-  overflow-wrap: anywhere;
-  white-space: pre-line;
-}
-
-.edit-area {
-  margin-top: auto;
-  padding-top: 28px;
-  display: flex;
-  justify-content: flex-start;
-}
-
-.edit-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 13px;
-  border: 1px solid var(--line);
-  color: var(--muted);
-  font-size: 12px;
-  letter-spacing: 1px;
-  transition: color .2s, border-color .2s;
-}
-
-.edit-link:hover {
-  color: var(--gold);
-  border-color: var(--gold);
-}
-
-/* 右页内容 */
-.page-section {
-  margin: 0 0 28px;
-  min-width: 0;
-}
-
-/* 关键：空栏目整块隐藏，防止被其他 display 样式覆盖 */
-.page-section[hidden] {
-  display: none !important;
-}
-
-.page-heading {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 0 0 15px;
-  padding-bottom: 11px;
-  border-bottom: 1px solid var(--line);
-  color: var(--gold);
-  font-family: Cinzel, "Noto Serif SC", serif;
-  font-size: 12px;
-  letter-spacing: 2px;
-}
-
-.page-heading .heading-cn {
-  color: var(--text);
-  font-family: "Noto Serif SC", serif;
-  font-size: 13px;
-  letter-spacing: 2px;
-}
-
-.page-text {
-  min-width: 0;
-  min-height: 0;
-  height: auto;
-  max-height: none;
-  overflow: visible;
-  color: var(--text);
-  font-size: 14px;
-  line-height: 2.15;
-  white-space: pre-line;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-}
-
-.loading-state,
-.empty-state,
-.error-state {
-  padding: 70px 15px;
-  text-align: center;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 2;
-}
-
-.loading-state .loading-star {
-  display: block;
-  margin-bottom: 12px;
-  color: var(--gold);
-  font-size: 24px;
-  animation: twinkle 1.5s ease-in-out infinite alternate;
-}
-
-/* 翻页 */
-.pagination {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 22px;
-  margin: 25px auto 0;
-}
-
-.page-button {
-  min-width: 92px;
-  padding: 10px 14px;
-  border: 1px solid var(--line);
-  border-radius: 2px;
-  color: var(--text);
-  background: var(--panel);
-  font-size: 12px;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: border-color .2s, opacity .2s;
-}
-
-.page-button:hover:not(:disabled) {
-  border-color: var(--gold);
-}
-
-.page-button:disabled {
-  opacity: .35;
-  cursor: not-allowed;
-}
-
-.page-indicator {
-  min-width: 70px;
-  color: var(--muted);
-  text-align: center;
-  font-family: Cinzel, serif;
-  font-size: 12px;
-  letter-spacing: 2px;
-}
-
-.site-footer {
-  padding: 35px 20px 25px;
-  color: var(--muted);
-  text-align: center;
-  font-family: Cinzel, serif;
-  font-size: 10px;
-  letter-spacing: 3px;
-}
-
-/* 日间模式 */
-.day-mode .book {
-  background: var(--panel);
-}
-
-.day-mode .left-page {
-  background: linear-gradient(145deg, rgba(174,197,225,.15), transparent 70%);
-}
-
-.day-mode .star-field span {
-  color: rgba(87,117,165,.45);
-}
-
-/* 手机端：内容随页面延伸，不再固定高度或内部裁切 */
-@media (max-width: 700px) {
-  .site-header {
-    width: calc(100% - 28px);
-    padding: 20px 0 14px;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .logo-cn {
-    font-size: 13px;
-    letter-spacing: 1.5px;
-  }
-
-  .logo-en {
-    font-size: 9px;
-    letter-spacing: 2px;
-  }
-
-  .header-actions {
-    gap: 6px;
-  }
-
-  .nav-link,
-  .theme-toggle {
-    min-height: 32px;
-    padding: 6px 9px;
-    font-size: 11px;
-    letter-spacing: 0;
-  }
-
-  .intro {
-    padding: 22px 15px 14px;
-  }
-
-  .eyebrow {
-    font-size: 9px;
-    letter-spacing: 2px;
-  }
-
-  .intro h1 {
-    margin-top: 12px;
-    font-size: 26px;
-    letter-spacing: 2px;
-  }
-
-  .subtitle {
-    font-size: 12px;
-    letter-spacing: 1px;
-    line-height: 1.9;
-  }
-
-  .book-wrap {
-    width: calc(100% - 24px);
-    margin-top: 10px;
-  }
-
-  .book {
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    min-height: 0;
-    overflow: visible;
-  }
-
-  .book::before {
-    display: none;
-  }
-
-  .book-page,
-  .left-page,
-  .right-page {
-    height: auto;
-    min-height: 0;
-    overflow: visible;
-  }
-
-  .book-page {
-    padding: 30px 23px;
-  }
-
-  .left-page {
-    border-bottom: 1px solid var(--line);
-  }
-
-  .right-page {
-    padding-top: 28px;
-    padding-bottom: 32px;
-  }
-
-  .country-title {
-    margin-top: 17px;
-    font-size: 27px;
-  }
-
-  .ornament {
-    margin: 20px 0;
-  }
-
-  .info-row {
-    grid-template-columns: 70px minmax(0, 1fr);
-    gap: 9px;
-    padding: 11px 0;
-  }
-
-  .page-section {
-    margin-bottom: 25px;
-  }
-
-  .page-heading {
-    gap: 8px;
-    font-size: 11px;
-  }
-
-  .page-heading .heading-cn {
-    font-size: 12px;
-  }
-
-  .page-text {
-    font-size: 13px;
-    line-height: 2;
-  }
-
-  .edit-area {
-    padding-top: 24px;
-  }
-
-  .pagination {
-    gap: 12px;
-    margin-top: 20px;
-  }
-
-  .page-button {
-    min-width: 78px;
-    padding: 9px 10px;
-    font-size: 11px;
-  }
-
-  .site-footer {
-    padding-top: 28px;
-    font-size: 9px;
-    letter-spacing: 2px;
-  }
-}
-
-@media (max-width: 360px) {
-  .site-header {
-    flex-wrap: wrap;
-  }
-
-  .header-actions {
-    width: 100%;
-    justify-content: flex-end;
-  }
-
-  .book-page {
-    padding-right: 18px;
-    padding-left: 18px;
-  }
-
-  .info-row {
-    grid-template-columns: 62px minmax(0, 1fr);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
-  }
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{min-height:100%;scroll-behavior:smooth}
+
+body{
+    min-height:100vh;
+    background:#061426;
+    color:#dcecff;
+    font-family:"Noto Serif SC",serif;
+    overflow-x:hidden;
+    transition:background .5s ease,color .5s ease;
+}
+
+.page{
+    position:relative;
+    min-height:100vh;
+    padding:34px 28px 42px;
+    background:
+        radial-gradient(circle at 50% 42%,rgba(38,91,137,.18),transparent 38%),
+        radial-gradient(circle at 50% 50%,rgba(11,45,75,.45),transparent 70%),
+        #061426;
+    overflow:clip;
+    transition:background .5s ease;
+}
+
+.stars,.stars::before,.stars::after{
+    position:absolute;
+    content:"";
+    pointer-events:none;
+}
+.stars{inset:0;z-index:0}
+.stars::before{
+    width:2px;height:2px;background:rgba(182,220,255,.55);
+    box-shadow:
+    5vw 8vh rgba(182,220,255,.55),13vw 18vh rgba(182,220,255,.40),
+    22vw 7vh rgba(182,220,255,.55),31vw 14vh rgba(182,220,255,.32),
+    41vw 5vh rgba(182,220,255,.50),52vw 12vh rgba(182,220,255,.38),
+    63vw 7vh rgba(182,220,255,.48),74vw 16vh rgba(182,220,255,.32),
+    86vw 8vh rgba(182,220,255,.52),94vw 20vh rgba(182,220,255,.38),
+    8vw 31vh rgba(182,220,255,.34),18vw 39vh rgba(182,220,255,.48),
+    29vw 27vh rgba(182,220,255,.32),39vw 34vh rgba(182,220,255,.44),
+    49vw 26vh rgba(182,220,255,.36),61vw 38vh rgba(182,220,255,.46),
+    72vw 29vh rgba(182,220,255,.34),83vw 36vh rgba(182,220,255,.50),
+    92vw 28vh rgba(182,220,255,.36),4vw 55vh rgba(182,220,255,.46),
+    15vw 63vh rgba(182,220,255,.34),25vw 52vh rgba(182,220,255,.52),
+    36vw 61vh rgba(182,220,255,.32),47vw 54vh rgba(182,220,255,.44),
+    58vw 67vh rgba(182,220,255,.38),69vw 55vh rgba(182,220,255,.50),
+    80vw 64vh rgba(182,220,255,.34),91vw 53vh rgba(182,220,255,.46),
+    9vw 81vh rgba(182,220,255,.34),20vw 91vh rgba(182,220,255,.48),
+    33vw 82vh rgba(182,220,255,.36),45vw 94vh rgba(182,220,255,.42),
+    57vw 84vh rgba(182,220,255,.32),68vw 92vh rgba(182,220,255,.48),
+    79vw 82vh rgba(182,220,255,.36),89vw 90vh rgba(182,220,255,.44);
+}
+.stars::after{
+    width:1px;height:1px;background:rgba(182,220,255,.38);
+    box-shadow:
+    2vw 14vh rgba(182,220,255,.35),17vw 5vh rgba(182,220,255,.28),
+    27vw 20vh rgba(182,220,255,.35),37vw 8vh rgba(182,220,255,.28),
+    47vw 18vh rgba(182,220,255,.35),58vw 5vh rgba(182,220,255,.28),
+    69vw 22vh rgba(182,220,255,.35),79vw 9vh rgba(182,220,255,.28),
+    90vw 15vh rgba(182,220,255,.35),11vw 45vh rgba(182,220,255,.28),
+    22vw 34vh rgba(182,220,255,.35),34vw 47vh rgba(182,220,255,.28),
+    44vw 39vh rgba(182,220,255,.35),55vw 47vh rgba(182,220,255,.28),
+    66vw 42vh rgba(182,220,255,.35),77vw 48vh rgba(182,220,255,.28),
+    88vw 40vh rgba(182,220,255,.35),6vw 72vh rgba(182,220,255,.35),
+    17vw 78vh rgba(182,220,255,.28),29vw 70vh rgba(182,220,255,.35),
+    41vw 77vh rgba(182,220,255,.28),53vw 72vh rgba(182,220,255,.35),
+    64vw 79vh rgba(182,220,255,.28),76vw 71vh rgba(182,220,255,.35),
+    87vw 78vh rgba(182,220,255,.28);
+}
+
+.micro-stars{position:absolute;inset:0;z-index:1;pointer-events:none}
+.micro-stars span{
+    position:absolute;width:2px;height:2px;border-radius:50%;
+    background:rgba(158,207,247,.62);opacity:.45;
+    animation:microTwinkle 5s ease-in-out infinite;
+}
+.micro-stars span:nth-child(1){left:9%;top:12%;animation-delay:0s}
+.micro-stars span:nth-child(2){left:18%;top:25%;animation-delay:1s}
+.micro-stars span:nth-child(3){left:28%;top:11%;animation-delay:2s}
+.micro-stars span:nth-child(4){left:37%;top:21%;animation-delay:3s}
+.micro-stars span:nth-child(5){left:48%;top:9%;animation-delay:1.5s}
+.micro-stars span:nth-child(6){left:58%;top:27%;animation-delay:2.5s}
+.micro-stars span:nth-child(7){left:69%;top:14%;animation-delay:4s}
+.micro-stars span:nth-child(8){left:78%;top:24%;animation-delay:.5s}
+.micro-stars span:nth-child(9){left:88%;top:11%;animation-delay:3.5s}
+.micro-stars span:nth-child(10){left:94%;top:31%;animation-delay:1.2s}
+.micro-stars span:nth-child(11){left:7%;top:48%;animation-delay:2.2s}
+.micro-stars span:nth-child(12){left:20%;top:58%;animation-delay:4.2s}
+.micro-stars span:nth-child(13){left:31%;top:46%;animation-delay:1.8s}
+.micro-stars span:nth-child(14){left:44%;top:57%;animation-delay:.8s}
+.micro-stars span:nth-child(15){left:56%;top:48%;animation-delay:3.2s}
+.micro-stars span:nth-child(16){left:68%;top:59%;animation-delay:1.4s}
+.micro-stars span:nth-child(17){left:80%;top:47%;animation-delay:2.8s}
+.micro-stars span:nth-child(18){left:91%;top:57%;animation-delay:4.5s}
+.micro-stars span:nth-child(19){left:13%;top:84%;animation-delay:3.8s}
+@keyframes microTwinkle{
+    0%,100%{opacity:.25;transform:scale(.8)}
+    50%{opacity:.9;transform:scale(1.5)}
+}
+
+.arcane-stars{position:absolute;inset:0;z-index:1;pointer-events:none}
+.arcane-stars span{
+    position:absolute;width:auto;height:auto;background:none;transform:none;
+    opacity:.52;color:rgba(158,207,247,.62);font-family:"Cinzel",serif;
+    font-size:10px;line-height:1;letter-spacing:0;
+    text-shadow:0 0 7px rgba(113,177,220,.28);
+    animation:arcaneTwinkle 6s ease-in-out infinite;
+}
+.arcane-stars span:nth-child(odd)::before{content:"✦"}
+.arcane-stars span:nth-child(even)::before{content:"✶"}
+@keyframes arcaneTwinkle{
+    0%,100%{opacity:.38;transform:scale(.85)}
+    50%{opacity:.72;transform:scale(1.15)}
+}
+.star-a{left:7%;top:19%}.star-b{left:15%;top:8%}
+.star-c{left:24%;top:31%}.star-d{left:34%;top:12%}
+.star-e{left:43%;top:24%}.star-f{left:54%;top:10%}
+.star-g{left:64%;top:31%}.star-h{left:74%;top:17%}
+.star-i{left:84%;top:28%}.star-j{left:93%;top:13%}
+.star-k{left:5%;top:67%}.star-l{left:16%;top:77%}
+.star-m{left:27%;top:64%}.star-n{left:38%;top:75%}
+.star-o{left:49%;top:67%}.star-p{left:61%;top:78%}
+.star-q{left:72%;top:65%}.star-r{left:83%;top:76%}
+.star-s{left:94%;top:68%}.star-t{left:57%;top:90%}
+.extra-u{left:12%;top:42%}.extra-v{left:30%;top:54%}
+.extra-w{left:46%;top:42%}.extra-x{left:66%;top:49%}
+.extra-y{left:86%;top:44%}.extra-z{left:97%;top:55%}
+
+.magic-circle{
+    position:absolute;width:min(72vw,760px);height:min(72vw,760px);
+    left:50%;top:47%;transform:translate(-50%,-50%);border-radius:50%;
+    border:1px solid rgba(73,143,198,.28);
+    box-shadow:0 0 50px rgba(47,126,184,.08),inset 0 0 60px rgba(62,139,194,.04);
+    z-index:0;pointer-events:none;
+    transition:border-color .6s ease,box-shadow .6s ease;
+}
+.magic-circle::before,.magic-circle::after{
+    content:"";position:absolute;left:50%;top:50%;
+    transform:translate(-50%,-50%);border-radius:50%;
+    pointer-events:none;
+    transition:border-color .6s ease,box-shadow .6s ease;
+}
+.magic-circle::before{
+    width:82%;height:82%;border:1px solid rgba(91,162,213,.22);
+    box-shadow:0 0 25px rgba(47,126,184,.08)
+}
+.magic-circle::after{
+    width:61%;height:61%;border:1px solid rgba(91,162,213,.22);
+    box-shadow:0 0 18px rgba(62,139,194,.04)
+}
+
+.frame{
+    position:relative;z-index:5;max-width:1280px;
+    min-height:calc(100vh - 76px);
+    margin:0 auto;border:1px solid rgba(111,174,224,.32);
+    padding:28px 34px 32px;
+    display:flex;flex-direction:column;
+}
+.frame::before,.frame::after{
+    content:"";position:absolute;width:42px;height:42px;pointer-events:none
+}
+.frame::before{
+    left:-1px;top:-1px;
+    border-left:1px solid rgba(108,178,230,.88);
+    border-top:1px solid rgba(108,178,230,.88)
+}
+.frame::after{
+    right:-1px;bottom:-1px;
+    border-right:1px solid rgba(108,178,230,.88);
+    border-bottom:1px solid rgba(108,178,230,.88)
+}
+
+.header{
+    position:relative;z-index:10;display:flex;align-items:center;
+    justify-content:space-between;gap:20px;min-height:44px
+}
+.logo{
+    display:flex;align-items:center;gap:10px;color:#d9edff;
+    font-family:"Cinzel",serif;font-size:14px;letter-spacing:3px;
+    white-space:nowrap
+}
+.logo-symbol{color:rgba(137,201,239,.9);font-size:13px}
+.logo>span:last-child{
+    display:flex;flex-direction:column;justify-content:center;line-height:1.15
+}
+.logo-cn{
+    font-family:"Noto Serif SC",serif;font-size:12px;font-weight:400;
+    letter-spacing:2px;color:inherit
+}
+.logo-en{
+    margin-top:3px;font-family:"Cinzel",serif;font-size:8px;
+    letter-spacing:2.5px;color:rgba(191,220,243,.55)
+}
+.header-right{display:flex;align-items:center;gap:18px}
+.back{
+    text-decoration:none;color:rgba(191,220,243,.68);
+    font-family:"Cinzel","Noto Serif SC",serif;font-size:11px;
+    letter-spacing:1.8px;transition:color .3s ease
+}
+.back:hover{color:#d9efff}
+.theme-toggle{
+    border:1px solid rgba(111,174,224,.32);
+    background:rgba(8,28,49,.35);color:rgba(191,220,243,.68);
+    padding:7px 11px;font-family:"Noto Serif SC",serif;font-size:11px;
+    letter-spacing:1px;cursor:pointer;
+    transition:color .3s ease,border-color .3s ease,background .3s ease
+}
+.theme-toggle:hover{color:#d9efff;border-color:rgba(111,174,224,.58)}
+
+.hero{position:relative;z-index:5;text-align:center;padding:55px 10px 30px}
+.hero-main{
+    font-family:"Cinzel",serif;font-size:clamp(30px,5vw,56px);
+    font-weight:400;letter-spacing:8px;line-height:1.15;color:#dceeff;
+    text-shadow:0 0 18px rgba(106,172,220,.08)
+}
+.hero-sub{
+    margin-top:15px;font-family:"Cinzel",serif;font-size:13px;
+    letter-spacing:5px;color:rgba(177,207,230,.62)
+}
+.hero-cn{margin-top:9px;font-size:13px;letter-spacing:4px;color:rgba(177,207,230,.62)}
+
+.book-area{position:relative;z-index:6;width:100%;max-width:1040px;margin:0 auto;padding:12px 0 0}
+
+/* 保留原有书页样式，正文随内容自然延伸 */
+.book{position:relative;width:100%;height:auto;min-height:520px;display:block}
+.book-page{
+    position:relative;width:100%;height:auto;min-height:520px;
+    overflow:visible;border:1px solid rgba(111,174,224,.28);
+    background:linear-gradient(135deg,rgba(12,38,62,.76),rgba(7,25,44,.82));
+    box-shadow:inset 0 0 45px rgba(65,132,178,.05);
+    transition:background .5s ease,border-color .5s ease
+}
+.left-page{display:none}
+.right-page{
+    display:block;width:100%;border-radius:4px;
+    padding:52px 70px 48px
+}
+.book-page::before{
+    content:"";position:absolute;inset:15px;
+    border:1px solid rgba(111,174,224,.10);pointer-events:none
+}
+.book-page::after{
+    content:"✦";position:absolute;bottom:18px;right:24px;
+    font-family:"Cinzel",serif;font-size:10px;
+    color:rgba(137,201,239,.28);pointer-events:none
+}
+.page-index{
+    font-family:"Cinzel",serif;font-size:10px;letter-spacing:3px;
+    color:rgba(137,190,220,.50);margin-bottom:27px
+}
+.country-title{
+    font-family:"Cinzel",serif;font-size:38px;font-weight:400;
+    letter-spacing:6px;color:#dceeff;min-height:48px;
+    overflow-wrap:anywhere;word-break:break-word
+}
+.country-cn{
+    margin-top:9px;font-size:14px;letter-spacing:3px;
+    color:rgba(177,207,230,.65);min-height:22px;
+    overflow-wrap:anywhere;word-break:break-word
+}
+.page-line{
+    width:120px;height:1px;margin:25px 0 29px;
+    background:linear-gradient(90deg,rgba(111,174,224,.50),transparent)
+}
+.country-info{
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:24px 34px;margin-top:26px
+}
+.info-item{min-width:0}
+.info-label{
+    font-family:"Cinzel",serif;font-size:9px;letter-spacing:2px;
+    color:rgba(137,190,220,.52);margin-bottom:8px
+}
+.info-value{
+    min-height:20px;font-size:11px;line-height:1.8;
+    letter-spacing:1px;color:rgba(205,228,244,.72);
+    overflow-wrap:anywhere;word-break:break-word
+}
+.page-section{margin-top:30px}
+/* 关键：空栏目连同标题一起隐藏 */
+.page-section[hidden]{display:none!important}
+.page-heading{
+    font-family:"Cinzel",serif;font-size:10px;letter-spacing:3px;
+    color:rgba(137,190,220,.68);margin-bottom:15px
+}
+.page-text{
+    min-height:0;width:100%;max-width:880px;
+    font-size:12px;line-height:2.15;letter-spacing:1px;
+    color:rgba(191,220,243,.76);
+    white-space:pre-line;overflow-wrap:anywhere;word-break:break-word;
+    overflow:visible
+}
+
+/* 管理员按钮放在正文后方，避免遮挡历史和文化 */
+.edit-area{
+    display:none;position:relative;right:auto;bottom:auto;
+    justify-content:flex-end;align-items:center;
+    margin-top:28px;z-index:20
+}
+.edit-button{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:112px;padding:8px 15px;
+    border:1px solid rgba(111,174,224,.38);
+    background:rgba(8,28,49,.55);color:rgba(191,220,243,.78);
+    text-decoration:none;font-family:"Cinzel","Noto Serif SC",serif;
+    font-size:9px;letter-spacing:1.5px;cursor:pointer;
+    transition:color .3s ease,border-color .3s ease,background .3s ease,opacity .3s ease
+}
+.edit-button:hover{
+    color:#d9efff;border-color:rgba(111,174,224,.68);
+    background:rgba(18,48,72,.65)
+}
+
+.book-controls{
+    width:100%;margin:28px auto 0;display:flex;align-items:center;
+    justify-content:space-between;position:relative;z-index:10
+}
+.page-button{
+    appearance:none;border:0;background:transparent;padding:8px 4px;
+    color:rgba(191,220,243,.68);
+    font-family:"Cinzel","Noto Serif SC",serif;font-size:9px;
+    letter-spacing:3px;cursor:pointer;
+    transition:color .3s ease,opacity .3s ease,text-shadow .3s ease
+}
+.page-button:hover:not(:disabled){
+    color:#d9efff;text-shadow:0 0 10px rgba(102,180,231,.35)
+}
+.page-button:disabled{opacity:.18;cursor:default}
+.page-count{
+    color:rgba(115,182,224,.48);font-family:"Cinzel",serif;
+    font-size:8px;letter-spacing:3px;min-width:auto;text-align:center
+}
+.archive-note{
+    text-align:center;margin-top:17px;
+    font-family:"Cinzel","Noto Serif SC",serif;font-size:9px;
+    letter-spacing:2px;color:rgba(133,177,207,.34)
+}
+.footer{
+    position:relative;z-index:5;margin-top:auto;padding-top:38px;
+    text-align:center;font-family:"Cinzel",serif;font-size:9px;
+    letter-spacing:3px;color:rgba(133,177,207,.38)
+}
+
+/* 日间模式：保留原有配色 */
+body.day{background:#f4f9fd;color:#2e5069}
+body.day .page{
+    background:
+    radial-gradient(circle at 50% 42%,rgba(165,211,238,.20),transparent 38%),
+    radial-gradient(circle at 50% 52%,rgba(226,240,249,.68),transparent 72%),
+    #f4f9fd
+}
+body.day .stars::before{
+    background:rgba(103,166,207,.42);
+    box-shadow:5vw 8vh rgba(103,166,207,.42),13vw 18vh rgba(103,166,207,.30),22vw 7vh rgba(103,166,207,.42),31vw 14vh rgba(103,166,207,.25),41vw 5vh rgba(103,166,207,.38),52vw 12vh rgba(103,166,207,.28),63vw 7vh rgba(103,166,207,.38),74vw 16vh rgba(103,166,207,.25),86vw 8vh rgba(103,166,207,.40),94vw 20vh rgba(103,166,207,.28)
+}
+body.day .stars::after{background:rgba(103,166,207,.30)}
+body.day .micro-stars span{background:rgba(87,151,199,.50)}
+body.day .arcane-stars span{
+    background:none;color:rgba(87,151,199,.50);
+    box-shadow:none;text-shadow:0 0 7px rgba(87,151,199,.18)
+}
+body.day .magic-circle{
+    border-color:rgba(79,148,196,.26);
+    box-shadow:0 0 50px rgba(70,142,196,.055),inset 0 0 60px rgba(78,151,204,.028)
+}
+body.day .magic-circle::before{
+    border-color:rgba(79,148,196,.26);
+    box-shadow:0 0 25px rgba(70,142,196,.055)
+}
+body.day .magic-circle::after{
+    border-color:rgba(101,168,207,.20);
+    box-shadow:0 0 18px rgba(76,151,202,.065)
+}
+body.day .frame{border-color:rgba(91,145,184,.34)}
+body.day .frame::before{
+    border-left-color:rgba(79,141,190,.68);
+    border-top-color:rgba(79,141,190,.68)
+}
+body.day .frame::after{
+    border-right-color:rgba(79,141,190,.68);
+    border-bottom-color:rgba(79,141,190,.68)
+}
+body.day .logo{color:#2e526c}
+body.day .logo-symbol{color:rgba(79,151,201,.84)}
+body.day .logo-en{color:rgba(61,98,125,.58)}
+body.day .back{color:rgba(62,99,127,.70)}
+body.day .back:hover{color:#28536f}
+body.day .theme-toggle{
+    border-color:rgba(91,145,184,.34);
+    background:rgba(248,252,255,.78);color:rgba(61,98,125,.76)
+}
+body.day .theme-toggle:hover{color:#28536f;border-color:rgba(91,145,184,.58)}
+body.day .hero-main{color:#2b506a}
+body.day .hero-sub,body.day .hero-cn{color:rgba(45,82,106,.80)}
+body.day .book-page{
+    border-color:rgba(82,151,198,.36);
+    background:linear-gradient(135deg,rgba(242,249,253,.90),rgba(226,240,249,.84));
+    box-shadow:inset 0 0 45px rgba(82,151,198,.035)
+}
+body.day .book-page::before{border-color:rgba(82,151,198,.12)}
+body.day .page-index{color:rgba(73,115,143,.55)}
+body.day .country-title{color:#2b506a}
+body.day .country-cn{color:rgba(45,82,106,.72)}
+body.day .page-line{background:linear-gradient(90deg,rgba(82,151,198,.45),transparent)}
+body.day .info-label{color:rgba(73,115,143,.68)}
+body.day .info-value{color:rgba(45,82,106,.82)}
+body.day .page-heading{color:rgba(73,115,143,.72)}
+body.day .page-text{color:rgba(45,82,106,.82)}
+body.day .edit-button{
+    border-color:rgba(82,151,198,.38);
+    background:rgba(248,252,255,.72);color:rgba(62,99,127,.78)
+}
+body.day .edit-button:hover{
+    color:#28536f;border-color:rgba(82,151,198,.68);
+    background:rgba(248,252,255,.92)
+}
+body.day .archive-note{color:rgba(73,115,143,.40)}
+body.day .footer{color:rgba(73,115,143,.40)}
+body.day .page-button{color:rgba(62,99,127,.70)}
+body.day .page-button:hover:not(:disabled){color:#28536f;text-shadow:0 0 8px rgba(76,151,202,.14)}
+body.day .page-count{color:rgba(70,135,165,.55)}
+
+@media(max-width:800px){
+    .page{padding:24px 18px 30px}
+    .frame{padding:24px 24px 28px}
+    .hero{padding:50px 5px 25px}
+    .hero-main{letter-spacing:6px}
+    .right-page{padding:40px 42px 35px}
+    .country-title{font-size:25px}
+    .country-info{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 20px}
+}
+
+@media(max-width:600px){
+    html,body{min-height:100%;height:auto}
+    body{overflow-x:hidden;overflow-y:auto}
+
+    .page{
+        min-height:100vh;height:auto;
+        padding:16px 12px 22px;
+        overflow:clip;
+    }
+    .frame{
+        min-height:calc(100vh - 38px);
+        height:auto;
+        padding:18px 16px 24px
+    }
+    .header{align-items:flex-start;gap:8px}
+    .logo{font-size:11px;letter-spacing:2px;gap:7px}
+    .logo-cn{font-size:11px;letter-spacing:1px}
+    .logo-en{font-size:7px;letter-spacing:1.5px}
+    .header-right{gap:8px;align-items:center}
+    .back{font-size:9px;letter-spacing:1px;white-space:nowrap}
+    .theme-toggle{padding:6px 8px;font-size:9px;white-space:nowrap}
+
+    .hero{padding:45px 0 25px}
+    .hero-main{font-size:27px;letter-spacing:4px}
+    .hero-sub{font-size:10px;letter-spacing:3px}
+    .hero-cn{font-size:11px;letter-spacing:3px}
+
+    .book-area{padding-top:8px}
+    .book{
+        height:auto;min-height:0;
+        overflow:visible;
+    }
+    .book-page{
+        height:auto;min-height:0;
+        overflow:visible;
+    }
+    .right-page{
+        display:block;width:100%;
+        height:auto;min-height:0;
+        border-radius:4px;
+        padding:34px 24px 30px;
+        overflow:visible;
+    }
+    body.day .right-page{border-color:rgba(82,151,198,.36)}
+
+    .page-index{margin-bottom:22px;font-size:9px}
+    .country-title{font-size:24px;letter-spacing:3px;line-height:1.5;min-height:0}
+    .country-cn{font-size:12px;letter-spacing:2px;line-height:1.8;min-height:0}
+    .page-line{margin:21px 0 24px}
+
+    .country-info{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:20px 14px;margin-top:22px
+    }
+    .info-label{font-size:8px;letter-spacing:1.5px;margin-bottom:6px}
+    .info-value{font-size:11px;line-height:1.9;letter-spacing:.5px}
+
+    .page-section{margin-top:27px}
+    .page-heading{font-size:9px;letter-spacing:2.5px;margin-bottom:12px}
+    .page-text{
+        display:block;
+        width:100%;height:auto;min-height:0;max-height:none;
+        font-size:11px;line-height:2.05;letter-spacing:.4px;
+        white-space:pre-line;
+        overflow:visible;overflow-y:visible;
+        overflow-wrap:anywhere;word-break:break-word;
+    }
+
+    .edit-area{
+        position:relative;right:auto;bottom:auto;
+        width:100%;margin-top:26px;
+        justify-content:flex-end;align-items:center;z-index:20
+    }
+    .edit-button{min-width:100px;padding:7px 12px;font-size:8px;letter-spacing:1.2px}
+
+    .book-controls{margin-top:22px;padding:0 5px}
+    .page-button{font-size:8px;letter-spacing:2px;padding:8px 4px}
+    .page-count{font-size:7px;letter-spacing:2px}
+    .archive-note{font-size:8px;letter-spacing:1.5px}
+    .magic-circle{width:105vw;height:105vw}
+    .footer{padding-top:35px;font-size:8px;letter-spacing:2px}
+}
+
+@media(max-width:360px){
+    .frame{padding-left:12px;padding-right:12px}
+    .logo{font-size:9px}
+    .logo-cn{font-size:10px}
+    .back{font-size:8px}
+    .theme-toggle{font-size:8px;padding:5px 7px}
+    .hero-main{font-size:23px;letter-spacing:3px}
+    .hero-sub{font-size:9px}
+    .right-page{padding-left:20px;padding-right:20px}
+    .country-title{font-size:21px;letter-spacing:2px}
+    .country-info{grid-template-columns:1fr;gap:17px}
 }
 </style>
 </head>
 
 <body>
-<div class="star-field" aria-hidden="true">
-  <span style="left:7%;top:9%">✦</span>
-  <span style="left:19%;top:22%;font-size:10px">✧</span>
-  <span style="left:86%;top:12%">✡</span>
-  <span style="left:93%;top:31%;font-size:11px">✦</span>
-  <span style="left:5%;top:47%;font-size:12px">✧</span>
-  <span style="left:79%;top:52%">✶</span>
-  <span style="left:15%;top:76%">✦</span>
-  <span style="left:91%;top:80%;font-size:12px">✧</span>
-  <span style="left:46%;top:7%;font-size:10px">✦</span>
-  <span style="left:61%;top:90%">✡</span>
-  <span style="left:35%;top:93%;font-size:10px">✧</span>
-  <span style="left:70%;top:23%">✦</span>
-  <span style="left:28%;top:48%;font-size:9px">✧</span>
-  <span style="left:96%;top:61%">✦</span>
-  <span style="left:54%;top:80%;font-size:10px">✧</span>
-  <span style="left:40%;top:34%">✦</span>
+<div class="page">
+    <div class="stars"></div>
+
+    <div class="micro-stars">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+    </div>
+
+    <div class="arcane-stars">
+        <span class="star-a"></span><span class="star-b"></span>
+        <span class="star-c"></span><span class="star-d"></span>
+        <span class="star-e"></span><span class="star-f"></span>
+        <span class="star-g"></span><span class="star-h"></span>
+        <span class="star-i"></span><span class="star-j"></span>
+        <span class="star-k"></span><span class="star-l"></span>
+        <span class="star-m"></span><span class="star-n"></span>
+        <span class="star-o"></span><span class="star-p"></span>
+        <span class="star-q"></span><span class="star-r"></span>
+        <span class="star-s"></span><span class="star-t"></span>
+        <span class="extra-u"></span><span class="extra-v"></span>
+        <span class="extra-w"></span><span class="extra-x"></span>
+        <span class="extra-y"></span><span class="extra-z"></span>
+    </div>
+
+    <div class="magic-circle"></div>
+
+    <main class="frame">
+        <header class="header">
+            <div class="logo">
+                <span class="logo-symbol">✦</span>
+                <span>
+                    <span class="logo-cn">塞垭弥大陆档案馆</span>
+                    <span class="logo-en">SEYAMI ARCHIVE</span>
+                </span>
+            </div>
+
+            <div class="header-right">
+                <a href="archive.html" class="back">← 返回档案目录</a>
+                <button class="theme-toggle" id="themeToggle" type="button">☼ 日间</button>
+            </div>
+        </header>
+
+        <section class="hero">
+            <div class="hero-main">NATION ARCHIVE</div>
+            <div class="hero-sub">NATIONS</div>
+            <div class="hero-cn">国家档案</div>
+        </section>
+
+        <section class="book-area">
+            <div class="book" id="book">
+                <article class="book-page right-page" id="rightPage">
+                    <div class="page-index">NATION RECORD</div>
+
+                    <div class="country-title" id="rightTitle">—</div>
+                    <div class="country-cn" id="rightCn">—</div>
+
+                    <div class="page-line"></div>
+
+                    <div class="country-info" id="rightInfo">
+                        <div class="info-item">
+                            <div class="info-label">CAPITAL · 首都</div>
+                            <div class="info-value">—</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">GOVERNMENT · 政治体系</div>
+                            <div class="info-value">—</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">REGION · 所在地区</div>
+                            <div class="info-value">—</div>
+                        </div>
+                    </div>
+
+                    <!-- 没有填写内容时，整栏（包括标题）自动隐藏 -->
+                    <section class="page-section" id="descriptionSection" hidden>
+                        <div class="page-heading">PROFILE · 国家介绍</div>
+                        <div class="page-text" id="rightDescription"></div>
+                    </section>
+
+                    <section class="page-section" id="historySection" hidden>
+                        <div class="page-heading">HISTORY · 国家历史</div>
+                        <div class="page-text" id="rightHistory"></div>
+                    </section>
+
+                    <section class="page-section" id="cultureSection" hidden>
+                        <div class="page-heading">CULTURE · 国家文化</div>
+                        <div class="page-text" id="rightCulture"></div>
+                    </section>
+
+                    <div class="edit-area" id="editArea">
+                        <a href="#" class="edit-button" id="editButton">✦ 修改档案</a>
+                    </div>
+                </article>
+            </div>
+
+            <nav class="book-controls" id="nationPagination" aria-label="国家翻页">
+                <button class="page-button" id="prevButton" type="button">← PREVIOUS</button>
+                <div class="page-count" id="pageCount">NATION · 001</div>
+                <button class="page-button" id="nextButton" type="button">NEXT →</button>
+            </nav>
+
+            <div class="archive-note" id="archiveNote">· ARCHIVE RECORDS AWAITING ·</div>
+        </section>
+
+        <footer class="footer">SEYAMI CONTINENT · NATION ARCHIVE</footer>
+    </main>
 </div>
 
-<header class="site-header">
-  <a class="logo" href="index.html" aria-label="返回塞垭弥大陆档案馆首页">
-    <span class="logo-cn">塞垭弥大陆档案馆</span>
-    <span class="logo-en">SEYAMI ARCHIVE</span>
-  </a>
-
-  <div class="header-actions">
-    <a class="nav-link" href="archive.html">返回档案</a>
-    <button class="theme-toggle" id="themeToggle" type="button">☼ 日间</button>
-  </div>
-</header>
-
-<main>
-  <section class="intro">
-    <div class="eyebrow">✧ THE ARCHIVES OF SEYAMI ✧</div>
-    <h1>国家档案</h1>
-    <div class="subtitle">记录大陆诸国的疆域、历史与文明</div>
-    <div class="intro-stars" aria-hidden="true">✧ ✦ ✧</div>
-  </section>
-
-  <div class="book-wrap">
-    <div id="loadingState" class="loading-state">
-      <span class="loading-star">✧</span>
-      正在翻阅国家档案……
-    </div>
-
-    <div id="errorState" class="error-state" hidden>
-      暂时无法读取国家档案，请稍后刷新页面。
-    </div>
-
-    <div id="emptyState" class="empty-state" hidden>
-      目前还没有已公开的国家档案。
-    </div>
-
-    <article class="book" id="countryBook" hidden>
-      <section class="book-page left-page">
-        <span class="corner tl" aria-hidden="true">✧</span>
-        <span class="corner tr" aria-hidden="true">✧</span>
-        <span class="corner bl" aria-hidden="true">✧</span>
-        <span class="corner br" aria-hidden="true">✧</span>
-
-        <div class="page-kicker">NATIONAL ARCHIVE</div>
-
-        <h2 class="country-title" id="countryName"></h2>
-        <div class="country-subtitle" id="countrySubtitle"></div>
-
-        <div class="ornament" aria-hidden="true">✧</div>
-
-        <dl class="country-info">
-          <div class="info-row">
-            <dt>首都</dt>
-            <dd id="countryCapital"></dd>
-          </div>
-          <div class="info-row">
-            <dt>政体</dt>
-            <dd id="countryGovernment"></dd>
-          </div>
-          <div class="info-row">
-            <dt>所属地域</dt>
-            <dd id="countryRegion"></dd>
-          </div>
-        </dl>
-
-        <div class="edit-area">
-          <a class="edit-link" id="editCountry" href="admin.html">
-            ✦ 修改档案
-          </a>
-        </div>
-      </section>
-
-      <section class="book-page right-page">
-        <span class="corner tl" aria-hidden="true">✧</span>
-        <span class="corner tr" aria-hidden="true">✧</span>
-        <span class="corner bl" aria-hidden="true">✧</span>
-        <span class="corner br" aria-hidden="true">✧</span>
-
-        <section class="page-section" id="descriptionSection" hidden>
-          <h3 class="page-heading">
-            <span>PROFILE</span>
-            <span class="heading-cn">国家介绍</span>
-          </h3>
-          <div class="page-text" id="rightDescription"></div>
-        </section>
-
-        <section class="page-section" id="historySection" hidden>
-          <h3 class="page-heading">
-            <span>HISTORY</span>
-            <span class="heading-cn">国家历史</span>
-          </h3>
-          <div class="page-text" id="rightHistory"></div>
-        </section>
-
-        <section class="page-section" id="cultureSection" hidden>
-          <h3 class="page-heading">
-            <span>CULTURE</span>
-            <span class="heading-cn">国家文化</span>
-          </h3>
-          <div class="page-text" id="rightCulture"></div>
-        </section>
-      </section>
-    </article>
-
-    <nav class="pagination" id="pagination" aria-label="国家档案翻页" hidden>
-      <button class="page-button" id="prevButton" type="button">← 上一国</button>
-      <span class="page-indicator" id="pageIndicator">01 / 01</span>
-      <button class="page-button" id="nextButton" type="button">下一国 →</button>
-    </nav>
-  </div>
-</main>
-
-<footer class="site-footer">✧ THE ARCHIVES OF SEYAMI ✧</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-/* Supabase 配置：保留现有项目地址与公开密钥 */
 const SUPABASE_URL = "https://rqqkdpzehxzwqzytpxgh.supabase.co";
-const SUPABASE_KEY = "sb_publishable_T_gNdlgkOaXnzjSvdmI1Pw_HQOVTEWG";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_T_gNdlgkOaXnzjSvdmI1Pw_HQOVTEWG";
 
 const supabaseClient = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
 );
 
-const elements = {
-  loading: document.getElementById("loadingState"),
-  error: document.getElementById("errorState"),
-  empty: document.getElementById("emptyState"),
-  book: document.getElementById("countryBook"),
-  pagination: document.getElementById("pagination"),
+const ADMIN_EMAIL = "1296457710@qq.com";
 
-  name: document.getElementById("countryName"),
-  subtitle: document.getElementById("countrySubtitle"),
-  capital: document.getElementById("countryCapital"),
-  government: document.getElementById("countryGovernment"),
-  region: document.getElementById("countryRegion"),
-
-  descriptionSection: document.getElementById("descriptionSection"),
-  historySection: document.getElementById("historySection"),
-  cultureSection: document.getElementById("cultureSection"),
-
-  description: document.getElementById("rightDescription"),
-  history: document.getElementById("rightHistory"),
-  culture: document.getElementById("rightCulture"),
-
-  edit: document.getElementById("editCountry"),
-  prev: document.getElementById("prevButton"),
-  next: document.getElementById("nextButton"),
-  indicator: document.getElementById("pageIndicator")
-};
-
-let countries = [];
+let allNations = [];
 let currentIndex = 0;
+let isAdmin = false;
 
-/* 只有存在实际文字时才显示栏目 */
-function setOptionalSection(section, element, value) {
-  const text = value == null ? "" : String(value).trim();
+const rightTitle = document.getElementById("rightTitle");
+const rightCn = document.getElementById("rightCn");
+const rightDescription = document.getElementById("rightDescription");
+const rightHistory = document.getElementById("rightHistory");
+const rightCulture = document.getElementById("rightCulture");
+const rightInfo = document.getElementById("rightInfo");
+const pageCount = document.getElementById("pageCount");
+const prevButton = document.getElementById("prevButton");
+const nextButton = document.getElementById("nextButton");
+const archiveNote = document.getElementById("archiveNote");
+const editButton = document.getElementById("editButton");
+const editArea = document.getElementById("editArea");
 
-  element.textContent = text;
-  section.hidden = text.length === 0;
+const descriptionSection = document.getElementById("descriptionSection");
+const historySection = document.getElementById("historySection");
+const cultureSection = document.getElementById("cultureSection");
+
+/* 根据内容决定是否显示栏目 */
+function setOptionalSection(section, element, value){
+    const text = value == null ? "" : String(value).trim();
+
+    element.textContent = text;
+    section.hidden = text.length === 0;
 }
 
-/* 没有资料时，隐藏所有可选栏目 */
-function hideOptionalSections() {
-  elements.description.textContent = "";
-  elements.history.textContent = "";
-  elements.culture.textContent = "";
-
-  elements.descriptionSection.hidden = true;
-  elements.historySection.hidden = true;
-  elements.cultureSection.hidden = true;
+/* 隐藏所有可选正文栏目 */
+function hideOptionalSections(){
+    setOptionalSection(descriptionSection, rightDescription, "");
+    setOptionalSection(historySection, rightHistory, "");
+    setOptionalSection(cultureSection, rightCulture, "");
 }
 
-function showOnlyState(state) {
-  elements.loading.hidden = state !== "loading";
-  elements.error.hidden = state !== "error";
-  elements.empty.hidden = state !== "empty";
-  elements.book.hidden = state !== "book";
-  elements.pagination.hidden =
-    state !== "book" || countries.length <= 1;
+/* 管理员登录检查 */
+function isAuthorizedAdmin(session){
+    const email = session?.user?.email || "";
+    return email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
 }
 
-function renderNation() {
-  if (!countries.length) {
-    showOnlyState("empty");
-    return;
-  }
+function updateEditVisibility(){
+    const hasNation = allNations.length > 0 &&
+        !!allNations[currentIndex]?.id;
 
-  const nation = countries[currentIndex];
-
-  elements.name.textContent = nation.name || "未命名国家";
-  elements.subtitle.textContent = nation.subtitle || "";
-
-  elements.capital.textContent = nation.capital || "—";
-  elements.government.textContent = nation.government || "—";
-  elements.region.textContent = nation.region || "—";
-
-  /* 核心修改：空内容连同整个栏目标题一起隐藏 */
-  setOptionalSection(
-    elements.descriptionSection,
-    elements.description,
-    nation.description
-  );
-
-  setOptionalSection(
-    elements.historySection,
-    elements.history,
-    nation.history
-  );
-
-  setOptionalSection(
-    elements.cultureSection,
-    elements.culture,
-    nation.culture
-  );
-
-  /* 保留原有后台编辑入口 */
-  elements.edit.href =
-    "admin.html?type=country&id=" +
-    encodeURIComponent(nation.id);
-
-  elements.prev.disabled = currentIndex <= 0;
-  elements.next.disabled = currentIndex >= countries.length - 1;
-
-  elements.indicator.textContent =
-    String(currentIndex + 1).padStart(2, "0") +
-    " / " +
-    String(countries.length).padStart(2, "0");
-
-  showOnlyState("book");
+    editArea.style.display = isAdmin && hasNation ? "flex" : "none";
 }
 
-async function loadNations() {
-  showOnlyState("loading");
+async function checkAdminLogin(){
+    isAdmin = false;
+    updateEditVisibility();
 
-  try {
-    const { data, error } = await supabaseClient
-      .from("countries")
-      .select(
-        "id, name, subtitle, capital, government, region, description, history, culture, updated_at"
-      )
-      .order("name", { ascending: true });
+    try{
+        const { data, error } = await supabaseClient.auth.getSession();
 
-    if (error) {
-      throw error;
+        if(error){
+            console.error("检查管理员登录状态失败：", error);
+            return;
+        }
+
+        isAdmin = isAuthorizedAdmin(data.session);
+        updateEditVisibility();
+    }catch(error){
+        console.error("检查管理员登录状态失败：", error);
+        isAdmin = false;
+        updateEditVisibility();
+    }
+}
+
+supabaseClient.auth.onAuthStateChange((event, session) => {
+    isAdmin = isAuthorizedAdmin(session);
+    updateEditVisibility();
+});
+
+checkAdminLogin();
+
+/* URL / 国家翻页 */
+function getNationId(){
+    const params = new URLSearchParams(window.location.search);
+    return params.get("id");
+}
+
+function goToNation(nation){
+    if(!nation || nation.id === undefined || nation.id === null) return;
+
+    const url = "nations.html?id=" + encodeURIComponent(nation.id);
+    window.location.href = url;
+}
+
+function updatePagination(){
+    const total = allNations.length;
+
+    prevButton.disabled = total <= 1 || currentIndex <= 0;
+    nextButton.disabled = total <= 1 || currentIndex >= total - 1;
+
+    const displayNumber = String(currentIndex + 1).padStart(3, "0");
+    pageCount.textContent = "NATION · " + displayNumber;
+
+    document.title = "塞垭弥大陆档案馆 · " +
+        (allNations[currentIndex]?.name || "国家档案");
+}
+
+function renderNation(nation){
+    if(!nation) return;
+
+    rightTitle.textContent = nation.name || "—";
+    rightCn.textContent = nation.subtitle || "—";
+
+    /* 只有填写了内容的栏目才显示 */
+    setOptionalSection(
+        descriptionSection,
+        rightDescription,
+        nation.description
+    );
+
+    setOptionalSection(
+        historySection,
+        rightHistory,
+        nation.history
+    );
+
+    setOptionalSection(
+        cultureSection,
+        rightCulture,
+        nation.culture
+    );
+
+    /* 顺序：首都、政治体系、所在地区 */
+    const values = [
+        nation.capital,
+        nation.government,
+        nation.region
+    ];
+
+    rightInfo.querySelectorAll(".info-value").forEach((element, index) => {
+        element.textContent = values[index] || "—";
+    });
+
+    if(nation.id !== undefined && nation.id !== null){
+        editButton.href = "admin.html?type=country&id=" +
+            encodeURIComponent(nation.id);
+        editButton.style.opacity = "1";
+        editButton.style.pointerEvents = "auto";
+    }else{
+        editButton.href = "#";
+        editButton.style.opacity = ".25";
+        editButton.style.pointerEvents = "none";
     }
 
-    countries = Array.isArray(data) ? data : [];
-    currentIndex = 0;
+    updateEditVisibility();
+    updatePagination();
+}
 
-    if (countries.length === 0) {
-      hideOptionalSections();
-      showOnlyState("empty");
-      return;
-    }
+function renderEmpty(){
+    rightTitle.textContent = "NO RECORD";
+    rightCn.textContent = "暂无国家档案";
 
-    renderNation();
-  } catch (error) {
-    console.error("加载国家档案失败：", error);
+    /* 没有国家记录时不展示空的介绍、历史或文化栏目 */
     hideOptionalSections();
-    showOnlyState("error");
-  }
+
+    rightInfo.querySelectorAll(".info-value").forEach(element => {
+        element.textContent = "—";
+    });
+
+    editButton.href = "#";
+    editButton.style.opacity = ".25";
+    editButton.style.pointerEvents = "none";
+
+    pageCount.textContent = "NATION · 000";
+    prevButton.disabled = true;
+    nextButton.disabled = true;
+    archiveNote.textContent = "· NO NATION RECORDS ·";
+
+    updateEditVisibility();
 }
 
-elements.prev.addEventListener("click", function () {
-  if (currentIndex > 0) {
-    currentIndex--;
-    renderNation();
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
+/* 读取国家 */
+async function loadNations(){
+    archiveNote.textContent = "· LOADING NATION RECORDS ·";
+
+    try{
+        const { data, error } = await supabaseClient
+            .from("countries")
+            .select(`
+                id,
+                name,
+                subtitle,
+                capital,
+                government,
+                region,
+                description,
+                history,
+                culture,
+                updated_at
+            `)
+            .order("id", { ascending: true });
+
+        if(error){
+            console.error("读取国家档案失败：", error);
+
+            archiveNote.textContent = "· FAILED TO LOAD NATION RECORDS ·";
+            rightTitle.textContent = "READ ERROR";
+            rightCn.textContent = "读取失败";
+            hideOptionalSections();
+
+            editButton.href = "#";
+            editButton.style.opacity = ".25";
+            editButton.style.pointerEvents = "none";
+
+            pageCount.textContent = "NATION · 000";
+            prevButton.disabled = true;
+            nextButton.disabled = true;
+            updateEditVisibility();
+            return;
+        }
+
+        if(!data || data.length === 0){
+            allNations = [];
+            currentIndex = 0;
+            renderEmpty();
+            return;
+        }
+
+        allNations = data;
+
+        const nationId = getNationId();
+
+        if(nationId){
+            const foundIndex = allNations.findIndex(
+                nation => String(nation.id) === String(nationId)
+            );
+            currentIndex = foundIndex >= 0 ? foundIndex : 0;
+        }else{
+            currentIndex = 0;
+        }
+
+        renderNation(allNations[currentIndex]);
+
+        console.log("国家数量：", allNations.length);
+        console.log("当前国家：", allNations[currentIndex]);
+
+    }catch(error){
+        console.error("国家档案加载失败：", error);
+
+        archiveNote.textContent = "· FAILED TO LOAD NATION RECORDS ·";
+        rightTitle.textContent = "ARCHIVE ERROR";
+        rightCn.textContent = "档案读取失败";
+        hideOptionalSections();
+
+        pageCount.textContent = "NATION · 000";
+        prevButton.disabled = true;
+        nextButton.disabled = true;
+        updateEditVisibility();
+    }
+}
+
+/* 翻页按钮 */
+prevButton.addEventListener("click", function(){
+    if(currentIndex <= 0) return;
+    goToNation(allNations[currentIndex - 1]);
 });
 
-elements.next.addEventListener("click", function () {
-  if (currentIndex < countries.length - 1) {
-    currentIndex++;
-    renderNation();
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
+nextButton.addEventListener("click", function(){
+    if(currentIndex >= allNations.length - 1) return;
+    goToNation(allNations[currentIndex + 1]);
 });
 
-/* 日间 / 夜间模式 */
+document.addEventListener("keydown", function(event){
+    const tag = document.activeElement?.tagName;
+    if(tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+
+    if(event.key === "ArrowLeft" && currentIndex > 0){
+        goToNation(allNations[currentIndex - 1]);
+    }
+
+    if(event.key === "ArrowRight" && currentIndex < allNations.length - 1){
+        goToNation(allNations[currentIndex + 1]);
+    }
+});
+
+/* 修改按钮额外检查 */
+editButton.addEventListener("click", function(event){
+    if(!isAdmin || !allNations[currentIndex]){
+        event.preventDefault();
+        return;
+    }
+});
+
+/* 日夜模式 */
 const themeToggle = document.getElementById("themeToggle");
+const savedTheme = localStorage.getItem("seyami-theme");
 
-themeToggle.addEventListener("click", function () {
-  const isDay = document.body.classList.toggle("day-mode");
+function applyTheme(theme){
+    if(theme === "day"){
+        document.body.classList.add("day");
+        themeToggle.textContent = "☾ 夜间";
+    }else{
+        document.body.classList.remove("day");
+        themeToggle.textContent = "☼ 日间";
+    }
+}
 
-  themeToggle.textContent = isDay ? "☾ 夜间" : "☼ 日间";
+applyTheme(savedTheme === "day" ? "day" : "night");
 
-  document
-    .querySelector('meta[name="theme-color"]')
-    .setAttribute("content", isDay ? "#e8eef6" : "#061426");
+themeToggle.addEventListener("click", function(){
+    const isDay = document.body.classList.contains("day");
+    const newTheme = isDay ? "night" : "day";
+
+    localStorage.setItem("seyami-theme", newTheme);
+    applyTheme(newTheme);
 });
 
-/* 初始化 */
+/* 启动 */
 loadNations();
 </script>
 </body>
