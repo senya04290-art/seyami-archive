@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -9,7 +8,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;min-height:100%}
@@ -59,34 +57,14 @@ input::placeholder,textarea::placeholder{color:rgba(210,225,240,.35)}
 .upload-text,.gallery-upload-text{font-family:"Cinzel",serif;font-size:10px;letter-spacing:.22em;opacity:.65}
 .upload-hint,.gallery-upload-hint{font-size:10px;opacity:.4}
 .preview,.gallery-preview{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:15px;display:none;pointer-events:none}
-.save-area{margin-top:38px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.save-area{margin-top:38px;display:flex;justify-content:center}
 .save-button{min-width:230px;height:48px;border:1px solid rgba(190,220,245,.4);background:rgba(10,32,55,.5);color:#dbe8f5;font-family:"Cinzel",serif;font-size:10px;letter-spacing:.3em;cursor:pointer;transition:background .3s,border-color .3s,transform .2s}
 .save-button:hover{background:rgba(30,65,95,.5);border-color:rgba(210,230,245,.65)}
 .save-button:active{transform:scale(.98)}
 .save-button:disabled{opacity:.45;cursor:wait}
-.secondary-button{min-width:130px;height:48px;border:1px solid rgba(190,220,245,.22);background:transparent;color:inherit;font-family:"Noto Serif SC",serif;font-size:12px;cursor:pointer}
-.secondary-button:hover{background:rgba(180,210,240,.06)}
 .message{text-align:center;margin-top:22px;min-height:20px;font-size:12px;letter-spacing:.06em;opacity:.85;overflow-wrap:anywhere}
 .message.success{color:#b8d8c8}
 .message.error{color:#e0b8b8}
-
-/* 新增：已有国家档案列表 */
-.country-records{margin-bottom:36px;padding-bottom:28px;border-bottom:1px solid rgba(180,210,240,.16)}
-.country-records-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
-.country-records-title{font-family:"Cinzel","Noto Serif SC",serif;font-size:12px;letter-spacing:.18em;opacity:.85}
-.country-records-hint{font-size:11px;opacity:.5;line-height:1.8}
-.country-records-list{display:flex;flex-direction:column;gap:10px}
-.country-record-item{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 15px;border:1px solid rgba(180,210,240,.15);background:rgba(5,20,38,.28)}
-.country-record-item.editing{border-color:rgba(190,220,245,.6);background:rgba(30,65,95,.25)}
-.country-record-info{min-width:0;flex:1}
-.country-record-name{font-size:13px;line-height:1.8;overflow-wrap:anywhere}
-.country-record-subtitle{font-size:11px;opacity:.5;margin-top:3px;overflow-wrap:anywhere}
-.country-record-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.country-edit-button{border:1px solid rgba(190,220,245,.35);background:rgba(10,32,55,.35);color:inherit;padding:9px 13px;font-family:"Noto Serif SC",serif;font-size:11px;cursor:pointer;white-space:nowrap}
-.country-edit-button:hover{background:rgba(30,65,95,.5);border-color:rgba(210,230,245,.6)}
-.country-record-empty{padding:18px 12px;text-align:center;border:1px dashed rgba(180,210,240,.18);font-size:12px;line-height:2;opacity:.6}
-.country-list-refresh{border:0;background:transparent;color:inherit;font-family:"Noto Serif SC",serif;font-size:11px;text-decoration:underline;text-underline-offset:4px;opacity:.65;cursor:pointer}
-.country-list-refresh:hover{opacity:1}
 .footer{text-align:center;margin-top:55px;font-family:"Cinzel",serif;font-size:8px;letter-spacing:.35em;opacity:.25}
 body.day-mode{background:radial-gradient(circle at 50% 30%,rgba(210,225,238,.35),transparent 50%),#e9eef3;color:#24384c}
 body.day-mode .admin-container{background:rgba(255,255,255,.52);border-color:rgba(40,70,100,.18)}
@@ -97,13 +75,6 @@ body.day-mode input:focus,body.day-mode select:focus,body.day-mode textarea:focu
 body.day-mode .upload-box,body.day-mode .gallery-upload-box{border-color:rgba(40,70,100,.25)}
 body.day-mode .save-button{color:#24384c;background:rgba(255,255,255,.5);border-color:rgba(40,70,100,.35)}
 body.day-mode .theme-toggle,body.day-mode .logout-button{border-color:rgba(40,70,100,.25)}
-body.day-mode .country-records{border-bottom-color:rgba(40,70,100,.18)}
-body.day-mode .country-record-item{background:rgba(255,255,255,.35);border-color:rgba(40,70,100,.18)}
-body.day-mode .country-record-item.editing{background:rgba(210,225,238,.45);border-color:rgba(40,70,100,.45)}
-body.day-mode .country-edit-button{background:rgba(255,255,255,.5);border-color:rgba(40,70,100,.3);color:#24384c}
-body.day-mode .secondary-button{border-color:rgba(40,70,100,.3)}
-body.day-mode .country-record-empty{border-color:rgba(40,70,100,.25)}
-
 @media(max-width:700px){
 .page{padding:25px 20px 50px}
 .header{align-items:center}
@@ -124,18 +95,11 @@ body.day-mode .country-record-empty{border-color:rgba(40,70,100,.25)}
 .field.full{grid-column:auto}
 .upload-box{min-height:200px}
 .gallery-upload-box{min-height:300px}
-.save-button{width:100%;min-width:0}
-.secondary-button{width:100%}
+.save-button{width:100%}
 textarea{min-height:160px}
-.country-record-item{align-items:flex-start;padding:12px 10px;gap:8px}
-.country-record-name{font-size:12px}
-.country-record-actions{padding-top:2px}
-.country-edit-button{padding:8px 10px;font-size:10px}
-.country-records-title{font-size:11px}
 }
 </style>
 </head>
-
 <body>
 <div class="stars">
 <span class="star" style="left:8%;top:14%"></span><span class="star" style="left:18%;top:31%"></span>
@@ -148,54 +112,30 @@ textarea{min-height:160px}
 <span class="star" style="left:73%;top:88%"></span><span class="star" style="left:86%;top:61%"></span>
 <span class="star" style="left:94%;top:78%"></span>
 </div>
-
 <div class="page">
 <header class="header">
-<div class="logo">
-<div class="logo-cn">塞垭弥大陆档案馆</div>
-<div class="logo-en">SEYAMI ARCHIVE</div>
-</div>
+<div class="logo"><div class="logo-cn">塞垭弥大陆档案馆</div><div class="logo-en">SEYAMI ARCHIVE</div></div>
 <div class="header-right">
 <a href="archive.html" class="back">RETURN TO ARCHIVE</a>
 <button class="logout-button" id="logoutButton" type="button">LOG OUT</button>
 <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换日夜模式">☾</button>
 </div>
 </header>
-
 <section class="title-area">
 <div class="title-en" id="titleEn">CHARACTER</div>
 <div class="title-sub" id="titleSub">ARCHIVE ADMINISTRATION</div>
 <div class="title-cn" id="titleCn">角色档案管理</div>
 </section>
-
 <div class="management-switch">
 <button type="button" class="management-button active" id="characterModeButton">CHARACTER · 角色</button>
 <button type="button" class="management-button" id="countryModeButton">COUNTRY · 国家</button>
 <button type="button" class="management-button" id="historyModeButton">HISTORY · 历史</button>
 <button type="button" class="management-button" id="galleryModeButton">GALLERY · 图集</button>
 </div>
-
 <main class="admin-container">
-
-<!-- 新增：国家管理模式下显示已有国家 -->
-<div class="country-records" id="countryRecordsPanel" style="display:none">
-<div class="country-records-heading">
-<div>
-<div class="country-records-title">EXISTING COUNTRY RECORDS</div>
-<div class="country-records-hint">已有国家档案 · 选择一条记录即可修改</div>
-</div>
-<button type="button" class="country-list-refresh" id="refreshCountriesButton">刷新列表 ↻</button>
-</div>
-<div class="country-records-list" id="countryRecordsList">
-<div class="country-record-empty">正在读取国家档案……</div>
-</div>
-</div>
-
 <div class="section-title" id="sectionTitle">CREATE CHARACTER RECORD</div>
-
 <form id="characterForm">
 <div class="form-grid">
-
 <div class="field full character-field">
 <label for="name">CHARACTER NAME · 角色名称</label>
 <input id="name" type="text" placeholder="例如：Evelina · 伊莉娜" required>
@@ -218,114 +158,61 @@ textarea{min-height:160px}
 </div>
 <div class="field full character-field">
 <label for="gender">GENDER · 性别</label>
-<select id="gender">
-<option value="">请选择</option>
-<option value="女性">女性</option>
-<option value="男性">男性</option>
-<option value="其他">其他</option>
-</select>
+<select id="gender"><option value="">请选择</option><option value="女性">女性</option><option value="男性">男性</option><option value="其他">其他</option></select>
 </div>
+
+<!-- 已恢复：性格 -->
 <div class="field full character-field">
 <label for="personality">PERSONALITY · 性格</label>
 <textarea id="personality" placeholder="填写角色的性格特点、习惯、喜好、待人方式等……"></textarea>
 </div>
+
+<!-- 已恢复：人物背景 -->
 <div class="field full character-field">
 <label for="backstory">BACKSTORY · 人物背景</label>
 <textarea id="backstory" placeholder="填写角色的出身、成长经历、重要事件、人物关系与故事背景等……"></textarea>
 </div>
+
 <div class="field full character-field">
 <label>CHARACTER ARTWORK · 角色立绘</label>
 <div class="upload-box">
 <input id="image" type="file" accept="image/png,image/jpeg,image/webp">
-<div class="upload-placeholder" id="uploadPlaceholder">
-<div class="upload-symbol">✦</div><div class="upload-text">SELECT ARTWORK</div><div class="upload-hint">PNG / JPG / WEBP</div>
-</div>
+<div class="upload-placeholder" id="uploadPlaceholder"><div class="upload-symbol">✦</div><div class="upload-text">SELECT ARTWORK</div><div class="upload-hint">PNG / JPG / WEBP</div></div>
 <img id="preview" class="preview" alt="角色立绘预览">
 </div>
 </div>
 
-<div class="field full country-field" style="display:none">
-<label for="countryName">COUNTRY NAME · 国家名称</label>
-<input id="countryName" type="text" placeholder="例如：雪境王国">
-</div>
-<div class="field full country-field" style="display:none">
-<label for="countrySubtitle">SUBTITLE · 副标题 / 别名</label>
-<input id="countrySubtitle" type="text" placeholder="例如：永冬之国">
-</div>
-<div class="field country-field" style="display:none">
-<label for="countryCapital">CAPITAL · 首都</label>
-<input id="countryCapital" type="text" placeholder="例如：伊尔希亚">
-</div>
-<div class="field country-field" style="display:none">
-<label for="countryGovernment">GOVERNMENT · 政体</label>
-<input id="countryGovernment" type="text" placeholder="例如：君主制">
-</div>
-<div class="field full country-field" style="display:none">
-<label for="countryRegion">REGION · 所在地区</label>
-<input id="countryRegion" type="text" placeholder="例如：北境雪山">
-</div>
-<div class="field full country-field" style="display:none">
-<label for="countryDescription">DESCRIPTION · 国家介绍</label>
-<textarea id="countryDescription" placeholder="填写国家介绍、地理环境、国土情况等……"></textarea>
-</div>
-<div class="field full country-field" style="display:none">
-<label for="countryHistory">HISTORY · 国家历史</label>
-<textarea id="countryHistory" placeholder="填写国家建立、战争、王朝、重要历史事件等……"></textarea>
-</div>
-<div class="field full country-field" style="display:none">
-<label for="countryCulture">CULTURE · 国家文化</label>
-<textarea id="countryCulture" placeholder="填写国家文化、传统、宗教、节日、风俗等……"></textarea>
-</div>
+<div class="field full country-field" style="display:none"><label for="countryName">COUNTRY NAME · 国家名称</label><input id="countryName" type="text" placeholder="例如：雪境王国"></div>
+<div class="field full country-field" style="display:none"><label for="countrySubtitle">SUBTITLE · 副标题 / 别名</label><input id="countrySubtitle" type="text" placeholder="例如：永冬之国"></div>
+<div class="field country-field" style="display:none"><label for="countryCapital">CAPITAL · 首都</label><input id="countryCapital" type="text" placeholder="例如：伊尔希亚"></div>
+<div class="field country-field" style="display:none"><label for="countryGovernment">GOVERNMENT · 政体</label><input id="countryGovernment" type="text" placeholder="例如：君主制"></div>
+<div class="field full country-field" style="display:none"><label for="countryRegion">REGION · 所在地区</label><input id="countryRegion" type="text" placeholder="例如：北境雪山"></div>
+<div class="field full country-field" style="display:none"><label for="countryDescription">DESCRIPTION · 国家介绍</label><textarea id="countryDescription" placeholder="填写国家介绍、地理环境、国土情况等……"></textarea></div>
+<div class="field full country-field" style="display:none"><label for="countryHistory">HISTORY · 国家历史</label><textarea id="countryHistory" placeholder="填写国家建立、战争、王朝、重要历史事件等……"></textarea></div>
+<div class="field full country-field" style="display:none"><label for="countryCulture">CULTURE · 国家文化</label><textarea id="countryCulture" placeholder="填写国家文化、传统、宗教、节日、风俗等……"></textarea></div>
 
-<div class="field history-field" style="display:none">
-<label for="historyYear">YEAR · 年代</label>
-<input id="historyYear" type="text" placeholder="例如：公元 1200 年">
-</div>
-<div class="field history-field" style="display:none">
-<label for="historyEra">ERA · 时期</label>
-<input id="historyEra" type="text" placeholder="例如：白银时代">
-</div>
-<div class="field full history-field" style="display:none">
-<label for="historyTitle">TITLE · 事件名称</label>
-<input id="historyTitle" type="text" placeholder="例如：雪境王国建立">
-</div>
-<div class="field full history-field" style="display:none">
-<label for="historyLocation">LOCATION · 地点</label>
-<input id="historyLocation" type="text" placeholder="例如：北境雪山 · 伊尔希亚">
-</div>
-<div class="field full history-field" style="display:none">
-<label for="historyDescription">DESCRIPTION · 事件简介</label>
-<textarea id="historyDescription" placeholder="用一小段文字介绍这个历史事件……"></textarea>
-</div>
-<div class="field full history-field" style="display:none">
-<label for="historyContent">CONTENT · HISTORICAL RECORD</label>
-<textarea id="historyContent" placeholder="填写完整历史记录、事件经过、人物、影响等……"></textarea>
-</div>
+<div class="field history-field" style="display:none"><label for="historyYear">YEAR · 年代</label><input id="historyYear" type="text" placeholder="例如：公元 1200 年"></div>
+<div class="field history-field" style="display:none"><label for="historyEra">ERA · 时期</label><input id="historyEra" type="text" placeholder="例如：白银时代"></div>
+<div class="field full history-field" style="display:none"><label for="historyTitle">TITLE · 事件名称</label><input id="historyTitle" type="text" placeholder="例如：雪境王国建立"></div>
+<div class="field full history-field" style="display:none"><label for="historyLocation">LOCATION · 地点</label><input id="historyLocation" type="text" placeholder="例如：北境雪山 · 伊尔希亚"></div>
+<div class="field full history-field" style="display:none"><label for="historyDescription">DESCRIPTION · 事件简介</label><textarea id="historyDescription" placeholder="用一小段文字介绍这个历史事件……"></textarea></div>
+<div class="field full history-field" style="display:none"><label for="historyContent">CONTENT · HISTORICAL RECORD</label><textarea id="historyContent" placeholder="填写完整历史记录、事件经过、人物、影响等……"></textarea></div>
 
 <div class="field full gallery-field" style="display:none">
 <label>GALLERY ARTWORK · 图集图片</label>
 <div class="gallery-upload-box">
 <input id="galleryImage" type="file" accept="image/png,image/jpeg,image/webp">
-<div class="gallery-placeholder" id="galleryPlaceholder">
-<div class="gallery-symbol">✦</div><div class="gallery-upload-text">SELECT GALLERY IMAGE</div><div class="gallery-upload-hint">PNG / JPG / WEBP</div>
-</div>
+<div class="gallery-placeholder" id="galleryPlaceholder"><div class="gallery-symbol">✦</div><div class="gallery-upload-text">SELECT GALLERY IMAGE</div><div class="gallery-upload-hint">PNG / JPG / WEBP</div></div>
 <img id="galleryPreview" class="gallery-preview" alt="图集预览">
 </div>
 </div>
-
 </div>
-
-<div class="save-area">
-<button class="save-button" id="saveButton" type="submit">SAVE CHARACTER</button>
-<button class="secondary-button" id="cancelCountryEditButton" type="button" style="display:none">取消修改</button>
-</div>
+<div class="save-area"><button class="save-button" id="saveButton" type="submit">SAVE CHARACTER</button></div>
 <div class="message" id="message" role="status" aria-live="polite"></div>
 </form>
 </main>
-
 <footer class="footer" id="footer">SEYAMI · CHARACTER ARCHIVE</footer>
 </div>
-
 <script>
 "use strict";
 
@@ -334,60 +221,41 @@ const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_T_gNdlgkOaXnzjSvdmI1Pw_HQOVTEWG
 const ADMIN_EMAIL = "1296457710@qq.com";
 
 const supabaseClient = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_PUBLISHABLE_KEY,
+  SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY,
   {auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}}
 );
 
 let adminAuthorized = false;
-let currentMode = "character";
-let editHistoryId = null;
-let editCountryId = null;
-let countryRecords = [];
-
 function goToLogin(){window.location.replace("login.html");}
 
 async function verifyAdmin(){
   try{
     const {data:sessionData,error:sessionError}=await supabaseClient.auth.getSession();
     if(sessionError||!sessionData.session){goToLogin();return false;}
-
     const {data:userData,error:userError}=await supabaseClient.auth.getUser();
     if(userError||!userData.user){
-      await supabaseClient.auth.signOut();
-      goToLogin();
-      return false;
+      await supabaseClient.auth.signOut();goToLogin();return false;
     }
-
     if((userData.user.email||"").trim().toLowerCase()!==ADMIN_EMAIL.toLowerCase()){
-      await supabaseClient.auth.signOut();
-      goToLogin();
-      return false;
+      await supabaseClient.auth.signOut();goToLogin();return false;
     }
-
     adminAuthorized=true;
     document.body.classList.add("auth-ready");
     return true;
   }catch(error){
-    console.error(error);
-    goToLogin();
-    return false;
+    console.error(error);goToLogin();return false;
   }
 }
 
 document.getElementById("logoutButton").addEventListener("click",async()=>{
   const b=document.getElementById("logoutButton");
-  b.disabled=true;
-  b.textContent="SIGNING OUT...";
+  b.disabled=true;b.textContent="SIGNING OUT...";
   try{await supabaseClient.auth.signOut();}
   finally{adminAuthorized=false;goToLogin();}
 });
 
 supabaseClient.auth.onAuthStateChange((event)=>{
-  if(event==="SIGNED_OUT"&&adminAuthorized){
-    adminAuthorized=false;
-    goToLogin();
-  }
+  if(event==="SIGNED_OUT"&&adminAuthorized){adminAuthorized=false;goToLogin();}
 });
 
 const $=id=>document.getElementById(id);
@@ -402,217 +270,115 @@ const characterFields=document.querySelectorAll(".character-field");
 const countryFields=document.querySelectorAll(".country-field");
 const historyFields=document.querySelectorAll(".history-field");
 const galleryFields=document.querySelectorAll(".gallery-field");
-
 const nameInput=$("name"),raceInput=$("race"),regionInput=$("region");
 const roleInput=$("role"),ageInput=$("age"),genderInput=$("gender");
 const personalityInput=$("personality"),backstoryInput=$("backstory");
 const imageInput=$("image"),preview=$("preview");
 const uploadPlaceholder=$("uploadPlaceholder");
-
-const countryNameInput=$("countryName");
-const countrySubtitleInput=$("countrySubtitle");
-const countryCapitalInput=$("countryCapital");
-const countryGovernmentInput=$("countryGovernment");
-const countryRegionInput=$("countryRegion");
-const countryDescriptionInput=$("countryDescription");
-const countryHistoryInput=$("countryHistory");
-const countryCultureInput=$("countryCulture");
-
+const countryNameInput=$("countryName"),countrySubtitleInput=$("countrySubtitle");
+const countryCapitalInput=$("countryCapital"),countryGovernmentInput=$("countryGovernment");
+const countryRegionInput=$("countryRegion"),countryDescriptionInput=$("countryDescription");
+const countryHistoryInput=$("countryHistory"),countryCultureInput=$("countryCulture");
 const historyYearInput=$("historyYear"),historyTitleInput=$("historyTitle");
 const historyEraInput=$("historyEra"),historyLocationInput=$("historyLocation");
 const historyDescriptionInput=$("historyDescription"),historyContentInput=$("historyContent");
-
 const galleryImageInput=$("galleryImage"),galleryPreview=$("galleryPreview");
-const galleryPlaceholder=$("galleryPlaceholder");
-const saveButton=$("saveButton"),message=$("message");
-const themeToggle=$("themeToggle");
-const countryRecordsPanel=$("countryRecordsPanel");
-const countryRecordsList=$("countryRecordsList");
-const refreshCountriesButton=$("refreshCountriesButton");
-const cancelCountryEditButton=$("cancelCountryEditButton");
+const galleryPlaceholder=$("galleryPlaceholder"),saveButton=$("saveButton");
+const message=$("message"),themeToggle=$("themeToggle");
 
+let currentMode="character",editHistoryId=null;
 const urlParams=new URLSearchParams(location.search);
 const urlType=urlParams.get("type"),urlId=urlParams.get("id");
 
 function showMessage(text,type=""){
-  message.textContent=text;
-  message.className="message "+type;
+  message.textContent=text;message.className="message "+type;
 }
-
 function hideAllFields(){
   [characterFields,countryFields,historyFields,galleryFields].forEach(group=>
-    group.forEach(field=>field.style.display="none")
-  );
+    group.forEach(field=>field.style.display="none"));
 }
-
 function clearRequired(){
-  nameInput.required=false;
-  countryNameInput.required=false;
-  historyTitleInput.required=false;
+  nameInput.required=false;countryNameInput.required=false;historyTitleInput.required=false;
 }
-
 function clearCharacterPreview(){
-  imageInput.value="";
-  preview.removeAttribute("src");
-  preview.style.display="none";
+  imageInput.value="";preview.removeAttribute("src");preview.style.display="none";
   uploadPlaceholder.style.display="flex";
 }
-
 function clearGalleryPreview(){
-  galleryImageInput.value="";
-  galleryPreview.removeAttribute("src");
-  galleryPreview.style.display="none";
-  galleryPlaceholder.style.display="flex";
+  galleryImageInput.value="";galleryPreview.removeAttribute("src");
+  galleryPreview.style.display="none";galleryPlaceholder.style.display="flex";
 }
-
 function setActiveButton(active){
   [characterModeButton,countryModeButton,historyModeButton,galleryModeButton]
     .forEach(b=>b.classList.toggle("active",b===active));
 }
-
 function showCharacterMode(){
-  currentMode="character";
-  editHistoryId=null;
-  editCountryId=null;
-  setActiveButton(characterModeButton);
-  hideAllFields();
-  clearRequired();
-  characterFields.forEach(f=>f.style.display="");
-  countryRecordsPanel.style.display="none";
-  cancelCountryEditButton.style.display="none";
-  titleEn.textContent="CHARACTER";
-  titleSub.textContent="ARCHIVE ADMINISTRATION";
-  titleCn.textContent="角色档案管理";
-  sectionTitle.textContent="CREATE CHARACTER RECORD";
-  saveButton.textContent="SAVE CHARACTER";
-  saveButton.disabled=false;
-  footer.textContent="SEYAMI · CHARACTER ARCHIVE";
-  nameInput.required=true;
-  showMessage("");
+  currentMode="character";editHistoryId=null;setActiveButton(characterModeButton);
+  hideAllFields();clearRequired();characterFields.forEach(f=>f.style.display="");
+  titleEn.textContent="CHARACTER";titleSub.textContent="ARCHIVE ADMINISTRATION";
+  titleCn.textContent="角色档案管理";sectionTitle.textContent="CREATE CHARACTER RECORD";
+  saveButton.textContent="SAVE CHARACTER";footer.textContent="SEYAMI · CHARACTER ARCHIVE";
+  nameInput.required=true;showMessage("");
 }
-
 function showCountryMode(){
-  currentMode="country";
-  editHistoryId=null;
-  setActiveButton(countryModeButton);
-  hideAllFields();
-  clearRequired();
-  countryFields.forEach(f=>f.style.display="");
-  countryRecordsPanel.style.display="block";
-  titleEn.textContent=editCountryId?"EDIT COUNTRY":"COUNTRY";
-  titleSub.textContent="ARCHIVE ADMINISTRATION";
-  titleCn.textContent=editCountryId?"修改国家档案":"国家设定管理";
-  sectionTitle.textContent=editCountryId?"EDIT COUNTRY RECORD":"CREATE COUNTRY RECORD";
-  saveButton.textContent=editCountryId?"UPDATE COUNTRY":"SAVE COUNTRY";
-  saveButton.disabled=false;
-  cancelCountryEditButton.style.display=editCountryId?"inline-block":"none";
-  footer.textContent="SEYAMI · COUNTRY ARCHIVE";
-  countryNameInput.required=true;
-  showMessage("");
-  loadCountryRecords();
+  currentMode="country";editHistoryId=null;setActiveButton(countryModeButton);
+  hideAllFields();clearRequired();countryFields.forEach(f=>f.style.display="");
+  titleEn.textContent="COUNTRY";titleSub.textContent="ARCHIVE ADMINISTRATION";
+  titleCn.textContent="国家设定管理";sectionTitle.textContent="CREATE COUNTRY RECORD";
+  saveButton.textContent="SAVE COUNTRY";footer.textContent="SEYAMI · COUNTRY ARCHIVE";
+  countryNameInput.required=true;showMessage("");
 }
-
 function showHistoryMode(){
-  currentMode="history";
-  setActiveButton(historyModeButton);
-  hideAllFields();
-  clearRequired();
+  currentMode="history";setActiveButton(historyModeButton);hideAllFields();clearRequired();
   historyFields.forEach(f=>f.style.display="");
-  countryRecordsPanel.style.display="none";
-  cancelCountryEditButton.style.display="none";
   titleEn.textContent=editHistoryId?"EDIT HISTORY":"HISTORY";
   titleSub.textContent="ARCHIVE ADMINISTRATION";
   titleCn.textContent=editHistoryId?"修改历史记录":"历史记录管理";
   sectionTitle.textContent=editHistoryId?"EDIT HISTORY RECORD":"CREATE HISTORY RECORD";
   saveButton.textContent=editHistoryId?"UPDATE HISTORY":"SAVE HISTORY";
-  saveButton.disabled=false;
   footer.textContent="SEYAMI · HISTORY ARCHIVE";
-  historyTitleInput.required=true;
-  showMessage("");
+  historyTitleInput.required=true;showMessage("");
 }
-
 function showGalleryMode(){
-  currentMode="gallery";
-  editHistoryId=null;
-  editCountryId=null;
-  setActiveButton(galleryModeButton);
-  hideAllFields();
-  clearRequired();
-  galleryFields.forEach(f=>f.style.display="");
-  countryRecordsPanel.style.display="none";
-  cancelCountryEditButton.style.display="none";
-  titleEn.textContent="GALLERY";
-  titleSub.textContent="ARCHIVE ADMINISTRATION";
-  titleCn.textContent="档案图集管理";
-  sectionTitle.textContent="ADD GALLERY IMAGE";
-  saveButton.textContent="UPLOAD IMAGE";
-  saveButton.disabled=false;
-  footer.textContent="SEYAMI · GALLERY ARCHIVE";
+  currentMode="gallery";editHistoryId=null;setActiveButton(galleryModeButton);
+  hideAllFields();clearRequired();galleryFields.forEach(f=>f.style.display="");
+  titleEn.textContent="GALLERY";titleSub.textContent="ARCHIVE ADMINISTRATION";
+  titleCn.textContent="档案图集管理";sectionTitle.textContent="ADD GALLERY IMAGE";
+  saveButton.textContent="UPLOAD IMAGE";footer.textContent="SEYAMI · GALLERY ARCHIVE";
   showMessage("");
 }
 
 characterModeButton.addEventListener("click",()=>{
-  form.reset();
-  clearCharacterPreview();
-  clearGalleryPreview();
-  showCharacterMode();
+  form.reset();clearCharacterPreview();clearGalleryPreview();showCharacterMode();
 });
-
 countryModeButton.addEventListener("click",()=>{
-  form.reset();
-  clearCharacterPreview();
-  clearGalleryPreview();
-  editCountryId=null;
-  showCountryMode();
+  form.reset();clearCharacterPreview();clearGalleryPreview();showCountryMode();
 });
-
 historyModeButton.addEventListener("click",()=>{
-  form.reset();
-  clearCharacterPreview();
-  clearGalleryPreview();
-  editHistoryId=null;
-  showHistoryMode();
+  form.reset();clearCharacterPreview();clearGalleryPreview();editHistoryId=null;showHistoryMode();
 });
-
 galleryModeButton.addEventListener("click",()=>{
-  form.reset();
-  clearCharacterPreview();
-  clearGalleryPreview();
-  showGalleryMode();
+  form.reset();clearCharacterPreview();clearGalleryPreview();showGalleryMode();
 });
 
-/* 图片预览 */
 imageInput.addEventListener("change",()=>{
   const file=imageInput.files[0];
   if(!file){clearCharacterPreview();return;}
   if(!file.type.startsWith("image/")){
-    showMessage("请选择有效的图片文件。","error");
-    clearCharacterPreview();
-    return;
+    showMessage("请选择有效的图片文件。","error");clearCharacterPreview();return;
   }
   const reader=new FileReader();
-  reader.onload=e=>{
-    preview.src=e.target.result;
-    preview.style.display="block";
-    uploadPlaceholder.style.display="none";
-  };
+  reader.onload=e=>{preview.src=e.target.result;preview.style.display="block";uploadPlaceholder.style.display="none";};
   reader.readAsDataURL(file);
 });
-
 galleryImageInput.addEventListener("change",()=>{
   const file=galleryImageInput.files[0];
   if(!file){clearGalleryPreview();return;}
   if(!file.type.startsWith("image/")){
-    showMessage("请选择有效的图片文件。","error");
-    clearGalleryPreview();
-    return;
+    showMessage("请选择有效的图片文件。","error");clearGalleryPreview();return;
   }
   const reader=new FileReader();
-  reader.onload=e=>{
-    galleryPreview.src=e.target.result;
-    galleryPreview.style.display="block";
-    galleryPlaceholder.style.display="none";
-  };
+  reader.onload=e=>{galleryPreview.src=e.target.result;galleryPreview.style.display="block";galleryPlaceholder.style.display="none";};
   reader.readAsDataURL(file);
 });
 
@@ -621,79 +387,40 @@ function makeFilePath(prefix,file){
   return prefix+"-"+Date.now()+"-"+Math.random().toString(36).slice(2,10)+"."+
     (["png","jpg","jpeg","webp"].includes(ext)?ext:"png");
 }
-
 async function uploadPublicImage(bucket,path,file){
-  const {error}=await supabaseClient.storage.from(bucket).upload(path,file,{
-    cacheControl:"3600",
-    upsert:false
-  });
+  const {error}=await supabaseClient.storage.from(bucket).upload(path,file,{cacheControl:"3600",upsert:false});
   if(error)throw error;
   return supabaseClient.storage.from(bucket).getPublicUrl(path).data.publicUrl;
 }
+function setSaving(text){saveButton.disabled=true;saveButton.textContent=text;}
+function finishSaving(text){saveButton.disabled=false;saveButton.textContent=text;}
 
-function setSaving(text){
-  saveButton.disabled=true;
-  saveButton.textContent=text;
-}
-
-function finishSaving(text){
-  saveButton.disabled=false;
-  saveButton.textContent=text;
-}
-
-/* 角色档案：保留原有新增功能 */
 async function saveCharacter(){
-  const name=nameInput.value.trim();
-  const race=raceInput.value.trim();
-  const region=regionInput.value.trim();
-  const role=roleInput.value.trim();
-  const age=ageInput.value.trim();
-  const gender=genderInput.value.trim();
+  const name=nameInput.value.trim(),race=raceInput.value.trim();
+  const region=regionInput.value.trim(),role=roleInput.value.trim();
+  const age=ageInput.value.trim(),gender=genderInput.value.trim();
   const personality=personalityInput.value.trim();
   const backstory=backstoryInput.value.trim();
   const imageFile=imageInput.files[0];
 
-  if(!name){
-    showMessage("请先填写角色名字。","error");
-    return;
-  }
-  if(!imageFile){
-    showMessage("请先选择角色立绘。","error");
-    return;
-  }
-  if(!imageFile.type.startsWith("image/")){
-    showMessage("请选择有效的图片文件。","error");
-    return;
-  }
+  if(!name){showMessage("请先填写角色名字。","error");return;}
+  if(!imageFile){showMessage("请先选择角色立绘。","error");return;}
+  if(!imageFile.type.startsWith("image/")){showMessage("请选择有效的图片文件。","error");return;}
 
   setSaving("UPLOADING...");
   try{
     showMessage("正在上传立绘……");
-    const imageURL=await uploadPublicImage(
-      "character-images",
-      makeFilePath("character",imageFile),
-      imageFile
-    );
-
+    const imageURL=await uploadPublicImage("character-images",makeFilePath("character",imageFile),imageFile);
     showMessage("立绘上传完成，正在建立角色档案……");
     const {error}=await supabaseClient.from("characters").insert({
-      name,
-      race:race||null,
-      role:role||null,
-      age:age===""?null:Number(age),
-      gender:gender||null,
-      region:region||null,
-      image_url:imageURL,
-      personality:personality||null,
-      backstory:backstory||null
+      name,race:race||null,role:role||null,
+      age:age===""?null:Number(age),gender:gender||null,
+      region:region||null,image_url:imageURL,
+      personality:personality||null,backstory:backstory||null
     });
-
     if(error)throw error;
-
     showMessage("角色档案保存成功！","success");
-    form.reset();
-    clearCharacterPreview();
-    finishSaving("SAVE CHARACTER");
+    form.reset();clearCharacterPreview();finishSaving("SAVE CHARACTER");
   }catch(error){
     console.error("Character save error:",error);
     showMessage("保存失败："+(error.message||"未知错误"),"error");
@@ -701,237 +428,27 @@ async function saveCharacter(){
   }
 }
 
-/* 国家档案：读取已有记录 */
-async function loadCountryRecords(){
-  if(!adminAuthorized||currentMode!=="country")return;
-
-  countryRecordsList.replaceChildren();
-  const loading=document.createElement("div");
-  loading.className="country-record-empty";
-  loading.textContent="正在读取国家档案……";
-  countryRecordsList.appendChild(loading);
-
-  refreshCountriesButton.disabled=true;
-
-  try{
-    const {data,error}=await supabaseClient
-      .from("countries")
-      .select("id,name,subtitle,capital,government,region,description,history,culture")
-      .order("name",{ascending:true});
-
-    if(error)throw error;
-
-    countryRecords=Array.isArray(data)?data:[];
-    renderCountryRecords();
-  }catch(error){
-    console.error("读取国家档案失败：",error);
-    countryRecordsList.replaceChildren();
-
-    const empty=document.createElement("div");
-    empty.className="country-record-empty";
-    empty.textContent="国家列表读取失败："+(error.message||"未知错误");
-    countryRecordsList.appendChild(empty);
-
-    showMessage(
-      "读取国家列表失败。请检查 countries 表的读取权限："+(error.message||"未知错误"),
-      "error"
-    );
-  }finally{
-    refreshCountriesButton.disabled=false;
-  }
-}
-
-function renderCountryRecords(){
-  countryRecordsList.replaceChildren();
-
-  if(countryRecords.length===0){
-    const empty=document.createElement("div");
-    empty.className="country-record-empty";
-    empty.textContent="目前还没有读取到国家档案。你可以在下方创建第一条记录。";
-    countryRecordsList.appendChild(empty);
-    return;
-  }
-
-  countryRecords.forEach(country=>{
-    const item=document.createElement("div");
-    item.className="country-record-item";
-    if(editCountryId!==null&&String(country.id)===String(editCountryId)){
-      item.classList.add("editing");
-    }
-
-    const info=document.createElement("div");
-    info.className="country-record-info";
-
-    const name=document.createElement("div");
-    name.className="country-record-name";
-    name.textContent=country.name||"未命名国家";
-
-    const subtitle=document.createElement("div");
-    subtitle.className="country-record-subtitle";
-    const details=[country.subtitle,country.capital?("首都："+country.capital):""]
-      .filter(Boolean);
-    subtitle.textContent=details.join(" · ")||"尚未填写副标题或首都";
-
-    info.append(name,subtitle);
-
-    const actions=document.createElement("div");
-    actions.className="country-record-actions";
-
-    const editButton=document.createElement("button");
-    editButton.type="button";
-    editButton.className="country-edit-button";
-    editButton.textContent=
-      editCountryId!==null&&String(country.id)===String(editCountryId)
-      ?"正在编辑":"编辑档案";
-
-    editButton.addEventListener("click",()=>beginEditCountry(country.id));
-
-    actions.appendChild(editButton);
-    item.append(info,actions);
-    countryRecordsList.appendChild(item);
-  });
-}
-
-/* 点击编辑：将原有数据载入表单 */
-function beginEditCountry(id){
-  const country=countryRecords.find(item=>String(item.id)===String(id));
-
-  if(!country){
-    showMessage("没有找到这条国家档案，请刷新列表后重试。","error");
-    return;
-  }
-
-  form.reset();
-  clearCharacterPreview();
-  clearGalleryPreview();
-
-  editCountryId=country.id;
-
-  countryNameInput.value=country.name||"";
-  countrySubtitleInput.value=country.subtitle||"";
-  countryCapitalInput.value=country.capital||"";
-  countryGovernmentInput.value=country.government||"";
-  countryRegionInput.value=country.region||"";
-  countryDescriptionInput.value=country.description||"";
-  countryHistoryInput.value=country.history||"";
-  countryCultureInput.value=country.culture||"";
-
-  showCountryMode();
-
-  /* showCountryMode 会异步刷新列表；再次渲染可立即标记当前项目 */
-  renderCountryRecords();
-
-  titleEn.textContent="EDIT COUNTRY";
-  titleCn.textContent="修改国家档案";
-  sectionTitle.textContent="EDIT COUNTRY RECORD";
-  saveButton.textContent="UPDATE COUNTRY";
-  cancelCountryEditButton.style.display="inline-block";
-
-  showMessage("已载入「"+(country.name||"未命名国家")+"」，修改后点击 UPDATE COUNTRY 保存。");
-  $("countryName").focus();
-
-  $("countryName").scrollIntoView({behavior:"smooth",block:"center"});
-}
-
-/* 退出编辑，恢复新增国家状态 */
-function cancelCountryEdit(){
-  editCountryId=null;
-  form.reset();
-  clearCharacterPreview();
-  clearGalleryPreview();
-
-  countryNameInput.value="";
-  countrySubtitleInput.value="";
-  countryCapitalInput.value="";
-  countryGovernmentInput.value="";
-  countryRegionInput.value="";
-  countryDescriptionInput.value="";
-  countryHistoryInput.value="";
-  countryCultureInput.value="";
-
-  showCountryMode();
-  showMessage("已退出编辑模式，可以新建国家档案。");
-}
-
-cancelCountryEditButton.addEventListener("click",cancelCountryEdit);
-refreshCountriesButton.addEventListener("click",loadCountryRecords);
-
-/* 国家档案：新增或更新 */
 async function saveCountry(){
   const name=countryNameInput.value.trim();
-
-  if(!name){
-    showMessage("请先填写国家名称。","error");
-    countryNameInput.focus();
-    return;
-  }
-
-  const payload={
-    name,
-    subtitle:countrySubtitleInput.value.trim()||null,
-    capital:countryCapitalInput.value.trim()||null,
-    government:countryGovernmentInput.value.trim()||null,
-    region:countryRegionInput.value.trim()||null,
-    description:countryDescriptionInput.value.trim()||null,
-    history:countryHistoryInput.value.trim()||null,
-    culture:countryCultureInput.value.trim()||null
-  };
-
-  const isEditing=editCountryId!==null;
-  const originalId=editCountryId;
-
-  setSaving(isEditing?"UPDATING...":"SAVING...");
-  showMessage(isEditing?"正在更新国家档案……":"正在建立国家档案……");
-
+  if(!name){showMessage("请先填写国家名称。","error");return;}
+  setSaving("SAVING...");showMessage("正在建立国家档案……");
   try{
-    let result;
-
-    if(isEditing){
-      /* 只更新当前选中的 id，不会新增重复国家 */
-      result=await supabaseClient
-        .from("countries")
-        .update(payload)
-        .eq("id",originalId)
-        .select("id");
-
-      if(result.error)throw result.error;
-
-      if(!result.data||result.data.length===0){
-        throw new Error("没有记录被更新。请检查管理员的更新权限及该国家的记录 ID。");
-      }
-
-      editCountryId=null;
-      form.reset();
-
-      showMessage("国家档案修改成功！","success");
-      finishSaving("SAVE COUNTRY");
-      cancelCountryEditButton.style.display="none";
-      titleEn.textContent="COUNTRY";
-      titleCn.textContent="国家设定管理";
-      sectionTitle.textContent="CREATE COUNTRY RECORD";
-
-      await loadCountryRecords();
-    }else{
-      result=await supabaseClient.from("countries").insert(payload);
-      if(result.error)throw result.error;
-
-      form.reset();
-      showMessage("国家设定保存成功！","success");
-      finishSaving("SAVE COUNTRY");
-
-      await loadCountryRecords();
-    }
+    const {error}=await supabaseClient.from("countries").insert({
+      name,subtitle:countrySubtitleInput.value.trim()||null,
+      capital:countryCapitalInput.value.trim()||null,
+      government:countryGovernmentInput.value.trim()||null,
+      region:countryRegionInput.value.trim()||null,
+      description:countryDescriptionInput.value.trim()||null,
+      history:countryHistoryInput.value.trim()||null,
+      culture:countryCultureInput.value.trim()||null
+    });
+    if(error)throw error;
+    showMessage("国家设定保存成功！","success");form.reset();finishSaving("SAVE COUNTRY");
   }catch(error){
-    console.error("Country save/update error:",error);
-    showMessage(
-      (isEditing?"修改失败：":"保存失败：")+(error.message||"未知错误"),
-      "error"
-    );
-    finishSaving(isEditing?"UPDATE COUNTRY":"SAVE COUNTRY");
+    console.error(error);showMessage("保存失败："+(error.message||"未知错误"),"error");finishSaving("SAVE COUNTRY");
   }
 }
 
-/* 历史档案：保留原有新增与修改功能 */
 function getHistoryPayload(){
   return {
     year:historyYearInput.value.trim()||null,
@@ -942,191 +459,103 @@ function getHistoryPayload(){
     content:historyContentInput.value.trim()||null
   };
 }
-
 async function createHistory(){
   const payload=getHistoryPayload();
-
-  if(!payload.title){
-    showMessage("请先填写事件名称。","error");
-    return;
-  }
-
-  setSaving("SAVING...");
-  showMessage("正在建立历史档案……");
-
+  if(!payload.title){showMessage("请先填写事件名称。","error");return;}
+  setSaving("SAVING...");showMessage("正在建立历史档案……");
   try{
     const {error}=await supabaseClient.from("history_records").insert(payload);
     if(error)throw error;
-
-    showMessage("历史记录保存成功！","success");
-    form.reset();
-    finishSaving("SAVE HISTORY");
+    showMessage("历史记录保存成功！","success");form.reset();finishSaving("SAVE HISTORY");
   }catch(error){
-    console.error(error);
-    showMessage("保存失败："+(error.message||"未知错误"),"error");
-    finishSaving("SAVE HISTORY");
+    console.error(error);showMessage("保存失败："+(error.message||"未知错误"),"error");finishSaving("SAVE HISTORY");
   }
 }
-
 async function updateHistory(){
-  if(!editHistoryId){
-    showMessage("没有找到需要修改的历史记录。","error");
-    return;
-  }
-
+  if(!editHistoryId){showMessage("没有找到需要修改的历史记录。","error");return;}
   const payload=getHistoryPayload();
-
-  if(!payload.title){
-    showMessage("请先填写事件名称。","error");
-    return;
-  }
-
-  setSaving("UPDATING...");
-  showMessage("正在更新历史记录……");
-
+  if(!payload.title){showMessage("请先填写事件名称。","error");return;}
+  setSaving("UPDATING...");showMessage("正在更新历史记录……");
   try{
-    const {error}=await supabaseClient
-      .from("history_records")
-      .update({...payload,updated_at:new Date().toISOString()})
-      .eq("id",editHistoryId);
-
+    const {error}=await supabaseClient.from("history_records")
+      .update({...payload,updated_at:new Date().toISOString()}).eq("id",editHistoryId);
     if(error)throw error;
-
     showMessage("历史记录修改成功，正在返回……","success");
     setTimeout(()=>location.href="history.html",900);
   }catch(error){
-    console.error(error);
-    showMessage("修改失败："+(error.message||"未知错误"),"error");
-    finishSaving("UPDATE HISTORY");
+    console.error(error);showMessage("修改失败："+(error.message||"未知错误"),"error");finishSaving("UPDATE HISTORY");
   }
 }
 
-/* 图集：保留原有上传功能 */
 async function saveGalleryImage(){
   const file=galleryImageInput.files[0];
-
-  if(!file){
-    showMessage("请先选择一张图集图片。","error");
-    return;
-  }
-  if(!file.type.startsWith("image/")){
-    showMessage("请选择 PNG、JPG 或 WEBP 图片。","error");
-    return;
-  }
-
+  if(!file){showMessage("请先选择一张图集图片。","error");return;}
+  if(!file.type.startsWith("image/")){showMessage("请选择 PNG、JPG 或 WEBP 图片。","error");return;}
   setSaving("UPLOADING...");
   let path=null;
-
   try{
-    path=makeFilePath("gallery",file);
-    showMessage("正在上传图集图片……");
-
+    path=makeFilePath("gallery",file);showMessage("正在上传图集图片……");
     const imageURL=await uploadPublicImage("gallery-images",path,file);
     showMessage("图片上传完成，正在建立图集记录……");
-
-    const {error}=await supabaseClient
-      .from("gallery_images")
-      .insert({image_url:imageURL});
-
+    const {error}=await supabaseClient.from("gallery_images").insert({image_url:imageURL});
     if(error){
-      const {error:removeError}=await supabaseClient
-        .storage.from("gallery-images").remove([path]);
+      const {error:removeError}=await supabaseClient.storage.from("gallery-images").remove([path]);
       if(removeError)console.error("清理未使用的图片失败：",removeError);
       throw error;
     }
-
-    showMessage("图集图片上传成功！","success");
-    clearGalleryPreview();
-    finishSaving("UPLOAD IMAGE");
+    showMessage("图集图片上传成功！","success");clearGalleryPreview();finishSaving("UPLOAD IMAGE");
   }catch(error){
-    console.error(error);
-    showMessage("上传失败："+(error.message||"未知错误"),"error");
-    finishSaving("UPLOAD IMAGE");
+    console.error(error);showMessage("上传失败："+(error.message||"未知错误"),"error");finishSaving("UPLOAD IMAGE");
   }
 }
 
 form.addEventListener("submit",async event=>{
   event.preventDefault();
-
-  if(!adminAuthorized){
-    showMessage("管理员身份尚未验证，请重新登录。","error");
-    goToLogin();
-    return;
-  }
-
+  if(!adminAuthorized){showMessage("管理员身份尚未验证，请重新登录。","error");goToLogin();return;}
   if(currentMode==="character")await saveCharacter();
   else if(currentMode==="country")await saveCountry();
   else if(currentMode==="history"){
-    if(editHistoryId)await updateHistory();
-    else await createHistory();
-  }else if(currentMode==="gallery"){
-    await saveGalleryImage();
-  }
+    if(editHistoryId)await updateHistory();else await createHistory();
+  }else if(currentMode==="gallery")await saveGalleryImage();
 });
 
-/* 根据 URL 读取待编辑的历史记录 */
 async function loadHistoryForEdit(){
-  if(urlType!=="history"||!urlId){
-    showCharacterMode();
-    return;
-  }
-
-  editHistoryId=urlId;
-  showHistoryMode();
-  setSaving("LOADING...");
+  if(urlType!=="history"||!urlId){showCharacterMode();return;}
+  editHistoryId=urlId;showHistoryMode();setSaving("LOADING...");
   showMessage("正在读取历史记录……");
-
   try{
-    const {data,error}=await supabaseClient
-      .from("history_records")
-      .select("id,year,title,era,location,description,content")
-      .eq("id",urlId)
-      .single();
-
+    const {data,error}=await supabaseClient.from("history_records")
+      .select("id,year,title,era,location,description,content").eq("id",urlId).single();
     if(error)throw error;
     if(!data)throw new Error("没有找到这条历史记录。");
-
     historyYearInput.value=data.year||"";
     historyTitleInput.value=data.title||"";
     historyEraInput.value=data.era||"";
     historyLocationInput.value=data.location||"";
     historyDescriptionInput.value=data.description||"";
     historyContentInput.value=data.content||"";
-
-    titleEn.textContent="EDIT HISTORY";
-    titleCn.textContent="修改历史记录";
-    sectionTitle.textContent="EDIT HISTORY RECORD";
-    saveButton.textContent="UPDATE HISTORY";
+    titleEn.textContent="EDIT HISTORY";titleCn.textContent="修改历史记录";
+    sectionTitle.textContent="EDIT HISTORY RECORD";saveButton.textContent="UPDATE HISTORY";
     footer.textContent="SEYAMI · HISTORY ARCHIVE";
-    saveButton.disabled=false;
-    showMessage("历史记录已载入，可以修改。");
+    saveButton.disabled=false;showMessage("历史记录已载入，可以修改。");
   }catch(error){
-    console.error(error);
-    showMessage("读取历史记录失败："+(error.message||"未知错误"),"error");
-    saveButton.disabled=true;
+    console.error(error);showMessage("读取历史记录失败："+(error.message||"未知错误"),"error");saveButton.disabled=true;
   }
 }
 
-/* 日夜模式 */
 function applyTheme(theme){
   const isDay=theme==="day";
   document.body.classList.toggle("day-mode",isDay);
   themeToggle.textContent=isDay?"☀":"☾";
 }
-
-try{
-  applyTheme(localStorage.getItem("seyami-theme")||"night");
-}catch{
-  applyTheme("night");
-}
-
+try{applyTheme(localStorage.getItem("seyami-theme")||"night");}
+catch{applyTheme("night");}
 themeToggle.addEventListener("click",()=>{
   const next=document.body.classList.contains("day-mode")?"night":"day";
   try{localStorage.setItem("seyami-theme",next);}catch{}
   applyTheme(next);
 });
 
-/* 初始化 */
 (async function initAdmin(){
   const authorized=await verifyAdmin();
   if(!authorized)return;
